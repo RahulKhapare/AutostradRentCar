@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">FastUAE</string>
+    <string name="select_language">Select Language</string>
+    <string name="english">English</string>
+    <string name="urdu">Urdu</string>
+    <string name="continueq">Continue</string>
+    <string name="login">Login</string>
+    <string name="signUp">Sign Up</string>
+    <string name="welcomeTo">Welcome to</string>
+    <string name="skip">Skip</string>
+    <string name="enterCode">Enter the code</string>
+    <string name="codeMessage">We sent the code to </string>
+    <string name="pleaseWait">Please Wait....</string>
+
+
+
+
+    <string name="txt1">Leading Car Rental Company with the largest network of Branches And Pickup points</string>
+    <string name="txt2">Leading Car Rental Company with the largest network of Branches And Pickup points</string>
+    <string name="txt3">Provides the most affordable rental services in the country.</string>
+</resources>
