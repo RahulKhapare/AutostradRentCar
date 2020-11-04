@@ -2,7 +2,7 @@
     <string name="app_name">FastUAE</string>
     <string name="select_language">Select Language</string>
     <string name="english">English</string>
-    <string name="urdu">Urdu</string>
+    <string name="urdu">Arabic</string>
     <string name="continueq">Continue</string>
     <string name="login">Login</string>
     <string name="signUp">Sign Up</string>
@@ -11,6 +11,22 @@
     <string name="enterCode">Enter the code</string>
     <string name="codeMessage">We sent the code to </string>
     <string name="pleaseWait">Please Wait....</string>
+    <string name="mobileNumber">Mobile Number</string>
+    <string name="proceed">Proceed</string>
+    <string name="dontHaveAccount">Dont have account ?</string>
+    <string name="skipNow">Skip for now</string>
+    <string name="enterEmail">Enter Email</string>
+    <string name="haveAnAccount">Have an account ?</string>
+    <string name="secondsRemaining">Seconds Remaining</string>
+    <string name="seconds">00</string>
+    <string name="resendOTP">Click to resend OTP</string>
+    <string name="optSent">OTP sent successfully</string>
+    <string name="enterOTP">Please enter OTP</string>
+    <string name="errorOTP">OTP should be 6 digit</string>
+    <string name="enterMobile">Please enter mobile number</string>
+    <string name="enterMobileValid">Please enter valid mobile number</string>
+    <string name="enterEmailId">Please enter email</string>
+    <string name="enterEmailValid">Please enter valid email</string>
 
 
 

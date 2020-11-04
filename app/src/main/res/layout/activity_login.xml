@@ -1,25 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:background="@color/colorPrimaryDark">
 
-        <RelativeLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:fillViewport="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:background="@color/colorPrimaryDark">
+                android:orientation="vertical">
 
                 <RelativeLayout
-                    android:layout_weight="1"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="400dp">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -48,7 +47,6 @@
                 </RelativeLayout>
 
                 <LinearLayout
-                    android:layout_weight="1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
@@ -66,13 +64,109 @@
 
                     </TextView>
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="?actionBarSize"
+                        android:layout_marginTop="20dp"
+                        android:orientation="horizontal">
+
+                        <Spinner
+                            android:id="@+id/spinnerCode"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                            android:backgroundTint="@color/colorWhite">
+
+                        </Spinner>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="?actionBarSize"
+                            android:textColorHint="@color/colorWhite"
+                            >
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/etxMobileNumber"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/mobileNumber"
+                                android:inputType="number"
+                                android:textColorHint="@color/colorWhite"
+                                android:fontFamily="@font/nunito_sans_regular"
+                                android:textColor="@color/colorWhite"
+                                android:backgroundTint="@color/colorWhite"
+                                />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/txtProceed"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunito_sans_semibold"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:text="@string/proceed"
+                        android:padding="15dp"
+                        android:layout_marginTop="30dp"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:textSize="18dp"
+                        android:background="@drawable/button_bg"></TextView>
+
+
+                    <LinearLayout
+                        android:id="@+id/lnrSignUp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_horizontal"
+                        android:layout_marginTop="10dp"
+                        android:padding="10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorWhite"
+                            android:text="@string/dontHaveAccount"
+                            android:fontFamily="@font/nunito_sans_semibold"
+                            android:textSize="15sp">
+
+                        </TextView>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/lightBlue"
+                            android:text="@string/signUp"
+                            android:paddingLeft="10dp"
+                            android:fontFamily="@font/nunito_sans_semibold"
+                            android:textSize="15sp">
+
+                        </TextView>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_marginTop="30dp"
+                        android:id="@+id/txtSkipNow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/lightBlue"
+                        android:text="@string/skipNow"
+                        android:layout_gravity="center_horizontal"
+                        android:paddingLeft="10dp"
+                        android:fontFamily="@font/nunito_sans_semibold"
+                        android:textSize="18sp">
+
+                    </TextView>
+
                 </LinearLayout>
 
             </LinearLayout>
 
-        </RelativeLayout>
+        </ScrollView>
 
-    </ScrollView>
+    </LinearLayout>
 
 
 

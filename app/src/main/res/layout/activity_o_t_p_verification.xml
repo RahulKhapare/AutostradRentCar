@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:layout_height="match_parent">
 
-        <RelativeLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:fillViewport="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -17,9 +18,8 @@
                 android:background="@color/colorPrimaryDark">
 
                 <RelativeLayout
-                    android:layout_weight="1"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="400dp">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -48,7 +48,6 @@
                 </RelativeLayout>
 
                 <LinearLayout
-                    android:layout_weight="1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
@@ -67,23 +66,71 @@
                     </TextView>
 
                     <TextView
-                        android:id="@+id/txtMessage"
+                        android:id="@+id/txtOTPMessage"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColor="@color/colorWhite"
-                        android:text="@string/codeMessage"
                         android:fontFamily="@font/nunito_sans_semibold"
                         android:textSize="18sp">
 
                     </TextView>
 
+                    <com.example.fastuae.util.OtpEditText
+                        android:id="@+id/etxOtp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:cursorVisible="false"
+                        android:digits="1234567890"
+                        android:maxLength="6"
+                        android:hint="0"
+                        android:text=""
+                        android:textIsSelectable="false"
+                        android:textColor="@color/colorWhite"
+                        android:textColorHint="@color/colorWhite"
+                        android:layout_marginTop="20dp"
+                        android:inputType="number" />
+
+                    <TextView
+                        android:id="@+id/txtProceed"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunito_sans_semibold"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:text="@string/proceed"
+                        android:padding="15dp"
+                        android:layout_marginTop="30dp"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:textSize="18dp"
+                        android:background="@drawable/button_bg"></TextView>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="20dp">
+
+                        <TextView
+                            android:id="@+id/txtSeconds"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorWhite"
+                            android:text="@string/secondsRemaining"
+                            android:fontFamily="@font/nunito_sans_semibold"
+                            android:textSize="15sp">
+
+                        </TextView>
+
+                    </LinearLayout>
+
                 </LinearLayout>
 
             </LinearLayout>
 
-        </RelativeLayout>
+        </ScrollView>
 
-    </ScrollView>
+    </LinearLayout>
 
 
 
