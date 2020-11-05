@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:background="@color/colorWhite">
+
+       <ScrollView
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:fillViewport="true">
+
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:orientation="vertical">
+
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_marginTop="20dp"
+                   android:orientation="horizontal">
+
+                   <ImageView
+                       android:layout_width="15dp"
+                       android:layout_height="15dp"
+                       android:layout_gravity="center_vertical"
+                       android:src="@drawable/ic_baseline_brightness_1_24">
+
+                   </ImageView>
+
+                   <TextView
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:drawablePadding="10dp"
+                       android:fontFamily="@font/nunito_sans_regular"
+                       android:text="@string/txt1"
+                       android:paddingLeft="10dp"
+                       android:textColor="@color/textDark"
+                       android:textSize="14sp">
+
+                   </TextView>
+
+               </LinearLayout>
+
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_marginTop="10dp"
+                   android:orientation="horizontal">
+
+                   <ImageView
+                       android:layout_width="15dp"
+                       android:layout_height="15dp"
+                       android:layout_gravity="center_vertical"
+                       android:src="@drawable/ic_baseline_brightness_1_24">
+
+                   </ImageView>
+
+                   <TextView
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:fontFamily="@font/nunito_sans_regular"
+                       android:text="@string/txt2"
+                       android:paddingLeft="10dp"
+                       android:textColor="@color/textDark"
+                       android:textSize="14sp">
+
+                   </TextView>
+
+               </LinearLayout>
+
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_marginTop="10dp"
+                   android:orientation="horizontal">
+
+                   <ImageView
+                       android:layout_width="15dp"
+                       android:layout_height="15dp"
+                       android:layout_gravity="center_vertical"
+                       android:src="@drawable/ic_baseline_brightness_1_24">
+
+                   </ImageView>
+
+                   <TextView
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:fontFamily="@font/nunito_sans_regular"
+                       android:text="@string/txt3"
+                       android:paddingLeft="10dp"
+                       android:textColor="@color/textDark"
+                       android:textSize="14sp">
+
+                   </TextView>
+
+               </LinearLayout>
+
+
+           </LinearLayout>
+
+       </ScrollView>
+
+   </RelativeLayout>
+
+</layout>

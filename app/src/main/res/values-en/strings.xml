@@ -28,7 +28,6 @@
     <string name="enterEmailId">Please enter email</string>
     <string name="enterEmailValid">Please enter valid email</string>
 
-
     <string name="home">Home</string>
     <string name="profile">Profile</string>
     <string name="fleet">Fleet</string>
@@ -43,7 +42,6 @@
     <string name="pm">PM</string>
     <string name="search">Search</string>
     <string name="welcome">Welcome</string>
-
 
     <string name="txt1">Leading Car Rental Company with the largest network of Branches And Pickup points</string>
     <string name="txt2">Leading Car Rental Company with the largest network of Branches And Pickup points</string>

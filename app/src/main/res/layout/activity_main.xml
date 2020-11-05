@@ -1,18 +1,221 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".activity.MainActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimaryDark">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            app:titleTextColor="@color/colorWhite"
+            app:subtitleTextColor="@color/colorWhite"
+            android:theme="@style/ToolbarColoredBackArrow"
+            android:background="@color/colorPrimaryDark">
+        </androidx.appcompat.widget.Toolbar>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/curve_main_bg"
+            android:layout_below="@+id/toolbar">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <FrameLayout
+                    android:id="@+id/fragmentFrame"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_above="@+id/lnrBottom"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp">
+
+                </FrameLayout>
+
+                <LinearLayout
+                    android:id="@+id/lnrBottom"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_alignParentBottom="true">
+
+
+                    <LinearLayout
+                        android:id="@+id/lnrHome"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="onBottomBarClick"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:tag="lnrTag"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/lightBlue">
+                        </LinearLayout>
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:src="@drawable/ic_home"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_gravity="center_horizontal"
+                            android:tag="imageView">
+
+                        </ImageView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="12sp"
+                            android:gravity="center_horizontal"
+                            android:textColor="@color/lightBlue"
+                            android:paddingBottom="5dp"
+                            android:tag="textView"
+                            android:fontFamily="@font/nunit_sans_bold"
+                            android:text="@string/home"></TextView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/lnrProfile"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="onBottomBarClick"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:tag="lnrTag"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/colorWhite">
+                        </LinearLayout>
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:src="@drawable/ic_profile"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:tag="imageView"
+                            android:layout_gravity="center_horizontal">
+
+                        </ImageView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="12sp"
+                            android:gravity="center_horizontal"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:paddingBottom="5dp"
+                            android:tag="textView"
+                            android:fontFamily="@font/nunit_sans_bold"
+                            android:text="@string/profile"></TextView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/lnrFleet"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="onBottomBarClick"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:tag="lnrTag"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/colorWhite">
+                        </LinearLayout>
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:src="@drawable/ic_fleat"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:tag="imageView"
+                            android:layout_gravity="center_horizontal">
+
+                        </ImageView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="12sp"
+                            android:gravity="center_horizontal"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:paddingBottom="5dp"
+                            android:tag="textView"
+                            android:fontFamily="@font/nunit_sans_bold"
+                            android:text="@string/fleet"></TextView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/lnrMenu"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="onBottomBarClick"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:tag="lnrTag"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/colorWhite">
+                        </LinearLayout>
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:src="@drawable/ic_menu"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:tag="imageView"
+                            android:layout_gravity="center_horizontal">
+
+                        </ImageView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="12sp"
+                            android:gravity="center_horizontal"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:paddingBottom="5dp"
+                            android:tag="textView"
+                            android:fontFamily="@font/nunit_sans_bold"
+                            android:text="@string/menu"></TextView>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</layout>

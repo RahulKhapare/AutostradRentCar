@@ -89,11 +89,12 @@
                             android:id="@+id/imgEnglish"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_baseline_done_all_24"></ImageView>
+                            android:tint="@color/colorWhite"
+                            android:src="@drawable/ic_check"></ImageView>
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/lnrUrdu"
+                        android:id="@+id/lnrArabic"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="15dp"
@@ -117,7 +118,8 @@
                             android:id="@+id/imgUrdu"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_baseline_done_all_24"></ImageView>
+                            android:tint="@color/colorWhite"
+                            android:src="@drawable/ic_check"></ImageView>
                     </LinearLayout>
 
 

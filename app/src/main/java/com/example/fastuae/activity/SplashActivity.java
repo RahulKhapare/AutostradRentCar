@@ -30,9 +30,7 @@ public class SplashActivity extends AppCompatActivity {
 
     private void initView(){
         loadingDialog = new LoadingDialog(activity);
-        ProgressView.show(activity,loadingDialog);
         new Handler().postDelayed(() -> {
-            ProgressView.dismiss(loadingDialog);
             Intent intent = new Intent(activity, LanguageSelectionActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);

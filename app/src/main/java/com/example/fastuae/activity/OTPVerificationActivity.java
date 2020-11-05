@@ -48,7 +48,6 @@ public class OTPVerificationActivity extends AppCompatActivity {
 
         binding.txtOTPMessage.setText(getResources().getString(R.string.codeMessage) + " " + number);
         binding.etxOtp.setText(loginOTP);
-        binding.etxOtp.setTextColor(getResources().getColor(R.color.colorWhite));
 
         startTimer();
 
