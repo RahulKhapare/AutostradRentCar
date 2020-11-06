@@ -42,6 +42,12 @@
     <string name="pm">PM</string>
     <string name="search">Search</string>
     <string name="welcome">Welcome</string>
+    <string name="selectCar">Select Car</string>
+    <string name="cardview">Card View</string>
+    <string name="gridview">Grid View</string>
+    <string name="payLater">Pay Later</string>
+    <string name="payNow">Pay Now</string>
+    <string name="more">More</string>
 
     <string name="txt1">شركة رائدة في مجال تأجير السيارات ولديها أكبر شبكة من الفروع ونقاط الالتقاء</string>
     <string name="txt2">شركة رائدة في مجال تأجير السيارات ولديها أكبر شبكة من الفروع ونقاط الالتقاء</string>

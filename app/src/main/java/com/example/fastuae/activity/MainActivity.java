@@ -44,8 +44,6 @@ public class MainActivity extends AppCompatActivity {
 
         binding.toolbar.setTitle(getResources().getString(R.string.welcome) + " User Name");
         setSupportActionBar(binding.toolbar);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        getSupportActionBar().setHomeButtonEnabled(true);
 
         initView();
     }
