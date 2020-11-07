@@ -15,6 +15,7 @@ public class CarModel {
     String aedNow;
     String aedLater;
 
+
     public String getName() {
         return name;
     }

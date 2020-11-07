@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center">
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardview"
             android:layout_width="match_parent"
-            android:layout_height="550dp"
+            android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="10dp">
+            app:cardElevation="10dp"
+            app:cardCornerRadius="10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -36,8 +41,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/nunit_sans_bold"
                             android:textColor="@color/colorPrimaryDark"
-                            android:textSize="18sp"
-                            android:text="@string/more"
+                            android:textSize="24sp"
                             android:maxLines="1">
 
                         </TextView>
@@ -48,8 +52,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/nunito_sans_semibold"
                             android:textColor="@color/textDark"
-                            android:textSize="18sp"
-                            android:text="@string/more"
+                            android:textSize="24sp"
                             android:maxLines="1">
 
                         </TextView>
@@ -60,8 +63,7 @@
                         android:id="@+id/imgCar"
                         android:layout_marginTop="10dp"
                         android:layout_width="match_parent"
-                        android:layout_height="200dp"
-                        android:src="@drawable/ic_car_four"
+                        android:layout_height="300dp"
                         android:scaleType="fitXY">
                     </ImageView>
 
@@ -76,8 +78,7 @@
                           android:layout_height="wrap_content"
                           android:fontFamily="@font/nunito_sans_semibold"
                           android:textColor="@color/textDark"
-                          android:textSize="18sp"
-                          android:text="@string/more"
+                          android:textSize="22sp"
                           android:maxLines="1">
 
                       </TextView>
@@ -95,15 +96,14 @@
                               android:layout_width="wrap_content"
                               android:layout_height="wrap_content"
                               android:layout_gravity="center"
-                              android:fontFamily="@font/nunito_sans_semibold"
-                              android:textColor="@color/textDark"
-                              android:textSize="14sp"
-                              android:layout_marginLeft="20dp"
-                              android:layout_marginRight="20dp"
+                              android:layout_marginLeft="10dp"
+                              android:layout_marginRight="10dp"
                               android:drawableLeft="@drawable/ic_ceat"
                               android:drawablePadding="5dp"
-                              android:text="@string/more"
-                              android:maxLines="1">
+                              android:fontFamily="@font/nunito_sans_semibold"
+                              android:maxLines="1"
+                              android:textColor="@color/textDark"
+                              android:textSize="18sp">
 
                           </TextView>
 
@@ -114,12 +114,11 @@
                               android:layout_gravity="center"
                               android:fontFamily="@font/nunito_sans_semibold"
                               android:textColor="@color/textDark"
-                              android:textSize="14sp"
-                              android:layout_marginLeft="20dp"
-                              android:layout_marginRight="20dp"
+                              android:textSize="18sp"
+                              android:layout_marginLeft="10dp"
+                              android:layout_marginRight="10dp"
                               android:drawableLeft="@drawable/ic_mode"
                               android:drawablePadding="5dp"
-                              android:text="@string/more"
                               android:maxLines="1">
 
                           </TextView>
@@ -131,12 +130,11 @@
                               android:layout_gravity="center"
                               android:fontFamily="@font/nunito_sans_semibold"
                               android:textColor="@color/textDark"
-                              android:textSize="14sp"
-                              android:layout_marginLeft="20dp"
-                              android:layout_marginRight="20dp"
+                              android:textSize="18sp"
+                              android:layout_marginLeft="10dp"
+                              android:layout_marginRight="10dp"
                               android:drawableLeft="@drawable/ic_doore"
                               android:drawablePadding="5dp"
-                              android:text="@string/more"
                               android:maxLines="1">
 
                           </TextView>
@@ -158,12 +156,11 @@
                               android:layout_gravity="center"
                               android:fontFamily="@font/nunito_sans_semibold"
                               android:textColor="@color/textDark"
-                              android:textSize="14sp"
-                              android:layout_marginLeft="20dp"
-                              android:layout_marginRight="20dp"
+                              android:textSize="18sp"
+                              android:layout_marginLeft="10dp"
+                              android:layout_marginRight="10dp"
                               android:drawableLeft="@drawable/ic_fuil"
                               android:drawablePadding="5dp"
-                              android:text="@string/more"
                               android:maxLines="1">
 
                           </TextView>
@@ -175,12 +172,11 @@
                               android:layout_gravity="center"
                               android:fontFamily="@font/nunito_sans_semibold"
                               android:textColor="@color/textDark"
-                              android:textSize="14sp"
-                              android:layout_marginLeft="20dp"
-                              android:layout_marginRight="20dp"
+                              android:textSize="18sp"
+                              android:layout_marginLeft="10dp"
+                              android:layout_marginRight="10dp"
                               android:drawableLeft="@drawable/ic_suitcase"
                               android:drawablePadding="5dp"
-                              android:text="@string/more"
                               android:maxLines="1">
 
                           </TextView>
@@ -192,12 +188,11 @@
                               android:layout_gravity="center"
                               android:fontFamily="@font/nunito_sans_semibold"
                               android:textColor="@color/textDark"
-                              android:textSize="14sp"
-                              android:layout_marginLeft="20dp"
-                              android:layout_marginRight="20dp"
+                              android:textSize="18sp"
+                              android:layout_marginLeft="10dp"
+                              android:layout_marginRight="10dp"
                               android:drawableLeft="@drawable/ic_engine"
                               android:drawablePadding="5dp"
-                              android:text="@string/more"
                               android:maxLines="1">
 
                           </TextView>
@@ -213,54 +208,54 @@
                           android:orientation="horizontal">
 
                           <androidx.cardview.widget.CardView
-                              android:layout_width="70dp"
-                              android:layout_height="70dp"
+                              android:layout_width="100dp"
+                              android:layout_height="100dp"
                               app:cardElevation="10dp"
                               app:cardCornerRadius="10dp"
                               android:layout_marginRight="10dp"
                               android:layout_marginLeft="10dp">
 
                               <ImageView
+                                  android:id="@+id/img1"
                                   android:layout_width="match_parent"
                                   android:layout_height="match_parent"
-                                  android:scaleType="fitXY"
-                                  android:src="@drawable/ic_view">
+                                  android:scaleType="fitXY">
 
                               </ImageView>
 
                           </androidx.cardview.widget.CardView>
 
                           <androidx.cardview.widget.CardView
-                              android:layout_width="70dp"
-                              android:layout_height="70dp"
+                              android:layout_width="100dp"
+                              android:layout_height="100dp"
                               app:cardElevation="10dp"
                               app:cardCornerRadius="10dp"
                               android:layout_marginRight="10dp"
                               android:layout_marginLeft="10dp">
 
                               <ImageView
+                                  android:id="@+id/img2"
                                   android:layout_width="match_parent"
                                   android:layout_height="match_parent"
-                                  android:scaleType="fitXY"
-                                  android:src="@drawable/ic_view">
+                                  android:scaleType="fitXY">
 
                               </ImageView>
 
                           </androidx.cardview.widget.CardView>
 
                           <androidx.cardview.widget.CardView
-                              android:layout_width="70dp"
-                              android:layout_height="70dp"
+                              android:layout_width="100dp"
+                              android:layout_height="100dp"
                               app:cardElevation="10dp"
                               app:cardCornerRadius="10dp"
                               android:layout_marginRight="10dp"
                               android:layout_marginLeft="10dp">
 
                               <ImageView
+                                  android:id="@+id/img3"
                                   android:layout_width="match_parent"
                                   android:layout_height="match_parent"
-                                  android:scaleType="fitXY"
-                                  android:src="@drawable/ic_view">
+                                  android:scaleType="fitXY">
 
                               </ImageView>
 
@@ -284,11 +279,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:padding="10dp"
+                        android:padding="20dp"
                         android:background="@drawable/curve_left_blue_bg"
                         android:fontFamily="@font/nunit_sans_bold"
                         android:textColor="@color/colorWhite"
-                        android:textSize="16sp">
+                        android:textSize="20sp">
 
                     </TextView>
 
@@ -301,8 +296,8 @@
                         android:gravity="center"
                         android:fontFamily="@font/nunit_sans_bold"
                         android:textColor="@color/colorWhite"
-                        android:textSize="16sp"
-                        android:padding="10dp"
+                        android:textSize="20sp"
+                        android:padding="20dp"
                         android:background="@drawable/curve_right_orange_bg">
 
                     </TextView>
@@ -318,4 +313,4 @@
         </androidx.cardview.widget.CardView>
 
     </RelativeLayout>
-</layout>
+</LinearLayout>
