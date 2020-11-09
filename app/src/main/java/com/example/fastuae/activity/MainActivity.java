@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.adoisstudio.helper.H;
+import com.adoisstudio.helper.Session;
 import com.example.fastuae.R;
 import com.example.fastuae.databinding.ActivityMainBinding;
 import com.example.fastuae.fragment.FleetFragment;
@@ -22,6 +23,7 @@ import com.example.fastuae.fragment.MenuFragment;
 import com.example.fastuae.fragment.ProfileFragment;
 import com.example.fastuae.util.Click;
 import com.example.fastuae.util.Config;
+import com.example.fastuae.util.P;
 import com.example.fastuae.util.WindowView;
 
 public class MainActivity extends AppCompatActivity {
@@ -35,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private MenuFragment menuFragment;
     private final int TIME_DELAY = 2000;
     private long back_pressed;
+    private Session session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,13 +45,15 @@ public class MainActivity extends AppCompatActivity {
         WindowView.getWindow(activity);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
-        binding.toolbar.setTitle(getResources().getString(R.string.welcome) + " User Name");
-        setSupportActionBar(binding.toolbar);
-
         initView();
     }
 
     private void initView(){
+        session = new Session(activity);
+
+        binding.toolbar.setTitle(getResources().getString(R.string.welcome) + " " + session.getString(P.user_name));
+        setSupportActionBar(binding.toolbar);
+
         fragmentManager = getSupportFragmentManager();
 
         homeFragment = HomeFragment.newInstance();

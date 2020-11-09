@@ -39,16 +39,16 @@ public class LanguageSelectionActivity extends AppCompatActivity {
     private void initView() {
 
         if (session.getString(P.languageFlag).equals(Config.ENGLISH)){
-            updateEnglishLanguage();
+            updateEnglishLanguage(Config.ENGLISH);
         }else if (session.getString(P.languageFlag).equals(Config.ARABIC)){
-            updateArabicLanguage();
+            updateArabicLanguage(Config.ARABIC);
         }
 
         binding.lnrEnglish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Click.preventTwoClick(view);
-                updateEnglishLanguage();
+                updateEnglishLanguage(Config.ENGLISH);
 //                updateLocalization(Config.ENGLISH);
             }
         });
@@ -57,7 +57,7 @@ public class LanguageSelectionActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Click.preventTwoClick(view);
-                updateArabicLanguage();
+                updateArabicLanguage(Config.ARABIC);
 //                updateLocalization(Config.ARABIC);
             }
         });
@@ -77,20 +77,21 @@ public class LanguageSelectionActivity extends AppCompatActivity {
         });
     }
 
-    private void updateEnglishLanguage() {
+    private void updateEnglishLanguage(String language) {
         languageFlag = englishFlag;
         binding.lnrEnglish.setBackground(getResources().getDrawable(R.drawable.layout_color_bg));
         binding.lnrArabic.setBackground(getResources().getDrawable(R.drawable.layout_bg));
+        session.addString(P.languageFlag, language);
     }
 
-    private void updateArabicLanguage() {
+    private void updateArabicLanguage(String language) {
         languageFlag = urduFlag;
         binding.lnrEnglish.setBackground(getResources().getDrawable(R.drawable.layout_bg));
         binding.lnrArabic.setBackground(getResources().getDrawable(R.drawable.layout_color_bg));
+        session.addString(P.languageFlag, language);
     }
 
     private void updateLocalization(String language) {
-        session.addString(P.languageFlag, language);
         Localization.setLocal(activity, language);
     }
 

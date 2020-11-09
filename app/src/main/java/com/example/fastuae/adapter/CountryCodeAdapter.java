@@ -45,7 +45,7 @@ public class CountryCodeAdapter extends BaseAdapter {
         view = inflter.inflate(R.layout.activity_countr_code_bg, null);
         TextView txtName = view.findViewById(R.id.txtCode);
         CountryCodeModel model = itemListModels.get(i);
-        txtName.setText("+"+model.getCode());
+        txtName.setText("+"+model.getPhone_code());
         return view;
     }
 

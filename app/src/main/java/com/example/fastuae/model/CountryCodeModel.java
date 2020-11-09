@@ -2,27 +2,31 @@ package com.example.fastuae.model;
 
 public class CountryCodeModel {
 
-    String image;
-    String code;
+    String id;
+    String country_name;
+    String phone_code;
 
-    public CountryCodeModel(String code, String image) {
-        this.code = code;
-        this.image = image;
+    public String getId() {
+        return id;
     }
 
-    public String getImage() {
-        return image;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public String getCountry_name() {
+        return country_name;
     }
 
-    public String getCode() {
-        return code;
+    public void setCountry_name(String country_name) {
+        this.country_name = country_name;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public String getPhone_code() {
+        return phone_code;
+    }
+
+    public void setPhone_code(String phone_code) {
+        this.phone_code = phone_code;
     }
 }
