@@ -31,7 +31,7 @@ public class LanguageSelectionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         WindowView.getWindow(activity);
         session = new Session(activity);
-//        Localization.loadLocal(activity,session.getString(P.languageFlag));
+        Localization.loadLocal(activity,session.getString(P.languageFlag));
         binding = DataBindingUtil.setContentView(this, R.layout.activity_language_selection);
         initView();
     }
@@ -49,7 +49,7 @@ public class LanguageSelectionActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Click.preventTwoClick(view);
                 updateEnglishLanguage(Config.ENGLISH);
-//                updateLocalization(Config.ENGLISH);
+                updateLocalization(Config.ENGLISH);
             }
         });
 
@@ -58,7 +58,7 @@ public class LanguageSelectionActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Click.preventTwoClick(view);
                 updateArabicLanguage(Config.ARABIC);
-//                updateLocalization(Config.ARABIC);
+                updateLocalization(Config.ARABIC);
             }
         });
 

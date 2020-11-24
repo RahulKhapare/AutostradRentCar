@@ -35,7 +35,7 @@ public class LoginDashboardActivity extends AppCompatActivity implements ViewPag
         super.onCreate(savedInstanceState);
         WindowView.getWindow(activity);
         session = new Session(activity);
-//        Localization.loadLocal(activity,session.getString(P.languageFlag));
+        Localization.loadLocal(activity,session.getString(P.languageFlag));
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login_dashboard);
         initView();
     }

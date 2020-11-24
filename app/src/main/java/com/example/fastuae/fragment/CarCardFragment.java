@@ -33,7 +33,6 @@ public class CarCardFragment extends Fragment {
     private ScrollView scrollView;
     private LoadingDialog loadingDialog;
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -70,11 +69,11 @@ public class CarCardFragment extends Fragment {
         viewPagesSwipe.setAdapter(swipeAdapter);
 
 
-        ProgressView.show(context,loadingDialog);
-        new Handler().postDelayed(() -> {
-            ProgressView.dismiss(loadingDialog);
-            scrollView.fullScroll(ScrollView.FOCUS_DOWN);
-        }, 1000);
+//        ProgressView.show(context,loadingDialog);
+//        new Handler().postDelayed(() -> {
+//            ProgressView.dismiss(loadingDialog);
+//            scrollView.fullScroll(ScrollView.FOCUS_DOWN);
+//        }, 1000);
 
         return view;
     }
