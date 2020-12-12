@@ -40,7 +40,7 @@ public class CarGridAdapter extends RecyclerView.Adapter<CarGridAdapter.viewHold
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
         CarModel model = carModelList.get(position);
 
-        Picasso.get().load(R.drawable.ic_car_four).into(holder.binding.imgCard);
+//        Picasso.get().load(R.drawable.ic_car_four).into(holder.binding.imgCard);
         holder.binding.txtCarName.setText(model.getName());
         holder.binding.txtModel.setText(model.getModel());
         holder.binding.txtCarGroup.setText(model.getGroup());

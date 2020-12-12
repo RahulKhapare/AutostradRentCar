@@ -18,31 +18,31 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="400dp">
+                    android:layout_height="300dp">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="250dp"
+                        android:layout_height="160dp"
                         android:background="@drawable/curve_white_bg">
 
                         <ImageView
                             android:id="@+id/imgName"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerInParent="true"
-                            android:paddingBottom="100dp"
+                            android:layout_width="136dp"
+                            android:layout_height="28dp"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="40dp"
                             android:src="@drawable/ic_name"></ImageView>
 
                     </RelativeLayout>
 
                     <ImageView
                         android:id="@+id/imgCar"
-                        android:paddingTop="150dp"
-                        android:paddingRight="-130dp"
-                        android:layout_width="wrap_content"
+                        android:paddingTop="50dp"
+                        android:paddingRight="-200dp"
+                        android:layout_width="366dp"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:src="@drawable/ic_car_three"></ImageView>
+                        android:src="@drawable/ic_car_new"></ImageView>
 
                 </RelativeLayout>
 
@@ -59,7 +59,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/colorWhite"
                         android:text="@string/signUp"
-                        android:fontFamily="@font/nunito_sans_semibold"
+                        android:fontFamily="@font/nunit_sans_bold"
                         android:textSize="25sp">
 
                     </TextView>
@@ -101,7 +101,7 @@
 
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="20dp"
                         android:layout_width="match_parent"
                         android:layout_height="?actionBarSize"
                         android:textColorHint="@color/colorWhite"
@@ -124,7 +124,7 @@
                         android:id="@+id/txtProceed"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/nunito_sans_semibold"
+                        android:fontFamily="@font/nunit_sans_bold"
                         android:textColor="@color/colorPrimaryDark"
                         android:text="@string/proceed"
                         android:padding="15dp"
@@ -150,7 +150,7 @@
                             android:textColor="@color/colorWhite"
                             android:text="@string/haveAnAccount"
                             android:fontFamily="@font/nunito_sans_semibold"
-                            android:textSize="15sp">
+                            android:textSize="14sp">
 
                         </TextView>
                         <TextView
@@ -158,16 +158,16 @@
                             android:layout_height="wrap_content"
                             android:textColor="@color/lightBlue"
                             android:text="@string/login"
-                            android:paddingLeft="10dp"
+                            android:paddingLeft="5dp"
                             android:fontFamily="@font/nunito_sans_semibold"
-                            android:textSize="15sp">
+                            android:textSize="14sp">
 
                         </TextView>
 
                     </LinearLayout>
 
                     <TextView
-                        android:layout_marginTop="30dp"
+                        android:layout_marginTop="100dp"
                         android:id="@+id/txtSkipNow"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -176,7 +176,7 @@
                         android:layout_gravity="center_horizontal"
                         android:paddingLeft="10dp"
                         android:fontFamily="@font/nunito_sans_semibold"
-                        android:textSize="18sp">
+                        android:textSize="14sp">
 
                     </TextView>
 

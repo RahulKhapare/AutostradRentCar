@@ -18,27 +18,29 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="400dp">
+                    android:layout_height="350dp">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="250dp"
+                        android:layout_height="160dp"
                         android:background="@drawable/curve_white_bg">
 
                         <ImageView
                             android:id="@+id/imgName"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerInParent="true"
-                            android:paddingBottom="100dp"
+                            android:layout_width="136dp"
+                            android:layout_height="28dp"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="40dp"
                             android:src="@drawable/ic_name"></ImageView>
 
                     </RelativeLayout>
 
                     <ImageView
                         android:id="@+id/imgCar"
-                        android:paddingTop="100dp"
-                        android:paddingRight="-130dp"
+                        android:paddingTop="60dp"
+                        android:paddingRight="-60dp"
+                        android:paddingLeft="20dp"
+                        android:layout_alignParentRight="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/ic_car"></ImageView>
@@ -58,7 +60,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/colorWhite"
                         android:text="@string/select_language"
-                        android:fontFamily="@font/nunito_sans_semibold"
+                        android:fontFamily="@font/nunit_sans_bold"
                         android:textSize="25sp">
 
                     </TextView>
@@ -98,7 +100,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="15dp"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="30dp"
                         android:background="@drawable/layout_bg"
                         android:orientation="horizontal">
 
@@ -127,8 +129,10 @@
                         android:id="@+id/txtContinue"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="30dp"
-                        android:fontFamily="@font/nunito_sans_semibold"
+                        android:layout_marginTop="40dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:fontFamily="@font/nunit_sans_bold"
                         android:textColor="@color/colorPrimaryDark"
                         android:text="@string/continueq"
                         android:padding="15dp"

@@ -34,42 +34,71 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <TextView
-                            android:id="@+id/txtCarName"
+                        <LinearLayout
                             android:layout_weight="1"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/nunit_sans_bold"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="24sp"
-                            android:maxLines="1">
+                            android:layout_height="wrap_content">
 
-                        </TextView>
+                            <TextView
+                                android:id="@+id/txtCarName"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/nunit_sans_bold"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:textSize="20sp"
+                                android:text="@string/app_name"
+                                android:maxLines="1">
 
-                        <TextView
-                            android:id="@+id/txtGroup"
+                            </TextView>
+
+                        </LinearLayout>
+
+                        <LinearLayout
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/nunito_sans_semibold"
-                            android:textColor="@color/textDark"
-                            android:textSize="24sp"
-                            android:maxLines="1">
+                            android:layout_height="wrap_content">
 
-                        </TextView>
+                            <TextView
+                                android:id="@+id/txtGroup"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/nunito_sans_semibold"
+                                android:textColor="@color/textDark"
+                                android:textSize="20sp"
+                                android:text="@string/app_name"
+                                android:maxLines="1">
+
+                            </TextView>
+
+                        </LinearLayout>
+
 
                     </LinearLayout>
 
-                    <ImageView
-                        android:id="@+id/imgCar"
-                        android:layout_marginTop="10dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="300dp"
-                        android:scaleType="fitXY">
-                    </ImageView>
+                    <androidx.cardview.widget.CardView
+                        android:layout_marginTop="30dp"
+                        android:layout_width="350dp"
+                        android:layout_height="250dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        app:cardCornerRadius="5dp"
+                        app:cardElevation="0dp"
+                        android:layout_gravity="center">
+
+                        <ImageView
+                            android:id="@+id/imgCar"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/ic_car_four"
+                            android:scaleType="fitXY">
+                        </ImageView>
+
+                    </androidx.cardview.widget.CardView>
+
 
                   <LinearLayout
                       android:layout_width="match_parent"
                       android:layout_height="wrap_content"
+                      android:layout_marginTop="20dp"
                       android:orientation="vertical">
 
                       <TextView
@@ -77,16 +106,17 @@
                           android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
                           android:fontFamily="@font/nunito_sans_semibold"
+                          android:maxLines="1"
+                          android:text="@string/app_name"
                           android:textColor="@color/textDark"
-                          android:textSize="22sp"
-                          android:maxLines="1">
+                          android:textSize="20sp">
 
                       </TextView>
 
                       <LinearLayout
                           android:layout_width="match_parent"
                           android:layout_height="wrap_content"
-                          android:layout_marginTop="10dp"
+                          android:layout_marginTop="20dp"
                           android:layout_gravity="center_horizontal"
                           android:gravity="center_horizontal"
                           android:orientation="horizontal">
@@ -98,10 +128,11 @@
                               android:layout_gravity="center"
                               android:layout_marginLeft="10dp"
                               android:layout_marginRight="10dp"
-                              android:drawableLeft="@drawable/ic_ceat"
+                              android:drawableLeft="@drawable/seat_bg_two"
                               android:drawablePadding="5dp"
                               android:fontFamily="@font/nunito_sans_semibold"
                               android:maxLines="1"
+                              android:text="@string/app_name"
                               android:textColor="@color/textDark"
                               android:textSize="18sp">
 
@@ -115,9 +146,10 @@
                               android:fontFamily="@font/nunito_sans_semibold"
                               android:textColor="@color/textDark"
                               android:textSize="18sp"
+                              android:text="@string/app_name"
                               android:layout_marginLeft="10dp"
                               android:layout_marginRight="10dp"
-                              android:drawableLeft="@drawable/ic_mode"
+                              android:drawableLeft="@drawable/mode_bg_two"
                               android:drawablePadding="5dp"
                               android:maxLines="1">
 
@@ -128,12 +160,13 @@
                               android:layout_width="wrap_content"
                               android:layout_height="wrap_content"
                               android:layout_gravity="center"
+                              android:text="@string/app_name"
                               android:fontFamily="@font/nunito_sans_semibold"
                               android:textColor="@color/textDark"
                               android:textSize="18sp"
                               android:layout_marginLeft="10dp"
                               android:layout_marginRight="10dp"
-                              android:drawableLeft="@drawable/ic_doore"
+                              android:drawableLeft="@drawable/doore_bg_two"
                               android:drawablePadding="5dp"
                               android:maxLines="1">
 
@@ -144,7 +177,7 @@
                       <LinearLayout
                           android:layout_width="match_parent"
                           android:layout_height="wrap_content"
-                          android:layout_marginTop="10dp"
+                          android:layout_marginTop="20dp"
                           android:layout_gravity="center_horizontal"
                           android:gravity="center_horizontal"
                           android:orientation="horizontal">
@@ -157,9 +190,10 @@
                               android:fontFamily="@font/nunito_sans_semibold"
                               android:textColor="@color/textDark"
                               android:textSize="18sp"
+                              android:text="@string/app_name"
                               android:layout_marginLeft="10dp"
                               android:layout_marginRight="10dp"
-                              android:drawableLeft="@drawable/ic_fuil"
+                              android:drawableLeft="@drawable/fuil_bg_two"
                               android:drawablePadding="5dp"
                               android:maxLines="1">
 
@@ -173,9 +207,10 @@
                               android:fontFamily="@font/nunito_sans_semibold"
                               android:textColor="@color/textDark"
                               android:textSize="18sp"
+                              android:text="@string/app_name"
                               android:layout_marginLeft="10dp"
                               android:layout_marginRight="10dp"
-                              android:drawableLeft="@drawable/ic_suitcase"
+                              android:drawableLeft="@drawable/suitcase_bg_two"
                               android:drawablePadding="5dp"
                               android:maxLines="1">
 
@@ -189,9 +224,10 @@
                               android:fontFamily="@font/nunito_sans_semibold"
                               android:textColor="@color/textDark"
                               android:textSize="18sp"
+                              android:text="@string/app_name"
                               android:layout_marginLeft="10dp"
                               android:layout_marginRight="10dp"
-                              android:drawableLeft="@drawable/ic_engine"
+                              android:drawableLeft="@drawable/engine_bg_two"
                               android:drawablePadding="5dp"
                               android:maxLines="1">
 
@@ -200,7 +236,7 @@
                       </LinearLayout>
 
                       <LinearLayout
-                          android:layout_marginTop="20dp"
+                          android:layout_marginTop="40dp"
                           android:layout_width="match_parent"
                           android:layout_height="wrap_content"
                           android:layout_gravity="center"
@@ -208,8 +244,8 @@
                           android:orientation="horizontal">
 
                           <androidx.cardview.widget.CardView
-                              android:layout_width="100dp"
-                              android:layout_height="100dp"
+                              android:layout_width="80dp"
+                              android:layout_height="80dp"
                               app:cardElevation="10dp"
                               app:cardCornerRadius="10dp"
                               android:layout_marginRight="10dp"
@@ -219,6 +255,7 @@
                                   android:id="@+id/img1"
                                   android:layout_width="match_parent"
                                   android:layout_height="match_parent"
+                                  android:src="@drawable/ic_view_one"
                                   android:scaleType="fitXY">
 
                               </ImageView>
@@ -226,8 +263,8 @@
                           </androidx.cardview.widget.CardView>
 
                           <androidx.cardview.widget.CardView
-                              android:layout_width="100dp"
-                              android:layout_height="100dp"
+                              android:layout_width="80dp"
+                              android:layout_height="80dp"
                               app:cardElevation="10dp"
                               app:cardCornerRadius="10dp"
                               android:layout_marginRight="10dp"
@@ -237,6 +274,7 @@
                                   android:id="@+id/img2"
                                   android:layout_width="match_parent"
                                   android:layout_height="match_parent"
+                                  android:src="@drawable/ic_view_two"
                                   android:scaleType="fitXY">
 
                               </ImageView>
@@ -244,8 +282,8 @@
                           </androidx.cardview.widget.CardView>
 
                           <androidx.cardview.widget.CardView
-                              android:layout_width="100dp"
-                              android:layout_height="100dp"
+                              android:layout_width="80dp"
+                              android:layout_height="80dp"
                               app:cardElevation="10dp"
                               app:cardCornerRadius="10dp"
                               android:layout_marginRight="10dp"
@@ -255,6 +293,7 @@
                                   android:id="@+id/img3"
                                   android:layout_width="match_parent"
                                   android:layout_height="match_parent"
+                                  android:src="@drawable/ic_view_three"
                                   android:scaleType="fitXY">
 
                               </ImageView>
@@ -270,6 +309,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginTop="20dp"
                     android:orientation="horizontal">
 
                     <TextView
@@ -279,11 +319,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:padding="20dp"
+                        android:padding="15dp"
+                        android:text="@string/app_name"
                         android:background="@drawable/curve_left_blue_bg"
                         android:fontFamily="@font/nunit_sans_bold"
                         android:textColor="@color/colorWhite"
-                        android:textSize="20sp">
+                        android:textSize="18sp">
 
                     </TextView>
 
@@ -295,9 +336,10 @@
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:fontFamily="@font/nunit_sans_bold"
-                        android:textColor="@color/colorWhite"
-                        android:textSize="20sp"
-                        android:padding="20dp"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="18dp"
+                        android:padding="15dp"
+                        android:text="@string/app_name"
                         android:background="@drawable/curve_right_orange_bg">
 
                     </TextView>

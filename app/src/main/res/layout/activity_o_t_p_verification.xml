@@ -19,31 +19,44 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="400dp">
+                    android:layout_height="300dp">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="250dp"
+                        android:layout_height="160dp"
                         android:background="@drawable/curve_white_bg">
 
                         <ImageView
                             android:id="@+id/imgName"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerInParent="true"
-                            android:paddingBottom="100dp"
+                            android:layout_width="136dp"
+                            android:layout_height="28dp"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="40dp"
                             android:src="@drawable/ic_name"></ImageView>
 
                     </RelativeLayout>
 
                     <ImageView
-                        android:id="@+id/imgCar"
-                        android:paddingTop="150dp"
-                        android:paddingRight="-130dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:id="@+id/imgCarLogin"
+                        android:paddingTop="60dp"
+                        android:paddingRight="-250dp"
+                        android:layout_width="366dp"
+                        android:layout_height="200dp"
+                        android:visibility="gone"
                         android:layout_alignParentRight="true"
                         android:src="@drawable/ic_car_three"></ImageView>
+
+
+                    <ImageView
+                        android:id="@+id/imgCarSignup"
+                        android:paddingTop="50dp"
+                        android:paddingRight="-200dp"
+                        android:layout_width="366dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:visibility="gone"
+                        android:src="@drawable/ic_car_new"></ImageView>
+
 
                 </RelativeLayout>
 
@@ -60,7 +73,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/colorWhite"
                         android:text="@string/enterCode"
-                        android:fontFamily="@font/nunito_sans_semibold"
+                        android:fontFamily="@font/nunit_sans_bold"
                         android:textSize="25sp">
 
                     </TextView>
@@ -71,7 +84,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/colorWhite"
                         android:fontFamily="@font/nunito_sans_semibold"
-                        android:textSize="18sp">
+                        android:textSize="16sp">
 
                     </TextView>
 
@@ -87,14 +100,14 @@
                         android:textIsSelectable="false"
                         android:textColor="@color/colorWhite"
                         android:textColorHint="@color/colorWhite"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="30dp"
                         android:inputType="number" />
 
                     <TextView
                         android:id="@+id/txtProceed"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/nunito_sans_semibold"
+                        android:fontFamily="@font/nunit_sans_bold"
                         android:textColor="@color/colorPrimaryDark"
                         android:text="@string/proceed"
                         android:padding="15dp"
@@ -112,13 +125,30 @@
                         android:layout_marginTop="20dp">
 
                         <TextView
+                            android:id="@+id/txtResend"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/lightBlue"
+                            android:text="@string/resendCodeIn"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:visibility="gone"
+                            android:fontFamily="@font/nunito_sans_semibold"
+                            android:textSize="14sp">
+
+                        </TextView>
+
+
+                        <TextView
                             android:id="@+id/txtSeconds"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/colorWhite"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
                             android:text="@string/secondsRemaining"
                             android:fontFamily="@font/nunito_sans_semibold"
-                            android:textSize="15sp">
+                            android:textSize="14sp">
 
                         </TextView>
 

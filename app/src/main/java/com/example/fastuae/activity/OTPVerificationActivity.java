@@ -50,10 +50,18 @@ public class OTPVerificationActivity extends AppCompatActivity {
         countryCode = getIntent().getStringExtra(Config.COUNTRY_CODE);
         verificationFor = getIntent().getStringExtra(Config.VERIFICATION_FOR);
 
+        if(verificationFor.equals(Config.LOGIN)){
+            binding.imgCarLogin.setVisibility(View.VISIBLE);
+            binding.imgCarSignup.setVisibility(View.GONE);
+        }else if(verificationFor.equals(Config.SIGN_UP)){
+            binding.imgCarLogin.setVisibility(View.GONE);
+            binding.imgCarSignup.setVisibility(View.VISIBLE);
+        }
+
         loadingDialog = new LoadingDialog(activity);
         resetOTP = getResources().getString(R.string.resendOTP);
 
-        binding.txtOTPMessage.setText(getResources().getString(R.string.codeMessage) + " " + number);
+        binding.txtOTPMessage.setText(getResources().getString(R.string.codeMessage) + " +" + number);
         binding.etxOtp.setText(loginOTP);
 
         startTimer();
@@ -77,7 +85,11 @@ public class OTPVerificationActivity extends AppCompatActivity {
                 }else if (binding.etxOtp.getText().toString().length()<6 || binding.etxOtp.getText().toString().length()>6){
                     H.showMessage(activity,getResources().getString(R.string.errorOTP));
                 }else {
-                    hitVerifyOtp();
+//                    hitVerifyOtp();
+                    Intent mainIntent = new Intent(activity,MainActivity.class);
+                    mainIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(mainIntent);
+                    finish();
                 }
             }
         });
@@ -85,12 +97,15 @@ public class OTPVerificationActivity extends AppCompatActivity {
     }
 
     private void startTimer(){
+        binding.txtResend.setVisibility(View.VISIBLE);
         timer = new CountDownTimer(30000, 1000) {
 
             public void onTick(long millisUntilFinished) {
-                binding.txtSeconds.setText(getResources().getString(R.string.secondsRemaining) + " " + "00 : " + millisUntilFinished / 1000);
+                long time = millisUntilFinished / 1000;
+                binding.txtSeconds.setText("00 : " + time + " " + getResources().getString(R.string.secondsRemaining));
             }
             public void onFinish() {
+                binding.txtResend.setVisibility(View.GONE);
                 binding.txtSeconds.setText(resetOTP);
                 binding.etxOtp.setText("");
             }

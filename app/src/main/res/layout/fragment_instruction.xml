@@ -23,9 +23,9 @@
                    android:orientation="horizontal">
 
                    <ImageView
-                       android:layout_width="15dp"
-                       android:layout_height="15dp"
-                       android:layout_gravity="center_vertical"
+                       android:layout_width="8dp"
+                       android:layout_height="8dp"
+                       android:layout_marginTop="7dp"
                        android:src="@drawable/ic_baseline_brightness_1_24">
 
                    </ImageView>
@@ -33,7 +33,6 @@
                    <TextView
                        android:layout_width="match_parent"
                        android:layout_height="wrap_content"
-                       android:drawablePadding="10dp"
                        android:fontFamily="@font/nunito_sans_regular"
                        android:text="@string/txt1"
                        android:paddingLeft="10dp"
@@ -51,9 +50,9 @@
                    android:orientation="horizontal">
 
                    <ImageView
-                       android:layout_width="15dp"
-                       android:layout_height="15dp"
-                       android:layout_gravity="center_vertical"
+                       android:layout_width="8dp"
+                       android:layout_height="8dp"
+                       android:layout_marginTop="7dp"
                        android:src="@drawable/ic_baseline_brightness_1_24">
 
                    </ImageView>
@@ -78,9 +77,9 @@
                    android:orientation="horizontal">
 
                    <ImageView
-                       android:layout_width="15dp"
-                       android:layout_height="15dp"
-                       android:layout_gravity="center_vertical"
+                       android:layout_width="8dp"
+                       android:layout_height="8dp"
+                       android:layout_marginTop="7dp"
                        android:src="@drawable/ic_baseline_brightness_1_24">
 
                    </ImageView>

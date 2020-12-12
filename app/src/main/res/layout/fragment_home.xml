@@ -21,9 +21,9 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardPickLocation"
                     android:layout_width="match_parent"
-                    android:layout_height="70dp"
-                    app:cardElevation="10dp"
-                    app:cardCornerRadius="10dp"
+                    android:layout_height="60dp"
+                    app:cardElevation="5dp"
+                    app:cardCornerRadius="5dp"
                     android:layout_margin="5dp">
 
                     <LinearLayout
@@ -44,8 +44,8 @@
                                 android:layout_height="wrap_content">
 
                                 <ImageView
-                                    android:layout_width="30dp"
-                                    android:layout_height="30dp"
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp"
                                     android:layout_gravity="center_vertical"
                                     android:src="@drawable/ic_location"></ImageView>
                                 <TextView
@@ -55,7 +55,7 @@
                                     android:layout_gravity="center_vertical"
                                     android:fontFamily="@font/nunito_sans_semibold"
                                     android:text="@string/pickUpLocation"
-                                    android:textSize="16sp">
+                                    android:textSize="14sp">
                                 </TextView>
 
                             </LinearLayout>
@@ -68,7 +68,7 @@
                                 android:fontFamily="@font/nunito_sans_semibold"
                                 android:text="@string/userCurrentLocation"
                                 android:paddingLeft="10dp"
-                                android:textSize="14sp">
+                                android:textSize="12sp">
                             </TextView>
 
                         </LinearLayout>
@@ -87,10 +87,10 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardDropLocation"
                     android:layout_width="match_parent"
-                    android:layout_height="70dp"
-                    app:cardElevation="10dp"
-                    app:cardCornerRadius="10dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_height="60dp"
+                    app:cardElevation="5dp"
+                    app:cardCornerRadius="5dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp">
 
@@ -112,8 +112,8 @@
                                 android:layout_height="wrap_content">
 
                                 <ImageView
-                                    android:layout_width="30dp"
-                                    android:layout_height="30dp"
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp"
                                     android:layout_gravity="center_vertical"
                                     android:src="@drawable/ic_location"></ImageView>
                                 <TextView
@@ -123,7 +123,7 @@
                                     android:layout_gravity="center_vertical"
                                     android:fontFamily="@font/nunito_sans_semibold"
                                     android:text="@string/dropOfLocation"
-                                    android:textSize="16sp">
+                                    android:textSize="14sp">
                                 </TextView>
 
                             </LinearLayout>
@@ -155,6 +155,7 @@
                         android:orientation="vertical">
 
                         <LinearLayout
+                            android:id="@+id/lnrPickupDate"
                             android:layout_weight="1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -170,7 +171,7 @@
                                 android:layout_margin="10dp"
                                 android:fontFamily="@font/nunito_sans_semibold"
                                 android:text="@string/pickUp"
-                                android:textSize="18sp">
+                                android:textSize="16sp">
 
                             </TextView>
 
@@ -181,10 +182,13 @@
                                 android:textColor="@color/colorPrimaryDark"
                                 android:layout_gravity="center_vertical"
                                 android:gravity="center_horizontal"
-                                android:layout_margin="10dp"
-                                android:fontFamily="@font/nunit_sans_bold"
+                                android:layout_marginTop="0dp"
+                                android:layout_marginRight="10dp"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginBottom="0dp"
+                                android:fontFamily="@font/nunito_sans_semibold"
                                 android:text="00"
-                                android:textSize="30sp">
+                                android:textSize="26sp">
 
                             </TextView>
 
@@ -198,38 +202,39 @@
                                 android:fontFamily="@font/nunito_sans_semibold"
                                 android:text="Month"
                                 android:layout_margin="10dp"
-                                android:textSize="18sp">
+                                android:textSize="14sp">
 
                             </TextView>
 
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/lnrPickupTime"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/corner_blue_bg"
                             android:layout_marginTop="10dp"
+                            android:background="@drawable/corner_blue_bg"
+                            android:gravity="center"
                             android:padding="10dp">
 
                             <ImageView
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
-                                android:gravity="center_horizontal"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
                                 android:layout_gravity="center_vertical"
+                                android:gravity="center_horizontal"
                                 android:src="@drawable/ic_watch"></ImageView>
 
                             <TextView
                                 android:id="@+id/txtPickTime"
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="@color/colorPrimaryDark"
                                 android:layout_gravity="center_vertical"
-                                android:fontFamily="@font/nunito_sans_semibold"
-                                android:text="10:10 AM"
-                                android:gravity="center_horizontal"
                                 android:layout_marginLeft="5dp"
-                                android:textSize="18sp">
-                            </TextView>
+                                android:fontFamily="@font/nunito_sans_semibold"
+                                android:gravity="center_horizontal"
+                                android:text="10:10 AM"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:textSize="14sp"></TextView>
 
                         </LinearLayout>
 
@@ -240,9 +245,9 @@
                         android:layout_height="wrap_content"
                         android:tint="@color/colorPrimaryDark"
                         android:layout_gravity="center_vertical"
-                        android:paddingBottom="70dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
+                        android:paddingBottom="50dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
                         android:src="@drawable/ic_baseline_arrow_forward_24"></ImageView>
 
                     <LinearLayout
@@ -252,6 +257,7 @@
                         android:orientation="vertical">
 
                         <LinearLayout
+                            android:id="@+id/lnrDropoffDate"
                             android:layout_weight="1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -268,7 +274,7 @@
                                 android:layout_margin="10dp"
                                 android:fontFamily="@font/nunito_sans_semibold"
                                 android:text="@string/dropOf"
-                                android:textSize="18sp">
+                                android:textSize="16sp">
 
                             </TextView>
 
@@ -279,10 +285,13 @@
                                 android:textColor="@color/colorPrimaryDark"
                                 android:layout_gravity="center_vertical"
                                 android:gravity="center_horizontal"
-                                android:layout_margin="10dp"
-                                android:fontFamily="@font/nunit_sans_bold"
+                                android:layout_marginTop="0dp"
+                                android:layout_marginRight="10dp"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginBottom="0dp"
+                                android:fontFamily="@font/nunito_sans_semibold"
                                 android:text="00"
-                                android:textSize="30sp">
+                                android:textSize="26sp">
 
                             </TextView>
 
@@ -296,29 +305,31 @@
                                 android:fontFamily="@font/nunito_sans_semibold"
                                 android:text="Month"
                                 android:layout_margin="10dp"
-                                android:textSize="18sp">
+                                android:textSize="14sp">
 
                             </TextView>
 
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/lnrDropoffTime"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/corner_blue_bg"
                             android:layout_marginTop="10dp"
+                            android:gravity="center"
                             android:padding="10dp">
 
                             <ImageView
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
                                 android:gravity="center_horizontal"
                                 android:layout_gravity="center_vertical"
                                 android:src="@drawable/ic_watch"></ImageView>
 
                             <TextView
                                 android:id="@+id/txtDropTime"
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/colorPrimaryDark"
                                 android:layout_gravity="center_vertical"
@@ -326,7 +337,7 @@
                                 android:text="10:10 AM"
                                 android:gravity="center_horizontal"
                                 android:layout_marginLeft="5dp"
-                                android:textSize="18sp">
+                                android:textSize="14sp">
                             </TextView>
 
                         </LinearLayout>
@@ -339,7 +350,7 @@
                     android:id="@+id/txtSearch"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/nunito_sans_semibold"
+                    android:fontFamily="@font/nunit_sans_bold"
                     android:textColor="@color/colorWhite"
                     android:text="@string/search"
                     android:padding="15dp"
@@ -380,16 +391,17 @@
                     </LinearLayout>
 
                     <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:tint="@color/colorPrimaryDark"
-                        android:layout_marginTop="60dp"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
                         android:layout_alignParentLeft="true"
-                        android:src="@drawable/ic_baseline_chevron_left_24"></ImageView>
+                        android:layout_marginLeft="0dp"
+                        android:layout_marginTop="60dp"
+                        android:src="@drawable/ic_baseline_chevron_left_24"
+                        android:tint="@color/colorPrimaryDark"></ImageView>
 
                     <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
                         android:layout_alignParentRight="true"
                         android:tint="@color/colorPrimaryDark"
                         android:layout_marginTop="60dp"

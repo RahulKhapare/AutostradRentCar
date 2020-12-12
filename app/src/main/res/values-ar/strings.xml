@@ -5,6 +5,7 @@
     <string name="urdu">عربى</string>
     <string name="continueq">استمر</string>
     <string name="login">تسجيل الدخول</string>
+    <string name="loginn">تسجيل الدخول</string>
     <string name="signUp">سجل</string>
     <string name="welcomeTo">مرحبا بك في</string>
     <string name="skip">تخطى</string>
@@ -17,12 +18,13 @@
     <string name="skipNow">تخطي في الوقت الراهن</string>
     <string name="enterEmail">أدخل البريد الإلكتروني</string>
     <string name="haveAnAccount">هل لديك حساب؟</string>
-    <string name="secondsRemaining">الثواني المتبقية</string>
+    <string name="secondsRemaining">ثواني</string>
+    <string name="resendCodeIn">إعادة إرسال الرمز بتنسيق</string>
     <string name="seconds">00</string>
-    <string name="resendOTP">انقر لإعادة إرسال OTP</string>
-    <string name="optSent">تم إرسال OTP بنجاح</string>
-    <string name="enterOTP">الرجاء إدخال OTP</string>
-    <string name="errorOTP">يجب أن يتكون OTP من 6 أرقام</string>
+    <string name="resendOTP">انقر لإعادة إرسال بنجاح</string>
+    <string name="optSent">تم إرسال الشفرة بنجاح</string>
+    <string name="enterOTP">الرجاء إدخال الشفرة</string>
+    <string name="errorOTP">يجب أن يتكون الشفرة من 6 أرقام</string>
     <string name="enterMobile">الرجاء إدخال رقم الهاتف المحمول</string>
     <string name="enterMobileValid">الرجاء إدخال رقم هاتف محمول صحيح</string>
     <string name="enterEmailId">الرجاء إدخال البريد الإلكتروني</string>

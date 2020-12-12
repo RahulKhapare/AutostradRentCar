@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -46,6 +47,7 @@ public class LoginActivity extends AppCompatActivity {
     private void initView(){
         session = new Session(activity);
         loadingDialog = new LoadingDialog(activity);
+        binding.txtSkipNow.setPaintFlags(binding.txtSkipNow.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
         List<CountryCodeModel> countryCodeModelList = new ArrayList<>();
 
@@ -95,7 +97,12 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Click.preventTwoClick(v);
                 if (checkValidation()){
-                   hitMobileLogin();
+//                   hitMobileLogin();
+                    Intent intent = new Intent(activity, OTPVerificationActivity.class);
+                    intent.putExtra(Config.VERIFICATION_FOR,Config.LOGIN);
+                    intent.putExtra(Config.MOBILE_NUMBER,binding.etxMobileNumber.getText().toString().trim());
+                    intent.putExtra(Config.COUNTRY_CODE,countryCode);
+                    startActivity(intent);
                 }
             }
         });

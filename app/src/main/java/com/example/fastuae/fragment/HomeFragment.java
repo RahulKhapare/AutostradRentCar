@@ -1,5 +1,7 @@
 package com.example.fastuae.fragment;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +11,9 @@ import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
+import android.widget.TextView;
+import android.widget.TimePicker;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
@@ -22,8 +27,10 @@ import com.example.fastuae.databinding.FragmentHomeBinding;
 import com.example.fastuae.model.SliderModel;
 import com.example.fastuae.util.Click;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -60,16 +67,19 @@ public class HomeFragment extends Fragment {
 
     private void getCurrentDate(){
         Calendar c= Calendar.getInstance();
-        int year = c.get(Calendar.YEAR);
-        int monthInt = c.get(Calendar.MONTH);
-        String monthString = c.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault());
-        int day = c.get(Calendar.DAY_OF_MONTH);
+        final Date date = c.getTime();
 
-        binding.txtPickDate.setText(day+"");
+        String dayOfTheWeek = (String) DateFormat.format("EEEE", date); // Thursday
+        String dayString         = (String) DateFormat.format("dd",   date); // 20
+        String monthString  = (String) DateFormat.format("MMM",  date); // Jun
+        String monthNumber  = (String) DateFormat.format("MM",   date); // 06
+        String yeare         = (String) DateFormat.format("yyyy", date); // 2013
+
+        binding.txtPickDate.setText(dayString);
         binding.txtPickMonth.setText(monthString.toUpperCase());
         binding.txtPickTime.setText(getCurrentTime()+"");
 
-        binding.txtDropDate.setText(day+"");
+        binding.txtDropDate.setText(dayString);
         binding.txtDropMonth.setText(monthString.toUpperCase());
         binding.txtDropTime.setText(getCurrentTime());
 
@@ -121,6 +131,38 @@ public class HomeFragment extends Fragment {
 
     private void onClick(){
 
+        binding.lnrPickupDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                setDateTime(binding.txtPickDate,binding.txtPickMonth);
+            }
+        });
+
+        binding.lnrDropoffDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                setDateTime(binding.txtDropDate,binding.txtDropMonth);
+            }
+        });
+
+        binding.lnrPickupTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                setTime(binding.txtPickTime);
+            }
+        });
+
+        binding.lnrDropoffTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                setTime(binding.txtDropTime);
+            }
+        });
+
         binding.txtSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -129,6 +171,59 @@ public class HomeFragment extends Fragment {
                 startActivity(selectCarIntent);
             }
         });
+    }
+
+    private void setDateTime(TextView txtDay, TextView txtMonth) {
+
+        Calendar newCalendar = Calendar.getInstance();
+        DatePickerDialog mDatePickerDialog = new DatePickerDialog(context, R.style.DialogTheme,new DatePickerDialog.OnDateSetListener() {
+
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                Calendar newDate = Calendar.getInstance();
+                newDate.set(year, monthOfYear, dayOfMonth);
+                SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
+                final Date date = newDate.getTime();
+                String fdate = sd.format(date);
+
+                String dayOfTheWeek = (String) DateFormat.format("EEEE", date); // Thursday
+                String dayString         = (String) DateFormat.format("dd",   date); // 20
+                String monthString  = (String) DateFormat.format("MMM",  date); // Jun
+                String monthNumber  = (String) DateFormat.format("MM",   date); // 06
+                String yeare         = (String) DateFormat.format("yyyy", date); // 2013
+
+                txtDay.setText(dayString);
+                txtMonth.setText(monthString.toUpperCase());
+
+            }
+        }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+//        mDatePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+        mDatePickerDialog.show();
+
+    }
+
+    private void setTime(TextView txtTime){
+        Calendar mcurrentTime = Calendar.getInstance();
+        int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+        int minute = mcurrentTime.get(Calendar.MINUTE);
+        TimePickerDialog mTimePicker;
+        mTimePicker = new TimePickerDialog(getActivity(),R.style.DialogTheme, new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                String AM_PM = "";
+                Calendar datetime = Calendar.getInstance();
+                datetime.set(Calendar.HOUR_OF_DAY, selectedHour);
+                datetime.set(Calendar.MINUTE, selectedMinute);
+
+                if (datetime.get(Calendar.AM_PM) == Calendar.AM)
+                    AM_PM = "AM";
+                else if (datetime.get(Calendar.AM_PM) == Calendar.PM)
+                    AM_PM = "PM";
+
+                txtTime.setText( selectedHour + ":" + selectedMinute + " " + AM_PM);
+            }
+        }, hour, minute, true);//Yes 24 hour time
+        mTimePicker.setTitle("Select Time");
+        mTimePicker.show();
     }
 
 

@@ -1,6 +1,8 @@
 package com.example.fastuae.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +16,7 @@ import androidx.viewpager.widget.PagerAdapter;
 
 import com.example.fastuae.R;
 import com.example.fastuae.model.CarModel;
+import com.example.fastuae.util.Click;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -63,10 +66,10 @@ public class ViewPagerSwipeAdapter extends PagerAdapter {
         TextView txtPayLatter = view.findViewById(R.id.txtPayLatter);
         TextView txtPayNow = view.findViewById(R.id.txtPayNow);
 
-        Picasso.get().load(R.drawable.ic_car_four).into(imgCar);
-        Picasso.get().load(R.drawable.ic_view).into(img1);
-        Picasso.get().load(R.drawable.ic_view).into(img2);
-        Picasso.get().load(R.drawable.ic_view).into(img3);
+//        Picasso.get().load(R.drawable.ic_car_four).into(imgCar);
+//        Picasso.get().load(R.drawable.ic_view_one).into(img1);
+//        Picasso.get().load(R.drawable.ic_view_two).into(img2);
+//        Picasso.get().load(R.drawable.ic_view_three).into(img3);
 
         txtCarName.setText(model.getName());
         txtGroup.setText(model.getGroup());
@@ -77,8 +80,37 @@ public class ViewPagerSwipeAdapter extends PagerAdapter {
         txtPetrol.setText(model.getPetrol());
         txtSuitcase.setText(model.getSuitcase());
         txtEngine.setText(model.getEngine());
-        txtPayLatter.setText(context.getResources().getString(R.string.payNow) + "\n" + model.getAedNow());
-        txtPayNow.setText(context.getResources().getString(R.string.payLater) + "\n" + model.getAedLater());
+        txtPayNow.setText(context.getResources().getString(R.string.payNow) + "\n" + model.getAedNow());
+        txtPayLatter.setText(context.getResources().getString(R.string.payLater) + "\n" + model.getAedLater());
+
+        img1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                BitmapDrawable drawable = (BitmapDrawable) img1.getDrawable();
+                Bitmap bitmap = drawable.getBitmap();
+                imgCar.setImageBitmap(bitmap);
+
+            }
+        });
+        img2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                BitmapDrawable drawable = (BitmapDrawable) img2.getDrawable();
+                Bitmap bitmap = drawable.getBitmap();
+                imgCar.setImageBitmap(bitmap);
+            }
+        });
+        img3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                BitmapDrawable drawable = (BitmapDrawable) img3.getDrawable();
+                Bitmap bitmap = drawable.getBitmap();
+                imgCar.setImageBitmap(bitmap);
+            }
+        });
 
         return view;
     }
