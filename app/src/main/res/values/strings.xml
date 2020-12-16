@@ -51,6 +51,11 @@
     <string name="payLater">Pay Later</string>
     <string name="payNow">Pay Now</string>
     <string name="more">More</string>
+    <string name="deliever">Deliver</string>
+    <string name="selfPickup">Self-Pickup</string>
+    <string name="collect">Collect</string>
+    <string name="selfreturn">Self-return</string>
+    <string name="enterLocationDeliver">Enter Location to Deliver</string>
 
 
     <string name="txt1">Leading Car Rental Company with the largest network of Branches And Pickup points</string>

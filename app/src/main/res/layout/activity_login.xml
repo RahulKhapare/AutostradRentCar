@@ -87,15 +87,16 @@
                             <com.google.android.material.textfield.TextInputLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="?actionBarSize"
-                                android:textColorHint="@color/colorWhite">
+                                android:hint="@string/mobileNumber"
+                                app:hintTextColor="@color/grayLight"
+                                android:textColorHint="@color/grayLight">
 
                                 <com.google.android.material.textfield.TextInputEditText
                                     android:id="@+id/etxMobileNumber"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:hint="@string/mobileNumber"
                                     android:inputType="number"
-                                    android:textColorHint="@color/colorWhite"
+                                    android:singleLine="true"
                                     android:fontFamily="@font/nunito_sans_regular"
                                     android:textColor="@color/colorWhite"
                                     android:backgroundTint="@color/colorWhite"

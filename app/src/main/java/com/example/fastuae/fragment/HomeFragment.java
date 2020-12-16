@@ -171,6 +171,42 @@ public class HomeFragment extends Fragment {
                 startActivity(selectCarIntent);
             }
         });
+
+        binding.radioDeliver.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                binding.radioSelfPickup.setChecked(false);
+                binding.txtPickUpMessage.setVisibility(View.GONE);
+                binding.txtPickUpTitle.setText(getResources().getString(R.string.enterLocationDeliver));
+            }
+        });
+
+        binding.radioSelfPickup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                binding.radioDeliver.setChecked(false);
+                binding.txtPickUpMessage.setVisibility(View.VISIBLE);
+                binding.txtPickUpTitle.setText(getResources().getString(R.string.pickUpLocation));
+            }
+        });
+
+        binding.radioCollect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                binding.radioSelfReturn.setChecked(false);
+            }
+        });
+
+        binding.radioSelfReturn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                binding.radioCollect.setChecked(false);
+            }
+        });
     }
 
     private void setDateTime(TextView txtDay, TextView txtMonth) {

@@ -82,7 +82,7 @@
                         android:id="@+id/txtOTPMessage"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/colorWhite"
+                        android:textColor="@color/grayLight"
                         android:fontFamily="@font/nunito_sans_semibold"
                         android:textSize="16sp">
 
@@ -99,7 +99,8 @@
                         android:text=""
                         android:textIsSelectable="false"
                         android:textColor="@color/colorWhite"
-                        android:textColorHint="@color/colorWhite"
+                        android:textColorHint="@color/grayLight"
+                        android:backgroundTint="@color/grayLight"
                         android:layout_marginTop="30dp"
                         android:inputType="number" />
 

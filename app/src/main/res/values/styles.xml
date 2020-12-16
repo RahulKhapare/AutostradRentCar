@@ -1,24 +1,54 @@
 <resources>
-<!-- Base application theme. -->
-<style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-    <!-- Customize your theme here. -->
-    <item name="colorPrimary">@color/colorPrimary</item>
-    <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-    <item name="colorAccent">@color/colorAccent</item>
-</style>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
 
-<style name="AppTheme.NoActionBar">
-    <item name="windowActionBar">false</item>
-    <item name="windowNoTitle">true</item>
-</style>
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
 
-<style name="ToolbarColoredBackArrow" parent="AppTheme">
-    <item name="android:textColorSecondary">@color/colorWhite</item>
+    <style name="ToolbarColoredBackArrow" parent="AppTheme">
+        <item name="android:textColorSecondary">@color/colorWhite</item>
 
-</style>
+    </style>
 
     <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog">
         <item name="colorAccent">@color/colorPrimary</item>
+    </style>
+
+
+    <style name="ErrorText" parent="TextAppearance.Design.Error">
+<!--        <item name="android:textSize">11sp</item>-->
+        <item name="android:textColor">@color/grayLight</item>
+    </style>
+
+    <style name="EditTextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+<!--        <item name="boxStrokeColor">@color/grayLight</item>-->
+<!--        <item name="boxStrokeWidth">0.5dp</item>-->
+<!--        <item name="boxBackgroundColor">@color/grayLight</item>-->
+<!--        <item name="errorTextAppearance">@style/ErrorText</item>-->
+        <item name="hintTextColor">@color/grayLight</item>
+<!--        <item name="android:textColor">@color/colorWhite</item>-->
+        <item name="android:textColorHint">@color/grayLight</item>
+    </style>
+
+    <style name="InputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <!-- The color of the label when it is collapsed and the text field is active -->
+        <item name="hintTextColor">@color/grayLight</item>
+        <!-- The color of the label in all other text field states (such as resting and disabled) -->
+        <item name="android:textColorHint">@color/grayLight</item>
+    </style>
+
+    <style name="TextLabel" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="android:textColorHint">@color/grayLight</item>
+        <item name="android:textSize">16sp</item>
+        <item name="colorControlNormal">@color/grayLight</item>
+        <item name="colorControlActivated">@color/grayLight</item>
     </style>
 
 </resources>

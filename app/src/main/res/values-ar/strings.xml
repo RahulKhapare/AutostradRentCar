@@ -50,6 +50,11 @@
     <string name="payLater">ادفع لاحقا</string>
     <string name="payNow">ادفع الآن</string>
     <string name="more">أكثر</string>
+    <string name="deliever">ايصال</string>
+    <string name="selfPickup">النفس التقاط</string>
+    <string name="collect">تجميع</string>
+    <string name="selfreturn">العودة الذاتية</string>
+    <string name="enterLocationDeliver">أدخل الموقع للتسليم</string>
 
     <string name="txt1">شركة رائدة في مجال تأجير السيارات ولديها أكبر شبكة من الفروع ونقاط الالتقاء</string>
     <string name="txt2">شركة رائدة في مجال تأجير السيارات ولديها أكبر شبكة من الفروع ونقاط الالتقاء</string>

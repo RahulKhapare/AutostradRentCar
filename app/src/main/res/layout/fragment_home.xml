@@ -18,13 +18,54 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:layout_marginTop="15dp">
+
+                    <RadioButton
+                        android:id="@+id/radioDeliver"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/lightBlue"
+                        android:textColor="@color/textDark"
+                        android:textSize="14sp"
+                        android:checked="true"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:text="@string/deliever">
+
+                    </RadioButton>
+
+                    <RadioButton
+                        android:id="@+id/radioSelfPickup"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/lightBlue"
+                        android:textColor="@color/textDark"
+                        android:textSize="14sp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:text="@string/selfPickup">
+
+                    </RadioButton>
+
+                </LinearLayout>
+
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardPickLocation"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     app:cardElevation="5dp"
                     app:cardCornerRadius="5dp"
-                    android:layout_margin="5dp">
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:paddingBottom="5dp"
+                    android:layout_marginTop="10dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -49,18 +90,20 @@
                                     android:layout_gravity="center_vertical"
                                     android:src="@drawable/ic_location"></ImageView>
                                 <TextView
+                                    android:id="@+id/txtPickUpTitle"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:textColor="@color/textDark"
                                     android:layout_gravity="center_vertical"
                                     android:fontFamily="@font/nunito_sans_semibold"
-                                    android:text="@string/pickUpLocation"
+                                    android:text="@string/enterLocationDeliver"
                                     android:textSize="14sp">
                                 </TextView>
 
                             </LinearLayout>
 
                             <TextView
+                                android:id="@+id/txtPickUpMessage"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/iconicGray"
@@ -68,6 +111,7 @@
                                 android:fontFamily="@font/nunito_sans_semibold"
                                 android:text="@string/userCurrentLocation"
                                 android:paddingLeft="10dp"
+                                android:visibility="gone"
                                 android:textSize="12sp">
                             </TextView>
 
@@ -83,6 +127,43 @@
                     </LinearLayout>
 
                 </androidx.cardview.widget.CardView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:layout_marginTop="25dp">
+
+                    <RadioButton
+                        android:id="@+id/radioCollect"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/lightBlue"
+                        android:textColor="@color/textDark"
+                        android:textSize="14sp"
+                        android:checked="true"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:text="@string/collect">
+
+                    </RadioButton>
+
+                    <RadioButton
+                        android:id="@+id/radioSelfReturn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/lightBlue"
+                        android:textColor="@color/textDark"
+                        android:textSize="14sp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:text="@string/selfreturn">
+
+                    </RadioButton>
+
+                </LinearLayout>
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardDropLocation"
