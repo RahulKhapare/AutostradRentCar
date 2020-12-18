@@ -12,5 +12,6 @@
     <color name="textDark">#262626</color>
     <color name="lightBlue">#159dd8</color>
     <color name="grayLight">#8c99b4</color>
+    <color name="grayDark">#707070</color>
 
 </resources>

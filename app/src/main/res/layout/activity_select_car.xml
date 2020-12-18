@@ -25,28 +25,28 @@
             android:background="@drawable/curve_main_bg"
             android:layout_below="@+id/toolbar">
 
-
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp">
+                android:layout_marginTop="10dp">
 
                 <com.google.android.material.tabs.TabLayout
                     android:id="@+id/tabLayout"
+                    android:layout_marginTop="-15dp"
                     android:layout_width="match_parent"
                     android:layout_height="?actionBarSize"
                     android:background="@color/colorWhite"
-                    android:elevation="4dp"
+                    android:elevation="3dp"
                     app:tabIndicatorColor="@color/lightBlue"
-                    app:tabIndicatorHeight="3dp"
+                    app:tabIndicatorHeight="2dp"
                     app:tabMode="fixed"
                     app:tabGravity="fill"
                     app:tabInlineLabel="true"
                     app:tabIconTint="@color/your_color_selector"
                     app:tabSelectedTextColor="@color/lightBlue"
-                    app:tabTextColor="@color/colorPrimaryDark" />
+                    app:tabTextColor="@color/colorPrimaryDark"
+                    app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
+                    android:theme="@style/MyCustomTabLayout"/>
 
                 <androidx.viewpager.widget.ViewPager
                     android:layout_below="@+id/tabLayout"

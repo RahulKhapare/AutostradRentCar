@@ -64,6 +64,8 @@
                             android:layout_height="wrap_content"
                             android:textColor="@color/colorWhite"
                             android:text="@string/loginn"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginLeft="5dp"
                             android:fontFamily="@font/nunit_sans_bold"
                             android:textSize="25sp">
 
@@ -79,6 +81,8 @@
                                 android:id="@+id/spinnerCode"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
+                                android:layout_marginRight="5dp"
+                                android:layout_marginLeft="5dp"
                                 style="@style/Base.Widget.AppCompat.Spinner.Underlined"
                                 android:backgroundTint="@color/colorWhite">
 
@@ -88,6 +92,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="?actionBarSize"
                                 android:hint="@string/mobileNumber"
+                                android:layout_marginRight="5dp"
+                                android:layout_marginLeft="5dp"
                                 app:hintTextColor="@color/grayLight"
                                 android:textColorHint="@color/grayLight">
 
@@ -113,6 +119,8 @@
                             android:textColor="@color/colorPrimaryDark"
                             android:text="@string/proceed"
                             android:padding="15dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginLeft="5dp"
                             android:layout_marginTop="30dp"
                             android:layout_gravity="center"
                             android:gravity="center"

@@ -4,6 +4,8 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
@@ -12,9 +14,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import androidx.annotation.RequiresApi;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
@@ -173,38 +177,50 @@ public class HomeFragment extends Fragment {
         });
 
         binding.radioDeliver.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
                 binding.radioSelfPickup.setChecked(false);
                 binding.txtPickUpMessage.setVisibility(View.GONE);
                 binding.txtPickUpTitle.setText(getResources().getString(R.string.enterLocationDeliver));
+                blueTin(binding.radioDeliver);
+                blackTin(binding.radioSelfPickup);
             }
         });
 
         binding.radioSelfPickup.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
                 binding.radioDeliver.setChecked(false);
                 binding.txtPickUpMessage.setVisibility(View.VISIBLE);
                 binding.txtPickUpTitle.setText(getResources().getString(R.string.pickUpLocation));
+                blueTin(binding.radioSelfPickup);
+                blackTin(binding.radioDeliver);
             }
         });
 
         binding.radioCollect.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
                 binding.radioSelfReturn.setChecked(false);
+                blueTin(binding.radioCollect);
+                blackTin(binding.radioSelfReturn);
             }
         });
 
         binding.radioSelfReturn.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
                 binding.radioCollect.setChecked(false);
+                blueTin(binding.radioSelfReturn);
+                blackTin(binding.radioCollect);
             }
         });
     }
@@ -262,6 +278,30 @@ public class HomeFragment extends Fragment {
         mTimePicker.show();
     }
 
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    private void blackTin(RadioButton radioButton){
+        ColorStateList myColorStateList = new ColorStateList(
+                new int[][]{
+                        new int[]{getResources().getColor(R.color.grayDark)}
+                },
+                new int[]{getResources().getColor(R.color.grayDark)}
+        );
+
+        radioButton.setButtonTintList(myColorStateList);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    private void blueTin(RadioButton radioButton){
+        ColorStateList myColorStateList = new ColorStateList(
+                new int[][]{
+                        new int[]{getResources().getColor(R.color.lightBlue)}
+                },
+                new int[]{getResources().getColor(R.color.lightBlue)}
+        );
+
+        radioButton.setButtonTintList(myColorStateList);
+    }
 
     public static HomeFragment newInstance() {
         HomeFragment fragment = new HomeFragment();

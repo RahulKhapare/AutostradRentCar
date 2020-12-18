@@ -47,7 +47,7 @@ public class CarGreedFragment extends Fragment {
         model.setName("Murcedes suv");
         model.setGroup("Group A");
         model.setType("Automatic");
-        model.setModel("SUV");
+        model.setModel("Suv");
         model.setSeat("5 Seat");
         model.setEngine("Engine");
         model.setDore("3 Door");

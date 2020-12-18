@@ -60,6 +60,8 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/colorWhite"
                         android:text="@string/signUp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginLeft="5dp"
                         android:fontFamily="@font/nunit_sans_bold"
                         android:textSize="25sp">
 
@@ -76,6 +78,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:backgroundTint="@color/colorWhite"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginLeft="5dp"
                             style="@style/Base.Widget.AppCompat.Spinner.Underlined">
 
                         </Spinner>
@@ -84,6 +88,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:hint="@string/mobileNumber"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginLeft="5dp"
                             app:hintTextColor="@color/grayLight"
                             android:textColorHint="@color/grayLight"
                             >
@@ -117,6 +123,8 @@
                             android:layout_height="wrap_content"
                             android:inputType="textEmailAddress"
                             android:singleLine="true"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginLeft="5dp"
                             android:fontFamily="@font/nunito_sans_regular"
                             android:textColor="@color/colorWhite"
                             android:backgroundTint="@color/colorWhite"
@@ -132,6 +140,8 @@
                         android:textColor="@color/colorPrimaryDark"
                         android:text="@string/proceed"
                         android:padding="15dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginLeft="5dp"
                         android:layout_marginTop="30dp"
                         android:layout_gravity="center"
                         android:gravity="center"
