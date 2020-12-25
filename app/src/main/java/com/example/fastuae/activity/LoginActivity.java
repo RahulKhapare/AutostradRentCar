@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import com.adoisstudio.helper.Api;
 import com.adoisstudio.helper.H;
 import com.adoisstudio.helper.Json;
+import com.adoisstudio.helper.JsonList;
 import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
 import com.example.fastuae.R;
@@ -35,6 +36,7 @@ public class LoginActivity extends AppCompatActivity {
     private LoadingDialog loadingDialog;
     private String countryCode = "";
     private Session session;
+    private int position = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,16 +53,24 @@ public class LoginActivity extends AppCompatActivity {
 
         List<CountryCodeModel> countryCodeModelList = new ArrayList<>();
 
-        for (Json json : Config.countryJsonList){
+        JsonList jsonList = Config.countryJsonList;
+        for (int i=0;i<jsonList.size(); i++){
+            Json json = jsonList.get(i);
             CountryCodeModel model = new CountryCodeModel();
             model.setId(json.getString(P.id));
             model.setCountry_name(json.getString(P.country_name));
             model.setPhone_code(json.getString(P.phone_code));
             countryCodeModelList.add(model);
+
+            if (model.getPhone_code().equalsIgnoreCase("971")){
+                position = i;
+            }
+
         }
 
         CountryCodeAdapter adapter = new CountryCodeAdapter(activity, countryCodeModelList);
         binding.spinnerCode.setAdapter(adapter);
+        binding.spinnerCode.setSelection(position);
 
         binding.spinnerCode.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

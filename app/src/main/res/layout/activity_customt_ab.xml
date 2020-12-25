@@ -26,7 +26,7 @@
            android:paddingLeft="5dp"
            android:fontFamily="@font/nunit_sans_bold"
            android:textColor="@color/textDark"
-           android:textSize="12dp" />
+           android:textSize="14dp" />
 
    </LinearLayout>
 
