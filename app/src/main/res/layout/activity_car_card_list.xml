@@ -45,7 +45,7 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/nunit_sans_bold"
                                 android:textColor="@color/colorPrimaryDark"
-                                android:textSize="22sp"
+                                android:textSize="24sp"
                                 android:layout_margin="5dp"
                                 android:text="@string/app_name"
                                 android:maxLines="1">
@@ -64,7 +64,7 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/nunito_sans_semibold"
                                 android:textColor="@color/textDark"
-                                android:textSize="22sp"
+                                android:textSize="24sp"
                                 android:text="@string/app_name"
                                 android:layout_margin="5dp"
                                 android:maxLines="1">
@@ -112,7 +112,7 @@
                           android:text="@string/app_name"
                           android:layout_margin="5dp"
                           android:textColor="@color/textDark"
-                          android:textSize="22sp">
+                          android:textSize="24sp">
 
                       </TextView>
 
@@ -137,7 +137,7 @@
                               android:maxLines="1"
                               android:text="@string/app_name"
                               android:textColor="@color/textDark"
-                              android:textSize="18sp">
+                              android:textSize="20sp">
 
                           </TextView>
 
@@ -148,7 +148,7 @@
                               android:layout_gravity="center"
                               android:fontFamily="@font/nunito_sans_semibold"
                               android:textColor="@color/textDark"
-                              android:textSize="18sp"
+                              android:textSize="20sp"
                               android:text="@string/app_name"
                               android:layout_marginLeft="35dp"
                               android:layout_marginRight="35dp"
@@ -166,7 +166,7 @@
                               android:text="@string/app_name"
                               android:fontFamily="@font/nunito_sans_semibold"
                               android:textColor="@color/textDark"
-                              android:textSize="18sp"
+                              android:textSize="20sp"
                               android:layout_marginLeft="10dp"
                               android:layout_marginRight="10dp"
                               android:drawableLeft="@drawable/doore_bg_two"
@@ -192,7 +192,7 @@
                               android:layout_gravity="center"
                               android:fontFamily="@font/nunito_sans_semibold"
                               android:textColor="@color/textDark"
-                              android:textSize="18sp"
+                              android:textSize="20sp"
                               android:text="@string/app_name"
                               android:layout_marginLeft="10dp"
                               android:layout_marginRight="10dp"
@@ -209,7 +209,7 @@
                               android:layout_gravity="center"
                               android:fontFamily="@font/nunito_sans_semibold"
                               android:textColor="@color/textDark"
-                              android:textSize="18sp"
+                              android:textSize="20sp"
                               android:text="@string/app_name"
                               android:layout_marginLeft="35dp"
                               android:layout_marginRight="35dp"
@@ -226,7 +226,7 @@
                               android:layout_gravity="center"
                               android:fontFamily="@font/nunito_sans_semibold"
                               android:textColor="@color/textDark"
-                              android:textSize="18sp"
+                              android:textSize="20sp"
                               android:text="@string/app_name"
                               android:layout_marginLeft="10dp"
                               android:layout_marginRight="10dp"
@@ -326,7 +326,7 @@
                         android:background="@drawable/curve_left_blue_bg"
                         android:fontFamily="@font/nunit_sans_bold"
                         android:textColor="@color/colorWhite"
-                        android:textSize="18sp">
+                        android:textSize="20sp">
 
                     </TextView>
 
@@ -338,7 +338,7 @@
                         android:gravity="center"
                         android:fontFamily="@font/nunit_sans_bold"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="18dp"
+                        android:textSize="20dp"
                         android:padding="15dp"
                         android:text="@string/app_name"
                         android:background="@drawable/curve_right_orange_bg">
