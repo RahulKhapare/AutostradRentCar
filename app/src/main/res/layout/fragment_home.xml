@@ -16,6 +16,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:padding="16dp"
                 android:orientation="vertical">
 
 
@@ -25,7 +26,7 @@
                     android:orientation="horizontal"
                     android:layout_gravity="center_horizontal"
                     android:gravity="center_horizontal"
-                    android:layout_marginTop="15dp">
+                    android:layout_marginTop="10dp">
 
                     <RadioButton
                         android:id="@+id/radioDeliver"
@@ -33,7 +34,7 @@
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/lightBlue"
                         android:textColor="@color/textDark"
-                        android:textSize="14sp"
+                        android:textSize="16sp"
                         android:checked="true"
                         android:layout_marginRight="10dp"
                         android:layout_marginLeft="10dp"
@@ -47,7 +48,7 @@
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/grayDark"
                         android:textColor="@color/textDark"
-                        android:textSize="14sp"
+                        android:textSize="16sp"
                         android:layout_marginRight="10dp"
                         android:layout_marginLeft="10dp"
                         android:text="@string/selfPickup">
@@ -62,15 +63,14 @@
                     android:layout_height="60dp"
                     app:cardElevation="3dp"
                     app:cardCornerRadius="5dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:paddingBottom="5dp"
-                    android:layout_marginTop="10dp">
+                    android:layout_marginTop="8dp"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginRight="1dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
+                        android:layout_margin="5dp"
                         android:layout_gravity="center_vertical"
                         android:orientation="horizontal">
 
@@ -97,7 +97,7 @@
                                     android:layout_gravity="center_vertical"
                                     android:fontFamily="@font/nunito_sans_semibold"
                                     android:text="@string/enterLocationDeliver"
-                                    android:textSize="14sp">
+                                    android:textSize="16sp">
                                 </TextView>
 
                             </LinearLayout>
@@ -112,17 +112,17 @@
                                 android:text="@string/userCurrentLocation"
                                 android:paddingLeft="10dp"
                                 android:visibility="gone"
-                                android:textSize="12sp">
+                                android:textSize="14sp">
                             </TextView>
 
                         </LinearLayout>
 
                         <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
                             android:layout_gravity="center_vertical"
                             android:tint="@color/colorBlack"
-                            android:src="@drawable/ic_baseline_expand_more_24"></ImageView>
+                            android:src="@drawable/ic_down_arrow"></ImageView>
 
                     </LinearLayout>
 
@@ -142,7 +142,7 @@
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/lightBlue"
                         android:textColor="@color/textDark"
-                        android:textSize="14sp"
+                        android:textSize="16sp"
                         android:checked="true"
                         android:layout_marginRight="10dp"
                         android:layout_marginLeft="10dp"
@@ -156,7 +156,7 @@
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/grayDark"
                         android:textColor="@color/textDark"
-                        android:textSize="14sp"
+                        android:textSize="16sp"
                         android:layout_marginRight="10dp"
                         android:layout_marginLeft="10dp"
                         android:text="@string/selfreturn">
@@ -171,14 +171,14 @@
                     android:layout_height="60dp"
                     app:cardElevation="3dp"
                     app:cardCornerRadius="5dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp">
+                    android:layout_marginTop="8dp"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginRight="1dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
+                        android:layout_margin="5dp"
                         android:layout_gravity="center_vertical"
                         android:orientation="horizontal">
 
@@ -204,7 +204,7 @@
                                     android:layout_gravity="center_vertical"
                                     android:fontFamily="@font/nunito_sans_semibold"
                                     android:text="@string/dropOfLocation"
-                                    android:textSize="14sp">
+                                    android:textSize="16sp">
                                 </TextView>
 
                             </LinearLayout>
@@ -213,11 +213,11 @@
                         </LinearLayout>
 
                         <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
                             android:layout_gravity="center_vertical"
                             android:tint="@color/colorBlack"
-                            android:src="@drawable/ic_baseline_expand_more_24"></ImageView>
+                            android:src="@drawable/ic_down_arrow"></ImageView>
 
                     </LinearLayout>
 
@@ -226,7 +226,9 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginRight="1dp"
                     android:orientation="horizontal">
 
                     <LinearLayout
@@ -252,7 +254,7 @@
                                 android:layout_margin="10dp"
                                 android:fontFamily="@font/nunito_sans_semibold"
                                 android:text="@string/pickUp"
-                                android:textSize="16sp">
+                                android:textSize="18sp">
 
                             </TextView>
 
@@ -269,7 +271,7 @@
                                 android:layout_marginBottom="0dp"
                                 android:fontFamily="@font/nunito_sans_semibold"
                                 android:text="00"
-                                android:textSize="26sp">
+                                android:textSize="28sp">
 
                             </TextView>
 
@@ -283,7 +285,7 @@
                                 android:fontFamily="@font/nunito_sans_semibold"
                                 android:text="Month"
                                 android:layout_margin="10dp"
-                                android:textSize="14sp">
+                                android:textSize="16sp">
 
                             </TextView>
 
@@ -293,7 +295,7 @@
                             android:id="@+id/lnrPickupTime"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
+                            android:layout_marginTop="7dp"
                             android:background="@drawable/corner_blue_bg"
                             android:gravity="center"
                             android:padding="10dp">
@@ -315,7 +317,7 @@
                                 android:gravity="center_horizontal"
                                 android:text="10:10 AM"
                                 android:textColor="@color/colorPrimaryDark"
-                                android:textSize="14sp"></TextView>
+                                android:textSize="16sp"></TextView>
 
                         </LinearLayout>
 
@@ -326,10 +328,10 @@
                         android:layout_height="wrap_content"
                         android:tint="@color/colorPrimaryDark"
                         android:layout_gravity="center_vertical"
-                        android:paddingBottom="50dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
-                        android:src="@drawable/ic_baseline_arrow_forward_24"></ImageView>
+                        android:paddingBottom="45dp"
+                        android:paddingLeft="25dp"
+                        android:paddingRight="25dp"
+                        android:src="@drawable/ic_baseline_east_24"></ImageView>
 
                     <LinearLayout
                         android:layout_weight="1"
@@ -355,7 +357,7 @@
                                 android:layout_margin="10dp"
                                 android:fontFamily="@font/nunito_sans_semibold"
                                 android:text="@string/dropOf"
-                                android:textSize="16sp">
+                                android:textSize="18sp">
 
                             </TextView>
 
@@ -372,7 +374,7 @@
                                 android:layout_marginBottom="0dp"
                                 android:fontFamily="@font/nunito_sans_semibold"
                                 android:text="00"
-                                android:textSize="26sp">
+                                android:textSize="28sp">
 
                             </TextView>
 
@@ -386,7 +388,7 @@
                                 android:fontFamily="@font/nunito_sans_semibold"
                                 android:text="Month"
                                 android:layout_margin="10dp"
-                                android:textSize="14sp">
+                                android:textSize="16sp">
 
                             </TextView>
 
@@ -397,7 +399,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/corner_blue_bg"
-                            android:layout_marginTop="10dp"
+                            android:layout_marginTop="7dp"
                             android:gravity="center"
                             android:padding="10dp">
 
@@ -418,7 +420,7 @@
                                 android:text="10:10 AM"
                                 android:gravity="center_horizontal"
                                 android:layout_marginLeft="5dp"
-                                android:textSize="14sp">
+                                android:textSize="16sp">
                             </TextView>
 
                         </LinearLayout>
@@ -435,10 +437,13 @@
                     android:textColor="@color/colorWhite"
                     android:text="@string/search"
                     android:padding="15dp"
-                    android:layout_margin="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:textSize="18dp"
+                    android:textSize="20dp"
                     android:background="@drawable/button_blue_bg"></TextView>
 
 
@@ -450,43 +455,72 @@
                         android:id="@+id/lnrSlider"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="40dp"
-                        android:layout_marginRight="40dp"
-                        android:layout_marginBottom="40dp"
+                        android:layout_marginLeft="0dp"
+                        android:layout_marginRight="0dp"
+                        android:layout_marginBottom="20dp"
                         android:orientation="vertical">
 
-                        <androidx.viewpager.widget.ViewPager
-                            android:id="@+id/pager"
+                        <RelativeLayout
                             android:layout_width="match_parent"
-                            android:layout_height="150dp" />
+                            android:layout_height="wrap_content">
+
+                            <androidx.viewpager.widget.ViewPager
+                                android:id="@+id/pager"
+                                android:layout_centerHorizontal="true"
+                                android:layout_width="match_parent"
+                                android:layout_marginRight="35dp"
+                                android:layout_marginLeft="35dp"
+                                android:layout_height="145dp" />
+
+                            <ImageView
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_alignParentLeft="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginLeft="5dp"
+                                android:src="@drawable/ic_baseline_chevron_left_24"
+                                android:tint="@color/colorPrimaryDark"></ImageView>
+
+                            <ImageView
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_alignParentRight="true"
+                                android:tint="@color/colorPrimaryDark"
+                                android:layout_centerVertical="true"
+                                android:layout_marginRight="5dp"
+                                android:src="@drawable/ic_baseline_chevron_right_24"></ImageView>
+
+
+                        </RelativeLayout>
 
                         <com.google.android.material.tabs.TabLayout
                             android:id="@+id/tabLayout"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="-10dp"
+                            android:layout_marginTop="-12dp"
                             app:tabBackground="@drawable/tab_selector"
                             app:tabGravity="center"
                             app:tabIndicatorHeight="0dp" />
 
                     </LinearLayout>
 
-                    <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_alignParentLeft="true"
-                        android:layout_marginLeft="0dp"
-                        android:layout_marginTop="60dp"
-                        android:src="@drawable/ic_baseline_chevron_left_24"
-                        android:tint="@color/colorPrimaryDark"></ImageView>
+<!--                    <ImageView-->
+<!--                        android:layout_width="25dp"-->
+<!--                        android:layout_height="25dp"-->
+<!--                        android:layout_alignParentLeft="true"-->
+<!--                        android:layout_marginTop="60dp"-->
+<!--                        android:layout_marginLeft="10dp"-->
+<!--                        android:src="@drawable/ic_baseline_chevron_left_24"-->
+<!--                        android:tint="@color/colorPrimaryDark"></ImageView>-->
 
-                    <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_alignParentRight="true"
-                        android:tint="@color/colorPrimaryDark"
-                        android:layout_marginTop="60dp"
-                        android:src="@drawable/ic_baseline_chevron_right_24"></ImageView>
+<!--                    <ImageView-->
+<!--                        android:layout_width="25dp"-->
+<!--                        android:layout_height="25dp"-->
+<!--                        android:layout_alignParentRight="true"-->
+<!--                        android:tint="@color/colorPrimaryDark"-->
+<!--                        android:layout_marginTop="60dp"-->
+<!--                        android:layout_marginRight="10dp"-->
+<!--                        android:src="@drawable/ic_baseline_chevron_right_24"></ImageView>-->
 
                 </RelativeLayout>
 

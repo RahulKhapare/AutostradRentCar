@@ -9,10 +9,10 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="21dp"
+            android:layout_marginRight="21dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="3dp"
             app:cardCornerRadius="10dp"
             app:cardElevation="3dp">
 
@@ -47,6 +47,7 @@
                                 android:fontFamily="@font/nunit_sans_bold"
                                 android:maxLines="1"
                                 android:text="@string/app_name"
+                                android:singleLine="true"
                                 android:textColor="@color/colorPrimaryDark"
                                 android:textSize="16sp">
 
@@ -65,6 +66,7 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/nunito_sans_semibold"
                                 android:maxLines="1"
+                                android:singleLine="true"
                                 android:text="@string/app_name"
                                 android:textColor="@color/textDark"
                                 android:textSize="16sp">
@@ -104,8 +106,8 @@
                             <ImageView
                                 android:id="@+id/imgCard"
                                 android:layout_marginTop="10dp"
-                                android:layout_marginBottom="10dp"
-                                android:layout_width="130dp"
+                                android:layout_marginBottom="2dp"
+                                android:layout_width="135dp"
                                 android:scaleType="fitXY"
                                 android:src="@drawable/ic_car_four"
                                 android:layout_height="80dp">
@@ -120,6 +122,7 @@
                                 android:fontFamily="@font/nunit_sans_bold"
                                 android:textColor="@color/textDark"
                                 android:textSize="12sp"
+                                android:singleLine="true"
                                 android:text="@string/app_name"
                                 android:maxLines="1">
 
@@ -141,6 +144,7 @@
                                 android:drawablePadding="5dp"
                                 android:fontFamily="@font/nunito_sans_semibold"
                                 android:maxLines="1"
+                                android:singleLine="true"
                                 android:textColor="@color/textDark"
                                 android:textSize="14sp">
 
@@ -155,6 +159,7 @@
                                 android:fontFamily="@font/nunito_sans_semibold"
                                 android:textColor="@color/textDark"
                                 android:textSize="14sp"
+                                android:singleLine="true"
                                 android:drawableLeft="@drawable/engine_bg"
                                 android:drawablePadding="5dp"
                                 android:maxLines="1">
@@ -169,6 +174,7 @@
                                 android:fontFamily="@font/nunito_sans_semibold"
                                 android:textColor="@color/textDark"
                                 android:textSize="14sp"
+                                android:singleLine="true"
                                 android:drawableLeft="@drawable/doore_bg"
                                 android:drawablePadding="5dp"
                                 android:maxLines="1">
@@ -208,10 +214,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:padding="10dp"
+                        android:padding="12dp"
                         android:background="@drawable/curve_left_blue_bg"
                         android:fontFamily="@font/nunit_sans_bold"
                         android:textColor="@color/colorWhite"
+                        android:singleLine="true"
                         android:textSize="14sp">
 
                     </TextView>
@@ -225,7 +232,8 @@
                         android:fontFamily="@font/nunit_sans_bold"
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="14sp"
-                        android:padding="10dp"
+                        android:padding="12dp"
+                        android:singleLine="true"
                         android:background="@drawable/curve_right_orange_bg">
 
                     </TextView>

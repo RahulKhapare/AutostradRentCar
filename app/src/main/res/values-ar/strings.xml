@@ -29,6 +29,8 @@
     <string name="enterMobileValid">الرجاء إدخال رقم هاتف محمول صحيح</string>
     <string name="enterEmailId">الرجاء إدخال البريد الإلكتروني</string>
     <string name="enterEmailValid">الرجاء إدخال بريد إلكتروني صحيح</string>
+    <string name="filterYourSearch">تصفية البحث الخاص بك</string>
+    <string name="apply">تطبيق</string>
 
     <string name="home">الصفحة الرئيسية</string>
     <string name="profile">الملف الشخصي</string>

@@ -29,6 +29,8 @@
     <string name="enterMobileValid">Please enter valid mobile number</string>
     <string name="enterEmailId">Please enter email</string>
     <string name="enterEmailValid">Please enter valid email</string>
+    <string name="filterYourSearch">Filter Your Search</string>
+    <string name="apply">Apply</string>
 
     <string name="home">Home</string>
     <string name="profile">Profile</string>

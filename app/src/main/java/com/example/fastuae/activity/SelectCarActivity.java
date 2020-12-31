@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.media.Image;
 import android.os.Build;
@@ -183,6 +184,8 @@ public class SelectCarActivity extends AppCompatActivity implements ViewPager.On
             onBackPressed();
         }
         else if (item.getItemId() == R.id.ic_filter) {
+            Intent intent = new Intent(activity,CarFilterActivity.class);
+            startActivity(intent);
         }
         return false;
     }

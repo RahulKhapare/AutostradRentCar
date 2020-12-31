@@ -74,7 +74,7 @@
                         android:textColor="@color/colorWhite"
                         android:text="@string/enterCode"
                         android:fontFamily="@font/nunit_sans_bold"
-                        android:textSize="25sp">
+                        android:textSize="27sp">
 
                     </TextView>
 
@@ -84,7 +84,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/grayLight"
                         android:fontFamily="@font/nunito_sans_semibold"
-                        android:textSize="16sp">
+                        android:textSize="18sp">
 
                     </TextView>
 
@@ -97,6 +97,7 @@
                         android:maxLength="6"
                         android:hint="0"
                         android:text=""
+                        android:textSize="20sp"
                         android:textIsSelectable="false"
                         android:textColor="@color/colorWhite"
                         android:textColorHint="@color/grayLight"
@@ -115,7 +116,7 @@
                         android:layout_marginTop="30dp"
                         android:layout_gravity="center"
                         android:gravity="center"
-                        android:textSize="18dp"
+                        android:textSize="20dp"
                         android:background="@drawable/button_bg"></TextView>
 
 
@@ -135,7 +136,7 @@
                             android:layout_marginRight="5dp"
                             android:visibility="gone"
                             android:fontFamily="@font/nunito_sans_semibold"
-                            android:textSize="14sp">
+                            android:textSize="16sp">
 
                         </TextView>
 
@@ -149,7 +150,7 @@
                             android:layout_marginRight="5dp"
                             android:text="@string/secondsRemaining"
                             android:fontFamily="@font/nunito_sans_semibold"
-                            android:textSize="14sp">
+                            android:textSize="16sp">
 
                         </TextView>
 

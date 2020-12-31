@@ -55,8 +55,11 @@ public class ViewPagerSwipeAdapter extends PagerAdapter {
         ImageView imgCar = view.findViewById(R.id.imgCar);
         TextView txtSUV = view.findViewById(R.id.txtSUV);
         TextView txtSeat = view.findViewById(R.id.txtSeat);
+        TextView txtSeat2 = view.findViewById(R.id.txtSeat2);
         TextView txtMode = view.findViewById(R.id.txtMode);
+        TextView txtMode2 = view.findViewById(R.id.txtMode2);
         TextView txtDoore = view.findViewById(R.id.txtDoore);
+        TextView txtDoore2 = view.findViewById(R.id.txtDoore2);
         TextView txtPetrol = view.findViewById(R.id.txtPetrol);
         TextView txtSuitcase = view.findViewById(R.id.txtSuitcase);
         TextView txtEngine = view.findViewById(R.id.txtEngine);
@@ -75,8 +78,11 @@ public class ViewPagerSwipeAdapter extends PagerAdapter {
         txtGroup.setText(model.getGroup());
         txtSUV.setText(model.getModel());
         txtSeat.setText(model.getSeat());
+        txtSeat2.setText(model.getSeat());
         txtMode.setText(model.getType());
+        txtMode2.setText(model.getType());
         txtDoore.setText(model.getDore());
+        txtDoore2.setText(model.getDore());
         txtPetrol.setText(model.getPetrol());
         txtSuitcase.setText(model.getSuitcase());
         txtEngine.setText(model.getEngine());

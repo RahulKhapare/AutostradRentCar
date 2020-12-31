@@ -34,10 +34,8 @@
                     android:id="@+id/fragmentFrame"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_above="@+id/lnrBottom"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp">
+                    android:layout_marginTop="5dp"
+                    android:layout_above="@+id/lnrBottom">
 
                 </FrameLayout>
 
@@ -61,7 +59,7 @@
                         <LinearLayout
                             android:tag="lnrTag"
                             android:layout_width="match_parent"
-                            android:layout_height="1dp"
+                            android:layout_height="2dp"
                             android:background="@color/lightBlue">
                         </LinearLayout>
 
@@ -101,7 +99,7 @@
                         <LinearLayout
                             android:tag="lnrTag"
                             android:layout_width="match_parent"
-                            android:layout_height="1dp"
+                            android:layout_height="2dp"
                             android:background="@color/colorWhite">
                         </LinearLayout>
 
@@ -141,7 +139,7 @@
                         <LinearLayout
                             android:tag="lnrTag"
                             android:layout_width="match_parent"
-                            android:layout_height="1dp"
+                            android:layout_height="2dp"
                             android:background="@color/colorWhite">
                         </LinearLayout>
 
@@ -181,7 +179,7 @@
                         <LinearLayout
                             android:tag="lnrTag"
                             android:layout_width="match_parent"
-                            android:layout_height="1dp"
+                            android:layout_height="2dp"
                             android:background="@color/colorWhite">
                         </LinearLayout>
 

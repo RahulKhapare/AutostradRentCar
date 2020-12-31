@@ -14,7 +14,7 @@
             android:id="@+id/cardview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_margin="5dp"
             app:cardElevation="3dp"
             app:cardCornerRadius="10dp">
 
@@ -77,11 +77,11 @@
                     </LinearLayout>
 
                     <androidx.cardview.widget.CardView
-                        android:layout_marginTop="30dp"
+                        android:layout_marginTop="10dp"
                         android:layout_width="350dp"
                         android:layout_height="250dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="0dp"
+                        android:layout_marginRight="0dp"
                         app:cardCornerRadius="5dp"
                         app:cardElevation="0dp"
                         android:layout_gravity="center">
@@ -100,7 +100,7 @@
                   <LinearLayout
                       android:layout_width="match_parent"
                       android:layout_height="wrap_content"
-                      android:layout_marginTop="20dp"
+                      android:layout_marginTop="0dp"
                       android:orientation="vertical">
 
                       <TextView
@@ -129,8 +129,8 @@
                               android:layout_width="wrap_content"
                               android:layout_height="wrap_content"
                               android:layout_gravity="center"
-                              android:layout_marginLeft="10dp"
-                              android:layout_marginRight="10dp"
+                              android:layout_marginLeft="12dp"
+                              android:layout_marginRight="12dp"
                               android:drawableLeft="@drawable/seat_bg_two"
                               android:drawablePadding="5dp"
                               android:fontFamily="@font/nunito_sans_semibold"
@@ -167,8 +167,8 @@
                               android:fontFamily="@font/nunito_sans_semibold"
                               android:textColor="@color/textDark"
                               android:textSize="20sp"
-                              android:layout_marginLeft="10dp"
-                              android:layout_marginRight="10dp"
+                              android:layout_marginLeft="12dp"
+                              android:layout_marginRight="12dp"
                               android:drawableLeft="@drawable/doore_bg_two"
                               android:drawablePadding="5dp"
                               android:maxLines="1">
@@ -194,8 +194,8 @@
                               android:textColor="@color/textDark"
                               android:textSize="20sp"
                               android:text="@string/app_name"
-                              android:layout_marginLeft="10dp"
-                              android:layout_marginRight="10dp"
+                              android:layout_marginLeft="12dp"
+                              android:layout_marginRight="12dp"
                               android:drawableLeft="@drawable/fuil_bg_two"
                               android:drawablePadding="5dp"
                               android:maxLines="1">
@@ -228,9 +228,70 @@
                               android:textColor="@color/textDark"
                               android:textSize="20sp"
                               android:text="@string/app_name"
-                              android:layout_marginLeft="10dp"
-                              android:layout_marginRight="10dp"
+                              android:layout_marginLeft="12dp"
+                              android:layout_marginRight="12dp"
                               android:drawableLeft="@drawable/engine_bg_two"
+                              android:drawablePadding="5dp"
+                              android:maxLines="1">
+
+                          </TextView>
+
+                      </LinearLayout>
+
+                      <LinearLayout
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_marginTop="20dp"
+                          android:layout_gravity="center_horizontal"
+                          android:gravity="center_horizontal"
+                          android:orientation="horizontal">
+
+                          <TextView
+                              android:id="@+id/txtSeat2"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:layout_gravity="center"
+                              android:layout_marginLeft="12dp"
+                              android:layout_marginRight="12dp"
+                              android:drawableLeft="@drawable/seat_bg_two"
+                              android:drawablePadding="5dp"
+                              android:fontFamily="@font/nunito_sans_semibold"
+                              android:maxLines="1"
+                              android:text="@string/app_name"
+                              android:textColor="@color/textDark"
+                              android:textSize="20sp">
+
+                          </TextView>
+
+                          <TextView
+                              android:id="@+id/txtMode2"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:layout_gravity="center"
+                              android:fontFamily="@font/nunito_sans_semibold"
+                              android:textColor="@color/textDark"
+                              android:textSize="20sp"
+                              android:text="@string/app_name"
+                              android:layout_marginLeft="35dp"
+                              android:layout_marginRight="35dp"
+                              android:drawableLeft="@drawable/mode_bg_two"
+                              android:drawablePadding="5dp"
+                              android:maxLines="1">
+
+                          </TextView>
+
+                          <TextView
+                              android:id="@+id/txtDoore2"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:layout_gravity="center"
+                              android:text="@string/app_name"
+                              android:fontFamily="@font/nunito_sans_semibold"
+                              android:textColor="@color/textDark"
+                              android:textSize="20sp"
+                              android:layout_marginLeft="12dp"
+                              android:layout_marginRight="12dp"
+                              android:drawableLeft="@drawable/doore_bg_two"
                               android:drawablePadding="5dp"
                               android:maxLines="1">
 
@@ -247,12 +308,12 @@
                           android:orientation="horizontal">
 
                           <androidx.cardview.widget.CardView
-                              android:layout_width="80dp"
-                              android:layout_height="80dp"
-                              app:cardElevation="10dp"
+                              android:layout_width="85dp"
+                              android:layout_height="85dp"
+                              app:cardElevation="0dp"
                               app:cardCornerRadius="10dp"
-                              android:layout_marginRight="10dp"
-                              android:layout_marginLeft="10dp">
+                              android:layout_marginRight="15dp"
+                              android:layout_marginLeft="15dp">
 
                               <ImageView
                                   android:id="@+id/img1"
@@ -266,12 +327,12 @@
                           </androidx.cardview.widget.CardView>
 
                           <androidx.cardview.widget.CardView
-                              android:layout_width="80dp"
-                              android:layout_height="80dp"
-                              app:cardElevation="10dp"
+                              android:layout_width="85dp"
+                              android:layout_height="85dp"
+                              app:cardElevation="0dp"
                               app:cardCornerRadius="10dp"
-                              android:layout_marginRight="10dp"
-                              android:layout_marginLeft="10dp">
+                              android:layout_marginRight="15dp"
+                              android:layout_marginLeft="15dp">
 
                               <ImageView
                                   android:id="@+id/img2"
@@ -285,12 +346,12 @@
                           </androidx.cardview.widget.CardView>
 
                           <androidx.cardview.widget.CardView
-                              android:layout_width="80dp"
-                              android:layout_height="80dp"
-                              app:cardElevation="10dp"
+                              android:layout_width="85dp"
+                              android:layout_height="85dp"
+                              app:cardElevation="0dp"
                               app:cardCornerRadius="10dp"
-                              android:layout_marginRight="10dp"
-                              android:layout_marginLeft="10dp">
+                              android:layout_marginRight="15dp"
+                              android:layout_marginLeft="15dp">
 
                               <ImageView
                                   android:id="@+id/img3"
@@ -312,7 +373,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="30dp"
                     android:orientation="horizontal">
 
                     <TextView
@@ -321,7 +382,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:padding="15dp"
+                        android:padding="10dp"
                         android:text="@string/app_name"
                         android:background="@drawable/curve_left_blue_bg"
                         android:fontFamily="@font/nunit_sans_bold"
@@ -339,7 +400,7 @@
                         android:fontFamily="@font/nunit_sans_bold"
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="20dp"
-                        android:padding="15dp"
+                        android:padding="10dp"
                         android:text="@string/app_name"
                         android:background="@drawable/curve_right_orange_bg">
 

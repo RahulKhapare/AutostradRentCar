@@ -61,7 +61,7 @@
                         android:textColor="@color/colorWhite"
                         android:text="@string/select_language"
                         android:fontFamily="@font/nunit_sans_bold"
-                        android:textSize="25sp">
+                        android:textSize="27sp">
 
                     </TextView>
 
@@ -81,7 +81,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textColor="@color/colorWhite"
-                            android:textSize="18sp"
+                            android:textSize="20sp"
                             android:fontFamily="@font/nunito_sans_semibold"
                             android:text="@string/english">
 
@@ -110,7 +110,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textColor="@color/colorWhite"
-                            android:textSize="18sp"
+                            android:textSize="20sp"
                             android:fontFamily="@font/nunito_sans_semibold"
                             android:text="@string/urdu">
 
@@ -138,7 +138,7 @@
                         android:padding="15dp"
                         android:layout_gravity="center"
                         android:gravity="center"
-                        android:textSize="18dp"
+                        android:textSize="20dp"
                         android:background="@drawable/button_bg"></TextView>
 
                 </LinearLayout>

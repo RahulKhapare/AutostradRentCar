@@ -39,7 +39,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/nunit_sans_bold"
-                                android:textSize="25sp"
+                                android:textSize="27sp"
                                 android:text="@string/welcomeTo"
                                 android:textColor="@color/textDark">
 
@@ -50,7 +50,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/nunit_sans_bold"
-                                android:textSize="14sp"
+                                android:textSize="16sp"
                                 android:text="@string/skip"
                                 android:padding="10dp"
                                 android:textColor="@color/textDark">
@@ -62,7 +62,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/nunit_sans_bold"
-                            android:textSize="18sp"
+                            android:textSize="20sp"
                             android:text="@string/app_name"
                             android:textColor="@color/textDark">
 
@@ -132,7 +132,7 @@
                         android:gravity="center"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
-                        android:textSize="18dp"
+                        android:textSize="20dp"
                         android:background="@drawable/button_bg"></TextView>
 
                     <TextView
@@ -146,7 +146,7 @@
                         android:padding="15dp"
                         android:layout_gravity="center"
                         android:gravity="center"
-                        android:textSize="18dp"
+                        android:textSize="20dp"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
                         android:background="@drawable/corner_bg"></TextView>

@@ -23,8 +23,8 @@
                    android:orientation="horizontal">
 
                    <ImageView
-                       android:layout_width="8dp"
-                       android:layout_height="8dp"
+                       android:layout_width="10dp"
+                       android:layout_height="10dp"
                        android:layout_marginTop="7dp"
                        android:src="@drawable/ic_baseline_brightness_1_24">
 
@@ -37,7 +37,7 @@
                        android:text="@string/txt1"
                        android:paddingLeft="10dp"
                        android:textColor="@color/textDark"
-                       android:textSize="14sp">
+                       android:textSize="16sp">
 
                    </TextView>
 
@@ -50,8 +50,8 @@
                    android:orientation="horizontal">
 
                    <ImageView
-                       android:layout_width="8dp"
-                       android:layout_height="8dp"
+                       android:layout_width="10dp"
+                       android:layout_height="10dp"
                        android:layout_marginTop="7dp"
                        android:src="@drawable/ic_baseline_brightness_1_24">
 
@@ -64,7 +64,7 @@
                        android:text="@string/txt2"
                        android:paddingLeft="10dp"
                        android:textColor="@color/textDark"
-                       android:textSize="14sp">
+                       android:textSize="16sp">
 
                    </TextView>
 
@@ -77,8 +77,8 @@
                    android:orientation="horizontal">
 
                    <ImageView
-                       android:layout_width="8dp"
-                       android:layout_height="8dp"
+                       android:layout_width="10dp"
+                       android:layout_height="10dp"
                        android:layout_marginTop="7dp"
                        android:src="@drawable/ic_baseline_brightness_1_24">
 
@@ -91,7 +91,7 @@
                        android:text="@string/txt3"
                        android:paddingLeft="10dp"
                        android:textColor="@color/textDark"
-                       android:textSize="14sp">
+                       android:textSize="16sp">
 
                    </TextView>
 

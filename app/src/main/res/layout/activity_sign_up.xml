@@ -63,7 +63,7 @@
                         android:layout_marginRight="5dp"
                         android:layout_marginLeft="5dp"
                         android:fontFamily="@font/nunit_sans_bold"
-                        android:textSize="25sp">
+                        android:textSize="27sp">
 
                     </TextView>
 
@@ -100,6 +100,7 @@
                                 android:layout_height="wrap_content"
                                 android:inputType="number"
                                 android:singleLine="true"
+                                android:textSize="20sp"
                                 android:fontFamily="@font/nunito_sans_regular"
                                 android:textColor="@color/colorWhite"
                                 android:backgroundTint="@color/colorWhite"
@@ -123,6 +124,7 @@
                             android:layout_height="wrap_content"
                             android:inputType="textEmailAddress"
                             android:singleLine="true"
+                            android:textSize="20sp"
                             android:layout_marginRight="5dp"
                             android:layout_marginLeft="5dp"
                             android:fontFamily="@font/nunito_sans_regular"
@@ -145,7 +147,7 @@
                         android:layout_marginTop="30dp"
                         android:layout_gravity="center"
                         android:gravity="center"
-                        android:textSize="18dp"
+                        android:textSize="20dp"
                         android:background="@drawable/button_bg"></TextView>
 
 
@@ -164,7 +166,7 @@
                             android:textColor="@color/colorWhite"
                             android:text="@string/haveAnAccount"
                             android:fontFamily="@font/nunito_sans_semibold"
-                            android:textSize="14sp">
+                            android:textSize="16sp">
 
                         </TextView>
                         <TextView
@@ -174,7 +176,7 @@
                             android:text="@string/login"
                             android:paddingLeft="5dp"
                             android:fontFamily="@font/nunito_sans_semibold"
-                            android:textSize="14sp">
+                            android:textSize="16sp">
 
                         </TextView>
 
@@ -190,7 +192,7 @@
                         android:layout_gravity="center_horizontal"
                         android:paddingLeft="10dp"
                         android:fontFamily="@font/nunito_sans_semibold"
-                        android:textSize="14sp">
+                        android:textSize="16sp">
 
                     </TextView>
 
