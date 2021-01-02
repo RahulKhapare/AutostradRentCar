@@ -31,6 +31,27 @@
     <string name="enterEmailValid">الرجاء إدخال بريد إلكتروني صحيح</string>
     <string name="filterYourSearch">تصفية البحث الخاص بك</string>
     <string name="apply">تطبيق</string>
+    <string name="carFleet">اسطول سيارات</string>
+    <string name="viewMore">عرض المزيد من التفاصيل</string>
+    <string name="myAccount">حسابي</string>
+    <string name="document">وثيقة</string>
+    <string name="additionalDriver">سائق إضافي</string>
+    <string name="booking">الحجز</string>
+    <string name="managePayment">إدارة الدفع</string>
+    <string name="invoices">الفواتير</string>
+    <string name="salik_Charges">رسوم سالك</string>
+    <string name="traffic_Lines">خطوط المرور</string>
+    <string name="personalDetails">تفاصيل شخصية</string>
+    <string name="password">كلمه السر</string>
+    <string name="address">عنوان</string>
+    <string name="firstName">الاسم الاول</string>
+    <string name="lastName">الكنية</string>
+    <string name="alternateNumber">عدد البديل</string>
+    <string name="dateBirth">تاريخ الولادة</string>
+    <string name="email">البريد الإلكتروني</string>
+    <string name="male">الذكر</string>
+    <string name="female">أنثى</string>
+    <string name="saveChanges">حفظ التغييرات</string>
 
     <string name="home">الصفحة الرئيسية</string>
     <string name="profile">الملف الشخصي</string>

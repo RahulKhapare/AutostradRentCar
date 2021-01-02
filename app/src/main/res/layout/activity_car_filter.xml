@@ -46,12 +46,42 @@
                         app:cardElevation="3dp"
                         app:cardCornerRadius="5dp">
 
-                        <Spinner
-                            android:id="@+id/spinnerPrice"
+                        <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
 
-                        </Spinner>
+                            <Spinner
+                                android:id="@+id/spinnerPrice"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@null">
+
+                            </Spinner>
+
+
+                            <ImageView
+                                android:id="@+id/imgPriceRight"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_marginRight="15dp"
+                                android:src="@drawable/ic_down_arrow"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true">
+                            </ImageView>
+
+                            <ImageView
+                                android:id="@+id/imgPriceLeft"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_marginLeft="15dp"
+                                android:src="@drawable/ic_down_arrow"
+                                android:layout_alignParentLeft="true"
+                                android:layout_centerVertical="true"
+                                android:visibility="gone">
+                            </ImageView>
+
+                        </RelativeLayout>
+
 
                     </androidx.cardview.widget.CardView>
 
@@ -65,12 +95,40 @@
                         app:cardElevation="3dp"
                         app:cardCornerRadius="5dp">
 
-                        <Spinner
-                            android:id="@+id/spinnerSeats"
+                        <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
 
-                        </Spinner>
+                            <Spinner
+                                android:id="@+id/spinnerSeats"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@null">
+
+                            </Spinner>
+
+
+                            <ImageView
+                                android:id="@+id/imgSeatRight"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_marginRight="15dp"
+                                android:src="@drawable/ic_down_arrow"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true">
+                            </ImageView>
+
+                            <ImageView
+                                android:id="@+id/imgSeatLeft"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_marginLeft="15dp"
+                                android:visibility="gone"
+                                android:src="@drawable/ic_down_arrow"
+                                android:layout_alignParentLeft="true"
+                                android:layout_centerVertical="true">
+                            </ImageView>
+                        </RelativeLayout>
 
                     </androidx.cardview.widget.CardView>
 
@@ -84,12 +142,41 @@
                         app:cardElevation="3dp"
                         app:cardCornerRadius="5dp">
 
-                        <Spinner
-                            android:id="@+id/spinnerPassengers"
+                        <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
 
-                        </Spinner>
+                            <Spinner
+                                android:id="@+id/spinnerPassengers"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@null">
+
+                            </Spinner>
+
+
+                            <ImageView
+                                android:id="@+id/imgPassengerRight"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_marginRight="15dp"
+                                android:src="@drawable/ic_down_arrow"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true">
+                            </ImageView>
+
+                            <ImageView
+                                android:id="@+id/imgPassengerLeft"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_marginLeft="15dp"
+                                android:visibility="gone"
+                                android:src="@drawable/ic_down_arrow"
+                                android:layout_alignParentLeft="true"
+                                android:layout_centerVertical="true">
+                            </ImageView>
+
+                        </RelativeLayout>
 
                     </androidx.cardview.widget.CardView>
 
@@ -103,12 +190,40 @@
                         app:cardElevation="3dp"
                         app:cardCornerRadius="5dp">
 
-                        <Spinner
-                            android:id="@+id/spinnerDoors"
+                        <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
 
-                        </Spinner>
+                            <Spinner
+                                android:id="@+id/spinnerDoors"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@null">
+
+                            </Spinner>
+
+
+                            <ImageView
+                                android:id="@+id/imgDoorRight"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_marginRight="15dp"
+                                android:src="@drawable/ic_down_arrow"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true">
+                            </ImageView>
+
+                            <ImageView
+                                android:id="@+id/imgDoorLeft"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_marginLeft="15dp"
+                                android:visibility="gone"
+                                android:src="@drawable/ic_down_arrow"
+                                android:layout_alignParentLeft="true"
+                                android:layout_centerVertical="true">
+                            </ImageView>
+                        </RelativeLayout>
 
                     </androidx.cardview.widget.CardView>
 
@@ -122,12 +237,41 @@
                         app:cardElevation="3dp"
                         app:cardCornerRadius="5dp">
 
-                        <Spinner
-                            android:id="@+id/spinnerTransmission"
+                        <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
 
-                        </Spinner>
+                            <Spinner
+                                android:id="@+id/spinnerTransmission"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@null">
+
+                            </Spinner>
+
+
+                            <ImageView
+                                android:id="@+id/imgTransRight"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_marginRight="15dp"
+                                android:src="@drawable/ic_down_arrow"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true">
+                            </ImageView>
+
+                            <ImageView
+                                android:id="@+id/imgTransLeft"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_marginLeft="15dp"
+                                android:visibility="gone"
+                                android:src="@drawable/ic_down_arrow"
+                                android:layout_alignParentLeft="true"
+                                android:layout_centerVertical="true">
+                            </ImageView>
+
+                        </RelativeLayout>
 
                     </androidx.cardview.widget.CardView>
 
@@ -141,12 +285,41 @@
                         app:cardElevation="3dp"
                         app:cardCornerRadius="5dp">
 
-                        <Spinner
-                            android:id="@+id/spinnerFuel"
+                        <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
 
-                        </Spinner>
+                            <Spinner
+                                android:id="@+id/spinnerFuel"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@null">
+
+                            </Spinner>
+
+
+                            <ImageView
+                                android:id="@+id/imgFuelRight"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_marginRight="15dp"
+                                android:src="@drawable/ic_down_arrow"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true">
+                            </ImageView>
+
+                            <ImageView
+                                android:id="@+id/imgFuelLeft"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_marginLeft="15dp"
+                                android:visibility="gone"
+                                android:src="@drawable/ic_down_arrow"
+                                android:layout_alignParentLeft="true"
+                                android:layout_centerVertical="true">
+                            </ImageView>
+
+                        </RelativeLayout>
 
                     </androidx.cardview.widget.CardView>
 
@@ -160,12 +333,40 @@
                         app:cardElevation="3dp"
                         app:cardCornerRadius="5dp">
 
-                        <Spinner
-                            android:id="@+id/spinnerCategory"
+                        <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
 
-                        </Spinner>
+                            <Spinner
+                                android:id="@+id/spinnerCategory"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@null">
+
+                            </Spinner>
+
+
+                            <ImageView
+                                android:id="@+id/imgCategoryRight"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_marginRight="15dp"
+                                android:src="@drawable/ic_down_arrow"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true">
+                            </ImageView>
+
+                            <ImageView
+                                android:id="@+id/imgCategoryLeft"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_marginLeft="15dp"
+                                android:src="@drawable/ic_down_arrow"
+                                android:visibility="gone"
+                                android:layout_alignParentLeft="true"
+                                android:layout_centerVertical="true">
+                            </ImageView>
+                        </RelativeLayout>
 
                     </androidx.cardview.widget.CardView>
 
@@ -179,12 +380,42 @@
                         app:cardElevation="3dp"
                         app:cardCornerRadius="5dp">
 
-                        <Spinner
-                            android:id="@+id/spinnerGroup"
+                        <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
 
-                        </Spinner>
+                            <Spinner
+                                android:id="@+id/spinnerGroup"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@null">
+
+                            </Spinner>
+
+
+                            <ImageView
+                                android:id="@+id/imgGroupRight"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_marginRight="15dp"
+                                android:src="@drawable/ic_down_arrow"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true">
+                            </ImageView>
+
+                            <ImageView
+                                android:id="@+id/imgGroupLeft"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_marginLeft="15dp"
+                                android:visibility="gone"
+                                android:src="@drawable/ic_down_arrow"
+                                android:layout_alignParentLeft="true"
+                                android:layout_centerVertical="true">
+                            </ImageView>
+
+                        </RelativeLayout>
+
 
                     </androidx.cardview.widget.CardView>
 

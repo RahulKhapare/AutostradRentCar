@@ -9,11 +9,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.adoisstudio.helper.Session;
 import com.example.fastuae.R;
 import com.example.fastuae.adapter.FilterSpinnerAdapter;
 import com.example.fastuae.databinding.ActivityCarFilterBinding;
 import com.example.fastuae.model.CarFilterModel;
 import com.example.fastuae.util.Click;
+import com.example.fastuae.util.Config;
+import com.example.fastuae.util.P;
 import com.example.fastuae.util.WindowView;
 
 import java.util.ArrayList;
@@ -62,6 +65,8 @@ public class CarFilterActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
+        updateIcons();
+
         priceList = new ArrayList<>();;
         priceAdapter = new FilterSpinnerAdapter(activity,priceList);
         binding.spinnerPrice.setAdapter(priceAdapter);
@@ -99,6 +104,63 @@ public class CarFilterActivity extends AppCompatActivity {
 
     }
 
+    private void updateIcons(){
+        Session session = new Session(activity);
+        String flag = session.getString(P.languageFlag);
+        if (flag.equals(Config.ARABIC)){
+
+            binding.imgPriceRight.setVisibility(View.GONE);
+            binding.imgPriceLeft.setVisibility(View.VISIBLE);
+
+            binding.imgSeatRight.setVisibility(View.GONE);
+            binding.imgSeatLeft.setVisibility(View.VISIBLE);
+
+            binding.imgPassengerRight.setVisibility(View.GONE);
+            binding.imgPassengerLeft.setVisibility(View.VISIBLE);
+
+            binding.imgDoorRight.setVisibility(View.GONE);
+            binding.imgDoorLeft.setVisibility(View.VISIBLE);
+
+            binding.imgTransRight.setVisibility(View.GONE);
+            binding.imgTransLeft.setVisibility(View.VISIBLE);
+
+            binding.imgFuelRight.setVisibility(View.GONE);
+            binding.imgFuelLeft.setVisibility(View.VISIBLE);
+
+            binding.imgCategoryRight.setVisibility(View.GONE);
+            binding.imgCategoryLeft.setVisibility(View.VISIBLE);
+
+            binding.imgGroupRight.setVisibility(View.GONE);
+            binding.imgGroupLeft.setVisibility(View.VISIBLE);
+
+        }else if (flag.equals(Config.ENGLISH)){
+
+            binding.imgPriceRight.setVisibility(View.VISIBLE);
+            binding.imgPriceLeft.setVisibility(View.GONE);
+
+            binding.imgSeatRight.setVisibility(View.VISIBLE);
+            binding.imgSeatLeft.setVisibility(View.GONE);
+
+            binding.imgPassengerRight.setVisibility(View.VISIBLE);
+            binding.imgPassengerLeft.setVisibility(View.GONE);
+
+            binding.imgDoorRight.setVisibility(View.VISIBLE);
+            binding.imgDoorLeft.setVisibility(View.GONE);
+
+            binding.imgTransRight.setVisibility(View.VISIBLE);
+            binding.imgTransLeft.setVisibility(View.GONE);
+
+            binding.imgFuelRight.setVisibility(View.VISIBLE);
+            binding.imgFuelLeft.setVisibility(View.GONE);
+
+            binding.imgCategoryRight.setVisibility(View.VISIBLE);
+            binding.imgCategoryLeft.setVisibility(View.GONE);
+
+            binding.imgGroupRight.setVisibility(View.VISIBLE);
+            binding.imgGroupLeft.setVisibility(View.GONE);
+
+        }
+    }
 
     private void onClick(){
 
@@ -106,6 +168,7 @@ public class CarFilterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
+                finish();
             }
         });
 
@@ -113,7 +176,7 @@ public class CarFilterActivity extends AppCompatActivity {
 
     private void setData(){
 
-        priceList.add(new CarFilterModel("Select Price"));
+        priceList.add(new CarFilterModel("Price"));
         priceList.add(new CarFilterModel("1000"));
         priceList.add(new CarFilterModel("2000"));
         priceList.add(new CarFilterModel("3000"));
@@ -121,7 +184,7 @@ public class CarFilterActivity extends AppCompatActivity {
         priceList.add(new CarFilterModel("5000"));
         priceAdapter.notifyDataSetChanged();
 
-        seatsList.add(new CarFilterModel("Select Seat"));
+        seatsList.add(new CarFilterModel("Seat"));
         seatsList.add(new CarFilterModel("1"));
         seatsList.add(new CarFilterModel("2"));
         seatsList.add(new CarFilterModel("3"));
@@ -129,7 +192,7 @@ public class CarFilterActivity extends AppCompatActivity {
         seatsList.add(new CarFilterModel("5"));
         seatsAdapter.notifyDataSetChanged();
 
-        passengersList.add(new CarFilterModel("Select Passengers"));
+        passengersList.add(new CarFilterModel("Passengers"));
         passengersList.add(new CarFilterModel("1"));
         passengersList.add(new CarFilterModel("2"));
         passengersList.add(new CarFilterModel("3"));
@@ -137,7 +200,7 @@ public class CarFilterActivity extends AppCompatActivity {
         passengersList.add(new CarFilterModel("5"));
         passengersAdapter.notifyDataSetChanged();
 
-        doorsList.add(new CarFilterModel("Select Doors"));
+        doorsList.add(new CarFilterModel("Doors"));
         doorsList.add(new CarFilterModel("1"));
         doorsList.add(new CarFilterModel("2"));
         doorsList.add(new CarFilterModel("3"));
@@ -145,7 +208,7 @@ public class CarFilterActivity extends AppCompatActivity {
         doorsList.add(new CarFilterModel("5"));
         doorsAdapter.notifyDataSetChanged();
 
-        transmissionList.add(new CarFilterModel("Select Transmission"));
+        transmissionList.add(new CarFilterModel("Transmission"));
         transmissionList.add(new CarFilterModel("1"));
         transmissionList.add(new CarFilterModel("2"));
         transmissionList.add(new CarFilterModel("3"));
@@ -153,18 +216,18 @@ public class CarFilterActivity extends AppCompatActivity {
         transmissionList.add(new CarFilterModel("5"));
         transmissionAdapter.notifyDataSetChanged();
 
-        fuelList.add(new CarFilterModel("Select Fuel"));
+        fuelList.add(new CarFilterModel("Fuel"));
         fuelList.add(new CarFilterModel("Petrol"));
         fuelList.add(new CarFilterModel("Deisel"));
         fuelAdapter.notifyDataSetChanged();
 
-        categoryList.add(new CarFilterModel("Select Category"));
+        categoryList.add(new CarFilterModel("Category"));
         categoryList.add(new CarFilterModel("A"));
         categoryList.add(new CarFilterModel("B"));
         categoryList.add(new CarFilterModel("C"));
         categoryAdapter.notifyDataSetChanged();
 
-        groupList.add(new CarFilterModel("Select Group"));
+        groupList.add(new CarFilterModel("Group"));
         groupList.add(new CarFilterModel("A"));
         groupList.add(new CarFilterModel("B"));
         groupList.add(new CarFilterModel("C"));

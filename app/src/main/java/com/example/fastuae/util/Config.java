@@ -16,6 +16,17 @@ public class Config {
     public static String LOGIN = "LOGIN";
     public static String SIGN_UP = "SIGN_UP";
     public static String currentFlag = "";
+    public static String currentProfileFlag = "";
+
+    public static String My_Account = "My Account";
+    public static String Documents = "Documents";
+    public static String Additional_Driver = "Additional Driver";
+    public static String Booking = "Booking";
+    public static String Manage_Payments = "Manage Payments";
+    public static String Invoices = "Invoices";
+    public static String Salik_Charges = "Salik Charges";
+    public static String Traffic_Lines = "Traffic Lines";
+
 
 
     public static JsonList countryJsonList = new JsonList();

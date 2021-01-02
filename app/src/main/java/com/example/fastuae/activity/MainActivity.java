@@ -5,8 +5,10 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -38,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private final int TIME_DELAY = 2000;
     private long back_pressed;
     private Session session;
+    private MenuItem ic_filter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         initView();
     }
 
-    private void initView(){
+    private void initView() {
         session = new Session(activity);
 
         binding.toolbar.setTitle(getResources().getString(R.string.welcome) + " " + session.getString(P.user_name));
@@ -60,6 +63,34 @@ public class MainActivity extends AppCompatActivity {
         fragmentLoader(homeFragment, Config.HOME);
     }
 
+    private void updateToolbarName(String tag) {
+        if (tag.equals(Config.HOME)) {
+            binding.toolbar.setTitle(getResources().getString(R.string.welcome) + " " + session.getString(P.user_name));
+            hideBackArrow();
+            if (ic_filter!=null){
+                ic_filter.setVisible(false);
+            }
+        }else if (tag.equals(Config.PROFILE)){
+            binding.toolbar.setTitle(getResources().getString(R.string.profile));
+            showBackArrow();
+            if (ic_filter!=null){
+                ic_filter.setVisible(false);
+            }
+        }else if (tag.equals(Config.FLEET)){
+            binding.toolbar.setTitle(getResources().getString(R.string.carFleet));
+            showBackArrow();
+            if (ic_filter!=null){
+                ic_filter.setVisible(true);
+            }
+        }else if (tag.equals(Config.MENU)){
+            binding.toolbar.setTitle(getResources().getString(R.string.menu));
+            showBackArrow();
+            if (ic_filter!=null){
+                ic_filter.setVisible(false);
+            }
+        }
+    }
+
     public void fragmentLoader(Fragment fragment, String tag) {
         Config.currentFlag = tag;
         fragmentManager.beginTransaction()
@@ -67,6 +98,8 @@ public class MainActivity extends AppCompatActivity {
                 .replace(R.id.fragmentFrame, fragment, tag)
                 .addToBackStack(tag)
                 .commit();
+
+        updateToolbarName(tag);
     }
 
     public void onBottomBarClick(View view) {
@@ -179,6 +212,7 @@ public class MainActivity extends AppCompatActivity {
         } else if (tag.equals(Config.MENU)) {
             selectBottomNavigation(binding.lnrMenu);
         }
+        updateToolbarName(tag);
     }
 
     private void finishAction() {
@@ -191,8 +225,46 @@ public class MainActivity extends AppCompatActivity {
         back_pressed = System.currentTimeMillis();
     }
 
+    private void showBackArrow(){
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setHomeButtonEnabled(true);
+        }
+    }
+
+    private void hideBackArrow(){
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+            getSupportActionBar().setHomeButtonEnabled(false);
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        ic_filter = menu.findItem(R.id.ic_filter);
+        if (ic_filter!=null){
+            ic_filter.setVisible(false);
+        }
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+        }
+        else if (item.getItemId() == R.id.ic_filter) {
+            Intent intent = new Intent(activity,CarFilterActivity.class);
+            startActivity(intent);
+        }
+        return false;
+    }
+
+
     @Override
     public void onBackPressed() {
         onBackAction();
     }
+
 }

@@ -29,6 +29,15 @@
     <string name="enterMobileValid">Please enter valid mobile number</string>
     <string name="enterEmailId">Please enter email</string>
     <string name="enterEmailValid">Please enter valid email</string>
+    <string name="viewMore">View more details</string>
+    <string name="myAccount">My Account</string>
+    <string name="document">Document</string>
+    <string name="additionalDriver">Additional Driver</string>
+    <string name="booking">Booking</string>
+    <string name="managePayment">Manage Payment</string>
+    <string name="invoices">Invoices</string>
+    <string name="salik_Charges">Salik Charges</string>
+    <string name="traffic_Lines">Traffic Lines</string>
 
 
     <string name="home">Home</string>
@@ -58,6 +67,18 @@
     <string name="enterLocationDeliver">Enter Location to Deliver</string>
     <string name="filterYourSearch">Filter Your Search</string>
     <string name="apply">Apply</string>
+    <string name="carFleet">Car Fleet</string>
+    <string name="personalDetails">Personal Details</string>
+    <string name="password">Password</string>
+    <string name="address">Address</string>
+    <string name="firstName">First Name</string>
+    <string name="lastName">Last Name</string>
+    <string name="alternateNumber">Alternate Number</string>
+    <string name="dateBirth">Date of Birth</string>
+    <string name="email">Email</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="saveChanges">Save Changes</string>
 
 
     <string name="txt1">Leading Car Rental Company with the largest network of Branches And Pickup points</string>
