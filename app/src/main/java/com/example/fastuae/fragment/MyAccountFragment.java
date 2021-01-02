@@ -55,6 +55,7 @@ public class MyAccountFragment extends Fragment {
             binding = DataBindingUtil.inflate(inflater, R.layout.fragment_my_account, container, false);
             context = inflater.getContext();
             updateIcons();
+
             initView();
         }
 
