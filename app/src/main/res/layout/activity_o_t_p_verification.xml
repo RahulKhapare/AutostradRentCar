@@ -112,11 +112,11 @@
                         android:fontFamily="@font/nunit_sans_bold"
                         android:textColor="@color/colorPrimaryDark"
                         android:text="@string/proceed"
-                        android:padding="15dp"
+                        android:padding="16dp"
                         android:layout_marginTop="30dp"
                         android:layout_gravity="center"
                         android:gravity="center"
-                        android:textSize="20dp"
+                        android:textSize="18dp"
                         android:background="@drawable/button_bg"></TextView>
 
 

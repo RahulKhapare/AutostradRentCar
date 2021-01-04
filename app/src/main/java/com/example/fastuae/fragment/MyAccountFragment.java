@@ -6,6 +6,7 @@ import android.content.res.ColorStateList;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -24,9 +25,10 @@ import com.adoisstudio.helper.Json;
 import com.adoisstudio.helper.JsonList;
 import com.adoisstudio.helper.Session;
 import com.example.fastuae.R;
+import com.example.fastuae.adapter.AddressSelectionAdapter;
 import com.example.fastuae.adapter.CodeSelectionAdapter;
-import com.example.fastuae.adapter.CountryCodeAdapter;
 import com.example.fastuae.databinding.FragmentMyAccountBinding;
+import com.example.fastuae.model.AddressModel;
 import com.example.fastuae.model.CountryCodeModel;
 import com.example.fastuae.util.Click;
 import com.example.fastuae.util.Config;
@@ -44,8 +46,9 @@ public class MyAccountFragment extends Fragment {
     private Context context;
     private FragmentMyAccountBinding binding;
     private int positionNumber = 0;
-    private List<CountryCodeModel> countryCodeModelList;
     private DatePickerDialog mDatePickerDialog;
+    private List<CountryCodeModel> countryCodeModelList;
+    private List<AddressModel> lisAddressEmirate;
 
 
     @Override
@@ -66,6 +69,20 @@ public class MyAccountFragment extends Fragment {
     private void initView() {
 
         countryCodeModelList = new ArrayList<>();
+
+        lisAddressEmirate = new ArrayList<>();
+        AddressModel modelAddress1 = new AddressModel();
+        modelAddress1.setEmirate(getResources().getString(R.string.selectEmirate));
+        lisAddressEmirate.add(modelAddress1);
+
+        AddressModel modelAddress2 = new AddressModel();
+        modelAddress2.setEmirate("1");
+        lisAddressEmirate.add(modelAddress2);
+
+        AddressModel modelAddress3 = new AddressModel();
+        modelAddress3.setEmirate("2");
+        lisAddressEmirate.add(modelAddress3);
+
 
         JsonList jsonList = Config.countryJsonList;
         for (int i = 0; i < jsonList.size(); i++) {
@@ -90,11 +107,14 @@ public class MyAccountFragment extends Fragment {
         binding.spinnerCodeAlternate.setAdapter(adapterTwo);
         binding.spinnerCodeAlternate.setSelection(positionNumber);
 
+        AddressSelectionAdapter adapterAddress = new AddressSelectionAdapter(context, lisAddressEmirate);
+        binding.spinnerAddress.setAdapter(adapterAddress);
+
         onClick();
 
         setDateTimeField(binding.etxBirtDate);
         binding.etxBirtDate.setFocusable(false);
-        binding.etxBirtDate.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_calender, 0);
+        binding.etxBirtDate.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.calender_bg, 0);
         binding.etxBirtDate.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -122,6 +142,18 @@ public class MyAccountFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 CountryCodeModel model = countryCodeModelList.get(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        binding.spinnerAddress.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                AddressModel model = lisAddressEmirate.get(position);
             }
 
             @Override
@@ -173,6 +205,48 @@ public class MyAccountFragment extends Fragment {
                 }
             }
         });
+
+        binding.passwordView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                if (binding.lnrPassword.getVisibility() == View.GONE) {
+                    binding.lnrPassword.setVisibility(View.VISIBLE);
+                } else if (binding.lnrPassword.getVisibility() == View.VISIBLE) {
+                    binding.lnrPassword.setVisibility(View.GONE);
+                }
+            }
+        });
+
+        binding.txtPasswordSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                if (checkPasswordValidation()){
+
+                }
+            }
+        });
+
+        binding.lnrAddressView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                if (binding.lnrAddress.getVisibility() == View.GONE) {
+                    binding.lnrAddress.setVisibility(View.VISIBLE);
+                } else if (binding.lnrAddress.getVisibility() == View.VISIBLE) {
+                    binding.lnrAddress.setVisibility(View.GONE);
+                }
+            }
+        });
+
+        binding.txtAddressSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+
+            }
+        });
     }
 
     private boolean checkPersonalDetailValidation() {
@@ -181,22 +255,42 @@ public class MyAccountFragment extends Fragment {
 
         if (TextUtils.isEmpty(binding.etxFirstName.getText().toString().trim())) {
             value = false;
-            H.showMessage(context, "");
+            H.showMessage(context, getResources().getString(R.string.pleaseEnterFirstName));
         } else if (TextUtils.isEmpty(binding.etxLastName.getText().toString().trim())) {
             value = false;
-            H.showMessage(context, "");
+            H.showMessage(context, getResources().getString(R.string.pleaseEnterLastName));
         } else if (TextUtils.isEmpty(binding.etxNumber.getText().toString().trim())) {
             value = false;
-            H.showMessage(context, "");
+            H.showMessage(context, getResources().getString(R.string.enterMobile));
         } else if (TextUtils.isEmpty(binding.etxBirtDate.getText().toString().trim())) {
             value = false;
-            H.showMessage(context, "");
+            H.showMessage(context, getResources().getString(R.string.pleaseEnterDOB));
         } else if (TextUtils.isEmpty(binding.etxEmail.getText().toString().trim())) {
             value = false;
-            H.showMessage(context, "");
+            H.showMessage(context, getResources().getString(R.string.enterEmailId));
         } else if (!Validation.validEmail(binding.etxEmail.getText().toString().trim())) {
             value = false;
-            H.showMessage(context, "");
+            H.showMessage(context, getResources().getString(R.string.enterEmailValid));
+        }
+
+        return value;
+    }
+
+    private boolean checkPasswordValidation(){
+        boolean value = true;
+
+        if (TextUtils.isEmpty(binding.etxPassword.getText().toString().trim())) {
+            value = false;
+            H.showMessage(context, getResources().getString(R.string.enterPassword));
+        } else if (binding.etxPassword.getText().toString().trim().length()<6){
+            value = false;
+            H.showMessage(context, getResources().getString(R.string.minPassLength));
+        } else if (TextUtils.isEmpty(binding.etxConfirmPassword.getText().toString().trim())) {
+            value = false;
+            H.showMessage(context, getResources().getString(R.string.enterConfirmPassword));
+        } else if (!binding.etxConfirmPassword.getText().toString().trim().equals(binding.etxPassword.getText().toString().trim())){
+            value = false;
+            H.showMessage(context, getResources().getString(R.string.passwordNotMatch));
         }
 
         return value;
@@ -217,6 +311,9 @@ public class MyAccountFragment extends Fragment {
             binding.imgAddressRight.setVisibility(View.GONE);
             binding.imgAddressLeft.setVisibility(View.VISIBLE);
 
+            binding.imgEmirateRight.setVisibility(View.GONE);
+            binding.imgEmirateLeft.setVisibility(View.VISIBLE);
+
         } else if (flag.equals(Config.ENGLISH)) {
 
             binding.imgPersonalRight.setVisibility(View.VISIBLE);
@@ -228,6 +325,9 @@ public class MyAccountFragment extends Fragment {
             binding.imgAddressRight.setVisibility(View.VISIBLE);
             binding.imgAddressLeft.setVisibility(View.GONE);
 
+            binding.imgEmirateRight.setVisibility(View.VISIBLE);
+            binding.imgEmirateLeft.setVisibility(View.GONE);
+
         }
 
     }
@@ -236,21 +336,26 @@ public class MyAccountFragment extends Fragment {
     private void setDateTimeField(EditText editText) {
 
         Calendar newCalendar = Calendar.getInstance();
-        mDatePickerDialog = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
+        mDatePickerDialog = new DatePickerDialog(context, R.style.DialogTheme,new DatePickerDialog.OnDateSetListener() {
 
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 Calendar newDate = Calendar.getInstance();
                 newDate.set(year, monthOfYear, dayOfMonth);
                 SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
-                final Date startDate = newDate.getTime();
-                String fdate = sd.format(startDate);
+                final Date date = newDate.getTime();
+                String fdate = sd.format(date);
 
                 editText.setText(fdate);
 
+                String dayOfTheWeek = (String) DateFormat.format("EEEE", date); // Thursday
+                String dayString         = (String) DateFormat.format("dd",   date); // 20
+                String monthString  = (String) DateFormat.format("MMM",  date); // Jun
+                String monthNumber  = (String) DateFormat.format("MM",   date); // 06
+                String yeare         = (String) DateFormat.format("yyyy", date); // 2013
+
             }
         }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
-        mDatePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
-
+//        mDatePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)

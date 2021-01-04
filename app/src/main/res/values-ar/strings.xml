@@ -52,6 +52,25 @@
     <string name="male">الذكر</string>
     <string name="female">أنثى</string>
     <string name="saveChanges">حفظ التغييرات</string>
+    <string name="pleaseEnterFirstName">الرجاء إدخال الاسم الأول</string>
+    <string name="pleaseEnterLastName">الرجاء إدخال الاسم الأخير</string>
+    <string name="pleaseEnterAlternateNumber">الرجاء إدخال رقم الهاتف المحمول البديل</string>
+    <string name="pleaseEnterDOB">الرجاء إدخال تاريخ الميلاد</string>
+    <string name="enterPassword">الرجاء إدخال كلمة المرور</string>
+    <string name="enterConfirmPassword">الرجاء إدخال تأكيد كلمة المرور</string>
+    <string name="passwordNotMatch">تأكيد كلمة المرور غير متطابقة مع كلمة المرور</string>
+    <string name="minPassLength">تحتوي كلمة المرور على 6 أحرف على الأقل</string>
+    <string name="confirmPassword">تأكيد كلمة المرور</string>
+    <string name="houseNo">رقم المنزل / رقم المبنى</string>
+    <string name="streetName">اسم الشارع</string>
+    <string name="area">منطقة</string>
+    <string name="landMark">معلم معروف</string>
+    <string name="city">مدينة</string>
+    <string name="selectEmirate">اختر الإمارة</string>
+    <string name="additionalDriverDetails">تفاصيل إضافية للسائق</string>
+    <string name="nationality">الجنسية</string>
+    <string name="middleName">الاسم الوسطى</string>
+    <string name="enterMiddleName">الرجاء إدخال الاسم الأوسط</string>
 
     <string name="home">الصفحة الرئيسية</string>
     <string name="profile">الملف الشخصي</string>

@@ -1,6 +1,5 @@
 package com.example.fastuae.fragment;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -10,13 +9,9 @@ import android.view.ViewGroup;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.adoisstudio.helper.H;
 import com.example.fastuae.R;
 import com.example.fastuae.adapter.CategorySelectionAdapter;
 import com.example.fastuae.databinding.FragmentProfileBinding;

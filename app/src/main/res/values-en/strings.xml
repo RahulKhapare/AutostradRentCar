@@ -52,6 +52,26 @@
     <string name="male">Male</string>
     <string name="female">Female</string>
     <string name="saveChanges">Save Changes</string>
+    <string name="pleaseEnterFirstName">Please enter first name</string>
+    <string name="pleaseEnterLastName">Please enter last name</string>
+    <string name="pleaseEnterAlternateNumber">Please enter alternate mobile number</string>
+    <string name="pleaseEnterDOB">Please enter date of birth</string>
+    <string name="enterPassword">Please enter password</string>
+    <string name="enterConfirmPassword">Please enter confirm password</string>
+    <string name="passwordNotMatch">Confirm password not matched with password</string>
+    <string name="minPassLength">Password contain minimum 6 characters</string>
+    <string name="confirmPassword">Confirm Password</string>
+    <string name="houseNo">House No./ Building No.</string>
+    <string name="streetName">Street Name</string>
+    <string name="area">Area</string>
+    <string name="landMark">Landmark</string>
+    <string name="city">City</string>
+    <string name="selectEmirate">Select Emirate</string>
+    <string name="additionalDriverDetails">Additional Driver Details</string>
+    <string name="nationality">Nationality</string>
+    <string name="middleName">Middle Name</string>
+    <string name="enterMiddleName">Enter middle name</string>
+
 
     <string name="home">Home</string>
     <string name="profile">Profile</string>

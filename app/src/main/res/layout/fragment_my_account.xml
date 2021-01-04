@@ -79,7 +79,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="0dp"
                         android:background="@color/customeGray"
                         tools:ignore="Suspicious0dp">
 
@@ -89,12 +89,18 @@
                         android:id="@+id/etxFirstName"
                         android:layout_width="match_parent"
                         android:layout_height="?actionBarSize"
-                        android:layout_margin="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
                         android:textSize="18sp"
                         android:imeOptions="actionNext"
                         android:textColor="@color/textDark"
+                        android:textColorHint="@color/iconicGray"
+                        android:textCursorDrawable="@drawable/color_cursor"
+                        android:backgroundTint="@color/colorPrimaryDark"
                         android:fontFamily="@font/nunito_sans_semibold"
-                        android:inputType="text"
+                        android:inputType="textCapWords"
                         android:hint="@string/firstName">
 
                     </EditText>
@@ -103,12 +109,18 @@
                         android:id="@+id/etxLastName"
                         android:layout_width="match_parent"
                         android:layout_height="?actionBarSize"
-                        android:layout_margin="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
                         android:textSize="18sp"
                         android:imeOptions="actionNext"
+                        android:textColorHint="@color/iconicGray"
                         android:textColor="@color/textDark"
+                        android:textCursorDrawable="@drawable/color_cursor"
                         android:fontFamily="@font/nunito_sans_semibold"
-                        android:inputType="text"
+                        android:inputType="textCapWords"
+                        android:backgroundTint="@color/colorPrimaryDark"
                         android:hint="@string/lastName">
 
                     </EditText>
@@ -117,7 +129,10 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="?actionBarSize"
-                        android:layout_margin="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
                         android:orientation="horizontal">
 
                         <Spinner
@@ -135,9 +150,12 @@
                             android:id="@+id/etxNumber"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:inputType="text"
+                            android:inputType="number"
                             android:textSize="18sp"
                             android:imeOptions="actionNext"
+                            android:textCursorDrawable="@drawable/color_cursor"
+                            android:backgroundTint="@color/colorPrimaryDark"
+                            android:textColorHint="@color/iconicGray"
                             android:textColor="@color/textDark"
                             android:fontFamily="@font/nunito_sans_semibold"
                             android:hint="@string/mobileNumber">
@@ -149,13 +167,16 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="?actionBarSize"
-                        android:layout_margin="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
                         android:orientation="horizontal">
 
                         <Spinner
                             android:id="@+id/spinnerCodeAlternate"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_marginRight="5dp"
                             android:layout_marginLeft="5dp"
                             style="@style/Base.Widget.AppCompat.Spinner.Underlined"
@@ -167,9 +188,12 @@
                             android:id="@+id/etxAlternameNumber"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:inputType="text"
+                            android:inputType="number"
+                            android:textColorHint="@color/iconicGray"
                             android:textColor="@color/textDark"
                             android:textSize="18sp"
+                            android:textCursorDrawable="@drawable/color_cursor"
+                            android:backgroundTint="@color/colorPrimaryDark"
                             android:imeOptions="actionNext"
                             android:fontFamily="@font/nunito_sans_semibold"
                             android:hint="@string/alternateNumber">
@@ -182,10 +206,15 @@
                         android:id="@+id/etxBirtDate"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
                         android:textSize="18sp"
                         android:imeOptions="actionNext"
+                        android:textColorHint="@color/iconicGray"
                         android:textColor="@color/textDark"
+                        android:backgroundTint="@color/colorPrimaryDark"
                         android:fontFamily="@font/nunito_sans_semibold"
                         android:inputType="textEmailAddress"
                         android:hint="@string/dateBirth">
@@ -197,9 +226,15 @@
                         android:id="@+id/etxEmail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
                         android:textSize="18sp"
+                        android:textCursorDrawable="@drawable/color_cursor"
                         android:imeOptions="actionNext"
+                        android:backgroundTint="@color/colorPrimaryDark"
+                        android:textColorHint="@color/iconicGray"
                         android:textColor="@color/textDark"
                         android:fontFamily="@font/nunito_sans_semibold"
                         android:inputType="textEmailAddress"
@@ -211,7 +246,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="20dp"
                         android:layout_marginBottom="10dp"
                         android:orientation="horizontal">
 
@@ -253,14 +288,14 @@
                         android:fontFamily="@font/nunit_sans_bold"
                         android:textColor="@color/colorWhite"
                         android:text="@string/saveChanges"
-                        android:padding="15dp"
-                        android:layout_marginTop="30dp"
+                        android:padding="16dp"
+                        android:layout_marginTop="40dp"
                         android:layout_marginBottom="20dp"
                         android:layout_marginRight="15dp"
                         android:layout_marginLeft="15dp"
                         android:layout_gravity="center"
                         android:gravity="center"
-                        android:textSize="20dp"
+                        android:textSize="18dp"
                         android:background="@drawable/button_blue_bg"></TextView>
 
 
@@ -286,6 +321,7 @@
                 android:orientation="vertical">
 
                 <RelativeLayout
+                    android:id="@+id/passwordView"
                     android:layout_width="match_parent"
                     android:layout_height="?actionBarSize">
 
@@ -328,24 +364,88 @@
                 </RelativeLayout>
 
                 <LinearLayout
+                    android:id="@+id/lnrPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="1dp">
+                        android:layout_height="0.5dp"
+                        android:layout_marginTop="0dp"
+                        android:background="@color/customeGray"
+                        tools:ignore="Suspicious0dp">
 
                     </LinearLayout>
 
+                    <EditText
+                        android:id="@+id/etxPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="?actionBarSize"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:textSize="18sp"
+                        android:imeOptions="actionNext"
+                        android:textCursorDrawable="@drawable/color_cursor"
+                        android:textColor="@color/textDark"
+                        android:textColorHint="@color/iconicGray"
+                        android:backgroundTint="@color/colorPrimaryDark"
+                        android:fontFamily="@font/nunito_sans_semibold"
+                        android:inputType="textPassword"
+                        android:hint="@string/password">
+
+                    </EditText>
+
+                    <EditText
+                        android:id="@+id/etxConfirmPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="?actionBarSize"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:textSize="18sp"
+                        android:imeOptions="actionNext"
+                        android:textCursorDrawable="@drawable/color_cursor"
+                        android:textColor="@color/textDark"
+                        android:fontFamily="@font/nunito_sans_semibold"
+                        android:inputType="textPassword"
+                        android:textColorHint="@color/iconicGray"
+                        android:backgroundTint="@color/colorPrimaryDark"
+                        android:hint="@string/confirmPassword">
+
+                    </EditText>
+
+                    <TextView
+                        android:id="@+id/txtPasswordSave"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunit_sans_bold"
+                        android:textColor="@color/colorWhite"
+                        android:text="@string/saveChanges"
+                        android:padding="16dp"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:textSize="18dp"
+                        android:background="@drawable/button_blue_bg"></TextView>
+
+
                 </LinearLayout>
+
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="?actionBarSize"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="1dp"
             android:layout_marginRight="1dp"
             android:layout_marginTop="12dp"
@@ -353,48 +453,250 @@
             app:cardElevation="3dp"
             app:cardCornerRadius="5dp">
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="?actionBarSize">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-                <TextView
+                <RelativeLayout
+                    android:id="@+id/lnrAddressView"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="16dp"
-                    android:paddingRight="16dp"
-                    android:textSize="18sp"
-                    android:fontFamily="@font/nunito_sans_semibold"
-                    android:text="@string/address">
+                    android:layout_height="?actionBarSize">
 
-                </TextView>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp"
+                        android:textSize="18sp"
+                        android:fontFamily="@font/nunito_sans_semibold"
+                        android:text="@string/address">
+
+                    </TextView>
 
 
-                <ImageView
-                    android:id="@+id/imgAddressRight"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_marginRight="15dp"
-                    android:src="@drawable/ic_down_arrow"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true">
+                    <ImageView
+                        android:id="@+id/imgAddressRight"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_marginRight="15dp"
+                        android:src="@drawable/ic_down_arrow"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true">
 
-                </ImageView>
+                    </ImageView>
 
-                <ImageView
-                    android:id="@+id/imgAddressLeft"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_marginLeft="15dp"
+                    <ImageView
+                        android:id="@+id/imgAddressLeft"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_marginLeft="15dp"
+                        android:visibility="gone"
+                        android:src="@drawable/ic_down_arrow"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true">
+                    </ImageView>
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/lnrAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:visibility="gone"
-                    android:src="@drawable/ic_down_arrow"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true">
-                </ImageView>
+                    android:orientation="vertical">
 
-            </RelativeLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_marginTop="0dp"
+                        android:background="@color/customeGray"
+                        tools:ignore="Suspicious0dp">
 
+                    </LinearLayout>
+
+                    <EditText
+                        android:id="@+id/etxHouseNo"
+                        android:layout_width="match_parent"
+                        android:layout_height="?actionBarSize"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:textSize="18sp"
+                        android:imeOptions="actionNext"
+                        android:textCursorDrawable="@drawable/color_cursor"
+                        android:textColor="@color/textDark"
+                        android:textColorHint="@color/iconicGray"
+                        android:backgroundTint="@color/colorPrimaryDark"
+                        android:fontFamily="@font/nunito_sans_semibold"
+                        android:inputType="text"
+                        android:hint="@string/houseNo">
+
+                    </EditText>
+
+                    <EditText
+                        android:id="@+id/etxStreetName"
+                        android:layout_width="match_parent"
+                        android:layout_height="?actionBarSize"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:textSize="18sp"
+                        android:imeOptions="actionNext"
+                        android:textCursorDrawable="@drawable/color_cursor"
+                        android:textColor="@color/textDark"
+                        android:textColorHint="@color/iconicGray"
+                        android:fontFamily="@font/nunito_sans_semibold"
+                        android:inputType="text"
+                        android:backgroundTint="@color/colorPrimaryDark"
+                        android:hint="@string/streetName">
+
+                    </EditText>
+
+                    <EditText
+                        android:id="@+id/etxArea"
+                        android:layout_width="match_parent"
+                        android:layout_height="?actionBarSize"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:textSize="18sp"
+                        android:imeOptions="actionNext"
+                        android:textCursorDrawable="@drawable/color_cursor"
+                        android:textColor="@color/textDark"
+                        android:textColorHint="@color/iconicGray"
+                        android:fontFamily="@font/nunito_sans_semibold"
+                        android:inputType="text"
+                        android:backgroundTint="@color/colorPrimaryDark"
+                        android:hint="@string/area">
+
+                    </EditText>
+
+                    <EditText
+                        android:id="@+id/etxLandMark"
+                        android:layout_width="match_parent"
+                        android:layout_height="?actionBarSize"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:textSize="18sp"
+                        android:imeOptions="actionNext"
+                        android:textCursorDrawable="@drawable/color_cursor"
+                        android:textColor="@color/textDark"
+                        android:textColorHint="@color/iconicGray"
+                        android:fontFamily="@font/nunito_sans_semibold"
+                        android:inputType="text"
+                        android:backgroundTint="@color/colorPrimaryDark"
+                        android:hint="@string/landMark">
+
+                    </EditText>
+
+                    <EditText
+                        android:id="@+id/etxCity"
+                        android:layout_width="match_parent"
+                        android:layout_height="?actionBarSize"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:textSize="18sp"
+                        android:imeOptions="actionNext"
+                        android:textCursorDrawable="@drawable/color_cursor"
+                        android:textColor="@color/textDark"
+                        android:textColorHint="@color/iconicGray"
+                        android:fontFamily="@font/nunito_sans_semibold"
+                        android:inputType="text"
+                        android:backgroundTint="@color/colorPrimaryDark"
+                        android:hint="@string/city">
+
+                    </EditText>
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp">
+
+                       <LinearLayout
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:orientation="vertical">
+
+                           <Spinner
+                               android:id="@+id/spinnerAddress"
+                               android:layout_width="match_parent"
+                               android:layout_height="?actionBarSize"
+                               android:background="@android:color/transparent"
+                               android:backgroundTint="@color/colorPrimaryDark">
+
+                           </Spinner>
+
+                           <LinearLayout
+                               android:layout_width="match_parent"
+                               android:layout_height="1dp"
+                               android:background="@color/colorPrimaryDark"
+                               android:layout_marginTop="-5dp"
+                               android:layout_marginLeft="3dp"
+                               android:layout_marginRight="3dp"></LinearLayout>
+
+                       </LinearLayout>
+
+                        <ImageView
+                            android:id="@+id/imgEmirateRight"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_marginRight="10dp"
+                            android:src="@drawable/ic_down_arrow"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true">
+
+                        </ImageView>
+
+                        <ImageView
+                            android:id="@+id/imgEmirateLeft"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_marginLeft="10dp"
+                            android:visibility="gone"
+                            android:src="@drawable/ic_down_arrow"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true">
+                        </ImageView>
+
+
+                    </RelativeLayout>
+
+
+                    <TextView
+                        android:id="@+id/txtAddressSave"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunit_sans_bold"
+                        android:textColor="@color/colorWhite"
+                        android:text="@string/saveChanges"
+                        android:padding="16dp"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:textSize="18dp"
+                        android:background="@drawable/button_blue_bg"></TextView>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
 
         </androidx.cardview.widget.CardView>
 

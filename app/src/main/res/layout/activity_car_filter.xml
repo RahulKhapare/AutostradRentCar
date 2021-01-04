@@ -426,14 +426,14 @@
                         android:fontFamily="@font/nunit_sans_bold"
                         android:textColor="@color/colorWhite"
                         android:text="@string/apply"
-                        android:padding="15dp"
+                        android:padding="16dp"
                         android:layout_marginTop="25dp"
                         android:layout_marginBottom="50dp"
                         android:layout_marginRight="15dp"
                         android:layout_marginLeft="15dp"
                         android:layout_gravity="center"
                         android:gravity="center"
-                        android:textSize="20dp"
+                        android:textSize="18dp"
                         android:background="@drawable/button_blue_bg"></TextView>
 
 
