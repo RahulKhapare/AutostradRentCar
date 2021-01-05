@@ -50,6 +50,8 @@ public class ProfileFragment extends Fragment implements CategorySelectionAdapte
         return binding.getRoot();
     }
 
+
+
     private void initView() {
 
         categoryModelList = new ArrayList<>();
@@ -62,6 +64,22 @@ public class ProfileFragment extends Fragment implements CategorySelectionAdapte
         myAccountFragment = MyAccountFragment.newInstance();
         fragmentLoader(myAccountFragment, Config.My_Account);
 
+    }
+
+    @Override
+    public void onDestroyView()
+    {
+        if (binding.getRoot() != null)
+        {
+            ViewGroup parentViewGroup = (ViewGroup) binding.getRoot().getParent();
+
+            if (parentViewGroup != null)
+            {
+                parentViewGroup.removeAllViews();
+            }
+        }
+
+        super.onDestroyView();
     }
 
     public void fragmentLoader(Fragment fragment, String tag) {

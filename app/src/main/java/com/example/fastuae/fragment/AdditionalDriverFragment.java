@@ -50,6 +50,8 @@ public class AdditionalDriverFragment extends Fragment {
     private DatePickerDialog mDatePickerDialog;
     private List<CountryCodeModel> countryCodeModelList;
     private List<AddressModel> lisAddressEmirate;
+    private Session session;
+    private String flag;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -57,14 +59,33 @@ public class AdditionalDriverFragment extends Fragment {
         if (binding == null) {
             binding = DataBindingUtil.inflate(inflater, R.layout.fragment_additional_drive, container, false);
             context = inflater.getContext();
-            updateIcons();
             initView();
+            updateIcons();
         }
 
         return binding.getRoot();
     }
 
+    @Override
+    public void onDestroyView()
+    {
+        if (binding.getRoot() != null)
+        {
+            ViewGroup parentViewGroup = (ViewGroup) binding.getRoot().getParent();
+
+            if (parentViewGroup != null)
+            {
+                parentViewGroup.removeAllViews();
+            }
+        }
+
+        super.onDestroyView();
+    }
+
     private void initView(){
+
+        session = new Session(context);
+        flag = session.getString(P.languageFlag);
 
         countryCodeModelList = new ArrayList<>();
 
@@ -190,8 +211,18 @@ public class AdditionalDriverFragment extends Fragment {
                 Click.preventTwoClick(v);
                 if (binding.lnrAdditionalDetails.getVisibility() == View.GONE) {
                     binding.lnrAdditionalDetails.setVisibility(View.VISIBLE);
+                    if (flag.equals(Config.ARABIC)) {
+                        binding.imgDriveLeft.setImageResource(R.drawable.ic_up_arrow);
+                    }else if (flag.equals(Config.ENGLISH)) {
+                        binding.imgDriveRight.setImageResource(R.drawable.ic_up_arrow);
+                    }
                 } else if (binding.lnrAdditionalDetails.getVisibility() == View.VISIBLE) {
                     binding.lnrAdditionalDetails.setVisibility(View.GONE);
+                    if (flag.equals(Config.ARABIC)) {
+                        binding.imgDriveLeft.setImageResource(R.drawable.ic_down_arrow);
+                    }else if (flag.equals(Config.ENGLISH)) {
+                        binding.imgDriveRight.setImageResource(R.drawable.ic_down_arrow);
+                    }
                 }
             }
         });
@@ -240,8 +271,6 @@ public class AdditionalDriverFragment extends Fragment {
 
     private void updateIcons() {
 
-        Session session = new Session(context);
-        String flag = session.getString(P.languageFlag);
         if (flag.equals(Config.ARABIC)) {
 
             binding.imgDriveRight.setVisibility(View.GONE);

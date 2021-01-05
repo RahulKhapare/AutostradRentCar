@@ -29,6 +29,22 @@ public class SalikChargesFragment extends Fragment {
         return binding.getRoot();
     }
 
+    @Override
+    public void onDestroyView()
+    {
+        if (binding.getRoot() != null)
+        {
+            ViewGroup parentViewGroup = (ViewGroup) binding.getRoot().getParent();
+
+            if (parentViewGroup != null)
+            {
+                parentViewGroup.removeAllViews();
+            }
+        }
+
+        super.onDestroyView();
+    }
+
     public static SalikChargesFragment newInstance() {
         SalikChargesFragment fragment = new SalikChargesFragment();
         return fragment;

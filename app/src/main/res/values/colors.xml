@@ -13,5 +13,8 @@
     <color name="lightBlue">#159dd8</color>
     <color name="grayLight">#8c99b4</color>
     <color name="grayDark">#707070</color>
+    <color name="darkOrange">#EC6262</color>
+    <color name="green">#52AC03</color>
+    <color name="grayTwo">#7C7B7C</color>
 
 </resources>

@@ -1,11 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorWhite">
+        android:background="@color/colorWhite"
+        android:layout_marginTop="0dp">
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_marginTop="-12dp"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:background="@color/colorWhite"
+            android:elevation="3dp"
+            app:tabIndicatorColor="@color/lightBlue"
+            app:tabIndicatorHeight="2dp"
+            app:tabMode="fixed"
+            app:tabGravity="fill"
+            app:tabInlineLabel="true"
+            app:tabIconTint="@color/your_color_selector"
+            app:tabSelectedTextColor="@color/lightBlue"
+            app:tabTextColor="@color/colorPrimaryDark"
+            app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
+            android:theme="@style/MyCustomTabLayout"/>
+
+        <androidx.viewpager.widget.ViewPager
+            android:layout_below="@+id/tabLayout"
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
     </RelativeLayout>
 

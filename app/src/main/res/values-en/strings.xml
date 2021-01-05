@@ -71,7 +71,29 @@
     <string name="nationality">Nationality</string>
     <string name="middleName">Middle Name</string>
     <string name="enterMiddleName">Enter middle name</string>
-
+    <string name="upcomingReservation">Upcoming Reservations</string>
+    <string name="pastRental">Past Rentals</string>
+    <string name="cancel">Cancel</string>
+    <string name="viewBooking">View Booking</string>
+    <string name="helpSupport">Help/Support</string>
+    <string name="from">From</string>
+    <string name="to">To</string>
+    <string name="bookingError">You don’t have a rental history yet!</string>
+    <string name="addNewCard">Add New Card</string>
+    <string name="cardNumber">Card Number</string>
+    <string name="nameOnCard">Name on card</string>
+    <string name="validThrough">Valid through (MM/YY)</string>
+    <string name="ccv">CVV</string>
+    <string name="securelyMessage">Securely save card details</string>
+    <string name="save">Save</string>
+    <string name="enterCardNumber">Please enter card number</string>
+    <string name="enterCardName">Please enter name on card</string>
+    <string name="enterValidMonth">Please enter valid month/year</string>
+    <string name="enterCvv">Please enter valid cvv</string>
+    <string name="enterMonth">Please enter month/year</string>
+    <string name="enterValidCvv">Please enter valid cvv</string>
+    <string name="enterValidCarNumber">Please enter 16 digit card number</string>
+    <string name="checkCardFormat">Please check card expire format</string>
 
     <string name="home">Home</string>
     <string name="profile">Profile</string>

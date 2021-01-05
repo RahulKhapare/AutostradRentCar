@@ -2,11 +2,237 @@
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <RelativeLayout
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorWhite">
+        android:fillViewport="true">
 
-    </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorWhite"
+            android:padding="16dp">
+
+            <LinearLayout
+                android:id="@+id/lnrAddNewView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/addNewCard"
+                    android:fontFamily="@font/nunit_sans_bold"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="18sp">
+
+                </TextView>
+
+                <EditText
+                    android:id="@+id/etxCardNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="?actionBarSize"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="20dp"
+                    android:textSize="18sp"
+                    android:imeOptions="actionNext"
+                    android:textColor="@color/textDark"
+                    android:textColorHint="@color/iconicGray"
+                    android:textCursorDrawable="@drawable/color_cursor"
+                    android:backgroundTint="@color/colorPrimaryDark"
+                    android:fontFamily="@font/nunito_sans_regular"
+                    android:inputType="number"
+                    android:maxLength="16"
+                    android:digits="01234 56789"
+                    android:hint="@string/cardNumber">
+
+                </EditText>
+
+                <EditText
+                    android:id="@+id/etxCardName"
+                    android:layout_width="match_parent"
+                    android:layout_height="?actionBarSize"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="0dp"
+                    android:textSize="18sp"
+                    android:imeOptions="actionNext"
+                    android:textColor="@color/textDark"
+                    android:textColorHint="@color/iconicGray"
+                    android:textCursorDrawable="@drawable/color_cursor"
+                    android:backgroundTint="@color/colorPrimaryDark"
+                    android:fontFamily="@font/nunito_sans_regular"
+                    android:inputType="textCapWords"
+                    android:hint="@string/nameOnCard">
+
+                </EditText>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="0dp"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/etxValidMonth"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="?actionBarSize"
+                        android:textSize="18sp"
+                        android:imeOptions="actionNext"
+                        android:textColor="@color/textDark"
+                        android:textColorHint="@color/iconicGray"
+                        android:textCursorDrawable="@drawable/color_cursor"
+                        android:backgroundTint="@color/colorPrimaryDark"
+                        android:fontFamily="@font/nunito_sans_regular"
+                        android:inputType="number"
+                        android:maxLength="5"
+                        android:digits="0123456789/"
+                        android:layout_marginRight="20dp"
+                        android:hint="@string/validThrough">
+
+                    </EditText>
+
+                    <EditText
+                        android:id="@+id/etxCvv"
+                        android:layout_width="100dp"
+                        android:layout_height="?actionBarSize"
+                        android:textSize="18sp"
+                        android:digits="0123456789"
+                        android:maxLength="3"
+                        android:imeOptions="actionNext"
+                        android:textColor="@color/textDark"
+                        android:textColorHint="@color/iconicGray"
+                        android:textCursorDrawable="@drawable/color_cursor"
+                        android:backgroundTint="@color/colorPrimaryDark"
+                        android:fontFamily="@font/nunito_sans_regular"
+                        android:inputType="number"
+                        android:hint="@string/ccv">
+
+                    </EditText>
+
+                </LinearLayout>
+
+                <CheckBox
+                    android:id="@+id/checkSecure"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/green"
+                    android:textColor="@color/grayTwo"
+                    android:fontFamily="@font/nunito_sans_regular"
+                    android:textSize="16sp"
+                    android:checked="true"
+                    android:text="@string/securelyMessage">
+
+                </CheckBox>
+
+                <TextView
+                    android:id="@+id/txtSave"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunit_sans_bold"
+                    android:textColor="@color/colorWhite"
+                    android:text="@string/save"
+                    android:padding="16dp"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textSize="18dp"
+                    android:background="@drawable/button_blue_bg"></TextView>
+
+
+            </LinearLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/lnrDisplayView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp">
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+                <RelativeLayout
+                    android:layout_below="@+id/recyclerCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="0dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:id="@+id/lnrAddNewCard"
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="35dp"
+                                android:layout_height="27dp"
+                                android:layout_gravity="center_vertical"
+                                android:src="@drawable/ic_add_card"></ImageView>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/addNewCard"
+                                android:paddingLeft="20dp"
+                                android:paddingRight="20dp"
+                                android:layout_gravity="center_vertical"
+                                android:fontFamily="@font/nunit_sans_bold"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:textSize="18sp">
+
+                            </TextView>
+
+                        </LinearLayout>
+
+                        <ImageView
+                            android:layout_width="116dp"
+                            android:layout_height="15dp"
+                            android:scaleType="fitXY"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/ic_vizas"></ImageView>
+
+                    </LinearLayout>
+
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="380dp"
+                        android:layout_marginTop="120dp"
+                        android:layout_alignParentBottom="true"
+                        android:background="@drawable/ic_manage_payment">
+
+                    </ImageView>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
 
 </layout>

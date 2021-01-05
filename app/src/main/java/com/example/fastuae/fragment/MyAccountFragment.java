@@ -49,7 +49,8 @@ public class MyAccountFragment extends Fragment {
     private DatePickerDialog mDatePickerDialog;
     private List<CountryCodeModel> countryCodeModelList;
     private List<AddressModel> lisAddressEmirate;
-
+    private Session session;
+    private String flag;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -57,16 +58,34 @@ public class MyAccountFragment extends Fragment {
         if (binding == null) {
             binding = DataBindingUtil.inflate(inflater, R.layout.fragment_my_account, container, false);
             context = inflater.getContext();
+            initView();
             updateIcons();
 
-            initView();
         }
 
         return binding.getRoot();
     }
 
+    @Override
+    public void onDestroyView()
+    {
+        if (binding.getRoot() != null)
+        {
+            ViewGroup parentViewGroup = (ViewGroup) binding.getRoot().getParent();
+
+            if (parentViewGroup != null)
+            {
+                parentViewGroup.removeAllViews();
+            }
+        }
+
+        super.onDestroyView();
+    }
 
     private void initView() {
+
+        session = new Session(context);
+        flag = session.getString(P.languageFlag);
 
         countryCodeModelList = new ArrayList<>();
 
@@ -190,9 +209,21 @@ public class MyAccountFragment extends Fragment {
                 Click.preventTwoClick(v);
                 if (binding.lnrPersonalDetails.getVisibility() == View.GONE) {
                     binding.lnrPersonalDetails.setVisibility(View.VISIBLE);
+                    if (flag.equals(Config.ARABIC)) {
+                        binding.imgPersonalLeft.setImageResource(R.drawable.ic_up_arrow);
+                    }else if (flag.equals(Config.ENGLISH)) {
+                        binding.imgPersonalRight.setImageResource(R.drawable.ic_up_arrow);
+                    }
                 } else if (binding.lnrPersonalDetails.getVisibility() == View.VISIBLE) {
                     binding.lnrPersonalDetails.setVisibility(View.GONE);
+                    if (flag.equals(Config.ARABIC)) {
+                        binding.imgPersonalLeft.setImageResource(R.drawable.ic_down_arrow);
+                    }else if (flag.equals(Config.ENGLISH)) {
+                        binding.imgPersonalRight.setImageResource(R.drawable.ic_down_arrow);
+                    }
                 }
+
+
             }
         });
 
@@ -212,9 +243,20 @@ public class MyAccountFragment extends Fragment {
                 Click.preventTwoClick(v);
                 if (binding.lnrPassword.getVisibility() == View.GONE) {
                     binding.lnrPassword.setVisibility(View.VISIBLE);
+                    if (flag.equals(Config.ARABIC)) {
+                        binding.imgPasswordLeft.setImageResource(R.drawable.ic_up_arrow);
+                    }else if (flag.equals(Config.ENGLISH)) {
+                        binding.imgPasswordRight.setImageResource(R.drawable.ic_up_arrow);
+                    }
                 } else if (binding.lnrPassword.getVisibility() == View.VISIBLE) {
                     binding.lnrPassword.setVisibility(View.GONE);
+                    if (flag.equals(Config.ARABIC)) {
+                        binding.imgPasswordLeft.setImageResource(R.drawable.ic_down_arrow);
+                    }else if (flag.equals(Config.ENGLISH)) {
+                        binding.imgPasswordRight.setImageResource(R.drawable.ic_down_arrow);
+                    }
                 }
+
             }
         });
 
@@ -234,8 +276,18 @@ public class MyAccountFragment extends Fragment {
                 Click.preventTwoClick(v);
                 if (binding.lnrAddress.getVisibility() == View.GONE) {
                     binding.lnrAddress.setVisibility(View.VISIBLE);
+                    if (flag.equals(Config.ARABIC)) {
+                        binding.imgAddressLeft.setImageResource(R.drawable.ic_up_arrow);
+                    }else if (flag.equals(Config.ENGLISH)) {
+                        binding.imgAddressRight.setImageResource(R.drawable.ic_up_arrow);
+                    }
                 } else if (binding.lnrAddress.getVisibility() == View.VISIBLE) {
                     binding.lnrAddress.setVisibility(View.GONE);
+                    if (flag.equals(Config.ARABIC)) {
+                        binding.imgAddressLeft.setImageResource(R.drawable.ic_down_arrow);
+                    }else if (flag.equals(Config.ENGLISH)) {
+                        binding.imgAddressRight.setImageResource(R.drawable.ic_down_arrow);
+                    }
                 }
             }
         });
@@ -298,8 +350,6 @@ public class MyAccountFragment extends Fragment {
 
     private void updateIcons() {
 
-        Session session = new Session(context);
-        String flag = session.getString(P.languageFlag);
         if (flag.equals(Config.ARABIC)) {
 
             binding.imgPersonalRight.setVisibility(View.GONE);
