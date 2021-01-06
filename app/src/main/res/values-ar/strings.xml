@@ -94,6 +94,19 @@
     <string name="enterValidCvv">الرجاء إدخال سيرة ذاتية صالحة</string>
     <string name="enterValidCarNumber">الرجاء إدخال رقم البطاقة المكون من 16 رقمًا</string>
     <string name="checkCardFormat">يرجى التحقق من تنسيق انتهاء صلاحية البطاقة</string>
+    <string name="docDate">وثيقة. تاريخ</string>
+    <string name="docType">وثيقة. نوع</string>
+    <string name="docNo">وثيقة. لا.</string>
+    <string name="creditAmt">مبلغ الائتمان</string>
+    <string name="debitAmt">المبلغ المدين</string>
+    <string name="paymentType">نوع الدفع</string>
+    <string name="download">تحميل</string>
+    <string name="noPdfFound">لم يتم العثور على مسار pdf</string>
+    <string name="allowPermission">يرجى السماح بالإذن من الإعداد.</string>
+    <string name="somethingWrong">حدث خطأ ما حاول مرة أخرى.</string>
+    <string name="noPdfAppAvailable">لا يوجد تطبيق متاح لعرض ملف PDF</string>
+    <string name="downloading">جارى التحميل....</string>
+    <string name="downloadingCompete">اكتمل التنزيل</string>
 
     <string name="home">الصفحة الرئيسية</string>
     <string name="profile">الملف الشخصي</string>

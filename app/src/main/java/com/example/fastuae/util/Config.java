@@ -27,6 +27,9 @@ public class Config {
     public static String Salik_Charges = "Salik Charges";
     public static String Traffic_Lines = "Traffic Lines";
 
+    public static int OPEN = 1;
+    public static int SHARE = 2;
+
 
 
     public static JsonList countryJsonList = new JsonList();

@@ -7,6 +7,14 @@
         android:layout_height="match_parent"
         android:background="@color/colorWhite">
 
+        <androidx.recyclerview.widget.RecyclerView
+
+            android:id="@+id/recyclerTraffic"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
     </RelativeLayout>
 
 </layout>

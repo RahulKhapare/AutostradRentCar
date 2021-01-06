@@ -81,4 +81,9 @@
         <item name="colorControlActivated">@color/grayLight</item>
     </style>
 
+    <style name="styleText">
+        <item name="colorAccent">@color/colorPrimaryDark</item>
+    </style>
+
+
 </resources>

@@ -210,16 +210,16 @@ public class MyAccountFragment extends Fragment {
                 if (binding.lnrPersonalDetails.getVisibility() == View.GONE) {
                     binding.lnrPersonalDetails.setVisibility(View.VISIBLE);
                     if (flag.equals(Config.ARABIC)) {
-                        binding.imgPersonalLeft.setImageResource(R.drawable.ic_up_arrow);
+                        binding.imgPersonalLeft.setImageResource(R.drawable.ic_minus);
                     }else if (flag.equals(Config.ENGLISH)) {
-                        binding.imgPersonalRight.setImageResource(R.drawable.ic_up_arrow);
+                        binding.imgPersonalRight.setImageResource(R.drawable.ic_minus);
                     }
                 } else if (binding.lnrPersonalDetails.getVisibility() == View.VISIBLE) {
                     binding.lnrPersonalDetails.setVisibility(View.GONE);
                     if (flag.equals(Config.ARABIC)) {
-                        binding.imgPersonalLeft.setImageResource(R.drawable.ic_down_arrow);
+                        binding.imgPersonalLeft.setImageResource(R.drawable.ic_plus);
                     }else if (flag.equals(Config.ENGLISH)) {
-                        binding.imgPersonalRight.setImageResource(R.drawable.ic_down_arrow);
+                        binding.imgPersonalRight.setImageResource(R.drawable.ic_plus);
                     }
                 }
 
@@ -244,16 +244,16 @@ public class MyAccountFragment extends Fragment {
                 if (binding.lnrPassword.getVisibility() == View.GONE) {
                     binding.lnrPassword.setVisibility(View.VISIBLE);
                     if (flag.equals(Config.ARABIC)) {
-                        binding.imgPasswordLeft.setImageResource(R.drawable.ic_up_arrow);
+                        binding.imgPasswordLeft.setImageResource(R.drawable.ic_minus);
                     }else if (flag.equals(Config.ENGLISH)) {
-                        binding.imgPasswordRight.setImageResource(R.drawable.ic_up_arrow);
+                        binding.imgPasswordRight.setImageResource(R.drawable.ic_minus);
                     }
                 } else if (binding.lnrPassword.getVisibility() == View.VISIBLE) {
                     binding.lnrPassword.setVisibility(View.GONE);
                     if (flag.equals(Config.ARABIC)) {
-                        binding.imgPasswordLeft.setImageResource(R.drawable.ic_down_arrow);
+                        binding.imgPasswordLeft.setImageResource(R.drawable.ic_plus);
                     }else if (flag.equals(Config.ENGLISH)) {
-                        binding.imgPasswordRight.setImageResource(R.drawable.ic_down_arrow);
+                        binding.imgPasswordRight.setImageResource(R.drawable.ic_plus);
                     }
                 }
 
@@ -277,16 +277,16 @@ public class MyAccountFragment extends Fragment {
                 if (binding.lnrAddress.getVisibility() == View.GONE) {
                     binding.lnrAddress.setVisibility(View.VISIBLE);
                     if (flag.equals(Config.ARABIC)) {
-                        binding.imgAddressLeft.setImageResource(R.drawable.ic_up_arrow);
+                        binding.imgAddressLeft.setImageResource(R.drawable.ic_minus);
                     }else if (flag.equals(Config.ENGLISH)) {
-                        binding.imgAddressRight.setImageResource(R.drawable.ic_up_arrow);
+                        binding.imgAddressRight.setImageResource(R.drawable.ic_minus);
                     }
                 } else if (binding.lnrAddress.getVisibility() == View.VISIBLE) {
                     binding.lnrAddress.setVisibility(View.GONE);
                     if (flag.equals(Config.ARABIC)) {
-                        binding.imgAddressLeft.setImageResource(R.drawable.ic_down_arrow);
+                        binding.imgAddressLeft.setImageResource(R.drawable.ic_plus);
                     }else if (flag.equals(Config.ENGLISH)) {
-                        binding.imgAddressRight.setImageResource(R.drawable.ic_down_arrow);
+                        binding.imgAddressRight.setImageResource(R.drawable.ic_plus);
                     }
                 }
             }

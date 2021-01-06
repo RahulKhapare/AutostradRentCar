@@ -94,6 +94,19 @@
     <string name="enterValidCvv">Please enter valid cvv</string>
     <string name="enterValidCarNumber">Please enter 16 digit card number</string>
     <string name="checkCardFormat">Please check card expire format</string>
+    <string name="docDate">Doc. Date</string>
+    <string name="docType">Doc. Type</string>
+    <string name="docNo">Doc. No.</string>
+    <string name="creditAmt">Credit Amt</string>
+    <string name="debitAmt">Debit Amt</string>
+    <string name="paymentType">Payment Type</string>
+    <string name="download">Download</string>
+    <string name="noPdfFound">No pdf path found</string>
+    <string name="allowPermission">Please allow permission from setting.</string>
+    <string name="somethingWrong">Something went wrong, try again.</string>
+    <string name="noPdfAppAvailable">No application available to view PDF</string>
+    <string name="downloading">Downloading....</string>
+    <string name="downloadingCompete">Downloading Complete</string>
 
     <string name="home">Home</string>
     <string name="profile">Profile</string>

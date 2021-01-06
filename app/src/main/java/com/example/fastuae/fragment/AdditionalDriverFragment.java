@@ -212,16 +212,16 @@ public class AdditionalDriverFragment extends Fragment {
                 if (binding.lnrAdditionalDetails.getVisibility() == View.GONE) {
                     binding.lnrAdditionalDetails.setVisibility(View.VISIBLE);
                     if (flag.equals(Config.ARABIC)) {
-                        binding.imgDriveLeft.setImageResource(R.drawable.ic_up_arrow);
+                        binding.imgDriveLeft.setImageResource(R.drawable.ic_minus);
                     }else if (flag.equals(Config.ENGLISH)) {
-                        binding.imgDriveRight.setImageResource(R.drawable.ic_up_arrow);
+                        binding.imgDriveRight.setImageResource(R.drawable.ic_minus);
                     }
                 } else if (binding.lnrAdditionalDetails.getVisibility() == View.VISIBLE) {
                     binding.lnrAdditionalDetails.setVisibility(View.GONE);
                     if (flag.equals(Config.ARABIC)) {
-                        binding.imgDriveLeft.setImageResource(R.drawable.ic_down_arrow);
+                        binding.imgDriveLeft.setImageResource(R.drawable.ic_plus);
                     }else if (flag.equals(Config.ENGLISH)) {
-                        binding.imgDriveRight.setImageResource(R.drawable.ic_down_arrow);
+                        binding.imgDriveRight.setImageResource(R.drawable.ic_plus);
                     }
                 }
             }

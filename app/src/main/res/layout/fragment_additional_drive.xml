@@ -48,7 +48,7 @@
                         android:layout_width="25dp"
                         android:layout_height="25dp"
                         android:layout_marginRight="15dp"
-                        android:src="@drawable/ic_down_arrow"
+                        android:src="@drawable/ic_plus"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true">
 
@@ -60,7 +60,7 @@
                         android:layout_height="25dp"
                         android:layout_marginLeft="15dp"
                         android:visibility="gone"
-                        android:src="@drawable/ic_down_arrow"
+                        android:src="@drawable/ic_plus"
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true">
                     </ImageView>
@@ -84,65 +84,91 @@
 
                     </LinearLayout>
 
-                    <EditText
-                        android:id="@+id/etxFirstName"
+                    <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="?actionBarSize"
+                        android:hint="@string/firstName"
                         android:layout_marginBottom="10dp"
                         android:layout_marginTop="30dp"
                         android:layout_marginRight="10dp"
                         android:layout_marginLeft="10dp"
-                        android:textSize="18sp"
-                        android:imeOptions="actionNext"
-                        android:textColor="@color/textDark"
+                        app:hintTextColor="@color/iconicGray"
                         android:textColorHint="@color/iconicGray"
-                        android:textCursorDrawable="@drawable/color_cursor"
-                        android:backgroundTint="@color/colorPrimaryDark"
-                        android:fontFamily="@font/nunito_sans_semibold"
-                        android:inputType="textCapWords"
-                        android:hint="@string/firstName">
+                        app:theme="@style/styleText"
+                        android:backgroundTint="@color/colorPrimaryDark">
 
-                    </EditText>
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etxFirstName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:singleLine="true"
+                            android:textSize="18sp"
+                            android:imeOptions="actionNext"
+                            android:inputType="textCapWords"
+                            android:fontFamily="@font/nunito_sans_semibold"
+                            android:textColor="@color/textDark"
+                            android:backgroundTint="@color/colorPrimaryDark"
+                            />
 
-                    <EditText
-                        android:id="@+id/etxMiddleName"
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                    <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="?actionBarSize"
+                        android:hint="@string/middleName"
                         android:layout_marginBottom="10dp"
                         android:layout_marginTop="20dp"
                         android:layout_marginRight="10dp"
                         android:layout_marginLeft="10dp"
-                        android:textSize="18sp"
-                        android:imeOptions="actionNext"
+                        app:hintTextColor="@color/iconicGray"
                         android:textColorHint="@color/iconicGray"
-                        android:textColor="@color/textDark"
-                        android:textCursorDrawable="@drawable/color_cursor"
-                        android:fontFamily="@font/nunito_sans_semibold"
-                        android:inputType="textCapWords"
-                        android:backgroundTint="@color/colorPrimaryDark"
-                        android:hint="@string/middleName">
+                        app:theme="@style/styleText"
+                        android:backgroundTint="@color/colorPrimaryDark">
 
-                    </EditText>
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etxMiddleName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:singleLine="true"
+                            android:textSize="18sp"
+                            android:imeOptions="actionNext"
+                            android:inputType="textCapWords"
+                            android:fontFamily="@font/nunito_sans_semibold"
+                            android:textColor="@color/textDark"
+                            android:backgroundTint="@color/colorPrimaryDark"
+                            />
 
-                    <EditText
-                        android:id="@+id/etxLastName"
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                    <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="?actionBarSize"
+                        android:hint="@string/lastName"
                         android:layout_marginBottom="10dp"
                         android:layout_marginTop="20dp"
                         android:layout_marginRight="10dp"
                         android:layout_marginLeft="10dp"
-                        android:textSize="18sp"
-                        android:imeOptions="actionNext"
+                        app:hintTextColor="@color/iconicGray"
                         android:textColorHint="@color/iconicGray"
-                        android:textColor="@color/textDark"
-                        android:textCursorDrawable="@drawable/color_cursor"
-                        android:fontFamily="@font/nunito_sans_semibold"
-                        android:inputType="textCapWords"
-                        android:backgroundTint="@color/colorPrimaryDark"
-                        android:hint="@string/lastName">
+                        app:theme="@style/styleText"
+                        android:backgroundTint="@color/colorPrimaryDark">
 
-                    </EditText>
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etxLastName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:singleLine="true"
+                            android:textSize="18sp"
+                            android:imeOptions="actionNext"
+                            android:inputType="textCapWords"
+                            android:fontFamily="@font/nunito_sans_semibold"
+                            android:textColor="@color/textDark"
+                            android:backgroundTint="@color/colorPrimaryDark"
+                            />
+
+                    </com.google.android.material.textfield.TextInputLayout>
 
 
                     <LinearLayout
@@ -165,21 +191,31 @@
 
                         </Spinner>
 
-                        <EditText
-                            android:id="@+id/etxNumber"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:inputType="number"
-                            android:textSize="18sp"
-                            android:imeOptions="actionNext"
-                            android:textCursorDrawable="@drawable/color_cursor"
-                            android:backgroundTint="@color/colorPrimaryDark"
-                            android:textColorHint="@color/iconicGray"
-                            android:textColor="@color/textDark"
-                            android:fontFamily="@font/nunito_sans_semibold"
-                            android:hint="@string/mobileNumber">
 
-                        </EditText>
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="?actionBarSize"
+                            android:hint="@string/mobileNumber"
+                            app:hintTextColor="@color/iconicGray"
+                            android:textColorHint="@color/iconicGray"
+                            app:theme="@style/styleText"
+                            android:backgroundTint="@color/colorPrimaryDark">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/etxNumber"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:singleLine="true"
+                                android:textSize="18sp"
+                                android:imeOptions="actionNext"
+                                android:inputType="number"
+                                android:fontFamily="@font/nunito_sans_semibold"
+                                android:textColor="@color/textDark"
+                                android:backgroundTint="@color/colorPrimaryDark"
+                                />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
 
                     </LinearLayout>
 
@@ -203,63 +239,91 @@
 
                         </Spinner>
 
-                        <EditText
-                            android:id="@+id/etxAlternameNumber"
+                        <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:inputType="number"
+                            android:layout_height="?actionBarSize"
+                            android:hint="@string/alternateNumber"
+                            app:hintTextColor="@color/iconicGray"
                             android:textColorHint="@color/iconicGray"
-                            android:textColor="@color/textDark"
-                            android:textSize="18sp"
-                            android:textCursorDrawable="@drawable/color_cursor"
-                            android:backgroundTint="@color/colorPrimaryDark"
-                            android:imeOptions="actionNext"
-                            android:fontFamily="@font/nunito_sans_semibold"
-                            android:hint="@string/alternateNumber">
+                            app:theme="@style/styleText"
+                            android:backgroundTint="@color/colorPrimaryDark">
 
-                        </EditText>
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/etxAlternameNumber"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:singleLine="true"
+                                android:textSize="18sp"
+                                android:imeOptions="actionNext"
+                                android:inputType="number"
+                                android:fontFamily="@font/nunito_sans_semibold"
+                                android:textColor="@color/textDark"
+                                android:backgroundTint="@color/colorPrimaryDark"
+                                />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
 
                     </LinearLayout>
 
-                    <EditText
-                        android:id="@+id/etxBirtDate"
+                    <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="?actionBarSize"
+                        android:hint="@string/dateBirth"
                         android:layout_marginBottom="10dp"
                         android:layout_marginTop="20dp"
                         android:layout_marginRight="10dp"
                         android:layout_marginLeft="10dp"
-                        android:textSize="18sp"
-                        android:imeOptions="actionNext"
+                        app:hintTextColor="@color/iconicGray"
                         android:textColorHint="@color/iconicGray"
-                        android:textColor="@color/textDark"
-                        android:backgroundTint="@color/colorPrimaryDark"
-                        android:fontFamily="@font/nunito_sans_semibold"
-                        android:inputType="textEmailAddress"
-                        android:hint="@string/dateBirth">
+                        app:theme="@style/styleText"
+                        android:backgroundTint="@color/colorPrimaryDark">
 
-                    </EditText>
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etxBirtDate"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:singleLine="true"
+                            android:textSize="18sp"
+                            android:imeOptions="actionNext"
+                            android:inputType="text"
+                            android:fontFamily="@font/nunito_sans_semibold"
+                            android:textColor="@color/textDark"
+                            android:backgroundTint="@color/colorPrimaryDark"
+                            />
+
+                    </com.google.android.material.textfield.TextInputLayout>
 
 
-                    <EditText
-                        android:id="@+id/etxEmail"
+
+                    <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="?actionBarSize"
+                        android:hint="@string/email"
                         android:layout_marginBottom="10dp"
                         android:layout_marginTop="20dp"
                         android:layout_marginRight="10dp"
                         android:layout_marginLeft="10dp"
-                        android:textSize="18sp"
-                        android:textCursorDrawable="@drawable/color_cursor"
-                        android:imeOptions="actionNext"
-                        android:backgroundTint="@color/colorPrimaryDark"
+                        app:hintTextColor="@color/iconicGray"
                         android:textColorHint="@color/iconicGray"
-                        android:textColor="@color/textDark"
-                        android:fontFamily="@font/nunito_sans_semibold"
-                        android:inputType="textEmailAddress"
-                        android:hint="@string/email">
+                        app:theme="@style/styleText"
+                        android:backgroundTint="@color/colorPrimaryDark">
 
-                    </EditText>
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etxEmail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:singleLine="true"
+                            android:textSize="18sp"
+                            android:imeOptions="actionNext"
+                            android:inputType="textEmailAddress"
+                            android:fontFamily="@font/nunito_sans_semibold"
+                            android:textColor="@color/textDark"
+                            android:backgroundTint="@color/colorPrimaryDark"
+                            />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
 
 
                     <LinearLayout

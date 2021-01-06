@@ -1,13 +1,23 @@
 package com.example.fastuae.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.Manifest;
+import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.os.StrictMode;
+import android.provider.Settings;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,7 +36,11 @@ import com.example.fastuae.fragment.ProfileFragment;
 import com.example.fastuae.util.Click;
 import com.example.fastuae.util.Config;
 import com.example.fastuae.util.P;
+import com.example.fastuae.util.PdfDownloader;
 import com.example.fastuae.util.WindowView;
+
+import java.io.File;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -41,6 +55,9 @@ public class MainActivity extends AppCompatActivity {
     private long back_pressed;
     private Session session;
     private MenuItem ic_filter;
+    private static final int READ_WRITE = 20;
+    String pdf_url;
+    String pdf_title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
         WindowView.getWindow(activity);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
+        getAccess();
         initView();
     }
 
@@ -261,6 +279,99 @@ public class MainActivity extends AppCompatActivity {
         return false;
     }
 
+    private void getAccess() {
+        try {
+            StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+            StrictMode.setVmPolicy(builder.build());
+        } catch (Exception e) {
+        }
+    }
+
+    public void checkPDF(String path) {
+        pdf_url = path;
+        pdf_title = randomText();
+        if (TextUtils.isEmpty(pdf_url) || pdf_url.equals("null")) {
+            H.showMessage(activity, getResources().getString(R.string.noPdfFound));
+        } else {
+            getPermission();
+        }
+    }
+
+    private void getPermission() {
+        ActivityCompat.requestPermissions(activity,
+                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE},
+                READ_WRITE);
+    }
+
+    public void jumpToSetting() {
+        H.showMessage(activity, getResources().getString(R.string.allowPermission));
+        Intent intent = new Intent();
+        intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+        Uri uri = Uri.fromParts("package", activity.getPackageName(), null);
+        intent.setData(uri);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case READ_WRITE: {
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    checkDirectory(activity, pdf_url, pdf_title);
+                } else if (grantResults[0] == PackageManager.PERMISSION_DENIED) {
+                    jumpToSetting();
+                } else {
+                    getPermission();
+                }
+                return;
+            }
+
+        }
+    }
+
+    private void checkDirectory(Context context, String fileURL, String title) {
+        try {
+            String destination = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/FastUAE/Pdf/";
+            String fileName = title + ".pdf";
+            destination += fileName;
+            File direct = new File(destination);
+            if (direct.exists()) {
+                openPdf(context, destination);
+            } else {
+                PdfDownloader.download(context, fileURL, title, Config.OPEN);
+            }
+        } catch (Exception e) {
+            H.showMessage(context, getResources().getString(R.string.somethingWrong));
+        }
+
+    }
+
+    private void openPdf(Context context, String filepath) {
+        File pdfFile = new File(filepath);
+        Uri path = Uri.fromFile(pdfFile);
+        Intent pdfIntent = new Intent(Intent.ACTION_VIEW);
+        pdfIntent.setDataAndType(path, "application/pdf");
+        pdfIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        try {
+            context.startActivity(pdfIntent);
+        } catch (ActivityNotFoundException e) {
+            H.showMessage(context, getResources().getString(R.string.noPdfAppAvailable));
+        }
+    }
+
+    private String randomText() {
+        Random generator = new Random();
+        StringBuilder randomStringBuilder = new StringBuilder();
+        int randomLength = generator.nextInt(10);
+        char tempChar;
+        for (int i = 0; i < randomLength; i++){
+            tempChar = (char) (generator.nextInt(96) + 32);
+            randomStringBuilder.append(tempChar);
+        }
+        return randomStringBuilder.toString();
+    }
 
     @Override
     public void onBackPressed() {
