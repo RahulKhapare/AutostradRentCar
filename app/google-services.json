@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1086767951140",
+    "project_id": "fastuae-600a9",
+    "storage_bucket": "fastuae-600a9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1086767951140:android:5eb817e9515e883a8cd7b1",
+        "android_client_info": {
+          "package_name": "com.example.fastuae"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1086767951140-laclk7kqagnp075drqim342770ojnpvu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArMaUHrUep4fWqECKUqa2BAOKqWGjua28"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1086767951140-laclk7kqagnp075drqim342770ojnpvu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

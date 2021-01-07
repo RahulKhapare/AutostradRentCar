@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <fragment
+            android:id="@+id/mapFrame"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></fragment>
+
+        <RelativeLayout
+            android:id="@+id/lnrBottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/card_top_curv"
+            android:padding="20dp">
+
+            <RelativeLayout
+                android:id="@+id/lnrAction"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito_sans_semibold"
+                    android:text="@string/currentLocation"
+                    android:drawablePadding="5dp"
+                    android:gravity="center_vertical"
+                    android:drawableLeft="@drawable/location_bg"
+                    android:textColor="@color/textDark"
+                    android:textSize="16dp"></TextView>
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/txtAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lnrAction"
+                android:layout_marginTop="0dp"
+                android:textColor="@color/textDark"
+                android:fontFamily="@font/nunito_sans_regular"
+                android:text="@string/loading"
+                android:textSize="14sp"></TextView>
+
+            <Button
+                android:id="@+id/btnLocation"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_below="@+id/txtAddress"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/button_blue_bg"
+                android:fontFamily="@font/nunit_sans_bold"
+                android:text="@string/conformLocation"
+                android:textAllCaps="false"
+                android:textColor="@color/colorWhite"
+                android:textSize="18sp"></Button>
+
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/imgBack"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:tint="@color/colorWhite"
+            android:src="@drawable/ic_back_black_arrow"></ImageView>
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_below="@+id/imgBack"
+            android:id="@+id/cardPickLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardElevation="3dp"
+            app:cardCornerRadius="5dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_margin="5dp"
+                    android:gravity="center_vertical"
+                    android:layout_gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_gravity="center_vertical"
+                                android:src="@drawable/ic_location"></ImageView>
+                            <TextView
+                                android:id="@+id/txtPickUpTitle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/textDark"
+                                android:layout_gravity="center_vertical"
+                                android:fontFamily="@font/nunito_sans_semibold"
+                                android:text="@string/enterLocationDeliver"
+                                android:textSize="16sp">
+                            </TextView>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/imgArrowUp"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:visibility="gone"
+                        android:layout_gravity="center_vertical"
+                        android:tint="@color/colorBlack"
+                        android:src="@drawable/ic_up_arrow"></ImageView>
+
+                    <ImageView
+                        android:id="@+id/imgArrowDown"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_gravity="center_vertical"
+                        android:tint="@color/colorBlack"
+                        android:src="@drawable/ic_down_arrow"></ImageView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/lnrSearchLocation"
+                    android:layout_width="match_parent"
+                    android:layout_height="?actionBarSize"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    android:padding="0dp">
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="@string/searchLocation"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        app:hintTextColor="@color/iconicGray"
+                        android:textColorHint="@color/iconicGray"
+                        app:theme="@style/styleText"
+                        android:backgroundTint="@color/colorPrimaryDark">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etxLocation"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:singleLine="true"
+                            android:textSize="18sp"
+                            android:imeOptions="actionNext"
+                            android:inputType="textCapWords"
+                            android:fontFamily="@font/nunito_sans_semibold"
+                            android:textColor="@color/textDark"
+                            android:backgroundTint="@color/colorPrimaryDark"
+                            />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                    <TextView
+                        android:id="@+id/txtSearchLocation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/search"
+                        android:padding="10dp"
+                        android:layout_gravity="center_vertical"
+                        android:textSize="14sp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:fontFamily="@font/nunit_sans_bold"
+                        android:textColor="@color/colorWhite"
+                        android:background="@drawable/button_blue_bg"></TextView>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+
+        </androidx.cardview.widget.CardView>
+
+
+        <ImageView
+            android:id="@+id/imgCurrentLocation"
+            android:layout_width="?actionBarSize"
+            android:layout_height="?actionBarSize"
+            android:layout_above="@+id/lnrBottom"
+            android:layout_alignParentRight="true"
+            android:scaleType="fitXY"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="25dp"
+            android:src="@drawable/ic_current_location"></ImageView>
+
+    </RelativeLayout>
+
+</layout>

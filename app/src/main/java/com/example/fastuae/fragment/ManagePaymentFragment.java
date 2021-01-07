@@ -175,11 +175,15 @@ public class ManagePaymentFragment extends Fragment {
         return value;
     }
 
-    public static void hideKeyboard(Context mContext) {
-        InputMethodManager imm = (InputMethodManager) mContext
-                .getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(((Activity) mContext).getWindow()
-                .getCurrentFocus().getWindowToken(), 0);
+    public void hideKeyboard(Context mContext) {
+        try {
+            InputMethodManager imm = (InputMethodManager) mContext
+                    .getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(((Activity) mContext).getWindow()
+                    .getCurrentFocus().getWindowToken(), 0);
+        }catch (Exception e){
+
+        }
     }
 
 

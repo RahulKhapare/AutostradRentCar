@@ -8,7 +8,6 @@ import android.content.res.ColorStateList;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,29 +20,38 @@ import android.widget.TimePicker;
 import androidx.annotation.RequiresApi;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.adoisstudio.helper.Json;
-import com.adoisstudio.helper.JsonList;
+import com.adoisstudio.helper.H;
+import com.adoisstudio.helper.Session;
 import com.example.fastuae.R;
 import com.example.fastuae.activity.SelectCarActivity;
+import com.example.fastuae.activity.SelectLocationActivity;
+import com.example.fastuae.adapter.LocationAdapter;
 import com.example.fastuae.adapter.SliderImageAdapter;
 import com.example.fastuae.databinding.FragmentHomeBinding;
+import com.example.fastuae.model.LocationModel;
 import com.example.fastuae.model.SliderModel;
 import com.example.fastuae.util.Click;
+import com.example.fastuae.util.Config;
+import com.example.fastuae.util.P;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements LocationAdapter.onClick{
 
     private Context context;
     private FragmentHomeBinding binding;
     private List<SliderModel> sliderModelList;
     private SliderImageAdapter sliderImageAdapter;
+    private List<LocationModel> locationModelList;
+    private LocationAdapter locationAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -51,11 +59,45 @@ public class HomeFragment extends Fragment {
         if (binding == null) {
             binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false);
             context = inflater.getContext();
-
+            Config.FROM_MAP = false;
             initView();
         }
 
         return binding.getRoot();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (Config.FROM_MAP){
+            Config.FROM_MAP = false;
+            String address = new Session(context).getString(P.locationAddress);
+            if (locationModelList!=null && !locationModelList.isEmpty()){
+                if (containsLocation(locationModelList,address)){
+                    H.showMessage(context,getResources().getString(R.string.locationAdded));
+                }else {
+                    locationModelList.add(new LocationModel(address));
+                }
+            }else {
+                locationModelList.add(new LocationModel(address));
+            }
+            Collections.reverse(locationModelList);
+            checkSize();
+            locationAdapter.notifyDataSetChanged();
+            binding.imgArrowDown.setVisibility(View.GONE);
+            binding.imgArrowUp.setVisibility(View.VISIBLE);
+            binding.cardLocation.setVisibility(View.VISIBLE);
+        }
+    }
+
+    public static boolean containsLocation(Collection<LocationModel> list, String location) {
+        for(LocationModel model : list) {
+            if(model != null && model.getLocation()
+                    .equals(location)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void initView(){
@@ -64,9 +106,44 @@ public class HomeFragment extends Fragment {
         binding.pager.setAdapter(sliderImageAdapter);
         binding.tabLayout.setupWithViewPager(binding.pager, true);
 
+        locationModelList = new ArrayList<>();
+        locationAdapter = new LocationAdapter(context,locationModelList,HomeFragment.this);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
+//        linearLayoutManager.setSmoothScrollbarEnabled(true);
+        binding.recyclerLocation.setLayoutManager(linearLayoutManager);
+        binding.recyclerLocation.setHasFixedSize(true);
+        binding.recyclerLocation.setAdapter(locationAdapter);
+
+        setLocationData();
         getCurrentDate();
         setUpSliderList();
         onClick();
+    }
+
+    private void setLocationData(){
+
+        locationModelList.add(new LocationModel("Al Quoz - Service/sales branch, Dubai"));
+        checkSize();
+        locationAdapter.notifyDataSetChanged();
+    }
+
+    private void checkSize(){
+        if (locationModelList.size()>6){
+            ViewGroup.LayoutParams params=binding.recyclerLocation.getLayoutParams();
+            params.height=1010;
+            binding.recyclerLocation.setLayoutParams(params);
+        }
+    }
+
+    @Override
+    public void onLocationClick(String location) {
+        if (binding.txtPickUpMessage.getVisibility()==View.VISIBLE){
+            binding.imgArrowUp.setVisibility(View.GONE);
+            binding.imgArrowDown.setVisibility(View.VISIBLE);
+            binding.cardLocation.setVisibility(View.GONE);
+        }
+        Intent intent = new Intent(context, SelectLocationActivity.class);
+        startActivity(intent);
     }
 
     private void getCurrentDate(){
@@ -186,6 +263,11 @@ public class HomeFragment extends Fragment {
                 binding.txtPickUpTitle.setText(getResources().getString(R.string.enterLocationDeliver));
                 blueTin(binding.radioDeliver);
                 blackTin(binding.radioSelfPickup);
+
+                binding.cardLocation.setVisibility(View.GONE);
+                binding.imgArrowUp.setVisibility(View.GONE);
+                binding.imgArrowDown.setVisibility(View.VISIBLE);
+
             }
         });
 
@@ -221,6 +303,26 @@ public class HomeFragment extends Fragment {
                 binding.radioCollect.setChecked(false);
                 blueTin(binding.radioSelfReturn);
                 blackTin(binding.radioCollect);
+            }
+        });
+
+        binding.cardPickLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+
+                if (binding.txtPickUpMessage.getVisibility()==View.VISIBLE){
+                    if (binding.imgArrowDown.getVisibility()==View.VISIBLE){
+                        binding.imgArrowDown.setVisibility(View.GONE);
+                        binding.imgArrowUp.setVisibility(View.VISIBLE);
+                        binding.cardLocation.setVisibility(View.VISIBLE);
+                    }else if (binding.imgArrowUp.getVisibility()==View.VISIBLE){
+                        binding.imgArrowUp.setVisibility(View.GONE);
+                        binding.imgArrowDown.setVisibility(View.VISIBLE);
+                        binding.cardLocation.setVisibility(View.GONE);
+                    }
+                }
+
             }
         });
     }

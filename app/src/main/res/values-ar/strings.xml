@@ -107,6 +107,16 @@
     <string name="noPdfAppAvailable">لا يوجد تطبيق متاح لعرض ملف PDF</string>
     <string name="downloading">جارى التحميل....</string>
     <string name="downloadingCompete">اكتمل التنزيل</string>
+    <string name="conformLocation">أكد الموقع</string>
+    <string name="currentLocation">الموقع الحالي</string>
+    <string name="loading">جار التحميل....</string>
+    <string name="getLOcation">احصل على الموقع</string>
+    <string name="gpsDisable">يبدو أن GPS الخاص بك معطل ، هل تريد تمكينه من خريطة الخروج؟</string>
+    <string name="yes">نعم</string>
+    <string name="no">لا</string>
+    <string name="permissionAccess">الوصول إذن</string>
+    <string name="permissionAllow">يرجى السماح بالإذن من الإعداد.</string>
+    <string name="allow">السماح</string>
 
     <string name="home">الصفحة الرئيسية</string>
     <string name="profile">الملف الشخصي</string>
@@ -133,10 +143,13 @@
     <string name="collect">تجميع</string>
     <string name="selfreturn">العودة الذاتية</string>
     <string name="enterLocationDeliver">أدخل الموقع للتسليم</string>
+    <string name="searchLocation">البحث عن الموقع</string>
+    <string name="enterSearchLocation">الرجاء إدخال الموقع للبحث</string>
+    <string name="locationAdded">تمت إضافة الموقع بالفعل</string>
 
     <string name="txt1">شركة رائدة في مجال تأجير السيارات ولديها أكبر شبكة من الفروع ونقاط الالتقاء</string>
     <string name="txt2">شركة رائدة في مجال تأجير السيارات ولديها أكبر شبكة من الفروع ونقاط الالتقاء</string>
     <string name="txt3">يوفر خدمات تأجير أكثر بأسعار معقولة في البلاد</string>
-
+    <string name="googleAPIKey">AIzaSyBarBZmOziSTpL58ln6HVZpmbC0utZJ48g</string>
 
 </resources>

@@ -23,4 +23,13 @@ public class P {
     public static String country_name = "country_name";
     public static String phone_code = "phone_code";
     public static String user_country_code = "user_country_code";
+
+    public static String googleAddress = "googleAddress";
+    public static String googleCity = "googleCity";
+    public static String googleState = "googleState";
+    public static String googleCountry = "googleCountry";
+    public static String googleCode = "googleCode";
+    public static String googleKnownName = "googleKnownName";
+    public static String locationAddress = "locationAddress";
+
 }

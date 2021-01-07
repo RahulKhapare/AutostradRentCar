@@ -84,13 +84,13 @@ public class InvoiceAdapter extends RecyclerView.Adapter<InvoiceAdapter.viewHold
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-                if (fragmentValue == 1){
-                    ((InvoiceFragment)invoiceFragment).onDownload(model.getPath());
-                }else if (fragmentValue == 2){
-                    ((SalikChargesFragment)salikChargesFragment).onDownload(model.getPath());
-                }else if (fragmentValue == 3){
-                    ((TrafficLinesFragment)trafficLinesFragment).onDownload(model.getPath());
-                }
+//                if (fragmentValue == 1){
+//                    ((InvoiceFragment)invoiceFragment).onDownload(model.getPath());
+//                }else if (fragmentValue == 2){
+//                    ((SalikChargesFragment)salikChargesFragment).onDownload(model.getPath());
+//                }else if (fragmentValue == 3){
+//                    ((TrafficLinesFragment)trafficLinesFragment).onDownload(model.getPath());
+//                }
             }
         });
 

@@ -91,7 +91,6 @@
     <string name="downloadingCompete">Downloading Complete</string>
 
 
-
     <string name="home">Home</string>
     <string name="profile">Profile</string>
     <string name="fleet">Fleet</string>
@@ -135,11 +134,25 @@
     <string name="pleaseEnterLastName">Please enter last name</string>
     <string name="pleaseEnterAlternateNumber">Please enter alternate mobile number</string>
     <string name="pleaseEnterDOB">Please enter date of birth</string>
+    <string name="conformLocation">Confirm Location</string>
+    <string name="currentLocation">Current Location</string>
+    <string name="loading">Loading....</string>
+    <string name="getLOcation">Get Location</string>
+    <string name="gpsDisable">Your GPS seems to be disabled, do you want to enable it to checkout map?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="permissionAccess">Permission Access</string>
+    <string name="permissionAllow">Please allow permission from setting.</string>
+    <string name="allow">Allow</string>
+    <string name="searchLocation">Search for location</string>
+    <string name="enterSearchLocation">Please enter location to search</string>
+    <string name="locationAdded">Location already added</string>
 
 
     <string name="txt1">Leading Car Rental Company with the largest network of Branches And Pickup points</string>
     <string name="txt2">Leading Car Rental Company with the largest network of Branches And Pickup points</string>
     <string name="txt3">Provides the most affordable rental services in the country.</string>
+    <string name="googleAPIKey">AIzaSyBarBZmOziSTpL58ln6HVZpmbC0utZJ48g</string>
 
 
 </resources>
