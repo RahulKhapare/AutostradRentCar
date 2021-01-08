@@ -147,6 +147,15 @@
     <string name="searchLocation">Search for location</string>
     <string name="enterSearchLocation">Please enter location to search</string>
     <string name="locationAdded">Location already added</string>
+    <string name="price">Price</string>
+    <string name="seats">Seat</string>
+    <string name="passengers">Passengers</string>
+    <string name="doors">Doors</string>
+    <string name="transmission">Transmission</string>
+    <string name="fuel">Fuel</string>
+    <string name="category">Category</string>
+    <string name="group">Group</string>
+    <string name="getLocation">Get Location</string>
 
 
     <string name="txt1">Leading Car Rental Company with the largest network of Branches And Pickup points</string>

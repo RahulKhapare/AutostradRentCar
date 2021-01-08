@@ -570,6 +570,23 @@
 
                             </androidx.recyclerview.widget.RecyclerView>
 
+                            <TextView
+                                android:id="@+id/txtGetLocation"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/nunit_sans_bold"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:text="@string/getLocation"
+                                android:padding="12dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginBottom="20dp"
+                                android:layout_marginRight="20dp"
+                                android:layout_marginLeft="20dp"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:textSize="18dp"
+                                android:background="@drawable/corner_blue_bg"></TextView>
+
                         </LinearLayout>
 
                     </androidx.cardview.widget.CardView>

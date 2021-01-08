@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite">
+
+        <TextView
+            android:id="@+id/txtFilter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textDark"
+            android:textSize="16sp"
+            android:paddingRight="20dp"
+            android:paddingLeft="20dp"
+            android:paddingTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/nunito_sans_regular"
+            android:text="@string/app_name">
+
+        </TextView>
+
+        <LinearLayout
+            android:id="@+id/lnrLine"
+            android:layout_below="@+id/txtLocation"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:orientation="vertical"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="1dp"
+            android:background="@color/customeGray"></LinearLayout>
+
+    </RelativeLayout>
+</layout>

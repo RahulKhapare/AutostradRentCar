@@ -42,12 +42,14 @@
 
                         <ImageView
                             android:id="@+id/imgCar"
-                            android:paddingTop="60dp"
-                            android:paddingRight="-250dp"
-                            android:layout_width="366dp"
-                            android:layout_height="200dp"
+                            android:paddingTop="50dp"
+                            android:paddingRight="-80dp"
+                            android:paddingLeft="0dp"
+                            android:layout_width="290dp"
+                            android:layout_height="300dp"
+                            android:scaleType="fitXY"
                             android:layout_alignParentRight="true"
-                            android:src="@drawable/ic_car_three"></ImageView>
+                            android:src="@drawable/ic_car_red_new"></ImageView>
 
                     </RelativeLayout>
 

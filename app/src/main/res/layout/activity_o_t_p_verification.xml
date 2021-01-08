@@ -38,24 +38,28 @@
 
                     <ImageView
                         android:id="@+id/imgCarLogin"
-                        android:paddingTop="60dp"
-                        android:paddingRight="-250dp"
-                        android:layout_width="366dp"
-                        android:layout_height="200dp"
+                        android:paddingTop="50dp"
+                        android:paddingRight="-80dp"
+                        android:paddingLeft="0dp"
+                        android:layout_width="290dp"
+                        android:layout_height="300dp"
+                        android:scaleType="fitXY"
                         android:visibility="gone"
                         android:layout_alignParentRight="true"
-                        android:src="@drawable/ic_car_three"></ImageView>
-
+                        android:src="@drawable/ic_car_red_new"></ImageView>
 
                     <ImageView
                         android:id="@+id/imgCarSignup"
-                        android:paddingTop="50dp"
-                        android:paddingRight="-200dp"
-                        android:layout_width="366dp"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
+                        android:paddingTop="30dp"
+                        android:paddingRight="-80dp"
+                        android:paddingLeft="0dp"
+                        android:layout_width="290dp"
+                        android:layout_height="300dp"
+                        android:scaleType="fitXY"
                         android:visibility="gone"
-                        android:src="@drawable/ic_car_new"></ImageView>
+                        android:layout_alignParentRight="true"
+                        android:src="@drawable/ic_car_blue_new"></ImageView>
+
 
 
                 </RelativeLayout>

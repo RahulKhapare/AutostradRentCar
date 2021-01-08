@@ -30,12 +30,13 @@
 
         <ImageView
             android:id="@+id/imgCar"
-            android:layout_width="548dp"
-            android:layout_height="335dp"
+            android:layout_width="match_parent"
+            android:layout_height="355dp"
             android:layout_centerInParent="true"
-            android:paddingRight="-180dp"
+            android:paddingRight="-110dp"
+            android:paddingLeft="-30dp"
             android:scaleType="fitXY"
-            android:src="@drawable/ic_car"></ImageView>
+            android:src="@drawable/ic_car_black"></ImageView>
 
 
         <ImageView

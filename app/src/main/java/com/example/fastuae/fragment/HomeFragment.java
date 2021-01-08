@@ -114,17 +114,9 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick{
         binding.recyclerLocation.setHasFixedSize(true);
         binding.recyclerLocation.setAdapter(locationAdapter);
 
-        setLocationData();
         getCurrentDate();
         setUpSliderList();
         onClick();
-    }
-
-    private void setLocationData(){
-
-        locationModelList.add(new LocationModel("Al Quoz - Service/sales branch, Dubai"));
-        checkSize();
-        locationAdapter.notifyDataSetChanged();
     }
 
     private void checkSize(){
@@ -137,13 +129,7 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick{
 
     @Override
     public void onLocationClick(String location) {
-        if (binding.txtPickUpMessage.getVisibility()==View.VISIBLE){
-            binding.imgArrowUp.setVisibility(View.GONE);
-            binding.imgArrowDown.setVisibility(View.VISIBLE);
-            binding.cardLocation.setVisibility(View.GONE);
-        }
-        Intent intent = new Intent(context, SelectLocationActivity.class);
-        startActivity(intent);
+
     }
 
     private void getCurrentDate(){
@@ -211,6 +197,20 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick{
 
 
     private void onClick(){
+
+        binding.txtGetLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                if (binding.txtPickUpMessage.getVisibility()==View.VISIBLE){
+                    binding.imgArrowUp.setVisibility(View.GONE);
+                    binding.imgArrowDown.setVisibility(View.VISIBLE);
+                    binding.cardLocation.setVisibility(View.GONE);
+                }
+                Intent intent = new Intent(context, SelectLocationActivity.class);
+                startActivity(intent);
+            }
+        });
 
         binding.lnrPickupDate.setOnClickListener(new View.OnClickListener() {
             @Override

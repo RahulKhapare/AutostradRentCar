@@ -30,13 +30,13 @@
                 android:layout_height="match_parent"
                 android:fillViewport="true">
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
                     android:padding="16dp">
 
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/cardPrice"
                         android:layout_width="match_parent"
                         android:layout_height="?actionBarSize"
                         android:layout_marginLeft="1dp"
@@ -50,13 +50,18 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
 
-                            <Spinner
-                                android:id="@+id/spinnerPrice"
+                            <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:background="@null">
-
-                            </Spinner>
+                                android:textColor="@color/textDark"
+                                android:gravity="center_vertical"
+                                android:layout_marginLeft="20dp"
+                                android:layout_marginRight="20dp"
+                                android:layout_gravity="center_vertical"
+                                android:fontFamily="@font/nunito_sans_semibold"
+                                android:text="@string/price"
+                                android:textSize="18sp">
+                            </TextView>
 
 
                             <ImageView
@@ -86,6 +91,8 @@
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
+                        android:layout_below="@+id/cardPrice"
+                        android:id="@+id/cardSeats"
                         android:layout_width="match_parent"
                         android:layout_height="?actionBarSize"
                         android:layout_marginLeft="1dp"
@@ -99,13 +106,19 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
 
-                            <Spinner
-                                android:id="@+id/spinnerSeats"
+                            <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:background="@null">
+                                android:textColor="@color/textDark"
+                                android:gravity="center_vertical"
+                                android:layout_marginLeft="20dp"
+                                android:layout_marginRight="20dp"
+                                android:layout_gravity="center_vertical"
+                                android:fontFamily="@font/nunito_sans_semibold"
+                                android:text="@string/seats"
+                                android:textSize="18sp">
+                            </TextView>
 
-                            </Spinner>
 
 
                             <ImageView
@@ -133,6 +146,8 @@
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
+                        android:layout_below="@+id/cardSeats"
+                        android:id="@+id/cardPassengers"
                         android:layout_width="match_parent"
                         android:layout_height="?actionBarSize"
                         android:layout_marginLeft="1dp"
@@ -146,13 +161,18 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
 
-                            <Spinner
-                                android:id="@+id/spinnerPassengers"
+                            <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:background="@null">
-
-                            </Spinner>
+                                android:textColor="@color/textDark"
+                                android:gravity="center_vertical"
+                                android:layout_marginLeft="20dp"
+                                android:layout_marginRight="20dp"
+                                android:layout_gravity="center_vertical"
+                                android:fontFamily="@font/nunito_sans_semibold"
+                                android:text="@string/passengers"
+                                android:textSize="18sp">
+                            </TextView>
 
 
                             <ImageView
@@ -181,6 +201,8 @@
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
+                        android:layout_below="@+id/cardPassengers"
+                        android:id="@+id/cardDoors"
                         android:layout_width="match_parent"
                         android:layout_height="?actionBarSize"
                         android:layout_marginLeft="1dp"
@@ -194,13 +216,18 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
 
-                            <Spinner
-                                android:id="@+id/spinnerDoors"
+                            <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:background="@null">
-
-                            </Spinner>
+                                android:textColor="@color/textDark"
+                                android:gravity="center_vertical"
+                                android:layout_marginLeft="20dp"
+                                android:layout_marginRight="20dp"
+                                android:layout_gravity="center_vertical"
+                                android:fontFamily="@font/nunito_sans_semibold"
+                                android:text="@string/doors"
+                                android:textSize="18sp">
+                            </TextView>
 
 
                             <ImageView
@@ -228,6 +255,8 @@
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
+                        android:layout_below="@+id/cardDoors"
+                        android:id="@+id/cardTransmission"
                         android:layout_width="match_parent"
                         android:layout_height="?actionBarSize"
                         android:layout_marginLeft="1dp"
@@ -241,13 +270,18 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
 
-                            <Spinner
-                                android:id="@+id/spinnerTransmission"
+                            <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:background="@null">
-
-                            </Spinner>
+                                android:textColor="@color/textDark"
+                                android:gravity="center_vertical"
+                                android:layout_marginLeft="20dp"
+                                android:layout_marginRight="20dp"
+                                android:layout_gravity="center_vertical"
+                                android:fontFamily="@font/nunito_sans_semibold"
+                                android:text="@string/transmission"
+                                android:textSize="18sp">
+                            </TextView>
 
 
                             <ImageView
@@ -276,6 +310,8 @@
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
+                        android:layout_below="@+id/cardTransmission"
+                        android:id="@+id/cardFuel"
                         android:layout_width="match_parent"
                         android:layout_height="?actionBarSize"
                         android:layout_marginLeft="1dp"
@@ -289,13 +325,18 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
 
-                            <Spinner
-                                android:id="@+id/spinnerFuel"
+                            <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:background="@null">
-
-                            </Spinner>
+                                android:textColor="@color/textDark"
+                                android:gravity="center_vertical"
+                                android:layout_marginLeft="20dp"
+                                android:layout_marginRight="20dp"
+                                android:layout_gravity="center_vertical"
+                                android:fontFamily="@font/nunito_sans_semibold"
+                                android:text="@string/fuel"
+                                android:textSize="18sp">
+                            </TextView>
 
 
                             <ImageView
@@ -324,6 +365,8 @@
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
+                        android:layout_below="@+id/cardFuel"
+                        android:id="@+id/cardCategory"
                         android:layout_width="match_parent"
                         android:layout_height="?actionBarSize"
                         android:layout_marginLeft="1dp"
@@ -337,13 +380,18 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
 
-                            <Spinner
-                                android:id="@+id/spinnerCategory"
+                            <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:background="@null">
-
-                            </Spinner>
+                                android:textColor="@color/textDark"
+                                android:gravity="center_vertical"
+                                android:layout_marginLeft="20dp"
+                                android:layout_marginRight="20dp"
+                                android:layout_gravity="center_vertical"
+                                android:fontFamily="@font/nunito_sans_semibold"
+                                android:text="@string/category"
+                                android:textSize="18sp">
+                            </TextView>
 
 
                             <ImageView
@@ -371,6 +419,8 @@
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
+                        android:layout_below="@+id/cardCategory"
+                        android:id="@+id/cardGroup"
                         android:layout_width="match_parent"
                         android:layout_height="?actionBarSize"
                         android:layout_marginLeft="1dp"
@@ -384,13 +434,18 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
 
-                            <Spinner
-                                android:id="@+id/spinnerGroup"
+                            <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:background="@null">
-
-                            </Spinner>
+                                android:textColor="@color/textDark"
+                                android:gravity="center_vertical"
+                                android:layout_marginLeft="20dp"
+                                android:layout_marginRight="20dp"
+                                android:layout_gravity="center_vertical"
+                                android:fontFamily="@font/nunito_sans_semibold"
+                                android:text="@string/group"
+                                android:textSize="18sp">
+                            </TextView>
 
 
                             <ImageView
@@ -420,6 +475,7 @@
                     </androidx.cardview.widget.CardView>
 
                     <TextView
+                        android:layout_below="@+id/cardGroup"
                         android:id="@+id/txtApply"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -436,8 +492,335 @@
                         android:textSize="18dp"
                         android:background="@drawable/button_blue_bg"></TextView>
 
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/viewPrice"
+                        android:layout_below="@+id/cardPrice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardElevation="3dp"
+                        android:background="@drawable/curve_bottom_bg"
+                        android:layout_marginTop="-5dp"
+                        android:layout_marginLeft="1dp"
+                        android:layout_marginRight="1dp"
+                        android:visibility="gone">
 
-                </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0.5dp"
+                                android:layout_marginTop="5dp"
+                                android:background="@color/customeGray"
+                                tools:ignore="Suspicious0dp">
+
+                            </LinearLayout>
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/recycelrPrice"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:scrollbarSize="7dp"
+                                android:scrollbarFadeDuration="0"
+                                android:scrollbarThumbVertical="@drawable/scrollbar_shape"
+                                android:scrollbars="vertical">
+
+                            </androidx.recyclerview.widget.RecyclerView>
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/viewSeats"
+                        android:layout_below="@+id/cardSeats"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardElevation="3dp"
+                        android:background="@drawable/curve_bottom_bg"
+                        android:layout_marginTop="-5dp"
+                        android:layout_marginLeft="1dp"
+                        android:layout_marginRight="1dp"
+                        android:visibility="gone">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0.5dp"
+                                android:layout_marginTop="5dp"
+                                android:background="@color/customeGray"
+                                tools:ignore="Suspicious0dp">
+
+                            </LinearLayout>
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/recyclerSeats"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:scrollbarSize="7dp"
+                                android:scrollbarFadeDuration="0"
+                                android:scrollbarThumbVertical="@drawable/scrollbar_shape"
+                                android:scrollbars="vertical">
+
+                            </androidx.recyclerview.widget.RecyclerView>
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/viewPassengers"
+                        android:layout_below="@+id/cardPassengers"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardElevation="3dp"
+                        android:background="@drawable/curve_bottom_bg"
+                        android:layout_marginTop="-5dp"
+                        android:layout_marginLeft="1dp"
+                        android:layout_marginRight="1dp"
+                        android:visibility="gone">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0.5dp"
+                                android:layout_marginTop="5dp"
+                                android:background="@color/customeGray"
+                                tools:ignore="Suspicious0dp">
+
+                            </LinearLayout>
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/recyclerPassengers"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:scrollbarSize="7dp"
+                                android:scrollbarFadeDuration="0"
+                                android:scrollbarThumbVertical="@drawable/scrollbar_shape"
+                                android:scrollbars="vertical">
+
+                            </androidx.recyclerview.widget.RecyclerView>
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/viewDoors"
+                        android:layout_below="@+id/cardDoors"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardElevation="3dp"
+                        android:background="@drawable/curve_bottom_bg"
+                        android:layout_marginTop="-5dp"
+                        android:layout_marginLeft="1dp"
+                        android:layout_marginRight="1dp"
+                        android:visibility="gone">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0.5dp"
+                                android:layout_marginTop="5dp"
+                                android:background="@color/customeGray"
+                                tools:ignore="Suspicious0dp">
+
+                            </LinearLayout>
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/recyclerDoors"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:scrollbarSize="7dp"
+                                android:scrollbarFadeDuration="0"
+                                android:scrollbarThumbVertical="@drawable/scrollbar_shape"
+                                android:scrollbars="vertical">
+
+                            </androidx.recyclerview.widget.RecyclerView>
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/viewTransmission"
+                        android:layout_below="@+id/cardTransmission"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardElevation="3dp"
+                        android:background="@drawable/curve_bottom_bg"
+                        android:layout_marginTop="-5dp"
+                        android:layout_marginLeft="1dp"
+                        android:layout_marginRight="1dp"
+                        android:visibility="gone">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0.5dp"
+                                android:layout_marginTop="5dp"
+                                android:background="@color/customeGray"
+                                tools:ignore="Suspicious0dp">
+
+                            </LinearLayout>
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/recyclerTransmission"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:scrollbarSize="7dp"
+                                android:scrollbarFadeDuration="0"
+                                android:scrollbarThumbVertical="@drawable/scrollbar_shape"
+                                android:scrollbars="vertical">
+
+                            </androidx.recyclerview.widget.RecyclerView>
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/viewFuel"
+                        android:layout_below="@+id/cardFuel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardElevation="3dp"
+                        android:background="@drawable/curve_bottom_bg"
+                        android:layout_marginTop="-5dp"
+                        android:layout_marginLeft="1dp"
+                        android:layout_marginRight="1dp"
+                        android:visibility="gone">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0.5dp"
+                                android:layout_marginTop="5dp"
+                                android:background="@color/customeGray"
+                                tools:ignore="Suspicious0dp">
+
+                            </LinearLayout>
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/recyclerFuel"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:scrollbarSize="7dp"
+                                android:scrollbarFadeDuration="0"
+                                android:scrollbarThumbVertical="@drawable/scrollbar_shape"
+                                android:scrollbars="vertical">
+
+                            </androidx.recyclerview.widget.RecyclerView>
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/viewCategory"
+                        android:layout_below="@+id/cardCategory"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardElevation="3dp"
+                        android:background="@drawable/curve_bottom_bg"
+                        android:layout_marginTop="-5dp"
+                        android:layout_marginLeft="1dp"
+                        android:layout_marginRight="1dp"
+                        android:visibility="gone">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0.5dp"
+                                android:layout_marginTop="5dp"
+                                android:background="@color/customeGray"
+                                tools:ignore="Suspicious0dp">
+
+                            </LinearLayout>
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/recyclerCategory"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:scrollbarSize="7dp"
+                                android:scrollbarFadeDuration="0"
+                                android:scrollbarThumbVertical="@drawable/scrollbar_shape"
+                                android:scrollbars="vertical">
+
+                            </androidx.recyclerview.widget.RecyclerView>
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/viewGroup"
+                        android:layout_below="@+id/cardGroup"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardElevation="3dp"
+                        android:background="@drawable/curve_bottom_bg"
+                        android:layout_marginTop="-5dp"
+                        android:layout_marginLeft="1dp"
+                        android:layout_marginRight="1dp"
+                        android:visibility="gone">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0.5dp"
+                                android:layout_marginTop="5dp"
+                                android:background="@color/customeGray"
+                                tools:ignore="Suspicious0dp">
+
+                            </LinearLayout>
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/recyclerGroup"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:scrollbarSize="7dp"
+                                android:scrollbarFadeDuration="0"
+                                android:scrollbarThumbVertical="@drawable/scrollbar_shape"
+                                android:scrollbars="vertical">
+
+                            </androidx.recyclerview.widget.RecyclerView>
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                </RelativeLayout>
 
             </androidx.core.widget.NestedScrollView>
 

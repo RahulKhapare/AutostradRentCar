@@ -146,6 +146,15 @@
     <string name="searchLocation">البحث عن الموقع</string>
     <string name="enterSearchLocation">الرجاء إدخال الموقع للبحث</string>
     <string name="locationAdded">تمت إضافة الموقع بالفعل</string>
+    <string name="price">السعر</string>
+    <string name="seats">مقعد</string>
+    <string name="passengers">ركاب</string>
+    <string name="doors">أبواب</string>
+    <string name="transmission">الانتقال</string>
+    <string name="fuel">وقود</string>
+    <string name="category">الفئة</string>
+    <string name="group">مجموعة</string>
+    <string name="getLocation">احصل على الموقع</string>
 
     <string name="txt1">شركة رائدة في مجال تأجير السيارات ولديها أكبر شبكة من الفروع ونقاط الالتقاء</string>
     <string name="txt2">شركة رائدة في مجال تأجير السيارات ولديها أكبر شبكة من الفروع ونقاط الالتقاء</string>
