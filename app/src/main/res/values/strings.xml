@@ -156,6 +156,17 @@
     <string name="category">Category</string>
     <string name="group">Group</string>
     <string name="getLocation">Get Location</string>
+    <string name="carDetails">Car Details</string>
+    <string name="book">Book</string>
+    <string name="upgrade">Upgrade</string>
+    <string name="carSpecification">Car Specification</string>
+    <string name="insranceOption">Insurance Option</string>
+    <string name="promotionCode">Promotion Code</string>
+    <string name="estimatedTotal">Estimated Total</string>
+    <string name="ade100">ADE 100</string>
+    <string name="baseFree">(Base Free + Taxes Free)</string>
+    <string name="termConditions">Term And Conditions</string>
+    <string name="upgradeAvailable">Upgrade Availability</string>
 
 
     <string name="txt1">Leading Car Rental Company with the largest network of Branches And Pickup points</string>

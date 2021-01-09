@@ -1,0 +1,860 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimaryDark">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:background="@color/colorPrimaryDark"
+            android:theme="@style/ToolbarColoredBackArrow"
+            app:subtitleTextColor="@color/colorWhite"
+            app:titleTextColor="@color/colorWhite"></androidx.appcompat.widget.Toolbar>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/toolbar"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/curve_main_bg">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.core.widget.NestedScrollView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_above="@+id/cardBottom"
+                    android:fillViewport="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_marginBottom="10dp"
+                        android:padding="0dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="16dp">
+
+                            <TextView
+                                android:id="@+id/txtCarName"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/nunit_sans_bold"
+                                android:text="@string/app_name"
+                                android:textColor="@color/textDark"
+                                android:textSize="18sp">
+
+                            </TextView>
+
+                            <TextView
+                                android:id="@+id/txtUpgrade"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/nunit_sans_bold"
+                                android:text="@string/upgrade"
+                                android:textColor="@color/lightBlue"
+                                android:textSize="16sp">
+
+                            </TextView>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="-10dp"
+                            android:orientation="vertical"
+                            android:padding="16dp">
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="271dp"
+                                android:layout_height="162dp"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="0dp"
+                                android:layout_marginRight="0dp"
+                                app:cardCornerRadius="5dp"
+                                app:cardElevation="0dp">
+
+                                <ImageView
+                                    android:id="@+id/imgCar"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/ic_car_four"></ImageView>
+
+                            </androidx.cardview.widget.CardView>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="20dp"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <androidx.cardview.widget.CardView
+                                    android:layout_width="70dp"
+                                    android:layout_height="70dp"
+                                    android:layout_marginLeft="15dp"
+                                    android:layout_marginRight="15dp"
+                                    app:cardCornerRadius="8dp"
+                                    app:cardElevation="0dp">
+
+                                    <ImageView
+                                        android:id="@+id/img1"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:scaleType="fitXY"
+                                        android:src="@drawable/ic_view_one">
+
+                                    </ImageView>
+
+                                </androidx.cardview.widget.CardView>
+
+                                <androidx.cardview.widget.CardView
+                                    android:layout_width="70dp"
+                                    android:layout_height="70dp"
+                                    android:layout_marginLeft="15dp"
+                                    android:layout_marginRight="15dp"
+                                    app:cardCornerRadius="8dp"
+                                    app:cardElevation="0dp">
+
+                                    <ImageView
+                                        android:id="@+id/img2"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:scaleType="fitXY"
+                                        android:src="@drawable/ic_view_two">
+
+                                    </ImageView>
+
+                                </androidx.cardview.widget.CardView>
+
+                                <androidx.cardview.widget.CardView
+                                    android:layout_width="70dp"
+                                    android:layout_height="70dp"
+                                    android:layout_marginLeft="15dp"
+                                    android:layout_marginRight="15dp"
+                                    app:cardCornerRadius="8dp"
+                                    app:cardElevation="0dp">
+
+                                    <ImageView
+                                        android:id="@+id/img3"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:scaleType="fitXY"
+                                        android:src="@drawable/ic_view_three">
+
+                                    </ImageView>
+
+                                </androidx.cardview.widget.CardView>
+
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="@color/customeGray"></LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="16dp">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/nunito_sans_semibold"
+                                android:text="@string/pickUp"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:textSize="18sp">
+
+                            </TextView>
+
+                            <TextView
+                                android:id="@+id/txtPickUpLocation"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/nunito_sans_regular"
+                                android:text="@string/pickUp"
+                                android:textColor="@color/textDark"
+                                android:alpha="0.8"
+                                android:textSize="16sp">
+
+                            </TextView>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/nunito_sans_semibold"
+                                android:text="@string/dropOf"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:textSize="18sp">
+
+                            </TextView>
+
+                            <TextView
+                                android:id="@+id/txtDropOffLocation"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/nunito_sans_regular"
+                                android:text="@string/pickUp"
+                                android:alpha="0.8"
+                                android:textColor="@color/textDark"
+                                android:textSize="16sp">
+
+                            </TextView>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="@color/customeGray"></LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="16dp">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/nunito_sans_semibold"
+                                android:text="@string/carSpecification"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:textSize="18sp">
+
+                            </TextView>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="15dp"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/txtSeat"
+                                    android:layout_weight="1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:drawableLeft="@drawable/seat_bg_two"
+                                    android:drawablePadding="5dp"
+                                    android:fontFamily="@font/nunito_sans_regular"
+                                    android:maxLines="1"
+                                    android:text="@string/app_name"
+                                    android:alpha="0.8"
+                                    android:textColor="@color/textDark"
+                                    android:textSize="16sp">
+
+                                </TextView>
+
+                                <TextView
+                                    android:id="@+id/txtEngineOne"
+                                    android:layout_weight="1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/nunito_sans_regular"
+                                    android:textColor="@color/textDark"
+                                    android:textSize="16sp"
+                                    android:text="@string/app_name"
+                                    android:alpha="0.8"
+                                    android:drawableLeft="@drawable/engine_bg_two"
+                                    android:drawablePadding="5dp"
+                                    android:maxLines="1">
+
+                                </TextView>
+
+                                <TextView
+                                    android:id="@+id/txtEngineTwo"
+                                    android:layout_weight="1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/app_name"
+                                    android:alpha="0.8"
+                                    android:fontFamily="@font/nunito_sans_regular"
+                                    android:textColor="@color/textDark"
+                                    android:textSize="16sp"
+                                    android:drawableLeft="@drawable/engine_bg_two"
+                                    android:drawablePadding="5dp"
+                                    android:maxLines="1">
+
+                                </TextView>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="15dp"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/txtPetrol"
+                                    android:layout_weight="1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:drawableLeft="@drawable/fuil_bg_two"
+                                    android:drawablePadding="5dp"
+                                    android:fontFamily="@font/nunito_sans_regular"
+                                    android:maxLines="1"
+                                    android:text="@string/app_name"
+                                    android:alpha="0.8"
+                                    android:textColor="@color/textDark"
+                                    android:textSize="16sp">
+
+                                </TextView>
+
+                                <TextView
+                                    android:id="@+id/txtAutomaticOne"
+                                    android:layout_weight="1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/nunito_sans_regular"
+                                    android:textColor="@color/textDark"
+                                    android:textSize="16sp"
+                                    android:text="@string/app_name"
+                                    android:alpha="0.8"
+                                    android:drawableLeft="@drawable/mode_bg_two"
+                                    android:drawablePadding="5dp"
+                                    android:maxLines="1">
+
+                                </TextView>
+
+                                <TextView
+                                    android:id="@+id/txtAutomaticTwo"
+                                    android:layout_weight="1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/app_name"
+                                    android:alpha="0.8"
+                                    android:fontFamily="@font/nunito_sans_regular"
+                                    android:textColor="@color/textDark"
+                                    android:textSize="16sp"
+                                    android:drawableLeft="@drawable/mode_bg_two"
+                                    android:drawablePadding="5dp"
+                                    android:maxLines="1">
+
+                                </TextView>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="15dp"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/txtDoor"
+                                    android:layout_weight="1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:drawableLeft="@drawable/doore_bg_two"
+                                    android:drawablePadding="5dp"
+                                    android:fontFamily="@font/nunito_sans_regular"
+                                    android:maxLines="1"
+                                    android:text="@string/app_name"
+                                    android:alpha="0.8"
+                                    android:textColor="@color/textDark"
+                                    android:textSize="16sp">
+
+                                </TextView>
+
+                                <TextView
+                                    android:id="@+id/txtSuitcaseOne"
+                                    android:layout_weight="1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/nunito_sans_regular"
+                                    android:textColor="@color/textDark"
+                                    android:textSize="16sp"
+                                    android:text="@string/app_name"
+                                    android:alpha="0.8"
+                                    android:drawableLeft="@drawable/suitcase_bg_two"
+                                    android:drawablePadding="5dp"
+                                    android:maxLines="1">
+
+                                </TextView>
+
+                                <TextView
+                                    android:id="@+id/txtSuitcaseTwo"
+                                    android:layout_weight="1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/app_name"
+                                    android:alpha="0.8"
+                                    android:fontFamily="@font/nunito_sans_regular"
+                                    android:textColor="@color/textDark"
+                                    android:textSize="16sp"
+                                    android:drawableLeft="@drawable/suitcase_bg_two"
+                                    android:drawablePadding="5dp"
+                                    android:maxLines="1">
+
+                                </TextView>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="@color/customeGray"></LinearLayout>
+
+
+                        <RelativeLayout
+                            android:id="@+id/lnrInsurance"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="16dp">
+
+                            <TextView
+                                android:id="@+id/txtInsurance"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:gravity="center_vertical"
+                                android:layout_gravity="center_vertical"
+                                android:fontFamily="@font/nunito_sans_semibold"
+                                android:text="@string/insranceOption"
+                                android:textSize="18sp">
+                            </TextView>
+
+
+                            <ImageView
+                                android:id="@+id/imgInsuranceRight"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_marginRight="15dp"
+                                android:src="@drawable/ic_down_arrow"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true">
+                            </ImageView>
+
+                            <ImageView
+                                android:id="@+id/imgInsuranceLeft"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_marginLeft="15dp"
+                                android:src="@drawable/ic_down_arrow"
+                                android:layout_alignParentLeft="true"
+                                android:layout_centerVertical="true"
+                                android:visibility="gone">
+                            </ImageView>
+
+                            <LinearLayout
+                                android:layout_below="@+id/txtInsurance"
+                                android:id="@+id/viewInsurance"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                            </LinearLayout>
+
+                        </RelativeLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="@color/customeGray"></LinearLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/lnrPromotions"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="16dp">
+
+                            <TextView
+                                android:id="@+id/txtPromotions"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:gravity="center_vertical"
+                                android:layout_gravity="center_vertical"
+                                android:fontFamily="@font/nunito_sans_semibold"
+                                android:text="@string/promotionCode"
+                                android:textSize="18sp">
+                            </TextView>
+
+
+                            <ImageView
+                                android:id="@+id/imgPromotionRight"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_marginRight="15dp"
+                                android:src="@drawable/ic_down_arrow"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true">
+                            </ImageView>
+
+                            <ImageView
+                                android:id="@+id/imgPromotionLeft"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_marginLeft="15dp"
+                                android:src="@drawable/ic_down_arrow"
+                                android:layout_alignParentLeft="true"
+                                android:layout_centerVertical="true"
+                                android:visibility="gone">
+                            </ImageView>
+
+                            <LinearLayout
+                                android:layout_below="@+id/txtPromotions"
+                                android:id="@+id/viewPromotion"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:visibility="gone"
+                                android:orientation="vertical">
+
+                            </LinearLayout>
+
+                        </RelativeLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="@color/customeGray"></LinearLayout>
+
+
+                        <RelativeLayout
+                            android:id="@+id/lnrEstimated"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="16dp">
+
+                            <LinearLayout
+                                android:id="@+id/lnrEst"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/txtEstimated"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:textColor="@color/colorPrimaryDark"
+                                    android:gravity="center_vertical"
+                                    android:layout_gravity="center_vertical"
+                                    android:fontFamily="@font/nunito_sans_semibold"
+                                    android:text="@string/estimatedTotal"
+                                    android:textSize="18sp">
+                                </TextView>
+
+
+                                <LinearLayout
+                                    android:id="@+id/txtAde"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="match_parent"
+                                        android:textColor="@color/colorPrimaryDark"
+                                        android:gravity="center_vertical"
+                                        android:layout_gravity="center_vertical"
+                                        android:fontFamily="@font/nunit_sans_bold"
+                                        android:text="@string/ade100"
+                                        android:textSize="20sp">
+                                    </TextView>
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="match_parent"
+                                        android:textColor="@color/colorPrimaryDark"
+                                        android:gravity="center_vertical"
+                                        android:paddingLeft="5dp"
+                                        android:paddingRight="5dp"
+                                        android:layout_gravity="center_vertical"
+                                        android:fontFamily="@font/nunito_sans_regular"
+                                        android:text="@string/baseFree"
+                                        android:textSize="14sp">
+                                    </TextView>
+
+
+                                </LinearLayout>
+
+
+                            </LinearLayout>
+
+                            <ImageView
+                                android:id="@+id/imgEstimatedRight"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_marginRight="15dp"
+                                android:src="@drawable/ic_down_arrow"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true">
+                            </ImageView>
+
+                            <ImageView
+                                android:id="@+id/imgEstimatedLeft"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_marginLeft="15dp"
+                                android:src="@drawable/ic_down_arrow"
+                                android:layout_alignParentLeft="true"
+                                android:layout_centerVertical="true"
+                                android:visibility="gone">
+                            </ImageView>
+
+
+                            <LinearLayout
+                                android:layout_below="@+id/lnrEst"
+                                android:id="@+id/viewEstimated"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:visibility="gone"
+                                android:orientation="vertical">
+
+                            </LinearLayout>
+
+                        </RelativeLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="@color/customeGray"></LinearLayout>
+
+
+                        <RelativeLayout
+                            android:id="@+id/lnrTermCondition"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="16dp">
+
+                            <TextView
+                                android:id="@+id/txtTerm"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:gravity="center_vertical"
+                                android:layout_gravity="center_vertical"
+                                android:fontFamily="@font/nunito_sans_semibold"
+                                android:text="@string/termConditions"
+                                android:textSize="18sp">
+                            </TextView>
+
+
+                            <ImageView
+                                android:id="@+id/imgTermRight"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_marginRight="15dp"
+                                android:src="@drawable/ic_down_arrow"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true">
+                            </ImageView>
+
+                            <ImageView
+                                android:id="@+id/imgTemLeft"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_marginLeft="15dp"
+                                android:src="@drawable/ic_down_arrow"
+                                android:layout_alignParentLeft="true"
+                                android:layout_centerVertical="true"
+                                android:visibility="gone">
+                            </ImageView>
+
+                            <LinearLayout
+                                android:layout_below="@+id/txtTerm"
+                                android:id="@+id/viewTerm"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:visibility="gone"
+                                android:orientation="vertical">
+
+                            </LinearLayout>
+
+                        </RelativeLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="@color/customeGray"></LinearLayout>
+
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="16dp"
+                            android:orientation="vertical">
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginTop="15dp">
+
+                                <ImageView
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp"
+                                    android:src="@drawable/ic_mark"></ImageView>
+                                <TextView
+                                    android:id="@+id/txtMessageOne"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/nunito_sans_semibold"
+                                    android:text="@string/pickUp"
+                                    android:paddingLeft="5dp"
+                                    android:textColor="@color/colorPrimaryDark"
+                                    android:textSize="16sp">
+
+
+                                </TextView>
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginTop="15dp">
+
+                                <ImageView
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp"
+                                    android:src="@drawable/ic_mark"></ImageView>
+                                <TextView
+                                    android:id="@+id/txtMessageTwo"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/nunito_sans_semibold"
+                                    android:text="@string/pickUp"
+                                    android:paddingLeft="5dp"
+                                    android:textColor="@color/colorPrimaryDark"
+                                    android:textSize="16sp">
+
+
+                                </TextView>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginTop="15dp">
+
+                                <ImageView
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp"
+                                    android:src="@drawable/ic_mark"></ImageView>
+                                <TextView
+                                    android:id="@+id/txtMessageThree"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/nunito_sans_semibold"
+                                    android:text="@string/pickUp"
+                                    android:paddingLeft="5dp"
+                                    android:textColor="@color/colorPrimaryDark"
+                                    android:textSize="16sp">
+
+                                </TextView>
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="20dp"
+                            android:background="@color/customeGray"></LinearLayout>
+
+
+
+                    </LinearLayout>
+
+                </androidx.core.widget.NestedScrollView>
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardBottom"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="-15dp"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="10dp">
+
+                    <TextView
+                        android:id="@+id/txtBook"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/cardGroup"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="25dp"
+                        android:layout_marginRight="30dp"
+                        android:layout_marginBottom="30dp"
+                        android:background="@drawable/button_blue_bg"
+                        android:fontFamily="@font/nunit_sans_bold"
+                        android:gravity="center"
+                        android:padding="16dp"
+                        android:text="@string/book"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="18dp" />
+
+
+                </androidx.cardview.widget.CardView>
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</layout>

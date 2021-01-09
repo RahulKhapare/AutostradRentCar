@@ -539,7 +539,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:cardElevation="3dp"
-                        android:background="@drawable/curve_bottom_bg"
+                        app:cardCornerRadius="5dp"
                         android:layout_marginTop="-5dp"
                         android:layout_marginLeft="1dp"
                         android:layout_marginRight="1dp"

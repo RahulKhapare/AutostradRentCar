@@ -1,6 +1,7 @@
 package com.example.fastuae.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.example.fastuae.R;
+import com.example.fastuae.activity.CarDetailActivity;
 import com.example.fastuae.model.CarModel;
 import com.example.fastuae.util.Click;
 import com.squareup.picasso.Picasso;
@@ -118,11 +120,32 @@ public class ViewPagerSwipeAdapter extends PagerAdapter {
             }
         });
 
+        txtPayNow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                jumpToCardDetails();
+            }
+        });
+
+        txtPayLatter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                jumpToCardDetails();
+            }
+        });
+
         return view;
     }
 
     @Override
     public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
        container.removeView((View)object);
+    }
+
+    private void jumpToCardDetails(){
+        Intent intent = new Intent(context, CarDetailActivity.class);
+        context.startActivity(intent);
     }
 }

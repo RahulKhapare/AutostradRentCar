@@ -51,12 +51,6 @@ public class CarFilterAdapter extends RecyclerView.Adapter<CarFilterAdapter.view
 
             }
         });
-
-        if (position==carFilterModelList.size()-1){
-            holder.binding.lnrLine.setVisibility(View.GONE);
-        }else {
-            holder.binding.lnrLine.setVisibility(View.VISIBLE);
-        }
     }
 
     @Override

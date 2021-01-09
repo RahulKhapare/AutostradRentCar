@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite">
+
+        <ImageView
+            android:id="@+id/imgCar"
+            android:layout_width="212dp"
+            android:layout_height="145dp"
+            android:scaleType="fitXY"
+            android:layout_centerInParent="true"
+            android:src="@drawable/ic_car_blue_new">
+
+        </ImageView>
+
+    </RelativeLayout>
+
+</layout>

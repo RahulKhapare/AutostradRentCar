@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -492,13 +493,14 @@
                         android:textSize="18dp"
                         android:background="@drawable/button_blue_bg"></TextView>
 
+
                     <androidx.cardview.widget.CardView
                         android:id="@+id/viewPrice"
                         android:layout_below="@+id/cardPrice"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        app:cardCornerRadius="5dp"
                         app:cardElevation="3dp"
-                        android:background="@drawable/curve_bottom_bg"
                         android:layout_marginTop="-5dp"
                         android:layout_marginLeft="1dp"
                         android:layout_marginRight="1dp"
@@ -539,7 +541,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:cardElevation="3dp"
-                        android:background="@drawable/curve_bottom_bg"
+                        app:cardCornerRadius="5dp"
                         android:layout_marginTop="-5dp"
                         android:layout_marginLeft="1dp"
                         android:layout_marginRight="1dp"
@@ -580,7 +582,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:cardElevation="3dp"
-                        android:background="@drawable/curve_bottom_bg"
+                        app:cardCornerRadius="5dp"
                         android:layout_marginTop="-5dp"
                         android:layout_marginLeft="1dp"
                         android:layout_marginRight="1dp"
@@ -621,7 +623,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:cardElevation="3dp"
-                        android:background="@drawable/curve_bottom_bg"
+                        app:cardCornerRadius="5dp"
                         android:layout_marginTop="-5dp"
                         android:layout_marginLeft="1dp"
                         android:layout_marginRight="1dp"
@@ -662,7 +664,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:cardElevation="3dp"
-                        android:background="@drawable/curve_bottom_bg"
+                        app:cardCornerRadius="5dp"
                         android:layout_marginTop="-5dp"
                         android:layout_marginLeft="1dp"
                         android:layout_marginRight="1dp"
@@ -703,7 +705,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:cardElevation="3dp"
-                        android:background="@drawable/curve_bottom_bg"
+                        app:cardCornerRadius="5dp"
                         android:layout_marginTop="-5dp"
                         android:layout_marginLeft="1dp"
                         android:layout_marginRight="1dp"
@@ -744,7 +746,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:cardElevation="3dp"
-                        android:background="@drawable/curve_bottom_bg"
+                        app:cardCornerRadius="5dp"
                         android:layout_marginTop="-5dp"
                         android:layout_marginLeft="1dp"
                         android:layout_marginRight="1dp"
@@ -785,7 +787,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:cardElevation="3dp"
-                        android:background="@drawable/curve_bottom_bg"
+                        app:cardCornerRadius="5dp"
                         android:layout_marginTop="-5dp"
                         android:layout_marginLeft="1dp"
                         android:layout_marginRight="1dp"

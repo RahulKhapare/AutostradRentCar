@@ -155,6 +155,17 @@
     <string name="category">الفئة</string>
     <string name="group">مجموعة</string>
     <string name="getLocation">احصل على الموقع</string>
+    <string name="carDetails">تفاصيل السيارة</string>
+    <string name="book">كتاب</string>
+    <string name="upgrade">تطوير</string>
+    <string name="carSpecification">مواصفات السيارة</string>
+    <string name="insranceOption">خيار التأمين</string>
+    <string name="promotionCode">شفرة الترقية</string>
+    <string name="estimatedTotal">المجموع التقديري</string>
+    <string name="ade100">ADE 100</string>
+    <string name="baseFree">(معفاة من الضرائب + الضرائب)</string>
+    <string name="termConditions">شروط وأحكام</string>
+    <string name="upgradeAvailable">توفر الترقية</string>
 
     <string name="txt1">شركة رائدة في مجال تأجير السيارات ولديها أكبر شبكة من الفروع ونقاط الالتقاء</string>
     <string name="txt2">شركة رائدة في مجال تأجير السيارات ولديها أكبر شبكة من الفروع ونقاط الالتقاء</string>

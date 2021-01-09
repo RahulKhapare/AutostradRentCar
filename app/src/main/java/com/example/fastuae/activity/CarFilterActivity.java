@@ -313,16 +313,6 @@ public class CarFilterActivity extends AppCompatActivity implements CarFilterAda
         priceList.add(new CarFilterModel("3000"));
         priceList.add(new CarFilterModel("4000"));
         priceList.add(new CarFilterModel("5000"));
-        priceList.add(new CarFilterModel("5000"));
-        priceList.add(new CarFilterModel("5000"));
-        priceList.add(new CarFilterModel("5000"));
-        priceList.add(new CarFilterModel("5000"));
-        priceList.add(new CarFilterModel("5000"));
-        priceList.add(new CarFilterModel("5000"));
-        priceList.add(new CarFilterModel("5000"));
-        priceList.add(new CarFilterModel("5000"));
-        priceList.add(new CarFilterModel("5000"));
-        priceList.add(new CarFilterModel("5000"));
         checkSize(priceList, binding.recycelrPrice);
         priceAdapter.notifyDataSetChanged();
 
@@ -360,18 +350,25 @@ public class CarFilterActivity extends AppCompatActivity implements CarFilterAda
 
         fuelList.add(new CarFilterModel("Petrol"));
         fuelList.add(new CarFilterModel("Deisel"));
+        fuelList.add(new CarFilterModel("Oil"));
+        fuelList.add(new CarFilterModel("Cerocine"));
+        fuelList.add(new CarFilterModel("CNG"));
         checkSize(fuelList, binding.recyclerFuel);
         fuelAdapter.notifyDataSetChanged();
 
         categoryList.add(new CarFilterModel("A"));
         categoryList.add(new CarFilterModel("B"));
         categoryList.add(new CarFilterModel("C"));
+        categoryList.add(new CarFilterModel("D"));
+        categoryList.add(new CarFilterModel("E"));
         checkSize(categoryList, binding.recyclerCategory);
         categoryAdapter.notifyDataSetChanged();
 
         groupList.add(new CarFilterModel("A"));
         groupList.add(new CarFilterModel("B"));
         groupList.add(new CarFilterModel("C"));
+        groupList.add(new CarFilterModel("D"));
+        groupList.add(new CarFilterModel("E"));
         checkSize(groupList, binding.recyclerGroup);
         groupAdapter.notifyDataSetChanged();
 
@@ -381,7 +378,7 @@ public class CarFilterActivity extends AppCompatActivity implements CarFilterAda
     private void checkSize(List<CarFilterModel> list, RecyclerView recyclerView) {
         if (list.size() > 6) {
             ViewGroup.LayoutParams params = recyclerView.getLayoutParams();
-            params.height = 1010;
+            params.height = 900;
             recyclerView.setLayoutParams(params);
         }
     }

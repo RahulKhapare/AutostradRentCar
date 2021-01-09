@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:layout_margin="10dp"
+    android:background="@drawable/custome_dialog_bg">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/upgradeAvailable"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/nunito_sans_semibold"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="18sp"
+        android:layout_gravity="center"
+        android:gravity="center">
+
+    </TextView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp">
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="165dp"
+            android:clipToPadding="false"
+            android:foregroundGravity="center" />
+
+
+        <RelativeLayout
+            android:id="@+id/borderView"
+            android:layout_width="232dp"
+            android:layout_height="165dp"
+            android:background="@drawable/corner_light_pink_bg"
+            android:layout_centerInParent="true">
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/imgLeft"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:tint="@color/textDark"
+            android:src="@drawable/ic_baseline_chevron_left_24">
+
+        </ImageView>
+
+        <TextView
+            android:layout_weight="1"
+            android:id="@+id/txtCarName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito_sans_semibold"
+            android:textSize="16sp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/app_name"
+            android:textColor="@color/colorPrimaryDark">
+
+        </TextView>
+
+
+        <ImageView
+            android:id="@+id/imgRight"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:tint="@color/textDark"
+            android:src="@drawable/ic_baseline_chevron_right_24">
+
+        </ImageView>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/txtReservationFee"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:fontFamily="@font/nunit_sans_bold"
+        android:textSize="18sp"
+        android:layout_marginTop="5dp"
+        android:text="@string/app_name"
+        android:textColor="@color/colorPrimaryDark">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/txtEstimateTotal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:fontFamily="@font/nunit_sans_bold"
+        android:textSize="18sp"
+        android:layout_marginTop="5dp"
+        android:text="@string/app_name"
+        android:textColor="@color/colorPrimaryDark">
+
+    </TextView>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="right"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/txtCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:fontFamily="@font/nunit_sans_bold"
+            android:textSize="16sp"
+            android:padding="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:text="@string/cancel"
+            android:textColor="@color/lightBlue">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/txtUpgrade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:fontFamily="@font/nunit_sans_bold"
+            android:textSize="16sp"
+            android:padding="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:text="@string/upgrade"
+            android:textColor="@color/lightBlue">
+
+        </TextView>
+
+    </LinearLayout>
+
+
+</LinearLayout>

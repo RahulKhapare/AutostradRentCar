@@ -22,15 +22,5 @@
 
         </TextView>
 
-        <LinearLayout
-            android:id="@+id/lnrLine"
-            android:layout_below="@+id/txtLocation"
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:orientation="vertical"
-            android:layout_marginTop="1dp"
-            android:layout_marginBottom="1dp"
-            android:background="@color/customeGray"></LinearLayout>
-
     </RelativeLayout>
 </layout>

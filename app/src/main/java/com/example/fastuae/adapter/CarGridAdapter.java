@@ -1,6 +1,7 @@
 package com.example.fastuae.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fastuae.R;
+import com.example.fastuae.activity.CarDetailActivity;
 import com.example.fastuae.databinding.ActivityCarGreedListBinding;
 import com.example.fastuae.model.CarModel;
 import com.example.fastuae.util.Click;
@@ -67,6 +69,7 @@ public class CarGridAdapter extends RecyclerView.Adapter<CarGridAdapter.viewHold
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
+                jumpToCardDetails();
             }
         });
 
@@ -74,6 +77,7 @@ public class CarGridAdapter extends RecyclerView.Adapter<CarGridAdapter.viewHold
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
+                jumpToCardDetails();
             }
         });
     }
@@ -89,5 +93,10 @@ public class CarGridAdapter extends RecyclerView.Adapter<CarGridAdapter.viewHold
             super(binding.getRoot());
             this.binding = binding;
         }
+    }
+
+    private void jumpToCardDetails(){
+        Intent intent = new Intent(context, CarDetailActivity.class);
+        context.startActivity(intent);
     }
 }
