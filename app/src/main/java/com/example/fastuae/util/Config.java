@@ -32,6 +32,14 @@ public class Config {
     public static boolean FROM_MAP = false;
 
 
+    public static String firstName = "John";
+    public static String lastName = "Doe";
+    public static String email = "Johnd@gmail.com";
+    public static String phone = "1234567891";
+    public static String code = "971";
+    public static Integer positionCode = null;
+    public static boolean isEditDetails;
+
 
     public static JsonList countryJsonList = new JsonList();
 

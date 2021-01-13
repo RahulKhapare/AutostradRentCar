@@ -166,9 +166,30 @@
     <string name="baseFree">(Base Free + Taxes Free)</string>
     <string name="termConditions">Term And Conditions</string>
     <string name="upgradeAvailable">Upgrade Availability</string>
+    <string name="enterYourDetails">Enter your details</string>
+    <string name="driversInformation">Drivers Information</string>
+    <string name="edit">Edit</string>
+    <string name="uploadDriverLicence">Please Upload Driver Licence</string>
+    <string name="paymentDetails">Payment Details</string>
+    <string name="confirmPayment">Confirm Payment</string>
+    <string name="similar">(or similar)</string>
+    <string name="creditCard">Credit Card</string>
+    <string name="checkPaymentDetails">Please check payment details</string>
+    <string name="editInformation">Edit Information</string>
+    <string name="saveDetails">Save Details</string>
+    <string name="fName">First Name:</string>
+    <string name="lName">Last Name:</string>
+    <string name="pEmail">Email:</string>
+    <string name="pPhone">Phone:</string>
+    <string name="confirm">Confirm</string>
+    <string name="taxInsurance">Tax &amp; Insurance Included</string>
+    <string name="bookingSucessfull">Your Booking is Successful!!!</string>
+    <string name="backToHome">Back to Home</string>
+    <string name="viewMyBooking">View My Booking</string>
+    <string name="confirmBooking">Confirm Booking</string>
 
-    <string name="txt1">Leading Car Rental Company with the largest network of Branches And Pickup points</string>
-    <string name="txt2">Leading Car Rental Company with the largest network of Branches And Pickup points</string>
+    <string name="txt1">Leading Car Rental Company with the largest network of Branches &amp; Pickup points</string>
+    <string name="txt2">Leading Car Rental Company with the largest network of Branches &amp; Pickup points</string>
     <string name="txt3">Provides the most affordable rental services in the country.</string>
     <string name="googleAPIKey">AIzaSyBarBZmOziSTpL58ln6HVZpmbC0utZJ48g</string>
 

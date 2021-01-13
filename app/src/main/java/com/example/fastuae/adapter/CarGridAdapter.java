@@ -13,11 +13,10 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fastuae.R;
-import com.example.fastuae.activity.CarDetailActivity;
+import com.example.fastuae.activity.CarDetailOneActivity;
 import com.example.fastuae.databinding.ActivityCarGreedListBinding;
 import com.example.fastuae.model.CarModel;
 import com.example.fastuae.util.Click;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -96,7 +95,7 @@ public class CarGridAdapter extends RecyclerView.Adapter<CarGridAdapter.viewHold
     }
 
     private void jumpToCardDetails(){
-        Intent intent = new Intent(context, CarDetailActivity.class);
+        Intent intent = new Intent(context, CarDetailOneActivity.class);
         context.startActivity(intent);
     }
 }

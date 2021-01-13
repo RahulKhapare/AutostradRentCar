@@ -21,9 +21,25 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.CarDetailActivity"
+        <activity android:name=".activity.BookingSucessfullActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" ></activity>
+        <activity
+            android:name=".activity.EditInformationActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.CarDetailsActivityThree"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.CarDetailTwoActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.CarDetailOneActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.SelectLocationActivity"
             android:screenOrientation="portrait"
@@ -31,8 +47,8 @@
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".activity.CarFilterActivity"
-            android:screenOrientation="portrait"
             android:hardwareAccelerated="true"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.SelectCarActivity"

@@ -4,8 +4,6 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:paddingTop="10dp"
-    android:paddingBottom="10dp"
     android:layout_margin="10dp"
     android:background="@drawable/custome_dialog_bg">
 
@@ -34,6 +32,8 @@
             android:layout_width="match_parent"
             android:layout_height="165dp"
             android:clipToPadding="false"
+            android:paddingStart="80dp"
+            android:paddingEnd="80dp"
             android:foregroundGravity="center" />
 
 
@@ -45,6 +45,7 @@
             android:layout_centerInParent="true">
 
         </RelativeLayout>
+
     </RelativeLayout>
 
     <LinearLayout
@@ -56,8 +57,8 @@
             android:id="@+id/imgLeft"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:tint="@color/textDark"
             android:src="@drawable/ic_baseline_chevron_left_24">
 
@@ -82,8 +83,8 @@
             android:id="@+id/imgRight"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:tint="@color/textDark"
             android:src="@drawable/ic_baseline_chevron_right_24">
 
@@ -121,6 +122,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
+        android:layout_marginBottom="10dp"
         android:layout_gravity="right"
         android:orientation="horizontal">
 

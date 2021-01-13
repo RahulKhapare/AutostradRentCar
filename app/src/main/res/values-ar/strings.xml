@@ -166,6 +166,27 @@
     <string name="baseFree">(معفاة من الضرائب + الضرائب)</string>
     <string name="termConditions">شروط وأحكام</string>
     <string name="upgradeAvailable">توفر الترقية</string>
+    <string name="enterYourDetails">أدخل التفاصيل الخاصة بك</string>
+    <string name="driversInformation">معلومات السائقين</string>
+    <string name="edit">تعديل</string>
+    <string name="uploadDriverLicence">الرجاء تحميل رخصة القيادة</string>
+    <string name="paymentDetails">بيانات الدفع</string>
+    <string name="confirmPayment">تأكيد الدفع</string>
+    <string name="similar">(أو مشابه)</string>
+    <string name="creditCard">بطاقة ائتمان</string>
+    <string name="checkPaymentDetails">يرجى التحقق من تفاصيل الدفع</string>
+    <string name="editInformation">تعديل المعلومات</string>
+    <string name="saveDetails">حفظ التفاصيل</string>
+    <string name="fName">الاسم الاول:</string>
+    <string name="lName">الكنية:</string>
+    <string name="pEmail">البريد الإلكتروني:</string>
+    <string name="pPhone">هاتف:</string>
+    <string name="confirm">تؤكد</string>
+    <string name="taxInsurance">شامل الضرائب والتأمين</string>
+    <string name="bookingSucessfull">حجزك ناجح !!!</string>
+    <string name="backToHome">العودة إلى المنزل</string>
+    <string name="viewMyBooking">عرض حجزي</string>
+    <string name="confirmBooking">تأكيد الحجز</string>
 
     <string name="txt1">شركة رائدة في مجال تأجير السيارات ولديها أكبر شبكة من الفروع ونقاط الالتقاء</string>
     <string name="txt2">شركة رائدة في مجال تأجير السيارات ولديها أكبر شبكة من الفروع ونقاط الالتقاء</string>

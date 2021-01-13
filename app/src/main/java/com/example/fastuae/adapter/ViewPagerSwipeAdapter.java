@@ -9,17 +9,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.example.fastuae.R;
-import com.example.fastuae.activity.CarDetailActivity;
+import com.example.fastuae.activity.CarDetailOneActivity;
 import com.example.fastuae.model.CarModel;
 import com.example.fastuae.util.Click;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -145,7 +143,7 @@ public class ViewPagerSwipeAdapter extends PagerAdapter {
     }
 
     private void jumpToCardDetails(){
-        Intent intent = new Intent(context, CarDetailActivity.class);
+        Intent intent = new Intent(context, CarDetailOneActivity.class);
         context.startActivity(intent);
     }
 }

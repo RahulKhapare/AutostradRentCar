@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.example.fastuae.R;
+import com.example.fastuae.activity.CarDetailOneActivity;
 import com.example.fastuae.model.CarUpgradeModel;
 import com.squareup.picasso.Picasso;
 
