@@ -187,6 +187,23 @@
     <string name="backToHome">العودة إلى المنزل</string>
     <string name="viewMyBooking">عرض حجزي</string>
     <string name="confirmBooking">تأكيد الحجز</string>
+    <string name="fastReward">مكافآت سريعة</string>
+    <string name="specialOffers">عروض خاصة</string>
+    <string name="faqs">أسئلة وأجوبة</string>
+    <string name="locations">المواقع</string>
+    <string name="aboutCompany">عن الشركة</string>
+    <string name="contactUs">اتصل بنا</string>
+    <string name="getReceipt">احصل على إيصال إلكتروني</string>
+    <string name="careers">وظائف</string>
+    <string name="rentalInfo">معلومات الإيجار</string>
+    <string name="yourFasrCar">Fastcar الخاص بك في الإمارات العربية المتحدة</string>
+    <string name="branchCode">رمز الفرع</string>
+    <string name="branchName">اسم الفرع</string>
+    <string name="details">تفاصيل</string>
+    <string name="normalOperation">ساعات العمل العادية:</string>
+    <string name="moreView">عرض المزيد</string>
+
+
 
     <string name="txt1">شركة رائدة في مجال تأجير السيارات ولديها أكبر شبكة من الفروع ونقاط الالتقاء</string>
     <string name="txt2">شركة رائدة في مجال تأجير السيارات ولديها أكبر شبكة من الفروع ونقاط الالتقاء</string>

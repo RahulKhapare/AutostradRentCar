@@ -188,6 +188,21 @@
     <string name="backToHome">Back to Home</string>
     <string name="viewMyBooking">View My Booking</string>
     <string name="confirmBooking">Confirm Booking</string>
+    <string name="fastReward">Fast Rewards</string>
+    <string name="specialOffers">Special Offers</string>
+    <string name="faqs">FAQs</string>
+    <string name="locations">Locations</string>
+    <string name="aboutCompany">About the Company</string>
+    <string name="contactUs">Contact Us</string>
+    <string name="getReceipt">Get E-Receipt</string>
+    <string name="careers">Careers</string>
+    <string name="rentalInfo">Rental Information</string>
+    <string name="yourFasrCar">Your Fastcar in UAE</string>
+    <string name="branchCode">Branch Code</string>
+    <string name="branchName">Branch Name</string>
+    <string name="details">Details</string>
+    <string name="normalOperation">Normal hours of operation:</string>
+    <string name="moreView">View more</string>
 
 
     <string name="txt1">Leading Car Rental Company with the largest network of Branches &amp; Pickup points</string>
