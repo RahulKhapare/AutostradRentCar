@@ -55,7 +55,7 @@ public class ProfileFragment extends Fragment implements CategorySelectionAdapte
     private void initView() {
 
         categoryModelList = new ArrayList<>();
-        adapter = new CategorySelectionAdapter(context, categoryModelList, ProfileFragment.this);
+        adapter = new CategorySelectionAdapter(context, categoryModelList, ProfileFragment.this,Config.PROFILE_TAG);
         binding.recyclerProfileCategory.setLayoutManager(new LinearLayoutManager(context, RecyclerView.HORIZONTAL, false));
         binding.recyclerProfileCategory.setNestedScrollingEnabled(false);
         binding.recyclerProfileCategory.setAdapter(adapter);

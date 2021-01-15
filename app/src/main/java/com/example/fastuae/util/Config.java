@@ -17,6 +17,7 @@ public class Config {
     public static String SIGN_UP = "SIGN_UP";
     public static String currentFlag = "";
     public static String currentProfileFlag = "";
+    public static String currentFAQFlag = "";
 
     public static String My_Account = "My Account";
     public static String Documents = "Documents";
@@ -26,6 +27,14 @@ public class Config {
     public static String Invoices = "Invoices";
     public static String Salik_Charges = "Salik Charges";
     public static String Traffic_Lines = "Traffic Lines";
+
+    public static String General = "General";
+    public static String Payment_Related = "Payment Related";
+    public static String Vehicle_Related = "Vehicle Related";
+    public static String Insurance_Related = "Insurance Related";
+
+    public static String PROFILE_TAG = "PROFILE_TAG";
+    public static String FAQ_TAG = "FAQ_TAG";
 
     public static int OPEN = 1;
     public static int SHARE = 2;

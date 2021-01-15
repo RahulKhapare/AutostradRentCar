@@ -203,6 +203,11 @@
     <string name="normalOperation">Normal hours of operation:</string>
     <string name="moreView">View more</string>
 
+    <string name="general">General</string>
+    <string name="paymentRelated">Payment Related</string>
+    <string name="vehicleRelated">Vehicle Related</string>
+    <string name="insuranceRelated">Insurance Related</string>
+
     <string name="txt1">Leading Car Rental Company with the largest network of Branches &amp; Pickup points</string>
     <string name="txt2">Leading Car Rental Company with the largest network of Branches &amp; Pickup points</string>
     <string name="txt3">Provides the most affordable rental services in the country.</string>
