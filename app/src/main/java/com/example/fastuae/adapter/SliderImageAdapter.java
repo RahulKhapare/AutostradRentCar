@@ -1,6 +1,7 @@
 package com.example.fastuae.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +12,9 @@ import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.example.fastuae.R;
+import com.example.fastuae.activity.SpecialOffersActivity;
 import com.example.fastuae.model.SliderModel;
+import com.example.fastuae.util.Click;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -56,6 +59,16 @@ public class SliderImageAdapter extends PagerAdapter {
                 .findViewById(R.id.imgView);
         SliderModel model = imageModelList.get(position);
         Picasso.get().load(R.drawable.ic_banner).error(R.mipmap.ic_launcher).into(imageView);
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                Intent intent = new Intent(context, SpecialOffersActivity.class);
+                context.startActivity(intent);
+            }
+        });
+
         view.addView(imageLayout, 0);
 
         return imageLayout;

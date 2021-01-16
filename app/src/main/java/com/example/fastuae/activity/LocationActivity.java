@@ -58,6 +58,13 @@ public class LocationActivity extends AppCompatActivity {
                 setData();
             }
         });
+
+        binding.cardPickLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+            }
+        });
     }
 
     private void setData(){
