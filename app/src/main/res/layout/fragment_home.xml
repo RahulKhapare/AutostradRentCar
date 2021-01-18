@@ -127,7 +127,7 @@
                             </LinearLayout>
 
                             <ImageView
-                                android:id="@+id/imgArrowUp"
+                                android:id="@+id/imgDeliverArrowUp"
                                 android:layout_width="25dp"
                                 android:layout_height="25dp"
                                 android:visibility="gone"
@@ -136,7 +136,7 @@
                                 android:src="@drawable/ic_up_arrow"></ImageView>
 
                             <ImageView
-                                android:id="@+id/imgArrowDown"
+                                android:id="@+id/imgDeliverArrowDown"
                                 android:layout_width="25dp"
                                 android:layout_height="25dp"
                                 android:layout_gravity="center_vertical"
@@ -221,21 +221,45 @@
                                         android:layout_gravity="center_vertical"
                                         android:src="@drawable/ic_location"></ImageView>
                                     <TextView
+                                        android:id="@+id/txtDropUpTitle"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:textColor="@color/textDark"
                                         android:layout_gravity="center_vertical"
                                         android:fontFamily="@font/nunito_sans_semibold"
-                                        android:text="@string/dropOfLocation"
+                                        android:text="@string/enterLocationDeliver"
                                         android:textSize="16sp">
                                     </TextView>
 
                                 </LinearLayout>
 
+                                <TextView
+                                    android:id="@+id/txtDropUpMessage"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="@color/iconicGray"
+                                    android:layout_gravity="center_vertical"
+                                    android:fontFamily="@font/nunito_sans_semibold"
+                                    android:text="@string/userCurrentLocation"
+                                    android:paddingLeft="10dp"
+                                    android:visibility="gone"
+                                    android:textSize="14sp">
+                                </TextView>
+
 
                             </LinearLayout>
 
                             <ImageView
+                                android:id="@+id/imgCollectArrowUp"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:visibility="gone"
+                                android:layout_gravity="center_vertical"
+                                android:tint="@color/colorBlack"
+                                android:src="@drawable/ic_up_arrow"></ImageView>
+
+                            <ImageView
+                                android:id="@+id/imgCollectArrowDown"
                                 android:layout_width="25dp"
                                 android:layout_height="25dp"
                                 android:layout_gravity="center_vertical"
@@ -534,7 +558,7 @@
                     </RelativeLayout>
 
                     <androidx.cardview.widget.CardView
-                        android:id="@+id/cardLocation"
+                        android:id="@+id/cardLocationDeliver"
                         android:layout_below="@+id/cardPickLocation"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -561,7 +585,7 @@
                             </LinearLayout>
 
                             <androidx.recyclerview.widget.RecyclerView
-                                android:id="@+id/recyclerLocation"
+                                android:id="@+id/recyclerLocationDeliver"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:scrollbarSize="7dp"
@@ -572,7 +596,7 @@
                             </androidx.recyclerview.widget.RecyclerView>
 
                             <TextView
-                                android:id="@+id/txtGetLocation"
+                                android:id="@+id/txtGetLocationDeliver"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/nunit_sans_bold"
@@ -587,6 +611,67 @@
                                 android:gravity="center"
                                 android:textSize="18dp"
                                 android:background="@drawable/corner_blue_bg"></TextView>
+
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardLocationCollect"
+                        android:layout_below="@+id/cardDropLocation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardElevation="3dp"
+                        app:cardCornerRadius="5dp"
+                        android:layout_marginTop="-5dp"
+                        android:layout_marginLeft="1dp"
+                        android:layout_marginRight="1dp"
+                        android:visibility="gone"
+                        >
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0.5dp"
+                                android:layout_marginTop="5dp"
+                                android:background="@color/customeGray"
+                                tools:ignore="Suspicious0dp">
+
+                            </LinearLayout>
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/recyclerLocationCollect"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:scrollbarSize="7dp"
+                                android:scrollbarFadeDuration="0"
+                                android:scrollbarThumbVertical="@drawable/scrollbar_shape"
+                                android:scrollbars="vertical">
+
+                            </androidx.recyclerview.widget.RecyclerView>
+
+                            <TextView
+                                android:id="@+id/txtGetLocationCollect"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/nunit_sans_bold"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:text="@string/getLocation"
+                                android:padding="12dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginBottom="20dp"
+                                android:layout_marginRight="20dp"
+                                android:layout_marginLeft="20dp"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:textSize="18dp"
+                                android:background="@drawable/corner_blue_bg"></TextView>
+
 
                         </LinearLayout>
 

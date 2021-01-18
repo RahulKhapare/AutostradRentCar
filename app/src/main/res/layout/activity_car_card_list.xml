@@ -144,17 +144,17 @@
                           <TextView
                               android:id="@+id/txtMode"
                               android:layout_width="wrap_content"
-                              android:layout_height="wrap_content"
+                              android:layout_height="match_parent"
                               android:layout_gravity="center"
-                              android:fontFamily="@font/nunito_sans_semibold"
-                              android:textColor="@color/textDark"
-                              android:textSize="20sp"
-                              android:text="@string/app_name"
                               android:layout_marginLeft="35dp"
                               android:layout_marginRight="35dp"
                               android:drawableLeft="@drawable/mode_bg_two"
                               android:drawablePadding="5dp"
-                              android:maxLines="1">
+                              android:fontFamily="@font/nunito_sans_semibold"
+                              android:maxLines="1"
+                              android:text="@string/app_name"
+                              android:textColor="@color/textDark"
+                              android:textSize="20sp">
 
                           </TextView>
 

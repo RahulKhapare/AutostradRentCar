@@ -21,6 +21,7 @@ import androidx.annotation.RequiresApi;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.adoisstudio.helper.H;
 import com.adoisstudio.helper.Session;
@@ -50,8 +51,13 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick{
     private FragmentHomeBinding binding;
     private List<SliderModel> sliderModelList;
     private SliderImageAdapter sliderImageAdapter;
-    private List<LocationModel> locationModelList;
-    private LocationAdapter locationAdapter;
+    private List<LocationModel> locationDeliverModelList;
+    private List<LocationModel> locationCollectModelList;
+    private LocationAdapter locationDeliverAdapter;
+    private LocationAdapter locationCollectAdapter;
+    private String from = "";
+    private String deliver = "deliver";
+    private String collect = "collect";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -66,28 +72,95 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick{
         return binding.getRoot();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onResume() {
         super.onResume();
         if (Config.FROM_MAP){
             Config.FROM_MAP = false;
-            String address = new Session(context).getString(P.locationAddress);
-            if (locationModelList!=null && !locationModelList.isEmpty()){
-                if (containsLocation(locationModelList,address)){
-                    H.showMessage(context,getResources().getString(R.string.locationAdded));
-                }else {
-                    locationModelList.add(new LocationModel(address));
-                }
-            }else {
-                locationModelList.add(new LocationModel(address));
+            if (from.equals(deliver)){
+                hideCollectView();
+                updateSelfPickupData();
+            }else if (from.equals(collect)){
+                hideDeliverView();
+                updateSelfReturnData();
             }
-            Collections.reverse(locationModelList);
-            checkSize();
-            locationAdapter.notifyDataSetChanged();
-            binding.imgArrowDown.setVisibility(View.GONE);
-            binding.imgArrowUp.setVisibility(View.VISIBLE);
-            binding.cardLocation.setVisibility(View.VISIBLE);
+
         }
+    }
+
+    private void hideDeliverView(){
+        binding.imgDeliverArrowDown.setVisibility(View.VISIBLE);
+        binding.imgDeliverArrowUp.setVisibility(View.GONE);
+        binding.cardLocationDeliver.setVisibility(View.GONE);
+    }
+
+    private void hideCollectView(){
+        binding.imgCollectArrowDown.setVisibility(View.VISIBLE);
+        binding.imgCollectArrowUp.setVisibility(View.GONE);
+        binding.cardLocationCollect.setVisibility(View.GONE);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    private void updateSelfPickupData(){
+        String address = new Session(context).getString(P.locationAddress);
+        if (locationDeliverModelList!=null && !locationDeliverModelList.isEmpty()){
+            if (containsLocation(locationDeliverModelList,address)){
+                H.showMessage(context,getResources().getString(R.string.locationAdded));
+            }else {
+                locationDeliverModelList.add(new LocationModel(address));
+            }
+        }else {
+            locationDeliverModelList.add(new LocationModel(address));
+        }
+        Collections.reverse(locationDeliverModelList);
+        checkSize(binding.recyclerLocationDeliver);
+        locationDeliverAdapter.notifyDataSetChanged();
+
+        binding.imgDeliverArrowDown.setVisibility(View.GONE);
+        binding.imgDeliverArrowUp.setVisibility(View.VISIBLE);
+        binding.cardLocationDeliver.setVisibility(View.VISIBLE);
+        binding.txtGetLocationDeliver.setVisibility(View.GONE);
+        binding.recyclerLocationDeliver.setVisibility(View.VISIBLE);
+
+        binding.radioDeliver.setChecked(false);
+        binding.txtPickUpMessage.setVisibility(View.VISIBLE);
+        binding.txtPickUpTitle.setText(getResources().getString(R.string.pickUpLocation));
+        binding.radioSelfPickup.setChecked(true);
+        blueTin(binding.radioSelfPickup);
+        blackTin(binding.radioDeliver);
+
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    private void updateSelfReturnData(){
+        String address = new Session(context).getString(P.locationAddress);
+        if (locationCollectModelList!=null && !locationCollectModelList.isEmpty()){
+            if (containsLocation(locationCollectModelList,address)){
+                H.showMessage(context,getResources().getString(R.string.locationAdded));
+            }else {
+                locationCollectModelList.add(new LocationModel(address));
+            }
+        }else {
+            locationCollectModelList.add(new LocationModel(address));
+        }
+        Collections.reverse(locationCollectModelList);
+        checkSize(binding.recyclerLocationCollect);
+        locationCollectAdapter.notifyDataSetChanged();
+
+        binding.imgCollectArrowDown.setVisibility(View.GONE);
+        binding.imgCollectArrowUp.setVisibility(View.VISIBLE);
+        binding.cardLocationCollect.setVisibility(View.VISIBLE);
+        binding.txtGetLocationCollect.setVisibility(View.GONE);
+        binding.recyclerLocationCollect.setVisibility(View.VISIBLE);
+
+        binding.radioCollect.setChecked(false);
+        binding.txtDropUpMessage.setVisibility(View.VISIBLE);
+        binding.txtDropUpTitle.setText(getResources().getString(R.string.dropOfLocation));
+        binding.radioSelfReturn.setChecked(true);
+        blueTin(binding.radioSelfReturn);
+        blackTin(binding.radioCollect);
+
     }
 
     public static boolean containsLocation(Collection<LocationModel> list, String location) {
@@ -106,24 +179,36 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick{
         binding.pager.setAdapter(sliderImageAdapter);
         binding.tabLayout.setupWithViewPager(binding.pager, true);
 
-        locationModelList = new ArrayList<>();
-        locationAdapter = new LocationAdapter(context,locationModelList,HomeFragment.this);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
-//        linearLayoutManager.setSmoothScrollbarEnabled(true);
-        binding.recyclerLocation.setLayoutManager(linearLayoutManager);
-        binding.recyclerLocation.setHasFixedSize(true);
-        binding.recyclerLocation.setAdapter(locationAdapter);
+        locationDeliverModelList = new ArrayList<>();
+        locationDeliverModelList.add(new LocationModel("Al Quoz - Service/sales branch, Dubai"));
+        locationDeliverModelList.add(new LocationModel("Sarjah, Dubai"));
+        locationDeliverModelList.add(new LocationModel("Ruwais Mall, Al Ruwais"));
+        locationDeliverAdapter = new LocationAdapter(context,locationDeliverModelList,HomeFragment.this);
+        LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(context);
+        binding.recyclerLocationDeliver.setLayoutManager(linearLayoutManager1);
+        binding.recyclerLocationDeliver.setHasFixedSize(true);
+        binding.recyclerLocationDeliver.setAdapter(locationDeliverAdapter);
+
+        locationCollectModelList = new ArrayList<>();
+        locationCollectModelList.add(new LocationModel("Al Quoz - Service/sales branch, Dubai"));
+        locationCollectModelList.add(new LocationModel("Sarjah, Dubai"));
+        locationCollectModelList.add(new LocationModel("Ruwais Mall, Al Ruwais"));
+        locationCollectAdapter = new LocationAdapter(context,locationCollectModelList,HomeFragment.this);
+        LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(context);
+        binding.recyclerLocationCollect.setLayoutManager(linearLayoutManager2);
+        binding.recyclerLocationCollect.setHasFixedSize(true);
+        binding.recyclerLocationCollect.setAdapter(locationCollectAdapter);
 
         getCurrentDate();
         setUpSliderList();
         onClick();
     }
 
-    private void checkSize(){
-        if (locationModelList.size()>6){
-            ViewGroup.LayoutParams params=binding.recyclerLocation.getLayoutParams();
+    private void checkSize(RecyclerView recyclerView){
+        if (locationDeliverModelList.size()>6){
+            ViewGroup.LayoutParams params=recyclerView.getLayoutParams();
             params.height=1010;
-            binding.recyclerLocation.setLayoutParams(params);
+            recyclerView.setLayoutParams(params);
         }
     }
 
@@ -198,15 +283,31 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick{
 
     private void onClick(){
 
-        binding.txtGetLocation.setOnClickListener(new View.OnClickListener() {
+        binding.txtGetLocationDeliver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
                 if (binding.txtPickUpMessage.getVisibility()==View.VISIBLE){
-                    binding.imgArrowUp.setVisibility(View.GONE);
-                    binding.imgArrowDown.setVisibility(View.VISIBLE);
-                    binding.cardLocation.setVisibility(View.GONE);
+                    binding.imgDeliverArrowUp.setVisibility(View.GONE);
+                    binding.imgDeliverArrowDown.setVisibility(View.VISIBLE);
+                    binding.cardLocationDeliver.setVisibility(View.GONE);
                 }
+                from = deliver;
+                Intent intent = new Intent(context, SelectLocationActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        binding.txtGetLocationCollect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                if (binding.txtDropUpMessage.getVisibility()==View.VISIBLE){
+                    binding.imgCollectArrowUp.setVisibility(View.GONE);
+                    binding.imgCollectArrowDown.setVisibility(View.VISIBLE);
+                    binding.cardLocationCollect.setVisibility(View.GONE);
+                }
+                from = collect;
                 Intent intent = new Intent(context, SelectLocationActivity.class);
                 startActivity(intent);
             }
@@ -264,9 +365,9 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick{
                 blueTin(binding.radioDeliver);
                 blackTin(binding.radioSelfPickup);
 
-                binding.cardLocation.setVisibility(View.GONE);
-                binding.imgArrowUp.setVisibility(View.GONE);
-                binding.imgArrowDown.setVisibility(View.VISIBLE);
+                binding.cardLocationDeliver.setVisibility(View.GONE);
+                binding.imgDeliverArrowUp.setVisibility(View.GONE);
+                binding.imgDeliverArrowDown.setVisibility(View.VISIBLE);
 
             }
         });
@@ -281,6 +382,10 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick{
                 binding.txtPickUpTitle.setText(getResources().getString(R.string.pickUpLocation));
                 blueTin(binding.radioSelfPickup);
                 blackTin(binding.radioDeliver);
+
+                binding.cardLocationDeliver.setVisibility(View.GONE);
+                binding.imgDeliverArrowUp.setVisibility(View.GONE);
+                binding.imgDeliverArrowDown.setVisibility(View.VISIBLE);
             }
         });
 
@@ -290,8 +395,14 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick{
             public void onClick(View v) {
                 Click.preventTwoClick(v);
                 binding.radioSelfReturn.setChecked(false);
+                binding.txtDropUpMessage.setVisibility(View.GONE);
+                binding.txtDropUpTitle.setText(getResources().getString(R.string.enterLocationDeliver));
                 blueTin(binding.radioCollect);
                 blackTin(binding.radioSelfReturn);
+
+                binding.cardLocationCollect.setVisibility(View.GONE);
+                binding.imgCollectArrowUp.setVisibility(View.GONE);
+                binding.imgCollectArrowDown.setVisibility(View.VISIBLE);
             }
         });
 
@@ -301,8 +412,14 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick{
             public void onClick(View v) {
                 Click.preventTwoClick(v);
                 binding.radioCollect.setChecked(false);
+                binding.txtDropUpMessage.setVisibility(View.VISIBLE);
+                binding.txtDropUpTitle.setText(getResources().getString(R.string.dropOfLocation));
                 blueTin(binding.radioSelfReturn);
                 blackTin(binding.radioCollect);
+
+                binding.cardLocationCollect.setVisibility(View.GONE);
+                binding.imgCollectArrowUp.setVisibility(View.GONE);
+                binding.imgCollectArrowDown.setVisibility(View.VISIBLE);
             }
         });
 
@@ -310,17 +427,47 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick{
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-
-                if (binding.txtPickUpMessage.getVisibility()==View.VISIBLE){
-                    if (binding.imgArrowDown.getVisibility()==View.VISIBLE){
-                        binding.imgArrowDown.setVisibility(View.GONE);
-                        binding.imgArrowUp.setVisibility(View.VISIBLE);
-                        binding.cardLocation.setVisibility(View.VISIBLE);
-                    }else if (binding.imgArrowUp.getVisibility()==View.VISIBLE){
-                        binding.imgArrowUp.setVisibility(View.GONE);
-                        binding.imgArrowDown.setVisibility(View.VISIBLE);
-                        binding.cardLocation.setVisibility(View.GONE);
+                hideCollectView();
+                if (binding.imgDeliverArrowDown.getVisibility()==View.VISIBLE){
+                    binding.imgDeliverArrowDown.setVisibility(View.GONE);
+                    binding.imgDeliverArrowUp.setVisibility(View.VISIBLE);
+                    binding.cardLocationDeliver.setVisibility(View.VISIBLE);
+                    if (binding.radioDeliver.isChecked()){
+                        binding.txtGetLocationDeliver.setVisibility(View.VISIBLE);
+                        binding.recyclerLocationDeliver.setVisibility(View.GONE);
+                    }else {
+                        binding.txtGetLocationDeliver.setVisibility(View.GONE);
+                        binding.recyclerLocationDeliver.setVisibility(View.VISIBLE);
                     }
+                }else if (binding.imgDeliverArrowUp.getVisibility()==View.VISIBLE){
+                    binding.imgDeliverArrowUp.setVisibility(View.GONE);
+                    binding.imgDeliverArrowDown.setVisibility(View.VISIBLE);
+                    binding.cardLocationDeliver.setVisibility(View.GONE);
+                }
+
+            }
+        });
+
+        binding.cardDropLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                hideDeliverView();
+                if (binding.imgCollectArrowDown.getVisibility()==View.VISIBLE){
+                    binding.imgCollectArrowDown.setVisibility(View.GONE);
+                    binding.imgCollectArrowUp.setVisibility(View.VISIBLE);
+                    binding.cardLocationCollect.setVisibility(View.VISIBLE);
+                    if (binding.radioCollect.isChecked()){
+                        binding.txtGetLocationCollect.setVisibility(View.VISIBLE);
+                        binding.recyclerLocationCollect.setVisibility(View.GONE);
+                    }else {
+                        binding.txtGetLocationCollect.setVisibility(View.GONE);
+                        binding.recyclerLocationCollect.setVisibility(View.VISIBLE);
+                    }
+                }else if (binding.imgCollectArrowUp.getVisibility()==View.VISIBLE){
+                    binding.imgCollectArrowUp.setVisibility(View.GONE);
+                    binding.imgCollectArrowDown.setVisibility(View.VISIBLE);
+                    binding.cardLocationCollect.setVisibility(View.GONE);
                 }
 
             }
