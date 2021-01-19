@@ -1,7 +1,6 @@
 package com.example.fastuae.activity;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,20 +15,23 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.FragmentActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.adoisstudio.helper.H;
 import com.adoisstudio.helper.Session;
 import com.example.fastuae.R;
-import com.example.fastuae.adapter.LocationAdapter;
-import com.example.fastuae.databinding.ActivitySelectLocationBinding;
+import com.example.fastuae.adapter.ContactAdapter;
+import com.example.fastuae.adapter.LocationFilterAdapter;
+import com.example.fastuae.databinding.ActivityContactUsBinding;
+import com.example.fastuae.model.ContactModel;
+import com.example.fastuae.model.LocationModel;
 import com.example.fastuae.util.Click;
 import com.example.fastuae.util.Config;
 import com.example.fastuae.util.P;
@@ -42,21 +44,30 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class SelectLocationActivity extends FragmentActivity implements LocationListener, OnMapReadyCallback{
+public class ContactUsActivity extends AppCompatActivity implements LocationListener, OnMapReadyCallback,LocationFilterAdapter.onClick {
 
-    private SelectLocationActivity activity = this;
-    private ActivitySelectLocationBinding binding;
+    private ContactUsActivity activity = this;
+    private ActivityContactUsBinding binding;
+    private Session session;
+    private String flag;
 
+    private List<LocationModel> locationModelList;
+    private LocationFilterAdapter locationFilterAdapter;
+
+    private List<ContactModel> contactModelList;
+    private ContactAdapter contactAdapter;
+
+    private GoogleMap mMap;
     private LocationManager locationManager;
     private String provider;
     private int REQUEST_LOCATION = 1;
     double currentLat = 0;
     double currentLong = 0;
-    private GoogleMap mMap;
-    private String checkingAddress;
+    boolean isUpdateSearch = false;
     private String setLocation;
     private String address;
     private String city;
@@ -64,127 +75,144 @@ public class SelectLocationActivity extends FragmentActivity implements Location
     private String country;
     private String postalCode;
     private String knownName;
-    private boolean isUpdateSearch;
 
-    private Geocoder geocoder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         WindowView.getWindow(activity);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_select_location);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_contact_us);
+        session = new Session(activity);
+        flag = session.getString(P.languageFlag);
+        updateIcons();
+        initView();
+    }
 
-        isUpdateSearch = false;
-        geocoder = new Geocoder(this, Locale.getDefault());
-        checkingAddress = getResources().getString(R.string.getLOcation);
-        setLocation = getResources().getString(R.string.conformLocation);
+    private void initView() {
+        binding.toolbar.setTitle(getResources().getString(R.string.contactUs));
+        setSupportActionBar(binding.toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
 
+        locationModelList = new ArrayList<>();
+
+        locationModelList.add(new LocationModel("Abu Dhabi"));
+        locationModelList.add(new LocationModel("India"));
+        locationModelList.add(new LocationModel("Africa"));
+        locationModelList.add(new LocationModel("America"));
+        locationModelList.add(new LocationModel("Shree-Lanka"));
+
+        locationFilterAdapter = new LocationFilterAdapter(activity,locationModelList);
+        binding.recyclerLocation.setLayoutManager(new LinearLayoutManager(activity));
+        binding.recyclerLocation.setAdapter(locationFilterAdapter);
+
+        contactModelList = new ArrayList<>();
+        contactAdapter = new ContactAdapter(activity,contactModelList);
+        binding.recyclerContacts.setLayoutManager(new LinearLayoutManager(activity));
+        binding.recyclerContacts.setAdapter(contactAdapter);
+
+        setData();
+        updateContactData();
+        onClick();
+        setMapData();
+    }
+
+    private void setMapData(){
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.mapFrame);
-        mapFragment.getMapAsync(this);
+        mapFragment.getMapAsync(activity);
         checkGPS();
+    }
 
-        binding.btnLocation.setText(checkingAddress);
-        onClick();
+    private void setData(){
 
+        binding.txtLocation.setText("Corner Building Musafah Industrial 2(M2) Abu Dhabi, UAE");
+        binding.txtEmail.setText("assist@fastuae.com");
+        binding.txtTelephoneNo.setText("600-500-101");
+        binding.txtMobileNo.setText("971 2815 2700");
+        binding.txtArea.setText(locationModelList.get(0).getLocation());
+
+    }
+
+    private void updateContactData(){
+
+        contactModelList.add(new ContactModel("Abu Dhabi - Abu Dhabi Mall","+971 2 645 7200","luxcar@fastuae.com"));
+        contactModelList.add(new ContactModel("Abu Dhabi : World Trade Center Mall","+971 2 632 3769","a35@fastuae.com"));
+        contactModelList.add(new ContactModel("Abu Dhabi : Mussafah","+971 2 551 2916","a8@fastuae.com"));
+        contactModelList.add(new ContactModel("Abu Dhabi : Airport Road","+971 2 445 9298","a14@fastuae.com"));
+        contactModelList.add(new ContactModel("Al Ain : Zayed Bin Sultan Street","+971 3 766 7330","a7@fastuae.com"));
+        contactModelList.add(new ContactModel("Dubai : Sheikh Zayed Road","+971 4 338 7171","done@fastuae.com"));
+        contactAdapter.notifyDataSetChanged();
+
+    }
+
+    @Override
+    public void onFilterClick(String location) {
+        binding.txtArea.setText(location);
+        checkLocationViewView();
     }
 
     private void onClick(){
 
-        binding.btnLocation.setOnClickListener(new View.OnClickListener() {
+        binding.cardLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-                if (binding.btnLocation.getText().toString().equals(checkingAddress)) {
-                    checkGPS();
-                } else {
-                    Config.FROM_MAP = true;
-                    finish();
-                }
+                checkLocationViewView();
             }
         });
 
-        binding.imgCurrentLocation.setOnClickListener(new View.OnClickListener() {
+        binding.txtViewMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-                isUpdateSearch = false;
-                checkGPS();
-            }
-        });
-
-        binding.imgBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Click.preventTwoClick(v);
-                finish();
-            }
-        });
-
-        binding.cardPickLocation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Click.preventTwoClick(v);
-                if (binding.imgArrowDown.getVisibility()==View.VISIBLE){
-                    binding.imgArrowDown.setVisibility(View.GONE);
-                    binding.imgArrowUp.setVisibility(View.VISIBLE);
-                    binding.lnrSearchLocation.setVisibility(View.VISIBLE);
-                    binding.etxLocation.setText("");
-                }else if (binding.imgArrowUp.getVisibility()==View.VISIBLE){
-                    binding.imgArrowUp.setVisibility(View.GONE);
-                    binding.imgArrowDown.setVisibility(View.VISIBLE);
-                    binding.lnrSearchLocation.setVisibility(View.GONE);
-                    binding.etxLocation.setText("");
-                    hideKeyboard(activity);
-
-                }
-            }
-        });
-
-        binding.txtSearchLocation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Click.preventTwoClick(v);
-                if (!TextUtils.isEmpty(binding.etxLocation.getText().toString().trim())){
-                    binding.imgArrowUp.setVisibility(View.GONE);
-                    binding.imgArrowDown.setVisibility(View.VISIBLE);
-                    binding.lnrSearchLocation.setVisibility(View.GONE);
-                    getLocation(binding.etxLocation.getText().toString());
-                hideKeyboard(activity);
-                }else {
-                    H.showMessage(activity,getResources().getString(R.string.enterSearchLocation));
-                }
-
+                binding.txtViewMore.setVisibility(View.GONE);
+                updateContactData();
             }
         });
 
     }
 
-    private void getLocation(String addressData){
-        isUpdateSearch = true;
-        binding.etxLocation.setText("");
-        List<Address> addressList = null;
-        try {
-            addressList = geocoder.getFromLocationName(addressData, 1);
-            for (int i = 0; i < addressList.size(); i++) {
-                Address address = addressList.get(0);
-                currentLat = address.getLatitude();
-                currentLong = address.getLongitude();
-                updateLocation(currentLat, currentLong);
+    private void checkLocationViewView() {
+        if (binding.lnrLocationListView.getVisibility() == View.VISIBLE) {
+            binding.lnrLocationListView.setVisibility(View.GONE);
+            if (flag.equals(Config.ARABIC)) {
+                binding.imgLocationLeft.setImageResource(R.drawable.ic_down_arrow);
+            } else if (flag.equals(Config.ENGLISH)) {
+                binding.imgLocationRight.setImageResource(R.drawable.ic_down_arrow);
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+        } else if (binding.lnrLocationListView.getVisibility() == View.GONE) {
+            binding.lnrLocationListView.setVisibility(View.VISIBLE);
+            if (flag.equals(Config.ARABIC)) {
+                binding.imgLocationLeft.setImageResource(R.drawable.ic_up_arrow);
+            } else if (flag.equals(Config.ENGLISH)) {
+                binding.imgLocationRight.setImageResource(R.drawable.ic_up_arrow);
+            }
         }
     }
 
-    private void setUserAddress(){
-        Session session = new Session(activity);
-        session.addString(P.googleAddress,address);
-        session.addString(P.googleCity,city);
-        session.addString(P.googleState,state);
-        session.addString(P.googleCountry,country);
-        session.addString(P.googleCode,postalCode);
-        session.addString(P.googleKnownName,knownName);
+    private void updateIcons() {
+
+        if (flag.equals(Config.ARABIC)) {
+
+            binding.imgLocationRight.setVisibility(View.GONE);
+            binding.imgLocationLeft.setVisibility(View.VISIBLE);
+
+        } else if (flag.equals(Config.ENGLISH)) {
+
+            binding.imgLocationRight.setVisibility(View.VISIBLE);
+            binding.imgLocationLeft.setVisibility(View.GONE);
+
+        }
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+        return false;
     }
 
     @Override
@@ -303,6 +331,7 @@ public class SelectLocationActivity extends FragmentActivity implements Location
     @Override
     public void onLocationChanged(Location location) {
         if (!isUpdateSearch){
+            isUpdateSearch = true;
             currentLat = location.getLatitude();
             currentLong = location.getLongitude();
             updateLocation(currentLat, currentLong);
@@ -327,18 +356,8 @@ public class SelectLocationActivity extends FragmentActivity implements Location
 
             if (!TextUtils.isEmpty(address)) {
                 addressData = address + "";
+                binding.txtLocation.setText(addressData);
             }
-//            if (!TextUtils.isEmpty(city)){
-//                addressData = addressData + city + ",";
-//            }
-//            if (!TextUtils.isEmpty(state)){
-//                addressData = addressData + state + ",";
-//            }
-//            if (!TextUtils.isEmpty(country)){
-//                addressData = addressData + country;
-//            }
-
-            setUserAddress();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -355,15 +374,12 @@ public class SelectLocationActivity extends FragmentActivity implements Location
             mMap.addMarker(new MarkerOptions().position(latLong).title("Current Location"));
             mMap.moveCamera(CameraUpdateFactory.newLatLng(latLong));
             mMap.animateCamera(CameraUpdateFactory.zoomTo(17.0f));
-            binding.txtAddress.setText(getAddress(currentLat,currentLong));
-            binding.btnLocation.setText(setLocation);
-            new Session(activity).addString(P.locationAddress, binding.txtAddress.getText().toString());
+            getAddress(currentLat,currentLong);
         }
     }
 
     @Override
     public void onProviderDisabled(String provider) {
-        // TODO Auto-generated method stub
 
         if (ActivityCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -376,12 +392,10 @@ public class SelectLocationActivity extends FragmentActivity implements Location
 
     @Override
     public void onProviderEnabled(String provider) {
-        // TODO Auto-generated method stub
     }
 
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {
-        // TODO Auto-generated method stub
     }
 
     private void jumpToSetting() {
@@ -459,14 +473,4 @@ public class SelectLocationActivity extends FragmentActivity implements Location
                 new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
                 REQUEST_LOCATION);
     }
-
-    private void hideKeyboard(Context context) {
-        try {
-            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(binding.etxLocation.getWindowToken(), 0);
-        } catch (Exception e) {
-            // TODO: handle exception
-        }
-    }
-
 }

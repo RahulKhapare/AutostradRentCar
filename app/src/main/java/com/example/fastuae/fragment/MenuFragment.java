@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 
 import com.adoisstudio.helper.Session;
 import com.example.fastuae.R;
+import com.example.fastuae.activity.ContactUsActivity;
 import com.example.fastuae.activity.FAQActivity;
 import com.example.fastuae.activity.LocationActivity;
 import com.example.fastuae.activity.SpecialOffersActivity;
@@ -94,6 +95,8 @@ public class MenuFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
+                Intent intent = new Intent(context, ContactUsActivity.class);
+                startActivity(intent);
             }
         });
 

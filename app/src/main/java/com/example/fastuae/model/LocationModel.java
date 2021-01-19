@@ -12,6 +12,10 @@ public class LocationModel {
 
     }
 
+    public LocationModel(String location) {
+        this.location = location;
+    }
+
     public String getBranchCode() {
         return branchCode;
     }
@@ -42,10 +46,6 @@ public class LocationModel {
 
     public void setOperation(String operation) {
         this.operation = operation;
-    }
-
-    public LocationModel(String location) {
-        this.location = location;
     }
 
     public String getLocation() {
