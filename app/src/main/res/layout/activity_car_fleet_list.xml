@@ -15,7 +15,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="wrap_content"
             android:layout_margin="3dp"
             app:cardCornerRadius="5dp"
             app:cardElevation="3dp">
@@ -106,7 +106,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cardInstruction"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="wrap_content"
             android:layout_margin="3dp"
             app:cardCornerRadius="5dp"
             app:cardElevation="3dp"
@@ -471,4 +471,5 @@
         </androidx.cardview.widget.CardView>
 
     </LinearLayout>
+
 </layout>
