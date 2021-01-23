@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,7 +16,7 @@ import com.adoisstudio.helper.Json;
 import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
 import com.example.fastuae.R;
-import com.example.fastuae.databinding.ActivityOTPVerificationBinding;
+import com.example.fastuae.databinding.ActivityOTPVerificationSkipBinding;
 import com.example.fastuae.util.Click;
 import com.example.fastuae.util.Config;
 import com.example.fastuae.util.ConnectionUtil;
@@ -23,10 +24,11 @@ import com.example.fastuae.util.P;
 import com.example.fastuae.util.ProgressView;
 import com.example.fastuae.util.WindowView;
 
-public class OTPVerificationActivity extends AppCompatActivity {
+public class OTPVerificationSkipActivity extends AppCompatActivity {
 
-    private OTPVerificationActivity activity = this;
-    private ActivityOTPVerificationBinding binding;
+    private OTPVerificationSkipActivity activity = this;
+    private ActivityOTPVerificationSkipBinding binding;
+
     private LoadingDialog loadingDialog;
     private Session session;
     private String number = "";
@@ -40,23 +42,20 @@ public class OTPVerificationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         WindowView.getWindow(activity);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_o_t_p_verification);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_o_t_p_verification_skip);
         initView();
     }
 
-    private void initView(){
+    private void initView() {
+        binding.toolbar.setTitle(getResources().getString(R.string.otpEnter));
+        setSupportActionBar(binding.toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+
         session = new Session(activity);
         number = getIntent().getStringExtra(Config.MOBILE_NUMBER);
         countryCode = getIntent().getStringExtra(Config.COUNTRY_CODE);
         verificationFor = getIntent().getStringExtra(Config.VERIFICATION_FOR);
-
-        if(verificationFor.equals(Config.LOGIN)){
-            binding.imgCarLogin.setVisibility(View.VISIBLE);
-            binding.imgCarSignup.setVisibility(View.GONE);
-        }else if(verificationFor.equals(Config.SIGN_UP)){
-            binding.imgCarLogin.setVisibility(View.GONE);
-            binding.imgCarSignup.setVisibility(View.VISIBLE);
-        }
 
         loadingDialog = new LoadingDialog(activity);
         resetOTP = getResources().getString(R.string.resendOTP);
@@ -97,7 +96,6 @@ public class OTPVerificationActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
 
     private void startTimer(){
@@ -209,5 +207,13 @@ public class OTPVerificationActivity extends AppCompatActivity {
                     }
                 })
                 .run("hitResendOtp");
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+        return false;
     }
 }

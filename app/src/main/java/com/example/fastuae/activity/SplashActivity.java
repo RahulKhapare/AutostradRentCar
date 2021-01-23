@@ -16,6 +16,7 @@ import com.adoisstudio.helper.Session;
 import com.example.fastuae.R;
 import com.example.fastuae.databinding.ActivitySplashBinding;
 import com.example.fastuae.util.Config;
+import com.example.fastuae.util.ConnectionUtil;
 import com.example.fastuae.util.P;
 import com.example.fastuae.util.ProgressView;
 import com.example.fastuae.util.WindowView;
@@ -39,7 +40,11 @@ public class SplashActivity extends AppCompatActivity {
     private void initView(){
         session = new Session(activity);
         loadingDialog = new LoadingDialog(activity);
-        hitInit();
+        if (ConnectionUtil.isOnline(activity)){
+            hitInit();
+        }else {
+            H.showMessage(activity,getResources().getString(R.string.noInternet));
+        }
     }
 
     private void checkValidation(){

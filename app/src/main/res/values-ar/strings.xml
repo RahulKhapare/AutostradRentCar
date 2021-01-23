@@ -212,6 +212,12 @@
     <string name="rentFastCar">فاست لتأجير السيارات</string>
     <string name="nationalGroup">مجموعة إماراتية وطنية</string>
     <string name="ourLocation">مواقعنا</string>
+    <string name="noInternet">لا يوجد اتصال بالإنترنت متاح</string>
+
+    <string name="otpEnter">أدخل OTP</string>
+    <string name="createAccount">إنشاء حساب</string>
+    <string name="newToFats">جديد على FastUAE؟</string>
+    <string name="alreyCustomer">عميل بالفعل؟</string>
 
     <string name="txt1">شركة رائدة في مجال تأجير السيارات ولديها أكبر شبكة من الفروع ونقاط الالتقاء</string>
     <string name="txt2">شركة رائدة في مجال تأجير السيارات ولديها أكبر شبكة من الفروع ونقاط الالتقاء</string>

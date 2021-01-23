@@ -17,11 +17,13 @@ public class CountryCodeAdapter extends BaseAdapter {
     private Context context;
     private LayoutInflater inflter;
     private List<CountryCodeModel> itemListModels;
+    int flag = 0;
 
-    public CountryCodeAdapter(Context context, List<CountryCodeModel> itemListModelList) {
+    public CountryCodeAdapter(Context context, List<CountryCodeModel> itemListModelList,int flag) {
         this.context = context;
         this.itemListModels = itemListModelList;
         inflter = (LayoutInflater.from(context));
+        this.flag = flag;
     }
 
 
@@ -42,7 +44,11 @@ public class CountryCodeAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        view = inflter.inflate(R.layout.activity_countr_code_bg, null);
+        if (flag==1){
+            view = inflter.inflate(R.layout.activity_countr_code_bg, null);
+        }else {
+            view = inflter.inflate(R.layout.activity_countr_code_white_bg, null);
+        }
         TextView txtName = view.findViewById(R.id.txtCode);
         CountryCodeModel model = itemListModels.get(i);
         txtName.setText("+"+model.getPhone_code());

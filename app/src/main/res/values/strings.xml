@@ -213,6 +213,12 @@
     <string name="rentFastCar">Fast Rent a Car</string>
     <string name="nationalGroup">An Emirates National Group</string>
     <string name="ourLocation">Our Locations</string>
+    <string name="noInternet">No internet connection available</string>
+
+    <string name="otpEnter">Enter OTP</string>
+    <string name="createAccount">Create Account</string>
+    <string name="newToFats">New to FastUAE ?</string>
+    <string name="alreyCustomer">Already a customer ?</string>
 
 
     <string name="txt1">Leading Car Rental Company with the largest network of Branches &amp; Pickup points</string>

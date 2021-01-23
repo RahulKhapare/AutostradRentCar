@@ -13,6 +13,7 @@ import com.example.fastuae.R;
 import com.example.fastuae.databinding.ActivityFaqListBinding;
 import com.example.fastuae.model.FAQModel;
 import com.example.fastuae.util.Click;
+import com.example.fastuae.util.RemoveHtml;
 
 import java.util.List;
 
@@ -38,8 +39,8 @@ public class FAQAdapter extends RecyclerView.Adapter<FAQAdapter.viewHolder> {
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
         FAQModel model = faqModelList.get(position);
 
-        holder.binding.txtTitle.setText(model.getTitle());
-        holder.binding.txtDescription.setText(model.getDescription());
+        holder.binding.txtTitle.setText(model.getQuestion());
+        holder.binding.txtDescription.setText(RemoveHtml.html2text(model.getAnswer()).trim());
 
         holder.binding.cardView.setOnClickListener(new View.OnClickListener() {
             @Override

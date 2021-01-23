@@ -22,6 +22,7 @@ import com.example.fastuae.databinding.ActivityLoginBinding;
 import com.example.fastuae.model.CountryCodeModel;
 import com.example.fastuae.util.Click;
 import com.example.fastuae.util.Config;
+import com.example.fastuae.util.ConnectionUtil;
 import com.example.fastuae.util.P;
 import com.example.fastuae.util.ProgressView;
 import com.example.fastuae.util.WindowView;
@@ -68,7 +69,7 @@ public class LoginActivity extends AppCompatActivity {
 
         }
 
-        CountryCodeAdapter adapter = new CountryCodeAdapter(activity, countryCodeModelList);
+        CountryCodeAdapter adapter = new CountryCodeAdapter(activity, countryCodeModelList,1);
         binding.spinnerCode.setAdapter(adapter);
         binding.spinnerCode.setSelection(position);
 
@@ -107,12 +108,11 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Click.preventTwoClick(v);
                 if (checkValidation()){
-//                   hitMobileLogin();
-                    Intent intent = new Intent(activity, OTPVerificationActivity.class);
-                    intent.putExtra(Config.VERIFICATION_FOR,Config.LOGIN);
-                    intent.putExtra(Config.MOBILE_NUMBER,binding.etxMobileNumber.getText().toString().trim());
-                    intent.putExtra(Config.COUNTRY_CODE,countryCode);
-                    startActivity(intent);
+                    if (ConnectionUtil.isOnline(activity)){
+                        hitMobileLogin();
+                    }else {
+                        H.showMessage(activity,getResources().getString(R.string.noInternet));
+                    }
                 }
             }
         });
@@ -125,7 +125,6 @@ public class LoginActivity extends AppCompatActivity {
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 finish();
-//                overridePendingTransition(0, 0);
             }
         });
 

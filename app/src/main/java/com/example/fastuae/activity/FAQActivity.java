@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.adoisstudio.helper.JsonList;
 import com.example.fastuae.R;
 import com.example.fastuae.adapter.CategorySelectionAdapter;
 import com.example.fastuae.databinding.ActivityFAQBinding;
@@ -37,6 +38,11 @@ public class FAQActivity extends AppCompatActivity implements CategorySelectionA
     private VehicleRelatedFragment vehicleRelatedFragment;
     private InsuranceRelatedFragment insuranceRelatedFragment;
 
+    public static JsonList generalJsonList = null;
+    public static JsonList paymentJsonList = null;
+    public static JsonList vehicleJsonList = null;
+    public static JsonList insuranceJsonList = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,10 +63,12 @@ public class FAQActivity extends AppCompatActivity implements CategorySelectionA
         binding.recyclerFAQCategory.setLayoutManager(new LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false));
         binding.recyclerFAQCategory.setNestedScrollingEnabled(false);
         binding.recyclerFAQCategory.setAdapter(adapter);
+
         setData();
 
         generalFragment = GeneralFragment.newInstance();
         fragmentLoader(generalFragment, Config.General);
+
     }
 
     private void setData() {
@@ -120,6 +128,7 @@ public class FAQActivity extends AppCompatActivity implements CategorySelectionA
             }
         }
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

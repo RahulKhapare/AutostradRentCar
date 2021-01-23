@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimaryDark">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:background="@color/colorPrimaryDark"
+            android:theme="@style/ToolbarColoredBackArrow"
+            app:subtitleTextColor="@color/colorWhite"
+            app:titleTextColor="@color/colorWhite"></androidx.appcompat.widget.Toolbar>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/toolbar"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/curve_main_bg">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.core.widget.NestedScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_above="@+id/cardBottom"
+                    android:fillViewport="true">
+
+                    <LinearLayout
+                        android:layout_marginTop="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:id="@+id/lnrClickCreateAccount"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:paddingRight="20dp"
+                            android:paddingLeft="20dp"
+                            android:layout_marginBottom="20dp"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/radioCreateAccount"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/createAccount"
+                                android:textColor="@color/textDark"
+                                android:checked="false"
+                                android:fontFamily="@font/nunito_sans_semibold"
+                                android:textSize="18sp">
+
+                            </RadioButton>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/textDark"
+                                android:fontFamily="@font/nunito_sans_regular"
+                                android:textSize="12sp"
+                                android:paddingRight="10dp"
+                                android:paddingLeft="10dp"
+                                android:text="@string/newToFats">
+
+                            </TextView>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0.1dp"
+                            android:background="@color/grayLight">
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/lnrClickLogin"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:paddingRight="20dp"
+                            android:paddingLeft="20dp"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/radioLogin"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/loginn"
+                                android:textColor="@color/textDark"
+                                android:buttonTint="@color/lightBlue"
+                                android:checked="true"
+                                android:fontFamily="@font/nunito_sans_semibold"
+                                android:textSize="18sp">
+
+                            </RadioButton>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/textDark"
+                                android:fontFamily="@font/nunito_sans_regular"
+                                android:textSize="12sp"
+                                android:paddingRight="10dp"
+                                android:paddingLeft="10dp"
+                                android:text="@string/alreyCustomer">
+
+                            </TextView>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/lnrLogin"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:layout_marginTop="30dp"
+                            android:paddingRight="30dp"
+                            android:paddingLeft="30dp"
+                            android:visibility="visible">
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="?actionBarSize"
+                                android:layout_marginTop="20dp"
+                                android:orientation="horizontal">
+
+                                <Spinner
+                                    android:id="@+id/spinnerCodeLogin"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginRight="5dp"
+                                    android:layout_marginLeft="5dp"
+                                    style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                                    android:backgroundTint="@color/colorPrimaryDark">
+
+                                </Spinner>
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="?actionBarSize"
+                                    android:hint="@string/mobileNumber"
+                                    android:layout_marginRight="5dp"
+                                    android:layout_marginLeft="5dp"
+                                    app:hintTextColor="@color/grayTwo"
+                                    app:backgroundTint="@color/colorPrimaryDark"
+                                    android:textColorHint="@color/grayTwo">
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/etxMobileNumberLogin"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:inputType="number"
+                                        android:singleLine="true"
+                                        android:textSize="20dp"
+                                        android:theme="@style/EditTextTheme"
+                                        android:fontFamily="@font/nunito_sans_regular"
+                                        android:textColor="@color/colorPrimaryDark"
+                                        app:backgroundTint="@color/colorPrimaryDark"
+                                        />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/txtProceedLogin"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/nunit_sans_bold"
+                                android:textColor="@color/colorWhite"
+                                android:text="@string/proceed"
+                                android:padding="16dp"
+                                android:layout_marginRight="5dp"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="30dp"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:textSize="18dp"
+                                android:background="@drawable/button_blue_bg"></TextView>
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/lnrSignUp"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:layout_marginTop="30dp"
+                            android:paddingRight="30dp"
+                            android:paddingLeft="30dp"
+                            android:visibility="gone">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="?actionBarSize"
+                                android:layout_marginTop="20dp"
+                                android:orientation="horizontal">
+
+                                <Spinner
+                                    android:id="@+id/spinnerCodeSignup"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:backgroundTint="@color/colorPrimaryDark"
+                                    android:layout_marginRight="5dp"
+                                    android:layout_marginLeft="5dp"
+                                    style="@style/Base.Widget.AppCompat.Spinner.Underlined">
+
+                                </Spinner>
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:hint="@string/mobileNumber"
+                                    android:layout_marginRight="5dp"
+                                    android:layout_marginLeft="5dp"
+                                    app:hintTextColor="@color/grayTwo"
+                                    android:textColorHint="@color/grayTwo"
+                                    app:backgroundTint="@color/colorPrimaryDark"
+                                    >
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/etxMobileNumberSignup"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:inputType="number"
+                                        android:singleLine="true"
+                                        android:textSize="20sp"
+                                        android:theme="@style/EditTextTheme"
+                                        android:fontFamily="@font/nunito_sans_regular"
+                                        android:textColor="@color/colorPrimaryDark"
+                                        app:backgroundTint="@color/colorPrimaryDark"
+                                        />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+                            </LinearLayout>
+
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:layout_marginTop="20dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="?actionBarSize"
+                                android:hint="@string/enterEmail"
+                                app:hintTextColor="@color/grayTwo"
+                                android:textColorHint="@color/grayTwo"
+                                app:backgroundTint="@color/colorPrimaryDark">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/etxEmailSignup"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:inputType="textEmailAddress"
+                                    android:singleLine="true"
+                                    android:textSize="20sp"
+                                    android:layout_marginRight="5dp"
+                                    android:layout_marginLeft="5dp"
+                                    android:theme="@style/EditTextTheme"
+                                    android:fontFamily="@font/nunito_sans_regular"
+                                    android:textColor="@color/colorPrimaryDark"
+                                    app:backgroundTint="@color/colorPrimaryDark"
+                                    />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <TextView
+                                android:id="@+id/txtProceedSignup"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/nunit_sans_bold"
+                                android:textColor="@color/colorWhite"
+                                android:text="@string/proceed"
+                                android:padding="16dp"
+                                android:layout_marginRight="5dp"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="30dp"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:textSize="18dp"
+                                android:background="@drawable/button_blue_bg"></TextView>
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                </androidx.core.widget.NestedScrollView>
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</layout>

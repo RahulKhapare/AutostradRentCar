@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimaryDark">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:background="@color/colorPrimaryDark"
+            android:theme="@style/ToolbarColoredBackArrow"
+            app:subtitleTextColor="@color/colorWhite"
+            app:titleTextColor="@color/colorWhite"></androidx.appcompat.widget.Toolbar>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/toolbar"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/curve_main_bg">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.core.widget.NestedScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_above="@+id/cardBottom"
+                    android:fillViewport="true">
+
+                    <RelativeLayout
+                        android:layout_marginTop="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:layout_marginTop="20dp"
+                            android:paddingRight="30dp"
+                            android:paddingLeft="30dp">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:text="@string/enterCode"
+                                android:fontFamily="@font/nunit_sans_bold"
+                                android:textSize="27sp">
+
+                            </TextView>
+
+                            <TextView
+                                android:id="@+id/txtOTPMessage"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/grayTwo"
+                                android:text="@string/app_name"
+                                android:fontFamily="@font/nunito_sans_semibold"
+                                android:textSize="18sp">
+
+                            </TextView>
+
+                            <com.example.fastuae.util.OtpEditTextDark
+                                android:id="@+id/etxOtp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:cursorVisible="false"
+                                android:digits="1234567890"
+                                android:maxLength="6"
+                                android:hint="0"
+                                android:text=""
+                                android:textSize="20sp"
+                                android:textIsSelectable="false"
+                                android:textColor="@color/colorWhite"
+                                android:textColorHint="@color/grayLight"
+                                android:backgroundTint="@color/grayLight"
+                                android:layout_marginTop="30dp"
+                                android:inputType="number" />
+
+                            <TextView
+                                android:id="@+id/txtProceed"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/nunit_sans_bold"
+                                android:textColor="@color/colorWhite"
+                                android:text="@string/proceed"
+                                android:padding="16dp"
+                                android:layout_marginTop="30dp"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:textSize="18dp"
+                                android:background="@drawable/button_blue_bg"></TextView>
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginTop="20dp">
+
+                                <TextView
+                                    android:id="@+id/txtResend"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="@color/lightBlue"
+                                    android:text="@string/resendCodeIn"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_marginRight="5dp"
+                                    android:visibility="gone"
+                                    android:fontFamily="@font/nunito_sans_semibold"
+                                    android:textSize="16sp">
+
+                                </TextView>
+
+
+                                <TextView
+                                    android:id="@+id/txtSeconds"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="@color/textDark"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_marginRight="5dp"
+                                    android:text="@string/secondsRemaining"
+                                    android:fontFamily="@font/nunito_sans_semibold"
+                                    android:textSize="16sp">
+
+                                </TextView>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </RelativeLayout>
+
+                </androidx.core.widget.NestedScrollView>
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</layout>

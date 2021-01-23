@@ -2,15 +2,33 @@ package com.example.fastuae.model;
 
 public class FAQModel {
 
-    String title;
-    String description;
+    String question;
+    String answer;
+    String faq_category_name;
     boolean clickFlag;
 
+    public String getQuestion() {
+        return question;
+    }
 
-    public FAQModel(String title, String description,boolean clickFlag) {
-        this.title = title;
-        this.description = description;
-        this.clickFlag = clickFlag;
+    public void setQuestion(String question) {
+        this.question = question;
+    }
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
+
+    public String getFaq_category_name() {
+        return faq_category_name;
+    }
+
+    public void setFaq_category_name(String faq_category_name) {
+        this.faq_category_name = faq_category_name;
     }
 
     public boolean isClickFlag() {
@@ -19,21 +37,5 @@ public class FAQModel {
 
     public void setClickFlag(boolean clickFlag) {
         this.clickFlag = clickFlag;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 }

@@ -58,7 +58,7 @@ public class SliderImageAdapter extends PagerAdapter {
         final ImageView imageView = imageLayout
                 .findViewById(R.id.imgView);
         SliderModel model = imageModelList.get(position);
-        Picasso.get().load(R.drawable.ic_banner).error(R.mipmap.ic_launcher).into(imageView);
+        Picasso.get().load(model.getBanner_image()).error(R.drawable.ic_image).into(imageView);
 
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override

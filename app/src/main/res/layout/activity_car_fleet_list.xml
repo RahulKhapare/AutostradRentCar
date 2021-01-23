@@ -15,7 +15,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="210dp"
             android:layout_margin="3dp"
             app:cardCornerRadius="5dp"
             app:cardElevation="3dp">
@@ -73,8 +73,8 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/nunit_sans_bold"
                         android:textSize="12sp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginBottom="0dp"
                         android:textColor="@color/lightBlue"
                         android:text="@string/viewMore">
                     </TextView>
@@ -106,7 +106,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cardInstruction"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="210dp"
             android:layout_margin="3dp"
             app:cardCornerRadius="5dp"
             app:cardElevation="3dp"
@@ -455,8 +455,8 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/nunit_sans_bold"
                     android:textSize="12sp"
-                    android:layout_marginTop="14dp"
-                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="0dp"
                     android:layout_marginRight="5dp"
                     android:layout_marginLeft="5dp"
                     android:textColor="@color/lightBlue"

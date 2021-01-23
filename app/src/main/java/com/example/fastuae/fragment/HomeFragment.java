@@ -23,9 +23,14 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.adoisstudio.helper.Api;
 import com.adoisstudio.helper.H;
+import com.adoisstudio.helper.Json;
+import com.adoisstudio.helper.JsonList;
+import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
 import com.example.fastuae.R;
+import com.example.fastuae.activity.FAQActivity;
 import com.example.fastuae.activity.SelectCarActivity;
 import com.example.fastuae.activity.SelectLocationActivity;
 import com.example.fastuae.adapter.LocationAdapter;
@@ -36,6 +41,7 @@ import com.example.fastuae.model.SliderModel;
 import com.example.fastuae.util.Click;
 import com.example.fastuae.util.Config;
 import com.example.fastuae.util.P;
+import com.example.fastuae.util.ProgressView;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -58,6 +64,10 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick{
     private String from = "";
     private String deliver = "deliver";
     private String collect = "collect";
+
+    private LoadingDialog loadingDialog;
+    public static JsonList carList = null;
+    public static JsonList blogList = null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -174,6 +184,7 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick{
     }
 
     private void initView(){
+        loadingDialog = new LoadingDialog(context);
         sliderModelList = new ArrayList<>();
         sliderImageAdapter = new SliderImageAdapter(context, sliderModelList);
         binding.pager.setAdapter(sliderImageAdapter);
@@ -199,8 +210,8 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick{
         binding.recyclerLocationCollect.setHasFixedSize(true);
         binding.recyclerLocationCollect.setAdapter(locationCollectAdapter);
 
+        hitHomeData();
         getCurrentDate();
-        setUpSliderList();
         onClick();
     }
 
@@ -246,13 +257,19 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick{
     }
 
 
-    private void setUpSliderList() {
+    private void setUpSliderList(JsonList jsonList) {
+
         sliderModelList.clear();
 
-        SliderModel model = new SliderModel();
-        sliderModelList.add(model);
-        sliderModelList.add(model);
-        sliderModelList.add(model);
+        if (jsonList!=null){
+            for (Json json : jsonList){
+                SliderModel model = new SliderModel();
+                model.setBanner_image(json.getString(P.banner_image));
+                model.setImage_alt_text(json.getString(P.image_alt_text));
+                model.setUrl(json.getString(P.url));
+                sliderModelList.add(model);
+            }
+        }
 
         sliderImageAdapter.notifyDataSetChanged();
 
@@ -550,6 +567,37 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick{
         );
 
         radioButton.setButtonTintList(myColorStateList);
+    }
+
+    private void hitHomeData() {
+
+        ProgressView.show(context,loadingDialog);
+        Json j = new Json();
+
+        Api.newApi(context, P.BaseUrl + "home").addJson(j)
+                .setMethod(Api.GET)
+                //.onHeaderRequest(App::getHeaders)
+                .onError(() -> {
+                    ProgressView.dismiss(loadingDialog);
+                    H.showMessage(context, "On error is called");
+                })
+                .onSuccess(json ->
+                {
+                    if (json.getInt(P.status) == 1) {
+
+                        json = json.getJson(P.data);
+                        JsonList bannerList = json.getJsonList(P.banner_list);
+                        carList = json.getJsonList(P.car_list);
+                        blogList = json.getJsonList(P.blog_list);
+                        setUpSliderList(bannerList);
+
+                    }else {
+                        H.showMessage(context,json.getString(P.error));
+                    }
+                    ProgressView.dismiss(loadingDialog);
+
+                })
+                .run("hitFAQData");
     }
 
     public static HomeFragment newInstance() {
