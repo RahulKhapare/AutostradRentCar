@@ -169,6 +169,82 @@ public class Api {
         return this;
     }
 
+    public Api run(final String code,final String tokenValue) {
+
+        H.log("Api Call", "______________________________________________");
+        H.log("Api Url", code + ": " + url);
+        H.log("Api Data", code + ": " + json.toString());
+
+        if (onLoadingListener != null) onLoadingListener.onLoading(true);
+        JsonObjectRequest jsonRequest = new JsonObjectRequest(getMethod(), url, json, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                if (onLoadingListener != null) onLoadingListener.onLoading(false);
+                H.log("Api Response", code + ": " + response.toString());
+
+                if (onSuccessListener != null) {
+                    try {
+                        onSuccessListener.onSuccess(new Json(response.toString()));
+                    } catch (JSONException e) {
+                        H.log(TAG, e.toString());
+                    }
+                }
+
+                if (onResultListener != null) {
+                    try {
+                        onResultListener.onResult(new Json(response.toString()));
+                    } catch (JSONException e) {
+                        H.log(TAG, e.toString());
+                    }
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if (onLoadingListener != null) onLoadingListener.onLoading(false);
+
+                H.log("Api Error", code + ": " + error.toString());
+                H.showMessage(context,error+"");
+
+                if (onErrorListener != null)
+                    onErrorListener.onError();
+
+                if (onResultListener != null)
+                    onResultListener.onResult(null);
+            }
+        }) {
+
+            @Override
+            public Map<String, String> getHeaders() {
+
+                Map<String, String> headers = new HashMap<>();
+
+                headers.put("Authorization",  "Basic YWRtaW46MTIzNEBhZG1pbg==");
+                headers.put("x-api-key", "123456");
+                headers.put("Content-Type", "application/json");
+                headers.put("x-auth-token",tokenValue);
+
+                return headers;
+            }
+        };
+
+        jsonRequest.setRetryPolicy(new DefaultRetryPolicy(
+                SOCKET_TIMEOUT_MS,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(jsonRequest);
+
+        this.jsonObjectRequest = jsonRequest;
+
+        return this;
+    }
+
     public void cancel() {
         if (jsonObjectRequest != null)
             jsonObjectRequest.cancel();

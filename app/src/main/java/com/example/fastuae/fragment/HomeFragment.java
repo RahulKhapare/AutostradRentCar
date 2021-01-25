@@ -82,7 +82,6 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick{
         return binding.getRoot();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onResume() {
         super.onResume();
@@ -111,7 +110,6 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick{
         binding.cardLocationCollect.setVisibility(View.GONE);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void updateSelfPickupData(){
         String address = new Session(context).getString(P.locationAddress);
         if (locationDeliverModelList!=null && !locationDeliverModelList.isEmpty()){
@@ -142,7 +140,6 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick{
 
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void updateSelfReturnData(){
         String address = new Session(context).getString(P.locationAddress);
         if (locationCollectModelList!=null && !locationCollectModelList.isEmpty()){
@@ -372,7 +369,6 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick{
         });
 
         binding.radioDeliver.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
@@ -390,7 +386,6 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick{
         });
 
         binding.radioSelfPickup.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
@@ -407,7 +402,6 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick{
         });
 
         binding.radioCollect.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
@@ -424,7 +418,6 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick{
         });
 
         binding.radioSelfReturn.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
@@ -545,28 +538,30 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick{
     }
 
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    private void blackTin(RadioButton radioButton){
-        ColorStateList myColorStateList = new ColorStateList(
-                new int[][]{
-                        new int[]{getResources().getColor(R.color.grayDark)}
-                },
-                new int[]{getResources().getColor(R.color.grayDark)}
-        );
+    private void blackTin(RadioButton radioButton) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            ColorStateList myColorStateList = new ColorStateList(
+                    new int[][]{
+                            new int[]{getResources().getColor(R.color.grayDark)}
+                    },
+                    new int[]{getResources().getColor(R.color.grayDark)}
+            );
 
-        radioButton.setButtonTintList(myColorStateList);
+            radioButton.setButtonTintList(myColorStateList);
+        }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    private void blueTin(RadioButton radioButton){
-        ColorStateList myColorStateList = new ColorStateList(
-                new int[][]{
-                        new int[]{getResources().getColor(R.color.lightBlue)}
-                },
-                new int[]{getResources().getColor(R.color.lightBlue)}
-        );
+    private void blueTin(RadioButton radioButton) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            ColorStateList myColorStateList = new ColorStateList(
+                    new int[][]{
+                            new int[]{getResources().getColor(R.color.lightBlue)}
+                    },
+                    new int[]{getResources().getColor(R.color.lightBlue)}
+            );
 
-        radioButton.setButtonTintList(myColorStateList);
+            radioButton.setButtonTintList(myColorStateList);
+        }
     }
 
     private void hitHomeData() {

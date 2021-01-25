@@ -10,6 +10,8 @@ public class P {
 
     public static String status = "status";
     public static String data = "data";
+    public static String user_payment_option_list = "user_payment_option_list";
+    public static String driver = "driver";
     public static String user_mobile = "user_mobile";
     public static String otp = "otp";
     public static String user = "user";
@@ -59,5 +61,34 @@ public class P {
     public static String slug = "slug";
     public static String thumbnail_image = "thumbnail_image";
     public static String add_date = "add_date";
+
+    public static String gender = "gender";
+    public static String user_alt_mobile = "user_alt_mobile";
+    public static String user_alt_country_code = "user_alt_country_code";
+    public static String user_dob = "user_dob";
+    public static String user_lastname = "user_lastname";
+
+    public static String driver_name = "driver_name";
+    public static String driver_middlename = "driver_middlename";
+    public static String driver_lastname = "driver_lastname";
+    public static String driver_dob = "driver_dob";
+    public static String driver_email = "driver_email";
+    public static String driver_user_country_code = "driver_user_country_code";
+    public static String driver_alt_country_code = "driver_alt_country_code";
+    public static String driver_alt_mobile = "driver_alt_mobile";
+    public static String driver_mobile = "driver_mobile";
+    public static String driver_gender = "driver_gender";
+    public static String driver_emirate_id = "driver_emirate_id";
+    public static String driver_country_id = "driver_country_id";
+
+    public static String user_id = "user_id";
+    public static String card_number = "card_number";
+    public static String name_on_card = "name_on_card";
+    public static String expiry_month = "expiry_month";
+    public static String expiry_year = "expiry_year";
+    public static String cvv = "cvv";
+    public static String update_date = "update_date";
+
+
 
 }

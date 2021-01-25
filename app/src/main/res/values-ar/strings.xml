@@ -218,6 +218,9 @@
     <string name="createAccount">إنشاء حساب</string>
     <string name="newToFats">جديد على FastUAE؟</string>
     <string name="alreyCustomer">عميل بالفعل؟</string>
+    <string name="dataUpdated">تم تحديث البيانات بنجاح</string>
+    <string name="selectNationality">الرجاء تحديد الجنسية</string>
+
 
     <string name="txt1">شركة رائدة في مجال تأجير السيارات ولديها أكبر شبكة من الفروع ونقاط الالتقاء</string>
     <string name="txt2">شركة رائدة في مجال تأجير السيارات ولديها أكبر شبكة من الفروع ونقاط الالتقاء</string>

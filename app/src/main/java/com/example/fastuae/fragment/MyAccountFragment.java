@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -20,9 +21,11 @@ import androidx.annotation.RequiresApi;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
+import com.adoisstudio.helper.Api;
 import com.adoisstudio.helper.H;
 import com.adoisstudio.helper.Json;
 import com.adoisstudio.helper.JsonList;
+import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
 import com.example.fastuae.R;
 import com.example.fastuae.adapter.AddressSelectionAdapter;
@@ -30,9 +33,11 @@ import com.example.fastuae.adapter.CodeSelectionAdapter;
 import com.example.fastuae.databinding.FragmentMyAccountBinding;
 import com.example.fastuae.model.AddressModel;
 import com.example.fastuae.model.CountryCodeModel;
+import com.example.fastuae.util.CheckString;
 import com.example.fastuae.util.Click;
 import com.example.fastuae.util.Config;
 import com.example.fastuae.util.P;
+import com.example.fastuae.util.ProgressView;
 import com.example.fastuae.util.Validation;
 
 import java.text.SimpleDateFormat;
@@ -51,6 +56,11 @@ public class MyAccountFragment extends Fragment {
     private List<AddressModel> lisAddressEmirate;
     private Session session;
     private String flag;
+    private LoadingDialog loadingDialog;
+    private String codePrimary = "";
+    private String codeSecondary = "";
+    private String countryId = "";
+    private String emirateID = "";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -84,6 +94,7 @@ public class MyAccountFragment extends Fragment {
 
     private void initView() {
 
+        loadingDialog = new LoadingDialog(context);
         session = new Session(context);
         flag = session.getString(P.languageFlag);
 
@@ -91,16 +102,9 @@ public class MyAccountFragment extends Fragment {
 
         lisAddressEmirate = new ArrayList<>();
         AddressModel modelAddress1 = new AddressModel();
-        modelAddress1.setEmirate(getResources().getString(R.string.selectEmirate));
+        modelAddress1.setCountry_name(getResources().getString(R.string.selectEmirate));
         lisAddressEmirate.add(modelAddress1);
 
-        AddressModel modelAddress2 = new AddressModel();
-        modelAddress2.setEmirate("1");
-        lisAddressEmirate.add(modelAddress2);
-
-        AddressModel modelAddress3 = new AddressModel();
-        modelAddress3.setEmirate("2");
-        lisAddressEmirate.add(modelAddress3);
 
 
         JsonList jsonList = Config.countryJsonList;
@@ -111,6 +115,12 @@ public class MyAccountFragment extends Fragment {
             model.setCountry_name(json.getString(P.country_name));
             model.setPhone_code(json.getString(P.phone_code));
             countryCodeModelList.add(model);
+
+            AddressModel modelAddress = new AddressModel();
+            modelAddress.setId(json.getString(P.id));
+            modelAddress.setCountry_name(json.getString(P.country_name));
+            modelAddress.setPhone_code(json.getString(P.phone_code));
+            lisAddressEmirate.add(modelAddress);
 
             if (model.getPhone_code().equalsIgnoreCase("971")) {
                 positionNumber = i;
@@ -142,6 +152,8 @@ public class MyAccountFragment extends Fragment {
             }
         });
 
+        hitPersonalDetails();
+
     }
 
     private void onClick() {
@@ -149,6 +161,7 @@ public class MyAccountFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 CountryCodeModel model = countryCodeModelList.get(position);
+                codePrimary = model.getPhone_code();
             }
 
             @Override
@@ -161,6 +174,7 @@ public class MyAccountFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 CountryCodeModel model = countryCodeModelList.get(position);
+                codeSecondary = model.getPhone_code();
             }
 
             @Override
@@ -173,6 +187,13 @@ public class MyAccountFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 AddressModel model = lisAddressEmirate.get(position);
+                if (!model.getCountry_name().equals(getResources().getString(R.string.selectEmirate))){
+                    emirateID = model.getId();
+                    countryId = model.getPhone_code();
+                }else {
+                    emirateID = "";
+                    countryId = "";
+                }
             }
 
             @Override
@@ -182,7 +203,6 @@ public class MyAccountFragment extends Fragment {
         });
 
         binding.radioMale.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
@@ -193,7 +213,6 @@ public class MyAccountFragment extends Fragment {
         });
 
         binding.radioFemale.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
@@ -207,23 +226,7 @@ public class MyAccountFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-                if (binding.lnrPersonalDetails.getVisibility() == View.GONE) {
-                    binding.lnrPersonalDetails.setVisibility(View.VISIBLE);
-                    if (flag.equals(Config.ARABIC)) {
-                        binding.imgPersonalLeft.setImageResource(R.drawable.ic_minus);
-                    }else if (flag.equals(Config.ENGLISH)) {
-                        binding.imgPersonalRight.setImageResource(R.drawable.ic_minus);
-                    }
-                } else if (binding.lnrPersonalDetails.getVisibility() == View.VISIBLE) {
-                    binding.lnrPersonalDetails.setVisibility(View.GONE);
-                    if (flag.equals(Config.ARABIC)) {
-                        binding.imgPersonalLeft.setImageResource(R.drawable.ic_plus);
-                    }else if (flag.equals(Config.ENGLISH)) {
-                        binding.imgPersonalRight.setImageResource(R.drawable.ic_plus);
-                    }
-                }
-
-
+                checkPersonalDetailsView();
             }
         });
 
@@ -232,7 +235,7 @@ public class MyAccountFragment extends Fragment {
             public void onClick(View v) {
                 Click.preventTwoClick(v);
                 if (checkPersonalDetailValidation()) {
-
+                    hitUpdatePersonalDetails();
                 }
             }
         });
@@ -241,22 +244,7 @@ public class MyAccountFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-                if (binding.lnrPassword.getVisibility() == View.GONE) {
-                    binding.lnrPassword.setVisibility(View.VISIBLE);
-                    if (flag.equals(Config.ARABIC)) {
-                        binding.imgPasswordLeft.setImageResource(R.drawable.ic_minus);
-                    }else if (flag.equals(Config.ENGLISH)) {
-                        binding.imgPasswordRight.setImageResource(R.drawable.ic_minus);
-                    }
-                } else if (binding.lnrPassword.getVisibility() == View.VISIBLE) {
-                    binding.lnrPassword.setVisibility(View.GONE);
-                    if (flag.equals(Config.ARABIC)) {
-                        binding.imgPasswordLeft.setImageResource(R.drawable.ic_plus);
-                    }else if (flag.equals(Config.ENGLISH)) {
-                        binding.imgPasswordRight.setImageResource(R.drawable.ic_plus);
-                    }
-                }
-
+                checkPasswordView();
             }
         });
 
@@ -274,21 +262,7 @@ public class MyAccountFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-                if (binding.lnrAddress.getVisibility() == View.GONE) {
-                    binding.lnrAddress.setVisibility(View.VISIBLE);
-                    if (flag.equals(Config.ARABIC)) {
-                        binding.imgAddressLeft.setImageResource(R.drawable.ic_minus);
-                    }else if (flag.equals(Config.ENGLISH)) {
-                        binding.imgAddressRight.setImageResource(R.drawable.ic_minus);
-                    }
-                } else if (binding.lnrAddress.getVisibility() == View.VISIBLE) {
-                    binding.lnrAddress.setVisibility(View.GONE);
-                    if (flag.equals(Config.ARABIC)) {
-                        binding.imgAddressLeft.setImageResource(R.drawable.ic_plus);
-                    }else if (flag.equals(Config.ENGLISH)) {
-                        binding.imgAddressRight.setImageResource(R.drawable.ic_plus);
-                    }
-                }
+                checkAddressView();
             }
         });
 
@@ -347,6 +321,7 @@ public class MyAccountFragment extends Fragment {
 
         return value;
     }
+
 
     private void updateIcons() {
 
@@ -408,28 +383,193 @@ public class MyAccountFragment extends Fragment {
 //        mDatePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    private void blackTin(RadioButton radioButton) {
-        ColorStateList myColorStateList = new ColorStateList(
-                new int[][]{
-                        new int[]{getResources().getColor(R.color.textDark)}
-                },
-                new int[]{getResources().getColor(R.color.textDark)}
-        );
-
-        radioButton.setButtonTintList(myColorStateList);
+    private void checkPersonalDetailsView(){
+        if (binding.lnrPersonalDetails.getVisibility() == View.GONE) {
+            binding.lnrPersonalDetails.setVisibility(View.VISIBLE);
+            if (flag.equals(Config.ARABIC)) {
+                binding.imgPersonalLeft.setImageResource(R.drawable.ic_minus);
+            }else if (flag.equals(Config.ENGLISH)) {
+                binding.imgPersonalRight.setImageResource(R.drawable.ic_minus);
+            }
+        } else if (binding.lnrPersonalDetails.getVisibility() == View.VISIBLE) {
+            binding.lnrPersonalDetails.setVisibility(View.GONE);
+            if (flag.equals(Config.ARABIC)) {
+                binding.imgPersonalLeft.setImageResource(R.drawable.ic_plus);
+            }else if (flag.equals(Config.ENGLISH)) {
+                binding.imgPersonalRight.setImageResource(R.drawable.ic_plus);
+            }
+        }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    private void blueTin(RadioButton radioButton) {
-        ColorStateList myColorStateList = new ColorStateList(
-                new int[][]{
-                        new int[]{getResources().getColor(R.color.lightBlue)}
-                },
-                new int[]{getResources().getColor(R.color.lightBlue)}
-        );
+    private void checkPasswordView(){
+        if (binding.lnrPassword.getVisibility() == View.GONE) {
+            binding.lnrPassword.setVisibility(View.VISIBLE);
+            if (flag.equals(Config.ARABIC)) {
+                binding.imgPasswordLeft.setImageResource(R.drawable.ic_minus);
+            }else if (flag.equals(Config.ENGLISH)) {
+                binding.imgPasswordRight.setImageResource(R.drawable.ic_minus);
+            }
+        } else if (binding.lnrPassword.getVisibility() == View.VISIBLE) {
+            binding.lnrPassword.setVisibility(View.GONE);
+            if (flag.equals(Config.ARABIC)) {
+                binding.imgPasswordLeft.setImageResource(R.drawable.ic_plus);
+            }else if (flag.equals(Config.ENGLISH)) {
+                binding.imgPasswordRight.setImageResource(R.drawable.ic_plus);
+            }
+        }
+    }
 
-        radioButton.setButtonTintList(myColorStateList);
+    private void checkAddressView(){
+        if (binding.lnrAddress.getVisibility() == View.GONE) {
+            binding.lnrAddress.setVisibility(View.VISIBLE);
+            if (flag.equals(Config.ARABIC)) {
+                binding.imgAddressLeft.setImageResource(R.drawable.ic_minus);
+            }else if (flag.equals(Config.ENGLISH)) {
+                binding.imgAddressRight.setImageResource(R.drawable.ic_minus);
+            }
+        } else if (binding.lnrAddress.getVisibility() == View.VISIBLE) {
+            binding.lnrAddress.setVisibility(View.GONE);
+            if (flag.equals(Config.ARABIC)) {
+                binding.imgAddressLeft.setImageResource(R.drawable.ic_plus);
+            }else if (flag.equals(Config.ENGLISH)) {
+                binding.imgAddressRight.setImageResource(R.drawable.ic_plus);
+            }
+        }
+    }
+
+
+    private void blackTin(RadioButton radioButton) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            ColorStateList myColorStateList = new ColorStateList(
+                    new int[][]{
+                            new int[]{getResources().getColor(R.color.textDark)}
+                    },
+                    new int[]{getResources().getColor(R.color.textDark)}
+            );
+
+            radioButton.setButtonTintList(myColorStateList);
+        }
+    }
+
+    private void blueTin(RadioButton radioButton) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            ColorStateList myColorStateList = new ColorStateList(
+                    new int[][]{
+                            new int[]{getResources().getColor(R.color.lightBlue)}
+                    },
+                    new int[]{getResources().getColor(R.color.lightBlue)}
+            );
+
+            radioButton.setButtonTintList(myColorStateList);
+        }
+    }
+
+
+    private void hitPersonalDetails() {
+
+        ProgressView.show(context,loadingDialog);
+        Json j = new Json();
+
+        Api.newApi(context, P.BaseUrl + "user_data").addJson(j)
+                .setMethod(Api.GET)
+                //.onHeaderRequest(App::getHeaders)
+                .onError(() -> {
+                    ProgressView.dismiss(loadingDialog);
+                    H.showMessage(context, "On error is called");
+                })
+                .onSuccess(json ->
+                {
+                    if (json.getInt(P.status) == 1) {
+
+                        json = json.getJson(P.data);
+                        json = json.getJson(P.user);
+
+                        binding.etxFirstName.setText(CheckString.check(json.getString(P.user_name)));
+                        binding.etxLastName.setText(CheckString.check(json.getString(P.user_lastname)));
+                        binding.etxEmail.setText(CheckString.check(json.getString(P.user_email)));
+                        binding.etxBirtDate.setText(CheckString.check(json.getString(P.user_dob)));
+                        binding.etxNumber.setText(CheckString.check(json.getString(P.user_mobile)));
+                        binding.etxAlternameNumber.setText(CheckString.check(json.getString(P.user_alt_mobile)));
+
+                        String gender = json.getString(P.gender);
+                        if (CheckString.check(gender).equalsIgnoreCase("1")){
+                            binding.radioFemale.setChecked(false);
+                            binding.radioMale.setChecked(true);
+                            blueTin(binding.radioMale);
+                            blackTin(binding.radioFemale);
+                        }else if (CheckString.check(gender).equalsIgnoreCase("2")){
+                            binding.radioMale.setChecked(false);
+                            binding.radioFemale.setChecked(true);
+                            blueTin(binding.radioFemale);
+                            blackTin(binding.radioMale);
+                        }
+
+                        String codePrimary = CheckString.check(json.getString(P.user_country_code));
+                        String codeSecondary = CheckString.check(json.getString(P.user_alt_country_code));
+
+                        JsonList jsonList = Config.countryJsonList;
+                        for (int i = 0; i < jsonList.size(); i++) {
+                            Json jsonData = jsonList.get(i);
+                            if (jsonData.getString(P.phone_code).equalsIgnoreCase(codePrimary)) {
+                                binding.spinnerCodeMobile.setSelection(i);
+                            }
+
+                            if (jsonData.getString(P.phone_code).equalsIgnoreCase(codeSecondary)) {
+                                binding.spinnerCodeAlternate.setSelection(i);
+                            }
+                        }
+
+                    }else {
+                        H.showMessage(context,json.getString(P.error));
+                    }
+                    ProgressView.dismiss(loadingDialog);
+
+                })
+                .run("hitPersonalDetails",session.getString(P.token));
+
+    }
+
+    private void hitUpdatePersonalDetails() {
+
+        ProgressView.show(context,loadingDialog);
+        Json j = new Json();
+        j.addString(P.user_name,binding.etxFirstName.getText().toString().trim());
+        j.addString(P.user_lastname,binding.etxLastName.getText().toString().trim());
+        j.addString(P.user_dob,binding.etxBirtDate.getText().toString().trim());
+        j.addString(P.user_email,binding.etxEmail.getText().toString().trim());
+        if (binding.radioMale.isChecked()){
+            j.addString(P.gender,"1");
+        }else if (binding.radioFemale.isChecked()){
+            j.addString(P.gender,"2");
+        }
+        j.addString(P.user_country_code,codePrimary);
+        j.addString(P.user_mobile,binding.etxNumber.getText().toString().trim());
+        j.addString(P.user_alt_country_code,codeSecondary);
+        j.addString(P.user_alt_mobile,binding.etxAlternameNumber.getText().toString().trim());
+
+        Api.newApi(context, P.BaseUrl + "update_user_data").addJson(j)
+                .setMethod(Api.POST)
+                //.onHeaderRequest(App::getHeaders)
+                .onError(() -> {
+                    ProgressView.dismiss(loadingDialog);
+                    H.showMessage(context, "On error is called");
+                })
+                .onSuccess(json ->
+                {
+                    if (json.getInt(P.status) == 1) {
+
+                        json = json.getJson(P.data);
+                        H.showMessage(context,getResources().getString(R.string.dataUpdated));
+                        checkPersonalDetailsView();
+
+                    }else {
+                        H.showMessage(context,json.getString(P.error));
+                    }
+
+                    ProgressView.dismiss(loadingDialog);
+
+                })
+                .run("hitUpdatePersonalDetails",session.getString(P.token));
     }
 
 

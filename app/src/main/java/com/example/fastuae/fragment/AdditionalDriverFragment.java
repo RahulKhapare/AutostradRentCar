@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -20,9 +21,11 @@ import androidx.annotation.RequiresApi;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
+import com.adoisstudio.helper.Api;
 import com.adoisstudio.helper.H;
 import com.adoisstudio.helper.Json;
 import com.adoisstudio.helper.JsonList;
+import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
 import com.example.fastuae.R;
 import com.example.fastuae.adapter.AddressSelectionAdapter;
@@ -31,9 +34,11 @@ import com.example.fastuae.databinding.FragmentAdditionalDriveBinding;
 import com.example.fastuae.databinding.FragmentMenuBinding;
 import com.example.fastuae.model.AddressModel;
 import com.example.fastuae.model.CountryCodeModel;
+import com.example.fastuae.util.CheckString;
 import com.example.fastuae.util.Click;
 import com.example.fastuae.util.Config;
 import com.example.fastuae.util.P;
+import com.example.fastuae.util.ProgressView;
 import com.example.fastuae.util.Validation;
 
 import java.text.SimpleDateFormat;
@@ -52,6 +57,11 @@ public class AdditionalDriverFragment extends Fragment {
     private List<AddressModel> lisAddressEmirate;
     private Session session;
     private String flag;
+    private LoadingDialog loadingDialog;
+    private String codePrimary = "";
+    private String codeSecondary = "";
+    private String countryId = "";
+    private String emirateID = "";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -83,7 +93,7 @@ public class AdditionalDriverFragment extends Fragment {
     }
 
     private void initView(){
-
+        loadingDialog = new LoadingDialog(context);
         session = new Session(context);
         flag = session.getString(P.languageFlag);
 
@@ -91,17 +101,8 @@ public class AdditionalDriverFragment extends Fragment {
 
         lisAddressEmirate = new ArrayList<>();
         AddressModel modelAddress1 = new AddressModel();
-        modelAddress1.setEmirate(getResources().getString(R.string.nationality));
+        modelAddress1.setCountry_name(getResources().getString(R.string.nationality));
         lisAddressEmirate.add(modelAddress1);
-
-        AddressModel modelAddress2 = new AddressModel();
-        modelAddress2.setEmirate("Indian");
-        lisAddressEmirate.add(modelAddress2);
-
-        AddressModel modelAddress3 = new AddressModel();
-        modelAddress3.setEmirate("Arabic");
-        lisAddressEmirate.add(modelAddress3);
-
 
         JsonList jsonList = Config.countryJsonList;
         for (int i = 0; i < jsonList.size(); i++) {
@@ -111,6 +112,12 @@ public class AdditionalDriverFragment extends Fragment {
             model.setCountry_name(json.getString(P.country_name));
             model.setPhone_code(json.getString(P.phone_code));
             countryCodeModelList.add(model);
+
+            AddressModel modelAddress = new AddressModel();
+            modelAddress.setId(json.getString(P.id));
+            modelAddress.setCountry_name(json.getString(P.country_name));
+            modelAddress.setPhone_code(json.getString(P.phone_code));
+            lisAddressEmirate.add(modelAddress);
 
             if (model.getPhone_code().equalsIgnoreCase("971")) {
                 positionNumber = i;
@@ -142,7 +149,7 @@ public class AdditionalDriverFragment extends Fragment {
 
 
         onClick();
-
+        hitDriverDetails();
     }
 
     private void onClick(){
@@ -151,6 +158,7 @@ public class AdditionalDriverFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 CountryCodeModel model = countryCodeModelList.get(position);
+                codePrimary = model.getPhone_code();
             }
 
             @Override
@@ -163,6 +171,7 @@ public class AdditionalDriverFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 CountryCodeModel model = countryCodeModelList.get(position);
+                codeSecondary = model.getPhone_code();
             }
 
             @Override
@@ -175,6 +184,13 @@ public class AdditionalDriverFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 AddressModel model = lisAddressEmirate.get(position);
+                if (!model.getCountry_name().equals(getResources().getString(R.string.nationality))){
+                    emirateID = model.getId();
+                    countryId = model.getPhone_code();
+                }else {
+                    emirateID = "";
+                    countryId = "";
+                }
             }
 
             @Override
@@ -184,7 +200,6 @@ public class AdditionalDriverFragment extends Fragment {
         });
 
         binding.radioMale.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
@@ -195,7 +210,6 @@ public class AdditionalDriverFragment extends Fragment {
         });
 
         binding.radioFemale.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
@@ -209,21 +223,7 @@ public class AdditionalDriverFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-                if (binding.lnrAdditionalDetails.getVisibility() == View.GONE) {
-                    binding.lnrAdditionalDetails.setVisibility(View.VISIBLE);
-                    if (flag.equals(Config.ARABIC)) {
-                        binding.imgDriveLeft.setImageResource(R.drawable.ic_minus);
-                    }else if (flag.equals(Config.ENGLISH)) {
-                        binding.imgDriveRight.setImageResource(R.drawable.ic_minus);
-                    }
-                } else if (binding.lnrAdditionalDetails.getVisibility() == View.VISIBLE) {
-                    binding.lnrAdditionalDetails.setVisibility(View.GONE);
-                    if (flag.equals(Config.ARABIC)) {
-                        binding.imgDriveLeft.setImageResource(R.drawable.ic_plus);
-                    }else if (flag.equals(Config.ENGLISH)) {
-                        binding.imgDriveRight.setImageResource(R.drawable.ic_plus);
-                    }
-                }
+                checkDriverDetailsView();
             }
         });
 
@@ -232,10 +232,28 @@ public class AdditionalDriverFragment extends Fragment {
             public void onClick(View v) {
                 Click.preventTwoClick(v);
                 if (checkAdditionalDetailValidation()) {
-
+                    hitUpdateDriverDetails();
                 }
             }
         });
+    }
+
+    private void checkDriverDetailsView(){
+        if (binding.lnrAdditionalDetails.getVisibility() == View.GONE) {
+            binding.lnrAdditionalDetails.setVisibility(View.VISIBLE);
+            if (flag.equals(Config.ARABIC)) {
+                binding.imgDriveLeft.setImageResource(R.drawable.ic_minus);
+            }else if (flag.equals(Config.ENGLISH)) {
+                binding.imgDriveRight.setImageResource(R.drawable.ic_minus);
+            }
+        } else if (binding.lnrAdditionalDetails.getVisibility() == View.VISIBLE) {
+            binding.lnrAdditionalDetails.setVisibility(View.GONE);
+            if (flag.equals(Config.ARABIC)) {
+                binding.imgDriveLeft.setImageResource(R.drawable.ic_plus);
+            }else if (flag.equals(Config.ENGLISH)) {
+                binding.imgDriveRight.setImageResource(R.drawable.ic_plus);
+            }
+        }
     }
 
     private boolean checkAdditionalDetailValidation() {
@@ -263,6 +281,9 @@ public class AdditionalDriverFragment extends Fragment {
         } else if (!Validation.validEmail(binding.etxEmail.getText().toString().trim())) {
             value = false;
             H.showMessage(context, getResources().getString(R.string.enterEmailValid));
+        } else if (TextUtils.isEmpty(countryId) && TextUtils.isEmpty(emirateID)){
+            value = false;
+            H.showMessage(context, getResources().getString(R.string.selectNationality));
         }
 
         return value;
@@ -316,28 +337,152 @@ public class AdditionalDriverFragment extends Fragment {
 //        mDatePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void blackTin(RadioButton radioButton) {
-        ColorStateList myColorStateList = new ColorStateList(
-                new int[][]{
-                        new int[]{getResources().getColor(R.color.textDark)}
-                },
-                new int[]{getResources().getColor(R.color.textDark)}
-        );
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            ColorStateList myColorStateList = new ColorStateList(
+                    new int[][]{
+                            new int[]{getResources().getColor(R.color.textDark)}
+                    },
+                    new int[]{getResources().getColor(R.color.textDark)}
+            );
 
-        radioButton.setButtonTintList(myColorStateList);
+            radioButton.setButtonTintList(myColorStateList);
+        }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void blueTin(RadioButton radioButton) {
-        ColorStateList myColorStateList = new ColorStateList(
-                new int[][]{
-                        new int[]{getResources().getColor(R.color.lightBlue)}
-                },
-                new int[]{getResources().getColor(R.color.lightBlue)}
-        );
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            ColorStateList myColorStateList = new ColorStateList(
+                    new int[][]{
+                            new int[]{getResources().getColor(R.color.lightBlue)}
+                    },
+                    new int[]{getResources().getColor(R.color.lightBlue)}
+            );
 
-        radioButton.setButtonTintList(myColorStateList);
+            radioButton.setButtonTintList(myColorStateList);
+        }
+    }
+
+    private void hitDriverDetails() {
+
+        ProgressView.show(context,loadingDialog);
+        Json j = new Json();
+
+        Api.newApi(context, P.BaseUrl + "user_driver_data").addJson(j)
+                .setMethod(Api.GET)
+                //.onHeaderRequest(App::getHeaders)
+                .onError(() -> {
+                    ProgressView.dismiss(loadingDialog);
+                    H.showMessage(context, "On error is called");
+                })
+                .onSuccess(json ->
+                {
+                    if (json.getInt(P.status) == 1) {
+
+                        json = json.getJson(P.data);
+                        json = json.getJson(P.driver);
+
+                        binding.etxFirstName.setText(CheckString.check(json.getString(P.driver_name)));
+                        binding.etxMiddleName.setText(CheckString.check(json.getString(P.driver_middlename)));
+                        binding.etxLastName.setText(CheckString.check(json.getString(P.driver_lastname)));
+                        binding.etxBirtDate.setText(CheckString.check(json.getString(P.driver_dob)));
+                        binding.etxEmail.setText(CheckString.check(json.getString(P.driver_email)));
+
+                        binding.etxNumber.setText(CheckString.check(json.getString(P.driver_mobile)));
+                        binding.etxAlternameNumber.setText(CheckString.check(json.getString(P.driver_alt_mobile)));
+
+                        String gender = json.getString(P.driver_gender);
+                        if (CheckString.check(gender).equalsIgnoreCase("1")){
+                            binding.radioFemale.setChecked(false);
+                            binding.radioMale.setChecked(true);
+                            blueTin(binding.radioMale);
+                            blackTin(binding.radioFemale);
+                        }else if (CheckString.check(gender).equalsIgnoreCase("2")){
+                            binding.radioMale.setChecked(false);
+                            binding.radioFemale.setChecked(true);
+                            blueTin(binding.radioFemale);
+                            blackTin(binding.radioMale);
+                        }
+
+                        String codePrimary = CheckString.check(json.getString(P.driver_user_country_code));
+                        String codeSecondary = CheckString.check(json.getString(P.driver_alt_country_code));
+                        String countryID = CheckString.check(json.getString(P.driver_country_id));
+                        String emirateID = CheckString.check(json.getString(P.driver_emirate_id));
+
+                        Log.e("TAG", "hitDriverDetailsID: "+ countryID  + " : " + emirateID);
+
+                        JsonList jsonList = Config.countryJsonList;
+                        for (int i = 0; i < jsonList.size(); i++) {
+                            Json jsonData = jsonList.get(i);
+                            if (jsonData.getString(P.phone_code).equalsIgnoreCase(codePrimary)) {
+                                binding.spinnerCodeMobile.setSelection(i);
+                            }
+
+                            if (jsonData.getString(P.phone_code).equalsIgnoreCase(codeSecondary)) {
+                                binding.spinnerCodeAlternate.setSelection(i);
+                            }
+
+                            if (jsonData.getString(P.phone_code).equalsIgnoreCase(countryID)) {
+                                if (i<jsonList.size()){
+                                    binding.spinnerNationality.setSelection(i+1);
+                                }
+                            }
+                        }
+
+                    }else {
+                        H.showMessage(context,json.getString(P.error));
+                    }
+                    ProgressView.dismiss(loadingDialog);
+
+                })
+                .run("hitDriverDetails",session.getString(P.token));
+
+    }
+
+    private void hitUpdateDriverDetails() {
+
+        ProgressView.show(context,loadingDialog);
+        Json j = new Json();
+        j.addString(P.driver_name,binding.etxFirstName.getText().toString().trim());
+        j.addString(P.driver_middlename,binding.etxMiddleName.getText().toString().trim());
+        j.addString(P.driver_lastname,binding.etxLastName.getText().toString().trim());
+        j.addString(P.driver_dob,binding.etxBirtDate.getText().toString().trim());
+        j.addString(P.driver_email,binding.etxEmail.getText().toString().trim());
+        if (binding.radioMale.isChecked()){
+            j.addString(P.driver_gender,"1");
+        }else if (binding.radioFemale.isChecked()){
+            j.addString(P.driver_gender,"2");
+        }
+        j.addString(P.driver_user_country_code,codePrimary);
+        j.addString(P.driver_mobile,binding.etxNumber.getText().toString().trim());
+        j.addString(P.driver_alt_country_code,codeSecondary);
+        j.addString(P.driver_alt_mobile,binding.etxAlternameNumber.getText().toString().trim());
+        j.addString(P.driver_country_id,countryId);
+        j.addString(P.driver_emirate_id,emirateID);
+
+        Api.newApi(context, P.BaseUrl + "update_user_driver_data").addJson(j)
+                .setMethod(Api.POST)
+                //.onHeaderRequest(App::getHeaders)
+                .onError(() -> {
+                    ProgressView.dismiss(loadingDialog);
+                    H.showMessage(context, "On error is called");
+                })
+                .onSuccess(json ->
+                {
+                    if (json.getInt(P.status) == 1) {
+
+                        json = json.getJson(P.data);
+                        H.showMessage(context,getResources().getString(R.string.dataUpdated));
+                        checkDriverDetailsView();
+
+                    }else {
+                        H.showMessage(context,json.getString(P.error));
+                    }
+
+                    ProgressView.dismiss(loadingDialog);
+
+                })
+                .run("hitUpdateDriverDetails",session.getString(P.token));
     }
 
     public static AdditionalDriverFragment newInstance() {

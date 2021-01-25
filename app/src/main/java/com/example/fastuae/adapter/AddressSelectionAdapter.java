@@ -44,7 +44,7 @@ public class AddressSelectionAdapter extends BaseAdapter {
         view = inflter.inflate(R.layout.activity_address_white_bg, null);
         TextView txtName = view.findViewById(R.id.txtName);
         AddressModel model = itemListModels.get(i);
-        txtName.setText(model.getEmirate());
+        txtName.setText(model.getCountry_name());
         if (i==0){
             txtName.setTextColor(context.getResources().getColor(R.color.iconicGray));
         }else {

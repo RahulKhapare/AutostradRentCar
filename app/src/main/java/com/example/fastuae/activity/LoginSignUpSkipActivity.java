@@ -147,7 +147,6 @@ public class LoginSignUpSkipActivity extends AppCompatActivity {
     private void onClick(){
 
         binding.lnrClickCreateAccount.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
@@ -156,7 +155,6 @@ public class LoginSignUpSkipActivity extends AppCompatActivity {
         });
 
         binding.radioCreateAccount.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
@@ -165,7 +163,6 @@ public class LoginSignUpSkipActivity extends AppCompatActivity {
         });
 
         binding.lnrClickLogin.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
@@ -174,7 +171,6 @@ public class LoginSignUpSkipActivity extends AppCompatActivity {
         });
 
         binding.radioLogin.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
@@ -273,7 +269,6 @@ public class LoginSignUpSkipActivity extends AppCompatActivity {
                 .run("hitSignUp");
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void visibleSignUp(){
         binding.etxMobileNumberLogin.setText("");
         binding.etxMobileNumberSignup.setText("");
@@ -287,7 +282,6 @@ public class LoginSignUpSkipActivity extends AppCompatActivity {
         binding.lnrSignUp.setVisibility(View.VISIBLE);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void visibleLogin(){
         binding.etxMobileNumberLogin.setText("");
         binding.etxMobileNumberSignup.setText("");
@@ -301,28 +295,30 @@ public class LoginSignUpSkipActivity extends AppCompatActivity {
         binding.lnrLogin.setVisibility(View.VISIBLE);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    private void blackTin(RadioButton radioButton){
-        ColorStateList myColorStateList = new ColorStateList(
-                new int[][]{
-                        new int[]{getResources().getColor(R.color.grayDark)}
-                },
-                new int[]{getResources().getColor(R.color.grayDark)}
-        );
+    private void blackTin(RadioButton radioButton) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            ColorStateList myColorStateList = new ColorStateList(
+                    new int[][]{
+                            new int[]{getResources().getColor(R.color.grayDark)}
+                    },
+                    new int[]{getResources().getColor(R.color.grayDark)}
+            );
 
-        radioButton.setButtonTintList(myColorStateList);
+            radioButton.setButtonTintList(myColorStateList);
+        }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    private void blueTin(RadioButton radioButton){
-        ColorStateList myColorStateList = new ColorStateList(
-                new int[][]{
-                        new int[]{getResources().getColor(R.color.lightBlue)}
-                },
-                new int[]{getResources().getColor(R.color.lightBlue)}
-        );
+    private void blueTin(RadioButton radioButton) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            ColorStateList myColorStateList = new ColorStateList(
+                    new int[][]{
+                            new int[]{getResources().getColor(R.color.lightBlue)}
+                    },
+                    new int[]{getResources().getColor(R.color.lightBlue)}
+            );
 
-        radioButton.setButtonTintList(myColorStateList);
+            radioButton.setButtonTintList(myColorStateList);
+        }
     }
 
     @Override

@@ -218,6 +218,9 @@
     <string name="createAccount">Create Account</string>
     <string name="newToFats">New to FastUAE ?</string>
     <string name="alreyCustomer">Already a customer ?</string>
+    <string name="dataUpdated">Data updated successfully</string>
+    <string name="selectNationality">Please select nationality</string>
+
 
     <string name="txt1">Leading Car Rental Company with the largest network of Branches &amp; Pickup points</string>
     <string name="txt2">Leading Car Rental Company with the largest network of Branches &amp; Pickup points</string>

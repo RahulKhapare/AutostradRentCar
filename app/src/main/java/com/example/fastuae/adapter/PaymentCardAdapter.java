@@ -40,7 +40,7 @@ public class PaymentCardAdapter extends RecyclerView.Adapter<PaymentCardAdapter.
         PaymentCardModel model = paymentCardModelList.get(position);
 
         String hideNumber = "";
-        String number = model.getCardNumber();
+        String number = model.getCard_number();
         String firstFour = number.substring(0, Math.min(number.length(), 4));
         String lastFour = number.substring(number.length() - 4);
 
