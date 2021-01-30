@@ -120,19 +120,22 @@
                           android:layout_width="match_parent"
                           android:layout_height="wrap_content"
                           android:layout_marginTop="20dp"
+                          android:layout_marginRight="20dp"
+                          android:layout_marginLeft="20dp"
                           android:layout_gravity="center_horizontal"
                           android:gravity="center_horizontal"
                           android:orientation="horizontal">
 
                           <TextView
-                              android:id="@+id/txtSeat"
-                              android:layout_width="wrap_content"
+                              android:id="@+id/txtFuel"
+                              android:layout_weight="1"
+                              android:layout_width="match_parent"
                               android:layout_height="wrap_content"
-                              android:layout_gravity="center"
                               android:layout_marginLeft="12dp"
                               android:layout_marginRight="12dp"
-                              android:drawableLeft="@drawable/seat_bg_two"
+                              android:drawableLeft="@drawable/fuil_bg_two"
                               android:drawablePadding="5dp"
+                              android:drawableTint="@color/textDark"
                               android:fontFamily="@font/nunito_sans_semibold"
                               android:maxLines="1"
                               android:text="@string/app_name"
@@ -143,11 +146,12 @@
 
                           <TextView
                               android:id="@+id/txtMode"
-                              android:layout_width="wrap_content"
+                              android:layout_weight="1"
+                              android:layout_width="match_parent"
                               android:layout_height="match_parent"
-                              android:layout_gravity="center"
                               android:layout_marginLeft="35dp"
                               android:layout_marginRight="35dp"
+                              android:drawableTint="@color/textDark"
                               android:drawableLeft="@drawable/mode_bg_two"
                               android:drawablePadding="5dp"
                               android:fontFamily="@font/nunito_sans_semibold"
@@ -159,17 +163,18 @@
                           </TextView>
 
                           <TextView
-                              android:id="@+id/txtDoore"
-                              android:layout_width="wrap_content"
+                              android:id="@+id/txtSeat"
+                              android:layout_weight="1"
+                              android:layout_width="match_parent"
                               android:layout_height="wrap_content"
-                              android:layout_gravity="center"
                               android:text="@string/app_name"
+                              android:drawableTint="@color/textDark"
                               android:fontFamily="@font/nunito_sans_semibold"
                               android:textColor="@color/textDark"
                               android:textSize="20sp"
                               android:layout_marginLeft="12dp"
                               android:layout_marginRight="12dp"
-                              android:drawableLeft="@drawable/doore_bg_two"
+                              android:drawableLeft="@drawable/seat_bg_two"
                               android:drawablePadding="5dp"
                               android:maxLines="1">
 
@@ -181,22 +186,43 @@
                           android:layout_width="match_parent"
                           android:layout_height="wrap_content"
                           android:layout_marginTop="20dp"
+                          android:layout_marginRight="20dp"
+                          android:layout_marginLeft="20dp"
                           android:layout_gravity="center_horizontal"
                           android:gravity="center_horizontal"
                           android:orientation="horizontal">
 
                           <TextView
-                              android:id="@+id/txtPetrol"
-                              android:layout_width="wrap_content"
+                              android:id="@+id/txtDoor"
+                              android:layout_weight="1"
+                              android:layout_width="match_parent"
                               android:layout_height="wrap_content"
-                              android:layout_gravity="center"
                               android:fontFamily="@font/nunito_sans_semibold"
                               android:textColor="@color/textDark"
                               android:textSize="20sp"
                               android:text="@string/app_name"
+                              android:drawableTint="@color/textDark"
                               android:layout_marginLeft="12dp"
                               android:layout_marginRight="12dp"
-                              android:drawableLeft="@drawable/fuil_bg_two"
+                              android:drawableLeft="@drawable/doore_bg_two"
+                              android:drawablePadding="5dp"
+                              android:maxLines="1">
+
+                          </TextView>
+
+                          <TextView
+                              android:id="@+id/txtPassenger"
+                              android:layout_weight="1"
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:fontFamily="@font/nunito_sans_semibold"
+                              android:textColor="@color/textDark"
+                              android:textSize="20sp"
+                              android:text="@string/app_name"
+                              android:drawableTint="@color/textDark"
+                              android:layout_marginLeft="35dp"
+                              android:layout_marginRight="35dp"
+                              android:drawableLeft="@drawable/passenger_bg_two"
                               android:drawablePadding="5dp"
                               android:maxLines="1">
 
@@ -204,33 +230,17 @@
 
                           <TextView
                               android:id="@+id/txtSuitcase"
-                              android:layout_width="wrap_content"
+                              android:layout_weight="1"
+                              android:layout_width="match_parent"
                               android:layout_height="wrap_content"
-                              android:layout_gravity="center"
                               android:fontFamily="@font/nunito_sans_semibold"
                               android:textColor="@color/textDark"
                               android:textSize="20sp"
                               android:text="@string/app_name"
-                              android:layout_marginLeft="35dp"
-                              android:layout_marginRight="35dp"
-                              android:drawableLeft="@drawable/suitcase_bg_two"
-                              android:drawablePadding="5dp"
-                              android:maxLines="1">
-
-                          </TextView>
-
-                          <TextView
-                              android:id="@+id/txtEngine"
-                              android:layout_width="wrap_content"
-                              android:layout_height="wrap_content"
-                              android:layout_gravity="center"
-                              android:fontFamily="@font/nunito_sans_semibold"
-                              android:textColor="@color/textDark"
-                              android:textSize="20sp"
-                              android:text="@string/app_name"
+                              android:drawableTint="@color/textDark"
                               android:layout_marginLeft="12dp"
                               android:layout_marginRight="12dp"
-                              android:drawableLeft="@drawable/engine_bg_two"
+                              android:drawableLeft="@drawable/suitcase_bg_two"
                               android:drawablePadding="5dp"
                               android:maxLines="1">
 
@@ -242,19 +252,22 @@
                           android:layout_width="match_parent"
                           android:layout_height="wrap_content"
                           android:layout_marginTop="20dp"
+                          android:layout_marginRight="20dp"
+                          android:layout_marginLeft="20dp"
                           android:layout_gravity="center_horizontal"
                           android:gravity="center_horizontal"
                           android:orientation="horizontal">
 
                           <TextView
-                              android:id="@+id/txtSeat2"
-                              android:layout_width="wrap_content"
+                              android:id="@+id/txtAirBag"
+                              android:layout_weight="1"
+                              android:layout_width="match_parent"
                               android:layout_height="wrap_content"
-                              android:layout_gravity="center"
                               android:layout_marginLeft="12dp"
                               android:layout_marginRight="12dp"
-                              android:drawableLeft="@drawable/seat_bg_two"
+                              android:drawableLeft="@drawable/air_bag_bg_two"
                               android:drawablePadding="5dp"
+                              android:drawableTint="@color/textDark"
                               android:fontFamily="@font/nunito_sans_semibold"
                               android:maxLines="1"
                               android:text="@string/app_name"
@@ -264,40 +277,43 @@
                           </TextView>
 
                           <TextView
-                              android:id="@+id/txtMode2"
-                              android:layout_width="wrap_content"
+                              android:id="@+id/txtAirConditionar"
+                              android:layout_weight="1"
+                              android:layout_width="match_parent"
                               android:layout_height="wrap_content"
-                              android:layout_gravity="center"
                               android:fontFamily="@font/nunito_sans_semibold"
                               android:textColor="@color/textDark"
                               android:textSize="20sp"
                               android:text="@string/app_name"
+                              android:drawableTint="@color/textDark"
                               android:layout_marginLeft="35dp"
                               android:layout_marginRight="35dp"
-                              android:drawableLeft="@drawable/mode_bg_two"
+                              android:drawableLeft="@drawable/air_condition_bg_two"
                               android:drawablePadding="5dp"
                               android:maxLines="1">
 
                           </TextView>
 
                           <TextView
-                              android:id="@+id/txtDoore2"
-                              android:layout_width="wrap_content"
+                              android:id="@+id/txtParkingSensor"
+                              android:layout_weight="1"
+                              android:layout_width="match_parent"
                               android:layout_height="wrap_content"
-                              android:layout_gravity="center"
                               android:text="@string/app_name"
                               android:fontFamily="@font/nunito_sans_semibold"
                               android:textColor="@color/textDark"
                               android:textSize="20sp"
+                              android:drawableTint="@color/textDark"
                               android:layout_marginLeft="12dp"
                               android:layout_marginRight="12dp"
-                              android:drawableLeft="@drawable/doore_bg_two"
+                              android:drawableLeft="@drawable/sensor_bg_two"
                               android:drawablePadding="5dp"
                               android:maxLines="1">
 
                           </TextView>
 
                       </LinearLayout>
+
 
                       <LinearLayout
                           android:layout_marginTop="40dp"

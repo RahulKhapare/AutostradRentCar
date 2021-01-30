@@ -6,6 +6,7 @@ import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.text.SpannableString;
+import android.text.TextUtils;
 import android.text.style.UnderlineSpan;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -24,9 +25,11 @@ import com.example.fastuae.R;
 import com.example.fastuae.activity.CarDetailOneActivity;
 import com.example.fastuae.databinding.ActivityCarGreedListBinding;
 import com.example.fastuae.model.CarModel;
+import com.example.fastuae.util.CheckString;
 import com.example.fastuae.util.Click;
 import com.example.fastuae.util.Config;
 import com.example.fastuae.util.P;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -53,27 +56,29 @@ public class CarGridAdapter extends RecyclerView.Adapter<CarGridAdapter.viewHold
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
         CarModel model = carModelList.get(position);
 
-//        Picasso.get().load(R.drawable.ic_car_four).into(holder.binding.imgCard);
-        holder.binding.txtCarName.setText(model.getName());
-        holder.binding.txtModel.setText(model.getModel());
-        holder.binding.txtCarGroup.setText(model.getGroup());
-        holder.binding.txtType.setText(model.getType());
-        holder.binding.txtSeat.setText(model.getSeat());
-        holder.binding.txtEngine.setText(model.getEngine());
-        holder.binding.txtDoor.setText(model.getDore());
-        holder.binding.txtPayNow.setText(context.getResources().getString(R.string.payNow) +  " - " + model.getAedNow());
-        holder.binding.txtPayLatter.setText(context.getResources().getString(R.string.payLater) +  " - " + model.getAedLater());
+        Picasso.get().load(model.getCar_image()).error(R.drawable.ic_image).into(holder.binding.imgCar);
+        holder.binding.txtCarName.setText(model.getCar_name());
+        holder.binding.txtModel.setText(model.getCategory_name());
+        holder.binding.txtCarGroup.setText(context.getResources().getString(R.string.group) + " " +model.getGroup_name());
+        holder.binding.txtType.setText(model.getTransmission_name());
+        holder.binding.txtPassenger.setText(model.getPassenger());
+        holder.binding.txtSuitcase.setText(model.getSuitcase());
+        holder.binding.txtDoor.setText(model.getDoor());
+        holder.binding.txtPayNow.setText(context.getResources().getString(R.string.payNow) +  " - " + model.getPay_now_rate() + " AED");
+        holder.binding.txtPayLatter.setText(context.getResources().getString(R.string.payLater) +  " - " + model.getPay_later_rate() + " AED");
 
-        holder.binding.txtPetrolInst.setText("Petrol");
-        holder.binding.txtSeatInst.setText("5 Seat");
-        holder.binding.txtAutomaticInst.setText("Automatic");
-        holder.binding.txtEnginInst.setText("Engine");
-        holder.binding.txtDoorInst.setText("3 Door");
-        holder.binding.txtPassengerInst.setText("5 Passengers");
-        holder.binding.txtSuitcaseInst.setText("2 Suitcases");
-        holder.binding.txtPassengerTwoInst.setText("5 Passengers");
-        holder.binding.txtSuitcaseTwoInst.setText("2 Suitcases");
-        holder.binding.txtPassengerThreeInst.setText("2 Suitcases");
+        holder.binding.txtPetrolInst.setText(checkString(model.getFuel_type_name()));
+        holder.binding.txtSeatInst.setText("Seat");
+        holder.binding.txtAutomaticInst.setText(checkString(model.getTransmission_name()));
+        holder.binding.txtDoorInst.setText(checkString(model.getDoor()));
+        holder.binding.txtPassengerInst.setText(checkString(model.getPassenger()));
+        holder.binding.txtSuitcaseInst.setText(checkString(model.getSuitcase()));
+        holder.binding.txtAirBags.setText(checkString(model.getAir_bags()));
+        holder.binding.txtAirConditionar.setText(checkString(model.getAir_conditioner()));
+        holder.binding.txtParkinSensor.setText(checkString(model.getParking_sensors()));
+        holder.binding.txtRearParkingCamera.setText(checkString(model.getRear_parking_camera()));
+        holder.binding.txtBluetooth.setText(checkString(model.getBluetooth()));
+        holder.binding.txtCruiseControl.setText(checkString(model.getCruise_control()));
 
         String more = context.getResources().getString(R.string.more);
         SpannableString content = new SpannableString(more);
@@ -125,13 +130,15 @@ public class CarGridAdapter extends RecyclerView.Adapter<CarGridAdapter.viewHold
             holder.binding.txtPetrolInst.setGravity(Gravity.RIGHT);
             holder.binding.txtSeatInst.setGravity(Gravity.RIGHT);
             holder.binding.txtAutomaticInst.setGravity(Gravity.RIGHT);
-            holder.binding.txtEnginInst.setGravity(Gravity.RIGHT);
             holder.binding.txtDoorInst.setGravity(Gravity.RIGHT);
             holder.binding.txtPassengerInst.setGravity(Gravity.RIGHT);
             holder.binding.txtSuitcaseInst.setGravity(Gravity.RIGHT);
-            holder.binding.txtPassengerTwoInst.setGravity(Gravity.RIGHT);
-            holder.binding.txtSuitcaseTwoInst.setGravity(Gravity.RIGHT);
-            holder.binding.txtPassengerThreeInst.setGravity(Gravity.RIGHT);
+            holder.binding.txtAirBags.setGravity(Gravity.RIGHT);
+            holder.binding.txtAirConditionar.setGravity(Gravity.RIGHT);
+            holder.binding.txtParkinSensor.setGravity(Gravity.RIGHT);
+            holder.binding.txtRearParkingCamera.setGravity(Gravity.RIGHT);
+            holder.binding.txtBluetooth.setGravity(Gravity.RIGHT);
+            holder.binding.txtCruiseControl.setGravity(Gravity.RIGHT);
 
         }
 
@@ -175,5 +182,14 @@ public class CarGridAdapter extends RecyclerView.Adapter<CarGridAdapter.viewHold
             }
         });
         oa1.start();
+    }
+
+    private String checkString(String string){
+        String value = string;
+
+        if (TextUtils.isEmpty(string) || string.equals("null")){
+            value = "";
+        }
+        return value;
     }
 }

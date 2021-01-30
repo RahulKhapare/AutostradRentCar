@@ -45,6 +45,7 @@ public class P {
     public static String url = "url";
 
     public static String car_list = "car_list";
+    public static String min_price = "min_price";
     public static String car_name = "car_name";
     public static String transmission_name = "transmission_name";
     public static String fuel_type_name = "fuel_type_name";
@@ -88,6 +89,33 @@ public class P {
     public static String expiry_year = "expiry_year";
     public static String cvv = "cvv";
     public static String update_date = "update_date";
+
+    public static String location_list = "location_list";
+    public static String emirate_id = "emirate_id";
+    public static String emirate_name = "emirate_name";
+    public static String location_name = "location_name";
+    public static String address = "address";
+    public static String contact_number = "contact_number";
+    public static String contact_email = "contact_email";
+    public static String location_time_data = "location_time_data";
+
+    public static String pickup_location_id = "pickup_location_id";
+    public static String pickup_date = "pickup_date";
+    public static String pickup_time = "pickup_time";
+
+    public static String dropoff_location_id = "dropoff_location_id";
+    public static String dropoff_date = "dropoff_date";
+    public static String dropoff_time = "dropoff_time";
+
+    public static String air_bags = "air_bags";
+    public static String air_conditioner = "air_conditioner";
+    public static String parking_sensors = "parking_sensors";
+    public static String rear_parking_camera = "rear_parking_camera";
+    public static String bluetooth = "bluetooth";
+    public static String cruise_control = "cruise_control";
+    public static String sunroof = "sunroof";
+    public static String pay_later_rate = "pay_later_rate";
+    public static String pay_now_rate = "pay_now_rate";
 
 
 

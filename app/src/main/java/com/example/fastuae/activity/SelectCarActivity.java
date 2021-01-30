@@ -23,10 +23,20 @@ import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.adoisstudio.helper.Api;
+import com.adoisstudio.helper.H;
+import com.adoisstudio.helper.Json;
+import com.adoisstudio.helper.JsonList;
+import com.adoisstudio.helper.LoadingDialog;
 import com.example.fastuae.R;
 import com.example.fastuae.databinding.ActivitySelectCarBinding;
 import com.example.fastuae.fragment.CarCardFragment;
 import com.example.fastuae.fragment.CarGreedFragment;
+import com.example.fastuae.model.CarModel;
+import com.example.fastuae.model.HomeLocationModel;
+import com.example.fastuae.util.Config;
+import com.example.fastuae.util.P;
+import com.example.fastuae.util.ProgressView;
 import com.example.fastuae.util.WindowView;
 import com.google.android.material.tabs.TabLayout;
 
@@ -43,6 +53,12 @@ public class SelectCarActivity extends AppCompatActivity implements ViewPager.On
             R.drawable.ic_card_dark,
             R.drawable.ic_greed_dark
     };
+    private LoadingDialog loadingDialog;
+
+    public static String pickUpEmirateID = "";
+    public static String dropUpEmirateID = "";
+    public static String pickUpDate = "";
+    public static String dropUpDate = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,8 +75,16 @@ public class SelectCarActivity extends AppCompatActivity implements ViewPager.On
         setSupportActionBar(binding.toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+
+        pickUpEmirateID = getIntent().getStringExtra(Config.pickUpEmirateID);
+        dropUpEmirateID = getIntent().getStringExtra(Config.dropUpEmirateID);
+        pickUpDate = getIntent().getStringExtra(Config.pickUpDate);
+        dropUpDate = getIntent().getStringExtra(Config.dropUpDate);
+
+        loadingDialog = new LoadingDialog(activity);
         setUpViewPager();
         setupTabIcons();
+
     }
 
     private void setupTabIcons() {

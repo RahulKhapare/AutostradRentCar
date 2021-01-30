@@ -14,11 +14,17 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import com.adoisstudio.helper.Api;
+import com.adoisstudio.helper.H;
+import com.adoisstudio.helper.Json;
+import com.adoisstudio.helper.JsonList;
 import com.adoisstudio.helper.LoadingDialog;
 import com.example.fastuae.R;
 import com.example.fastuae.activity.LanguageSelectionActivity;
+import com.example.fastuae.activity.SelectCarActivity;
 import com.example.fastuae.adapter.ViewPagerSwipeAdapter;
 import com.example.fastuae.model.CarModel;
+import com.example.fastuae.util.P;
 import com.example.fastuae.util.ProgressView;
 
 import java.util.ArrayList;
@@ -39,41 +45,17 @@ public class CarCardFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_car_card, container, false);
         context = inflater.getContext();
 
-        carModelList = new ArrayList<>();
-        CarModel model = new CarModel();
-        model.setName("Murcedes suv");
-        model.setGroup("Group A");
-        model.setType("Automatic");
-        model.setModel("Suv");
-        model.setSeat("5 Seat");
-        model.setEngine("Engine");
-        model.setDore("3 Door");
-        model.setAedNow("1160 AED");
-        model.setAedLater("1200 AED");
-        model.setSuitcase("2 Suitcase");
-        model.setPetrol("Petrol");
-
-        carModelList.add(model);
-        carModelList.add(model);
-        carModelList.add(model);
-        carModelList.add(model);
-        carModelList.add(model);
-
         loadingDialog = new LoadingDialog(context);
         scrollView = view.findViewById(R.id.scrollview);
         viewPagesSwipe = view.findViewById(R.id.viewPagesSwipe);
 
+        carModelList = new ArrayList<>();
         swipeAdapter = new ViewPagerSwipeAdapter(context, carModelList);
         viewPagesSwipe.setPageTransformer(true, new ViewPagerStack());
         viewPagesSwipe.setOffscreenPageLimit(3);
         viewPagesSwipe.setAdapter(swipeAdapter);
 
-
-//        ProgressView.show(context,loadingDialog);
-//        new Handler().postDelayed(() -> {
-//            ProgressView.dismiss(loadingDialog);
-//            scrollView.fullScroll(ScrollView.FOCUS_DOWN);
-//        }, 1000);
+        hitCarData();
 
         return view;
     }
@@ -90,6 +72,69 @@ public class CarCardFragment extends Fragment {
             }
         }
     }
+
+    private void hitCarData() {
+
+        ProgressView.show(context,loadingDialog);
+        Json j = new Json();
+
+        String externalParams = "emirate_id=" + SelectCarActivity.pickUpEmirateID + "&pickup_date=" + SelectCarActivity.pickUpDate + "&dropoff_date=" + SelectCarActivity.dropUpDate;
+
+        Api.newApi(context, P.BaseUrl + "cars?" + externalParams).addJson(j)
+                .setMethod(Api.GET)
+                //.onHeaderRequest(App::getHeaders)
+                .onError(() -> {
+                    ProgressView.dismiss(loadingDialog);
+                    H.showMessage(context, "On error is called");
+                })
+                .onSuccess(json ->
+                {
+                    if (json.getInt(P.status) == 1) {
+
+                        json = json.getJson(P.data);
+
+                        Json min_price = json.getJson(P.min_price);
+                        String pay_later_rate = min_price.getString(P.pay_later_rate);
+                        String pay_now_rate = min_price.getString(P.pay_now_rate);
+
+                        JsonList car_list = json.getJsonList(P.car_list);
+
+                        for (int i=0; i<car_list.size(); i++){
+                            Json jsonData = car_list.get(i);
+                            CarModel model = new CarModel();
+                            model.setId(jsonData.getString(P.id));
+                            model.setCar_name(jsonData.getString(P.car_name));
+                            model.setTransmission_name(jsonData.getString(P.transmission_name));
+                            model.setFuel_type_name(jsonData.getString(P.fuel_type_name));
+                            model.setGroup_name(jsonData.getString(P.group_name));
+                            model.setCategory_name(jsonData.getString(P.category_name));
+                            model.setAir_bags(jsonData.getString(P.air_bags));
+                            model.setAir_conditioner(jsonData.getString(P.air_conditioner));
+                            model.setParking_sensors(jsonData.getString(P.parking_sensors));
+                            model.setRear_parking_camera(jsonData.getString(P.rear_parking_camera));
+                            model.setBluetooth(jsonData.getString(P.bluetooth));
+                            model.setCruise_control(jsonData.getString(P.cruise_control));
+                            model.setSunroof(jsonData.getString(P.sunroof));
+                            model.setCar_image(jsonData.getString(P.car_image));
+                            model.setDoor(jsonData.getString(P.door));
+                            model.setPassenger(jsonData.getString(P.passenger));
+                            model.setSuitcase(jsonData.getString(P.suitcase));
+                            model.setPay_later_rate(jsonData.getString(P.pay_later_rate));
+                            model.setPay_now_rate(jsonData.getString(P.pay_now_rate));
+                            carModelList.add(model);
+                        }
+
+                        swipeAdapter.notifyDataSetChanged();
+
+                    }else {
+                        H.showMessage(context,json.getString(P.error));
+                    }
+                    ProgressView.dismiss(loadingDialog);
+
+                })
+                .run("hitCarData");
+    }
+
 
     public static CarCardFragment newInstance() {
         CarCardFragment fragment = new CarCardFragment();

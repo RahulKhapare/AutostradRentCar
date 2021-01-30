@@ -36,6 +36,11 @@ public class Config {
     public static String PROFILE_TAG = "PROFILE_TAG";
     public static String FAQ_TAG = "FAQ_TAG";
 
+    public static String pickUpEmirateID = "pickUpEmirateID";
+    public static String dropUpEmirateID = "dropUpEmirateID";
+    public static String pickUpDate = "pickUpDate";
+    public static String dropUpDate = "dropUpDate";
+
     public static int OPEN = 1;
     public static int SHARE = 2;
     public static boolean FROM_MAP = false;

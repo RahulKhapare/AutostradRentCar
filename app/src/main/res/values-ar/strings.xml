@@ -221,6 +221,9 @@
     <string name="dataUpdated">تم تحديث البيانات بنجاح</string>
     <string name="selectNationality">الرجاء تحديد الجنسية</string>
 
+    <string name="selectSelftPickUpLocation">الرجاء تحديد موقع الالتقاط الذاتي</string>
+    <string name="selectSelfReturnUpLocation">الرجاء تحديد موقع العودة الذاتية</string>
+
 
     <string name="txt1">شركة رائدة في مجال تأجير السيارات ولديها أكبر شبكة من الفروع ونقاط الالتقاء</string>
     <string name="txt2">شركة رائدة في مجال تأجير السيارات ولديها أكبر شبكة من الفروع ونقاط الالتقاء</string>

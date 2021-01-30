@@ -106,7 +106,7 @@
                             </TextView>
 
                             <ImageView
-                                android:id="@+id/imgCard"
+                                android:id="@+id/imgCar"
                                 android:layout_marginTop="10dp"
                                 android:layout_marginBottom="2dp"
                                 android:layout_width="135dp"
@@ -138,11 +138,11 @@
                             android:orientation="vertical">
 
                             <TextView
-                                android:id="@+id/txtSeat"
+                                android:id="@+id/txtPassenger"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:drawableLeft="@drawable/seat_bg"
+                                android:drawableLeft="@drawable/passenger_bg"
                                 android:drawablePadding="5dp"
                                 android:fontFamily="@font/nunito_sans_semibold"
                                 android:maxLines="1"
@@ -153,7 +153,7 @@
                             </TextView>
 
                             <TextView
-                                android:id="@+id/txtEngine"
+                                android:id="@+id/txtSuitcase"
                                 android:layout_marginTop="10dp"
                                 android:layout_weight="1"
                                 android:layout_width="match_parent"
@@ -162,7 +162,7 @@
                                 android:textColor="@color/textDark"
                                 android:textSize="14sp"
                                 android:singleLine="true"
-                                android:drawableLeft="@drawable/engine_bg"
+                                android:drawableLeft="@drawable/suitcase_bg"
                                 android:drawablePadding="5dp"
                                 android:maxLines="1">
 
@@ -293,6 +293,7 @@
                             <ImageView
                                 android:layout_width="20dp"
                                 android:layout_height="20dp"
+                                android:tint="@color/textDark"
                                 android:src="@drawable/ic_fuil"></ImageView>
 
                             <TextView
@@ -321,6 +322,7 @@
                             <ImageView
                                 android:layout_width="20dp"
                                 android:layout_height="20dp"
+                                android:tint="@color/textDark"
                                 android:src="@drawable/ic_ceat"></ImageView>
 
                             <TextView
@@ -349,6 +351,7 @@
                             <ImageView
                                 android:layout_width="20dp"
                                 android:layout_height="20dp"
+                                android:tint="@color/textDark"
                                 android:src="@drawable/ic_mode"></ImageView>
 
                             <TextView
@@ -377,33 +380,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <LinearLayout
-                            android:layout_weight="1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
-                                android:src="@drawable/ic_engine"></ImageView>
-
-                            <TextView
-                                android:id="@+id/txtEnginInst"
-                                android:layout_weight="1"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/app_name"
-                                android:singleLine="true"
-                                android:layout_marginLeft="5dp"
-                                android:layout_marginRight="5dp"
-                                android:fontFamily="@font/nunito_sans_semibold"
-                                android:textSize="14sp"
-                                android:textColor="@color/textDark">
-
-                            </TextView>
-
-                        </LinearLayout>
 
                         <LinearLayout
                             android:layout_weight="1"
@@ -414,6 +390,7 @@
                             <ImageView
                                 android:layout_width="20dp"
                                 android:layout_height="20dp"
+                                android:tint="@color/textDark"
                                 android:src="@drawable/ic_doore"></ImageView>
 
                             <TextView
@@ -442,6 +419,7 @@
                             <ImageView
                                 android:layout_width="20dp"
                                 android:layout_height="20dp"
+                                android:tint="@color/textDark"
                                 android:src="@drawable/ic_passengers"></ImageView>
 
                             <TextView
@@ -461,15 +439,6 @@
 
                         </LinearLayout>
 
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_marginTop="16dp"
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
                         <LinearLayout
                             android:layout_weight="1"
                             android:layout_width="match_parent"
@@ -479,6 +448,7 @@
                             <ImageView
                                 android:layout_width="20dp"
                                 android:layout_height="20dp"
+                                android:tint="@color/textDark"
                                 android:src="@drawable/ic_suitcase"></ImageView>
 
                             <TextView
@@ -498,6 +468,15 @@
 
                         </LinearLayout>
 
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_marginTop="16dp"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
                         <LinearLayout
                             android:layout_weight="1"
                             android:layout_width="match_parent"
@@ -507,11 +486,41 @@
                             <ImageView
                                 android:layout_width="20dp"
                                 android:layout_height="20dp"
-                                android:src="@drawable/ic_passengers"></ImageView>
+                                android:tint="@color/textDark"
+                                android:src="@drawable/ic_air_bag"></ImageView>
 
                             <TextView
+                                android:id="@+id/txtAirBags"
                                 android:layout_weight="1"
-                                android:id="@+id/txtPassengerTwoInst"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/app_name"
+                                android:singleLine="true"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginRight="5dp"
+                                android:fontFamily="@font/nunito_sans_semibold"
+                                android:textSize="14sp"
+                                android:textColor="@color/textDark">
+
+                            </TextView>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:tint="@color/textDark"
+                                android:src="@drawable/ic_ac_unit"></ImageView>
+
+                            <TextView
+                                android:id="@+id/txtAirConditionar"
+                                android:layout_weight="1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/app_name"
@@ -530,15 +539,16 @@
                             android:layout_weight="1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:visibility="invisible"
                             android:orientation="horizontal">
 
                             <ImageView
-                                android:layout_width="15dp"
-                                android:layout_height="15dp"
-                                android:src="@drawable/ic_ceat"></ImageView>
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:tint="@color/textDark"
+                                android:src="@drawable/ic_sensors"></ImageView>
 
                             <TextView
+                                android:id="@+id/txtParkinSensor"
                                 android:layout_weight="1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -570,12 +580,14 @@
                             android:orientation="horizontal">
 
                             <ImageView
-                                android:layout_width="20dp"
+                                android:layout_width="18dp"
                                 android:layout_height="20dp"
-                                android:src="@drawable/ic_suitcase"></ImageView>
+                                android:tint="@color/textDark"
+                                android:layout_gravity="center_vertical"
+                                android:src="@drawable/ic_camera"></ImageView>
 
                             <TextView
-                                android:id="@+id/txtSuitcaseTwoInst"
+                                android:id="@+id/txtRearParkingCamera"
                                 android:layout_weight="1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -600,11 +612,12 @@
                             <ImageView
                                 android:layout_width="20dp"
                                 android:layout_height="20dp"
-                                android:src="@drawable/ic_suitcase"></ImageView>
+                                android:tint="@color/textDark"
+                                android:src="@drawable/ic_bluetooth"></ImageView>
 
                             <TextView
+                                android:id="@+id/txtBluetooth"
                                 android:layout_weight="1"
-                                android:id="@+id/txtPassengerThreeInst"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/app_name"
@@ -623,15 +636,16 @@
                             android:layout_weight="1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:visibility="invisible"
                             android:orientation="horizontal">
 
                             <ImageView
-                                android:layout_width="15dp"
-                                android:layout_height="15dp"
-                                android:src="@drawable/ic_ceat"></ImageView>
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:tint="@color/textDark"
+                                android:src="@drawable/ic_control"></ImageView>
 
                             <TextView
+                                android:id="@+id/txtCruiseControl"
                                 android:layout_weight="1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -649,6 +663,7 @@
 
 
                     </LinearLayout>
+
 
                     <TextView
                         android:id="@+id/txtLess"

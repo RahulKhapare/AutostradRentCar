@@ -221,6 +221,8 @@
     <string name="dataUpdated">Data updated successfully</string>
     <string name="selectNationality">Please select nationality</string>
 
+    <string name="selectSelftPickUpLocation">Please select self pickup location</string>
+    <string name="selectSelfReturnUpLocation">Please select self return location</string>
 
     <string name="txt1">Leading Car Rental Company with the largest network of Branches &amp; Pickup points</string>
     <string name="txt2">Leading Car Rental Company with the largest network of Branches &amp; Pickup points</string>

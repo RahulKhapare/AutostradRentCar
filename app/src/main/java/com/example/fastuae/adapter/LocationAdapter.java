@@ -16,6 +16,7 @@ import com.example.fastuae.databinding.ActivityCarFleetListBinding;
 import com.example.fastuae.databinding.ActivityLocationListBinding;
 import com.example.fastuae.fragment.HomeFragment;
 import com.example.fastuae.model.CarFleetModel;
+import com.example.fastuae.model.HomeLocationModel;
 import com.example.fastuae.model.LocationModel;
 import com.example.fastuae.util.Click;
 
@@ -24,16 +25,19 @@ import java.util.List;
 public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.viewHolder> {
 
     private Context context;
-    private List<LocationModel> locationModelList;
+    private List<HomeLocationModel> locationModelList;
     private HomeFragment homeFragment;
+    private int flag = 0;
+
     public interface onClick{
-        void onLocationClick(String location);
+        void onLocationClick(String location,int flag,HomeLocationModel model);
     }
 
-    public LocationAdapter(Context context, List<LocationModel> locationModelList,HomeFragment fragment) {
+    public LocationAdapter(Context context, List<HomeLocationModel> locationModelList,HomeFragment fragment,int flag) {
         this.context = context;
         this.locationModelList = locationModelList;
         this.homeFragment = fragment;
+        this.flag = flag;
     }
 
     @NonNull
@@ -45,14 +49,14 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.viewHo
 
     @Override
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
-        LocationModel model = locationModelList.get(position);
+        HomeLocationModel model = locationModelList.get(position);
 
-        holder.binding.txtLocation.setText(model.getLocation());
+        holder.binding.txtLocation.setText(model.getLocation_name());
         holder.binding.txtLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-                ((HomeFragment)homeFragment).onLocationClick(model.getLocation());
+                ((HomeFragment)homeFragment).onLocationClick(model.getLocation_name(),flag,model);
             }
         });
 
