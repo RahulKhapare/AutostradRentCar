@@ -214,6 +214,7 @@
     <string name="nationalGroup">An Emirates National Group</string>
     <string name="ourLocation">Our Locations</string>
     <string name="noInternet">No internet connection available</string>
+    <string name="suitcase">Suitcase</string>
 
     <string name="otpEnter">Enter OTP</string>
     <string name="createAccount">Create Account</string>
@@ -221,6 +222,14 @@
     <string name="alreyCustomer">Already a customer ?</string>
     <string name="dataUpdated">Data updated successfully</string>
     <string name="selectNationality">Please select nationality</string>
+
+    <string name="selectGroup">Select Group</string>
+    <string name="selectPassengers">Select Passengers</string>
+    <string name="selectDoors">Select Doors</string>
+    <string name="selectSuitcase">Select Suitcase</string>
+    <string name="selectTransmission">Select Transmission</string>
+    <string name="selectFuel">Select Fuel</string>
+    <string name="noCardData">No car data found</string>
 
     <string name="selectSelftPickUpLocation">Please select self pickup location</string>
     <string name="selectSelfReturnUpLocation">Please select self return location</string>

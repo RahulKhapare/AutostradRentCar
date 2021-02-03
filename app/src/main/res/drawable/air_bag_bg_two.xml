@@ -3,8 +3,8 @@
 
     <item
         android:drawable="@drawable/ic_air_bag"
-        android:width="20dp"
-        android:height="20dp"
+        android:width="30dp"
+        android:height="30dp"
         />
 
 </layer-list >

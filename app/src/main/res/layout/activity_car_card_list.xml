@@ -120,8 +120,8 @@
                           android:layout_width="match_parent"
                           android:layout_height="wrap_content"
                           android:layout_marginTop="20dp"
-                          android:layout_marginRight="20dp"
-                          android:layout_marginLeft="20dp"
+                          android:layout_marginRight="15dp"
+                          android:layout_marginLeft="15dp"
                           android:layout_gravity="center_horizontal"
                           android:gravity="center_horizontal"
                           android:orientation="horizontal">
@@ -131,14 +131,12 @@
                               android:layout_weight="1"
                               android:layout_width="match_parent"
                               android:layout_height="wrap_content"
-                              android:layout_marginLeft="12dp"
-                              android:layout_marginRight="12dp"
                               android:drawableLeft="@drawable/fuil_bg_two"
                               android:drawablePadding="5dp"
                               android:drawableTint="@color/textDark"
                               android:fontFamily="@font/nunito_sans_semibold"
-                              android:maxLines="1"
                               android:text="@string/app_name"
+                              android:singleLine="true"
                               android:textColor="@color/textDark"
                               android:textSize="20sp">
 
@@ -149,14 +147,14 @@
                               android:layout_weight="1"
                               android:layout_width="match_parent"
                               android:layout_height="match_parent"
-                              android:layout_marginLeft="35dp"
-                              android:layout_marginRight="35dp"
                               android:drawableTint="@color/textDark"
                               android:drawableLeft="@drawable/mode_bg_two"
                               android:drawablePadding="5dp"
                               android:fontFamily="@font/nunito_sans_semibold"
-                              android:maxLines="1"
                               android:text="@string/app_name"
+                              android:layout_marginRight="5dp"
+                              android:layout_marginLeft="5dp"
+                              android:singleLine="true"
                               android:textColor="@color/textDark"
                               android:textSize="20sp">
 
@@ -172,11 +170,9 @@
                               android:fontFamily="@font/nunito_sans_semibold"
                               android:textColor="@color/textDark"
                               android:textSize="20sp"
-                              android:layout_marginLeft="12dp"
-                              android:layout_marginRight="12dp"
                               android:drawableLeft="@drawable/seat_bg_two"
                               android:drawablePadding="5dp"
-                              android:maxLines="1">
+                              android:singleLine="true">
 
                           </TextView>
 
@@ -186,8 +182,8 @@
                           android:layout_width="match_parent"
                           android:layout_height="wrap_content"
                           android:layout_marginTop="20dp"
-                          android:layout_marginRight="20dp"
-                          android:layout_marginLeft="20dp"
+                          android:layout_marginRight="15dp"
+                          android:layout_marginLeft="15dp"
                           android:layout_gravity="center_horizontal"
                           android:gravity="center_horizontal"
                           android:orientation="horizontal">
@@ -202,11 +198,9 @@
                               android:textSize="20sp"
                               android:text="@string/app_name"
                               android:drawableTint="@color/textDark"
-                              android:layout_marginLeft="12dp"
-                              android:layout_marginRight="12dp"
                               android:drawableLeft="@drawable/doore_bg_two"
                               android:drawablePadding="5dp"
-                              android:maxLines="1">
+                              android:singleLine="true">
 
                           </TextView>
 
@@ -220,11 +214,11 @@
                               android:textSize="20sp"
                               android:text="@string/app_name"
                               android:drawableTint="@color/textDark"
-                              android:layout_marginLeft="35dp"
-                              android:layout_marginRight="35dp"
                               android:drawableLeft="@drawable/passenger_bg_two"
                               android:drawablePadding="5dp"
-                              android:maxLines="1">
+                              android:layout_marginRight="5dp"
+                              android:layout_marginLeft="5dp"
+                              android:singleLine="true">
 
                           </TextView>
 
@@ -237,12 +231,9 @@
                               android:textColor="@color/textDark"
                               android:textSize="20sp"
                               android:text="@string/app_name"
-                              android:drawableTint="@color/textDark"
-                              android:layout_marginLeft="12dp"
-                              android:layout_marginRight="12dp"
                               android:drawableLeft="@drawable/suitcase_bg_two"
                               android:drawablePadding="5dp"
-                              android:maxLines="1">
+                              android:singleLine="true">
 
                           </TextView>
 
@@ -252,8 +243,8 @@
                           android:layout_width="match_parent"
                           android:layout_height="wrap_content"
                           android:layout_marginTop="20dp"
-                          android:layout_marginRight="20dp"
-                          android:layout_marginLeft="20dp"
+                          android:layout_marginRight="15dp"
+                          android:layout_marginLeft="15dp"
                           android:layout_gravity="center_horizontal"
                           android:gravity="center_horizontal"
                           android:orientation="horizontal">
@@ -263,13 +254,11 @@
                               android:layout_weight="1"
                               android:layout_width="match_parent"
                               android:layout_height="wrap_content"
-                              android:layout_marginLeft="12dp"
-                              android:layout_marginRight="12dp"
                               android:drawableLeft="@drawable/air_bag_bg_two"
                               android:drawablePadding="5dp"
                               android:drawableTint="@color/textDark"
                               android:fontFamily="@font/nunito_sans_semibold"
-                              android:maxLines="1"
+                              android:singleLine="true"
                               android:text="@string/app_name"
                               android:textColor="@color/textDark"
                               android:textSize="20sp">
@@ -286,11 +275,11 @@
                               android:textSize="20sp"
                               android:text="@string/app_name"
                               android:drawableTint="@color/textDark"
-                              android:layout_marginLeft="35dp"
-                              android:layout_marginRight="35dp"
                               android:drawableLeft="@drawable/air_condition_bg_two"
                               android:drawablePadding="5dp"
-                              android:maxLines="1">
+                              android:layout_marginRight="5dp"
+                              android:layout_marginLeft="5dp"
+                              android:singleLine="true">
 
                           </TextView>
 
@@ -304,11 +293,9 @@
                               android:textColor="@color/textDark"
                               android:textSize="20sp"
                               android:drawableTint="@color/textDark"
-                              android:layout_marginLeft="12dp"
-                              android:layout_marginRight="12dp"
                               android:drawableLeft="@drawable/sensor_bg_two"
                               android:drawablePadding="5dp"
-                              android:maxLines="1">
+                              android:singleLine="true">
 
                           </TextView>
 

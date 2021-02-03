@@ -46,6 +46,7 @@ public class P {
 
     public static String car_list = "car_list";
     public static String min_price = "min_price";
+    public static String num_rows = "num_rows";
     public static String car_name = "car_name";
     public static String transmission_name = "transmission_name";
     public static String fuel_type_name = "fuel_type_name";
@@ -116,6 +117,15 @@ public class P {
     public static String sunroof = "sunroof";
     public static String pay_later_rate = "pay_later_rate";
     public static String pay_now_rate = "pay_now_rate";
+
+    public static String group = "group";
+    public static String passengers = "passengers";
+    public static String doors = "doors";
+    public static String transmission = "transmission";
+    public static String fuel_type = "fuel_type";
+    public static String passengers_name = "passengers_name";
+    public static String doors_name = "doors_name";
+    public static String suitcase_name = "suitcase_name";
 
 
 

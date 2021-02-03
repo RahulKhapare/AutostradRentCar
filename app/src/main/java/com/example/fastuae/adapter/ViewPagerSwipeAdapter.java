@@ -3,8 +3,10 @@ package com.example.fastuae.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -88,9 +90,33 @@ public class ViewPagerSwipeAdapter extends PagerAdapter {
         txtDoor.setText(checkString(model.getDoor()));
         txtPassenger.setText(checkString(model.getPassenger()));
         txtSuitcase.setText(checkString(model.getSuitcase()));
-        txtAirBag.setText(checkString(model.getAir_bags()));
-        txtAirConditionar.setText(checkString(model.getAir_conditioner()));
-        txtParkingSensor.setText(checkString(model.getParking_sensors()));
+
+        String airBags = model.getAir_bags();
+        if (TextUtils.isEmpty(airBags) || airBags.equals("null") || airBags.equals("0")){
+            airBags = "Air Bags";
+            txtAirBag.setPaintFlags(txtAirBag.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        }else if (airBags.equals("1")){
+            airBags = "Air Bags";
+        }
+        txtAirBag.setText(checkString(airBags));
+
+        String airCondition = model.getAir_conditioner();
+        if (TextUtils.isEmpty(airCondition) || airCondition.equals("null") || airCondition.equals("0")){
+            airCondition = "Air Condition";
+            txtAirConditionar.setPaintFlags(txtAirConditionar.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        }else {
+            airCondition = "Air Condition";
+        }
+        txtAirConditionar.setText(checkString(airCondition));
+
+        String parkingSensor = model.getParking_sensors();
+        if (TextUtils.isEmpty(parkingSensor) || parkingSensor.equals("null") || parkingSensor.equals("0")){
+            parkingSensor = "Parking Sensor";
+            txtParkingSensor.setPaintFlags(txtParkingSensor.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        }else {
+            parkingSensor = "Parking Sensor";
+        }
+        txtParkingSensor.setText(checkString(parkingSensor));
 
         txtPayNow.setText(context.getResources().getString(R.string.payNow) + "\n" + model.getPay_now_rate() + " AED");
         txtPayLatter.setText(context.getResources().getString(R.string.payLater) + "\n" + model.getPay_later_rate() + " AED");

@@ -285,6 +285,7 @@
                         android:layout_height="wrap_content">
 
                         <LinearLayout
+                            android:id="@+id/lnrPetrol"
                             android:layout_weight="1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -292,8 +293,9 @@
 
                             <ImageView
                                 android:layout_width="20dp"
-                                android:layout_height="20dp"
+                                android:layout_height="18dp"
                                 android:tint="@color/textDark"
+                                android:layout_gravity="center_vertical"
                                 android:src="@drawable/ic_fuil"></ImageView>
 
                             <TextView
@@ -314,6 +316,7 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/lnrSeats"
                             android:layout_weight="1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -343,6 +346,7 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/lnrAutomatic"
                             android:layout_weight="1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -382,6 +386,7 @@
 
 
                         <LinearLayout
+                            android:id="@+id/lnrDoor"
                             android:layout_weight="1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -411,6 +416,7 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/lnrPassenger"
                             android:layout_weight="1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -441,14 +447,15 @@
 
                         <LinearLayout
                             android:layout_weight="1"
+                            android:id="@+id/lnrSuitcase"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
 
                             <ImageView
-                                android:layout_width="20dp"
+                                android:layout_width="18dp"
                                 android:layout_height="20dp"
-                                android:tint="@color/textDark"
+                                android:layout_gravity="center_vertical"
                                 android:src="@drawable/ic_suitcase"></ImageView>
 
                             <TextView
@@ -478,6 +485,7 @@
                         android:layout_height="wrap_content">
 
                         <LinearLayout
+                            android:id="@+id/lnrAirBags"
                             android:layout_weight="1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -508,6 +516,7 @@
 
                         <LinearLayout
                             android:layout_weight="1"
+                            android:id="@+id/lnrAirConditionar"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
@@ -536,6 +545,7 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/lnrParkinSensor"
                             android:layout_weight="1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -554,7 +564,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/app_name"
                                 android:fontFamily="@font/nunito_sans_semibold"
-                                android:textSize="12sp"
+                                android:textSize="14sp"
                                 android:layout_marginLeft="5dp"
                                 android:layout_marginRight="5dp"
                                 android:singleLine="true"
@@ -574,6 +584,7 @@
                         android:layout_height="wrap_content">
 
                         <LinearLayout
+                            android:id="@+id/lnrRearParkingCamera"
                             android:layout_weight="1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -604,6 +615,7 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/lnrBluetooth"
                             android:layout_weight="1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -633,6 +645,7 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/lnrCruiseControl"
                             android:layout_weight="1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -651,7 +664,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/app_name"
                                 android:fontFamily="@font/nunito_sans_semibold"
-                                android:textSize="12sp"
+                                android:textSize="14sp"
                                 android:layout_marginLeft="5dp"
                                 android:layout_marginRight="5dp"
                                 android:singleLine="true"

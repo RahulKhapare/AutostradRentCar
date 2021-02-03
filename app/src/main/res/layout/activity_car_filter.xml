@@ -37,63 +37,7 @@
                     android:padding="16dp">
 
                     <androidx.cardview.widget.CardView
-                        android:id="@+id/cardPrice"
-                        android:layout_width="match_parent"
-                        android:layout_height="?actionBarSize"
-                        android:layout_marginLeft="1dp"
-                        android:layout_marginRight="1dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginBottom="1dp"
-                        app:cardElevation="3dp"
-                        app:cardCornerRadius="5dp">
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:textColor="@color/textDark"
-                                android:gravity="center_vertical"
-                                android:layout_marginLeft="20dp"
-                                android:layout_marginRight="20dp"
-                                android:layout_gravity="center_vertical"
-                                android:fontFamily="@font/nunito_sans_semibold"
-                                android:text="@string/price"
-                                android:textSize="18sp">
-                            </TextView>
-
-
-                            <ImageView
-                                android:id="@+id/imgPriceRight"
-                                android:layout_width="25dp"
-                                android:layout_height="25dp"
-                                android:layout_marginRight="15dp"
-                                android:src="@drawable/ic_down_arrow"
-                                android:layout_alignParentRight="true"
-                                android:layout_centerVertical="true">
-                            </ImageView>
-
-                            <ImageView
-                                android:id="@+id/imgPriceLeft"
-                                android:layout_width="25dp"
-                                android:layout_height="25dp"
-                                android:layout_marginLeft="15dp"
-                                android:src="@drawable/ic_down_arrow"
-                                android:layout_alignParentLeft="true"
-                                android:layout_centerVertical="true"
-                                android:visibility="gone">
-                            </ImageView>
-
-                        </RelativeLayout>
-
-
-                    </androidx.cardview.widget.CardView>
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_below="@+id/cardPrice"
-                        android:id="@+id/cardSeats"
+                        android:id="@+id/cardGroup"
                         android:layout_width="match_parent"
                         android:layout_height="?actionBarSize"
                         android:layout_marginLeft="1dp"
@@ -108,6 +52,7 @@
                             android:layout_height="match_parent">
 
                             <TextView
+                                android:id="@+id/txtGroupTitle"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:textColor="@color/textDark"
@@ -116,14 +61,13 @@
                                 android:layout_marginRight="20dp"
                                 android:layout_gravity="center_vertical"
                                 android:fontFamily="@font/nunito_sans_semibold"
-                                android:text="@string/seats"
+                                android:text="@string/selectGroup"
                                 android:textSize="18sp">
                             </TextView>
 
 
-
                             <ImageView
-                                android:id="@+id/imgSeatRight"
+                                android:id="@+id/imgGroupRight"
                                 android:layout_width="25dp"
                                 android:layout_height="25dp"
                                 android:layout_marginRight="15dp"
@@ -133,7 +77,7 @@
                             </ImageView>
 
                             <ImageView
-                                android:id="@+id/imgSeatLeft"
+                                android:id="@+id/imgGroupLeft"
                                 android:layout_width="25dp"
                                 android:layout_height="25dp"
                                 android:layout_marginLeft="15dp"
@@ -142,12 +86,14 @@
                                 android:layout_alignParentLeft="true"
                                 android:layout_centerVertical="true">
                             </ImageView>
+
                         </RelativeLayout>
+
 
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
-                        android:layout_below="@+id/cardSeats"
+                        android:layout_below="@+id/cardGroup"
                         android:id="@+id/cardPassengers"
                         android:layout_width="match_parent"
                         android:layout_height="?actionBarSize"
@@ -163,6 +109,7 @@
                             android:layout_height="match_parent">
 
                             <TextView
+                                android:id="@+id/txtPassengetTitle"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:textColor="@color/textDark"
@@ -171,7 +118,7 @@
                                 android:layout_marginRight="20dp"
                                 android:layout_gravity="center_vertical"
                                 android:fontFamily="@font/nunito_sans_semibold"
-                                android:text="@string/passengers"
+                                android:text="@string/selectPassengers"
                                 android:textSize="18sp">
                             </TextView>
 
@@ -218,6 +165,7 @@
                             android:layout_height="match_parent">
 
                             <TextView
+                                android:id="@+id/txtDoorTitle"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:textColor="@color/textDark"
@@ -226,7 +174,7 @@
                                 android:layout_marginRight="20dp"
                                 android:layout_gravity="center_vertical"
                                 android:fontFamily="@font/nunito_sans_semibold"
-                                android:text="@string/doors"
+                                android:text="@string/selectDoors"
                                 android:textSize="18sp">
                             </TextView>
 
@@ -257,6 +205,61 @@
 
                     <androidx.cardview.widget.CardView
                         android:layout_below="@+id/cardDoors"
+                        android:id="@+id/cardSuitcase"
+                        android:layout_width="match_parent"
+                        android:layout_height="?actionBarSize"
+                        android:layout_marginLeft="1dp"
+                        android:layout_marginRight="1dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginBottom="1dp"
+                        app:cardElevation="3dp"
+                        app:cardCornerRadius="5dp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:id="@+id/txtSuitcaseTitle"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:textColor="@color/textDark"
+                                android:gravity="center_vertical"
+                                android:layout_marginLeft="20dp"
+                                android:layout_marginRight="20dp"
+                                android:layout_gravity="center_vertical"
+                                android:fontFamily="@font/nunito_sans_semibold"
+                                android:text="@string/selectSuitcase"
+                                android:textSize="18sp">
+                            </TextView>
+
+
+                            <ImageView
+                                android:id="@+id/imgSuitcaseRight"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_marginRight="15dp"
+                                android:src="@drawable/ic_down_arrow"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true">
+                            </ImageView>
+
+                            <ImageView
+                                android:id="@+id/imgSuitcaseLeft"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_marginLeft="15dp"
+                                android:visibility="gone"
+                                android:src="@drawable/ic_down_arrow"
+                                android:layout_alignParentLeft="true"
+                                android:layout_centerVertical="true">
+                            </ImageView>
+                        </RelativeLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_below="@+id/cardSuitcase"
                         android:id="@+id/cardTransmission"
                         android:layout_width="match_parent"
                         android:layout_height="?actionBarSize"
@@ -272,6 +275,7 @@
                             android:layout_height="match_parent">
 
                             <TextView
+                                android:id="@+id/txtTransmissionTitle"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:textColor="@color/textDark"
@@ -280,7 +284,7 @@
                                 android:layout_marginRight="20dp"
                                 android:layout_gravity="center_vertical"
                                 android:fontFamily="@font/nunito_sans_semibold"
-                                android:text="@string/transmission"
+                                android:text="@string/selectTransmission"
                                 android:textSize="18sp">
                             </TextView>
 
@@ -327,6 +331,7 @@
                             android:layout_height="match_parent">
 
                             <TextView
+                                android:id="@+id/txtFuilTitle"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:textColor="@color/textDark"
@@ -335,7 +340,7 @@
                                 android:layout_marginRight="20dp"
                                 android:layout_gravity="center_vertical"
                                 android:fontFamily="@font/nunito_sans_semibold"
-                                android:text="@string/fuel"
+                                android:text="@string/selectFuel"
                                 android:textSize="18sp">
                             </TextView>
 
@@ -365,118 +370,10 @@
 
                     </androidx.cardview.widget.CardView>
 
-                    <androidx.cardview.widget.CardView
-                        android:layout_below="@+id/cardFuel"
-                        android:id="@+id/cardCategory"
-                        android:layout_width="match_parent"
-                        android:layout_height="?actionBarSize"
-                        android:layout_marginLeft="1dp"
-                        android:layout_marginRight="1dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginBottom="1dp"
-                        app:cardElevation="3dp"
-                        app:cardCornerRadius="5dp">
 
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:textColor="@color/textDark"
-                                android:gravity="center_vertical"
-                                android:layout_marginLeft="20dp"
-                                android:layout_marginRight="20dp"
-                                android:layout_gravity="center_vertical"
-                                android:fontFamily="@font/nunito_sans_semibold"
-                                android:text="@string/category"
-                                android:textSize="18sp">
-                            </TextView>
-
-
-                            <ImageView
-                                android:id="@+id/imgCategoryRight"
-                                android:layout_width="25dp"
-                                android:layout_height="25dp"
-                                android:layout_marginRight="15dp"
-                                android:src="@drawable/ic_down_arrow"
-                                android:layout_alignParentRight="true"
-                                android:layout_centerVertical="true">
-                            </ImageView>
-
-                            <ImageView
-                                android:id="@+id/imgCategoryLeft"
-                                android:layout_width="25dp"
-                                android:layout_height="25dp"
-                                android:layout_marginLeft="15dp"
-                                android:src="@drawable/ic_down_arrow"
-                                android:visibility="gone"
-                                android:layout_alignParentLeft="true"
-                                android:layout_centerVertical="true">
-                            </ImageView>
-                        </RelativeLayout>
-
-                    </androidx.cardview.widget.CardView>
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_below="@+id/cardCategory"
-                        android:id="@+id/cardGroup"
-                        android:layout_width="match_parent"
-                        android:layout_height="?actionBarSize"
-                        android:layout_marginLeft="1dp"
-                        android:layout_marginRight="1dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginBottom="1dp"
-                        app:cardElevation="3dp"
-                        app:cardCornerRadius="5dp">
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:textColor="@color/textDark"
-                                android:gravity="center_vertical"
-                                android:layout_marginLeft="20dp"
-                                android:layout_marginRight="20dp"
-                                android:layout_gravity="center_vertical"
-                                android:fontFamily="@font/nunito_sans_semibold"
-                                android:text="@string/group"
-                                android:textSize="18sp">
-                            </TextView>
-
-
-                            <ImageView
-                                android:id="@+id/imgGroupRight"
-                                android:layout_width="25dp"
-                                android:layout_height="25dp"
-                                android:layout_marginRight="15dp"
-                                android:src="@drawable/ic_down_arrow"
-                                android:layout_alignParentRight="true"
-                                android:layout_centerVertical="true">
-                            </ImageView>
-
-                            <ImageView
-                                android:id="@+id/imgGroupLeft"
-                                android:layout_width="25dp"
-                                android:layout_height="25dp"
-                                android:layout_marginLeft="15dp"
-                                android:visibility="gone"
-                                android:src="@drawable/ic_down_arrow"
-                                android:layout_alignParentLeft="true"
-                                android:layout_centerVertical="true">
-                            </ImageView>
-
-                        </RelativeLayout>
-
-
-                    </androidx.cardview.widget.CardView>
 
                     <TextView
-                        android:layout_below="@+id/cardGroup"
+                        android:layout_below="@+id/cardFuel"
                         android:id="@+id/txtApply"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -494,87 +391,7 @@
                         android:background="@drawable/button_blue_bg"></TextView>
 
 
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/viewPrice"
-                        android:layout_below="@+id/cardPrice"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:cardCornerRadius="5dp"
-                        app:cardElevation="3dp"
-                        android:layout_marginTop="-5dp"
-                        android:layout_marginLeft="1dp"
-                        android:layout_marginRight="1dp"
-                        android:visibility="gone">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="0.5dp"
-                                android:layout_marginTop="5dp"
-                                android:background="@color/customeGray"
-                                tools:ignore="Suspicious0dp">
-
-                            </LinearLayout>
-
-                            <androidx.recyclerview.widget.RecyclerView
-                                android:id="@+id/recycelrPrice"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:scrollbarSize="7dp"
-                                android:scrollbarFadeDuration="0"
-                                android:scrollbarThumbVertical="@drawable/scrollbar_shape"
-                                android:scrollbars="vertical">
-
-                            </androidx.recyclerview.widget.RecyclerView>
-
-                        </LinearLayout>
-
-                    </androidx.cardview.widget.CardView>
-
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/viewSeats"
-                        android:layout_below="@+id/cardSeats"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:cardElevation="3dp"
-                        app:cardCornerRadius="5dp"
-                        android:layout_marginTop="-5dp"
-                        android:layout_marginLeft="1dp"
-                        android:layout_marginRight="1dp"
-                        android:visibility="gone">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="0.5dp"
-                                android:layout_marginTop="5dp"
-                                android:background="@color/customeGray"
-                                tools:ignore="Suspicious0dp">
-
-                            </LinearLayout>
-
-                            <androidx.recyclerview.widget.RecyclerView
-                                android:id="@+id/recyclerSeats"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:scrollbarSize="7dp"
-                                android:scrollbarFadeDuration="0"
-                                android:scrollbarThumbVertical="@drawable/scrollbar_shape"
-                                android:scrollbars="vertical">
-
-                            </androidx.recyclerview.widget.RecyclerView>
-
-                        </LinearLayout>
-
-                    </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/viewPassengers"
@@ -740,46 +557,6 @@
 
                     </androidx.cardview.widget.CardView>
 
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/viewCategory"
-                        android:layout_below="@+id/cardCategory"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:cardElevation="3dp"
-                        app:cardCornerRadius="5dp"
-                        android:layout_marginTop="-5dp"
-                        android:layout_marginLeft="1dp"
-                        android:layout_marginRight="1dp"
-                        android:visibility="gone">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="0.5dp"
-                                android:layout_marginTop="5dp"
-                                android:background="@color/customeGray"
-                                tools:ignore="Suspicious0dp">
-
-                            </LinearLayout>
-
-                            <androidx.recyclerview.widget.RecyclerView
-                                android:id="@+id/recyclerCategory"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:scrollbarSize="7dp"
-                                android:scrollbarFadeDuration="0"
-                                android:scrollbarThumbVertical="@drawable/scrollbar_shape"
-                                android:scrollbars="vertical">
-
-                            </androidx.recyclerview.widget.RecyclerView>
-
-                        </LinearLayout>
-
-                    </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/viewGroup"
@@ -809,6 +586,47 @@
 
                             <androidx.recyclerview.widget.RecyclerView
                                 android:id="@+id/recyclerGroup"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:scrollbarSize="7dp"
+                                android:scrollbarFadeDuration="0"
+                                android:scrollbarThumbVertical="@drawable/scrollbar_shape"
+                                android:scrollbars="vertical">
+
+                            </androidx.recyclerview.widget.RecyclerView>
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/viewSuitcase"
+                        android:layout_below="@+id/cardSuitcase"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardElevation="3dp"
+                        app:cardCornerRadius="5dp"
+                        android:layout_marginTop="-5dp"
+                        android:layout_marginLeft="1dp"
+                        android:layout_marginRight="1dp"
+                        android:visibility="gone">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0.5dp"
+                                android:layout_marginTop="5dp"
+                                android:background="@color/customeGray"
+                                tools:ignore="Suspicious0dp">
+
+                            </LinearLayout>
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/recyclerSuitcase"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:scrollbarSize="7dp"

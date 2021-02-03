@@ -4,14 +4,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.adoisstudio.helper.Api;
@@ -35,9 +39,13 @@ public class CarCardFragment extends Fragment {
     private Context context;
     private ViewPagerSwipeAdapter swipeAdapter;
     private ViewPager viewPagesSwipe;
+    private TextView txtError;
     private List<CarModel> carModelList;
     private ScrollView scrollView;
     private LoadingDialog loadingDialog;
+
+    int count;
+    int pageCount = 1;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -48,16 +56,21 @@ public class CarCardFragment extends Fragment {
         loadingDialog = new LoadingDialog(context);
         scrollView = view.findViewById(R.id.scrollview);
         viewPagesSwipe = view.findViewById(R.id.viewPagesSwipe);
+        txtError = view.findViewById(R.id.txtError);
 
         carModelList = new ArrayList<>();
-        swipeAdapter = new ViewPagerSwipeAdapter(context, carModelList);
-        viewPagesSwipe.setPageTransformer(true, new ViewPagerStack());
-        viewPagesSwipe.setOffscreenPageLimit(3);
-        viewPagesSwipe.setAdapter(swipeAdapter);
-
-        hitCarData();
+        setAdapter(0);
+        hitCarData(getPaginationUrl(false),false,0);
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (SelectCarActivity.isApplyFilter){
+            hitCarData(getPaginationUrl(true),true,0);
+        }
     }
 
 
@@ -73,14 +86,13 @@ public class CarCardFragment extends Fragment {
         }
     }
 
-    private void hitCarData() {
+
+    public void hitCarData(String url, boolean isFilter,int lastPosition) {
 
         ProgressView.show(context,loadingDialog);
         Json j = new Json();
 
-        String externalParams = "emirate_id=" + SelectCarActivity.pickUpEmirateID + "&pickup_date=" + SelectCarActivity.pickUpDate + "&dropoff_date=" + SelectCarActivity.dropUpDate;
-
-        Api.newApi(context, P.BaseUrl + "cars?" + externalParams).addJson(j)
+        Api.newApi(context, P.BaseUrl + "cars?" + url).addJson(j)
                 .setMethod(Api.GET)
                 //.onHeaderRequest(App::getHeaders)
                 .onError(() -> {
@@ -91,11 +103,20 @@ public class CarCardFragment extends Fragment {
                 {
                     if (json.getInt(P.status) == 1) {
 
+                        if (isFilter){
+                            carModelList.clear();
+                        }
+
                         json = json.getJson(P.data);
 
-                        Json min_price = json.getJson(P.min_price);
-                        String pay_later_rate = min_price.getString(P.pay_later_rate);
-                        String pay_now_rate = min_price.getString(P.pay_now_rate);
+                        String num_rows = json.getString(P.num_rows);
+                        if (!TextUtils.isEmpty(num_rows) && !num_rows.equals("null")){
+                            count = Integer.parseInt(num_rows);
+                        }
+
+//                        Json min_price = json.getJson(P.min_price);
+//                        String pay_later_rate = min_price.getString(P.pay_later_rate);
+//                        String pay_now_rate = min_price.getString(P.pay_now_rate);
 
                         JsonList car_list = json.getJsonList(P.car_list);
 
@@ -124,7 +145,7 @@ public class CarCardFragment extends Fragment {
                             carModelList.add(model);
                         }
 
-                        swipeAdapter.notifyDataSetChanged();
+                        setAdapter(lastPosition);
 
                     }else {
                         H.showMessage(context,json.getString(P.error));
@@ -133,6 +154,84 @@ public class CarCardFragment extends Fragment {
 
                 })
                 .run("hitCarData");
+    }
+
+    private void setAdapter(int lastPosition){
+        swipeAdapter = new ViewPagerSwipeAdapter(context, carModelList);
+        viewPagesSwipe.setPageTransformer(true, new ViewPagerStack());
+        viewPagesSwipe.setOffscreenPageLimit(3);
+        viewPagesSwipe.setAdapter(swipeAdapter);
+        viewPagesSwipe.setCurrentItem(lastPosition);
+
+        viewPagesSwipe.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                int page = position + 1;
+                if (carModelList!=null && !carModelList.isEmpty()){
+                    if (page==carModelList.size()){
+                        if (carModelList.size()<count){
+                            pageCount++;
+                            hitCarData(getPaginationUrl(false),false,page-1);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+        if (carModelList.isEmpty()){
+            txtError.setVisibility(View.VISIBLE);
+        }else {
+            txtError.setVisibility(View.GONE);
+        }
+    }
+
+    private String getPaginationUrl(boolean isFilter){
+        String url = "emirate_id=" + SelectCarActivity.pickUpEmirateID + "&pickup_date=" + SelectCarActivity.pickUpDate + "&dropoff_date=" + SelectCarActivity.dropUpDate;
+
+        if (!TextUtils.isEmpty(SelectCarActivity.groupValue)){
+            url = url + "&group=" + SelectCarActivity.groupValue;
+        }
+
+        if (!TextUtils.isEmpty(SelectCarActivity.passengerValue)){
+            url = url + "&passengers=" + SelectCarActivity.passengerValue;
+        }
+
+        if (!TextUtils.isEmpty(SelectCarActivity.doorValue)){
+            url = url + "&doors=" + SelectCarActivity.doorValue;
+        }
+
+        if (!TextUtils.isEmpty(SelectCarActivity.suitcaseValue)){
+            url = url + "&suitcase=" + SelectCarActivity.suitcaseValue;
+        }
+
+        if (!TextUtils.isEmpty(SelectCarActivity.transmissionValue)){
+            url = url + "&transmission=" + SelectCarActivity.transmissionValue;
+        }
+
+        if (!TextUtils.isEmpty(SelectCarActivity.fuilValue)){
+            url = url + "&fuel=" + SelectCarActivity.fuilValue;
+        }
+
+        if (isFilter){
+            url = url + "&page=" + "1";
+            pageCount = 1;
+        }else {
+            url = url + "&page=" + pageCount+"";
+        }
+
+        url = url + "&per_page=" + "10";
+
+        return url;
     }
 
 

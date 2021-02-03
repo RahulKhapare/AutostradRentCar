@@ -22,13 +22,16 @@ public class CarFilterAdapter extends RecyclerView.Adapter<CarFilterAdapter.view
 
     private Context context;
     private List<CarFilterModel> carFilterModelList;
+    private int flag;
+
     public interface onClick{
-        void onFilterClick(String location);
+        void onFilterClick(CarFilterModel model,int flag);
     }
 
-    public CarFilterAdapter(Context context, List<CarFilterModel> carFilterModelList) {
+    public CarFilterAdapter(Context context, List<CarFilterModel> carFilterModelList,int flag) {
         this.context = context;
         this.carFilterModelList = carFilterModelList;
+        this.flag = flag;
     }
 
     @NonNull
@@ -42,12 +45,13 @@ public class CarFilterAdapter extends RecyclerView.Adapter<CarFilterAdapter.view
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
         CarFilterModel model = carFilterModelList.get(position);
 
-        holder.binding.txtFilter.setText(model.getFilterName());
+        holder.binding.txtFilter.setText(model.getName());
         holder.binding.txtFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-                ((CarFilterActivity)context).onFilterClick(model.getFilterName());
+
+                ((CarFilterActivity)context).onFilterClick(model,flag);
 
             }
         });

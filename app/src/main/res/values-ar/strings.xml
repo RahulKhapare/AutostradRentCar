@@ -213,6 +213,15 @@
     <string name="nationalGroup">مجموعة إماراتية وطنية</string>
     <string name="ourLocation">مواقعنا</string>
     <string name="noInternet">لا يوجد اتصال بالإنترنت متاح</string>
+    <string name="suitcase">حقيبة سفر</string>
+
+    <string name="selectGroup">اختر مجموعة</string>
+    <string name="selectPassengers">حدد الركاب</string>
+    <string name="selectDoors">حدد الأبواب</string>
+    <string name="selectSuitcase">حدد حقيبة</string>
+    <string name="selectTransmission">حدد ناقل الحركة</string>
+    <string name="selectFuel">حدد الوقود</string>
+    <string name="noCardData">لم يتم العثور على بيانات السيارة</string>
 
     <string name="otpEnter">أدخل OTP</string>
     <string name="createAccount">إنشاء حساب</string>

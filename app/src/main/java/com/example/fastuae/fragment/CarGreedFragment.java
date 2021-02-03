@@ -2,13 +2,17 @@ package com.example.fastuae.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 
+import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.adoisstudio.helper.Api;
 import com.adoisstudio.helper.H;
@@ -34,6 +38,12 @@ public class CarGreedFragment extends Fragment {
     private CarGridAdapter adapter;
     private LoadingDialog loadingDialog;
 
+    private boolean loading = true;
+    int pastVisiblesItems, visibleItemCount, totalItemCount;
+    LinearLayoutManager linearLayoutManager;
+    int count;
+    int pageCount = 1;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -54,21 +64,58 @@ public class CarGreedFragment extends Fragment {
 
         carModelList = new ArrayList<>();
         adapter = new CarGridAdapter(context,carModelList);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
+        linearLayoutManager = new LinearLayoutManager(context);
         binding.recyclerCar.setLayoutManager(linearLayoutManager);
         binding.recyclerCar.setAdapter(adapter);
 
-        hitCarData();
+        hitCarData(getPaginationUrl(false),false);
+        setPagination();
+
     }
 
-    private void hitCarData() {
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (SelectCarActivity.isApplyFilter){
+            hitCarData(getPaginationUrl(true),true);
+        }
+    }
+
+    private void setPagination(){
+        binding.recyclerCar.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL){
+                    loading = true;
+                }
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                visibleItemCount = linearLayoutManager.getChildCount();
+                totalItemCount = linearLayoutManager.getItemCount();
+                pastVisiblesItems = linearLayoutManager.findFirstVisibleItemPosition();
+
+                if (loading && (visibleItemCount + pastVisiblesItems == totalItemCount)){
+                    loading = false;
+                    if (carModelList!=null && !carModelList.isEmpty()){
+                        if (carModelList.size()<count){
+                            pageCount++;
+                           hitCarData(getPaginationUrl(false),false);
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    public void hitCarData(String url, boolean isFilter) {
 
         ProgressView.show(context,loadingDialog);
         Json j = new Json();
 
-        String externalParams = "emirate_id=" + SelectCarActivity.pickUpEmirateID + "&pickup_date=" + SelectCarActivity.pickUpDate + "&dropoff_date=" + SelectCarActivity.dropUpDate;
-
-        Api.newApi(context, P.BaseUrl + "cars?" + externalParams).addJson(j)
+        Api.newApi(context, P.BaseUrl + "cars?" + url).addJson(j)
                 .setMethod(Api.GET)
                 //.onHeaderRequest(App::getHeaders)
                 .onError(() -> {
@@ -79,11 +126,21 @@ public class CarGreedFragment extends Fragment {
                 {
                     if (json.getInt(P.status) == 1) {
 
+                        if (isFilter){
+                            carModelList.clear();
+                            adapter.notifyDataSetChanged();
+                        }
+
                         json = json.getJson(P.data);
 
-                        Json min_price = json.getJson(P.min_price);
-                        String pay_later_rate = min_price.getString(P.pay_later_rate);
-                        String pay_now_rate = min_price.getString(P.pay_now_rate);
+                        String num_rows = json.getString(P.num_rows);
+                        if (!TextUtils.isEmpty(num_rows) && !num_rows.equals("null")){
+                            count = Integer.parseInt(num_rows);
+                        }
+
+//                        Json min_price = json.getJson(P.min_price);
+//                        String pay_later_rate = min_price.getString(P.pay_later_rate);
+//                        String pay_now_rate = min_price.getString(P.pay_now_rate);
 
                         JsonList car_list = json.getJsonList(P.car_list);
                         for (int i=0; i<car_list.size(); i++){
@@ -113,6 +170,12 @@ public class CarGreedFragment extends Fragment {
 
                         adapter.notifyDataSetChanged();
 
+                        if (carModelList.isEmpty()){
+                            binding.txtError.setVisibility(View.VISIBLE);
+                        }else {
+                            binding.txtError.setVisibility(View.GONE);
+                        }
+
                     }else {
                         H.showMessage(context,json.getString(P.error));
                     }
@@ -120,6 +183,45 @@ public class CarGreedFragment extends Fragment {
 
                 })
                 .run("hitCarData");
+    }
+
+    private String getPaginationUrl(boolean isFilter){
+        String url = "emirate_id=" + SelectCarActivity.pickUpEmirateID + "&pickup_date=" + SelectCarActivity.pickUpDate + "&dropoff_date=" + SelectCarActivity.dropUpDate;
+
+        if (!TextUtils.isEmpty(SelectCarActivity.groupValue)){
+            url = url + "&group=" + SelectCarActivity.groupValue;
+        }
+
+        if (!TextUtils.isEmpty(SelectCarActivity.passengerValue)){
+            url = url + "&passengers=" + SelectCarActivity.passengerValue;
+        }
+
+        if (!TextUtils.isEmpty(SelectCarActivity.doorValue)){
+            url = url + "&doors=" + SelectCarActivity.doorValue;
+        }
+
+        if (!TextUtils.isEmpty(SelectCarActivity.suitcaseValue)){
+            url = url + "&suitcase=" + SelectCarActivity.suitcaseValue;
+        }
+
+        if (!TextUtils.isEmpty(SelectCarActivity.transmissionValue)){
+            url = url + "&transmission=" + SelectCarActivity.transmissionValue;
+        }
+
+        if (!TextUtils.isEmpty(SelectCarActivity.fuilValue)){
+            url = url + "&fuel=" + SelectCarActivity.fuilValue;
+        }
+
+        if (isFilter){
+            url = url + "&page=" + "1";
+            pageCount = 1;
+        }else {
+            url = url + "&page=" + pageCount+"";
+        }
+
+        url = url + "&per_page=" + "10";
+
+        return url;
     }
 
     public static CarGreedFragment newInstance() {

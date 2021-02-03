@@ -14,6 +14,7 @@ import android.content.res.ColorStateList;
 import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -59,6 +60,13 @@ public class SelectCarActivity extends AppCompatActivity implements ViewPager.On
     public static String dropUpEmirateID = "";
     public static String pickUpDate = "";
     public static String dropUpDate = "";
+    public static String groupValue = "";
+    public static String passengerValue = "";
+    public static String doorValue = "";
+    public static String suitcaseValue = "";
+    public static String transmissionValue = "";
+    public static String fuilValue = "";
+    public static boolean isApplyFilter = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,12 +78,19 @@ public class SelectCarActivity extends AppCompatActivity implements ViewPager.On
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
+
     private void initView(){
         binding.toolbar.setTitle(getResources().getString(R.string.selectCar));
         setSupportActionBar(binding.toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
+        isApplyFilter = false;
         pickUpEmirateID = getIntent().getStringExtra(Config.pickUpEmirateID);
         dropUpEmirateID = getIntent().getStringExtra(Config.dropUpEmirateID);
         pickUpDate = getIntent().getStringExtra(Config.pickUpDate);
@@ -214,4 +229,15 @@ public class SelectCarActivity extends AppCompatActivity implements ViewPager.On
         return false;
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        isApplyFilter = false;
+        groupValue = "";
+        passengerValue = "";
+        doorValue = "";
+        suitcaseValue = "";
+        transmissionValue = "";
+        fuilValue = "";
+    }
 }

@@ -213,6 +213,15 @@
     <string name="nationalGroup">An Emirates National Group</string>
     <string name="ourLocation">Our Locations</string>
     <string name="noInternet">No internet connection available</string>
+    <string name="suitcase">Suitcase</string>
+
+    <string name="selectGroup">Select Group</string>
+    <string name="selectPassengers">Select Passengers</string>
+    <string name="selectDoors">Select Doors</string>
+    <string name="selectSuitcase">Select Suitcase</string>
+    <string name="selectTransmission">Select Transmission</string>
+    <string name="selectFuel">Select Fuel</string>
+    <string name="noCardData">No car data found</string>
 
     <string name="otpEnter">Enter OTP</string>
     <string name="createAccount">Create Account</string>

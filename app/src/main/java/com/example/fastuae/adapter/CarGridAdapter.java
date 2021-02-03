@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.style.UnderlineSpan;
@@ -73,12 +74,61 @@ public class CarGridAdapter extends RecyclerView.Adapter<CarGridAdapter.viewHold
         holder.binding.txtDoorInst.setText(checkString(model.getDoor()));
         holder.binding.txtPassengerInst.setText(checkString(model.getPassenger()));
         holder.binding.txtSuitcaseInst.setText(checkString(model.getSuitcase()));
-        holder.binding.txtAirBags.setText(checkString(model.getAir_bags()));
-        holder.binding.txtAirConditionar.setText(checkString(model.getAir_conditioner()));
-        holder.binding.txtParkinSensor.setText(checkString(model.getParking_sensors()));
-        holder.binding.txtRearParkingCamera.setText(checkString(model.getRear_parking_camera()));
-        holder.binding.txtBluetooth.setText(checkString(model.getBluetooth()));
-        holder.binding.txtCruiseControl.setText(checkString(model.getCruise_control()));
+
+        String airBags = model.getAir_bags();
+        if (TextUtils.isEmpty(airBags) || airBags.equals("null") || airBags.equals("0")){
+            airBags = "Air Bags";
+            holder.binding.txtAirBags.setPaintFlags(holder.binding.txtAirBags.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        }else if (airBags.equals("1")){
+            airBags = "Air Bags";
+        }
+        holder.binding.txtAirBags.setText(checkString(airBags));
+
+        String airCondition = model.getAir_conditioner();
+        if (TextUtils.isEmpty(airCondition) || airCondition.equals("null") || airCondition.equals("0")){
+            airCondition = "Air Condition";
+            holder.binding.txtAirConditionar.setPaintFlags(holder.binding.txtAirBags.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        }else {
+            airCondition = "Air Condition";
+        }
+        holder.binding.txtAirConditionar.setText(checkString(airCondition));
+
+        String parkingSensor = model.getParking_sensors();
+        if (TextUtils.isEmpty(parkingSensor) || parkingSensor.equals("null") || parkingSensor.equals("0")){
+            parkingSensor = "Parking Sensor";
+            holder.binding.txtParkinSensor.setPaintFlags(holder.binding.txtAirBags.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        }else {
+            parkingSensor = "Parking Sensor";
+        }
+        holder.binding.txtParkinSensor.setText(checkString(parkingSensor));
+
+        String camera = model.getRear_parking_camera();
+        if (TextUtils.isEmpty(camera) || camera.equals("null") || camera.equals("0")){
+            camera = "Parking Camera";
+            holder.binding.txtRearParkingCamera.setPaintFlags(holder.binding.txtAirBags.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        }else{
+            camera = "Parking Camera";
+        }
+        holder.binding.txtRearParkingCamera.setText(checkString(camera));
+
+        String bluetooth = model.getBluetooth();
+        if (TextUtils.isEmpty(bluetooth) || bluetooth.equals("null") || bluetooth.equals("0")){
+            bluetooth = "Bluetooth";
+            holder.binding.txtBluetooth.setPaintFlags(holder.binding.txtAirBags.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        }else{
+            bluetooth = "Bluetooth";
+        }
+
+        holder.binding.txtBluetooth.setText(checkString(bluetooth));
+
+        String control = model.getCruise_control();
+        if (TextUtils.isEmpty(control) || control.equals("null") || control.equals("0")){
+            control = "Cruise Control";
+            holder.binding.txtCruiseControl.setPaintFlags(holder.binding.txtAirBags.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        }else{
+            control = "Cruise Control";
+        }
+        holder.binding.txtCruiseControl.setText(checkString(control));
 
         String more = context.getResources().getString(R.string.more);
         SpannableString content = new SpannableString(more);
