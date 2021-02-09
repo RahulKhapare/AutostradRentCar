@@ -14,6 +14,71 @@
             android:background="@color/colorWhite">
 
             <RelativeLayout
+                android:id="@+id/lnrEnquireyNow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:src="@drawable/ic_enquirey_now">
+
+                    </ImageView>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/textDark"
+                        android:gravity="center_vertical"
+                        android:layout_gravity="center_vertical"
+                        android:fontFamily="@font/nunito_sans_regular"
+                        android:text="@string/enquireyNow"
+                        android:textSize="18sp">
+                    </TextView>
+
+                </LinearLayout>
+
+
+                <ImageView
+                    android:id="@+id/imgEnquireyNowRight"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginRight="15dp"
+                    android:src="@drawable/ic_right_arrow"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true">
+                </ImageView>
+
+                <ImageView
+                    android:id="@+id/imgEnquireyNowLeft"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="15dp"
+                    android:src="@drawable/ic_left_arrow"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:visibility="gone">
+                </ImageView>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@color/customeGray"></LinearLayout>
+
+
+            <RelativeLayout
                 android:id="@+id/lnrFastRewards"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -535,7 +600,7 @@
 
 
             <RelativeLayout
-                android:id="@+id/lnrRentalInfo"
+                android:id="@+id/lnrLeasing"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp">
@@ -550,7 +615,7 @@
                         android:layout_height="30dp"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
-                        android:src="@drawable/ic_rental">
+                        android:src="@drawable/ic_leasing">
 
                     </ImageView>
 
@@ -561,7 +626,7 @@
                         android:gravity="center_vertical"
                         android:layout_gravity="center_vertical"
                         android:fontFamily="@font/nunito_sans_regular"
-                        android:text="@string/rentalInfo"
+                        android:text="@string/leasing"
                         android:textSize="18sp">
                     </TextView>
 
@@ -569,7 +634,7 @@
 
 
                 <ImageView
-                    android:id="@+id/imgRentalInfoRight"
+                    android:id="@+id/imgLeasingRight"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:layout_marginRight="15dp"
@@ -579,7 +644,71 @@
                 </ImageView>
 
                 <ImageView
-                    android:id="@+id/imgRentalInfoLeft"
+                    android:id="@+id/imgLeasingLeft"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="15dp"
+                    android:src="@drawable/ic_left_arrow"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:visibility="gone">
+                </ImageView>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@color/customeGray"></LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/lnrLostFound"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:src="@drawable/ic_lost_found">
+
+                    </ImageView>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/textDark"
+                        android:gravity="center_vertical"
+                        android:layout_gravity="center_vertical"
+                        android:fontFamily="@font/nunito_sans_regular"
+                        android:text="@string/lostFount"
+                        android:textSize="18sp">
+                    </TextView>
+
+                </LinearLayout>
+
+
+                <ImageView
+                    android:id="@+id/imgLoastFoundRight"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginRight="15dp"
+                    android:src="@drawable/ic_right_arrow"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true">
+                </ImageView>
+
+                <ImageView
+                    android:id="@+id/imgLoastFoundLeft"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:layout_marginLeft="15dp"

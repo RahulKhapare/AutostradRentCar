@@ -21,6 +21,7 @@ import com.example.fastuae.R;
 import com.example.fastuae.activity.CarDetailOneActivity;
 import com.example.fastuae.model.CarModel;
 import com.example.fastuae.util.Click;
+import com.example.fastuae.util.Config;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -154,7 +155,7 @@ public class ViewPagerSwipeAdapter extends PagerAdapter {
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-                jumpToCardDetails();
+                jumpToCardDetails(model,Config.pay_now,model.getPay_now_rate());
             }
         });
 
@@ -162,7 +163,7 @@ public class ViewPagerSwipeAdapter extends PagerAdapter {
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-                jumpToCardDetails();
+                jumpToCardDetails(model,Config.pay_latter,model.getPay_later_rate());
             }
         });
 
@@ -174,8 +175,11 @@ public class ViewPagerSwipeAdapter extends PagerAdapter {
        container.removeView((View)object);
     }
 
-    private void jumpToCardDetails(){
+    private void jumpToCardDetails(CarModel model,String payType,String aedRate){
+        Config.carModel = model;
         Intent intent = new Intent(context, CarDetailOneActivity.class);
+        intent.putExtra(Config.PAY_TYPE,payType);
+        intent.putExtra(Config.SELECTED_AED,aedRate);
         context.startActivity(intent);
     }
 

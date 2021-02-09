@@ -216,7 +216,6 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:fontFamily="@font/nunito_sans_regular"
-                                    android:text="@string/app_name"
                                     android:textColor="@color/textDark"
                                     android:alpha="0.8"
                                     android:textSize="16sp">
@@ -247,7 +246,6 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:fontFamily="@font/nunito_sans_regular"
-                                    android:text="@string/app_name"
                                     android:textColor="@color/textDark"
                                     android:alpha="0.8"
                                     android:textSize="16sp">
@@ -278,7 +276,6 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:fontFamily="@font/nunito_sans_regular"
-                                    android:text="@string/app_name"
                                     android:textColor="@color/textDark"
                                     android:alpha="0.8"
                                     android:textSize="16sp">
@@ -309,7 +306,6 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:fontFamily="@font/nunito_sans_regular"
-                                    android:text="@string/app_name"
                                     android:textColor="@color/textDark"
                                     android:alpha="0.8"
                                     android:textSize="16sp">
@@ -516,7 +512,7 @@
                                         android:textSize="18sp"
                                         android:digits="0123456789"
                                         android:maxLength="3"
-                                        android:imeOptions="actionNext"
+                                        android:imeOptions="actionDone"
                                         android:textColor="@color/textDark"
                                         android:textColorHint="@color/iconicGray"
                                         android:textCursorDrawable="@drawable/color_cursor"

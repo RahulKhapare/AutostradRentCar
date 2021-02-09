@@ -230,6 +230,24 @@
     <string name="dataUpdated">Data updated successfully</string>
     <string name="selectNationality">Please select nationality</string>
 
+    <string name="enquireyNow">Enquire Now</string>
+    <string name="leasing">Leasing</string>
+    <string name="lostFount">Lost &amp; found</string>
+    <string name="quotationRequest">Quotation Request</string>
+    <string name="additionalComment">Additional Comments</string>
+    <string name="submit">Submit</string>
+    <string name="comment">Comment</string>
+    <string name="enterComment">Please enter comment</string>
+    <string name="enterValidComment">Please enter valid comment</string>
+    <string name="getStarted">Get Started by filling this form -</string>
+    <string name="brifDesc">Brief Description of lost or forgotten Item</string>
+    <string name="enterDescription">Please enter description</string>
+    <string name="description">Description</string>
+    <string name="vehicleNo">Rental Agreement No./ Vehicle No.</string>
+    <string name="enterVehicleNo">Please enter Rental Agreement No./ Vehicle No.</string>
+    <string name="enterValidDescription">Please enter valid description</string>
+
+
     <string name="selectSelftPickUpLocation">Please select self pickup location</string>
     <string name="selectSelfReturnUpLocation">Please select self return location</string>
 

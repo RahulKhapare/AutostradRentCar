@@ -127,6 +127,13 @@ public class P {
     public static String doors_name = "doors_name";
     public static String suitcase_name = "suitcase_name";
 
+    public static String car_id = "car_id";
+    public static String pay_type = "pay_type";
+    public static String pickup_emirate_id = "pickup_emirate_id";
+    public static String pickup_type = "pickup_type";
+    public static String dropoff_emirate_id = "dropoff_emirate_id";
+    public static String dropoff_type = "dropoff_type";
+
 
 
 }

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,21 +17,31 @@ import android.widget.CompoundButton;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import com.adoisstudio.helper.Api;
 import com.adoisstudio.helper.H;
+import com.adoisstudio.helper.Json;
+import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
 import com.example.fastuae.R;
 import com.example.fastuae.databinding.ActivityCarDetailTwoBinding;
+import com.example.fastuae.model.CarModel;
 import com.example.fastuae.util.Click;
 import com.example.fastuae.util.Config;
 import com.example.fastuae.util.P;
+import com.example.fastuae.util.ProgressView;
 import com.example.fastuae.util.WindowView;
+import com.squareup.picasso.Picasso;
 
 public class CarDetailTwoActivity extends AppCompatActivity {
 
     private CarDetailTwoActivity activity = this;
     private ActivityCarDetailTwoBinding binding;
     private Session session;
+    private LoadingDialog loadingDialog;
     private String flag;
+    private String payType = "";
+    private String aedSelected = "";
+    private CarModel model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +49,10 @@ public class CarDetailTwoActivity extends AppCompatActivity {
         WindowView.getWindow(activity);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_car_detail_two);
         session = new Session(activity);
+        loadingDialog = new LoadingDialog(activity);
         flag = session.getString(P.languageFlag);
+        payType = getIntent().getStringExtra(Config.PAY_TYPE);
+        aedSelected = getIntent().getStringExtra(Config.SELECTED_AED);
         Config.isEditDetails = false;
         initView();
     }
@@ -58,27 +72,61 @@ public class CarDetailTwoActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         if (Config.isEditDetails){
-            setInformation();
+            setInformation(true);
         }
+    }
+
+    private void clearData(){
+        Config.firstName  = "";
+        Config.lastName  = "";
+        Config.email  = "";
+        Config.code  = "";
+        Config.phone  = "";
+        Config.positionCode  = 0;
     }
 
     private void setData(){
 
-        binding.txtConfirmPayment.setText(getResources().getString(R.string.confirmPayment)+ " : AED 200");
-        binding.txtCarName.setText("Mercedes SUV");
-        binding.txtFees.setText("Reservation Fee: AED 100");
-        setInformation();
+        model = Config.carModel;
+        Picasso.get().load(model.getCar_image()).error(R.drawable.ic_image).into(binding.imgCar);
+
+        binding.txtConfirmPayment.setText(getResources().getString(R.string.confirmPayment)+ " : AED " + aedSelected);
+        binding.txtCarName.setText(model.getCar_name());
+        binding.txtFees.setText("Reservation Fee: AED " + aedSelected);
+        setInformation(false);
 
         if (flag.equals(Config.ARABIC)){
             binding.txtPhoneNo.setGravity(Gravity.LEFT);
         }
     }
 
-    private void setInformation(){
+    private void setInformation(boolean setData){
+
+        String name = session.getString(P.user_name);
+        String email = session.getString(P.user_email);
+        String number = session.getString(P.user_mobile);
+
+        if (TextUtils.isEmpty(binding.txtFirstName.getText().toString())){
+            Config.firstName = name;
+        }
+
+        if (TextUtils.isEmpty(binding.txtEmailName.getText().toString())){
+            Config.email = email;
+        }
+
+        if (TextUtils.isEmpty(binding.txtPhoneNo.getText().toString())){
+            Config.phone = number;
+        }
+
         binding.txtFirstName.setText(Config.firstName);
         binding.txtLastName.setText(Config.lastName);
         binding.txtEmailName.setText(Config.email);
-        binding.txtPhoneNo.setText(Config.code+ "-"+Config.phone);
+        if (!TextUtils.isEmpty(Config.code) && !TextUtils.isEmpty(Config.phone)){
+            binding.txtPhoneNo.setText(Config.code+ "-"+Config.phone);
+        }else if (TextUtils.isEmpty(Config.code) && !TextUtils.isEmpty(Config.phone)){
+            binding.txtPhoneNo.setText(Config.phone);
+        }
+
     }
 
     private void onClick(){
@@ -147,6 +195,12 @@ public class CarDetailTwoActivity extends AppCompatActivity {
                     if (checkAddCardDetails()) {
                         hideKeyboard(activity);
                         Intent intent = new Intent(activity,CarDetailsActivityThree.class);
+                        intent.putExtra(Config.cardNumber,binding.etxCardNumber.getText().toString().trim());
+                        intent.putExtra(Config.cardName,binding.etxCardName.getText().toString().trim());
+                        intent.putExtra(Config.cardValidMonth,binding.etxValidMonth.getText().toString().trim());
+                        intent.putExtra(Config.cardValidCVV,binding.etxCvv.getText().toString().trim());
+                        intent.putExtra(Config.PAY_TYPE,payType);
+                        intent.putExtra(Config.SELECTED_AED,aedSelected);
                         startActivity(intent);
                     }
                 }else {
@@ -192,7 +246,19 @@ public class CarDetailTwoActivity extends AppCompatActivity {
     private boolean checkAddCardDetails() {
         boolean value = true;
 
-        if (TextUtils.isEmpty(binding.etxCardNumber.getText().toString().trim())) {
+        if (TextUtils.isEmpty(binding.txtFirstName.getText().toString().trim())) {
+            value = false;
+            H.showMessage(activity, getResources().getString(R.string.pleaseEnterFirstName));
+        } else if (TextUtils.isEmpty(binding.txtLastName.getText().toString().trim())) {
+            value = false;
+            H.showMessage(activity, getResources().getString(R.string.pleaseEnterLastName));
+        }else if (TextUtils.isEmpty(binding.txtEmailName.getText().toString().trim())) {
+            value = false;
+            H.showMessage(activity, getResources().getString(R.string.enterEmailId));
+        }else if (TextUtils.isEmpty(binding.txtPhoneNo.getText().toString().trim())) {
+            value = false;
+            H.showMessage(activity, getResources().getString(R.string.enterEmailId));
+        }else if (TextUtils.isEmpty(binding.etxCardNumber.getText().toString().trim())) {
             value = false;
             H.showMessage(activity, getResources().getString(R.string.enterCardNumber));
         } else if (binding.etxCardNumber.getText().toString().trim().length() < 16 || binding.etxCardNumber.getText().toString().trim().length() > 16) {
@@ -240,4 +306,9 @@ public class CarDetailTwoActivity extends AppCompatActivity {
         return false;
     }
 
+    @Override
+    public void onBackPressed() {
+        clearData();
+        finish();
+    }
 }

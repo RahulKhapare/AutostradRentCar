@@ -9,12 +9,18 @@ import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.adoisstudio.helper.Api;
+import com.adoisstudio.helper.H;
+import com.adoisstudio.helper.Json;
+import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
 import com.example.fastuae.R;
 import com.example.fastuae.databinding.ActivityCarDetailsThreeBinding;
+import com.example.fastuae.model.CarModel;
 import com.example.fastuae.util.Click;
 import com.example.fastuae.util.Config;
 import com.example.fastuae.util.P;
+import com.example.fastuae.util.ProgressView;
 import com.example.fastuae.util.WindowView;
 
 public class CarDetailsActivityThree extends AppCompatActivity {
@@ -23,6 +29,7 @@ public class CarDetailsActivityThree extends AppCompatActivity {
     private ActivityCarDetailsThreeBinding binding;
     private Session session;
     private String flag;
+    private LoadingDialog loadingDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +37,7 @@ public class CarDetailsActivityThree extends AppCompatActivity {
         WindowView.getWindow(activity);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_car_details_three);
         session = new Session(activity);
+        loadingDialog = new LoadingDialog(activity);
         flag = session.getString(P.languageFlag);
         Config.isEditDetails = false;
         initView();
@@ -100,6 +108,31 @@ public class CarDetailsActivityThree extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void hitBookCarData(CarModel model) {
+
+        ProgressView.show(activity,loadingDialog);
+        Json j = new Json();
+        j.addString(P.car_id,model.getId());
+
+        Api.newApi(activity, P.BaseUrl + "book_car").addJson(j)
+                .setMethod(Api.POST)
+                //.onHeaderRequest(App::getHeaders)
+                .onError(() -> {
+                    ProgressView.dismiss(loadingDialog);
+                    H.showMessage(activity, "On error is called");
+                })
+                .onSuccess(json ->
+                {
+                    if (json.getInt(P.status) == 1) {
+                    }else {
+                        H.showMessage(activity,json.getString(P.error));
+                    }
+                    ProgressView.dismiss(loadingDialog);
+
+                })
+                .run("hitBookCarData");
     }
 
 

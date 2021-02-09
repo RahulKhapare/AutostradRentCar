@@ -230,6 +230,23 @@
     <string name="dataUpdated">تم تحديث البيانات بنجاح</string>
     <string name="selectNationality">الرجاء تحديد الجنسية</string>
 
+    <string name="enquireyNow">استفسر الان</string>
+    <string name="leasing">تأجير</string>
+    <string name="lostFount">وجد المفقود</string>
+    <string name="quotationRequest">طلب اقتباس</string>
+    <string name="additionalComment">تعليقات اضافية</string>
+    <string name="submit">إرسال</string>
+    <string name="comment">تعليق</string>
+    <string name="enterComment">الرجاء إدخال تعليق</string>
+    <string name="enterValidComment">الرجاء إدخال تعليق صالح</string>
+    <string name="getStarted">ابدأ بملء هذا النموذج -</string>
+    <string name="brifDesc">وصف موجز للعنصر المفقود أو المنسي</string>
+    <string name="enterDescription">الرجاء إدخال الوصف</string>
+    <string name="description">وصف</string>
+    <string name="vehicleNo">عقد الإيجار رقم / رقم المركبة.</string>
+    <string name="enterVehicleNo">الرجاء إدخال عقد الإيجار رقم / رقم المركبة.</string>
+    <string name="enterValidDescription">الرجاء إدخال وصف صحيح</string>
+
     <string name="selectSelftPickUpLocation">الرجاء تحديد موقع الالتقاط الذاتي</string>
     <string name="selectSelfReturnUpLocation">الرجاء تحديد موقع العودة الذاتية</string>
 

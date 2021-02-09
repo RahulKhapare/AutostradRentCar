@@ -13,7 +13,9 @@ import androidx.fragment.app.Fragment;
 import com.adoisstudio.helper.Session;
 import com.example.fastuae.R;
 import com.example.fastuae.activity.ContactUsActivity;
+import com.example.fastuae.activity.EnquireyNowActivity;
 import com.example.fastuae.activity.FAQActivity;
+import com.example.fastuae.activity.LoastAndFoundActivity;
 import com.example.fastuae.activity.LocationActivity;
 import com.example.fastuae.activity.SpecialOffersActivity;
 import com.example.fastuae.databinding.FragmentMenuBinding;
@@ -49,6 +51,15 @@ public class MenuFragment extends Fragment {
     }
 
     private void onClick(){
+
+        binding.lnrEnquireyNow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                Intent intent = new Intent(context, EnquireyNowActivity.class);
+                startActivity(intent);
+            }
+        });
 
         binding.lnrFastRewards.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,10 +125,19 @@ public class MenuFragment extends Fragment {
             }
         });
 
-        binding.lnrRentalInfo.setOnClickListener(new View.OnClickListener() {
+        binding.lnrLeasing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
+            }
+        });
+
+        binding.lnrLostFound.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                Intent intent = new Intent(context, LoastAndFoundActivity.class);
+                startActivity(intent);
             }
         });
     }
@@ -125,6 +145,9 @@ public class MenuFragment extends Fragment {
     private void updateIcons() {
 
         if (flag.equals(Config.ARABIC)) {
+
+            binding.imgEnquireyNowRight.setVisibility(View.GONE);
+            binding.imgEnquireyNowLeft.setVisibility(View.VISIBLE);
 
             binding.imgRewardRight.setVisibility(View.GONE);
             binding.imgRewardLeft.setVisibility(View.VISIBLE);
@@ -150,12 +173,16 @@ public class MenuFragment extends Fragment {
             binding.imgCareerRight.setVisibility(View.GONE);
             binding.imgCareerLeft.setVisibility(View.VISIBLE);
 
-            binding.imgRentalInfoRight.setVisibility(View.GONE);
-            binding.imgRentalInfoLeft.setVisibility(View.VISIBLE);
+            binding.imgLeasingRight.setVisibility(View.GONE);
+            binding.imgLeasingLeft.setVisibility(View.VISIBLE);
 
-
+            binding.imgLoastFoundRight.setVisibility(View.GONE);
+            binding.imgLoastFoundLeft.setVisibility(View.VISIBLE);
 
         } else if (flag.equals(Config.ENGLISH)) {
+
+            binding.imgEnquireyNowRight.setVisibility(View.VISIBLE);
+            binding.imgEnquireyNowLeft.setVisibility(View.GONE);
 
             binding.imgRewardRight.setVisibility(View.VISIBLE);
             binding.imgRewardLeft.setVisibility(View.GONE);
@@ -181,8 +208,11 @@ public class MenuFragment extends Fragment {
             binding.imgCareerRight.setVisibility(View.VISIBLE);
             binding.imgCareerLeft.setVisibility(View.GONE);
 
-            binding.imgRentalInfoRight.setVisibility(View.VISIBLE);
-            binding.imgRentalInfoLeft.setVisibility(View.GONE);
+            binding.imgLeasingRight.setVisibility(View.VISIBLE);
+            binding.imgLeasingLeft.setVisibility(View.GONE);
+
+            binding.imgLoastFoundRight.setVisibility(View.VISIBLE);
+            binding.imgLoastFoundLeft.setVisibility(View.GONE);
 
         }
     }

@@ -264,169 +264,416 @@
 
                             <LinearLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="15dp"
-                                android:orientation="horizontal">
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
 
-                                <TextView
-                                    android:id="@+id/txtSeat"
-                                    android:layout_weight="1"
+                                <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:drawableLeft="@drawable/seat_bg_two"
-                                    android:drawablePadding="5dp"
-                                    android:fontFamily="@font/nunito_sans_regular"
-                                    android:maxLines="1"
-                                    android:text="@string/app_name"
-                                    android:alpha="0.8"
-                                    android:textColor="@color/textDark"
-                                    android:textSize="16sp">
+                                    android:paddingTop="10dp"
+                                    android:paddingBottom="10dp"
+                                    android:orientation="vertical">
 
-                                </TextView>
+                                    <LinearLayout
+                                        android:orientation="horizontal"
+                                        android:layout_marginTop="5dp"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content">
 
-                                <TextView
-                                    android:id="@+id/txtEngineOne"
-                                    android:layout_weight="1"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/nunito_sans_regular"
-                                    android:textColor="@color/textDark"
-                                    android:textSize="16sp"
-                                    android:text="@string/app_name"
-                                    android:alpha="0.8"
-                                    android:drawableLeft="@drawable/engine_bg_two"
-                                    android:drawablePadding="5dp"
-                                    android:maxLines="1">
+                                        <LinearLayout
+                                            android:id="@+id/lnrPetrol"
+                                            android:layout_weight="1"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
 
-                                </TextView>
+                                            <ImageView
+                                                android:layout_width="20dp"
+                                                android:layout_height="18dp"
+                                                android:tint="@color/textDark"
+                                                android:layout_gravity="center_vertical"
+                                                android:src="@drawable/ic_fuil"></ImageView>
 
-                                <TextView
-                                    android:id="@+id/txtEngineTwo"
-                                    android:layout_weight="1"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/app_name"
-                                    android:alpha="0.8"
-                                    android:fontFamily="@font/nunito_sans_regular"
-                                    android:textColor="@color/textDark"
-                                    android:textSize="16sp"
-                                    android:drawableLeft="@drawable/engine_bg_two"
-                                    android:drawablePadding="5dp"
-                                    android:maxLines="1">
+                                            <TextView
+                                                android:id="@+id/txtPetrolInst"
+                                                android:layout_weight="1"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:text="@string/app_name"
+                                                android:singleLine="true"
+                                                android:layout_marginLeft="5dp"
+                                                android:layout_marginRight="5dp"
+                                                android:fontFamily="@font/nunito_sans_semibold"
+                                                android:textSize="14sp"
+                                                android:textColor="@color/textDark">
 
-                                </TextView>
+                                            </TextView>
 
-                            </LinearLayout>
+                                        </LinearLayout>
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="15dp"
-                                android:orientation="horizontal">
+                                        <LinearLayout
+                                            android:id="@+id/lnrSeats"
+                                            android:layout_weight="1"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
 
-                                <TextView
-                                    android:id="@+id/txtPetrol"
-                                    android:layout_weight="1"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:drawableLeft="@drawable/fuil_bg_two"
-                                    android:drawablePadding="5dp"
-                                    android:fontFamily="@font/nunito_sans_regular"
-                                    android:maxLines="1"
-                                    android:text="@string/app_name"
-                                    android:alpha="0.8"
-                                    android:textColor="@color/textDark"
-                                    android:textSize="16sp">
+                                            <ImageView
+                                                android:layout_width="20dp"
+                                                android:layout_height="20dp"
+                                                android:tint="@color/textDark"
+                                                android:src="@drawable/ic_ceat"></ImageView>
 
-                                </TextView>
+                                            <TextView
+                                                android:layout_weight="1"
+                                                android:id="@+id/txtSeatInst"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:text="@string/app_name"
+                                                android:fontFamily="@font/nunito_sans_semibold"
+                                                android:textSize="14sp"
+                                                android:layout_marginLeft="5dp"
+                                                android:layout_marginRight="5dp"
+                                                android:singleLine="true"
+                                                android:textColor="@color/textDark">
 
-                                <TextView
-                                    android:id="@+id/txtAutomaticOne"
-                                    android:layout_weight="1"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/nunito_sans_regular"
-                                    android:textColor="@color/textDark"
-                                    android:textSize="16sp"
-                                    android:text="@string/app_name"
-                                    android:alpha="0.8"
-                                    android:drawableLeft="@drawable/mode_bg_two"
-                                    android:drawablePadding="5dp"
-                                    android:maxLines="1">
+                                            </TextView>
 
-                                </TextView>
+                                        </LinearLayout>
 
-                                <TextView
-                                    android:id="@+id/txtAutomaticTwo"
-                                    android:layout_weight="1"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/app_name"
-                                    android:alpha="0.8"
-                                    android:fontFamily="@font/nunito_sans_regular"
-                                    android:textColor="@color/textDark"
-                                    android:textSize="16sp"
-                                    android:drawableLeft="@drawable/mode_bg_two"
-                                    android:drawablePadding="5dp"
-                                    android:maxLines="1">
+                                        <LinearLayout
+                                            android:id="@+id/lnrAutomatic"
+                                            android:layout_weight="1"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
 
-                                </TextView>
+                                            <ImageView
+                                                android:layout_width="20dp"
+                                                android:layout_height="20dp"
+                                                android:tint="@color/textDark"
+                                                android:src="@drawable/ic_mode"></ImageView>
 
-                            </LinearLayout>
+                                            <TextView
+                                                android:layout_weight="1"
+                                                android:id="@+id/txtAutomaticInst"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:text="@string/app_name"
+                                                android:fontFamily="@font/nunito_sans_semibold"
+                                                android:textSize="14sp"
+                                                android:layout_marginLeft="5dp"
+                                                android:layout_marginRight="5dp"
+                                                android:singleLine="true"
+                                                android:textColor="@color/textDark">
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="15dp"
-                                android:orientation="horizontal">
+                                            </TextView>
 
-                                <TextView
-                                    android:id="@+id/txtDoor"
-                                    android:layout_weight="1"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:drawableLeft="@drawable/doore_bg_two"
-                                    android:drawablePadding="5dp"
-                                    android:fontFamily="@font/nunito_sans_regular"
-                                    android:maxLines="1"
-                                    android:text="@string/app_name"
-                                    android:alpha="0.8"
-                                    android:textColor="@color/textDark"
-                                    android:textSize="16sp">
+                                        </LinearLayout>
 
-                                </TextView>
 
-                                <TextView
-                                    android:id="@+id/txtSuitcaseOne"
-                                    android:layout_weight="1"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/nunito_sans_regular"
-                                    android:textColor="@color/textDark"
-                                    android:textSize="16sp"
-                                    android:text="@string/app_name"
-                                    android:alpha="0.8"
-                                    android:drawableLeft="@drawable/suitcase_bg_two"
-                                    android:drawablePadding="5dp"
-                                    android:maxLines="1">
+                                    </LinearLayout>
 
-                                </TextView>
+                                    <LinearLayout
+                                        android:layout_marginTop="16dp"
+                                        android:orientation="horizontal"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content">
 
-                                <TextView
-                                    android:id="@+id/txtSuitcaseTwo"
-                                    android:layout_weight="1"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/app_name"
-                                    android:alpha="0.8"
-                                    android:fontFamily="@font/nunito_sans_regular"
-                                    android:textColor="@color/textDark"
-                                    android:textSize="16sp"
-                                    android:drawableLeft="@drawable/suitcase_bg_two"
-                                    android:drawablePadding="5dp"
-                                    android:maxLines="1">
 
-                                </TextView>
+                                        <LinearLayout
+                                            android:id="@+id/lnrDoor"
+                                            android:layout_weight="1"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <ImageView
+                                                android:layout_width="20dp"
+                                                android:layout_height="20dp"
+                                                android:tint="@color/textDark"
+                                                android:src="@drawable/ic_doore"></ImageView>
+
+                                            <TextView
+                                                android:layout_weight="1"
+                                                android:id="@+id/txtDoorInst"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:text="@string/app_name"
+                                                android:fontFamily="@font/nunito_sans_semibold"
+                                                android:textSize="14sp"
+                                                android:layout_marginLeft="5dp"
+                                                android:layout_marginRight="5dp"
+                                                android:singleLine="true"
+                                                android:textColor="@color/textDark">
+
+                                            </TextView>
+
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:id="@+id/lnrPassenger"
+                                            android:layout_weight="1"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <ImageView
+                                                android:layout_width="20dp"
+                                                android:layout_height="20dp"
+                                                android:tint="@color/textDark"
+                                                android:src="@drawable/ic_passengers"></ImageView>
+
+                                            <TextView
+                                                android:layout_weight="1"
+                                                android:id="@+id/txtPassengerInst"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:text="@string/app_name"
+                                                android:fontFamily="@font/nunito_sans_semibold"
+                                                android:textSize="14sp"
+                                                android:layout_marginLeft="5dp"
+                                                android:layout_marginRight="5dp"
+                                                android:singleLine="true"
+                                                android:textColor="@color/textDark">
+
+                                            </TextView>
+
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_weight="1"
+                                            android:id="@+id/lnrSuitcase"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <ImageView
+                                                android:layout_width="18dp"
+                                                android:layout_height="20dp"
+                                                android:layout_gravity="center_vertical"
+                                                android:src="@drawable/ic_suitcase"></ImageView>
+
+                                            <TextView
+                                                android:id="@+id/txtSuitcaseInst"
+                                                android:layout_weight="1"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:text="@string/app_name"
+                                                android:singleLine="true"
+                                                android:layout_marginLeft="5dp"
+                                                android:layout_marginRight="5dp"
+                                                android:fontFamily="@font/nunito_sans_semibold"
+                                                android:textSize="14sp"
+                                                android:textColor="@color/textDark">
+
+                                            </TextView>
+
+                                        </LinearLayout>
+
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_marginTop="16dp"
+                                        android:orientation="horizontal"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content">
+
+                                        <LinearLayout
+                                            android:id="@+id/lnrAirBags"
+                                            android:layout_weight="1"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <ImageView
+                                                android:layout_width="20dp"
+                                                android:layout_height="20dp"
+                                                android:tint="@color/textDark"
+                                                android:src="@drawable/ic_air_bag"></ImageView>
+
+                                            <TextView
+                                                android:id="@+id/txtAirBags"
+                                                android:layout_weight="1"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:text="@string/app_name"
+                                                android:singleLine="true"
+                                                android:layout_marginLeft="5dp"
+                                                android:layout_marginRight="5dp"
+                                                android:fontFamily="@font/nunito_sans_semibold"
+                                                android:textSize="14sp"
+                                                android:textColor="@color/textDark">
+
+                                            </TextView>
+
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_weight="1"
+                                            android:id="@+id/lnrAirConditionar"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <ImageView
+                                                android:layout_width="20dp"
+                                                android:layout_height="20dp"
+                                                android:tint="@color/textDark"
+                                                android:src="@drawable/ic_ac_unit"></ImageView>
+
+                                            <TextView
+                                                android:id="@+id/txtAirConditionar"
+                                                android:layout_weight="1"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:text="@string/app_name"
+                                                android:fontFamily="@font/nunito_sans_semibold"
+                                                android:textSize="14sp"
+                                                android:layout_marginLeft="5dp"
+                                                android:layout_marginRight="5dp"
+                                                android:singleLine="true"
+                                                android:textColor="@color/textDark">
+
+                                            </TextView>
+
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:id="@+id/lnrParkinSensor"
+                                            android:layout_weight="1"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <ImageView
+                                                android:layout_width="20dp"
+                                                android:layout_height="20dp"
+                                                android:tint="@color/textDark"
+                                                android:src="@drawable/ic_sensors"></ImageView>
+
+                                            <TextView
+                                                android:id="@+id/txtParkinSensor"
+                                                android:layout_weight="1"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:text="@string/app_name"
+                                                android:fontFamily="@font/nunito_sans_semibold"
+                                                android:textSize="14sp"
+                                                android:layout_marginLeft="5dp"
+                                                android:layout_marginRight="5dp"
+                                                android:singleLine="true"
+                                                android:textColor="@color/textDark">
+
+                                            </TextView>
+
+                                        </LinearLayout>
+
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_marginTop="16dp"
+                                        android:orientation="horizontal"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content">
+
+                                        <LinearLayout
+                                            android:id="@+id/lnrRearParkingCamera"
+                                            android:layout_weight="1"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <ImageView
+                                                android:layout_width="18dp"
+                                                android:layout_height="20dp"
+                                                android:tint="@color/textDark"
+                                                android:layout_gravity="center_vertical"
+                                                android:src="@drawable/ic_camera"></ImageView>
+
+                                            <TextView
+                                                android:id="@+id/txtRearParkingCamera"
+                                                android:layout_weight="1"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:text="@string/app_name"
+                                                android:singleLine="true"
+                                                android:layout_marginLeft="5dp"
+                                                android:layout_marginRight="5dp"
+                                                android:fontFamily="@font/nunito_sans_semibold"
+                                                android:textSize="14sp"
+                                                android:textColor="@color/textDark">
+
+                                            </TextView>
+
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:id="@+id/lnrBluetooth"
+                                            android:layout_weight="1"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <ImageView
+                                                android:layout_width="20dp"
+                                                android:layout_height="20dp"
+                                                android:tint="@color/textDark"
+                                                android:src="@drawable/ic_bluetooth"></ImageView>
+
+                                            <TextView
+                                                android:id="@+id/txtBluetooth"
+                                                android:layout_weight="1"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:text="@string/app_name"
+                                                android:fontFamily="@font/nunito_sans_semibold"
+                                                android:textSize="14sp"
+                                                android:layout_marginLeft="5dp"
+                                                android:layout_marginRight="5dp"
+                                                android:singleLine="true"
+                                                android:textColor="@color/textDark">
+
+                                            </TextView>
+
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:id="@+id/lnrCruiseControl"
+                                            android:layout_weight="1"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <ImageView
+                                                android:layout_width="20dp"
+                                                android:layout_height="20dp"
+                                                android:tint="@color/textDark"
+                                                android:src="@drawable/ic_control"></ImageView>
+
+                                            <TextView
+                                                android:id="@+id/txtCruiseControl"
+                                                android:layout_weight="1"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:text="@string/app_name"
+                                                android:fontFamily="@font/nunito_sans_semibold"
+                                                android:textSize="14sp"
+                                                android:layout_marginLeft="5dp"
+                                                android:layout_marginRight="5dp"
+                                                android:singleLine="true"
+                                                android:textColor="@color/textDark">
+
+                                            </TextView>
+
+                                        </LinearLayout>
+
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
 
                             </LinearLayout>
 

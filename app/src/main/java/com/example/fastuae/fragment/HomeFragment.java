@@ -68,9 +68,11 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick{
     private String deliver = "deliver";
     private String collect = "collect";
     private String pickUpId = "";
+    private String pickUpLocation = "";
     private String pickUpDate = "";
     private String pickUpTime = "";
     private String dropUpId = "";
+    private String dropUpLocation = "";
     private String dropUpDate = "";
     private String dropUpTime = "";
     private String pickUpEmirateID = "";
@@ -233,11 +235,13 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick{
 
         if (flag==pickUpFlag){
             pickUpId = model.getId();
+            pickUpLocation = model.getLocation_name();
             pickUpEmirateID = model.getEmirate_id();
             binding.txtPickUpMessage.setText(location);
             cardPickupClick();
         }else if (flag==dropUpFlag){
             dropUpId = model.getId();
+            dropUpLocation = model.getLocation_name();
             dropUpEmirateID = model.getEmirate_id();
             binding.txtDropUpMessage.setText(location);
             cardDropUpClick();
@@ -398,6 +402,26 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick{
                     H.showMessage(context,getResources().getString(R.string.selectSelfReturnUpLocation));
                 }else {
                     hitVerifyPickUpData(pickUpId,pickUpDate,pickUpTime,dropUpId,dropUpDate,dropUpTime);
+
+//                    Config.SelectedPickUpEmirateID = pickUpEmirateID;
+//                    Config.SelectedPickUpID = pickUpId;
+//                    Config.SelectedPickUpAddress = pickUpLocation;
+//                    Config.SelectedPickUpDate = pickUpDate;
+//                    Config.SelectedPickUpTime = pickUpTime;
+//
+//                    Config.SelectedDropUpEmirateID = dropUpEmirateID;
+//                    Config.SelectedDropUpID = dropUpId;
+//                    Config.SelectedDropUpAddress = dropUpLocation;
+//                    Config.SelectedDropUpDate = dropUpDate;
+//                    Config.SelectedDropUpTime = dropUpTime;
+//
+//                    Intent intent = new Intent(context,SelectCarActivity.class);
+//                    intent.putExtra(Config.pickUpEmirateID,pickUpEmirateID);
+//                    intent.putExtra(Config.dropUpEmirateID,dropUpEmirateID);
+//                    intent.putExtra(Config.pickUpDate,pickUpDate);
+//                    intent.putExtra(Config.dropUpDate,dropUpDate);
+//                    startActivity(intent);
+
                 }
             }
         });
@@ -718,10 +742,16 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick{
                 {
                     if (json.getInt(P.status) == 1) {
 
+                        Config.SelectedPickUpEmirateID = pickUpEmirateID;
+                        Config.SelectedPickUpID = pickUpID;
+                        Config.SelectedPickUpAddress = pickUpLocation;
+                        Config.SelectedPickUpDate = pickUpDate;
+                        Config.SelectedPickUpTime = pickUpTime;
                         hitVerifyDropUpData(dropUpID,dropUpDate,dropUpTime);
 
                     }else {
                         H.showMessage(context,json.getString(P.error));
+
                     }
                     ProgressView.dismiss(loadingDialog);
 
@@ -747,6 +777,12 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick{
                 .onSuccess(json ->
                 {
                     if (json.getInt(P.status) == 1) {
+
+                        Config.SelectedDropUpEmirateID = dropUpEmirateID;
+                        Config.SelectedDropUpID = id;
+                        Config.SelectedDropUpAddress = dropUpLocation;
+                        Config.SelectedDropUpDate = dropUpDate;
+                        Config.SelectedDropUpTime = dropUpTime;
 
                         Intent intent = new Intent(context,SelectCarActivity.class);
                         intent.putExtra(Config.pickUpEmirateID,pickUpEmirateID);

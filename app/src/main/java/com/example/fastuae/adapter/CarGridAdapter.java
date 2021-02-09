@@ -146,7 +146,7 @@ public class CarGridAdapter extends RecyclerView.Adapter<CarGridAdapter.viewHold
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-                jumpToCardDetails();
+                jumpToCardDetails(model,Config.pay_now,model.getPay_now_rate());
             }
         });
 
@@ -154,7 +154,7 @@ public class CarGridAdapter extends RecyclerView.Adapter<CarGridAdapter.viewHold
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-                jumpToCardDetails();
+                jumpToCardDetails(model,Config.pay_latter,model.getPay_later_rate());
             }
         });
 
@@ -207,8 +207,11 @@ public class CarGridAdapter extends RecyclerView.Adapter<CarGridAdapter.viewHold
         }
     }
 
-    private void jumpToCardDetails(){
+    private void jumpToCardDetails(CarModel model,String payType,String aedRate){
+        Config.carModel = model;
         Intent intent = new Intent(context, CarDetailOneActivity.class);
+        intent.putExtra(Config.PAY_TYPE,payType);
+        intent.putExtra(Config.SELECTED_AED,aedRate);
         context.startActivity(intent);
     }
 

@@ -1,6 +1,7 @@
 package com.example.fastuae.util;
 
 import com.adoisstudio.helper.JsonList;
+import com.example.fastuae.model.CarModel;
 
 public class Config {
 
@@ -19,6 +20,19 @@ public class Config {
     public static String currentProfileFlag = "";
     public static String currentFAQFlag = "";
 
+    public static String SelectedPickUpID = "";
+    public static String SelectedPickUpEmirateID = "";
+    public static String SelectedPickUpDate = "";
+    public static String SelectedPickUpTime = "";
+    public static String SelectedPickUpAddress = "";
+
+    public static String SelectedDropUpID = "";
+    public static String SelectedDropUpEmirateID = "";
+    public static String SelectedDropUpDate = "";
+    public static String SelectedDropUpTime = "";
+    public static String SelectedDropUpAddress = "";
+    public static CarModel carModel;
+
     public static String My_Account = "My Account";
     public static String Documents = "Documents";
     public static String Additional_Driver = "Additional Driver";
@@ -35,22 +49,31 @@ public class Config {
 
     public static String PROFILE_TAG = "PROFILE_TAG";
     public static String FAQ_TAG = "FAQ_TAG";
+    public static String PAY_TYPE = "PAY_TYPE";
+    public static String SELECTED_AED = "SELECTED_AED";
+    public static String pay_now = "pay_now";
+    public static String pay_latter = "pay_latter";
 
     public static String pickUpEmirateID = "pickUpEmirateID";
     public static String dropUpEmirateID = "dropUpEmirateID";
     public static String pickUpDate = "pickUpDate";
     public static String dropUpDate = "dropUpDate";
 
+    public static String cardNumber = "cardNumber";
+    public static String cardName = "cardName";
+    public static String cardValidMonth = "cardValidMonth";
+    public static String cardValidCVV = "cardValidCVV";
+
     public static int OPEN = 1;
     public static int SHARE = 2;
     public static boolean FROM_MAP = false;
 
 
-    public static String firstName = "John";
-    public static String lastName = "Doe";
-    public static String email = "Johnd@gmail.com";
-    public static String phone = "1234567891";
-    public static String code = "971";
+    public static String firstName = "";
+    public static String lastName = "";
+    public static String email = "";
+    public static String phone = "";
+    public static String code = "";
     public static Integer positionCode = null;
     public static boolean isEditDetails;
 

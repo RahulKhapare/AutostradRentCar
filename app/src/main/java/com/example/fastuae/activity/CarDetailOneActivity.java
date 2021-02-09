@@ -3,8 +3,10 @@ package com.example.fastuae.activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -24,18 +26,28 @@ import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.adoisstudio.helper.Api;
+import com.adoisstudio.helper.H;
+import com.adoisstudio.helper.Json;
+import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
 import com.example.fastuae.R;
 import com.example.fastuae.adapter.CarUpgradeAdapter;
 import com.example.fastuae.databinding.ActivityCarDetailOneBinding;
+import com.example.fastuae.model.CarModel;
 import com.example.fastuae.model.CarUpgradeModel;
 import com.example.fastuae.util.Click;
 import com.example.fastuae.util.Config;
 import com.example.fastuae.util.P;
+import com.example.fastuae.util.ProgressView;
 import com.example.fastuae.util.WindowView;
 import com.example.fastuae.util.ZoomFadeTransformer;
+import com.squareup.picasso.Picasso;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class CarDetailOneActivity extends AppCompatActivity {
@@ -45,6 +57,9 @@ public class CarDetailOneActivity extends AppCompatActivity {
     private Session session;
     private String flag;
     private int currentPosition = 0;
+    private LoadingDialog loadingDialog;
+    private String payType = "";
+    private String aedSelected = "";
 
 
     @Override
@@ -53,7 +68,10 @@ public class CarDetailOneActivity extends AppCompatActivity {
         WindowView.getWindow(activity);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_car_detail_one);
         session = new Session(activity);
+        loadingDialog = new LoadingDialog(activity);
         flag = session.getString(P.languageFlag);
+        payType = getIntent().getStringExtra(Config.PAY_TYPE);
+        aedSelected = getIntent().getStringExtra(Config.SELECTED_AED);
         initView();
         updateIcons();
     }
@@ -70,19 +88,82 @@ public class CarDetailOneActivity extends AppCompatActivity {
 
     private void setData() {
 
-        binding.txtCarName.setText("Mercedes SUV");
-        binding.txtPickUpLocation.setText("Mon, 10 Jan, 10:00 AM\n123, Building Name, Street Name, City Name,\nPincode 400000");
-        binding.txtDropOffLocation.setText("Mon, 10 Jan, 10:00 AM\n123, Building Name, Street Name, City Name,\nPincode 400000");
+        CarModel model = Config.carModel;
 
-        binding.txtSeat.setText("5 Seat");
-        binding.txtEngineOne.setText("Engine");
-        binding.txtEngineTwo.setText("Engine");
-        binding.txtPetrol.setText("Petrol");
-        binding.txtAutomaticOne.setText("Automatic");
-        binding.txtAutomaticTwo.setText("Automatic");
-        binding.txtDoor.setText("2 Door");
-        binding.txtSuitcaseOne.setText("2 Suitcase");
-        binding.txtSuitcaseTwo.setText("2 Suitcase");
+        hitBookingCarData(model);
+
+        Picasso.get().load(model.getCar_image()).error(R.drawable.ic_image).into(binding.imgCar);
+        binding.txtCarName.setText(model.getCar_name());
+        String pickUpDate = getFormatedDate("yyyy-MM-dd", "dd, MMM yyyy", Config.SelectedPickUpDate);
+        String dropUpDate = getFormatedDate("yyyy-MM-dd", "dd, MMM yyyy", Config.SelectedDropUpDate);
+
+        binding.txtPickUpLocation.setText(pickUpDate+", "+Config.SelectedPickUpTime+",\n"+Config.SelectedPickUpAddress);
+        binding.txtDropOffLocation.setText(dropUpDate+", "+Config.SelectedDropUpTime+",\n"+Config.SelectedDropUpAddress);
+
+        binding.txtPetrolInst.setText(checkString(model.getFuel_type_name()));
+        binding.txtSeatInst.setText("Seat");
+        binding.txtAutomaticInst.setText(checkString(model.getTransmission_name()));
+        binding.txtDoorInst.setText(checkString(model.getDoor()));
+        binding.txtPassengerInst.setText(checkString(model.getPassenger()));
+        binding.txtSuitcaseInst.setText(checkString(model.getSuitcase()));
+
+        String airBags = model.getAir_bags();
+        if (TextUtils.isEmpty(airBags) || airBags.equals("null") || airBags.equals("0")){
+            airBags = "Air Bags";
+            binding.txtAirBags.setPaintFlags(binding.txtAirBags.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        }else if (airBags.equals("1")){
+            airBags = "Air Bags";
+        }
+        binding.txtAirBags.setText(checkString(airBags));
+
+        String airCondition = model.getAir_conditioner();
+        if (TextUtils.isEmpty(airCondition) || airCondition.equals("null") || airCondition.equals("0")){
+            airCondition = "Air Condition";
+            binding.txtAirConditionar.setPaintFlags(binding.txtAirBags.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        }else {
+            airCondition = "Air Condition";
+        }
+        binding.txtAirConditionar.setText(checkString(airCondition));
+
+        String parkingSensor = model.getParking_sensors();
+        if (TextUtils.isEmpty(parkingSensor) || parkingSensor.equals("null") || parkingSensor.equals("0")){
+            parkingSensor = "Parking Sensor";
+            binding.txtParkinSensor.setPaintFlags(binding.txtAirBags.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        }else {
+            parkingSensor = "Parking Sensor";
+        }
+        binding.txtParkinSensor.setText(checkString(parkingSensor));
+
+        String camera = model.getRear_parking_camera();
+        if (TextUtils.isEmpty(camera) || camera.equals("null") || camera.equals("0")){
+            camera = "Parking Camera";
+            binding.txtRearParkingCamera.setPaintFlags(binding.txtAirBags.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        }else{
+            camera = "Parking Camera";
+        }
+        binding.txtRearParkingCamera.setText(checkString(camera));
+
+        String bluetooth = model.getBluetooth();
+        if (TextUtils.isEmpty(bluetooth) || bluetooth.equals("null") || bluetooth.equals("0")){
+            bluetooth = "Bluetooth";
+            binding.txtBluetooth.setPaintFlags(binding.txtAirBags.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        }else{
+            bluetooth = "Bluetooth";
+        }
+
+        binding.txtBluetooth.setText(checkString(bluetooth));
+
+        String control = model.getCruise_control();
+        if (TextUtils.isEmpty(control) || control.equals("null") || control.equals("0")){
+            control = "Cruise Control";
+            binding.txtCruiseControl.setPaintFlags(binding.txtAirBags.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        }else{
+            control = "Cruise Control";
+        }
+        binding.txtCruiseControl.setText(checkString(control));
+
+
+
         binding.txtMessageOne.setText("Free Booking");
         binding.txtMessageTwo.setText("Free Cancellation");
         binding.txtMessageThree.setText("Pay 100% at the counter or pay with online check-in-24hrs before your pickup time to secure your car and get 5% off");
@@ -109,6 +190,8 @@ public class CarDetailOneActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Click.preventTwoClick(v);
                 Intent intent = new Intent(activity, CarDetailTwoActivity.class);
+                intent.putExtra(Config.PAY_TYPE,payType);
+                intent.putExtra(Config.SELECTED_AED,aedSelected);
                 startActivity(intent);
             }
         });
@@ -458,7 +541,7 @@ public class CarDetailOneActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Click.preventTwoClick(v);
                 dialog.dismiss();
-                binding.imgCar.setImageResource(carUpgradeModelList.get(currentPosition).getImage());
+//                binding.imgCar.setImageResource(carUpgradeModelList.get(currentPosition).getImage());
             }
         });
 
@@ -469,6 +552,72 @@ public class CarDetailOneActivity extends AppCompatActivity {
 
     }
 
+    private void hitBookingCarData(CarModel model) {
+
+        ProgressView.show(activity,loadingDialog);
+        Json j = new Json();
+        j.addString(P.car_id,model.getId());
+        j.addString(P.pay_type,payType);
+        j.addString(P.pickup_emirate_id,Config.SelectedPickUpEmirateID);
+        j.addString(P.pickup_location_id,Config.SelectedPickUpID);
+        j.addString(P.pickup_date,Config.SelectedPickUpDate);
+        j.addString(P.pickup_time,Config.SelectedPickUpTime);
+        j.addString(P.pickup_type,"self_pickup");
+
+        j.addString(P.dropoff_emirate_id,Config.SelectedDropUpEmirateID);
+        j.addString(P.dropoff_location_id,Config.SelectedDropUpID);
+        j.addString(P.dropoff_date,Config.SelectedDropUpDate);
+        j.addString(P.dropoff_time,Config.SelectedDropUpTime);
+        j.addString(P.dropoff_type,"self_return");
+
+        Api.newApi(activity, P.BaseUrl + "car_booking_data").addJson(j)
+                .setMethod(Api.POST)
+                //.onHeaderRequest(App::getHeaders)
+                .onError(() -> {
+                    ProgressView.dismiss(loadingDialog);
+                    H.showMessage(activity, "On error is called");
+                })
+                .onSuccess(json ->
+                {
+                    if (json.getInt(P.status) == 1) {
+
+                    }else {
+//                        H.showMessage(activity,json.getString(P.error));
+                    }
+                    ProgressView.dismiss(loadingDialog);
+
+                })
+                .run("hitBookingCarData");
+    }
+
+    private String checkString(String string){
+        String value = string;
+
+        if (TextUtils.isEmpty(string) || string.equals("null")){
+            value = "";
+        }
+        return value;
+    }
+
+    private String getFormatedDate(String inputFormat, String outputFormat, String inputDate){
+
+        Date parsed = null;
+        String outputDate = "";
+
+        SimpleDateFormat df_input = new SimpleDateFormat(inputFormat, java.util.Locale.getDefault());
+        SimpleDateFormat df_output = new SimpleDateFormat(outputFormat, java.util.Locale.getDefault());
+
+        try {
+            parsed = df_input.parse(inputDate);
+            outputDate = df_output.format(parsed);
+
+        } catch (ParseException e) {
+
+        }
+
+        return outputDate;
+
+    }
 
     private int getCurrentItem(RecyclerView recyclerView) {
         return ((LinearLayoutManager) recyclerView.getLayoutManager())

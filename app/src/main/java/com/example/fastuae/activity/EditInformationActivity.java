@@ -74,6 +74,7 @@ public class EditInformationActivity extends AppCompatActivity {
     }
 
     private void setData(){
+
         if (Config.positionCode!=null){
             positionNumber = Config.positionCode;
             binding.spinnerCodeMobile.setSelection(positionNumber);
