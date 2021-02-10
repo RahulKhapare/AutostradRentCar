@@ -78,7 +78,6 @@
                                     android:id="@+id/txtCarName"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:gravity="center"
                                     android:fontFamily="@font/nunito_sans_semibold"
                                     android:text="@string/app_name"
                                     android:layout_marginRight="15dp"
@@ -91,7 +90,6 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:gravity="center"
                                     android:fontFamily="@font/nunito_sans_semibold"
                                     android:text="@string/similar"
                                     android:layout_marginRight="15dp"
@@ -102,25 +100,9 @@
                                 </TextView>
 
                                 <TextView
-                                    android:id="@+id/txtAEDOne"
+                                    android:id="@+id/txtAED"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:gravity="center"
-                                    android:fontFamily="@font/nunit_sans_bold"
-                                    android:text="@string/app_name"
-                                    android:layout_marginRight="15dp"
-                                    android:layout_marginLeft="15dp"
-                                    android:layout_marginTop="5dp"
-                                    android:textColor="@color/colorPrimaryDark"
-                                    android:textSize="14sp">
-
-                                </TextView>
-
-                                <TextView
-                                    android:id="@+id/txtAEDTwo"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center"
                                     android:fontFamily="@font/nunit_sans_bold"
                                     android:text="@string/app_name"
                                     android:layout_marginRight="15dp"

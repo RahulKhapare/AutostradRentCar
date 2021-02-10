@@ -12,6 +12,7 @@ import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.CompoundButton;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,17 +21,24 @@ import androidx.databinding.DataBindingUtil;
 import com.adoisstudio.helper.Api;
 import com.adoisstudio.helper.H;
 import com.adoisstudio.helper.Json;
+import com.adoisstudio.helper.JsonList;
 import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
 import com.example.fastuae.R;
+import com.example.fastuae.adapter.AddressSelectionAdapter;
 import com.example.fastuae.databinding.ActivityCarDetailTwoBinding;
+import com.example.fastuae.model.AddressModel;
 import com.example.fastuae.model.CarModel;
+import com.example.fastuae.model.CountryCodeModel;
 import com.example.fastuae.util.Click;
 import com.example.fastuae.util.Config;
 import com.example.fastuae.util.P;
 import com.example.fastuae.util.ProgressView;
 import com.example.fastuae.util.WindowView;
 import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CarDetailTwoActivity extends AppCompatActivity {
 
@@ -41,7 +49,11 @@ public class CarDetailTwoActivity extends AppCompatActivity {
     private String flag;
     private String payType = "";
     private String aedSelected = "";
+    private String paymentID = "";
+    private String countryID = "";
     private CarModel model;
+    private List<AddressModel> listCountry;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +70,8 @@ public class CarDetailTwoActivity extends AppCompatActivity {
     }
 
     private void initView(){
+
+        Log.e("TAG", "initViewDDDD: " + session.getString(P.token) );
         binding.toolbar.setTitle(getResources().getString(R.string.carDetails));
         setSupportActionBar(binding.toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -72,7 +86,7 @@ public class CarDetailTwoActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         if (Config.isEditDetails){
-            setInformation(true);
+            setInformation();
         }
     }
 
@@ -87,20 +101,54 @@ public class CarDetailTwoActivity extends AppCompatActivity {
 
     private void setData(){
 
+        listCountry = new ArrayList<>();
+        AddressModel countryModel = new AddressModel();
+        countryModel.setCountry_name(getResources().getString(R.string.country));
+        listCountry.add(countryModel);
+        JsonList jsonList = Config.countryJsonList;
+        for (int i = 0; i < jsonList.size(); i++) {
+            Json json = jsonList.get(i);
+            AddressModel model = new AddressModel();
+            model.setId(json.getString(P.id));
+            model.setCountry_name(json.getString(P.country_name));
+            model.setPhone_code(json.getString(P.phone_code));
+            listCountry.add(model);
+        }
+
+        AddressSelectionAdapter adapterEmirate = new AddressSelectionAdapter(activity, listCountry);
+        binding.spinnerCountry.setAdapter(adapterEmirate);
+
         model = Config.carModel;
         Picasso.get().load(model.getCar_image()).error(R.drawable.ic_image).into(binding.imgCar);
 
         binding.txtConfirmPayment.setText(getResources().getString(R.string.confirmPayment)+ " : AED " + aedSelected);
         binding.txtCarName.setText(model.getCar_name());
         binding.txtFees.setText("Reservation Fee: AED " + aedSelected);
-        setInformation(false);
+        setInformation();
 
         if (flag.equals(Config.ARABIC)){
             binding.txtPhoneNo.setGravity(Gravity.LEFT);
         }
+
+        binding.spinnerCountry.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                AddressModel model = listCountry.get(position);
+                if (TextUtils.isEmpty(model.getId())){
+                    countryID = "";
+                }else {
+                    countryID =  model.getId();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
-    private void setInformation(boolean setData){
+    private void setInformation(){
 
         String name = session.getString(P.user_name);
         String email = session.getString(P.user_email);
@@ -188,20 +236,20 @@ public class CarDetailTwoActivity extends AppCompatActivity {
             }
         });
 
+        binding.lnrBillingInformation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkBillingView();
+            }
+        });
+
         binding.txtConfirmPayment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (binding.viewPaymentDetails.getVisibility()==View.VISIBLE){
                     if (checkAddCardDetails()) {
                         hideKeyboard(activity);
-                        Intent intent = new Intent(activity,CarDetailsActivityThree.class);
-                        intent.putExtra(Config.cardNumber,binding.etxCardNumber.getText().toString().trim());
-                        intent.putExtra(Config.cardName,binding.etxCardName.getText().toString().trim());
-                        intent.putExtra(Config.cardValidMonth,binding.etxValidMonth.getText().toString().trim());
-                        intent.putExtra(Config.cardValidCVV,binding.etxCvv.getText().toString().trim());
-                        intent.putExtra(Config.PAY_TYPE,payType);
-                        intent.putExtra(Config.SELECTED_AED,aedSelected);
-                        startActivity(intent);
+                        hitAddPaymentData();
                     }
                 }else {
                     H.showMessage(activity,getResources().getString(R.string.checkPaymentDetails));
@@ -217,10 +265,22 @@ public class CarDetailTwoActivity extends AppCompatActivity {
             binding.imgPaymentRight.setVisibility(View.GONE);
             binding.imgPaymentLeft.setVisibility(View.VISIBLE);
 
+            binding.imgBillingRight.setVisibility(View.GONE);
+            binding.imgBillingLeft.setVisibility(View.VISIBLE);
+
+            binding.imgCountryRight.setVisibility(View.GONE);
+            binding.imgCountryLeft.setVisibility(View.VISIBLE);
+
         } else if (flag.equals(Config.ENGLISH)) {
 
             binding.imgPaymentRight.setVisibility(View.VISIBLE);
             binding.imgPaymentLeft.setVisibility(View.GONE);
+
+            binding.imgBillingRight.setVisibility(View.VISIBLE);
+            binding.imgBillingLeft.setVisibility(View.GONE);
+
+            binding.imgCountryRight.setVisibility(View.VISIBLE);
+            binding.imgCountryLeft.setVisibility(View.GONE);
 
         }
     }
@@ -239,6 +299,24 @@ public class CarDetailTwoActivity extends AppCompatActivity {
                 binding.imgPaymentLeft.setImageResource(R.drawable.ic_up_arrow);
             } else if (flag.equals(Config.ENGLISH)) {
                 binding.imgPaymentRight.setImageResource(R.drawable.ic_up_arrow);
+            }
+        }
+    }
+
+    private void checkBillingView() {
+        if (binding.viewBillingDetails.getVisibility() == View.VISIBLE) {
+            binding.viewBillingDetails.setVisibility(View.GONE);
+            if (flag.equals(Config.ARABIC)) {
+                binding.imgBillingLeft.setImageResource(R.drawable.ic_down_arrow);
+            } else if (flag.equals(Config.ENGLISH)) {
+                binding.imgBillingRight.setImageResource(R.drawable.ic_down_arrow);
+            }
+        } else if (binding.viewBillingDetails.getVisibility() == View.GONE) {
+            binding.viewBillingDetails.setVisibility(View.VISIBLE);
+            if (flag.equals(Config.ARABIC)) {
+                binding.imgBillingLeft.setImageResource(R.drawable.ic_up_arrow);
+            } else if (flag.equals(Config.ENGLISH)) {
+                binding.imgBillingRight.setImageResource(R.drawable.ic_up_arrow);
             }
         }
     }
@@ -282,9 +360,81 @@ public class CarDetailTwoActivity extends AppCompatActivity {
         } else if (binding.etxCvv.getText().toString().trim().length() < 3 || binding.etxCvv.getText().toString().trim().length() > 3) {
             value = false;
             H.showMessage(activity, getResources().getString(R.string.enterValidCvv));
+        }else if (binding.viewBillingDetails.getVisibility()==View.GONE){
+            value = false;
+            H.showMessage(activity, getResources().getString(R.string.enterBilling));
+        }else if (TextUtils.isEmpty(binding.etxAddressOne.getText().toString().trim())) {
+            value = false;
+            H.showMessage(activity, getResources().getString(R.string.enterAddress1));
+        }else if (TextUtils.isEmpty(binding.etxAddressTwo.getText().toString().trim())) {
+            value = false;
+            H.showMessage(activity, getResources().getString(R.string.enterAddress2));
+        }else if (TextUtils.isEmpty(countryID)) {
+            value = false;
+            H.showMessage(activity, getResources().getString(R.string.selectCountry));
+        }else if (TextUtils.isEmpty(binding.etxCity.getText().toString().trim())) {
+            value = false;
+            H.showMessage(activity, getResources().getString(R.string.enterCity));
+        }else if (TextUtils.isEmpty(binding.etxZipCode.getText().toString().trim())) {
+            value = false;
+            H.showMessage(activity, getResources().getString(R.string.enterZipCode));
         }
 
         return value;
+    }
+
+    private void hitAddPaymentData() {
+
+        String[] separated = binding.etxValidMonth.getText().toString().split("/");
+        String cardMonth = separated[0];
+        String cardYear = separated[1];
+
+        ProgressView.show(activity,loadingDialog);
+        Json j = new Json();
+        j.addString(P.id,"");
+        j.addString(P.card_number,binding.etxCardNumber.getText().toString().trim());
+        j.addString(P.name_on_card,binding.etxCardName.getText().toString().trim());
+        j.addString(P.expiry_month,cardMonth);
+        j.addString(P.expiry_year,cardYear);
+        j.addString(P.cvv,binding.etxCvv.getText().toString().trim());
+
+        Api.newApi(activity, P.BaseUrl + "add_user_payment_option").addJson(j)
+                .setMethod(Api.POST)
+                //.onHeaderRequest(App::getHeaders)
+                .onError(() -> {
+                    ProgressView.dismiss(loadingDialog);
+                    H.showMessage(activity, "On error is called");
+                })
+                .onSuccess(json ->
+                {
+                    if (json.getInt(P.status) == 1) {
+
+                        Json jsonData = json.getJson(P.data);
+                        Json detailJson = jsonData.getJson(P.user_payment_option);
+
+                        paymentID = detailJson.getString(P.id);
+                        Intent intent = new Intent(activity,CarDetailsActivityThree.class);
+                        intent.putExtra(Config.cardNumber,binding.etxCardNumber.getText().toString().trim());
+                        intent.putExtra(Config.cardName,binding.etxCardName.getText().toString().trim());
+                        intent.putExtra(Config.cardValidMonth,binding.etxValidMonth.getText().toString().trim());
+                        intent.putExtra(Config.cardValidCVV,binding.etxCvv.getText().toString().trim());
+                        intent.putExtra(Config.PAY_TYPE,payType);
+                        intent.putExtra(Config.PAY_ID,paymentID);
+                        intent.putExtra(Config.SELECTED_AED,aedSelected);
+                        intent.putExtra(Config.cityName,binding.etxCity.getText().toString().trim());
+                        intent.putExtra(Config.countryID,countryID);
+                        intent.putExtra(Config.zipCode,binding.etxZipCode.getText().toString().trim());
+                        intent.putExtra(Config.address1,binding.etxAddressOne.getText().toString().trim());
+                        intent.putExtra(Config.address2,binding.etxAddressTwo.getText().toString().trim());
+                        startActivity(intent);
+
+                    }else {
+                        H.showMessage(activity,json.getString(P.error));
+                    }
+                    ProgressView.dismiss(loadingDialog);
+
+                })
+                .run("hitAddPaymentData",session.getString(P.token));
     }
 
     public void hideKeyboard(Context mContext) {
@@ -297,6 +447,7 @@ public class CarDetailTwoActivity extends AppCompatActivity {
 
         }
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

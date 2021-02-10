@@ -247,6 +247,18 @@
     <string name="description">Description</string>
     <string name="vehicleNo">Rental Agreement No./ Vehicle No.</string>
     <string name="enterVehicleNo">Please enter Rental Agreement No./ Vehicle No.</string>
+    <string name="billingInfo">Billing Information</string>
+    <string name="address1">Address 1</string>
+    <string name="address2">Address 2</string>
+    <string name="twonCity">Town/City</string>
+    <string name="zipCode">Zip/Postal Code</string>
+    <string name="enterAddress1">Please enter address one</string>
+    <string name="enterAddress2">Please enter address two</string>
+    <string name="selectCountry">Please select country</string>
+    <string name="enterCity">Please enter town/city</string>
+    <string name="enterZipCode">Please enter zip/postal code</string>
+    <string name="country">Select Country</string>
+    <string name="enterBilling">Enter billing information</string>
 
 
     <string name="selectSelftPickUpLocation">Please select self pickup location</string>

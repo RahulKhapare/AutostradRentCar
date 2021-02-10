@@ -551,9 +551,212 @@
                             android:layout_width="match_parent"
                             android:layout_height="0.5dp"
                             android:layout_marginTop="5dp"
-                            android:layout_marginBottom="20dp"
+                            android:layout_marginBottom="5dp"
                             android:background="@color/customeGray"></LinearLayout>
 
+
+                        <RelativeLayout
+                            android:id="@+id/lnrBillingInformation"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="16dp">
+
+                            <TextView
+                                android:id="@+id/txtBillingInformation"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:gravity="center_vertical"
+                                android:layout_gravity="center_vertical"
+                                android:fontFamily="@font/nunito_sans_semibold"
+                                android:text="@string/billingInfo"
+                                android:textSize="18sp">
+                            </TextView>
+
+
+                            <ImageView
+                                android:id="@+id/imgBillingRight"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_marginRight="15dp"
+                                android:src="@drawable/ic_down_arrow"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true">
+                            </ImageView>
+
+                            <ImageView
+                                android:id="@+id/imgBillingLeft"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_marginLeft="15dp"
+                                android:src="@drawable/ic_down_arrow"
+                                android:layout_alignParentLeft="true"
+                                android:layout_centerVertical="true"
+                                android:visibility="gone">
+                            </ImageView>
+
+                        </RelativeLayout>
+
+                        <LinearLayout
+                            android:id="@+id/viewBillingDetails"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="16dp"
+                            android:paddingRight="16dp"
+                            android:layout_marginTop="0dp"
+                            android:paddingBottom="16dp"
+                            android:visibility="gone"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <EditText
+                                    android:id="@+id/etxAddressOne"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="?actionBarSize"
+                                    android:layout_marginBottom="10dp"
+                                    android:layout_marginTop="0dp"
+                                    android:textSize="18sp"
+                                    android:imeOptions="actionNext"
+                                    android:textColor="@color/textDark"
+                                    android:textColorHint="@color/iconicGray"
+                                    android:textCursorDrawable="@drawable/color_cursor"
+                                    android:backgroundTint="@color/colorPrimaryDark"
+                                    android:fontFamily="@font/nunito_sans_regular"
+                                    android:inputType="text"
+                                    android:hint="@string/address1">
+
+                                </EditText>
+
+
+                                <EditText
+                                    android:id="@+id/etxAddressTwo"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="?actionBarSize"
+                                    android:layout_marginBottom="10dp"
+                                    android:layout_marginTop="0dp"
+                                    android:textSize="18sp"
+                                    android:imeOptions="actionNext"
+                                    android:textColor="@color/textDark"
+                                    android:textColorHint="@color/iconicGray"
+                                    android:textCursorDrawable="@drawable/color_cursor"
+                                    android:backgroundTint="@color/colorPrimaryDark"
+                                    android:fontFamily="@font/nunito_sans_regular"
+                                    android:inputType="text"
+                                    android:hint="@string/address2">
+
+                                </EditText>
+
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="10dp"
+                                    android:layout_marginLeft="0dp"
+                                    android:layout_marginRight="0dp"
+                                    android:layout_marginTop="0dp">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                        <Spinner
+                                            android:id="@+id/spinnerCountry"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="?actionBarSize"
+                                            android:background="@android:color/transparent"
+                                            android:backgroundTint="@color/colorPrimaryDark">
+
+                                        </Spinner>
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="1dp"
+                                            android:background="@color/colorPrimaryDark"
+                                            android:layout_marginTop="-5dp"
+                                            android:layout_marginLeft="3dp"
+                                            android:layout_marginRight="3dp"></LinearLayout>
+
+                                    </LinearLayout>
+
+                                    <ImageView
+                                        android:id="@+id/imgCountryRight"
+                                        android:layout_width="25dp"
+                                        android:layout_height="25dp"
+                                        android:layout_marginRight="10dp"
+                                        android:src="@drawable/ic_down_arrow"
+                                        android:layout_alignParentRight="true"
+                                        android:layout_centerVertical="true">
+
+                                    </ImageView>
+
+                                    <ImageView
+                                        android:id="@+id/imgCountryLeft"
+                                        android:layout_width="25dp"
+                                        android:layout_height="25dp"
+                                        android:layout_marginLeft="10dp"
+                                        android:visibility="gone"
+                                        android:src="@drawable/ic_down_arrow"
+                                        android:layout_alignParentLeft="true"
+                                        android:layout_centerVertical="true">
+                                    </ImageView>
+
+
+                                </RelativeLayout>
+
+                                <EditText
+                                    android:id="@+id/etxCity"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="?actionBarSize"
+                                    android:layout_marginBottom="10dp"
+                                    android:layout_marginTop="0dp"
+                                    android:textSize="18sp"
+                                    android:imeOptions="actionNext"
+                                    android:textColor="@color/textDark"
+                                    android:textColorHint="@color/iconicGray"
+                                    android:textCursorDrawable="@drawable/color_cursor"
+                                    android:backgroundTint="@color/colorPrimaryDark"
+                                    android:fontFamily="@font/nunito_sans_regular"
+                                    android:inputType="text"
+                                    android:hint="@string/twonCity">
+
+                                </EditText>
+
+                                <EditText
+                                    android:id="@+id/etxZipCode"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="?actionBarSize"
+                                    android:layout_marginBottom="10dp"
+                                    android:layout_marginTop="0dp"
+                                    android:textSize="18sp"
+                                    android:imeOptions="actionDone"
+                                    android:textColor="@color/textDark"
+                                    android:textColorHint="@color/iconicGray"
+                                    android:textCursorDrawable="@drawable/color_cursor"
+                                    android:backgroundTint="@color/colorPrimaryDark"
+                                    android:fontFamily="@font/nunito_sans_regular"
+                                    android:inputType="text"
+                                    android:hint="@string/zipCode">
+
+                                </EditText>
+
+                            </LinearLayout>
+
+
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="20dp"
+                            android:background="@color/customeGray"></LinearLayout>
 
 
                     </LinearLayout>

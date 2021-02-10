@@ -134,6 +134,15 @@ public class P {
     public static String dropoff_emirate_id = "dropoff_emirate_id";
     public static String dropoff_type = "dropoff_type";
 
+    public static String user_payment_option_id = "user_payment_option_id";
+    public static String address_line_1 = "address_line_1";
+    public static String address_line_2 = "address_line_2";
+    public static String city = "city";
+    public static String state = "state";
+    public static String country_id = "country_id";
+    public static String zipcode = "zipcode";
+    public static String user_payment_option = "user_payment_option";
+
 
 
 }

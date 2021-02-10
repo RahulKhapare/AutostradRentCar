@@ -16,6 +16,7 @@ public class Config {
     public static String MENU = "MENU";
     public static String LOGIN = "LOGIN";
     public static String SIGN_UP = "SIGN_UP";
+    public static String WEB_URL = "WEB_URL";
     public static String currentFlag = "";
     public static String currentProfileFlag = "";
     public static String currentFAQFlag = "";
@@ -50,9 +51,15 @@ public class Config {
     public static String PROFILE_TAG = "PROFILE_TAG";
     public static String FAQ_TAG = "FAQ_TAG";
     public static String PAY_TYPE = "PAY_TYPE";
+    public static String PAY_ID = "PAY_ID";
     public static String SELECTED_AED = "SELECTED_AED";
     public static String pay_now = "pay_now";
     public static String pay_latter = "pay_latter";
+    public static String cityName = "cityName";
+    public static String countryID = "countryID";
+    public static String zipCode = "zipCode";
+    public static String address1 = "address1";
+    public static String address2 = "address2";
 
     public static String pickUpEmirateID = "pickUpEmirateID";
     public static String dropUpEmirateID = "dropUpEmirateID";

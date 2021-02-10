@@ -174,6 +174,7 @@ public class Api {
         H.log("Api Call", "______________________________________________");
         H.log("Api Url", code + ": " + url);
         H.log("Api Data", code + ": " + json.toString());
+        H.log("Api Token", code + ": " + tokenValue);
 
         if (onLoadingListener != null) onLoadingListener.onLoading(true);
         JsonObjectRequest jsonRequest = new JsonObjectRequest(getMethod(), url, json, new Response.Listener<JSONObject>() {
