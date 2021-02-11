@@ -142,6 +142,25 @@ public class P {
     public static String country_id = "country_id";
     public static String zipcode = "zipcode";
     public static String user_payment_option = "user_payment_option";
+    public static String pickup_location_data = "pickup_location_data";
+    public static String dropoff_location_data = "dropoff_location_data";
+    public static String car_data = "car_data";
+    public static String total_booking_days = "total_booking_days";
+    public static String payment_method = "payment_method";
+    public static String pay_now_discount_per = "pay_now_discount_per";
+    public static String total_advance_booking_days = "total_advance_booking_days";
+    public static String advance_discount_per = "advance_discount_per";
+    public static String total_car_rate = "total_car_rate";
+    public static String total_amount = "total_amount";
+    public static String choose_extras = "choose_extras";
+    public static String key_value = "key_value";
+    public static String max_quantity = "max_quantity";
+    public static String price = "price";
+    public static String payment_link = "payment_link";
+    public static String booking_from = "booking_from";
+    public static String success_url = "success_url";
+    public static String failed_url = "failed_url";
+
 
 
 

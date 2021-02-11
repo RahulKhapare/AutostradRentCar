@@ -170,6 +170,7 @@
     <string name="driversInformation">معلومات السائقين</string>
     <string name="edit">تعديل</string>
     <string name="uploadDriverLicence">الرجاء تحميل رخصة القيادة</string>
+    <string name="reUploadDriverLicence">إعادة تحميل رخصة القيادة</string>
     <string name="paymentDetails">بيانات الدفع</string>
     <string name="confirmPayment">تأكيد الدفع</string>
     <string name="similar">(أو مشابه)</string>
@@ -246,18 +247,19 @@
     <string name="vehicleNo">عقد الإيجار رقم / رقم المركبة.</string>
     <string name="enterVehicleNo">الرجاء إدخال عقد الإيجار رقم / رقم المركبة.</string>
     <string name="enterValidDescription">الرجاء إدخال وصف صحيح</string>
-    <string name="billingInfo">Billing Information</string>
+    <string name="billingInfo">معلومات الفواتير</string>
     <string name="address1">العنوان 1</string>
     <string name="address2">العنوان 2</string>
     <string name="twonCity">بلدة / مدينة</string>
     <string name="zipCode">الرمز البريدي / الرمز البريدي</string>
-    <string name="enterAddress1">Please enter address one</string>
-    <string name="enterAddress2">Please enter address two</string>
-    <string name="selectCountry">Please select country</string>
-    <string name="enterCity">Please enter town/city</string>
-    <string name="enterZipCode">Please enter zip/postal code</string>
-    <string name="country">Select Country</string>
-    <string name="enterBilling">Enter billing information</string>
+    <string name="enterAddress1">الرجاء إدخال العنوان الأول</string>
+    <string name="enterAddress2">الرجاء إدخال العنوان الثاني</string>
+    <string name="selectCountry">الرجاء تحديد الدولة</string>
+    <string name="enterCity">الرجاء إدخال المدينة / المدينة</string>
+    <string name="enterZipCode">الرجاء إدخال الرمز البريدي / البريدي</string>
+    <string name="country">حدد الدولة</string>
+    <string name="enterBilling">أدخل معلومات الفاتورة</string>
+    <string name="openDocumentMessage">هل تريد فتح المستند؟</string>
 
     <string name="selectSelftPickUpLocation">الرجاء تحديد موقع الالتقاط الذاتي</string>
     <string name="selectSelfReturnUpLocation">الرجاء تحديد موقع العودة الذاتية</string>

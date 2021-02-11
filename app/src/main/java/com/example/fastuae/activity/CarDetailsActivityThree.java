@@ -191,6 +191,9 @@ public class CarDetailsActivityThree extends AppCompatActivity {
         j.addString(P.state,"Empty");
         j.addString(P.country_id,countryID);
         j.addString(P.zipcode,zipCode);
+        j.addString(P.booking_from,"mobile-android");
+        j.addString(P.success_url,"");
+        j.addString(P.failed_url,"");
 
         Api.newApi(activity, P.BaseUrl + "book_car").addJson(j)
                 .setMethod(Api.POST)
@@ -202,12 +205,16 @@ public class CarDetailsActivityThree extends AppCompatActivity {
                 .onSuccess(json ->
                 {
                     if (json.getInt(P.status) == 1) {
+                        Json data = json.getJson(P.data);
+                        String paymentLink = "";
+                        try {
+                            paymentLink = data.getString(P.payment_link);
+                        }catch (Exception e){
+                        }
                         Intent intent = new Intent(activity,BookingSucessfullActivity.class);
-                        intent.putExtra(Config.WEB_URL,"");
+                        intent.putExtra(Config.WEB_URL,paymentLink);
                         intent.putExtra(Config.PAY_TYPE,pay_type);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
-                        finish();
                     }else {
                         H.showMessage(activity,json.getString(P.error));
                     }

@@ -1,21 +1,37 @@
 package com.example.fastuae.activity;
 
+import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.graphics.Color;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.provider.OpenableColumns;
+import android.provider.Settings;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Base64;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.CompoundButton;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.databinding.DataBindingUtil;
 
 import com.adoisstudio.helper.Api;
@@ -26,6 +42,7 @@ import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
 import com.example.fastuae.R;
 import com.example.fastuae.adapter.AddressSelectionAdapter;
+import com.example.fastuae.adapter.AddressSelectionLightAdapter;
 import com.example.fastuae.databinding.ActivityCarDetailTwoBinding;
 import com.example.fastuae.model.AddressModel;
 import com.example.fastuae.model.CarModel;
@@ -37,8 +54,14 @@ import com.example.fastuae.util.ProgressView;
 import com.example.fastuae.util.WindowView;
 import com.squareup.picasso.Picasso;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class CarDetailTwoActivity extends AppCompatActivity {
 
@@ -53,7 +76,8 @@ public class CarDetailTwoActivity extends AppCompatActivity {
     private String countryID = "";
     private CarModel model;
     private List<AddressModel> listCountry;
-
+    private static final int READ_WRIRE = 13;
+    private static final int REQUEST_DOCUMENT = 9;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,7 +139,7 @@ public class CarDetailTwoActivity extends AppCompatActivity {
             listCountry.add(model);
         }
 
-        AddressSelectionAdapter adapterEmirate = new AddressSelectionAdapter(activity, listCountry);
+        AddressSelectionLightAdapter adapterEmirate = new AddressSelectionLightAdapter(activity, listCountry);
         binding.spinnerCountry.setAdapter(adapterEmirate);
 
         model = Config.carModel;
@@ -226,6 +250,7 @@ public class CarDetailTwoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
+                getPermission();
             }
         });
 
@@ -448,6 +473,181 @@ public class CarDetailTwoActivity extends AppCompatActivity {
         }
     }
 
+    private void getPermission() {
+        ActivityCompat.requestPermissions(activity,
+                new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                READ_WRIRE);
+    }
+
+    private void jumpToSetting() {
+        H.showMessage(activity, getResources().getString(R.string.permissionAllow));
+        try {
+            Intent intent = new Intent();
+            intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+            Uri uri = Uri.fromParts("package", activity.getPackageName(), null);
+            intent.setData(uri);
+            activity.startActivity(intent);
+        } catch (Exception e) {
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case READ_WRIRE: {
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    openDocumentView();
+                } else if (grantResults[0] == PackageManager.PERMISSION_DENIED) {
+                    jumpToSetting();
+                } else {
+                    getPermission();
+                }
+                return;
+            }
+        }
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case REQUEST_DOCUMENT:
+                if (resultCode == Activity.RESULT_OK && data != null) {
+                    try {
+                        binding.txtDrivingLicence.setText(getResources().getString(R.string.reUploadDriverLicence));
+                        Uri uri = data.getData();
+                        openViewPDFDialog(getBase64PDF(uri));
+                    } catch (Exception e) {
+                    }
+                }
+                break;
+        }
+    }
+
+    private String getBase64PDF(Uri filepath){
+        InputStream inputStream = null;
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        try {
+            inputStream =  getContentResolver().openInputStream(filepath);
+
+            byte[] buffer = new byte[1024];
+            byteArrayOutputStream = new ByteArrayOutputStream();
+
+            int bytesRead;
+            while ((bytesRead = inputStream.read(buffer)) != -1) {
+                byteArrayOutputStream.write(buffer, 0, bytesRead);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (inputStream != null) {
+                try {
+                    inputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        byte[] pdfByteArray = byteArrayOutputStream.toByteArray();
+
+        return Base64.encodeToString(pdfByteArray, Base64.DEFAULT);
+    }
+
+    private void storeAndOpenPDF(Context context, String base) {
+
+
+        String root = Environment.getExternalStorageDirectory().toString();
+
+        Log.d("ResponseEnv",root);
+
+        File myDir = new File(root + "/FastCar");
+        if (!myDir.exists()) {
+            myDir.mkdirs();
+        }
+
+        Random generator = new Random();
+        int n = 10000;
+        n = generator.nextInt(n);
+
+        String fname = "Attachments-" + n + ".pdf";
+        File file = new File(myDir, fname);
+        if (file.exists())
+            file.delete();
+        try {
+
+            FileOutputStream out = new FileOutputStream(file);
+            byte[] pdfAsBytes = Base64.decode(base, 0);
+            out.write(pdfAsBytes);
+            out.flush();
+            out.close();
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        File dir = new File(Environment.getExternalStorageDirectory(), "FastCar");
+        File imgFile = new File(dir, fname);
+        Intent sendIntent = new Intent(Intent.ACTION_VIEW);
+
+        Uri uri;
+        if (Build.VERSION.SDK_INT < 24) {
+            uri = Uri.fromFile(file);
+        } else {
+            uri = Uri.parse("file://" + imgFile); // My work-around for new SDKs, causes ActivityNotFoundException in API 10.
+        }
+
+        sendIntent.setDataAndType(uri, "application/pdf");
+        sendIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        context.startActivity(sendIntent);
+
+    }
+
+
+    private void openDocumentView() {
+        try {
+            Intent intentPDF = new Intent(Intent.ACTION_GET_CONTENT);
+            intentPDF.setType("application/pdf");
+            intentPDF.addCategory(Intent.CATEGORY_OPENABLE);
+            startActivityForResult(Intent.createChooser(intentPDF , "Select Document"), REQUEST_DOCUMENT);
+        } catch (Exception e) {
+        }
+    }
+
+    private void openViewPDFDialog(String base64Path){
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(activity);
+        builder1.setMessage(getResources().getString(R.string.openDocumentMessage));
+        builder1.setCancelable(true);
+
+        builder1.setPositiveButton(
+                getResources().getString(R.string.yes),
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                        storeAndOpenPDF(activity,base64Path);
+                    }
+                });
+
+        builder1.setNegativeButton(
+                getResources().getString(R.string.no),
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
+
+        Button buttonColor1 = alert11.getButton(DialogInterface.BUTTON_NEGATIVE);
+        buttonColor1.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+
+        Button buttonColor2 = alert11.getButton(DialogInterface.BUTTON_POSITIVE);
+        buttonColor2.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

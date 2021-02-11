@@ -29,6 +29,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.adoisstudio.helper.Api;
 import com.adoisstudio.helper.H;
 import com.adoisstudio.helper.Json;
+import com.adoisstudio.helper.JsonList;
 import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
 import com.example.fastuae.R;
@@ -60,7 +61,7 @@ public class CarDetailOneActivity extends AppCompatActivity {
     private LoadingDialog loadingDialog;
     private String payType = "";
     private String aedSelected = "";
-
+    private CarModel model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,13 +83,15 @@ public class CarDetailOneActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
+        model = Config.carModel;
+        hitCarExtrasData();
         setData();
         onClick();
     }
 
     private void setData() {
 
-        CarModel model = Config.carModel;
+
 
         hitBookingCarData(model);
 
@@ -581,6 +584,48 @@ public class CarDetailOneActivity extends AppCompatActivity {
                 {
                     if (json.getInt(P.status) == 1) {
 
+                        Json data = json.getJson(P.data);
+
+                        data.getString(P.total_booking_days);
+                        data.getString(P.payment_method);
+                        data.getString(P.pay_now_discount_per);
+                        data.getString(P.total_advance_booking_days);
+                        data.getString(P.advance_discount_per);
+                        data.getString(P.total_car_rate);
+                        data.getString(P.total_amount);
+
+                        Json pickUpData = data.getJson(P.pickup_location_data);
+                        pickUpData.getString(P.location_name);
+                        pickUpData.getString(P.contact_email);
+                        pickUpData.getString(P.contact_number);
+                        pickUpData.getJsonList(P.location_time_data);
+                        pickUpData.getJsonList(P.location_time_data);
+
+                        Json dropUpData = data.getJson(P.dropoff_location_data);
+                        dropUpData.getString(P.location_name);
+                        dropUpData.getString(P.contact_email);
+                        dropUpData.getString(P.contact_number);
+                        dropUpData.getJsonList(P.location_time_data);
+                        dropUpData.getJsonList(P.location_time_data);
+
+                        Json carData = data.getJson(P.car_data);
+                        carData.getString(P.car_name);
+                        carData.getString(P.transmission_name);
+                        carData.getString(P.fuel_type_name);
+                        carData.getString(P.group_name);
+                        carData.getString(P.category_name);
+                        carData.getString(P.air_bags);
+                        carData.getString(P.air_conditioner);
+                        carData.getString(P.parking_sensors);
+                        carData.getString(P.rear_parking_camera);
+                        carData.getString(P.bluetooth);
+                        carData.getString(P.cruise_control);
+                        carData.getString(P.sunroof);
+                        carData.getString(P.car_image);
+                        carData.getString(P.door);
+                        carData.getString(P.passenger);
+                        carData.getString(P.suitcase);
+
                     }else {
 //                        H.showMessage(activity,json.getString(P.error));
                     }
@@ -588,6 +633,44 @@ public class CarDetailOneActivity extends AppCompatActivity {
 
                 })
                 .run("hitBookingCarData");
+    }
+
+    private void hitCarExtrasData() {
+
+        String url = "emirate_id=" + SelectCarActivity.pickUpEmirateID + "&car_id=" + model.getId() + "&pickup_date=" + SelectCarActivity.pickUpDate + "&dropoff_date=" + SelectCarActivity.dropUpDate;
+
+        ProgressView.show(activity,loadingDialog);
+        Json j = new Json();
+
+        Api.newApi(activity, P.BaseUrl + "cars_choose_extras?" + url).addJson(j)
+                .setMethod(Api.GET)
+                //.onHeaderRequest(App::getHeaders)
+                .onError(() -> {
+                    ProgressView.dismiss(loadingDialog);
+                    H.showMessage(activity, "On error is called");
+                })
+                .onSuccess(json ->
+                {
+                    if (json.getInt(P.status) == 1) {
+
+                        json = json.getJson(P.data);
+                        JsonList choose_extras = json.getJsonList(P.choose_extras);
+
+                        for (Json data : choose_extras){
+                            data.getString(P.title);
+                            data.getString(P.key_value);
+                            data.getString(P.description);
+                            data.getString(P.max_quantity);
+                            data.getString(P.price);
+                        }
+
+                    }else {
+                        H.showMessage(activity,json.getString(P.error));
+                    }
+                    ProgressView.dismiss(loadingDialog);
+
+                })
+                .run("hitCarExtrasData");
     }
 
     private String checkString(String string){

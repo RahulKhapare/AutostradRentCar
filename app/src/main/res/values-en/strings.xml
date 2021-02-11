@@ -170,6 +170,7 @@
     <string name="driversInformation">Drivers Information</string>
     <string name="edit">Edit</string>
     <string name="uploadDriverLicence">Please Upload Driver Licence</string>
+    <string name="reUploadDriverLicence">Re-Upload Driver Licence</string>
     <string name="paymentDetails">Payment Details</string>
     <string name="confirmPayment">Confirm Payment</string>
     <string name="similar">(or similar)</string>
@@ -258,7 +259,7 @@
     <string name="enterZipCode">Please enter zip/postal code</string>
     <string name="country">Select Country</string>
     <string name="enterBilling">Enter billing information</string>
-
+    <string name="openDocumentMessage">Do you want to open document ?</string>
 
     <string name="selectSelftPickUpLocation">Please select self pickup location</string>
     <string name="selectSelfReturnUpLocation">Please select self return location</string>

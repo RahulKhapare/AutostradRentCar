@@ -108,6 +108,14 @@ public class BookingSucessfullActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        goToHome();
+        if (binding.lnrSuccess.getVisibility()==View.VISIBLE){
+            goToHome();
+        }else {
+            if (binding.webView.canGoBack()){
+                binding.webView.goBack();
+            }else {
+                finish();
+            }
+        }
     }
 }
