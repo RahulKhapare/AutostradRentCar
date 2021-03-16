@@ -1,6 +1,7 @@
 package com.example.fastuae.activity;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.AdapterView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import com.adoisstudio.helper.Api;
 import com.adoisstudio.helper.H;
 import com.adoisstudio.helper.Json;
 import com.adoisstudio.helper.JsonList;
@@ -17,12 +19,16 @@ import com.adoisstudio.helper.Session;
 import com.example.fastuae.R;
 import com.example.fastuae.adapter.AddressSelectionAdapter;
 import com.example.fastuae.adapter.CodeSelectionAdapter;
+import com.example.fastuae.adapter.EmirateSelectionAdapter;
 import com.example.fastuae.databinding.ActivityEnquireyNowBinding;
+import com.example.fastuae.fragment.HomeFragment;
 import com.example.fastuae.model.AddressModel;
 import com.example.fastuae.model.CountryCodeModel;
+import com.example.fastuae.model.EmirateModel;
 import com.example.fastuae.util.Click;
 import com.example.fastuae.util.Config;
 import com.example.fastuae.util.P;
+import com.example.fastuae.util.ProgressView;
 import com.example.fastuae.util.Validation;
 import com.example.fastuae.util.WindowView;
 
@@ -39,8 +45,11 @@ public class EnquireyNowActivity extends AppCompatActivity {
 
     private int positionNumber = 0;
     private String codePrimary = "";
+    private String emirateID = "";
+    private String enquiryType = "";
+    private String duration = "";
     private List<CountryCodeModel> countryCodeModelList;
-    private List<AddressModel> listEmirate;
+    private List<EmirateModel> listEmirate;
     private List<AddressModel> listEnquery;
     private List<AddressModel> listDuration;
 
@@ -87,12 +96,26 @@ public class EnquireyNowActivity extends AppCompatActivity {
         binding.spinnerCodeMobile.setAdapter(adapterOne);
         binding.spinnerCodeMobile.setSelection(positionNumber);
 
-        AddressModel modelEmirate = new AddressModel();
-        modelEmirate.setCountry_name("Select Emirate");
-        listEmirate.add(modelEmirate);
-        AddressSelectionAdapter adapterEmirate = new AddressSelectionAdapter(activity, listEmirate);
-        binding.spinnerEmirate.setAdapter(adapterEmirate);
+        EmirateModel emirateModel = new EmirateModel();
+        emirateModel.setEmirate_name("Select Emirate");
+        listEmirate.add(emirateModel);
+        JsonList emirate_list = HomeFragment.emirate_list;
+        if (emirate_list != null && emirate_list.size() != 0) {
+            for (Json json : emirate_list) {
+                String id = json.getString(P.id);
+                String emirate_name = json.getString(P.emirate_name);
+                String status = json.getString(P.status);
+                EmirateModel model = new EmirateModel();
+                model.setId(id);
+                model.setEmirate_name(emirate_name);
+                model.setStatus(status);
+                listEmirate.add(model);
+            }
+        }
 
+
+        EmirateSelectionAdapter adapterEmirate = new EmirateSelectionAdapter(activity, listEmirate);
+        binding.spinnerEmirate.setAdapter(adapterEmirate);
 
         AddressModel modelEnqirey = new AddressModel();
         modelEnqirey.setCountry_name("Select Enquiry Type");
@@ -111,7 +134,7 @@ public class EnquireyNowActivity extends AppCompatActivity {
         onSelection();
     }
 
-    private void onSelection(){
+    private void onSelection() {
 
         binding.spinnerCodeMobile.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -129,7 +152,12 @@ public class EnquireyNowActivity extends AppCompatActivity {
         binding.spinnerEmirate.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+                EmirateModel model = listEmirate.get(position);
+                if (!TextUtils.isEmpty(model.getId()) && !model.getId().equals("")) {
+                    emirateID = model.getId();
+                } else {
+                    emirateID = "";
+                }
             }
 
             @Override
@@ -163,43 +191,52 @@ public class EnquireyNowActivity extends AppCompatActivity {
         });
     }
 
-    private void onClick(){
+    private void onClick() {
 
         binding.txtSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-                if (checkValidation()){
-
+                if (checkValidation()) {
+                    hitEnquiryDetails();
                 }
             }
         });
     }
 
-    private boolean checkValidation(){
+    private boolean checkValidation() {
         boolean value = true;
 
-        if (TextUtils.isEmpty(binding.etxFirstName.getText().toString().trim())){
+        if (TextUtils.isEmpty(binding.etxFirstName.getText().toString().trim())) {
             value = false;
-            H.showMessage(activity,getResources().getString(R.string.pleaseEnterFirstName));
-        }else if (TextUtils.isEmpty(binding.etxLastName.getText().toString().trim())){
+            H.showMessage(activity, getResources().getString(R.string.pleaseEnterFirstName));
+        } else if (TextUtils.isEmpty(binding.etxLastName.getText().toString().trim())) {
             value = false;
-            H.showMessage(activity,getResources().getString(R.string.pleaseEnterLastName));
-        }else if (TextUtils.isEmpty(binding.etxNumber.getText().toString().trim())){
+            H.showMessage(activity, getResources().getString(R.string.pleaseEnterLastName));
+        } else if (TextUtils.isEmpty(binding.etxNumber.getText().toString().trim())) {
             value = false;
-            H.showMessage(activity,getResources().getString(R.string.enterMobile));
-        }else if (TextUtils.isEmpty(binding.etxEmail.getText().toString().trim())){
+            H.showMessage(activity, getResources().getString(R.string.enterMobile));
+        } else if (TextUtils.isEmpty(binding.etxEmail.getText().toString().trim())) {
             value = false;
-            H.showMessage(activity,getResources().getString(R.string.enterEmailId));
-        }else if (!Validation.validEmail(binding.etxEmail.getText().toString().trim())){
+            H.showMessage(activity, getResources().getString(R.string.enterEmailId));
+        } else if (!Validation.validEmail(binding.etxEmail.getText().toString().trim())) {
             value = false;
-            H.showMessage(activity,getResources().getString(R.string.enterEmailValid));
-        }else if (TextUtils.isEmpty(binding.etxComment.getText().toString().trim())){
+            H.showMessage(activity, getResources().getString(R.string.enterEmailValid));
+        } else if (TextUtils.isEmpty(emirateID)) {
             value = false;
-            H.showMessage(activity,getResources().getString(R.string.enterComment));
-        }else if (binding.etxComment.getText().toString().trim().length()<3){
+            H.showMessage(activity, getResources().getString(R.string.selectEmirateId));
+        } else if (TextUtils.isEmpty(enquiryType)) {
             value = false;
-            H.showMessage(activity,getResources().getString(R.string.enterValidComment));
+            H.showMessage(activity, getResources().getString(R.string.selectEnquiry));
+        } else if (TextUtils.isEmpty(duration)) {
+            value = false;
+            H.showMessage(activity, getResources().getString(R.string.selectDuration));
+        } else if (TextUtils.isEmpty(binding.etxComment.getText().toString().trim())) {
+            value = false;
+            H.showMessage(activity, getResources().getString(R.string.enterComment));
+        } else if (binding.etxComment.getText().toString().trim().length() < 3) {
+            value = false;
+            H.showMessage(activity, getResources().getString(R.string.enterValidComment));
         }
 
         return value;
@@ -230,6 +267,44 @@ public class EnquireyNowActivity extends AppCompatActivity {
             binding.imgDurationLeft.setVisibility(View.GONE);
 
         }
+
+    }
+
+    private void hitEnquiryDetails() {
+
+        ProgressView.show(activity, loadingDialog);
+        Json j = new Json();
+        j.addString(P.user_name, binding.etxFirstName.getText().toString().trim());
+        j.addString(P.user_lastname, binding.etxLastName.getText().toString().trim());
+        j.addString(P.user_country_code, codePrimary);
+        j.addString(P.emirate_id, emirateID);
+        j.addString(P.enquiry_type, enquiryType);
+        j.addString(P.duration, duration);
+        j.addString(P.user_mobile, binding.etxNumber.getText().toString().trim());
+        j.addString(P.user_email, binding.etxEmail.getText().toString().trim());
+        j.addString(P.description, binding.etxComment.getText().toString().trim());
+
+        Api.newApi(activity, P.BaseUrl + "enquire_now").addJson(j)
+                .setMethod(Api.POST)
+                //.onHeaderRequest(App::getHeaders)
+                .onError(() -> {
+                    ProgressView.dismiss(loadingDialog);
+                    H.showMessage(activity, "On error is called");
+                })
+                .onSuccess(json ->
+                {
+                    if (json.getInt(P.status) == 1) {
+                        H.showMessage(activity, getResources().getString(R.string.enquiryAdded));
+                        new Handler().postDelayed(() -> {
+                            finish();
+                        }, 500);
+                    } else {
+                        H.showMessage(activity, json.getString(P.error));
+                    }
+                    ProgressView.dismiss(loadingDialog);
+
+                })
+                .run("hitEnquiryDetails", session.getString(P.token));
 
     }
 

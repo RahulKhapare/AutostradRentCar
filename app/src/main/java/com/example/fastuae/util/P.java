@@ -8,6 +8,7 @@ public class P {
     public static String userLogin = "userLogin";
 
 
+    public static String emirate_list = "emirate_list";
     public static String status = "status";
     public static String data = "data";
     public static String user_payment_option_list = "user_payment_option_list";
@@ -18,6 +19,7 @@ public class P {
     public static String id = "id";
     public static String user_name = "user_name";
     public static String user_email = "user_email";
+    public static String agreement_vehicle_no = "agreement_vehicle_no";
     public static String token = "token";
     public static String country_list = "country_list";
     public static String msg = "msg";
@@ -93,6 +95,8 @@ public class P {
 
     public static String location_list = "location_list";
     public static String emirate_id = "emirate_id";
+    public static String enquiry_type = "enquiry_type";
+    public static String duration = "duration";
     public static String emirate_name = "emirate_name";
     public static String location_name = "location_name";
     public static String address = "address";
@@ -103,6 +107,7 @@ public class P {
     public static String pickup_location_id = "pickup_location_id";
     public static String pickup_date = "pickup_date";
     public static String pickup_time = "pickup_time";
+    public static String booking_type = "booking_type";
 
     public static String dropoff_location_id = "dropoff_location_id";
     public static String dropoff_date = "dropoff_date";
@@ -130,8 +135,12 @@ public class P {
     public static String car_id = "car_id";
     public static String pay_type = "pay_type";
     public static String pickup_emirate_id = "pickup_emirate_id";
+    public static String pickup_address = "pickup_address";
+    public static String pickup_landmark = "pickup_landmark";
     public static String pickup_type = "pickup_type";
     public static String dropoff_emirate_id = "dropoff_emirate_id";
+    public static String dropoff_address = "dropoff_address";
+    public static String dropoff_landmark = "dropoff_landmark";
     public static String dropoff_type = "dropoff_type";
 
     public static String user_payment_option_id = "user_payment_option_id";

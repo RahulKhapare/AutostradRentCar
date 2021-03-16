@@ -77,12 +77,19 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick{
     private String dropUpTime = "";
     private String pickUpEmirateID = "";
     private String dropUpEmirateID = "";
+    private String pickUpAddress = "";
+    private String dropUpAddress = "";
+    private String pickUpLandmark = "";
+    private String dropUpLandmark = "";
+    private String dropupType = "";
+    private String pickupType = "";
     private int pickUpFlag = 1;
     private int dropUpFlag = 2;
 
     private LoadingDialog loadingDialog;
     public static JsonList carList = null;
     public static JsonList blogList = null;
+    public static JsonList emirate_list  = null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -219,6 +226,7 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick{
         hitHomeData();
         hitLocationData();
         getCurrentDate();
+        hitEmirateData();
         onClick();
     }
 
@@ -238,12 +246,16 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick{
             pickUpLocation = model.getLocation_name();
             pickUpEmirateID = model.getEmirate_id();
             binding.txtPickUpMessage.setText(location);
+            pickUpAddress = model.getAddress();
+            pickUpLandmark = model.getLocation_name();
             cardPickupClick();
         }else if (flag==dropUpFlag){
             dropUpId = model.getId();
             dropUpLocation = model.getLocation_name();
             dropUpEmirateID = model.getEmirate_id();
             binding.txtDropUpMessage.setText(location);
+            dropUpAddress = model.getAddress();
+            dropUpLandmark = model.getLocation_name();
             cardDropUpClick();
         }
 
@@ -430,6 +442,7 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick{
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
+                pickupType = "deliver";
                 binding.radioSelfPickup.setChecked(false);
                 binding.txtPickUpMessage.setVisibility(View.GONE);
                 binding.txtPickUpTitle.setText(getResources().getString(R.string.enterLocationDeliver));
@@ -446,6 +459,7 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick{
         binding.radioSelfPickup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                pickupType = "self_pickup";
                 Click.preventTwoClick(v);
                 binding.radioDeliver.setChecked(false);
                 binding.txtPickUpMessage.setVisibility(View.VISIBLE);
@@ -462,6 +476,7 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick{
         binding.radioCollect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                dropupType = "collect";
                 Click.preventTwoClick(v);
                 binding.radioSelfReturn.setChecked(false);
                 binding.txtDropUpMessage.setVisibility(View.GONE);
@@ -478,6 +493,7 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick{
         binding.radioSelfReturn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                dropupType = "self_return";
                 Click.preventTwoClick(v);
                 binding.radioCollect.setChecked(false);
                 binding.txtDropUpMessage.setVisibility(View.VISIBLE);
@@ -677,6 +693,33 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick{
                 .run("hitHomeData");
     }
 
+    private void hitEmirateData() {
+
+        ProgressView.show(context,loadingDialog);
+        Json j = new Json();
+
+        Api.newApi(context, P.BaseUrl + "emirate_list").addJson(j)
+                .setMethod(Api.GET)
+                //.onHeaderRequest(App::getHeaders)
+                .onError(() -> {
+                    ProgressView.dismiss(loadingDialog);
+                    H.showMessage(context, "On error is called");
+                })
+                .onSuccess(json ->
+                {
+                    if (json.getInt(P.status) == 1) {
+
+                        json = json.getJson(P.data);
+                        emirate_list = json.getJsonList(P.emirate_list);
+                    }else {
+                        H.showMessage(context,json.getString(P.error));
+                    }
+                    ProgressView.dismiss(loadingDialog);
+
+                })
+                .run("hitEmirateData");
+    }
+
     private void hitLocationData() {
 
         ProgressView.show(context,loadingDialog);
@@ -727,9 +770,14 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick{
 
         ProgressView.show(context,loadingDialog);
         Json j = new Json();
+        j.addString(P.pickup_type,pickupType);
+        j.addString(P.pickup_emirate_id,pickUpEmirateID);
+        j.addString(P.pickup_address,pickUpAddress);
+        j.addString(P.pickup_landmark,pickUpLandmark);
         j.addString(P.pickup_location_id,pickUpID);
         j.addString(P.pickup_date,pickUpDate);
         j.addString(P.pickup_time,pickUpTime);
+        j.addString(P.booking_type,"daily");
 
         Api.newApi(context, P.BaseUrl + "verify_pickup_location_date_time").addJson(j)
                 .setMethod(Api.POST)
@@ -747,7 +795,7 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick{
                         Config.SelectedPickUpAddress = pickUpLocation;
                         Config.SelectedPickUpDate = pickUpDate;
                         Config.SelectedPickUpTime = pickUpTime;
-                        hitVerifyDropUpData(dropUpID,dropUpDate,dropUpTime);
+                        hitVerifyDropUpData(pickUpDate,pickUpTime,dropUpID,dropUpDate,dropUpTime);
 
                     }else {
                         H.showMessage(context,json.getString(P.error));
@@ -759,10 +807,16 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick{
                 .run("hitVerifyPickUpData");
     }
 
-    private void hitVerifyDropUpData(String id, String date, String time) {
+    private void hitVerifyDropUpData(String pickUpDate,String pickUpTime, String id, String date, String time) {
 
         ProgressView.show(context,loadingDialog);
         Json j = new Json();
+        j.addString(P.pickup_date,pickUpDate);
+        j.addString(P.pickup_time,pickUpTime);
+        j.addString(P.dropoff_type,dropupType);
+        j.addString(P.dropoff_emirate_id,dropUpEmirateID);
+        j.addString(P.dropoff_address,dropUpAddress);
+        j.addString(P.dropoff_landmark,dropUpLandmark);
         j.addString(P.dropoff_location_id,id);
         j.addString(P.dropoff_date,date);
         j.addString(P.dropoff_time,time);

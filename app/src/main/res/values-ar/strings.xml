@@ -261,6 +261,13 @@
     <string name="enterBilling">أدخل معلومات الفاتورة</string>
     <string name="openDocumentMessage">هل تريد فتح المستند؟</string>
 
+    <string name="selectRentalLocation">يرجى تحديد موقع التأجير</string>
+    <string name="lostFoundAdded">تمت إضافة الاستفسار المفقود والموجود بنجاح</string>
+    <string name="enquiryAdded">تمت إضافة الاستفسار بنجاح</string>
+    <string name="selectEmirateId">الرجاء تحديد الإمارة</string>
+    <string name="selectEnquiry">الرجاء تحديد الاستفسار</string>
+    <string name="selectDuration">الرجاء تحديد المدة</string>
+
     <string name="selectSelftPickUpLocation">الرجاء تحديد موقع الالتقاط الذاتي</string>
     <string name="selectSelfReturnUpLocation">الرجاء تحديد موقع العودة الذاتية</string>
 

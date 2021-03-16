@@ -262,6 +262,12 @@
     <string name="enterBilling">Enter billing information</string>
 
     <string name="openDocumentMessage">Do you want to open document ?</string>
+    <string name="selectRentalLocation">Please Select Rental Location</string>
+    <string name="lostFoundAdded">Lost and found enquiry added successfully</string>
+    <string name="enquiryAdded">Enquiry added successfully</string>
+    <string name="selectEmirateId">Please select emirate</string>
+    <string name="selectEnquiry">Please select enquiry</string>
+    <string name="selectDuration">Please select duration</string>
 
 
 

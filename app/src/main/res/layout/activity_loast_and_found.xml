@@ -147,6 +147,7 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:gravity="start"
+                        android:cursorVisible="true"
                         android:imeOptions="actionNext"
                         android:hint="@string/description"
                         android:background="@drawable/corner_blue_light_bg">
@@ -307,8 +308,9 @@
                             android:layout_height="wrap_content"
                             android:singleLine="true"
                             android:textSize="18sp"
+                            android:textAllCaps="true"
+                            android:inputType="textCapCharacters"
                             android:imeOptions="actionDone"
-                            android:inputType="text"
                             android:fontFamily="@font/nunito_sans_semibold"
                             android:textColor="@color/textDark"
                             android:backgroundTint="@color/colorPrimaryDark"
