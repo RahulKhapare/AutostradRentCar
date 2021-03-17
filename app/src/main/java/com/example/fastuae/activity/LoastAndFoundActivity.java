@@ -91,9 +91,8 @@ public class LoastAndFoundActivity extends AppCompatActivity {
         binding.spinnerCodeMobile.setAdapter(adapterOne);
         binding.spinnerCodeMobile.setSelection(positionNumber);
 
-
         EmirateModel emirateModel = new EmirateModel();
-        emirateModel.setEmirate_name("Select Rental Location");
+        emirateModel.setEmirate_name(getResources().getString(R.string.selectRental));
         listLocation.add(emirateModel);
         JsonList emirate_list = HomeFragment.emirate_list;
         if (emirate_list != null && emirate_list.size() != 0) {

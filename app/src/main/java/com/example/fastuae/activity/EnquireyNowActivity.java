@@ -53,7 +53,6 @@ public class EnquireyNowActivity extends AppCompatActivity {
     private List<AddressModel> listEnquery;
     private List<AddressModel> listDuration;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,7 +96,7 @@ public class EnquireyNowActivity extends AppCompatActivity {
         binding.spinnerCodeMobile.setSelection(positionNumber);
 
         EmirateModel emirateModel = new EmirateModel();
-        emirateModel.setEmirate_name("Select Emirate");
+        emirateModel.setEmirate_name(getResources().getString(R.string.selectEmirate));
         listEmirate.add(emirateModel);
         JsonList emirate_list = HomeFragment.emirate_list;
         if (emirate_list != null && emirate_list.size() != 0) {
@@ -118,13 +117,13 @@ public class EnquireyNowActivity extends AppCompatActivity {
         binding.spinnerEmirate.setAdapter(adapterEmirate);
 
         AddressModel modelEnqirey = new AddressModel();
-        modelEnqirey.setCountry_name("Select Enquiry Type");
+        modelEnqirey.setCountry_name(getResources().getString(R.string.selectEnquiryType));
         listEnquery.add(modelEnqirey);
         AddressSelectionAdapter adapterEnquirey = new AddressSelectionAdapter(activity, listEnquery);
         binding.spinnerEnquirey.setAdapter(adapterEnquirey);
 
         AddressModel modelDuration = new AddressModel();
-        modelDuration.setCountry_name("Select Duration");
+        modelDuration.setCountry_name(getResources().getString(R.string.selectDuration));
         listDuration.add(modelDuration);
         AddressSelectionAdapter adapterDuration = new AddressSelectionAdapter(activity, listDuration);
         binding.spinnerDuration.setAdapter(adapterDuration);
@@ -320,4 +319,5 @@ public class EnquireyNowActivity extends AppCompatActivity {
     public void onBackPressed() {
         finish();
     }
+
 }

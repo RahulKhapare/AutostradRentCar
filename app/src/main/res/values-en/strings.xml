@@ -267,6 +267,8 @@
     <string name="selectEmirateId">Please select emirate</string>
     <string name="selectEnquiry">Please select enquiry</string>
     <string name="selectDuration">Please select duration</string>
+    <string name="selectRental">Select Rental Location</string>
+    <string name="selectEnquiryType">Select Enquiry Type</string>
 
     <string name="selectSelftPickUpLocation">Please select self pickup location</string>
     <string name="selectSelfReturnUpLocation">Please select self return location</string>

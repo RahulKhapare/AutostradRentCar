@@ -267,6 +267,8 @@
     <string name="selectEmirateId">الرجاء تحديد الإمارة</string>
     <string name="selectEnquiry">الرجاء تحديد الاستفسار</string>
     <string name="selectDuration">الرجاء تحديد المدة</string>
+    <string name="selectRental">حدد موقع التأجير</string>
+    <string name="selectEnquiryType">حدد نوع الاستفسار</string>
 
     <string name="selectSelftPickUpLocation">الرجاء تحديد موقع الالتقاط الذاتي</string>
     <string name="selectSelfReturnUpLocation">الرجاء تحديد موقع العودة الذاتية</string>
