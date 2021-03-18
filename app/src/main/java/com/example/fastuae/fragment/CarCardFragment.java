@@ -60,7 +60,7 @@ public class CarCardFragment extends Fragment {
 
         carModelList = new ArrayList<>();
         setAdapter(0);
-        hitCarData(getPaginationUrl(false),false,0);
+        hitCarData(getPaginationUrl(false), false, 0);
 
         return view;
     }
@@ -68,8 +68,8 @@ public class CarCardFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        if (SelectCarActivity.isApplyFilter){
-            hitCarData(getPaginationUrl(true),true,0);
+        if (SelectCarActivity.isApplyFilter) {
+            hitCarData(getPaginationUrl(true), true, 0);
         }
     }
 
@@ -87,9 +87,9 @@ public class CarCardFragment extends Fragment {
     }
 
 
-    public void hitCarData(String url, boolean isFilter,int lastPosition) {
+    public void hitCarData(String url, boolean isFilter, int lastPosition) {
 
-        ProgressView.show(context,loadingDialog);
+        ProgressView.show(context, loadingDialog);
         Json j = new Json();
 
         Api.newApi(context, P.BaseUrl + "cars?" + url).addJson(j)
@@ -103,14 +103,14 @@ public class CarCardFragment extends Fragment {
                 {
                     if (json.getInt(P.status) == 1) {
 
-                        if (isFilter){
+                        if (isFilter) {
                             carModelList.clear();
                         }
 
                         json = json.getJson(P.data);
 
                         String num_rows = json.getString(P.num_rows);
-                        if (!TextUtils.isEmpty(num_rows) && !num_rows.equals("null")){
+                        if (!TextUtils.isEmpty(num_rows) && !num_rows.equals("null")) {
                             count = Integer.parseInt(num_rows);
                         }
 
@@ -120,7 +120,7 @@ public class CarCardFragment extends Fragment {
 
                         JsonList car_list = json.getJsonList(P.car_list);
 
-                        for (int i=0; i<car_list.size(); i++){
+                        for (int i = 0; i < car_list.size(); i++) {
                             Json jsonData = car_list.get(i);
                             CarModel model = new CarModel();
                             model.setId(jsonData.getString(P.id));
@@ -147,8 +147,8 @@ public class CarCardFragment extends Fragment {
 
                         setAdapter(lastPosition);
 
-                    }else {
-                        H.showMessage(context,json.getString(P.error));
+                    } else {
+                        H.showMessage(context, json.getString(P.error));
                     }
                     ProgressView.dismiss(loadingDialog);
 
@@ -156,7 +156,7 @@ public class CarCardFragment extends Fragment {
                 .run("hitCarData");
     }
 
-    private void setAdapter(int lastPosition){
+    private void setAdapter(int lastPosition) {
         swipeAdapter = new ViewPagerSwipeAdapter(context, carModelList);
         viewPagesSwipe.setPageTransformer(true, new ViewPagerStack());
         viewPagesSwipe.setOffscreenPageLimit(3);
@@ -172,11 +172,11 @@ public class CarCardFragment extends Fragment {
             @Override
             public void onPageSelected(int position) {
                 int page = position + 1;
-                if (carModelList!=null && !carModelList.isEmpty()){
-                    if (page==carModelList.size()){
-                        if (carModelList.size()<count){
+                if (carModelList != null && !carModelList.isEmpty()) {
+                    if (page == carModelList.size()) {
+                        if (carModelList.size() < count) {
                             pageCount++;
-                            hitCarData(getPaginationUrl(false),false,page-1);
+                            hitCarData(getPaginationUrl(false), false, page - 1);
                         }
                     }
                 }
@@ -188,45 +188,62 @@ public class CarCardFragment extends Fragment {
             }
         });
 
-        if (carModelList.isEmpty()){
+        if (carModelList.isEmpty()) {
             txtError.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             txtError.setVisibility(View.GONE);
         }
     }
 
-    private String getPaginationUrl(boolean isFilter){
-        String url = "emirate_id=" + SelectCarActivity.pickUpEmirateID + "&pickup_date=" + SelectCarActivity.pickUpDate + "&dropoff_date=" + SelectCarActivity.dropUpDate;
+    private String getPaginationUrl(boolean isFilter) {
+        String url =
+                "booking_type=" + "daily" +
 
-        if (!TextUtils.isEmpty(SelectCarActivity.groupValue)){
+                "pickup_type=" + "" +
+                "pickup_emirate_id=" + SelectCarActivity.pickUpEmirateID +
+                "pickup_location_id=" + "" +
+                "pickup_address=" + "" +
+                "pickup_date=" + SelectCarActivity.pickUpDate +
+                "pickup_time=" + "" +
+
+                "dropoff_type=" + "" +
+                "dropoff_emirate_id=" + SelectCarActivity.dropUpEmirateID +
+                "dropoff_location_id=" + "" +
+                "dropoff_address=" + "" +
+                "dropoff_date=" + SelectCarActivity.dropUpDate +
+                "dropoff_time=" + "" +
+
+                "coupon_code=" + "" ;
+
+        if (!TextUtils.isEmpty(SelectCarActivity.groupValue)) {
             url = url + "&group=" + SelectCarActivity.groupValue;
         }
 
-        if (!TextUtils.isEmpty(SelectCarActivity.passengerValue)){
+        if (!TextUtils.isEmpty(SelectCarActivity.passengerValue)) {
             url = url + "&passengers=" + SelectCarActivity.passengerValue;
         }
 
-        if (!TextUtils.isEmpty(SelectCarActivity.doorValue)){
+        if (!TextUtils.isEmpty(SelectCarActivity.doorValue)) {
             url = url + "&doors=" + SelectCarActivity.doorValue;
         }
 
-        if (!TextUtils.isEmpty(SelectCarActivity.suitcaseValue)){
+        if (!TextUtils.isEmpty(SelectCarActivity.suitcaseValue)) {
             url = url + "&suitcase=" + SelectCarActivity.suitcaseValue;
         }
 
-        if (!TextUtils.isEmpty(SelectCarActivity.transmissionValue)){
+        if (!TextUtils.isEmpty(SelectCarActivity.transmissionValue)) {
             url = url + "&transmission=" + SelectCarActivity.transmissionValue;
         }
 
-        if (!TextUtils.isEmpty(SelectCarActivity.fuilValue)){
+        if (!TextUtils.isEmpty(SelectCarActivity.fuilValue)) {
             url = url + "&fuel=" + SelectCarActivity.fuilValue;
         }
 
-        if (isFilter){
+        if (isFilter) {
             url = url + "&page=" + "1";
             pageCount = 1;
-        }else {
-            url = url + "&page=" + pageCount+"";
+        } else {
+            url = url + "&page=" + pageCount + "";
         }
 
         url = url + "&per_page=" + "10";

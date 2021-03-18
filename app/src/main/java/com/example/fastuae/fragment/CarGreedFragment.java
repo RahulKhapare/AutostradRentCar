@@ -121,6 +121,7 @@ public class CarGreedFragment extends Fragment {
                 .onError(() -> {
                     ProgressView.dismiss(loadingDialog);
                     H.showMessage(context, "On error is called");
+                    checkError();
                 })
                 .onSuccess(json ->
                 {
@@ -170,23 +171,35 @@ public class CarGreedFragment extends Fragment {
 
                         adapter.notifyDataSetChanged();
 
-                        if (carModelList.isEmpty()){
-                            binding.txtError.setVisibility(View.VISIBLE);
-                        }else {
-                            binding.txtError.setVisibility(View.GONE);
-                        }
-
                     }else {
                         H.showMessage(context,json.getString(P.error));
                     }
                     ProgressView.dismiss(loadingDialog);
-
+                    checkError();
                 })
                 .run("hitCarData");
     }
 
     private String getPaginationUrl(boolean isFilter){
-        String url = "emirate_id=" + SelectCarActivity.pickUpEmirateID + "&pickup_date=" + SelectCarActivity.pickUpDate + "&dropoff_date=" + SelectCarActivity.dropUpDate;
+
+        String url =
+                        "booking_type=" + "daily" +
+
+                        "pickup_type=" + "" +
+                        "pickup_emirate_id=" + SelectCarActivity.pickUpEmirateID +
+                        "pickup_location_id=" + "" +
+                        "pickup_address=" + "" +
+                        "pickup_date=" + SelectCarActivity.pickUpDate +
+                        "pickup_time=" + "" +
+
+                        "dropoff_type=" + "" +
+                        "dropoff_emirate_id=" + SelectCarActivity.dropUpEmirateID +
+                        "dropoff_location_id=" + "" +
+                        "dropoff_address=" + "" +
+                        "dropoff_date=" + SelectCarActivity.dropUpDate +
+                        "dropoff_time=" + "" +
+
+                        "coupon_code=" + "" ;
 
         if (!TextUtils.isEmpty(SelectCarActivity.groupValue)){
             url = url + "&group=" + SelectCarActivity.groupValue;
@@ -223,6 +236,14 @@ public class CarGreedFragment extends Fragment {
 
         return url;
     }
+
+    private void checkError(){
+        if (carModelList.isEmpty()){
+            binding.txtError.setVisibility(View.VISIBLE);
+        }else {
+            binding.txtError.setVisibility(View.GONE);
+        }
+    };
 
     public static CarGreedFragment newInstance() {
         CarGreedFragment fragment = new CarGreedFragment();

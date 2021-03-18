@@ -6,6 +6,15 @@ public class EmirateModel {
     String emirate_name;
     String status;
 
+    public EmirateModel(String emirate_name, String id) {
+        this.emirate_name = emirate_name;
+        this.id = id;
+    }
+
+    public EmirateModel() {
+
+    }
+
     public String getId() {
         return id;
     }

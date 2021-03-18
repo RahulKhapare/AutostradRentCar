@@ -50,8 +50,8 @@ public class EnquireyNowActivity extends AppCompatActivity {
     private String duration = "";
     private List<CountryCodeModel> countryCodeModelList;
     private List<EmirateModel> listEmirate;
-    private List<AddressModel> listEnquery;
-    private List<AddressModel> listDuration;
+    private List<EmirateModel> listEnquery;
+    private List<EmirateModel> listDuration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,16 +116,19 @@ public class EnquireyNowActivity extends AppCompatActivity {
         EmirateSelectionAdapter adapterEmirate = new EmirateSelectionAdapter(activity, listEmirate);
         binding.spinnerEmirate.setAdapter(adapterEmirate);
 
-        AddressModel modelEnqirey = new AddressModel();
-        modelEnqirey.setCountry_name(getResources().getString(R.string.selectEnquiryType));
-        listEnquery.add(modelEnqirey);
-        AddressSelectionAdapter adapterEnquirey = new AddressSelectionAdapter(activity, listEnquery);
+
+        listEnquery.add(new EmirateModel(getResources().getString(R.string.selectEnquiryType),""));
+        listEnquery.add(new EmirateModel("Corporate","0"));
+        listEnquery.add(new EmirateModel("Individual","0"));
+        EmirateSelectionAdapter adapterEnquirey = new EmirateSelectionAdapter(activity, listEnquery);
         binding.spinnerEnquirey.setAdapter(adapterEnquirey);
 
-        AddressModel modelDuration = new AddressModel();
-        modelDuration.setCountry_name(getResources().getString(R.string.selectDuration));
-        listDuration.add(modelDuration);
-        AddressSelectionAdapter adapterDuration = new AddressSelectionAdapter(activity, listDuration);
+        listDuration.add(new EmirateModel(getResources().getString(R.string.selectDuration),""));
+        listDuration.add(new EmirateModel("Daily","0"));
+        listDuration.add(new EmirateModel("Weekly","0"));
+        listDuration.add(new EmirateModel("Monthly","0"));
+        listDuration.add(new EmirateModel("Yearly","0"));
+        EmirateSelectionAdapter adapterDuration = new EmirateSelectionAdapter(activity, listDuration);
         binding.spinnerDuration.setAdapter(adapterDuration);
 
         updateIcons();
@@ -165,10 +168,15 @@ public class EnquireyNowActivity extends AppCompatActivity {
             }
         });
 
-        binding.spinnerEmirate.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        binding.spinnerEnquirey.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+                EmirateModel model = listEnquery.get(position);
+                if (!TextUtils.isEmpty(model.getId()) && !model.getId().equals("")) {
+                    enquiryType = model.getEmirate_name().toLowerCase();
+                } else {
+                    enquiryType = "";
+                }
             }
 
             @Override
@@ -180,7 +188,12 @@ public class EnquireyNowActivity extends AppCompatActivity {
         binding.spinnerDuration.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+                EmirateModel model = listDuration.get(position);
+                if (!TextUtils.isEmpty(model.getId()) && !model.getId().equals("")) {
+                    duration = model.getEmirate_name().toLowerCase();
+                } else {
+                    duration = "";
+                }
             }
 
             @Override
