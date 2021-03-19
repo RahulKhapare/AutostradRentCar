@@ -33,6 +33,7 @@ import com.example.fastuae.R;
 import com.example.fastuae.databinding.ActivitySelectCarBinding;
 import com.example.fastuae.fragment.CarCardFragment;
 import com.example.fastuae.fragment.CarGreedFragment;
+import com.example.fastuae.model.CarFilterModel;
 import com.example.fastuae.model.CarModel;
 import com.example.fastuae.model.HomeLocationModel;
 import com.example.fastuae.util.Config;
@@ -56,10 +57,19 @@ public class SelectCarActivity extends AppCompatActivity implements ViewPager.On
     };
     private LoadingDialog loadingDialog;
 
-    public static String pickUpEmirateID = "";
-    public static String dropUpEmirateID = "";
-    public static String pickUpDate = "";
-    public static String dropUpDate = "";
+    public static String pickUpEmirateID = "";//
+    public static String dropUpEmirateID = "";//
+    public static String pickUpDate = "";//
+    public static String dropUpDate = "";//
+    public static String pickUpTime = "";
+    public static String dropUpTime = "";
+    public static String pickUpType = "";
+    public static String dropUpType = "";
+    public static String pickUpLocationID = "";
+    public static String dropUpLocationID = "";
+    public static String pickUpAddress = "";
+    public static String dropUpAddress = "";
+
     public static String groupValue = "";
     public static String passengerValue = "";
     public static String doorValue = "";
@@ -68,11 +78,25 @@ public class SelectCarActivity extends AppCompatActivity implements ViewPager.On
     public static String fuilValue = "";
     public static boolean isApplyFilter = false;
 
+    public static List<CarFilterModel> groupSelectionList;
+    public static List<CarFilterModel> passengerSelectionList;
+    public static List<CarFilterModel> doorSelectionList;
+    public static List<CarFilterModel> suitcaseSelectionList;
+    public static List<CarFilterModel> transmissionSelectionList;
+    public static List<CarFilterModel> fuilSelectionList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         WindowView.getWindow(activity);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_select_car);
+
+        groupSelectionList = new ArrayList<>();
+        passengerSelectionList = new ArrayList<>();
+        doorSelectionList = new ArrayList<>();
+        suitcaseSelectionList = new ArrayList<>();
+        transmissionSelectionList = new ArrayList<>();
+        fuilSelectionList = new ArrayList<>();
 
         initView();
 
@@ -95,6 +119,14 @@ public class SelectCarActivity extends AppCompatActivity implements ViewPager.On
         dropUpEmirateID = getIntent().getStringExtra(Config.dropUpEmirateID);
         pickUpDate = getIntent().getStringExtra(Config.pickUpDate);
         dropUpDate = getIntent().getStringExtra(Config.dropUpDate);
+        pickUpTime = getIntent().getStringExtra(Config.pickUpTime);
+        dropUpTime = getIntent().getStringExtra(Config.dropUpTime);
+        pickUpType = getIntent().getStringExtra(Config.pickUpType);
+        dropUpType = getIntent().getStringExtra(Config.dropUpType);
+        pickUpLocationID = getIntent().getStringExtra(Config.pickUpLocationID);
+        dropUpLocationID = getIntent().getStringExtra(Config.dropUpLocationID);
+        pickUpAddress = getIntent().getStringExtra(Config.pickUpAddress);
+        dropUpAddress = getIntent().getStringExtra(Config.dropUpAddress);
 
         loadingDialog = new LoadingDialog(activity);
         setUpViewPager();

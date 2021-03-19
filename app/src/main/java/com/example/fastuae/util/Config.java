@@ -65,6 +65,14 @@ public class Config {
     public static String dropUpEmirateID = "dropUpEmirateID";
     public static String pickUpDate = "pickUpDate";
     public static String dropUpDate = "dropUpDate";
+    public static String pickUpTime = "pickUpTime";
+    public static String dropUpTime = "dropUpTime";
+    public static String pickUpType = "pickUpType";
+    public static String dropUpType = "dropUpType";
+    public static String pickUpLocationID = "pickUpLocationID";
+    public static String dropUpLocationID = "dropUpLocationID";
+    public static String pickUpAddress = "pickUpAddress";
+    public static String dropUpAddress = "dropUpAddress";
 
     public static String cardNumber = "cardNumber";
     public static String cardName = "cardName";

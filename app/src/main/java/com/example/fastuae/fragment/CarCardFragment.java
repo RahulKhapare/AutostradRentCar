@@ -2,9 +2,11 @@ package com.example.fastuae.fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -197,23 +199,25 @@ public class CarCardFragment extends Fragment {
 
     private String getPaginationUrl(boolean isFilter) {
         String url =
-                "booking_type=" + "daily" +
 
-                "pickup_type=" + "" +
-                "pickup_emirate_id=" + SelectCarActivity.pickUpEmirateID +
-                "pickup_location_id=" + "" +
-                "pickup_address=" + "" +
-                "pickup_date=" + SelectCarActivity.pickUpDate +
-                "pickup_time=" + "" +
+                        "booking_type=" + "daily" +
 
-                "dropoff_type=" + "" +
-                "dropoff_emirate_id=" + SelectCarActivity.dropUpEmirateID +
-                "dropoff_location_id=" + "" +
-                "dropoff_address=" + "" +
-                "dropoff_date=" + SelectCarActivity.dropUpDate +
-                "dropoff_time=" + "" +
+                        "&emirate_id=" + SelectCarActivity.pickUpEmirateID+
+                        "&pickup_type=" + SelectCarActivity.pickUpType+
+                        "&pickup_emirate_id=" + SelectCarActivity.pickUpEmirateID +
+                        "&pickup_location_id=" + SelectCarActivity.pickUpLocationID +
+                        "&pickup_address=" + SelectCarActivity.pickUpAddress +
+                        "&pickup_date=" + SelectCarActivity.pickUpDate +
+                        "&pickup_time=" + SelectCarActivity.pickUpTime +
 
-                "coupon_code=" + "" ;
+                        "&dropoff_type=" + SelectCarActivity.dropUpType +
+                        "&dropoff_emirate_id=" + SelectCarActivity.dropUpEmirateID +
+                        "&dropoff_location_id=" + SelectCarActivity.dropUpLocationID +
+                        "&dropoff_address=" + SelectCarActivity.dropUpAddress +
+                        "&dropoff_date=" + SelectCarActivity.dropUpDate +
+                        "&dropoff_time=" + SelectCarActivity.dropUpTime +
+
+                        "&coupon_code=" + "" ;
 
         if (!TextUtils.isEmpty(SelectCarActivity.groupValue)) {
             url = url + "&group=" + SelectCarActivity.groupValue;

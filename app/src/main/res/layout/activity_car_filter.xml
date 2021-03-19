@@ -93,7 +93,7 @@
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
-                        android:layout_below="@+id/cardGroup"
+                        android:layout_below="@+id/recyclerGroupSelected"
                         android:id="@+id/cardPassengers"
                         android:layout_width="match_parent"
                         android:layout_height="?actionBarSize"
@@ -149,7 +149,7 @@
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
-                        android:layout_below="@+id/cardPassengers"
+                        android:layout_below="@+id/recyclerPassengersSelected"
                         android:id="@+id/cardDoors"
                         android:layout_width="match_parent"
                         android:layout_height="?actionBarSize"
@@ -204,7 +204,7 @@
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
-                        android:layout_below="@+id/cardDoors"
+                        android:layout_below="@+id/recyclerDoorsSelected"
                         android:id="@+id/cardSuitcase"
                         android:layout_width="match_parent"
                         android:layout_height="?actionBarSize"
@@ -259,7 +259,7 @@
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
-                        android:layout_below="@+id/cardSuitcase"
+                        android:layout_below="@+id/recyclerSuitcaseSelected"
                         android:id="@+id/cardTransmission"
                         android:layout_width="match_parent"
                         android:layout_height="?actionBarSize"
@@ -315,7 +315,7 @@
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
-                        android:layout_below="@+id/cardTransmission"
+                        android:layout_below="@+id/recyclerTransmissionSelected"
                         android:id="@+id/cardFuel"
                         android:layout_width="match_parent"
                         android:layout_height="?actionBarSize"
@@ -373,7 +373,7 @@
 
 
                     <TextView
-                        android:layout_below="@+id/cardFuel"
+                        android:layout_below="@+id/recyclerFuilSelected"
                         android:id="@+id/txtApply"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -391,6 +391,46 @@
                         android:background="@drawable/button_blue_bg"></TextView>
 
 
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/viewGroup"
+                        android:layout_below="@+id/cardGroup"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardElevation="3dp"
+                        app:cardCornerRadius="5dp"
+                        android:layout_marginTop="-5dp"
+                        android:layout_marginLeft="1dp"
+                        android:layout_marginRight="1dp"
+                        android:visibility="gone">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0.5dp"
+                                android:layout_marginTop="5dp"
+                                android:background="@color/customeGray"
+                                tools:ignore="Suspicious0dp">
+
+                            </LinearLayout>
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/recyclerGroup"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:scrollbarSize="7dp"
+                                android:scrollbarFadeDuration="0"
+                                android:scrollbarThumbVertical="@drawable/scrollbar_shape"
+                                android:scrollbars="vertical">
+
+                            </androidx.recyclerview.widget.RecyclerView>
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
 
 
                     <androidx.cardview.widget.CardView
@@ -559,47 +599,6 @@
 
 
                     <androidx.cardview.widget.CardView
-                        android:id="@+id/viewGroup"
-                        android:layout_below="@+id/cardGroup"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:cardElevation="3dp"
-                        app:cardCornerRadius="5dp"
-                        android:layout_marginTop="-5dp"
-                        android:layout_marginLeft="1dp"
-                        android:layout_marginRight="1dp"
-                        android:visibility="gone">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="0.5dp"
-                                android:layout_marginTop="5dp"
-                                android:background="@color/customeGray"
-                                tools:ignore="Suspicious0dp">
-
-                            </LinearLayout>
-
-                            <androidx.recyclerview.widget.RecyclerView
-                                android:id="@+id/recyclerGroup"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:scrollbarSize="7dp"
-                                android:scrollbarFadeDuration="0"
-                                android:scrollbarThumbVertical="@drawable/scrollbar_shape"
-                                android:scrollbars="vertical">
-
-                            </androidx.recyclerview.widget.RecyclerView>
-
-                        </LinearLayout>
-
-                    </androidx.cardview.widget.CardView>
-
-                    <androidx.cardview.widget.CardView
                         android:id="@+id/viewSuitcase"
                         android:layout_below="@+id/cardSuitcase"
                         android:layout_width="match_parent"
@@ -639,6 +638,50 @@
                         </LinearLayout>
 
                     </androidx.cardview.widget.CardView>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerGroupSelected"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/cardGroup"
+                        />
+
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerPassengersSelected"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/cardPassengers"
+                        />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerDoorsSelected"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/cardDoors"
+                        />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerSuitcaseSelected"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/cardSuitcase"
+                        />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerTransmissionSelected"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/cardTransmission"
+                        />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerFuilSelected"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/cardFuel"
+                        />
+
 
                 </RelativeLayout>
 

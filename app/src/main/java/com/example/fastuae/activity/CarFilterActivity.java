@@ -19,6 +19,7 @@ import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
 import com.example.fastuae.R;
 import com.example.fastuae.adapter.CarFilterAdapter;
+import com.example.fastuae.adapter.SelectionAdapter;
 import com.example.fastuae.databinding.ActivityCarFilterBinding;
 import com.example.fastuae.model.CarFilterModel;
 import com.example.fastuae.model.HomeLocationModel;
@@ -71,6 +72,20 @@ public class CarFilterActivity extends AppCompatActivity implements CarFilterAda
     String selectSuitcase;
     String selectTransmission;
     String selectFuel;
+
+    List<CarFilterModel> groupSelectionList;
+    List<CarFilterModel> passengerSelectionList;
+    List<CarFilterModel> doorSelectionList;
+    List<CarFilterModel> suitcaseSelectionList;
+    List<CarFilterModel> transmissionSelectionList;
+    List<CarFilterModel> fuilSelectionList;
+
+    SelectionAdapter groupSelectionAdapter;
+    SelectionAdapter passengerSelectionAdapter;
+    SelectionAdapter doorSelectionAdapter;
+    SelectionAdapter suitcaseSelectionAdapter;
+    SelectionAdapter transmissionSelectionAdapter;
+    SelectionAdapter fuilSelectionAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,6 +142,67 @@ public class CarFilterActivity extends AppCompatActivity implements CarFilterAda
         groupAdapter = new CarFilterAdapter(activity, groupList,groupFlag);
         binding.recyclerGroup.setLayoutManager(new LinearLayoutManager(activity));
         binding.recyclerGroup.setAdapter(groupAdapter);
+
+
+        groupSelectionList = new ArrayList<>();
+        if (!SelectCarActivity.groupSelectionList.isEmpty()){
+            for (CarFilterModel model : SelectCarActivity.groupSelectionList){
+                groupSelectionList.add(model);
+            }
+        }
+        groupSelectionAdapter = new SelectionAdapter(activity,groupSelectionList);
+        binding.recyclerGroupSelected.setLayoutManager(new LinearLayoutManager(activity,RecyclerView.HORIZONTAL,false));
+        binding.recyclerGroupSelected.setAdapter(groupSelectionAdapter);
+
+        passengerSelectionList = new ArrayList<>();
+        if (!SelectCarActivity.passengerSelectionList.isEmpty()){
+            for (CarFilterModel model : SelectCarActivity.passengerSelectionList){
+                passengerSelectionList.add(model);
+            }
+        }
+        passengerSelectionAdapter = new SelectionAdapter(activity,passengerSelectionList);
+        binding.recyclerPassengersSelected.setLayoutManager(new LinearLayoutManager(activity,RecyclerView.HORIZONTAL,false));
+        binding.recyclerPassengersSelected.setAdapter(passengerSelectionAdapter);
+
+        doorSelectionList = new ArrayList<>();
+        if (!SelectCarActivity.doorSelectionList.isEmpty()){
+            for (CarFilterModel model : SelectCarActivity.doorSelectionList){
+                doorSelectionList.add(model);
+            }
+        }
+        doorSelectionAdapter = new SelectionAdapter(activity,doorSelectionList);
+        binding.recyclerDoorsSelected.setLayoutManager(new LinearLayoutManager(activity,RecyclerView.HORIZONTAL,false));
+        binding.recyclerDoorsSelected.setAdapter(doorSelectionAdapter);
+
+        suitcaseSelectionList = new ArrayList<>();
+        if (!SelectCarActivity.suitcaseSelectionList.isEmpty()){
+            for (CarFilterModel model : SelectCarActivity.suitcaseSelectionList){
+                suitcaseSelectionList.add(model);
+            }
+        }
+        suitcaseSelectionAdapter = new SelectionAdapter(activity,suitcaseSelectionList);
+        binding.recyclerSuitcaseSelected.setLayoutManager(new LinearLayoutManager(activity,RecyclerView.HORIZONTAL,false));
+        binding.recyclerSuitcaseSelected.setAdapter(suitcaseSelectionAdapter);
+
+        transmissionSelectionList = new ArrayList<>();
+        if (!SelectCarActivity.transmissionSelectionList.isEmpty()){
+            for (CarFilterModel model : SelectCarActivity.transmissionSelectionList){
+                transmissionSelectionList.add(model);
+            }
+        }
+        transmissionSelectionAdapter = new SelectionAdapter(activity,transmissionSelectionList);
+        binding.recyclerTransmissionSelected.setLayoutManager(new LinearLayoutManager(activity,RecyclerView.HORIZONTAL,false));
+        binding.recyclerTransmissionSelected.setAdapter(transmissionSelectionAdapter);
+
+        fuilSelectionList = new ArrayList<>();
+        if (!SelectCarActivity.fuilSelectionList.isEmpty()){
+            for (CarFilterModel model : SelectCarActivity.fuilSelectionList){
+                fuilSelectionList.add(model);
+            }
+        }
+        fuilSelectionAdapter = new SelectionAdapter(activity,fuilSelectionList);
+        binding.recyclerFuilSelected.setLayoutManager(new LinearLayoutManager(activity,RecyclerView.HORIZONTAL,false));
+        binding.recyclerFuilSelected.setAdapter(fuilSelectionAdapter);
 
         onClick();
 
@@ -235,6 +311,158 @@ public class CarFilterActivity extends AppCompatActivity implements CarFilterAda
         hideSuitcaseView();
     }
 
+
+    public void saveGroupData(){
+
+        SelectCarActivity.groupValue = "";
+        if (groupSelectionList.isEmpty()){
+            SelectCarActivity.groupValue = "";
+        }else {
+            for (int i=0; i<groupSelectionList.size(); i++){
+                CarFilterModel model = groupSelectionList.get(i);
+                if (TextUtils.isEmpty(SelectCarActivity.groupValue)){
+                    SelectCarActivity.groupValue = model.getId();
+                }else {
+                    if (!SelectCarActivity.groupValue.contains(model.getId())){
+                        SelectCarActivity.groupValue = SelectCarActivity.groupValue + "," + model.getId();
+                    }
+                }
+            }
+        }
+
+        SelectCarActivity.groupSelectionList.clear();
+        for (CarFilterModel model : groupSelectionList){
+            SelectCarActivity.groupSelectionList.add(model);
+        }
+
+    }
+
+    public void savePassengerData(){
+
+        SelectCarActivity.passengerValue = "";
+        if (passengerSelectionList.isEmpty()){
+            SelectCarActivity.passengerValue = "";
+        }else {
+            for (int i=0; i<passengerSelectionList.size(); i++){
+                CarFilterModel model = passengerSelectionList.get(i);
+                if (TextUtils.isEmpty(SelectCarActivity.passengerValue)){
+                    SelectCarActivity.passengerValue = model.getId();
+                }else {
+                    if (!SelectCarActivity.passengerValue.contains(model.getId())){
+                        SelectCarActivity.passengerValue = SelectCarActivity.passengerValue + "," + model.getId();
+                    }
+                }
+            }
+        }
+
+        SelectCarActivity.passengerSelectionList.clear();
+        for (CarFilterModel model : passengerSelectionList){
+            SelectCarActivity.passengerSelectionList.add(model);
+        }
+
+    }
+
+
+    public void saveDoorData(){
+
+        SelectCarActivity.doorValue = "";
+        if (doorSelectionList.isEmpty()){
+            SelectCarActivity.doorValue = "";
+        }else {
+            for (int i=0; i<doorSelectionList.size(); i++){
+                CarFilterModel model = doorSelectionList.get(i);
+                if (TextUtils.isEmpty(SelectCarActivity.doorValue)){
+                    SelectCarActivity.doorValue = model.getId();
+                }else {
+                    if (!SelectCarActivity.doorValue.contains(model.getId())){
+                        SelectCarActivity.doorValue = SelectCarActivity.doorValue + "," + model.getId();
+                    }
+                }
+            }
+        }
+
+        SelectCarActivity.doorSelectionList.clear();
+        for (CarFilterModel model : doorSelectionList){
+            SelectCarActivity.doorSelectionList.add(model);
+        }
+
+    }
+
+    public void saveSuitcaseData(){
+
+        SelectCarActivity.suitcaseValue = "";
+        if (suitcaseSelectionList.isEmpty()){
+            SelectCarActivity.suitcaseValue = "";
+        }else {
+            for (int i=0; i<suitcaseSelectionList.size(); i++){
+                CarFilterModel model = suitcaseSelectionList.get(i);
+                if (TextUtils.isEmpty(SelectCarActivity.suitcaseValue)){
+                    SelectCarActivity.suitcaseValue = model.getId();
+                }else {
+                    if (!SelectCarActivity.suitcaseValue.contains(model.getId())){
+                        SelectCarActivity.suitcaseValue = SelectCarActivity.suitcaseValue + "," + model.getId();
+                    }
+                }
+            }
+        }
+
+        SelectCarActivity.suitcaseSelectionList.clear();
+        for (CarFilterModel model : suitcaseSelectionList){
+            SelectCarActivity.suitcaseSelectionList.add(model);
+        }
+
+    }
+
+    public void saveTransmissionData(){
+
+        SelectCarActivity.transmissionValue = "";
+        if (transmissionSelectionList.isEmpty()){
+            SelectCarActivity.transmissionValue = "";
+        }else {
+            for (int i=0; i<transmissionSelectionList.size(); i++){
+                CarFilterModel model = transmissionSelectionList.get(i);
+                if (TextUtils.isEmpty(SelectCarActivity.transmissionValue)){
+                    SelectCarActivity.transmissionValue = model.getId();
+                }else {
+                    if (!SelectCarActivity.transmissionValue.contains(model.getId())){
+                        SelectCarActivity.transmissionValue = SelectCarActivity.transmissionValue + "," + model.getId();
+                    }
+                }
+            }
+        }
+
+        SelectCarActivity.transmissionSelectionList.clear();
+        for (CarFilterModel model : transmissionSelectionList){
+            SelectCarActivity.transmissionSelectionList.add(model);
+        }
+
+    }
+
+    public void saveFuilData(){
+
+        SelectCarActivity.fuilValue = "";
+        if (fuilSelectionList.isEmpty()){
+            SelectCarActivity.fuilValue = "";
+        }else {
+            for (int i=0; i<fuilSelectionList.size(); i++){
+                CarFilterModel model = fuilSelectionList.get(i);
+                if (TextUtils.isEmpty(SelectCarActivity.fuilValue)){
+                    SelectCarActivity.fuilValue = model.getId();
+                }else {
+                    if (!SelectCarActivity.fuilValue.contains(model.getId())){
+                        SelectCarActivity.fuilValue = SelectCarActivity.fuilValue + "," + model.getId();
+                    }
+                }
+            }
+        }
+
+        SelectCarActivity.fuilSelectionList.clear();
+        for (CarFilterModel model : fuilSelectionList){
+            SelectCarActivity.fuilSelectionList.add(model);
+        }
+
+    }
+
     private void onClick() {
 
         binding.txtApply.setOnClickListener(new View.OnClickListener() {
@@ -242,6 +470,12 @@ public class CarFilterActivity extends AppCompatActivity implements CarFilterAda
             public void onClick(View v) {
                 Click.preventTwoClick(v);
                 SelectCarActivity.isApplyFilter = true;
+                saveGroupData();
+                savePassengerData();
+                saveDoorData();
+                saveSuitcaseData();
+                saveTransmissionData();
+                saveFuilData();
                 finish();
             }
         });
@@ -339,12 +573,21 @@ public class CarFilterActivity extends AppCompatActivity implements CarFilterAda
 
         if (flag==groupFlag){
             if (!TextUtils.isEmpty(model.getId())){
-                SelectCarActivity.groupValue = model.getId();
+//                SelectCarActivity.groupValue = model.getId();
                 if (!containsValue(groupList,selectGroup)){
                  addGroupPosition();
                 }
+
+                if (!isContainsLocation(groupSelectionList,model.getId())){
+                    CarFilterModel groupModel = new CarFilterModel();
+                    groupModel.setId(model.getId());
+                    groupModel.setName(model.getName());
+                    groupSelectionList.add(model);
+                    groupSelectionAdapter.notifyDataSetChanged();
+                }
+
             }else {
-                SelectCarActivity.groupValue = "";
+//                SelectCarActivity.groupValue = "";
                 if (containsValue(groupList,selectGroup)){
                     groupList.remove(0);
                     groupAdapter.notifyDataSetChanged();
@@ -354,12 +597,21 @@ public class CarFilterActivity extends AppCompatActivity implements CarFilterAda
             groupClick();
         }else if (flag==passengerFlag){
             if (!TextUtils.isEmpty(model.getId())){
-                SelectCarActivity.passengerValue = model.getId();
+//                SelectCarActivity.passengerValue = model.getId();
                 if (!containsValue(passengersList,selectPassengers)){
                     addPassengerPosition();
                 }
+
+                if (!isContainsLocation(passengerSelectionList,model.getId())){
+                    CarFilterModel groupModel = new CarFilterModel();
+                    groupModel.setId(model.getId());
+                    groupModel.setName(model.getName());
+                    passengerSelectionList.add(model);
+                    passengerSelectionAdapter.notifyDataSetChanged();
+                }
+
             }else {
-                SelectCarActivity.passengerValue = "";
+//                SelectCarActivity.passengerValue = "";
                 if (containsValue(passengersList,selectPassengers)){
                     passengersList.remove(0);
                     passengersAdapter.notifyDataSetChanged();
@@ -369,12 +621,21 @@ public class CarFilterActivity extends AppCompatActivity implements CarFilterAda
             passengerClick();
         }else if (flag==doorFlag){
             if (!TextUtils.isEmpty(model.getId())){
-                SelectCarActivity.doorValue = model.getId();
+//                SelectCarActivity.doorValue = model.getId();
                 if (!containsValue(doorsList,selectDoors)){
                    addDoorPosition();
                 }
+
+                if (!isContainsLocation(doorSelectionList,model.getId())){
+                    CarFilterModel groupModel = new CarFilterModel();
+                    groupModel.setId(model.getId());
+                    groupModel.setName(model.getName());
+                    doorSelectionList  .add(model);
+                    doorSelectionAdapter.notifyDataSetChanged();
+                }
+
             }else {
-                SelectCarActivity.doorValue = "";
+//                SelectCarActivity.doorValue = "";
                 if (containsValue(doorsList,selectDoors)){
                     doorsList.remove(0);
                     doorsAdapter.notifyDataSetChanged();
@@ -384,12 +645,21 @@ public class CarFilterActivity extends AppCompatActivity implements CarFilterAda
             doorClick();
         }else if (flag==suitcaseFlag){
             if (!TextUtils.isEmpty(model.getId())){
-                SelectCarActivity.suitcaseValue = model.getId();
+//                SelectCarActivity.suitcaseValue = model.getId();
                 if (!containsValue(suitcaseList,selectSuitcase)){
                    addSuitcasePosition();
                 }
+
+                if (!isContainsLocation(suitcaseSelectionList,model.getId())){
+                    CarFilterModel groupModel = new CarFilterModel();
+                    groupModel.setId(model.getId());
+                    groupModel.setName(model.getName());
+                    suitcaseSelectionList.add(model);
+                    suitcaseSelectionAdapter.notifyDataSetChanged();
+                }
+
             }else {
-                SelectCarActivity.suitcaseValue = "";
+//                SelectCarActivity.suitcaseValue = "";
                 if (containsValue(suitcaseList,selectSuitcase)){
                     suitcaseList.remove(0);
                     suitcaseAdapter.notifyDataSetChanged();
@@ -399,12 +669,21 @@ public class CarFilterActivity extends AppCompatActivity implements CarFilterAda
             suitcaseClick();
         }else if (flag==transmissionFlag){
             if (!TextUtils.isEmpty(model.getId())){
-                SelectCarActivity.transmissionValue = model.getId();
+//                SelectCarActivity.transmissionValue = model.getId();
                 if (!containsValue(transmissionList,selectTransmission)){
                    addTransmissionPosition();
                 }
+
+                if (!isContainsLocation(transmissionSelectionList,model.getId())){
+                    CarFilterModel groupModel = new CarFilterModel();
+                    groupModel.setId(model.getId());
+                    groupModel.setName(model.getName());
+                    transmissionSelectionList.add(model);
+                    transmissionSelectionAdapter.notifyDataSetChanged();
+                }
+
             }else {
-                SelectCarActivity.transmissionValue = "";
+//                SelectCarActivity.transmissionValue = "";
                 if (containsValue(transmissionList,selectTransmission)){
                     transmissionList.remove(0);
                     transmissionAdapter.notifyDataSetChanged();
@@ -414,12 +693,21 @@ public class CarFilterActivity extends AppCompatActivity implements CarFilterAda
             transmissionClick();
         }else if (flag==fuelFlag){
             if (!TextUtils.isEmpty(model.getId())){
-                SelectCarActivity.fuilValue = model.getId();
+//                SelectCarActivity.fuilValue = model.getId();
                 if (!containsValue(fuelList,selectFuel)){
                     addFuelPosition();
                 }
+
+                if (!isContainsLocation(fuilSelectionList,model.getId())){
+                    CarFilterModel groupModel = new CarFilterModel();
+                    groupModel.setId(model.getId());
+                    groupModel.setName(model.getName());
+                    fuilSelectionList.add(model);
+                    fuilSelectionAdapter.notifyDataSetChanged();
+                }
+
             }else {
-                SelectCarActivity.fuilValue = "";
+//                SelectCarActivity.fuilValue = "";
                 if (containsValue(fuelList,selectFuel)){
                     fuelList.remove(0);
                     fuelAdapter.notifyDataSetChanged();
@@ -784,6 +1072,17 @@ public class CarFilterActivity extends AppCompatActivity implements CarFilterAda
         }
         return false;
     }
+
+
+    public boolean isContainsLocation(Collection<CarFilterModel> c, String location) {
+        for(CarFilterModel o : c) {
+            if(o != null && o.getId().equals(location)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

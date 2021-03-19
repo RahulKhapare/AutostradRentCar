@@ -795,7 +795,7 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick{
                         Config.SelectedPickUpAddress = pickUpLocation;
                         Config.SelectedPickUpDate = pickUpDate;
                         Config.SelectedPickUpTime = pickUpTime;
-                        hitVerifyDropUpData(pickUpDate,pickUpTime,dropUpID,dropUpDate,dropUpTime);
+                        hitVerifyDropUpData(pickUpID,pickUpAddress,pickUpDate,pickUpTime,dropUpID,dropUpDate,dropUpTime);
 
                     }else {
                         H.showMessage(context,json.getString(P.error));
@@ -807,7 +807,7 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick{
                 .run("hitVerifyPickUpData");
     }
 
-    private void hitVerifyDropUpData(String pickUpDate,String pickUpTime, String id, String date, String time) {
+    private void hitVerifyDropUpData(String pickupId,String pickupAddress,String pickUpDate,String pickUpTime, String id, String date, String time) {
 
         ProgressView.show(context,loadingDialog);
         Json j = new Json();
@@ -843,6 +843,16 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick{
                         intent.putExtra(Config.dropUpEmirateID,dropUpEmirateID);
                         intent.putExtra(Config.pickUpDate,pickUpDate);
                         intent.putExtra(Config.dropUpDate,dropUpDate);
+//                        intent.putExtra(Config.pickUpTime,pickUpTime);
+                        intent.putExtra(Config.pickUpTime,binding.txtPickTime.getText().toString().replace(" ",""));
+//                        intent.putExtra(Config.dropUpTime,time);
+                        intent.putExtra(Config.dropUpTime,binding.txtDropTime.getText().toString().replace(" ",""));
+                        intent.putExtra(Config.pickUpType,pickupType);
+                        intent.putExtra(Config.dropUpType,dropupType);
+                        intent.putExtra(Config.pickUpLocationID,pickupId);
+                        intent.putExtra(Config.dropUpLocationID,id);
+                        intent.putExtra(Config.pickUpAddress,pickupAddress);
+                        intent.putExtra(Config.dropUpAddress,dropUpAddress);
                         startActivity(intent);
 
                     }else {
