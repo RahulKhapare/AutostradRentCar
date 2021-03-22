@@ -933,9 +933,9 @@ public class CarFilterActivity extends AppCompatActivity implements CarFilterAda
                 model.setName(json.getString(P.group_name));
                 model.setStatus(json.getString(P.status));
                 groupList.add(model);
-                if (model.getId().equals(SelectCarActivity.groupValue)){
-                    selectionValue = model.getName();
-                }
+//                if (model.getId().equals(SelectCarActivity.groupValue)){
+//                    selectionValue = model.getName();
+//                }
             }
             checkSize(groupList, binding.recyclerGroup);
             groupAdapter.notifyDataSetChanged();
@@ -956,10 +956,9 @@ public class CarFilterActivity extends AppCompatActivity implements CarFilterAda
                 model.setName(json.getString(P.passengers_name));
                 model.setStatus("");
                 passengersList.add(model);
-                if (model.getId().equals(SelectCarActivity.passengerValue)){
-                    selectionValue = model.getName();
-
-                }
+//                if (model.getId().equals(SelectCarActivity.passengerValue)){
+//                    selectionValue = model.getName();
+//                }
             }
             checkSize(passengersList, binding.recyclerPassengers);
             passengersAdapter.notifyDataSetChanged();
@@ -980,9 +979,9 @@ public class CarFilterActivity extends AppCompatActivity implements CarFilterAda
                 model.setName(json.getString(P.doors_name));
                 model.setStatus("");
                 doorsList.add(model);
-                if (model.getId().equals(SelectCarActivity.doorValue)){
-                    selectionValue = model.getName();
-                }
+//                if (model.getId().equals(SelectCarActivity.doorValue)){
+//                    selectionValue = model.getName();
+//                }
             }
             checkSize(doorsList, binding.recyclerDoors);
             doorsAdapter.notifyDataSetChanged();
@@ -1003,9 +1002,9 @@ public class CarFilterActivity extends AppCompatActivity implements CarFilterAda
                 model.setName(json.getString(P.suitcase_name));
                 model.setStatus("");
                 suitcaseList.add(model);
-                if (model.getId().equals(SelectCarActivity.suitcaseValue)){
-                    selectionValue = model.getName();
-                }
+//                if (model.getId().equals(SelectCarActivity.suitcaseValue)){
+//                    selectionValue = model.getName();
+//                }
             }
             checkSize(suitcaseList, binding.recyclerSuitcase);
             suitcaseAdapter.notifyDataSetChanged();
@@ -1026,9 +1025,9 @@ public class CarFilterActivity extends AppCompatActivity implements CarFilterAda
                 model.setName(json.getString(P.transmission_name));
                 model.setStatus(json.getString(P.status));
                 transmissionList.add(model);
-                if (model.getId().equals(SelectCarActivity.transmissionValue)){
-                    selectionValue = model.getName();
-                }
+//                if (model.getId().equals(SelectCarActivity.transmissionValue)){
+//                    selectionValue = model.getName();
+//                }
             }
             checkSize(transmissionList, binding.recyclerTransmission);
             transmissionAdapter.notifyDataSetChanged();
@@ -1049,9 +1048,9 @@ public class CarFilterActivity extends AppCompatActivity implements CarFilterAda
                 model.setName(json.getString(P.fuel_type_name));
                 model.setStatus(json.getString(P.status));
                 fuelList.add(model);
-                if (model.getId().equals(SelectCarActivity.fuilValue)){
-                    selectionValue = model.getName();
-                }
+//                if (model.getId().equals(SelectCarActivity.fuilValue)){
+//                    selectionValue = model.getName();
+//                }
             }
             checkSize(fuelList, binding.recyclerFuel);
             fuelAdapter.notifyDataSetChanged();
