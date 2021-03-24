@@ -61,6 +61,8 @@ public class P {
 
     public static String blog_list = "blog_list";
     public static String title = "title";
+    public static String quantity = "quantity";
+    public static String value = "value";
     public static String description = "description";
     public static String slug = "slug";
     public static String thumbnail_image = "thumbnail_image";
@@ -95,6 +97,9 @@ public class P {
 
     public static String location_list = "location_list";
     public static String emirate_id = "emirate_id";
+    public static String coupon_code = "coupon_code";
+    public static String coupon = "coupon";
+    public static String err = "err";
     public static String enquiry_type = "enquiry_type";
     public static String duration = "duration";
     public static String emirate_name = "emirate_name";
@@ -104,14 +109,18 @@ public class P {
     public static String contact_email = "contact_email";
     public static String location_time_data = "location_time_data";
 
+    public static String pickup_location_name = "pickup_location_name";
     public static String pickup_location_id = "pickup_location_id";
     public static String pickup_date = "pickup_date";
     public static String pickup_time = "pickup_time";
     public static String booking_type = "booking_type";
+    public static String month_time = "month_time";
 
+    public static String dropoff_location_name = "dropoff_location_name";
     public static String dropoff_location_id = "dropoff_location_id";
     public static String dropoff_date = "dropoff_date";
     public static String dropoff_time = "dropoff_time";
+    public static String car_extra = "car_extra";
 
     public static String air_bags = "air_bags";
     public static String air_conditioner = "air_conditioner";
@@ -161,6 +170,8 @@ public class P {
     public static String advance_discount_per = "advance_discount_per";
     public static String total_car_rate = "total_car_rate";
     public static String total_amount = "total_amount";
+    public static String delivery_charges = "delivery_charges";
+    public static String collect_charges = "collect_charges";
     public static String choose_extras = "choose_extras";
     public static String key_value = "key_value";
     public static String max_quantity = "max_quantity";

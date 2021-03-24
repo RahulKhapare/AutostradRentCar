@@ -45,6 +45,8 @@ import com.example.fastuae.util.WindowView;
 import com.example.fastuae.util.ZoomFadeTransformer;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -559,19 +561,33 @@ public class CarDetailOneActivity extends AppCompatActivity {
 
         ProgressView.show(activity,loadingDialog);
         Json j = new Json();
+        j.addString(P.booking_type,"daily");
+        j.addString(P.month_time,"");
         j.addString(P.car_id,model.getId());
         j.addString(P.pay_type,payType);
+        j.addString(P.emirate_id,Config.SelectedPickUpEmirateID);
+        j.addString(P.coupon_code,"");
+
+        j.addString(P.pickup_type,Config.pickUpTypeValue);
         j.addString(P.pickup_emirate_id,Config.SelectedPickUpEmirateID);
-        j.addString(P.pickup_location_id,Config.SelectedPickUpID);
+        j.addString(P.pickup_location_id,SelectCarActivity.pickUpLocationID);
+        j.addString(P.pickup_location_name,Config.SelectedPickUpAddress);
+        j.addString(P.pickup_address,SelectCarActivity.pickUpAddress);
+        j.addString(P.pickup_landmark,Config.SelectedPickUpLandmark);
         j.addString(P.pickup_date,Config.SelectedPickUpDate);
         j.addString(P.pickup_time,Config.SelectedPickUpTime);
-        j.addString(P.pickup_type,"self_pickup");
 
+        j.addString(P.dropoff_type,Config.dropUpTypeValue);
         j.addString(P.dropoff_emirate_id,Config.SelectedDropUpEmirateID);
-        j.addString(P.dropoff_location_id,Config.SelectedDropUpID);
+        j.addString(P.dropoff_location_id,SelectCarActivity.dropUpLocationID);
+        j.addString(P.dropoff_location_name,Config.SelectedDropUpAddress);
+        j.addString(P.dropoff_address,SelectCarActivity.dropUpAddress);
+        j.addString(P.dropoff_landmark,Config.SelectedDropUpLandmark);
         j.addString(P.dropoff_date,Config.SelectedDropUpDate);
         j.addString(P.dropoff_time,Config.SelectedDropUpTime);
-        j.addString(P.dropoff_type,"self_return");
+
+        JSONArray array = new JSONArray();
+        j.addJSONArray(P.car_extra,array);
 
         Api.newApi(activity, P.BaseUrl + "car_booking_data").addJson(j)
                 .setMethod(Api.POST)
@@ -593,19 +609,34 @@ public class CarDetailOneActivity extends AppCompatActivity {
                         data.getString(P.advance_discount_per);
                         data.getString(P.total_car_rate);
                         data.getString(P.total_amount);
+                        data.getString(P.delivery_charges);
+                        data.getString(P.collect_charges);
+
+                        if (data.has(P.car_extra)){
+                            JsonList carExtraData = data.getJsonList(P.car_extra);
+                            for (Json jsonCar :  carExtraData){
+                                jsonCar.getString(P.value);
+                                jsonCar.getString(P.quantity);
+                                jsonCar.getString(P.title);
+                                jsonCar.getString(P.price);
+                            }
+                        }
+
+                        Json couponData = data.getJson(P.coupon);
+                        couponData.getString(P.coupon_code);
+                        couponData.getString(P.msg);
+                        couponData.getString(P.err);
 
                         Json pickUpData = data.getJson(P.pickup_location_data);
                         pickUpData.getString(P.location_name);
                         pickUpData.getString(P.contact_email);
                         pickUpData.getString(P.contact_number);
                         pickUpData.getJsonList(P.location_time_data);
-                        pickUpData.getJsonList(P.location_time_data);
 
                         Json dropUpData = data.getJson(P.dropoff_location_data);
                         dropUpData.getString(P.location_name);
                         dropUpData.getString(P.contact_email);
                         dropUpData.getString(P.contact_number);
-                        dropUpData.getJsonList(P.location_time_data);
                         dropUpData.getJsonList(P.location_time_data);
 
                         Json carData = data.getJson(P.car_data);
@@ -637,7 +668,8 @@ public class CarDetailOneActivity extends AppCompatActivity {
 
     private void hitCarExtrasData() {
 
-        String url = "emirate_id=" + SelectCarActivity.pickUpEmirateID + "&car_id=" + model.getId() + "&pickup_date=" + SelectCarActivity.pickUpDate + "&dropoff_date=" + SelectCarActivity.dropUpDate;
+        String url = "emirate_id=" + SelectCarActivity.pickUpEmirateID + "&car_id=" + model.getId() + "&pickup_date=" + SelectCarActivity.pickUpDate + "&dropoff_date=" + SelectCarActivity.dropUpDate
+                + "&booking_type=daily&month_time=2";
 
         ProgressView.show(activity,loadingDialog);
         Json j = new Json();

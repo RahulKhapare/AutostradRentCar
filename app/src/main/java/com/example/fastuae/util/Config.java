@@ -26,12 +26,14 @@ public class Config {
     public static String SelectedPickUpDate = "";
     public static String SelectedPickUpTime = "";
     public static String SelectedPickUpAddress = "";
+    public static String SelectedPickUpLandmark = "";
 
     public static String SelectedDropUpID = "";
     public static String SelectedDropUpEmirateID = "";
     public static String SelectedDropUpDate = "";
     public static String SelectedDropUpTime = "";
     public static String SelectedDropUpAddress = "";
+    public static String SelectedDropUpLandmark = "";
     public static CarModel carModel;
 
     public static String My_Account = "My Account";
@@ -68,7 +70,9 @@ public class Config {
     public static String pickUpTime = "pickUpTime";
     public static String dropUpTime = "dropUpTime";
     public static String pickUpType = "pickUpType";
+    public static String pickUpTypeValue = "";
     public static String dropUpType = "dropUpType";
+    public static String dropUpTypeValue = "";
     public static String pickUpLocationID = "pickUpLocationID";
     public static String dropUpLocationID = "dropUpLocationID";
     public static String pickUpAddress = "pickUpAddress";

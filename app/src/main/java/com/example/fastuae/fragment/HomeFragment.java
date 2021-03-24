@@ -790,9 +790,11 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick{
                 {
                     if (json.getInt(P.status) == 1) {
 
+                        Config.pickUpTypeValue = pickupType;
                         Config.SelectedPickUpEmirateID = pickUpEmirateID;
                         Config.SelectedPickUpID = pickUpID;
                         Config.SelectedPickUpAddress = pickUpLocation;
+                        Config.SelectedPickUpLandmark = pickUpLandmark;
                         Config.SelectedPickUpDate = pickUpDate;
                         Config.SelectedPickUpTime = pickUpTime;
                         hitVerifyDropUpData(pickUpID,pickUpAddress,pickUpDate,pickUpTime,dropUpID,dropUpDate,dropUpTime);
@@ -832,9 +834,11 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick{
                 {
                     if (json.getInt(P.status) == 1) {
 
+                        Config.dropUpTypeValue = dropupType;
                         Config.SelectedDropUpEmirateID = dropUpEmirateID;
                         Config.SelectedDropUpID = id;
                         Config.SelectedDropUpAddress = dropUpLocation;
+                        Config.SelectedDropUpLandmark = dropUpLandmark;
                         Config.SelectedDropUpDate = dropUpDate;
                         Config.SelectedDropUpTime = dropUpTime;
 
