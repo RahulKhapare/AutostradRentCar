@@ -25,6 +25,8 @@ import com.example.fastuae.util.ProgressView;
 import com.example.fastuae.util.WindowView;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -160,14 +162,26 @@ public class CarDetailsActivityThree extends AppCompatActivity {
 
         ProgressView.show(activity,loadingDialog);
         Json j = new Json();
+        j.addString(P.booking_type,"daily");
+        j.addString(P.month_time,"0");
         j.addString(P.car_id,model.getId());
+        j.addString(P.pay_type,pay_type);
+        j.addString(P.coupon_code,"");
 
+        j.addString(P.pickup_type,Config.pickUpTypeValue);
         j.addString(P.pickup_emirate_id,Config.SelectedPickUpEmirateID);
-        j.addString(P.pickup_location_id,Config.SelectedPickUpID);
+        j.addString(P.pickup_location_id,SelectCarActivity.pickUpLocationID);
+        j.addString(P.pickup_address,SelectCarActivity.pickUpAddress);
+        j.addString(P.pickup_landmark,Config.SelectedPickUpLandmark);
         j.addString(P.pickup_date,Config.SelectedPickUpDate);
         j.addString(P.pickup_time,Config.SelectedPickUpTime);
+
+        j.addString(P.dropoff_type,Config.dropUpTypeValue);
         j.addString(P.dropoff_emirate_id,Config.SelectedDropUpEmirateID);
-        j.addString(P.dropoff_location_id,Config.SelectedDropUpID);
+        j.addString(P.dropoff_location_id,SelectCarActivity.dropUpLocationID);
+        j.addString(P.dropoff_location_name,Config.SelectedDropUpAddress);
+        j.addString(P.dropoff_address,SelectCarActivity.dropUpAddress);
+        j.addString(P.dropoff_landmark,Config.SelectedDropUpLandmark);
         j.addString(P.dropoff_date,Config.SelectedDropUpDate);
         j.addString(P.dropoff_time,Config.SelectedDropUpTime);
 
@@ -177,7 +191,6 @@ public class CarDetailsActivityThree extends AppCompatActivity {
         j.addString(P.user_country_code,Config.code);
         j.addString(P.user_mobile,Config.phone);
 
-        j.addString(P.pay_type,pay_type);
         j.addString(P.user_payment_option_id,paymentID);
         j.addString(P.card_number,cardNumber);
         j.addString(P.name_on_card,cardName);
@@ -187,13 +200,18 @@ public class CarDetailsActivityThree extends AppCompatActivity {
 
         j.addString(P.address_line_1,address1);
         j.addString(P.address_line_2,address2);
-        j.addString(P.city,cityName);
-        j.addString(P.state,"Empty");
         j.addString(P.country_id,countryID);
+        j.addString(P.state,"Empty");
+        j.addString(P.city,cityName);
         j.addString(P.zipcode,zipCode);
+
+        j.addString(P.booking_remark,"");
         j.addString(P.booking_from,"mobile-android");
         j.addString(P.success_url,"");
         j.addString(P.failed_url,"");
+
+        JSONArray array = new JSONArray();
+        j.addJSONArray(P.car_extra,array);
 
         Api.newApi(activity, P.BaseUrl + "book_car").addJson(j)
                 .setMethod(Api.POST)

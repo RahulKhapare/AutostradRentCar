@@ -178,6 +178,7 @@ public class P {
     public static String price = "price";
     public static String payment_link = "payment_link";
     public static String booking_from = "booking_from";
+    public static String booking_remark = "booking_remark";
     public static String success_url = "success_url";
     public static String failed_url = "failed_url";
 

@@ -228,6 +228,8 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick{
         getCurrentDate();
         hitEmirateData();
         onClick();
+
+        Log.e("TAG", "initViewSSSS: "+ new Session(getActivity()).getString(P.token) );
     }
 
     private void checkSize(RecyclerView recyclerView){
