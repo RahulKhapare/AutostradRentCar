@@ -2,6 +2,7 @@ package com.example.fastuae.adapter;
 
 import android.app.ActionBar;
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,15 +10,19 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.adoisstudio.helper.Session;
 import com.example.fastuae.R;
 import com.example.fastuae.databinding.ActivityCarBookingListBinding;
+import com.example.fastuae.fragment.PastRentalFragment;
+import com.example.fastuae.fragment.UpcomingReservationFragment;
 import com.example.fastuae.model.BookingModel;
 import com.example.fastuae.util.Click;
 import com.example.fastuae.util.Config;
 import com.example.fastuae.util.P;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -26,10 +31,18 @@ public class BookingCarAdapter extends RecyclerView.Adapter<BookingCarAdapter.vi
     private Context context;
     private List<BookingModel> bookingModelList;
     private Session session;
+    private Fragment fragment;
+    private int flag;
 
-    public BookingCarAdapter(Context context, List<BookingModel> bookingModelList) {
+    public interface onClick{
+        void cancelBooking(BookingModel model);
+    }
+
+    public BookingCarAdapter(Context context, List<BookingModel> bookingModelList,Fragment fragment,int flag) {
         this.context = context;
         this.bookingModelList = bookingModelList;
+        this.fragment = fragment;
+        this.flag = flag;
         session = new Session(context);
     }
 
@@ -44,10 +57,15 @@ public class BookingCarAdapter extends RecyclerView.Adapter<BookingCarAdapter.vi
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
         BookingModel model = bookingModelList.get(position);
 
-        holder.binding.txtCarName.setText(model.getCarName());
-        holder.binding.txtRegisterNo.setText(model.getReservationNumber());
-        holder.binding.txtFrom.setText(model.getFrom());
-        holder.binding.txtTo.setText(model.getTo());
+        if (!TextUtils.isEmpty(model.getCar_image())){
+            Picasso.get().load(model.getCar_image()).placeholder(R.drawable.ic_no_car).error(R.drawable.ic_no_car).into(holder.binding.imgCar);
+        }else {
+            Picasso.get().load(R.drawable.ic_no_car).into(holder.binding.imgCar);
+        }
+        holder.binding.txtCarName.setText(model.getCar_name());
+        holder.binding.txtRegisterNo.setText(context.getResources().getString(R.string.reservationNo)+"n"+model.getBooking_id());
+        holder.binding.txtFrom.setText(model.getPickup_address());
+        holder.binding.txtTo.setText(model.getDropoff_address());
 
         if (session.getString(P.languageFlag).equals(Config.ARABIC)) {
             holder.binding.txtRegisterNo.setGravity(Gravity.RIGHT);
@@ -59,6 +77,11 @@ public class BookingCarAdapter extends RecyclerView.Adapter<BookingCarAdapter.vi
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
+                if (flag==1){
+                    ((UpcomingReservationFragment)fragment).cancelBooking(model);
+                }else if (flag==2){
+                    ((PastRentalFragment)fragment).cancelBooking(model);
+                }
             }
         });
 
@@ -66,6 +89,7 @@ public class BookingCarAdapter extends RecyclerView.Adapter<BookingCarAdapter.vi
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
+
             }
         });
 

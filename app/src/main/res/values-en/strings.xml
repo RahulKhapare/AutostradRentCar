@@ -269,7 +269,14 @@
     <string name="selectDuration">Please select duration</string>
     <string name="selectRental">Select Rental Location</string>
     <string name="selectEnquiryType">Select Enquiry Type</string>
-
+    <string name="noDataFound">No data found...!</string>
+    <string name="reservationNo">Reservation Number</string>
+    <string name="enterCancelReason">Please enter cancel reason</string>
+    <string name="validCancelReason">Enter valid cancel reason</string>
+    <string name="bookingCancelSuccessfully">Booking cancel successfully</string>
+    <string name="cancelReason">Booking Cancellation Reason</string>
+    <string name="reason">Enter reason</string>
+    <string name="noUpcomingReservation">No upcoming reservation found yet!</string>
     <string name="selectSelftPickUpLocation">Please select self pickup location</string>
     <string name="selectSelfReturnUpLocation">Please select self return location</string>
 

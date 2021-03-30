@@ -54,9 +54,9 @@
                         </TextView>
 
                         <ImageView
+                            android:id="@+id/imgCar"
                             android:layout_width="146dp"
-                            android:layout_height="94dp"
-                            android:src="@drawable/ic_car_red"></ImageView>
+                            android:layout_height="94dp"></ImageView>
 
 
                         <TextView

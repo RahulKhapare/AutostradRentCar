@@ -269,6 +269,14 @@
     <string name="selectDuration">الرجاء تحديد المدة</string>
     <string name="selectRental">حدد موقع التأجير</string>
     <string name="selectEnquiryType">حدد نوع الاستفسار</string>
+    <string name="noDataFound">لاتوجد بيانات...!</string>
+    <string name="reservationNo">رقم الحجز</string>
+    <string name="enterCancelReason">الرجاء إدخال سبب الإلغاء</string>
+    <string name="validCancelReason">أدخل سبب إلغاء صالحًا</string>
+    <string name="bookingCancelSuccessfully">إلغاء الحجز بنجاح</string>
+    <string name="cancelReason">سبب إلغاء الحجز</string>
+    <string name="reason">إلغاء السبب</string>
+    <string name="noUpcomingReservation">لم يتم العثور على حجز قادم حتى الآن!</string>
 
     <string name="selectSelftPickUpLocation">الرجاء تحديد موقع الالتقاط الذاتي</string>
     <string name="selectSelfReturnUpLocation">الرجاء تحديد موقع العودة الذاتية</string>

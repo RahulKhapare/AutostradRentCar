@@ -181,6 +181,16 @@ public class P {
     public static String booking_remark = "booking_remark";
     public static String success_url = "success_url";
     public static String failed_url = "failed_url";
+    public static String booking_number = "booking_number";
+    public static String upcoming_list = "upcoming_list";
+    public static String current_list = "current_list";
+    public static String past_list = "past_list";
+    public static String cancel_list = "cancel_list";
+    public static String booking_id = "booking_id";
+    public static String refund_status_msg = "refund_status_msg";
+    public static String pickup_datetime = "pickup_datetime";
+    public static String dropoff_datetime = "dropoff_datetime";
+    public static String cancellation_reason = "cancellation_reason";
 
 
 
