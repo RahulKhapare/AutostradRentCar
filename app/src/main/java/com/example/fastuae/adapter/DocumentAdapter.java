@@ -24,7 +24,7 @@ public class DocumentAdapter extends RecyclerView.Adapter<DocumentAdapter.viewHo
     private DocumentFragment fragment;
 
     public interface onClick{
-        void downloadDocument(String path);
+        void downloadDocument(String name);
     }
 
     public DocumentAdapter(Context context, List<DocumentModel> documentModelList,DocumentFragment fragment) {
@@ -50,7 +50,7 @@ public class DocumentAdapter extends RecyclerView.Adapter<DocumentAdapter.viewHo
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-                ((DocumentFragment)fragment).downloadDocument(model.getPath());
+                ((DocumentFragment)fragment).downloadDocument(model.getDocumentName());
             }
         });
 

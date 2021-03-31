@@ -11,6 +11,7 @@ public class P {
     public static String emirate_list = "emirate_list";
     public static String status = "status";
     public static String data = "data";
+    public static String bill_info = "bill_info";
     public static String user_payment_option_list = "user_payment_option_list";
     public static String driver = "driver";
     public static String user_mobile = "user_mobile";
@@ -191,6 +192,16 @@ public class P {
     public static String pickup_datetime = "pickup_datetime";
     public static String dropoff_datetime = "dropoff_datetime";
     public static String cancellation_reason = "cancellation_reason";
+    public static String old_password = "old_password";
+    public static String new_password = "new_password";
+    public static String confirm_password = "confirm_password";
+    public static String bill_address_line_1 = "bill_address_line_1";
+    public static String bill_address_line_2 = "bill_address_line_2";
+    public static String bill_city = "bill_city";
+    public static String bill_state = "bill_state";
+    public static String bill_country_id = "bill_country_id";
+    public static String bill_zipcode = "bill_zipcode";
+
 
 
 

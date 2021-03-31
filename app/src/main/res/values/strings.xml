@@ -39,12 +39,14 @@
     <string name="salik_Charges">Salik Charges</string>
     <string name="traffic_Lines">Traffic Lines</string>
     <string name="enterPassword">Please enter password</string>
+    <string name="enterNewPassword">Please enter new password</string>
     <string name="enterConfirmPassword">Please enter confirm password</string>
     <string name="passwordNotMatch">Confirm password not matched with password</string>
     <string name="minPassLength">Password contain minimum 6 characters</string>
     <string name="confirmPassword">Confirm Password</string>
     <string name="houseNo">House No./ Building No.</string>
     <string name="streetName">Street Name</string>
+    <string name="streetAddress">Street/Area</string>
     <string name="area">Area</string>
     <string name="landMark">Landmark</string>
     <string name="city">City</string>
@@ -90,6 +92,12 @@
     <string name="downloading">Downloading....</string>
     <string name="downloadingCompete">Downloading Complete</string>
 
+    <string name="selectHouseNo">Enter house no/building name</string>
+    <string name="selectStreet">Enter street/area</string>
+    <string name="selectZip">Enter zip/postal code</string>
+    <string name="selectCountry1">Enter country</string>
+    <string name="selectCity1">Enter city</string>
+    <string name="state">State</string>
 
     <string name="home">Home</string>
     <string name="profile">Profile</string>
@@ -259,7 +267,10 @@
     <string name="enterCity">Please enter town/city</string>
     <string name="enterZipCode">Please enter zip/postal code</string>
     <string name="country">Select Country</string>
+    <string name="enterState">Enter state</string>
     <string name="enterBilling">Enter billing information</string>
+    <string name="enterAddress">Enter address</string>
+    <string name="addressField">House No./Building No./Street/Area</string>
 
     <string name="openDocumentMessage">Do you want to open document ?</string>
     <string name="selectRentalLocation">Please Select Rental Location</string>
@@ -278,7 +289,8 @@
     <string name="bookingCancelSuccessfully">Booking cancel successfully</string>
     <string name="cancelReason">Booking Cancellation Reason</string>
     <string name="reason">Enter reason</string>
-
+    <string name="newPassword">New Password</string>
+    <string name="country2">Country</string>
 
 
     <string name="selectSelftPickUpLocation">Please select self pickup location</string>

@@ -57,12 +57,14 @@
     <string name="pleaseEnterAlternateNumber">الرجاء إدخال رقم الهاتف المحمول البديل</string>
     <string name="pleaseEnterDOB">الرجاء إدخال تاريخ الميلاد</string>
     <string name="enterPassword">الرجاء إدخال كلمة المرور</string>
+    <string name="enterNewPassword">الرجاء إدخال كلمة المرور الجديدة</string>
     <string name="enterConfirmPassword">الرجاء إدخال تأكيد كلمة المرور</string>
     <string name="passwordNotMatch">تأكيد كلمة المرور غير متطابقة مع كلمة المرور</string>
     <string name="minPassLength">تحتوي كلمة المرور على 6 أحرف على الأقل</string>
     <string name="confirmPassword">تأكيد كلمة المرور</string>
     <string name="houseNo">رقم المنزل / رقم المبنى</string>
     <string name="streetName">اسم الشارع</string>
+    <string name="streetAddress">الشارع / المنطقة</string>
     <string name="area">منطقة</string>
     <string name="landMark">معلم معروف</string>
     <string name="city">مدينة</string>
@@ -277,6 +279,17 @@
     <string name="cancelReason">سبب إلغاء الحجز</string>
     <string name="reason">إلغاء السبب</string>
     <string name="noUpcomingReservation">لم يتم العثور على حجز قادم حتى الآن!</string>
+    <string name="newPassword">كلمة مرور جديدة</string>
+    <string name="country2">دولة</string>
+    <string name="selectHouseNo">أدخل رقم المنزل / اسم المبنى</string>
+    <string name="selectStreet">أدخل الشارع / المنطقة</string>
+    <string name="selectZip">أدخل الرمز البريدي</string>
+    <string name="selectCountry1">أدخل الدولة</string>
+    <string name="selectCity1">أدخل المدينة</string>
+    <string name="state">حالة</string>
+    <string name="enterState">إدخال الدولة</string>
+    <string name="enterAddress">أدخل العنوان</string>
+    <string name="addressField">House No./Building No./Street/Area</string>
 
     <string name="selectSelftPickUpLocation">الرجاء تحديد موقع الالتقاط الذاتي</string>
     <string name="selectSelfReturnUpLocation">الرجاء تحديد موقع العودة الذاتية</string>

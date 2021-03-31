@@ -60,7 +60,6 @@ public class MyAccountFragment extends Fragment {
     private String codePrimary = "";
     private String codeSecondary = "";
     private String countryId = "";
-    private String emirateID = "";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -102,7 +101,7 @@ public class MyAccountFragment extends Fragment {
 
         lisAddressEmirate = new ArrayList<>();
         AddressModel modelAddress1 = new AddressModel();
-        modelAddress1.setCountry_name(getResources().getString(R.string.selectEmirate));
+        modelAddress1.setCountry_name(getResources().getString(R.string.country));
         lisAddressEmirate.add(modelAddress1);
 
 
@@ -153,6 +152,7 @@ public class MyAccountFragment extends Fragment {
         });
 
         hitPersonalDetails();
+        hitAddressDetails();
 
     }
 
@@ -187,11 +187,9 @@ public class MyAccountFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 AddressModel model = lisAddressEmirate.get(position);
-                if (!model.getCountry_name().equals(getResources().getString(R.string.selectEmirate))){
-                    emirateID = model.getId();
-                    countryId = model.getPhone_code();
+                if (!model.getCountry_name().equals(getResources().getString(R.string.country))){
+                    countryId = model.getId();
                 }else {
-                    emirateID = "";
                     countryId = "";
                 }
             }
@@ -253,7 +251,7 @@ public class MyAccountFragment extends Fragment {
             public void onClick(View v) {
                 Click.preventTwoClick(v);
                 if (checkPasswordValidation()){
-
+                    hitChangePasswordDetails();
                 }
             }
         });
@@ -270,10 +268,36 @@ public class MyAccountFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-
+                if (checkAddressDetailValidation()){
+                    hitUpdateAddressDetails();
+                }
             }
         });
     }
+
+    private boolean checkAddressDetailValidation() {
+
+        boolean value = true;
+
+        if (TextUtils.isEmpty(binding.etxAddress.getText().toString().trim())) {
+            value = false;
+            H.showMessage(context, getResources().getString(R.string.enterAddress));
+        } else if (TextUtils.isEmpty(binding.etxZipcode.getText().toString().trim())) {
+            value = false;
+            H.showMessage(context, getResources().getString(R.string.selectZip));
+        }else if (TextUtils.isEmpty(binding.etxCity.getText().toString().trim())) {
+            value = false;
+            H.showMessage(context, getResources().getString(R.string.selectCity1));
+        }else if (TextUtils.isEmpty(binding.etxState.getText().toString().trim())) {
+            value = false;
+            H.showMessage(context, getResources().getString(R.string.enterState));
+        }else if (TextUtils.isEmpty(countryId)) {
+            value = false;
+            H.showMessage(context, getResources().getString(R.string.country));
+        }
+        return value;
+    }
+
 
     private boolean checkPersonalDetailValidation() {
 
@@ -308,13 +332,16 @@ public class MyAccountFragment extends Fragment {
         if (TextUtils.isEmpty(binding.etxPassword.getText().toString().trim())) {
             value = false;
             H.showMessage(context, getResources().getString(R.string.enterPassword));
-        } else if (binding.etxPassword.getText().toString().trim().length()<6){
+        } else if (TextUtils.isEmpty(binding.etxNewPassword.getText().toString().trim())) {
+            value = false;
+            H.showMessage(context, getResources().getString(R.string.enterNewPassword));
+        } else if (binding.etxNewPassword.getText().toString().trim().length()<6){
             value = false;
             H.showMessage(context, getResources().getString(R.string.minPassLength));
         } else if (TextUtils.isEmpty(binding.etxConfirmPassword.getText().toString().trim())) {
             value = false;
             H.showMessage(context, getResources().getString(R.string.enterConfirmPassword));
-        } else if (!binding.etxConfirmPassword.getText().toString().trim().equals(binding.etxPassword.getText().toString().trim())){
+        } else if (!binding.etxConfirmPassword.getText().toString().trim().equals(binding.etxNewPassword.getText().toString().trim())){
             value = false;
             H.showMessage(context, getResources().getString(R.string.passwordNotMatch));
         }
@@ -572,6 +599,119 @@ public class MyAccountFragment extends Fragment {
                 .run("hitUpdatePersonalDetails",session.getString(P.token));
     }
 
+    private void hitChangePasswordDetails() {
+
+        ProgressView.show(context,loadingDialog);
+        Json j = new Json();
+        j.addString(P.old_password,binding.etxPassword.getText().toString().trim());
+        j.addString(P.new_password,binding.etxNewPassword.getText().toString().trim());
+        j.addString(P.confirm_password,binding.etxConfirmPassword.getText().toString().trim());
+
+        Api.newApi(context, P.BaseUrl + "change_password").addJson(j)
+                .setMethod(Api.POST)
+                //.onHeaderRequest(App::getHeaders)
+                .onError(() -> {
+                    ProgressView.dismiss(loadingDialog);
+                    H.showMessage(context, "On error is called");
+                })
+                .onSuccess(json ->
+                {
+                    if (json.getInt(P.status) == 1) {
+                        json = json.getJson(P.data);
+                        H.showMessage(context,getResources().getString(R.string.dataUpdated));
+                        checkPasswordView();
+                    }else {
+                        H.showMessage(context,json.getString(P.error));
+                    }
+                    ProgressView.dismiss(loadingDialog);
+                })
+                .run("hitChangePasswordDetails",session.getString(P.token));
+    }
+
+
+    private void hitAddressDetails() {
+
+        ProgressView.show(context,loadingDialog);
+        Json j = new Json();
+
+        Api.newApi(context, P.BaseUrl + "user_bill_data").addJson(j)
+                .setMethod(Api.GET)
+                //.onHeaderRequest(App::getHeaders)
+                .onError(() -> {
+                    ProgressView.dismiss(loadingDialog);
+                    H.showMessage(context, "On error is called");
+                })
+                .onSuccess(json ->
+                {
+                    if (json.getInt(P.status) == 1) {
+
+                        json = json.getJson(P.data);
+                        json = json.getJson(P.bill_info);
+                        String bill_address_line_1 = json.getString(P.bill_address_line_1);
+                        String bill_address_line_2 = json.getString(P.bill_address_line_2);
+                        String bill_city = json.getString(P.bill_city);
+                        String bill_state = json.getString(P.bill_state);
+                        String bill_country_id = json.getString(P.bill_country_id);
+                        String bill_zipcode = json.getString(P.bill_zipcode);
+
+                        binding.etxAddress.setText(bill_address_line_1);
+                        binding.etxZipcode.setText(bill_zipcode);
+                        binding.etxCity.setText(bill_city);
+                        binding.etxState.setText(bill_state);
+                        countryId = bill_country_id;
+
+                        JsonList jsonList = Config.countryJsonList;
+                        for (int i = 0; i < jsonList.size(); i++) {
+                            Json jsonData = jsonList.get(i);
+                            if (jsonData.getString(P.id).equals(bill_country_id)) {
+                                binding.spinnerAddress.setSelection(i+1);
+                            }
+                        }
+                    }else {
+                        H.showMessage(context,json.getString(P.error));
+                    }
+                    ProgressView.dismiss(loadingDialog);
+
+                })
+                .run("hitAddressDetails",session.getString(P.token));
+
+    }
+
+    private void hitUpdateAddressDetails() {
+
+        ProgressView.show(context,loadingDialog);
+        Json j = new Json();
+        j.addString(P.bill_address_line_1,binding.etxAddress.getText().toString().trim());
+        j.addString(P.bill_address_line_2,binding.etxAddress.getText().toString().trim());
+        j.addString(P.bill_city,binding.etxCity.getText().toString().trim());
+        j.addString(P.bill_state,binding.etxState.getText().toString().trim());
+        j.addString(P.bill_country_id,countryId);
+        j.addString(P.bill_zipcode,binding.etxZipcode.getText().toString().trim());
+
+        Api.newApi(context, P.BaseUrl + "update_user_bill_data").addJson(j)
+                .setMethod(Api.POST)
+                //.onHeaderRequest(App::getHeaders)
+                .onError(() -> {
+                    ProgressView.dismiss(loadingDialog);
+                    H.showMessage(context, "On error is called");
+                })
+                .onSuccess(json ->
+                {
+                    if (json.getInt(P.status) == 1) {
+
+                        json = json.getJson(P.data);
+                        H.showMessage(context,getResources().getString(R.string.dataUpdated));
+                        checkAddressView();
+
+                    }else {
+                        H.showMessage(context,json.getString(P.error));
+                    }
+
+                    ProgressView.dismiss(loadingDialog);
+
+                })
+                .run("hitUpdateAddressDetails",session.getString(P.token));
+    }
 
     public static MyAccountFragment newInstance() {
         MyAccountFragment fragment = new MyAccountFragment();

@@ -7,16 +7,24 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.ActivityNotFoundException;
+import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
+import android.provider.DocumentsContract;
+import android.provider.MediaStore;
 import android.provider.Settings;
 import android.text.TextUtils;
+import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -39,7 +47,10 @@ import com.example.fastuae.util.P;
 import com.example.fastuae.util.PdfDownloader;
 import com.example.fastuae.util.WindowView;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -56,8 +67,29 @@ public class MainActivity extends AppCompatActivity {
     private Session session;
     private MenuItem ic_filter;
     private static final int READ_WRITE = 20;
+    private static final int PDF_DATA = 22;
     String pdf_url;
     String pdf_title;
+    String documentName;
+    String base64Image;
+
+    private String Upload_UAE_Driving_ID = "Upload UAE Driving ID";
+    private String Upload_International_ID = "Upload International ID";
+    private String Upload_GCC_ID = "Upload GCC ID";
+    private String Upload_Emirates_ID = "Upload Emirates ID";
+    private String Upload_Passport_Details = "Upload Passport Details";
+    private String Upload_Credit_Debit_Card_Details = "Upload Credit/ Debit Card Details";
+
+    public static String Upload_UAE_Driving_ID_PATH;
+    public static String Upload_International_ID_PATH;
+    public static String Upload_GCC_ID_PATH;
+    public static String Upload_Emirates_ID_PATH;
+    public static String Upload_Passport_Details_PATH;
+    public static String Upload_Credit_Debit_Card_Details_PATH;
+
+    public int download = 1;
+    public int upload = 2;
+    public int click = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -287,7 +319,14 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void uploadDocument(String name) {
+        documentName = name;
+        click = upload;
+        getPermission();
+    }
+
     public void checkPDF(String path) {
+        click = download;
         pdf_url = path;
         pdf_title = randomText();
         if (TextUtils.isEmpty(pdf_url) || pdf_url.equals("null")) {
@@ -312,6 +351,15 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public String getRealPathFromURI(Uri contentUri)
+    {
+        String[] proj = { MediaStore.Audio.Media.DATA };
+        Cursor cursor = managedQuery(contentUri, proj, null, null, null);
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA);
+        cursor.moveToFirst();
+        return cursor.getString(column_index);
+    }
+
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {
@@ -319,7 +367,11 @@ public class MainActivity extends AppCompatActivity {
             case READ_WRITE: {
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    checkDirectory(activity, pdf_url, pdf_title);
+                    if (click==upload){
+                        getPDF();
+                    }else if (click==download){
+                        checkDirectory(activity, pdf_url, pdf_title);
+                    }
                 } else if (grantResults[0] == PackageManager.PERMISSION_DENIED) {
                     jumpToSetting();
                 } else {
@@ -328,6 +380,47 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
 
+        }
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case PDF_DATA:
+                if (resultCode == Activity.RESULT_OK && data != null) {
+                    try {
+                        Uri selectedPDF = data.getData();
+
+                        if (documentName.equals(Upload_UAE_Driving_ID)){
+                            Upload_UAE_Driving_ID_PATH = getBase64Image(selectedPDF);
+                        }else  if (documentName.equals(Upload_International_ID)){
+                            Upload_International_ID_PATH = getBase64Image(selectedPDF);
+                        }else  if (documentName.equals(Upload_GCC_ID)){
+                            Upload_GCC_ID_PATH = getBase64Image(selectedPDF);
+                        }else  if (documentName.equals(Upload_Emirates_ID)){
+                            Upload_Emirates_ID_PATH = getBase64Image(selectedPDF);
+                        }else  if (documentName.equals(Upload_Passport_Details)){
+                            Upload_Passport_Details_PATH = getBase64Image(selectedPDF);
+                        }else  if (documentName.equals(Upload_Credit_Debit_Card_Details)){
+                            Upload_Credit_Debit_Card_Details_PATH = getBase64Image(selectedPDF);
+                        }
+
+                    } catch (Exception e) {
+                        H.showMessage(activity,e.getMessage());
+                    }
+                }
+                break;
+        }
+    }
+
+
+    private void getPDF(){
+        try {
+            Intent i = new Intent(
+                    Intent.ACTION_PICK,
+                    android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            startActivityForResult(i, PDF_DATA);
+        } catch (Exception e) {
         }
     }
 
@@ -371,6 +464,30 @@ public class MainActivity extends AppCompatActivity {
             randomStringBuilder.append(tempChar);
         }
         return randomStringBuilder.toString();
+    }
+
+
+    private String getBase64Image(Uri uri) {
+        base64Image = "";
+        try {
+            InputStream imageStream = getContentResolver().openInputStream(uri);
+            Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+            base64Image = encodeImage(selectedImage);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            Log.e("TAG", "setImageDataEE: "+ e.getMessage() );
+            H.showMessage(activity, "Unable to get image, try again.");
+        }
+
+        return base64Image;
+    }
+
+    private String encodeImage(Bitmap bm) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bm.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] b = baos.toByteArray();
+        String encImage = Base64.encodeToString(b, Base64.DEFAULT);
+        return encImage;
     }
 
     @Override
