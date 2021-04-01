@@ -85,6 +85,9 @@ public class Config {
 
     public static int OPEN = 1;
     public static int SHARE = 2;
+    public static int FILTER_ONE= 1;
+    public static int FILTER_TWO= 2;
+    public static int FILTER_VALUE = 0;
     public static boolean FROM_MAP = false;
 
 

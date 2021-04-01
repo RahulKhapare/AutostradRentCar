@@ -11,9 +11,12 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.fastuae.R;
+import com.example.fastuae.activity.SelectCarActivity;
 import com.example.fastuae.adapter.CarFleetAdapter;
 import com.example.fastuae.databinding.FragmentFleetBinding;
+import com.example.fastuae.model.CarFilterModel;
 import com.example.fastuae.model.CarFleetModel;
+import com.example.fastuae.util.Config;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +30,20 @@ public class FleetFragment extends Fragment {
     private CarFleetAdapter carFleetAdapterOne;
     private CarFleetAdapter carFleetAdapterTwo;
 
+    public static String groupValue = "";
+    public static String passengerValue = "";
+    public static String doorValue = "";
+    public static String suitcaseValue = "";
+    public static String transmissionValue = "";
+    public static String fuilValue = "";
+    public static boolean isApplyFilter = false;
+
+    public static List<CarFilterModel> groupSelectionList;
+    public static List<CarFilterModel> passengerSelectionList;
+    public static List<CarFilterModel> doorSelectionList;
+    public static List<CarFilterModel> suitcaseSelectionList;
+    public static List<CarFilterModel> transmissionSelectionList;
+    public static List<CarFilterModel> fuilSelectionList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -42,6 +59,13 @@ public class FleetFragment extends Fragment {
 
     private void initView(){
 
+        Config.FILTER_VALUE = Config.FILTER_TWO;
+        groupSelectionList = new ArrayList<>();
+        passengerSelectionList = new ArrayList<>();
+        doorSelectionList = new ArrayList<>();
+        suitcaseSelectionList = new ArrayList<>();
+        transmissionSelectionList = new ArrayList<>();
+        fuilSelectionList = new ArrayList<>();
 
         carFleetModelListOne = new ArrayList<>();
         carFleetAdapterOne = new CarFleetAdapter(context,carFleetModelListOne);
@@ -58,6 +82,7 @@ public class FleetFragment extends Fragment {
         setData();
 
     }
+
 
     private void setData(){
 
@@ -89,4 +114,23 @@ public class FleetFragment extends Fragment {
         return fragment;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (FleetFragment.isApplyFilter) {
+
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        isApplyFilter = false;
+        groupValue = "";
+        passengerValue = "";
+        doorValue = "";
+        suitcaseValue = "";
+        transmissionValue = "";
+        fuilValue = "";
+    }
 }

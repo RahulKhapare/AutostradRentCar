@@ -124,6 +124,7 @@
     <string name="collect">Collect</string>
     <string name="selfreturn">Self-return</string>
     <string name="enterLocationDeliver">Enter Location to Deliver</string>
+    <string name="enterLocationCollect">Enter Location to Collect</string>
     <string name="filterYourSearch">Filter Your Search</string>
     <string name="apply">Apply</string>
     <string name="carFleet">Car Fleet</string>

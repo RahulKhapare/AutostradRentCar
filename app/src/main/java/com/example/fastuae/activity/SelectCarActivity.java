@@ -109,6 +109,7 @@ public class SelectCarActivity extends AppCompatActivity implements ViewPager.On
     }
 
     private void initView(){
+        Config.FILTER_VALUE = Config.FILTER_ONE;
         binding.toolbar.setTitle(getResources().getString(R.string.selectCar));
         setSupportActionBar(binding.toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

@@ -83,6 +83,11 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".activity.CarFleetFilterActivity"
+            android:hardwareAccelerated="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".activity.SelectCarActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />

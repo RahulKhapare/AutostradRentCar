@@ -145,6 +145,7 @@
     <string name="collect">تجميع</string>
     <string name="selfreturn">العودة الذاتية</string>
     <string name="enterLocationDeliver">أدخل الموقع للتسليم</string>
+    <string name="enterLocationCollect">أدخل الموقع للتجميع</string>
     <string name="searchLocation">البحث عن الموقع</string>
     <string name="enterSearchLocation">الرجاء إدخال الموقع للبحث</string>
     <string name="locationAdded">تمت إضافة الموقع بالفعل</string>

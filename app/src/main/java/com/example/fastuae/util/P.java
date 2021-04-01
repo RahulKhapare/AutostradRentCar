@@ -16,6 +16,7 @@ public class P {
     public static String driver = "driver";
     public static String user_mobile = "user_mobile";
     public static String otp = "otp";
+    public static String user_info = "user_info";
     public static String user = "user";
     public static String id = "id";
     public static String user_name = "user_name";

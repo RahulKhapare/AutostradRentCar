@@ -305,7 +305,7 @@ public class MainActivity extends AppCompatActivity {
             onBackPressed();
         }
         else if (item.getItemId() == R.id.ic_filter) {
-            Intent intent = new Intent(activity,CarFilterActivity.class);
+            Intent intent = new Intent(activity,CarFleetFilterActivity.class);
             startActivity(intent);
         }
         return false;

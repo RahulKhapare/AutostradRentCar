@@ -11,10 +11,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fastuae.R;
 import com.example.fastuae.activity.CarFilterActivity;
+import com.example.fastuae.activity.CarFleetFilterActivity;
 import com.example.fastuae.databinding.ActivityCarFilterListBinding;
 import com.example.fastuae.databinding.ActivityLocationListBinding;
 import com.example.fastuae.model.CarFilterModel;
 import com.example.fastuae.util.Click;
+import com.example.fastuae.util.Config;
 
 import java.util.List;
 
@@ -51,7 +53,11 @@ public class CarFilterAdapter extends RecyclerView.Adapter<CarFilterAdapter.view
             public void onClick(View v) {
                 Click.preventTwoClick(v);
 
-                ((CarFilterActivity)context).onFilterClick(model,flag);
+                if (Config.FILTER_VALUE == Config.FILTER_ONE){
+                    ((CarFilterActivity)context).onFilterClick(model,flag);
+                }else  if (Config.FILTER_VALUE == Config.FILTER_TWO){
+                    ((CarFleetFilterActivity)context).onFilterClick(model,flag);
+                }
 
             }
         });

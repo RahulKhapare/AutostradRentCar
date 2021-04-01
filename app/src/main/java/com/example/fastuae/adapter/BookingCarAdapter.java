@@ -63,7 +63,7 @@ public class BookingCarAdapter extends RecyclerView.Adapter<BookingCarAdapter.vi
             Picasso.get().load(R.drawable.ic_no_car).into(holder.binding.imgCar);
         }
         holder.binding.txtCarName.setText(model.getCar_name());
-        holder.binding.txtRegisterNo.setText(context.getResources().getString(R.string.reservationNo)+"n"+model.getBooking_id());
+        holder.binding.txtRegisterNo.setText(context.getResources().getString(R.string.reservationNo)+"\n"+model.getBooking_id());
         holder.binding.txtFrom.setText(model.getPickup_address());
         holder.binding.txtTo.setText(model.getDropoff_address());
 

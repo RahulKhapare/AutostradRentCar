@@ -227,7 +227,7 @@
                                         android:textColor="@color/textDark"
                                         android:layout_gravity="center_vertical"
                                         android:fontFamily="@font/nunito_sans_semibold"
-                                        android:text="@string/enterLocationDeliver"
+                                        android:text="@string/enterLocationCollect"
                                         android:textSize="16sp">
                                     </TextView>
 

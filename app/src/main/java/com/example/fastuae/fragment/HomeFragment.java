@@ -482,7 +482,7 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick{
                 Click.preventTwoClick(v);
                 binding.radioSelfReturn.setChecked(false);
                 binding.txtDropUpMessage.setVisibility(View.GONE);
-                binding.txtDropUpTitle.setText(getResources().getString(R.string.enterLocationDeliver));
+                binding.txtDropUpTitle.setText(getResources().getString(R.string.enterLocationCollect));
                 blueTin(binding.radioCollect);
                 blackTin(binding.radioSelfReturn);
 

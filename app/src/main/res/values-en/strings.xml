@@ -145,6 +145,7 @@
     <string name="collect">Collect</string>
     <string name="selfreturn">Self-return</string>
     <string name="enterLocationDeliver">Enter Location to Deliver</string>
+    <string name="enterLocationCollect">Enter Location to Collect</string>
     <string name="searchLocation">Search for location</string>
     <string name="enterSearchLocation">Please enter location to search</string>
     <string name="locationAdded">Location already added</string>
