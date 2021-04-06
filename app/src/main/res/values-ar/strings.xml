@@ -290,7 +290,8 @@
     <string name="state">حالة</string>
     <string name="enterState">إدخال الدولة</string>
     <string name="enterAddress">أدخل العنوان</string>
-    <string name="addressField">House No./Building No./Street/Area</string>
+    <string name="addressField">رقم المنزل / رقم المبنى / الشارع / المنطقة</string>
+    <string name="features">سمات</string>
 
     <string name="selectSelftPickUpLocation">الرجاء تحديد موقع الالتقاط الذاتي</string>
     <string name="selectSelfReturnUpLocation">الرجاء تحديد موقع العودة الذاتية</string>

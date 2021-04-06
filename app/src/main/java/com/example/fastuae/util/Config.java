@@ -1,6 +1,7 @@
 package com.example.fastuae.util;
 
 import com.adoisstudio.helper.JsonList;
+import com.example.fastuae.model.CarFleetModel;
 import com.example.fastuae.model.CarModel;
 
 public class Config {
@@ -45,6 +46,12 @@ public class Config {
     public static String Salik_Charges = "Salik Charges";
     public static String Traffic_Lines = "Traffic Lines";
 
+    public static String Compact_Cars = "Compact Cars";
+    public static String Economy_Cars = "Economy Cars";
+    public static String Big_Size_Cars = "Big Size Cars";
+    public static String Mid_Size_Cars = "Mid Size Cars";
+    public static String Small_Size_Cars = "Small Size Cars";
+
     public static String General = "General";
     public static String Payment_Related = "Payment Related";
     public static String Vehicle_Related = "Vehicle Related";
@@ -52,6 +59,7 @@ public class Config {
 
     public static String PROFILE_TAG = "PROFILE_TAG";
     public static String FAQ_TAG = "FAQ_TAG";
+    public static String FLEET_TAG = "FLEET_TAG";
     public static String PAY_TYPE = "PAY_TYPE";
     public static String PAY_ID = "PAY_ID";
     public static String SELECTED_AED = "SELECTED_AED";
@@ -98,6 +106,8 @@ public class Config {
     public static String code = "";
     public static Integer positionCode = null;
     public static boolean isEditDetails;
+
+    public static CarFleetModel carFleetModel;
 
 
     public static JsonList countryJsonList = new JsonList();

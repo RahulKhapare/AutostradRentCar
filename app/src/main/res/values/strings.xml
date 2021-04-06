@@ -292,6 +292,7 @@
     <string name="reason">Enter reason</string>
     <string name="newPassword">New Password</string>
     <string name="country2">Country</string>
+    <string name="features">Features</string>
 
 
     <string name="selectSelftPickUpLocation">Please select self pickup location</string>

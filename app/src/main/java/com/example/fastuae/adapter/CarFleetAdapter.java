@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.content.Intent;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.adoisstudio.helper.Session;
 import com.example.fastuae.R;
+import com.example.fastuae.activity.CarFleetDetailsActivity;
 import com.example.fastuae.databinding.ActivityCarFleetListBinding;
 import com.example.fastuae.model.CarFleetModel;
 import com.example.fastuae.util.Click;
@@ -51,31 +53,19 @@ public class CarFleetAdapter extends RecyclerView.Adapter<CarFleetAdapter.viewHo
 
         holder.binding.imgCar.setImageResource(model.getImage());
         holder.binding.txtCarName.setText(model.getCarName());
-        holder.binding.txtCarGroup.setText(model.getGroupName());
-        holder.binding.txtCarGroup.setText(model.getGroupName());
 
-        holder.binding.txtSeat.setText("5 Seat");
-        holder.binding.txtAutomatic.setText("Automatic");
-        holder.binding.txtDoor.setText("3 Door");
-        holder.binding.txtPassengerOne.setText("Passenger");
-        holder.binding.txtFuel.setText("Petrol");
-        holder.binding.txtSuitcaseOne.setText("2 Suitcase");
-        holder.binding.txtEngine.setText("Engine");
-        holder.binding.txtSuitcaseTwo.setText("2 Suitcase");
-        holder.binding.txtSuitcaseThree.setText("2 Suitcase");
-        holder.binding.txtPassengerTwo.setText("5 Passenger");
+        holder.binding.txtSeat.setText(model.getSeat());
+        holder.binding.txtAutomatic.setText(model.getAutomatic());
+        holder.binding.txtDoor.setText(model.getDoor());
+        holder.binding.txtPassengerOne.setText(model.getPassenger());
 
         holder.binding.txtMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-            }
-        });
-
-        holder.binding.txtLess.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Click.preventTwoClick(v);
+                Config.carFleetModel = model;
+                Intent intent = new Intent(context, CarFleetDetailsActivity.class);
+                context.startActivity(intent);
             }
         });
 
@@ -97,21 +87,6 @@ public class CarFleetAdapter extends RecyclerView.Adapter<CarFleetAdapter.viewHo
             }
         });
 
-        holder.binding.txtMore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Click.preventTwoClick(v);
-                flipCard(holder.binding.cardView,holder.binding.cardInstruction);
-            }
-        });
-
-        holder.binding.txtLess.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Click.preventTwoClick(v);
-                flipCard(holder.binding.cardInstruction,holder.binding.cardView);
-            }
-        });
 
         if (session.getString(P.languageFlag).equals(Config.ARABIC)){
 
@@ -119,12 +94,6 @@ public class CarFleetAdapter extends RecyclerView.Adapter<CarFleetAdapter.viewHo
             holder.binding.txtAutomatic.setGravity(Gravity.RIGHT);
             holder.binding.txtDoor.setGravity(Gravity.RIGHT);
             holder.binding.txtPassengerOne.setGravity(Gravity.RIGHT);
-            holder.binding.txtFuel.setGravity(Gravity.RIGHT);
-            holder.binding.txtSuitcaseOne.setGravity(Gravity.RIGHT);
-            holder.binding.txtEngine.setGravity(Gravity.RIGHT);
-            holder.binding.txtSuitcaseTwo.setGravity(Gravity.RIGHT);
-            holder.binding.txtSuitcaseThree.setGravity(Gravity.RIGHT);
-            holder.binding.txtPassengerTwo.setGravity(Gravity.RIGHT);
         }
 
     }

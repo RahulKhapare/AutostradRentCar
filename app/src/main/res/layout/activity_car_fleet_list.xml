@@ -15,7 +15,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
             android:layout_width="match_parent"
-            android:layout_height="210dp"
+            android:layout_height="wrap_content"
             android:layout_margin="3dp"
             app:cardCornerRadius="5dp"
             app:cardElevation="3dp">
@@ -51,21 +51,150 @@
                         android:id="@+id/txtCarName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/nunito_sans_regular"
+                        android:fontFamily="@font/nunito_sans_semibold"
                         android:textSize="14sp"
                         android:textColor="@color/textDark"
                         android:text="@string/app_name">
                     </TextView>
 
-                    <TextView
-                        android:id="@+id/txtCarGroup"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/nunit_sans_bold"
-                        android:textSize="14sp"
-                        android:textColor="@color/textDark"
-                        android:text="@string/app_name">
-                    </TextView>
+                        android:layout_marginTop="15dp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <LinearLayout
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="15dp"
+                                    android:layout_height="15dp"
+                                    android:src="@drawable/ic_ceat"></ImageView>
+
+                                <TextView
+                                    android:id="@+id/txtSeat"
+                                    android:layout_weight="1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/app_name"
+                                    android:singleLine="true"
+                                    android:layout_marginLeft="3dp"
+                                    android:layout_marginRight="3dp"
+                                    android:fontFamily="@font/nunito_sans_regular"
+                                    android:textSize="12sp"
+                                    android:textColor="@color/textDark">
+
+                                </TextView>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="15dp"
+                                    android:layout_height="15dp"
+                                    android:src="@drawable/ic_mode"></ImageView>
+
+                                <TextView
+                                    android:layout_weight="1"
+                                    android:id="@+id/txtAutomatic"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/app_name"
+                                    android:fontFamily="@font/nunito_sans_regular"
+                                    android:textSize="12sp"
+                                    android:layout_marginLeft="3dp"
+                                    android:layout_marginRight="3dp"
+                                    android:singleLine="true"
+                                    android:textColor="@color/textDark">
+
+                                </TextView>
+
+                            </LinearLayout>
+
+
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp">
+
+                            <LinearLayout
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="15dp"
+                                    android:layout_height="15dp"
+                                    android:src="@drawable/ic_doore"></ImageView>
+
+                                <TextView
+                                    android:id="@+id/txtDoor"
+                                    android:layout_weight="1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/app_name"
+                                    android:singleLine="true"
+                                    android:layout_marginLeft="3dp"
+                                    android:layout_marginRight="3dp"
+                                    android:fontFamily="@font/nunito_sans_regular"
+                                    android:textSize="12sp"
+                                    android:textColor="@color/textDark">
+
+                                </TextView>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="15dp"
+                                    android:layout_height="15dp"
+                                    android:src="@drawable/ic_passengers"></ImageView>
+
+                                <TextView
+                                    android:layout_weight="1"
+                                    android:id="@+id/txtPassengerOne"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/app_name"
+                                    android:fontFamily="@font/nunito_sans_regular"
+                                    android:textSize="12sp"
+                                    android:layout_marginLeft="3dp"
+                                    android:layout_marginRight="3dp"
+                                    android:singleLine="true"
+                                    android:textColor="@color/textDark">
+
+                                </TextView>
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
 
                     <TextView
                         android:id="@+id/txtMore"
@@ -100,373 +229,6 @@
                 android:src="@drawable/ic_like_fill"></ImageView>
 
         </RelativeLayout>
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardInstruction"
-            android:layout_width="match_parent"
-            android:layout_height="210dp"
-            android:layout_margin="3dp"
-            app:cardCornerRadius="5dp"
-            app:cardElevation="3dp"
-            android:visibility="gone">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <LinearLayout
-                        android:layout_weight="1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="15dp"
-                            android:layout_height="15dp"
-                            android:src="@drawable/ic_ceat"></ImageView>
-
-                        <TextView
-                            android:id="@+id/txtSeat"
-                            android:layout_weight="1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/app_name"
-                            android:singleLine="true"
-                            android:layout_marginLeft="3dp"
-                            android:layout_marginRight="3dp"
-                            android:fontFamily="@font/nunito_sans_semibold"
-                            android:textSize="12sp"
-                            android:textColor="@color/textDark">
-
-                        </TextView>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_weight="1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="15dp"
-                            android:layout_height="15dp"
-                            android:src="@drawable/ic_mode"></ImageView>
-
-                        <TextView
-                            android:layout_weight="1"
-                            android:id="@+id/txtAutomatic"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/app_name"
-                            android:fontFamily="@font/nunito_sans_semibold"
-                            android:textSize="12sp"
-                            android:layout_marginLeft="3dp"
-                            android:layout_marginRight="3dp"
-                            android:singleLine="true"
-                            android:textColor="@color/textDark">
-
-                        </TextView>
-
-                    </LinearLayout>
-
-
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp">
-
-                    <LinearLayout
-                        android:layout_weight="1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="15dp"
-                            android:layout_height="15dp"
-                            android:src="@drawable/ic_doore"></ImageView>
-
-                        <TextView
-                            android:id="@+id/txtDoor"
-                            android:layout_weight="1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/app_name"
-                            android:singleLine="true"
-                            android:layout_marginLeft="3dp"
-                            android:layout_marginRight="3dp"
-                            android:fontFamily="@font/nunito_sans_semibold"
-                            android:textSize="12sp"
-                            android:textColor="@color/textDark">
-
-                        </TextView>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_weight="1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="15dp"
-                            android:layout_height="15dp"
-                            android:src="@drawable/ic_passengers"></ImageView>
-
-                        <TextView
-                            android:layout_weight="1"
-                            android:id="@+id/txtPassengerOne"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/app_name"
-                            android:fontFamily="@font/nunito_sans_semibold"
-                            android:textSize="12sp"
-                            android:layout_marginLeft="3dp"
-                            android:layout_marginRight="3dp"
-                            android:singleLine="true"
-                            android:textColor="@color/textDark">
-
-                        </TextView>
-
-                    </LinearLayout>
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp">
-
-                    <LinearLayout
-                        android:layout_weight="1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="15dp"
-                            android:layout_height="15dp"
-                            android:src="@drawable/ic_fuil"></ImageView>
-
-                        <TextView
-                            android:id="@+id/txtFuel"
-                            android:layout_weight="1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/app_name"
-                            android:singleLine="true"
-                            android:layout_marginLeft="3dp"
-                            android:layout_marginRight="3dp"
-                            android:fontFamily="@font/nunito_sans_semibold"
-                            android:textSize="12sp"
-                            android:textColor="@color/textDark">
-
-                        </TextView>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_weight="1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="15dp"
-                            android:layout_height="15dp"
-                            android:src="@drawable/ic_suitcase"></ImageView>
-
-                        <TextView
-                            android:layout_weight="1"
-                            android:id="@+id/txtSuitcaseOne"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/app_name"
-                            android:fontFamily="@font/nunito_sans_semibold"
-                            android:textSize="12sp"
-                            android:layout_marginLeft="3dp"
-                            android:layout_marginRight="3dp"
-                            android:singleLine="true"
-                            android:textColor="@color/textDark">
-
-                        </TextView>
-
-                    </LinearLayout>
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp">
-
-                    <LinearLayout
-                        android:layout_weight="1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="15dp"
-                            android:layout_height="15dp"
-                            android:src="@drawable/ic_engine"></ImageView>
-
-                        <TextView
-                            android:id="@+id/txtEngine"
-                            android:layout_weight="1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/app_name"
-                            android:singleLine="true"
-                            android:layout_marginLeft="3dp"
-                            android:layout_marginRight="3dp"
-                            android:fontFamily="@font/nunito_sans_semibold"
-                            android:textSize="12sp"
-                            android:textColor="@color/textDark">
-
-                        </TextView>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_weight="1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="15dp"
-                            android:layout_height="15dp"
-                            android:src="@drawable/ic_suitcase"></ImageView>
-
-                        <TextView
-                            android:layout_weight="1"
-                            android:id="@+id/txtSuitcaseTwo"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/app_name"
-                            android:fontFamily="@font/nunito_sans_semibold"
-                            android:textSize="12sp"
-                            android:layout_marginLeft="3dp"
-                            android:layout_marginRight="3dp"
-                            android:singleLine="true"
-                            android:textColor="@color/textDark">
-
-                        </TextView>
-
-                    </LinearLayout>
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp">
-
-                    <LinearLayout
-                        android:layout_weight="1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="15dp"
-                            android:layout_height="15dp"
-                            android:src="@drawable/ic_suitcase"></ImageView>
-
-                        <TextView
-                            android:id="@+id/txtSuitcaseThree"
-                            android:layout_weight="1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/app_name"
-                            android:singleLine="true"
-                            android:layout_marginLeft="3dp"
-                            android:layout_marginRight="3dp"
-                            android:fontFamily="@font/nunito_sans_semibold"
-                            android:textSize="12sp"
-                            android:textColor="@color/textDark">
-
-                        </TextView>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_weight="1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="15dp"
-                            android:layout_height="15dp"
-                            android:src="@drawable/ic_passengers"></ImageView>
-
-                        <TextView
-                            android:layout_weight="1"
-                            android:id="@+id/txtPassengerTwo"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/app_name"
-                            android:fontFamily="@font/nunito_sans_semibold"
-                            android:textSize="12sp"
-                            android:layout_marginLeft="3dp"
-                            android:layout_marginRight="3dp"
-                            android:singleLine="true"
-                            android:textColor="@color/textDark">
-
-                        </TextView>
-
-                    </LinearLayout>
-
-
-                </LinearLayout>
-
-
-                <TextView
-                    android:id="@+id/txtLess"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/nunit_sans_bold"
-                    android:textSize="12sp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="0dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginLeft="5dp"
-                    android:textColor="@color/lightBlue"
-                    android:text="@string/viewLess">
-                </TextView>
-
-
-
-            </LinearLayout>
-
 
         </androidx.cardview.widget.CardView>
 

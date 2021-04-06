@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.fastuae.R;
 import com.example.fastuae.activity.FAQActivity;
 import com.example.fastuae.databinding.ActivityCategorySetectionBgBinding;
+import com.example.fastuae.fragment.FleetFragment;
 import com.example.fastuae.fragment.ProfileFragment;
 import com.example.fastuae.model.CategoryModel;
 import com.example.fastuae.util.Click;
@@ -28,6 +29,7 @@ public class CategorySelectionAdapter extends RecyclerView.Adapter<CategorySelec
     List<CategoryModel> categoryModelList;
     int lastCheckPosition = 0;
     ProfileFragment profileFragment;
+    FleetFragment fleetFragment;
     String tag = "";
 
     public interface onClick{
@@ -41,11 +43,19 @@ public class CategorySelectionAdapter extends RecyclerView.Adapter<CategorySelec
         this.tag = tag;
     }
 
+    public CategorySelectionAdapter(Context context, List<CategoryModel> categoryModelList, FleetFragment fleetFragment,String tag) {
+        this.context = context;
+        this.categoryModelList = categoryModelList;
+        this.fleetFragment = fleetFragment;
+        this.tag = tag;
+    }
+
     public CategorySelectionAdapter(Context context, List<CategoryModel> categoryModelList,String tag) {
         this.context = context;
         this.categoryModelList = categoryModelList;
         this.tag = tag;
     }
+
 
     @NonNull
     @Override
@@ -70,6 +80,8 @@ public class CategorySelectionAdapter extends RecyclerView.Adapter<CategorySelec
                     ((ProfileFragment)profileFragment).onCategoryClick(model.getCategoryFlag());
                 }else if (tag.equals(Config.FAQ_TAG)){
                     ((FAQActivity)context).onCategoryClick(model.getCategoryFlag());
+                }else if (tag.equals(Config.FLEET_TAG)){
+                    ((FleetFragment)fleetFragment).onCategoryClick(model.getCategoryFlag());
                 }
 
             }
