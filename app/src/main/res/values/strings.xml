@@ -293,6 +293,9 @@
     <string name="newPassword">New Password</string>
     <string name="country2">Country</string>
     <string name="features">Features</string>
+    <string name="dailyRental">Daily Rentals</string>
+    <string name="monthlyDeals">Monthly Deals</string>
+    <string name="selectDurationD">Select Duration</string>
 
 
     <string name="selectSelftPickUpLocation">Please select self pickup location</string>

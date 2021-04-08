@@ -275,6 +275,9 @@
     <string name="enterAddress">Enter address</string>
     <string name="addressField">House No./Building No./Street/Area</string>
     <string name="features">Features</string>
+    <string name="dailyRental">Daily Rentals</string>
+    <string name="monthlyDeals">Monthly Deals</string>
+    <string name="selectDurationD">Select Duration</string>
 
     <string name="selectRentalLocation">Please Select Rental Location</string>
     <string name="lostFoundAdded">Lost and found enquiry added successfully</string>
