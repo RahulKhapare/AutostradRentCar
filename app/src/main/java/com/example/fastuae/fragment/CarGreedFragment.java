@@ -24,8 +24,10 @@ import com.adoisstudio.helper.LoadingDialog;
 import com.example.fastuae.R;
 import com.example.fastuae.activity.SelectCarActivity;
 import com.example.fastuae.adapter.CarGridAdapter;
+import com.example.fastuae.adapter.CarGridNewAdapter;
 import com.example.fastuae.databinding.FragmentGreedCardBinding;
 import com.example.fastuae.model.CarModel;
+import com.example.fastuae.util.Config;
 import com.example.fastuae.util.P;
 import com.example.fastuae.util.ProgressView;
 
@@ -38,6 +40,7 @@ public class CarGreedFragment extends Fragment {
     private FragmentGreedCardBinding binding;
     private List<CarModel> carModelList;
     private CarGridAdapter adapter;
+    private CarGridNewAdapter newAdapter;
     private LoadingDialog loadingDialog;
 
     private boolean loading = true;
@@ -66,9 +69,15 @@ public class CarGreedFragment extends Fragment {
 
         carModelList = new ArrayList<>();
         adapter = new CarGridAdapter(context,carModelList);
+        newAdapter = new CarGridNewAdapter(context,carModelList);
         linearLayoutManager = new LinearLayoutManager(context);
         binding.recyclerCar.setLayoutManager(linearLayoutManager);
-        binding.recyclerCar.setAdapter(adapter);
+        if(Config.dropUpTypeValue.equals(Config.daily)){
+            binding.recyclerCar.setAdapter(adapter);
+        }else if(Config.dropUpTypeValue.equals(Config.monthly)){
+            binding.recyclerCar.setAdapter(newAdapter);
+        }
+
 
         hitCarData(getPaginationUrl(false),false);
         setPagination();
@@ -131,7 +140,11 @@ public class CarGreedFragment extends Fragment {
 
                         if (isFilter){
                             carModelList.clear();
-                            adapter.notifyDataSetChanged();
+                            if(Config.dropUpTypeValue.equals(Config.daily)){
+                                adapter.notifyDataSetChanged();
+                            }else if(Config.dropUpTypeValue.equals(Config.monthly)){
+                                newAdapter.notifyDataSetChanged();
+                            }
                         }
 
                         json = json.getJson(P.data);
@@ -171,7 +184,11 @@ public class CarGreedFragment extends Fragment {
                             carModelList.add(model);
                         }
 
-                        adapter.notifyDataSetChanged();
+                        if(Config.dropUpTypeValue.equals(Config.daily)){
+                            adapter.notifyDataSetChanged();
+                        }else if(Config.dropUpTypeValue.equals(Config.monthly)){
+                            newAdapter.notifyDataSetChanged();
+                        }
 
                     }else {
                         H.showMessage(context,json.getString(P.error));

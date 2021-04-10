@@ -169,7 +169,6 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick,Du
         hitEmirateData();
         onClick();
 
-        Log.e("TAG", "initViewSSSS: " + new Session(getActivity()).getString(P.token));
     }
 
     private void checkSize(RecyclerView recyclerView) {
@@ -291,7 +290,6 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick,Du
 
     private void onClick() {
 
-
         binding.lnrPickupDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -343,12 +341,13 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick,Du
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-                pickupType = "daily";
-                dropupType = "daily";
+                pickupType = Config.daily;
+                dropupType =  Config.daily;
                 binding.radioMonthlyDeals.setChecked(false);
                 blueTin(binding.radioDailyRental);
                 blackTin(binding.radioMonthlyDeals);
                 binding.cardDuration.setVisibility(View.GONE);
+                hideDuration();
                 hideAllCardView();
             }
         });
@@ -356,8 +355,8 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick,Du
         binding.radioMonthlyDeals.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                pickupType = "monthly";
-                dropupType = "monthly";
+                pickupType =  Config.monthly;
+                dropupType = Config.monthly;
                 Click.preventTwoClick(v);
                 binding.radioDailyRental.setChecked(false);
                 blueTin(binding.radioMonthlyDeals);

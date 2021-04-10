@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.adoisstudio.helper.Session;
 import com.example.fastuae.R;
+import com.example.fastuae.activity.AddOnsActivity;
 import com.example.fastuae.activity.CarDetailOneActivity;
 import com.example.fastuae.databinding.ActivityCarGreedListBinding;
 import com.example.fastuae.model.CarModel;
@@ -135,13 +136,6 @@ public class CarGridAdapter extends RecyclerView.Adapter<CarGridAdapter.viewHold
         content.setSpan(new UnderlineSpan(), 0, more.length(), 0);
         holder.binding.txtMore.setText(content);
 
-        holder.binding.txtMore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Click.preventTwoClick(v);
-            }
-        });
-
         holder.binding.txtPayNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -209,7 +203,7 @@ public class CarGridAdapter extends RecyclerView.Adapter<CarGridAdapter.viewHold
 
     private void jumpToCardDetails(CarModel model,String payType,String aedRate){
         Config.carModel = model;
-        Intent intent = new Intent(context, CarDetailOneActivity.class);
+        Intent intent = new Intent(context, AddOnsActivity.class);
         intent.putExtra(Config.PAY_TYPE,payType);
         intent.putExtra(Config.SELECTED_AED,aedRate);
         context.startActivity(intent);

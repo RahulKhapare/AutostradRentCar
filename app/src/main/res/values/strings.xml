@@ -296,6 +296,13 @@
     <string name="dailyRental">Daily Rentals</string>
     <string name="monthlyDeals">Monthly Deals</string>
     <string name="selectDurationD">Select Duration</string>
+    <string name="fore">For</string>
+    <string name="month">month</string>
+    <string name="addOes">Add Ons</string>
+    <string name="chooseAdsOn">Choose Add ons</string>
+    <string name="Price">Price</string>
+    <string name="quantity">Quantity</string>
+    <string name="priceRental">(Per item per rental)</string>
 
 
     <string name="selectSelftPickUpLocation">Please select self pickup location</string>

@@ -18,7 +18,9 @@ import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.example.fastuae.R;
+import com.example.fastuae.activity.AddOnsActivity;
 import com.example.fastuae.activity.CarDetailOneActivity;
+import com.example.fastuae.fragment.HomeFragment;
 import com.example.fastuae.model.CarModel;
 import com.example.fastuae.util.Click;
 import com.example.fastuae.util.Config;
@@ -75,6 +77,11 @@ public class ViewPagerSwipeAdapter extends PagerAdapter {
         TextView txtAirConditionar = view.findViewById(R.id.txtAirConditionar);
         TextView txtParkingSensor = view.findViewById(R.id.txtParkingSensor);
 
+
+        LinearLayout lnrAEDMonth = view.findViewById(R.id.lnrAEDMonth);
+        TextView txtMonthAED = view.findViewById(R.id.txtMonthAED);
+        TextView txtMonthAEDFor = view.findViewById(R.id.txtMonthAEDFor);
+
 //        Picasso.get().load(R.drawable.ic_car_four).into(imgCar);
 //        Picasso.get().load(R.drawable.ic_view_one).into(img1);
 //        Picasso.get().load(R.drawable.ic_view_two).into(img2);
@@ -119,8 +126,17 @@ public class ViewPagerSwipeAdapter extends PagerAdapter {
         }
         txtParkingSensor.setText(checkString(parkingSensor));
 
-        txtPayNow.setText(context.getResources().getString(R.string.payNow) + "\n" + model.getPay_now_rate() + " AED");
-        txtPayLatter.setText(context.getResources().getString(R.string.payLater) + "\n" + model.getPay_later_rate() + " AED");
+        if(Config.dropUpTypeValue.equals(Config.daily)){
+            lnrAEDMonth.setVisibility(View.GONE);
+            txtPayNow.setText(context.getResources().getString(R.string.payNow) + "\n" + model.getPay_now_rate() + " AED");
+            txtPayLatter.setText(context.getResources().getString(R.string.payLater) + "\n" + model.getPay_later_rate() + " AED");
+        }else if(Config.dropUpTypeValue.equals(Config.monthly)){
+            lnrAEDMonth.setVisibility(View.VISIBLE);
+            txtMonthAED.setText(model.getPay_now_rate() + " AED");
+            txtMonthAEDFor.setText("("+context.getResources().getString(R.string.fore) + " 1 " + context.getResources().getString(R.string.month)+")");
+            txtPayNow.setText(context.getResources().getString(R.string.payNow));
+            txtPayLatter.setText(context.getResources().getString(R.string.payLater));
+        }
 
         img1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -177,7 +193,7 @@ public class ViewPagerSwipeAdapter extends PagerAdapter {
 
     private void jumpToCardDetails(CarModel model,String payType,String aedRate){
         Config.carModel = model;
-        Intent intent = new Intent(context, CarDetailOneActivity.class);
+        Intent intent = new Intent(context, AddOnsActivity.class);
         intent.putExtra(Config.PAY_TYPE,payType);
         intent.putExtra(Config.SELECTED_AED,aedRate);
         context.startActivity(intent);

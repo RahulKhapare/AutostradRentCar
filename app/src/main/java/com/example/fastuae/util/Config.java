@@ -90,6 +90,8 @@ public class Config {
     public static String cardName = "cardName";
     public static String cardValidMonth = "cardValidMonth";
     public static String cardValidCVV = "cardValidCVV";
+    public static String monthly = "monthly";
+    public static String daily = "daily";
 
     public static int OPEN = 1;
     public static int SHARE = 2;

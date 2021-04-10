@@ -295,6 +295,13 @@
     <string name="dailyRental">الإيجارات اليومية</string>
     <string name="monthlyDeals">الصفقات الشهرية</string>
     <string name="selectDurationD">حدد المدة</string>
+    <string name="fore">ل</string>
+    <string name="month">شهر</string>
+    <string name="addOes">إضافات</string>
+    <string name="chooseAdsOn">اختر اضافات</string>
+    <string name="Price">سعر</string>
+    <string name="quantity">كمية</string>
+    <string name="priceRental">(لكل عنصر لكل إيجار)</string>
 
     <string name="selectSelftPickUpLocation">الرجاء تحديد موقع الالتقاط الذاتي</string>
     <string name="selectSelfReturnUpLocation">الرجاء تحديد موقع العودة الذاتية</string>

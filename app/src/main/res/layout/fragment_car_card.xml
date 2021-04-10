@@ -22,7 +22,7 @@
 
                 android:id="@+id/viewPagesSwipe"
                 android:layout_width="match_parent"
-                android:layout_height="775dp"
+                android:layout_height="800dp"
                 android:layout_marginTop="-65dp"
                 android:layout_marginBottom="0dp"
                 android:layout_marginLeft="-60dp"
