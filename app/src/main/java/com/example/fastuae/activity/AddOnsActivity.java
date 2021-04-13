@@ -1,7 +1,9 @@
 package com.example.fastuae.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -18,6 +20,7 @@ import com.example.fastuae.adapter.ChooseExtrasAdapter;
 import com.example.fastuae.databinding.ActivityAddOnesBinding;
 import com.example.fastuae.model.CarModel;
 import com.example.fastuae.model.ChooseExtrasModel;
+import com.example.fastuae.util.Click;
 import com.example.fastuae.util.Config;
 import com.example.fastuae.util.P;
 import com.example.fastuae.util.ProgressView;
@@ -34,6 +37,7 @@ public class AddOnsActivity extends AppCompatActivity{
     private LoadingDialog loadingDialog;
 
     private List<ChooseExtrasModel> chooseExtrasModelLis;
+    public static List<ChooseExtrasModel> addOnsList;
     ChooseExtrasAdapter adapter;
     private CarModel model;
     private Session session;
@@ -70,6 +74,7 @@ public class AddOnsActivity extends AppCompatActivity{
         payType = getIntent().getStringExtra(Config.PAY_TYPE);
         aedSelected = getIntent().getStringExtra(Config.SELECTED_AED);
 
+        addOnsList = new ArrayList<>();
         chooseExtrasModelLis = new ArrayList<>();
         adapter = new ChooseExtrasAdapter(activity,chooseExtrasModelLis);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(activity);
@@ -79,6 +84,17 @@ public class AddOnsActivity extends AppCompatActivity{
         binding.recyclerExtras.setAdapter(adapter);
 
         hitChooseExtraData();
+
+        binding.txtProceed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                Intent intent = new Intent(activity,CarDetailOneActivity.class);
+                intent.putExtra(Config.PAY_TYPE,payType);
+                intent.putExtra(Config.SELECTED_AED,aedSelected);
+                startActivity(intent);
+            }
+        });
 
     }
 

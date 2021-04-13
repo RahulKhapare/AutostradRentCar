@@ -6,6 +6,14 @@ public class CountryCodeModel {
     String country_name;
     String phone_code;
 
+    public CountryCodeModel(String phone_code) {
+        this.phone_code = phone_code;
+    }
+
+    public CountryCodeModel() {
+
+    }
+
     public String getId() {
         return id;
     }

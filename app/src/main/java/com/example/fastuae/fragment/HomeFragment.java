@@ -129,6 +129,10 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick,Du
     }
 
     private void initView() {
+
+        pickupType = Config.daily;
+        dropupType =  Config.daily;
+
         loadingDialog = new LoadingDialog(context);
         sliderModelList = new ArrayList<>();
         sliderImageAdapter = new SliderImageAdapter(context, sliderModelList);
@@ -136,12 +140,18 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick,Du
         binding.tabLayout.setupWithViewPager(binding.pager, true);
 
         durationList = new ArrayList<>();
-        durationList.add(new DurationModel("January"));
-        durationList.add(new DurationModel("Feb"));
-        durationList.add(new DurationModel("March"));
-        durationList.add(new DurationModel("Apr"));
-        durationList.add(new DurationModel("May"));
-        durationList.add(new DurationModel("Jun"));
+        durationList.add(new DurationModel("1 month"));
+        durationList.add(new DurationModel("2 month"));
+        durationList.add(new DurationModel("3 month"));
+        durationList.add(new DurationModel("4 month"));
+        durationList.add(new DurationModel("5 month"));
+        durationList.add(new DurationModel("6 month"));
+        durationList.add(new DurationModel("7 month"));
+        durationList.add(new DurationModel("8 month"));
+        durationList.add(new DurationModel("9 month"));
+        durationList.add(new DurationModel("10 month"));
+        durationList.add(new DurationModel("11 month"));
+        durationList.add(new DurationModel("12 month"));
 
         durationAdapter = new DurationAdapter(context,durationList,HomeFragment.this);
         LinearLayoutManager linearLayoutManager0 = new LinearLayoutManager(context);

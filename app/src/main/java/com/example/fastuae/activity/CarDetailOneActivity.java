@@ -19,6 +19,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
@@ -33,10 +34,14 @@ import com.adoisstudio.helper.JsonList;
 import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
 import com.example.fastuae.R;
+import com.example.fastuae.adapter.AddOnsAdapter;
 import com.example.fastuae.adapter.CarUpgradeAdapter;
+import com.example.fastuae.adapter.RentalAdapter;
 import com.example.fastuae.databinding.ActivityCarDetailOneBinding;
 import com.example.fastuae.model.CarModel;
 import com.example.fastuae.model.CarUpgradeModel;
+import com.example.fastuae.model.ChooseExtrasModel;
+import com.example.fastuae.model.RentalModel;
 import com.example.fastuae.util.Click;
 import com.example.fastuae.util.Config;
 import com.example.fastuae.util.P;
@@ -80,20 +85,54 @@ public class CarDetailOneActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        binding.toolbar.setTitle(getResources().getString(R.string.carDetails));
+
+        binding.toolbar.setTitle(getResources().getString(R.string.booking));
         setSupportActionBar(binding.toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
+        List<ChooseExtrasModel> chooseExtrasModelList = new ArrayList<>();
+        chooseExtrasModelList.addAll(AddOnsActivity.addOnsList);
+        binding.recyclerAdOns.setLayoutManager(new LinearLayoutManager(activity));
+        binding.recyclerAdOns.setHasFixedSize(true);
+        binding.recyclerAdOns.setNestedScrollingEnabled(false);
+        AddOnsAdapter addOnsAdapter = new AddOnsAdapter(activity,chooseExtrasModelList);
+        binding.recyclerAdOns.setAdapter(addOnsAdapter);
+
+        if (chooseExtrasModelList.isEmpty()){
+            binding.lnrAddOns.setVisibility(View.GONE);
+        }
+
+        List<RentalModel> rentalModelList = new ArrayList<>();
+        rentalModelList.add(new RentalModel("Security Deposit"));
+        rentalModelList.add(new RentalModel("Insurance"));
+        rentalModelList.add(new RentalModel("Insurance Excess"));
+        rentalModelList.add(new RentalModel("Refund"));
+        rentalModelList.add(new RentalModel("Oman NOC"));
+        rentalModelList.add(new RentalModel("Additional Driver"));
+        rentalModelList.add(new RentalModel("Mileage"));
+        rentalModelList.add(new RentalModel("Cancellation/ No Show"));
+        rentalModelList.add(new RentalModel("Toll Charges"));
+        rentalModelList.add(new RentalModel("Fuel Policy"));
+        rentalModelList.add(new RentalModel("Driving License"));
+        rentalModelList.add(new RentalModel("Premature Termination"));
+        rentalModelList.add(new RentalModel("Administration Charges"));
+        rentalModelList.add(new RentalModel("International Driving License"));
+        rentalModelList.add(new RentalModel("Inter Emirate Transfer Cost"));
+        rentalModelList.add(new RentalModel("Airport Parking Fee"));
+
+        binding.recyclerRentalView.setLayoutManager(new GridLayoutManager(activity,2));
+        binding.recyclerRentalView.setHasFixedSize(true);
+        binding.recyclerRentalView.setNestedScrollingEnabled(false);
+        RentalAdapter rentalAdapter = new RentalAdapter(activity,rentalModelList);
+        binding.recyclerRentalView.setAdapter(rentalAdapter);
+
         model = Config.carModel;
-        hitCarExtrasData();
         setData();
         onClick();
     }
 
     private void setData() {
-
-
 
         hitBookingCarData(model);
 
@@ -102,76 +141,18 @@ public class CarDetailOneActivity extends AppCompatActivity {
         String pickUpDate = getFormatedDate("yyyy-MM-dd", "dd, MMM yyyy", Config.SelectedPickUpDate);
         String dropUpDate = getFormatedDate("yyyy-MM-dd", "dd, MMM yyyy", Config.SelectedDropUpDate);
 
+        binding.txtTotalAED.setText("AED "+aedSelected);
+
         binding.txtPickUpLocation.setText(pickUpDate+", "+Config.SelectedPickUpTime+",\n"+Config.SelectedPickUpAddress);
         binding.txtDropOffLocation.setText(dropUpDate+", "+Config.SelectedDropUpTime+",\n"+Config.SelectedDropUpAddress);
 
-        binding.txtPetrolInst.setText(checkString(model.getFuel_type_name()));
-        binding.txtSeatInst.setText("Seat");
-        binding.txtAutomaticInst.setText(checkString(model.getTransmission_name()));
-        binding.txtDoorInst.setText(checkString(model.getDoor()));
-        binding.txtPassengerInst.setText(checkString(model.getPassenger()));
-        binding.txtSuitcaseInst.setText(checkString(model.getSuitcase()));
-
-        String airBags = model.getAir_bags();
-        if (TextUtils.isEmpty(airBags) || airBags.equals("null") || airBags.equals("0")){
-            airBags = "Air Bags";
-            binding.txtAirBags.setPaintFlags(binding.txtAirBags.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-        }else if (airBags.equals("1")){
-            airBags = "Air Bags";
+        if (payType.equals(Config.pay_now)){
+            binding.txtCarRate.setText("AED " + model.getPay_now_rate());
+            binding.txtPayMethod.setText(getResources().getString(R.string.prePay));
+        }else if (payType.equals(Config.pay_latter)){
+            binding.txtCarRate.setText("AED " + model.getPay_later_rate());
+            binding.txtPayMethod.setText(getResources().getString(R.string.postPay));
         }
-        binding.txtAirBags.setText(checkString(airBags));
-
-        String airCondition = model.getAir_conditioner();
-        if (TextUtils.isEmpty(airCondition) || airCondition.equals("null") || airCondition.equals("0")){
-            airCondition = "Air Condition";
-            binding.txtAirConditionar.setPaintFlags(binding.txtAirBags.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-        }else {
-            airCondition = "Air Condition";
-        }
-        binding.txtAirConditionar.setText(checkString(airCondition));
-
-        String parkingSensor = model.getParking_sensors();
-        if (TextUtils.isEmpty(parkingSensor) || parkingSensor.equals("null") || parkingSensor.equals("0")){
-            parkingSensor = "Parking Sensor";
-            binding.txtParkinSensor.setPaintFlags(binding.txtAirBags.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-        }else {
-            parkingSensor = "Parking Sensor";
-        }
-        binding.txtParkinSensor.setText(checkString(parkingSensor));
-
-        String camera = model.getRear_parking_camera();
-        if (TextUtils.isEmpty(camera) || camera.equals("null") || camera.equals("0")){
-            camera = "Parking Camera";
-            binding.txtRearParkingCamera.setPaintFlags(binding.txtAirBags.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-        }else{
-            camera = "Parking Camera";
-        }
-        binding.txtRearParkingCamera.setText(checkString(camera));
-
-        String bluetooth = model.getBluetooth();
-        if (TextUtils.isEmpty(bluetooth) || bluetooth.equals("null") || bluetooth.equals("0")){
-            bluetooth = "Bluetooth";
-            binding.txtBluetooth.setPaintFlags(binding.txtAirBags.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-        }else{
-            bluetooth = "Bluetooth";
-        }
-
-        binding.txtBluetooth.setText(checkString(bluetooth));
-
-        String control = model.getCruise_control();
-        if (TextUtils.isEmpty(control) || control.equals("null") || control.equals("0")){
-            control = "Cruise Control";
-            binding.txtCruiseControl.setPaintFlags(binding.txtAirBags.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-        }else{
-            control = "Cruise Control";
-        }
-        binding.txtCruiseControl.setText(checkString(control));
-
-
-
-        binding.txtMessageOne.setText("Free Booking");
-        binding.txtMessageTwo.setText("Free Cancellation");
-        binding.txtMessageThree.setText("Pay 100% at the counter or pay with online check-in-24hrs before your pickup time to secure your car and get 5% off");
 
         if (flag.equals(Config.ARABIC)) {
             binding.txtCarName.setGravity(Gravity.RIGHT);
@@ -187,6 +168,41 @@ public class CarDetailOneActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Click.preventTwoClick(v);
                 updateCarDialog();
+            }
+        });
+
+        binding.txtPickupEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+            }
+        });
+
+        binding.txtPickupDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+            }
+        });
+
+        binding.txtDropupEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+            }
+        });
+
+        binding.txtDropupDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+            }
+        });
+
+        binding.txtAEDDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
             }
         });
 
@@ -230,35 +246,10 @@ public class CarDetailOneActivity extends AppCompatActivity {
             }
         });
 
-        binding.lnrPromotions.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Click.preventTwoClick(v);
-                checkPromotionView();
-            }
-        });
-
-        binding.lnrEstimated.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Click.preventTwoClick(v);
-                checkEstimationView();
-            }
-        });
-
         binding.lnrInsurance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Click.preventTwoClick(v);
                 checkInsuranceView();
-            }
-        });
-
-        binding.lnrTermCondition.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Click.preventTwoClick(v);
-                checkTermView();
             }
         });
     }
@@ -270,48 +261,12 @@ public class CarDetailOneActivity extends AppCompatActivity {
             binding.imgInsuranceRight.setVisibility(View.GONE);
             binding.imgInsuranceLeft.setVisibility(View.VISIBLE);
 
-            binding.imgPromotionRight.setVisibility(View.GONE);
-            binding.imgPromotionLeft.setVisibility(View.VISIBLE);
-
-            binding.imgEstimatedRight.setVisibility(View.GONE);
-            binding.imgEstimatedLeft.setVisibility(View.VISIBLE);
-
-            binding.imgTermRight.setVisibility(View.GONE);
-            binding.imgTemLeft.setVisibility(View.VISIBLE);
-
-
         } else if (flag.equals(Config.ENGLISH)) {
 
             binding.imgInsuranceRight.setVisibility(View.VISIBLE);
             binding.imgInsuranceLeft.setVisibility(View.GONE);
 
-            binding.imgPromotionRight.setVisibility(View.VISIBLE);
-            binding.imgPromotionLeft.setVisibility(View.GONE);
 
-            binding.imgEstimatedRight.setVisibility(View.VISIBLE);
-            binding.imgEstimatedLeft.setVisibility(View.GONE);
-
-            binding.imgTermRight.setVisibility(View.VISIBLE);
-            binding.imgTemLeft.setVisibility(View.GONE);
-
-        }
-    }
-
-    private void checkPromotionView() {
-        if (binding.viewPromotion.getVisibility() == View.VISIBLE) {
-            binding.viewPromotion.setVisibility(View.GONE);
-            if (flag.equals(Config.ARABIC)) {
-                binding.imgPromotionLeft.setImageResource(R.drawable.ic_down_arrow);
-            } else if (flag.equals(Config.ENGLISH)) {
-                binding.imgPromotionRight.setImageResource(R.drawable.ic_down_arrow);
-            }
-        } else if (binding.viewPromotion.getVisibility() == View.GONE) {
-            binding.viewPromotion.setVisibility(View.VISIBLE);
-            if (flag.equals(Config.ARABIC)) {
-                binding.imgPromotionLeft.setImageResource(R.drawable.ic_up_arrow);
-            } else if (flag.equals(Config.ENGLISH)) {
-                binding.imgPromotionRight.setImageResource(R.drawable.ic_up_arrow);
-            }
         }
     }
 
@@ -332,43 +287,6 @@ public class CarDetailOneActivity extends AppCompatActivity {
             }
         }
     }
-
-    private void checkEstimationView() {
-        if (binding.viewEstimated.getVisibility() == View.VISIBLE) {
-            binding.viewEstimated.setVisibility(View.GONE);
-            if (flag.equals(Config.ARABIC)) {
-                binding.imgEstimatedLeft.setImageResource(R.drawable.ic_down_arrow);
-            } else if (flag.equals(Config.ENGLISH)) {
-                binding.imgEstimatedRight.setImageResource(R.drawable.ic_down_arrow);
-            }
-        } else if (binding.viewEstimated.getVisibility() == View.GONE) {
-            binding.viewEstimated.setVisibility(View.VISIBLE);
-            if (flag.equals(Config.ARABIC)) {
-                binding.imgEstimatedLeft.setImageResource(R.drawable.ic_up_arrow);
-            } else if (flag.equals(Config.ENGLISH)) {
-                binding.imgEstimatedRight.setImageResource(R.drawable.ic_up_arrow);
-            }
-        }
-    }
-
-    private void checkTermView() {
-        if (binding.viewTerm.getVisibility() == View.VISIBLE) {
-            binding.viewTerm.setVisibility(View.GONE);
-            if (flag.equals(Config.ARABIC)) {
-                binding.imgTemLeft.setImageResource(R.drawable.ic_down_arrow);
-            } else if (flag.equals(Config.ENGLISH)) {
-                binding.imgTermRight.setImageResource(R.drawable.ic_down_arrow);
-            }
-        } else if (binding.viewTerm.getVisibility() == View.GONE) {
-            binding.viewTerm.setVisibility(View.VISIBLE);
-            if (flag.equals(Config.ARABIC)) {
-                binding.imgTemLeft.setImageResource(R.drawable.ic_up_arrow);
-            } else if (flag.equals(Config.ENGLISH)) {
-                binding.imgTermRight.setImageResource(R.drawable.ic_up_arrow);
-            }
-        }
-    }
-
 
     private void updateCarDialog() {
 
@@ -664,45 +582,6 @@ public class CarDetailOneActivity extends AppCompatActivity {
 
                 })
                 .run("hitBookingCarData");
-    }
-
-    private void hitCarExtrasData() {
-
-        String url = "emirate_id=" + SelectCarActivity.pickUpEmirateID + "&car_id=" + model.getId() + "&pickup_date=" + SelectCarActivity.pickUpDate + "&dropoff_date=" + SelectCarActivity.dropUpDate
-                + "&booking_type=daily&month_time=2";
-
-        ProgressView.show(activity,loadingDialog);
-        Json j = new Json();
-
-        Api.newApi(activity, P.BaseUrl + "cars_choose_extras?" + url).addJson(j)
-                .setMethod(Api.GET)
-                //.onHeaderRequest(App::getHeaders)
-                .onError(() -> {
-                    ProgressView.dismiss(loadingDialog);
-                    H.showMessage(activity, "On error is called");
-                })
-                .onSuccess(json ->
-                {
-                    if (json.getInt(P.status) == 1) {
-
-                        json = json.getJson(P.data);
-                        JsonList choose_extras = json.getJsonList(P.choose_extras);
-
-                        for (Json data : choose_extras){
-                            data.getString(P.title);
-                            data.getString(P.key_value);
-                            data.getString(P.description);
-                            data.getString(P.max_quantity);
-                            data.getString(P.price);
-                        }
-
-                    }else {
-                        H.showMessage(activity,json.getString(P.error));
-                    }
-                    ProgressView.dismiss(loadingDialog);
-
-                })
-                .run("hitCarExtrasData");
     }
 
     private String checkString(String string){

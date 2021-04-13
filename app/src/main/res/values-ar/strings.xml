@@ -302,6 +302,13 @@
     <string name="Price">سعر</string>
     <string name="quantity">كمية</string>
     <string name="priceRental">(لكل عنصر لكل إيجار)</string>
+    <string name="prePay">الدفع المسبق</string>
+    <string name="postPay">الدفع اللاحق</string>
+    <string name="paymentMethod">طريقة الدفع او السداد</string>
+    <string name="total">مجموع</string>
+    <string name="aed">درهم إماراتي</string>
+    <string name="includedRated">المدرجة في الأسعار ال</string>
+    <string name="rentalTerm">شروط الإيجار والمؤهلات والمتطلبات</string>
 
     <string name="selectSelftPickUpLocation">الرجاء تحديد موقع الالتقاط الذاتي</string>
     <string name="selectSelfReturnUpLocation">الرجاء تحديد موقع العودة الذاتية</string>

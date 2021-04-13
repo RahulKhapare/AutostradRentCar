@@ -96,7 +96,7 @@ public class CarDetailTwoActivity extends AppCompatActivity {
     private void initView(){
 
         Log.e("TAG", "initViewDDDD: " + session.getString(P.token) );
-        binding.toolbar.setTitle(getResources().getString(R.string.carDetails));
+        binding.toolbar.setTitle(getResources().getString(R.string.booking));
         setSupportActionBar(binding.toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);

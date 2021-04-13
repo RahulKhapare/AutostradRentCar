@@ -18,7 +18,7 @@
             android:background="@color/colorPrimaryDark">
         </androidx.appcompat.widget.Toolbar>
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
@@ -28,6 +28,7 @@
             <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_above="@+id/bottomCard"
                 android:fillViewport="true">
 
                 <RelativeLayout
@@ -55,12 +56,45 @@
 
                     </androidx.recyclerview.widget.RecyclerView>
 
+
+
                 </RelativeLayout>
 
             </androidx.core.widget.NestedScrollView>
 
+            <androidx.cardview.widget.CardView
+                android:id="@+id/bottomCard"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:layout_alignParentBottom="true"
+                app:cardCornerRadius="30dp"
+                android:layout_marginBottom="-30dp"
+                app:cardElevation="3dp">
 
-        </LinearLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:id="@+id/txtProceed"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunit_sans_bold"
+                        android:textColor="@color/colorWhite"
+                        android:text="@string/proceed"
+                        android:padding="16dp"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="30dp"
+                        android:layout_marginTop="30dp"
+                        android:textSize="18dp"
+                        android:background="@drawable/button_blue_bg"></TextView>
+
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+
+        </RelativeLayout>
 
     </RelativeLayout>
 </layout>

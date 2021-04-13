@@ -285,6 +285,14 @@
     <string name="Price">Price</string>
     <string name="quantity">Quantity</string>
     <string name="priceRental">(Per item per rental)</string>
+    <string name="prePay">Pre Pay</string>
+    <string name="postPay">Post Pay</string>
+    <string name="paymentMethod">Payment Method</string>
+    <string name="total">Total</string>
+    <string name="aed">AED</string>
+    <string name="includedRated">Included in th rates</string>
+    <string name="rentalTerm">Rental Terms, Qualifications &amp; Requirements</string>
+
 
     <string name="selectRentalLocation">Please Select Rental Location</string>
     <string name="lostFoundAdded">Lost and found enquiry added successfully</string>
