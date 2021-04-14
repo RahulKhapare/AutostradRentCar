@@ -11,6 +11,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fastuae.R;
+import com.example.fastuae.activity.CarBookingDetailsActivity;
 import com.example.fastuae.activity.SelectLocationActivity;
 import com.example.fastuae.databinding.ActivityCarFleetListBinding;
 import com.example.fastuae.databinding.ActivityLocationListBinding;
@@ -20,6 +21,7 @@ import com.example.fastuae.model.HomeLocationModel;
 import com.example.fastuae.model.LocationModel;
 import com.example.fastuae.util.Click;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.viewHolder> {
@@ -28,6 +30,8 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.viewHo
     private List<HomeLocationModel> locationModelList;
     private HomeFragment homeFragment;
     private int flag = 0;
+    private boolean fromActivity = false;
+
 
     public interface onClick{
         void onLocationClick(String location,int flag,HomeLocationModel model);
@@ -38,6 +42,14 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.viewHo
         this.locationModelList = locationModelList;
         this.homeFragment = fragment;
         this.flag = flag;
+        fromActivity = false;
+    }
+
+    public LocationAdapter(Context context, List<HomeLocationModel> locationModelList,int flag) {
+        this.context = context;
+        this.locationModelList = locationModelList;
+        this.flag = flag;
+        fromActivity = true;
     }
 
     @NonNull
@@ -56,7 +68,12 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.viewHo
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-                ((HomeFragment)homeFragment).onLocationClick(model.getLocation_name(),flag,model);
+                if (fromActivity){
+                    ((CarBookingDetailsActivity)context).onLocationClick(model.getLocation_name(),flag,model);
+                }else {
+                    ((HomeFragment)homeFragment).onLocationClick(model.getLocation_name(),flag,model);
+                }
+
             }
         });
 

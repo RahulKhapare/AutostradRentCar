@@ -213,6 +213,10 @@
     <string name="details">Details</string>
     <string name="normalOperation">Normal hours of operation:</string>
     <string name="moreView">View more</string>
+    <string name="personalInfo">Personal Information</string>
+    <string name="paymentInfo">Payment Information</string>
+    <string name="bookingRemark">Booking Remark</string>
+
 
     <string name="general">General</string>
     <string name="paymentRelated">Payment Related</string>

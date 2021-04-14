@@ -293,6 +293,9 @@
     <string name="includedRated">Included in th rates</string>
     <string name="rentalTerm">Rental Terms, Qualifications &amp; Requirements</string>
 
+    <string name="personalInfo">Personal Information</string>
+    <string name="paymentInfo">Payment Information</string>
+    <string name="bookingRemark">Booking Remark</string>
 
     <string name="selectRentalLocation">Please Select Rental Location</string>
     <string name="lostFoundAdded">Lost and found enquiry added successfully</string>

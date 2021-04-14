@@ -87,6 +87,12 @@
             android:hardwareAccelerated="true"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".activity.CarBookingDetailsActivity"
+            android:hardwareAccelerated="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.AddOnsActivity"
             android:hardwareAccelerated="true"

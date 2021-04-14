@@ -648,8 +648,8 @@
                            android:gravity="right"
                            android:paddingRight="60dp"
                            android:paddingLeft="60dp"
-                           android:paddingBottom="20dp"
-                           android:paddingTop="20dp"
+                           android:paddingBottom="16dp"
+                           android:paddingTop="16dp"
                            android:text="@string/book"
                            android:textColor="@color/colorWhite"
                            android:textSize="18dp" />

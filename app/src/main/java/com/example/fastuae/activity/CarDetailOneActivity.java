@@ -210,7 +210,7 @@ public class CarDetailOneActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-                Intent intent = new Intent(activity, CarDetailTwoActivity.class);
+                Intent intent = new Intent(activity, CarBookingDetailsActivity.class);
                 intent.putExtra(Config.PAY_TYPE,payType);
                 intent.putExtra(Config.SELECTED_AED,aedSelected);
                 startActivity(intent);
