@@ -21,15 +21,33 @@
                 android:visibility="gone"
                 android:orientation="vertical">
 
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/addNewCard"
-                    android:fontFamily="@font/nunit_sans_bold"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="18sp">
+                    android:orientation="horizontal">
 
-                </TextView>
+                    <TextView
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/addNewCard"
+                        android:fontFamily="@font/nunit_sans_bold"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="18sp">
+
+                    </TextView>
+
+                    <ImageView
+                        android:id="@+id/imgCancelAddNew"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:tint="@color/textDark"
+                        android:src="@drawable/ic_action_navigation_close_inverted"
+                        >
+                    </ImageView>
+
+
+                </LinearLayout>
 
                 <EditText
                     android:id="@+id/etxCardNumber"

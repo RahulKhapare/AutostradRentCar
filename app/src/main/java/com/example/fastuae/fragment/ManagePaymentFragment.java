@@ -126,6 +126,15 @@ public class ManagePaymentFragment extends Fragment {
             }
         });
 
+        binding.imgCancelAddNew.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                binding.lnrAddNewView.setVisibility(View.GONE);
+                binding.lnrDisplayView.setVisibility(View.VISIBLE);
+            }
+        });
+
         binding.checkSecure.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

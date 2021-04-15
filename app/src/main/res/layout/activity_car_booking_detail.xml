@@ -409,13 +409,13 @@
                             <RelativeLayout
                                 android:id="@+id/lnrPersonalInfo"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:padding="16dp">
+                                android:layout_height="wrap_content">
 
                                 <LinearLayout
                                     android:id="@+id/lnrmPersonalInfo"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:padding="16dp"
                                     android:orientation="horizontal">
 
                                     <TextView
@@ -455,13 +455,155 @@
                                 </LinearLayout>
 
                                 <LinearLayout
+                                    android:orientation="horizontal"
+                                    android:id="@+id/line1"
+                                    android:layout_marginTop="0dp"
                                     android:layout_below="@+id/lnrmPersonalInfo"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0.5dp"
+                                    android:background="@color/customeGray"
+                                    tools:ignore="Suspicious0dp">
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_below="@+id/line1"
                                     android:id="@+id/viewPersonalInfo"
-                                    android:layout_marginTop="20dp"
+                                    android:layout_marginTop="10dp"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:visibility="gone"
+                                    android:padding="16dp"
                                     android:orientation="vertical">
+
+
+                                    <com.google.android.material.textfield.TextInputLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="?actionBarSize"
+                                        android:hint="@string/firstName"
+                                        android:layout_marginBottom="10dp"
+                                        android:layout_marginTop="0dp"
+                                        app:hintTextColor="@color/iconicGray"
+                                        android:textColorHint="@color/iconicGray"
+                                        app:theme="@style/styleText"
+                                        android:backgroundTint="@color/colorPrimaryDark">
+
+                                        <com.google.android.material.textfield.TextInputEditText
+                                            android:id="@+id/etxFirstName"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:singleLine="true"
+                                            android:textSize="18sp"
+                                            android:imeOptions="actionNext"
+                                            android:inputType="textCapWords"
+                                            android:fontFamily="@font/nunito_sans_semibold"
+                                            android:textColor="@color/textDark"
+                                            android:backgroundTint="@color/colorPrimaryDark"
+                                            />
+
+                                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                                    <com.google.android.material.textfield.TextInputLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="?actionBarSize"
+                                        android:hint="@string/lastName"
+                                        android:layout_marginBottom="10dp"
+                                        android:layout_marginTop="20dp"
+                                        android:textColorHint="@color/iconicGray"
+                                        app:theme="@style/styleText"
+                                        android:backgroundTint="@color/colorPrimaryDark">
+
+                                        <com.google.android.material.textfield.TextInputEditText
+                                            android:id="@+id/etxLastName"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:singleLine="true"
+                                            android:textSize="18sp"
+                                            android:imeOptions="actionNext"
+                                            android:inputType="textCapWords"
+                                            android:fontFamily="@font/nunito_sans_semibold"
+                                            android:textColor="@color/textDark"
+                                            android:backgroundTint="@color/colorPrimaryDark"
+                                            />
+
+                                    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="?actionBarSize"
+                                        android:layout_marginBottom="10dp"
+                                        android:layout_marginTop="20dp"
+                                        android:orientation="horizontal">
+
+                                        <Spinner
+                                            android:id="@+id/spinnerCodeMobile"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="match_parent"
+                                            android:layout_marginRight="5dp"
+                                            android:layout_marginLeft="5dp"
+                                            style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                                            android:backgroundTint="@color/colorPrimaryDark">
+
+                                        </Spinner>
+
+
+                                        <com.google.android.material.textfield.TextInputLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="?actionBarSize"
+                                            android:hint="@string/mobileNumber"
+                                            app:hintTextColor="@color/iconicGray"
+                                            android:textColorHint="@color/iconicGray"
+                                            app:theme="@style/styleText"
+                                            android:backgroundTint="@color/colorPrimaryDark">
+
+                                            <com.google.android.material.textfield.TextInputEditText
+                                                android:id="@+id/etxNumber"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:singleLine="true"
+                                                android:textSize="18sp"
+                                                android:imeOptions="actionNext"
+                                                android:inputType="number"
+                                                android:fontFamily="@font/nunito_sans_semibold"
+                                                android:textColor="@color/textDark"
+                                                android:backgroundTint="@color/colorPrimaryDark"
+                                                />
+
+                                        </com.google.android.material.textfield.TextInputLayout>
+
+
+                                    </LinearLayout>
+
+
+
+                                    <com.google.android.material.textfield.TextInputLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="?actionBarSize"
+                                        android:hint="@string/email"
+                                        android:layout_marginBottom="10dp"
+                                        android:layout_marginTop="20dp"
+                                        app:hintTextColor="@color/iconicGray"
+                                        android:textColorHint="@color/iconicGray"
+                                        app:theme="@style/styleText"
+                                        android:backgroundTint="@color/colorPrimaryDark">
+
+                                        <com.google.android.material.textfield.TextInputEditText
+                                            android:id="@+id/etxEmail"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:singleLine="true"
+                                            android:textSize="18sp"
+                                            android:imeOptions="actionNext"
+                                            android:inputType="textEmailAddress"
+                                            android:fontFamily="@font/nunito_sans_semibold"
+                                            android:textColor="@color/textDark"
+                                            android:backgroundTint="@color/colorPrimaryDark"
+                                            />
+
+                                    </com.google.android.material.textfield.TextInputLayout>
 
                                 </LinearLayout>
 
@@ -483,13 +625,13 @@
                             <RelativeLayout
                                 android:id="@+id/lnrPaymentInfo"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:padding="16dp">
+                                android:layout_height="wrap_content">
 
                                 <LinearLayout
                                     android:id="@+id/lnrmPaymentInfo"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:padding="16dp"
                                     android:orientation="horizontal">
 
                                     <TextView
@@ -529,13 +671,247 @@
                                 </LinearLayout>
 
                                 <LinearLayout
+                                    android:orientation="horizontal"
+                                    android:id="@+id/line2"
+                                    android:layout_marginTop="0dp"
                                     android:layout_below="@+id/lnrmPaymentInfo"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0.5dp"
+                                    android:background="@color/customeGray"
+                                    tools:ignore="Suspicious0dp">
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_below="@+id/line2"
                                     android:id="@+id/viewPaymentInfo"
-                                    android:layout_marginTop="20dp"
+                                    android:layout_marginTop="10dp"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:visibility="gone"
+                                    android:padding="16dp"
                                     android:orientation="vertical">
+
+                                    <LinearLayout
+                                        android:id="@+id/lnrAddNewView"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:visibility="gone"
+                                        android:orientation="vertical">
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:layout_weight="1"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:text="@string/addNewCard"
+                                                android:fontFamily="@font/nunit_sans_bold"
+                                                android:textColor="@color/colorPrimaryDark"
+                                                android:textSize="18sp">
+
+                                            </TextView>
+
+                                            <ImageView
+                                                android:id="@+id/imgCancelAddNew"
+                                                android:layout_width="25dp"
+                                                android:layout_height="25dp"
+                                                android:tint="@color/textDark"
+                                                android:src="@drawable/ic_action_navigation_close_inverted"
+                                                >
+                                            </ImageView>
+
+
+                                        </LinearLayout>
+
+                                        <EditText
+                                            android:id="@+id/etxCardNumber"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="?actionBarSize"
+                                            android:layout_marginBottom="10dp"
+                                            android:layout_marginTop="20dp"
+                                            android:textSize="18sp"
+                                            android:imeOptions="actionNext"
+                                            android:textColor="@color/textDark"
+                                            android:textColorHint="@color/iconicGray"
+                                            android:textCursorDrawable="@drawable/color_cursor"
+                                            android:backgroundTint="@color/colorPrimaryDark"
+                                            android:fontFamily="@font/nunito_sans_regular"
+                                            android:inputType="number"
+                                            android:maxLength="16"
+                                            android:digits="01234 56789"
+                                            android:hint="@string/cardNumber">
+
+                                        </EditText>
+
+                                        <EditText
+                                            android:id="@+id/etxCardName"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="?actionBarSize"
+                                            android:layout_marginBottom="10dp"
+                                            android:layout_marginTop="0dp"
+                                            android:textSize="18sp"
+                                            android:imeOptions="actionNext"
+                                            android:textColor="@color/textDark"
+                                            android:textColorHint="@color/iconicGray"
+                                            android:textCursorDrawable="@drawable/color_cursor"
+                                            android:backgroundTint="@color/colorPrimaryDark"
+                                            android:fontFamily="@font/nunito_sans_regular"
+                                            android:inputType="textCapWords"
+                                            android:hint="@string/nameOnCard">
+
+                                        </EditText>
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginBottom="10dp"
+                                            android:layout_marginTop="0dp"
+                                            android:orientation="horizontal">
+
+                                            <EditText
+                                                android:id="@+id/etxValidMonth"
+                                                android:layout_weight="1"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="?actionBarSize"
+                                                android:textSize="18sp"
+                                                android:imeOptions="actionNext"
+                                                android:textColor="@color/textDark"
+                                                android:textColorHint="@color/iconicGray"
+                                                android:textCursorDrawable="@drawable/color_cursor"
+                                                android:backgroundTint="@color/colorPrimaryDark"
+                                                android:fontFamily="@font/nunito_sans_regular"
+                                                android:inputType="number"
+                                                android:maxLength="5"
+                                                android:digits="0123456789/"
+                                                android:layout_marginRight="20dp"
+                                                android:hint="@string/validThrough">
+
+                                            </EditText>
+
+                                            <EditText
+                                                android:id="@+id/etxCvv"
+                                                android:layout_width="100dp"
+                                                android:layout_height="?actionBarSize"
+                                                android:textSize="18sp"
+                                                android:digits="0123456789"
+                                                android:maxLength="3"
+                                                android:imeOptions="actionNext"
+                                                android:textColor="@color/textDark"
+                                                android:textColorHint="@color/iconicGray"
+                                                android:textCursorDrawable="@drawable/color_cursor"
+                                                android:backgroundTint="@color/colorPrimaryDark"
+                                                android:fontFamily="@font/nunito_sans_regular"
+                                                android:inputType="number"
+                                                android:hint="@string/ccv">
+
+                                            </EditText>
+
+                                        </LinearLayout>
+
+                                        <CheckBox
+                                            android:id="@+id/checkSecure"
+                                            android:layout_marginTop="10dp"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:buttonTint="@color/green"
+                                            android:textColor="@color/grayTwo"
+                                            android:fontFamily="@font/nunito_sans_regular"
+                                            android:textSize="16sp"
+                                            android:checked="true"
+                                            android:text="@string/securelyMessage">
+
+                                        </CheckBox>
+
+                                        <TextView
+                                            android:id="@+id/txtSave"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/nunit_sans_bold"
+                                            android:textColor="@color/colorWhite"
+                                            android:text="@string/save"
+                                            android:padding="16dp"
+                                            android:layout_marginTop="40dp"
+                                            android:layout_marginBottom="20dp"
+                                            android:layout_marginRight="20dp"
+                                            android:layout_marginLeft="20dp"
+                                            android:layout_gravity="center"
+                                            android:gravity="center"
+                                            android:textSize="18dp"
+                                            android:background="@drawable/button_blue_bg"></TextView>
+
+
+                                    </LinearLayout>
+
+                                    <RelativeLayout
+                                        android:id="@+id/lnrDisplayView"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:orientation="vertical">
+
+                                        <androidx.recyclerview.widget.RecyclerView
+                                            android:id="@+id/recyclerCard"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginBottom="20dp">
+
+                                        </androidx.recyclerview.widget.RecyclerView>
+
+                                        <RelativeLayout
+                                            android:layout_below="@+id/recyclerCard"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="vertical"
+                                            android:layout_marginTop="0dp">
+
+                                            <LinearLayout
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:orientation="horizontal">
+
+                                                <LinearLayout
+                                                    android:id="@+id/lnrAddNewCard"
+                                                    android:layout_weight="1"
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="30dp"
+                                                    android:orientation="horizontal">
+
+                                                    <ImageView
+                                                        android:layout_width="35dp"
+                                                        android:layout_height="27dp"
+                                                        android:layout_gravity="center_vertical"
+                                                        android:src="@drawable/ic_add_card"></ImageView>
+
+                                                    <TextView
+                                                        android:layout_width="match_parent"
+                                                        android:layout_height="wrap_content"
+                                                        android:text="@string/addNewCard"
+                                                        android:paddingLeft="20dp"
+                                                        android:paddingRight="20dp"
+                                                        android:layout_gravity="center_vertical"
+                                                        android:fontFamily="@font/nunit_sans_bold"
+                                                        android:textColor="@color/colorPrimaryDark"
+                                                        android:textSize="18sp">
+
+                                                    </TextView>
+
+                                                </LinearLayout>
+
+                                                <ImageView
+                                                    android:layout_width="100dp"
+                                                    android:layout_height="10dp"
+                                                    android:scaleType="fitXY"
+                                                    android:layout_gravity="center_vertical"
+                                                    android:src="@drawable/ic_vizas"></ImageView>
+
+                                            </LinearLayout>
+
+                                        </RelativeLayout>
+
+                                    </RelativeLayout>
 
                                 </LinearLayout>
 
@@ -551,18 +927,18 @@
                             android:layout_marginLeft="16dp"
                             android:layout_marginRight="16dp"
                             android:layout_marginTop="10dp"
-                            android:layout_marginBottom="16dp">
+                            android:layout_marginBottom="10dp">
 
                             <RelativeLayout
                                 android:id="@+id/lnrBillingInfo"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:padding="16dp">
+                                android:layout_height="wrap_content">
 
                                 <LinearLayout
                                     android:id="@+id/lnrmBillingInfo"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:padding="16dp"
                                     android:orientation="horizontal">
 
                                     <TextView
@@ -602,13 +978,281 @@
                                 </LinearLayout>
 
                                 <LinearLayout
+                                    android:orientation="horizontal"
+                                    android:id="@+id/line3"
+                                    android:layout_marginTop="0dp"
                                     android:layout_below="@+id/lnrmBillingInfo"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0.5dp"
+                                    android:background="@color/customeGray"
+                                    tools:ignore="Suspicious0dp">
+
+                                </LinearLayout>
+
+
+                                <LinearLayout
+                                    android:layout_below="@+id/line3"
                                     android:id="@+id/viewBillingInfo"
-                                    android:layout_marginTop="20dp"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:visibility="gone"
+                                    android:padding="16dp"
+                                    android:orientation="vertical">
+
+                                    <com.google.android.material.textfield.TextInputLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="?actionBarSize"
+                                        android:hint="@string/address"
+                                        android:layout_marginBottom="10dp"
+                                        android:layout_marginTop="0dp"
+                                        app:hintTextColor="@color/iconicGray"
+                                        android:textColorHint="@color/iconicGray"
+                                        app:theme="@style/styleText"
+                                        android:backgroundTint="@color/colorPrimaryDark">
+
+                                        <com.google.android.material.textfield.TextInputEditText
+                                            android:id="@+id/etxAddress"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:singleLine="true"
+                                            android:textSize="18sp"
+                                            android:imeOptions="actionNext"
+                                            android:inputType="text"
+                                            android:fontFamily="@font/nunito_sans_semibold"
+                                            android:textColor="@color/textDark"
+                                            android:backgroundTint="@color/colorPrimaryDark"
+                                            />
+
+                                    </com.google.android.material.textfield.TextInputLayout>
+
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="10dp"
+                                        android:layout_marginTop="20dp">
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="vertical">
+
+                                            <Spinner
+                                                android:id="@+id/spinnerAddress"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="?actionBarSize"
+                                                android:background="@android:color/transparent"
+                                                android:backgroundTint="@color/colorPrimaryDark">
+
+                                            </Spinner>
+
+                                            <LinearLayout
+                                                android:layout_width="match_parent"
+                                                android:layout_height="1dp"
+                                                android:background="@color/colorPrimaryDark"
+                                                android:layout_marginTop="-5dp"
+                                                android:layout_marginLeft="3dp"
+                                                android:layout_marginRight="3dp"></LinearLayout>
+
+                                        </LinearLayout>
+
+                                        <ImageView
+                                            android:id="@+id/imgEmirateRight"
+                                            android:layout_width="25dp"
+                                            android:layout_height="25dp"
+                                            android:layout_marginRight="10dp"
+                                            android:src="@drawable/ic_down_arrow"
+                                            android:layout_alignParentRight="true"
+                                            android:layout_centerVertical="true">
+
+                                        </ImageView>
+
+                                        <ImageView
+                                            android:id="@+id/imgEmirateLeft"
+                                            android:layout_width="25dp"
+                                            android:layout_height="25dp"
+                                            android:layout_marginLeft="10dp"
+                                            android:visibility="gone"
+                                            android:src="@drawable/ic_down_arrow"
+                                            android:layout_alignParentLeft="true"
+                                            android:layout_centerVertical="true">
+                                        </ImageView>
+
+
+                                    </RelativeLayout>
+
+                                    <com.google.android.material.textfield.TextInputLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="?actionBarSize"
+                                        android:hint="@string/state"
+                                        android:layout_marginBottom="10dp"
+                                        android:layout_marginTop="20dp"
+                                        app:hintTextColor="@color/iconicGray"
+                                        android:textColorHint="@color/iconicGray"
+                                        app:theme="@style/styleText"
+                                        android:backgroundTint="@color/colorPrimaryDark">
+
+                                        <com.google.android.material.textfield.TextInputEditText
+                                            android:id="@+id/etxState"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:singleLine="true"
+                                            android:textSize="18sp"
+                                            android:imeOptions="actionNext"
+                                            android:inputType="text"
+                                            android:fontFamily="@font/nunito_sans_semibold"
+                                            android:textColor="@color/textDark"
+                                            android:backgroundTint="@color/colorPrimaryDark"
+                                            />
+
+                                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                                    <com.google.android.material.textfield.TextInputLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="?actionBarSize"
+                                        android:hint="@string/twonCity"
+                                        android:layout_marginBottom="10dp"
+                                        android:layout_marginTop="20dp"
+                                        app:hintTextColor="@color/iconicGray"
+                                        android:textColorHint="@color/iconicGray"
+                                        app:theme="@style/styleText"
+                                        android:backgroundTint="@color/colorPrimaryDark">
+
+                                        <com.google.android.material.textfield.TextInputEditText
+                                            android:id="@+id/etxCity"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:singleLine="true"
+                                            android:textSize="18sp"
+                                            android:imeOptions="actionNext"
+                                            android:inputType="text"
+                                            android:fontFamily="@font/nunito_sans_semibold"
+                                            android:textColor="@color/textDark"
+                                            android:backgroundTint="@color/colorPrimaryDark"
+                                            />
+
+                                    </com.google.android.material.textfield.TextInputLayout>
+
+                                    <com.google.android.material.textfield.TextInputLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="?actionBarSize"
+                                        android:hint="@string/zipCode"
+                                        android:layout_marginBottom="10dp"
+                                        android:layout_marginTop="20dp"
+                                        app:hintTextColor="@color/iconicGray"
+                                        android:textColorHint="@color/iconicGray"
+                                        app:theme="@style/styleText"
+                                        android:backgroundTint="@color/colorPrimaryDark">
+
+                                        <com.google.android.material.textfield.TextInputEditText
+                                            android:id="@+id/etxZipcode"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:singleLine="true"
+                                            android:textSize="18sp"
+                                            android:imeOptions="actionNext"
+                                            android:inputType="text"
+                                            android:fontFamily="@font/nunito_sans_semibold"
+                                            android:textColor="@color/textDark"
+                                            android:backgroundTint="@color/colorPrimaryDark"
+                                            />
+
+                                    </com.google.android.material.textfield.TextInputLayout>
+
+                                </LinearLayout>
+
+                            </RelativeLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:cardElevation="3dp"
+                            app:cardCornerRadius="5dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginRight="16dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="16dp">
+
+                            <RelativeLayout
+                                android:id="@+id/lnrDocument"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <LinearLayout
+                                    android:id="@+id/lnrmDocument"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:padding="16dp"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_weight="1"
+                                        android:id="@+id/txtDocument"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="@color/textDark"
+                                        android:fontFamily="@font/nunito_sans_semibold"
+                                        android:text="@string/yourDocument"
+                                        android:textSize="18sp">
+                                    </TextView>
+
+                                    <RelativeLayout
+                                        android:layout_alignParentRight="true"
+                                        android:layout_centerVertical="true"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content">
+                                        <ImageView
+                                            android:id="@+id/imgDocumentRight"
+                                            android:layout_width="25dp"
+                                            android:layout_height="25dp"
+                                            android:src="@drawable/ic_plus"
+                                            >
+                                        </ImageView>
+
+                                        <ImageView
+                                            android:id="@+id/imgDocumentLeft"
+                                            android:layout_width="25dp"
+                                            android:layout_height="25dp"
+                                            android:src="@drawable/ic_minus"
+                                            android:visibility="gone">
+                                        </ImageView>
+                                    </RelativeLayout>
+
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:orientation="horizontal"
+                                    android:id="@+id/line4"
+                                    android:layout_marginTop="0dp"
+                                    android:layout_below="@+id/lnrmDocument"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0.5dp"
+                                    android:background="@color/customeGray"
+                                    tools:ignore="Suspicious0dp">
+
+                                </LinearLayout>
+
+
+                                <LinearLayout
+                                    android:layout_below="@+id/line4"
+                                    android:id="@+id/viewDocument"
+                                    android:layout_marginTop="10dp"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:visibility="gone"
                                     android:orientation="vertical">
+
+                                    <androidx.recyclerview.widget.RecyclerView
+                                        android:id="@+id/recyclerDocument"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content">
+
+                                    </androidx.recyclerview.widget.RecyclerView>
 
                                 </LinearLayout>
 

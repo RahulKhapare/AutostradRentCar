@@ -312,6 +312,7 @@
     <string name="personalInfo">Personal Information</string>
     <string name="paymentInfo">Payment Information</string>
     <string name="bookingRemark">Booking Remark</string>
+    <string name="yourDocument">Your Document</string>
 
     <string name="selectSelftPickUpLocation">الرجاء تحديد موقع الالتقاط الذاتي</string>
     <string name="selectSelfReturnUpLocation">الرجاء تحديد موقع العودة الذاتية</string>
