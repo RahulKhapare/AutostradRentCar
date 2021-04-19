@@ -313,9 +313,16 @@
     <string name="paymentInfo">Payment Information</string>
     <string name="bookingRemark">Booking Remark</string>
     <string name="yourDocument">Your Document</string>
+    <string name="deliverExtraMessage">Do you want the car to be Delivered ( Charges Extra ):</string>
+    <string name="collectExtraMessage">Do you want the car to be Collect ( Charges Extra ):</string>
+    <string name="deliverEmirate">Select Deliver Emirate</string>
+    <string name="collectEmirate">Select Collect Emirate</string>
 
     <string name="selectSelftPickUpLocation">الرجاء تحديد موقع الالتقاط الذاتي</string>
     <string name="selectSelfReturnUpLocation">الرجاء تحديد موقع العودة الذاتية</string>
+    <string name="selectDropOffLocation">Please select drop off location</string>
+    <string name="selectDeliverEmirate">Select deliver emirate</string>
+    <string name="selectCollectEmirate">Select collect emirate</string>
 
 
     <string name="txt1">شركة رائدة في مجال تأجير السيارات ولديها أكبر شبكة من الفروع ونقاط الالتقاء</string>

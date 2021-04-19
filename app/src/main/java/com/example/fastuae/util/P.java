@@ -114,6 +114,7 @@ public class P {
     public static String pickup_location_name = "pickup_location_name";
     public static String pickup_location_id = "pickup_location_id";
     public static String pickup_date = "pickup_date";
+    public static String action = "action";
     public static String pickup_time = "pickup_time";
     public static String booking_type = "booking_type";
     public static String month_time = "month_time";

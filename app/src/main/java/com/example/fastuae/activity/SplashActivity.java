@@ -3,16 +3,22 @@ package com.example.fastuae.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
+import android.widget.Button;
 
 import com.adoisstudio.helper.Api;
 import com.adoisstudio.helper.H;
 import com.adoisstudio.helper.Json;
 import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
+import com.example.fastuae.BuildConfig;
 import com.example.fastuae.R;
 import com.example.fastuae.databinding.ActivitySplashBinding;
 import com.example.fastuae.util.Config;
@@ -90,11 +96,69 @@ public class SplashActivity extends AppCompatActivity {
                     if (json.getInt(P.status) == 1) {
                         json = json.getJson(P.data);
                         Config.countryJsonList = json.getJsonList(P.country_list);
-                        checkValidation();
+
+                        String min_ver = "";
+
+                        if (!TextUtils.isEmpty(min_ver) || !min_ver.equals("null")){
+                            int versionCode = BuildConfig.VERSION_CODE;
+                            try {
+                                int minimumVersion = Integer.parseInt(min_ver);
+                                if (versionCode<minimumVersion){
+                                    showUpdatePopUP();
+                                }else {
+                                    checkValidation();
+                                }
+                            }catch (Exception e){
+                                checkValidation();
+                            }
+                        }else {
+                            checkValidation();
+                        }
+
                     }else {
                         H.showMessage(activity,json.getString(P.error));
                     }
                 })
                 .run("hitInit");
+    }
+
+    private void showUpdatePopUP()
+    {
+        AlertDialog.Builder adb = new AlertDialog.Builder(this);
+        adb.setTitle("Message");
+        adb.setMessage("New Update available.");
+        adb.setCancelable(false);
+        adb.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                checkValidation();
+            }
+        });
+        adb.setPositiveButton("update", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                redirectToPlayStore();
+            }
+        }).show();
+
+        AlertDialog alert = adb.create();
+        alert.show();
+        Button nbutton = alert.getButton(DialogInterface.BUTTON_NEGATIVE);
+        nbutton.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+        Button pbutton = alert.getButton(DialogInterface.BUTTON_POSITIVE);
+        pbutton.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+
+    }
+
+    private void redirectToPlayStore()
+    {
+        final String appPackageName = this.getPackageName();
+        try {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+        } catch (android.content.ActivityNotFoundException anfe) {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
+        }
     }
 }

@@ -26,6 +26,7 @@ import com.example.fastuae.model.CountryCodeModel;
 import com.example.fastuae.util.Config;
 import com.example.fastuae.util.P;
 import com.example.fastuae.util.RemoveHtml;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,6 +61,16 @@ public class ChooseExtrasAdapter extends RecyclerView.Adapter<ChooseExtrasAdapte
         holder.binding.txtName.setText(model.getTitle());
         holder.binding.txtDesc.setText(RemoveHtml.html2text(model.getDescription()));
         holder.binding.txtPrice.setText("AED " + model.getPrice());
+
+        if (model.getTitle().contains("Baby seater")){
+            Picasso.get().load(R.drawable.ic_baby_seat).into(holder.binding.imgExtra);
+        }else if (model.getTitle().contains("GPS")){
+            Picasso.get().load(R.drawable.ic_gps).into(holder.binding.imgExtra);
+        }else if (model.getTitle().contains("Additional Driver")){
+            Picasso.get().load(R.drawable.ic_driver).into(holder.binding.imgExtra);
+        }else {
+            holder.binding.imgExtra.setVisibility(View.GONE);
+        }
 
         holder.binding.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

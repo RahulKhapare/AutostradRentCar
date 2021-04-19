@@ -124,6 +124,7 @@ public class CarCardFragment extends Fragment {
 
                         for (int i = 0; i < car_list.size(); i++) {
                             Json jsonData = car_list.get(i);
+                            Log.e("TAG", "hitCarDataSSDSD: "+ jsonData.toString() );
                             CarModel model = new CarModel();
                             model.setId(jsonData.getString(P.id));
                             model.setCar_name(jsonData.getString(P.car_name));
@@ -155,7 +156,7 @@ public class CarCardFragment extends Fragment {
                     ProgressView.dismiss(loadingDialog);
 
                 })
-                .run("hitCarData");
+                .run("hitCarData1");
     }
 
     private void setAdapter(int lastPosition) {
@@ -200,22 +201,23 @@ public class CarCardFragment extends Fragment {
     private String getPaginationUrl(boolean isFilter) {
         String url =
 
-                        "booking_type=" + "daily" +
+                        "booking_type=" + SelectCarActivity.bookingTYpe +
+                        "&month_time=" + SelectCarActivity.monthDuration +
 
                         "&emirate_id=" + SelectCarActivity.pickUpEmirateID+
-                        "&pickup_type=" + SelectCarActivity.pickUpType+
-                        "&pickup_emirate_id=" + SelectCarActivity.pickUpEmirateID +
-                        "&pickup_location_id=" + SelectCarActivity.pickUpLocationID +
-                        "&pickup_address=" + SelectCarActivity.pickUpAddress +
+//                        "&pickup_type=" + SelectCarActivity.pickUpType+
+//                        "&pickup_emirate_id=" + SelectCarActivity.pickUpEmirateID +
+//                        "&pickup_location_id=" + SelectCarActivity.pickUpLocationID +
+//                        "&pickup_address=" + SelectCarActivity.pickUpAddress +
                         "&pickup_date=" + SelectCarActivity.pickUpDate +
-                        "&pickup_time=" + SelectCarActivity.pickUpTime +
+//                        "&pickup_time=" + SelectCarActivity.pickUpTime +
 
-                        "&dropoff_type=" + SelectCarActivity.dropUpType +
-                        "&dropoff_emirate_id=" + SelectCarActivity.dropUpEmirateID +
-                        "&dropoff_location_id=" + SelectCarActivity.dropUpLocationID +
-                        "&dropoff_address=" + SelectCarActivity.dropUpAddress +
+//                        "&dropoff_type=" + SelectCarActivity.dropUpType +
+//                        "&dropoff_emirate_id=" + SelectCarActivity.dropUpEmirateID +
+//                        "&dropoff_location_id=" + SelectCarActivity.dropUpLocationID +
+//                        "&dropoff_address=" + SelectCarActivity.dropUpAddress +
                         "&dropoff_date=" + SelectCarActivity.dropUpDate +
-                        "&dropoff_time=" + SelectCarActivity.dropUpTime +
+//                        "&dropoff_time=" + SelectCarActivity.dropUpTime +
 
                         "&coupon_code=" + "" ;
 

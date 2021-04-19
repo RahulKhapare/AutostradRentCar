@@ -63,9 +63,65 @@
 
                     </LinearLayout>
 
+                    <LinearLayout
+                        android:layout_below="@+id/lnrTopRadio"
+                        android:id="@+id/lnrExtraDeliver"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/textDark"
+                            android:textSize="16sp"
+                            android:text="@string/deliverExtraMessage">
+
+                        </TextView>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_gravity="center_horizontal"
+                            android:gravity="center_horizontal"
+                            android:layout_marginTop="10dp">
+
+                            <RadioButton
+                                android:id="@+id/radioDeliverYes"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:buttonTint="@color/grayDark"
+                                android:textColor="@color/textDark"
+                                android:textSize="16sp"
+                                android:checked="false"
+                                android:layout_marginRight="10dp"
+                                android:layout_marginLeft="10dp"
+                                android:text="@string/yes">
+
+                            </RadioButton>
+
+                            <RadioButton
+                                android:id="@+id/radioDeliverNo"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:buttonTint="@color/lightBlue"
+                                android:textColor="@color/textDark"
+                                android:checked="true"
+                                android:layout_marginRight="10dp"
+                                android:layout_marginLeft="10dp"
+                                android:text="@string/no">
+
+                            </RadioButton>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
 
                     <androidx.cardview.widget.CardView
-                        android:layout_below="@+id/lnrTopRadio"
+                        android:layout_below="@+id/lnrExtraDeliver"
                         android:id="@+id/cardDuration"
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
@@ -229,6 +285,142 @@
 
                     <androidx.cardview.widget.CardView
                         android:layout_below="@+id/cardPickLocation"
+                        android:id="@+id/cardDeliverEmirate"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        app:cardElevation="3dp"
+                        app:cardCornerRadius="5dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginLeft="1dp"
+                        android:layout_marginRight="1dp"
+                        android:visibility="gone">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:layout_gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="@color/textDark"
+                                        android:paddingLeft="10dp"
+                                        android:layout_gravity="center_vertical"
+                                        android:fontFamily="@font/nunito_sans_semibold"
+                                        android:text="@string/deliverEmirate"
+                                        android:textSize="16sp">
+                                    </TextView>
+
+
+                                </LinearLayout>
+
+                                <TextView
+                                    android:id="@+id/txtDeliverEmirateMessage"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="@color/iconicGray"
+                                    android:layout_gravity="center_vertical"
+                                    android:fontFamily="@font/nunito_sans_semibold"
+                                    android:text=""
+                                    android:visibility="gone"
+                                    android:paddingLeft="10dp"
+                                    android:textSize="14sp">
+                                </TextView>
+
+                            </LinearLayout>
+
+                            <ImageView
+                                android:id="@+id/imgDeliverEmirateArrowUp"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:visibility="gone"
+                                android:layout_gravity="center_vertical"
+                                android:tint="@color/colorBlack"
+                                android:src="@drawable/ic_up_arrow"></ImageView>
+
+                            <ImageView
+                                android:id="@+id/imgDeliverEmirateArrowDown"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_gravity="center_vertical"
+                                android:tint="@color/colorBlack"
+                                android:src="@drawable/ic_down_arrow"></ImageView>
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+
+                    <LinearLayout
+                        android:layout_below="@+id/cardDeliverEmirate"
+                        android:id="@+id/lnrExtraCollect"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/textDark"
+                            android:textSize="16sp"
+                            android:text="@string/collectExtraMessage">
+
+                        </TextView>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_gravity="center_horizontal"
+                            android:gravity="center_horizontal"
+                            android:layout_marginTop="10dp">
+
+                            <RadioButton
+                                android:id="@+id/radioCollectYes"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:buttonTint="@color/grayDark"
+                                android:textColor="@color/textDark"
+                                android:textSize="16sp"
+                                android:checked="false"
+                                android:layout_marginRight="10dp"
+                                android:layout_marginLeft="10dp"
+                                android:text="@string/yes">
+
+                            </RadioButton>
+
+                            <RadioButton
+                                android:id="@+id/radioCollectNo"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:buttonTint="@color/lightBlue"
+                                android:textColor="@color/textDark"
+                                android:checked="true"
+                                android:layout_marginRight="10dp"
+                                android:layout_marginLeft="10dp"
+                                android:text="@string/no">
+
+                            </RadioButton>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_below="@+id/lnrExtraCollect"
                         android:id="@+id/cardDropLocation"
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
@@ -309,8 +501,87 @@
 
                     </androidx.cardview.widget.CardView>
 
-                    <LinearLayout
+                    <androidx.cardview.widget.CardView
                         android:layout_below="@+id/cardDropLocation"
+                        android:id="@+id/cardCollectEmirate"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        app:cardElevation="3dp"
+                        app:cardCornerRadius="5dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginLeft="1dp"
+                        android:layout_marginRight="1dp"
+                        android:visibility="gone">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:layout_gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="@color/textDark"
+                                        android:paddingLeft="10dp"
+                                        android:layout_gravity="center_vertical"
+                                        android:fontFamily="@font/nunito_sans_semibold"
+                                        android:text="@string/collectEmirate"
+                                        android:textSize="16sp">
+                                    </TextView>
+
+
+                                </LinearLayout>
+
+                                <TextView
+                                    android:id="@+id/txtCollectEmirateMessage"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="@color/iconicGray"
+                                    android:layout_gravity="center_vertical"
+                                    android:fontFamily="@font/nunito_sans_semibold"
+                                    android:text=""
+                                    android:visibility="gone"
+                                    android:paddingLeft="10dp"
+                                    android:textSize="14sp">
+                                </TextView>
+
+                            </LinearLayout>
+
+                            <ImageView
+                                android:id="@+id/imgCollectEmirateArrowUp"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:visibility="gone"
+                                android:layout_gravity="center_vertical"
+                                android:tint="@color/colorBlack"
+                                android:src="@drawable/ic_up_arrow"></ImageView>
+
+                            <ImageView
+                                android:id="@+id/imgCollectEmirateArrowDown"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_gravity="center_vertical"
+                                android:tint="@color/colorBlack"
+                                android:src="@drawable/ic_down_arrow"></ImageView>
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <LinearLayout
+                        android:layout_below="@+id/cardCollectEmirate"
                         android:id="@+id/lnrPickup"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -712,6 +983,92 @@
 
                             <androidx.recyclerview.widget.RecyclerView
                                 android:id="@+id/recyclerDuration"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:scrollbarSize="7dp"
+                                android:scrollbarFadeDuration="0"
+                                android:scrollbarThumbVertical="@drawable/scrollbar_shape"
+                                android:scrollbars="vertical">
+
+                            </androidx.recyclerview.widget.RecyclerView>
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardDeliverEmirateView"
+                        android:layout_below="@+id/cardDeliverEmirate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardElevation="3dp"
+                        app:cardCornerRadius="5dp"
+                        android:layout_marginTop="-5dp"
+                        android:layout_marginLeft="1dp"
+                        android:layout_marginRight="1dp"
+                        android:layout_marginBottom="10dp"
+                        android:visibility="gone"
+                        >
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0.5dp"
+                                android:layout_marginTop="5dp"
+                                android:background="@color/customeGray"
+                                tools:ignore="Suspicious0dp">
+
+                            </LinearLayout>
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/recyclerDeliverEmirate"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:scrollbarSize="7dp"
+                                android:scrollbarFadeDuration="0"
+                                android:scrollbarThumbVertical="@drawable/scrollbar_shape"
+                                android:scrollbars="vertical">
+
+                            </androidx.recyclerview.widget.RecyclerView>
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardCollectEmirateView"
+                        android:layout_below="@+id/cardCollectEmirate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardElevation="3dp"
+                        app:cardCornerRadius="5dp"
+                        android:layout_marginTop="-5dp"
+                        android:layout_marginLeft="1dp"
+                        android:layout_marginRight="1dp"
+                        android:layout_marginBottom="10dp"
+                        android:visibility="gone"
+                        >
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0.5dp"
+                                android:layout_marginTop="5dp"
+                                android:background="@color/customeGray"
+                                tools:ignore="Suspicious0dp">
+
+                            </LinearLayout>
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/recyclerCollectEmirate"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:scrollbarSize="7dp"

@@ -89,10 +89,18 @@ public class AddOnsActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-                Intent intent = new Intent(activity,CarDetailOneActivity.class);
-                intent.putExtra(Config.PAY_TYPE,payType);
-                intent.putExtra(Config.SELECTED_AED,aedSelected);
-                startActivity(intent);
+                if (session.getBool(P.userLogin)){
+                    Intent intent = new Intent(activity,CarDetailOneActivity.class);
+                    intent.putExtra(Config.PAY_TYPE,payType);
+                    intent.putExtra(Config.SELECTED_AED,aedSelected);
+                    startActivity(intent);
+                }else {
+                    Intent intent = new Intent(activity,LoginSignUpSkipActivity.class);
+                    intent.putExtra(Config.PAY_TYPE,payType);
+                    intent.putExtra(Config.SELECTED_AED,aedSelected);
+                    startActivity(intent);
+                }
+
             }
         });
 

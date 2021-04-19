@@ -43,6 +43,9 @@ public class LoginSignUpSkipActivity extends AppCompatActivity {
     private String countryCode = "";
     private Session session;
     private int position = 0;
+    private String payType = "";
+    private String aedSelected = "";
+    private String flag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +60,10 @@ public class LoginSignUpSkipActivity extends AppCompatActivity {
         setSupportActionBar(binding.toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+
+        flag = session.getString(P.languageFlag);
+        payType = getIntent().getStringExtra(Config.PAY_TYPE);
+        aedSelected = getIntent().getStringExtra(Config.SELECTED_AED);
 
         loadingDialog = new LoadingDialog(activity);
         session = new Session(activity);

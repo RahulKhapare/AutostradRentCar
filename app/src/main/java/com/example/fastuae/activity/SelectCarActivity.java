@@ -57,6 +57,8 @@ public class SelectCarActivity extends AppCompatActivity implements ViewPager.On
     };
     private LoadingDialog loadingDialog;
 
+    public static String monthDuration = "";//
+    public static String bookingTYpe = "";//
     public static String pickUpEmirateID = "";//
     public static String dropUpEmirateID = "";//
     public static String pickUpDate = "";//
@@ -116,6 +118,8 @@ public class SelectCarActivity extends AppCompatActivity implements ViewPager.On
         getSupportActionBar().setHomeButtonEnabled(true);
 
         isApplyFilter = false;
+        monthDuration = getIntent().getStringExtra(Config.monthDuration);
+        bookingTYpe = getIntent().getStringExtra(Config.bookingTYpe);
         pickUpEmirateID = getIntent().getStringExtra(Config.pickUpEmirateID);
         dropUpEmirateID = getIntent().getStringExtra(Config.dropUpEmirateID);
         pickUpDate = getIntent().getStringExtra(Config.pickUpDate);

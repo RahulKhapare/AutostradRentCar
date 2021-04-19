@@ -72,9 +72,10 @@ public class CarGreedFragment extends Fragment {
         newAdapter = new CarGridNewAdapter(context,carModelList);
         linearLayoutManager = new LinearLayoutManager(context);
         binding.recyclerCar.setLayoutManager(linearLayoutManager);
-        if(Config.dropUpTypeValue.equals(Config.daily)){
+        binding.recyclerCar.setHasFixedSize(true);
+        if(SelectCarActivity.bookingTYpe.equals(Config.daily)){
             binding.recyclerCar.setAdapter(adapter);
-        }else if(Config.dropUpTypeValue.equals(Config.monthly)){
+        }else if(SelectCarActivity.bookingTYpe.equals(Config.monthly)){
             binding.recyclerCar.setAdapter(newAdapter);
         }
 
@@ -184,9 +185,10 @@ public class CarGreedFragment extends Fragment {
                             carModelList.add(model);
                         }
 
-                        if(Config.dropUpTypeValue.equals(Config.daily)){
+                        binding.recyclerCar.setItemViewCacheSize(carModelList.size());
+                        if(SelectCarActivity.bookingTYpe.equals(Config.daily)){
                             adapter.notifyDataSetChanged();
-                        }else if(Config.dropUpTypeValue.equals(Config.monthly)){
+                        }else if(SelectCarActivity.bookingTYpe.equals(Config.monthly)){
                             newAdapter.notifyDataSetChanged();
                         }
 
@@ -196,66 +198,68 @@ public class CarGreedFragment extends Fragment {
                     ProgressView.dismiss(loadingDialog);
                     checkError();
                 })
-                .run("hitCarData");
+                .run("hitCarData2");
     }
 
-    private String getPaginationUrl(boolean isFilter){
-
+    private String getPaginationUrl(boolean isFilter) {
         String url =
-                        "booking_type=" + "daily" +
+
+                "booking_type=" + SelectCarActivity.bookingTYpe +
+                        "&month_time=" + SelectCarActivity.monthDuration +
 
                         "&emirate_id=" + SelectCarActivity.pickUpEmirateID+
-                        "&pickup_type=" + SelectCarActivity.pickUpType+
-                        "&pickup_emirate_id=" + SelectCarActivity.pickUpEmirateID +
-                        "&pickup_location_id=" + SelectCarActivity.pickUpLocationID +
-                        "&pickup_address=" + SelectCarActivity.pickUpAddress +
+//                        "&pickup_type=" + SelectCarActivity.pickUpType+
+//                        "&pickup_emirate_id=" + SelectCarActivity.pickUpEmirateID +
+//                        "&pickup_location_id=" + SelectCarActivity.pickUpLocationID +
+//                        "&pickup_address=" + SelectCarActivity.pickUpAddress +
                         "&pickup_date=" + SelectCarActivity.pickUpDate +
-                        "&pickup_time=" + SelectCarActivity.pickUpTime +
+//                        "&pickup_time=" + SelectCarActivity.pickUpTime +
 
-                        "&dropoff_type=" + SelectCarActivity.dropUpType +
-                        "&dropoff_emirate_id=" + SelectCarActivity.dropUpEmirateID +
-                        "&dropoff_location_id=" + SelectCarActivity.dropUpLocationID +
-                        "&dropoff_address=" + SelectCarActivity.dropUpAddress +
+//                        "&dropoff_type=" + SelectCarActivity.dropUpType +
+//                        "&dropoff_emirate_id=" + SelectCarActivity.dropUpEmirateID +
+//                        "&dropoff_location_id=" + SelectCarActivity.dropUpLocationID +
+//                        "&dropoff_address=" + SelectCarActivity.dropUpAddress +
                         "&dropoff_date=" + SelectCarActivity.dropUpDate +
-                        "&dropoff_time=" + SelectCarActivity.dropUpTime +
+//                        "&dropoff_time=" + SelectCarActivity.dropUpTime +
 
                         "&coupon_code=" + "" ;
 
-        if (!TextUtils.isEmpty(SelectCarActivity.groupValue)){
+        if (!TextUtils.isEmpty(SelectCarActivity.groupValue)) {
             url = url + "&group=" + SelectCarActivity.groupValue;
         }
 
-        if (!TextUtils.isEmpty(SelectCarActivity.passengerValue)){
+        if (!TextUtils.isEmpty(SelectCarActivity.passengerValue)) {
             url = url + "&passengers=" + SelectCarActivity.passengerValue;
         }
 
-        if (!TextUtils.isEmpty(SelectCarActivity.doorValue)){
+        if (!TextUtils.isEmpty(SelectCarActivity.doorValue)) {
             url = url + "&doors=" + SelectCarActivity.doorValue;
         }
 
-        if (!TextUtils.isEmpty(SelectCarActivity.suitcaseValue)){
+        if (!TextUtils.isEmpty(SelectCarActivity.suitcaseValue)) {
             url = url + "&suitcase=" + SelectCarActivity.suitcaseValue;
         }
 
-        if (!TextUtils.isEmpty(SelectCarActivity.transmissionValue)){
+        if (!TextUtils.isEmpty(SelectCarActivity.transmissionValue)) {
             url = url + "&transmission=" + SelectCarActivity.transmissionValue;
         }
 
-        if (!TextUtils.isEmpty(SelectCarActivity.fuilValue)){
+        if (!TextUtils.isEmpty(SelectCarActivity.fuilValue)) {
             url = url + "&fuel=" + SelectCarActivity.fuilValue;
         }
 
-        if (isFilter){
+        if (isFilter) {
             url = url + "&page=" + "1";
             pageCount = 1;
-        }else {
-            url = url + "&page=" + pageCount+"";
+        } else {
+            url = url + "&page=" + pageCount + "";
         }
 
         url = url + "&per_page=" + "10";
 
         return url;
     }
+
 
     private void checkError(){
         if (carModelList.isEmpty()){

@@ -71,6 +71,8 @@ public class Config {
     public static String address1 = "address1";
     public static String address2 = "address2";
 
+    public static String monthDuration = "monthDuration";
+    public static String bookingTYpe = "bookingTYpe";
     public static String pickUpEmirateID = "pickUpEmirateID";
     public static String dropUpEmirateID = "dropUpEmirateID";
     public static String pickUpDate = "pickUpDate";

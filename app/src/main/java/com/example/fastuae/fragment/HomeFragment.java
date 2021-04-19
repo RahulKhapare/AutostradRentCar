@@ -33,10 +33,13 @@ import com.adoisstudio.helper.Session;
 import com.example.fastuae.R;
 import com.example.fastuae.activity.SelectCarActivity;
 import com.example.fastuae.adapter.DurationAdapter;
+import com.example.fastuae.adapter.EmirateAdapter;
+import com.example.fastuae.adapter.EmirateSelectionAdapter;
 import com.example.fastuae.adapter.LocationAdapter;
 import com.example.fastuae.adapter.SliderImageAdapter;
 import com.example.fastuae.databinding.FragmentHomeBinding;
 import com.example.fastuae.model.DurationModel;
+import com.example.fastuae.model.EmirateModel;
 import com.example.fastuae.model.HomeLocationModel;
 import com.example.fastuae.model.SliderModel;
 import com.example.fastuae.util.Click;
@@ -51,7 +54,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
-public class HomeFragment extends Fragment implements LocationAdapter.onClick,DurationAdapter.onClick {
+public class HomeFragment extends Fragment implements LocationAdapter.onClick,DurationAdapter.onClick,EmirateAdapter.onClick {
 
     private Context context;
     private FragmentHomeBinding binding;
@@ -79,14 +82,25 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick,Du
     private String dropUpLandmark = "";
     private String dropupType = "";
     private String pickupType = "";
+    private String bookingTYpe = "";
     private String monthDuration = "";
+    private String deleveryEmirateID = "";
+    private String collectEmirateID = "";
     private int pickUpFlag = 1;
     private int dropUpFlag = 2;
+
 
     private LoadingDialog loadingDialog;
     public static JsonList carList = null;
     public static JsonList blogList = null;
     public static JsonList emirate_list = null;
+
+    private List<EmirateModel> deliverEmirateList;
+    private List<EmirateModel> collectEmirateList;
+    private EmirateAdapter deliverEmirateAdapter;
+    private EmirateAdapter collectEmirateAdapter;
+    private int deliverEmirateFlag = 1;
+    private int collectEmirateFlag = 2;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -130,8 +144,9 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick,Du
 
     private void initView() {
 
-        pickupType = Config.daily;
-        dropupType =  Config.daily;
+        bookingTYpe = Config.daily;
+        pickupType = "self_pickup";
+        dropupType = "self_dropoff";
 
         loadingDialog = new LoadingDialog(context);
         sliderModelList = new ArrayList<>();
@@ -140,23 +155,12 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick,Du
         binding.tabLayout.setupWithViewPager(binding.pager, true);
 
         durationList = new ArrayList<>();
-        durationList.add(new DurationModel("1 month"));
-        durationList.add(new DurationModel("2 month"));
-        durationList.add(new DurationModel("3 month"));
-        durationList.add(new DurationModel("4 month"));
-        durationList.add(new DurationModel("5 month"));
-        durationList.add(new DurationModel("6 month"));
-        durationList.add(new DurationModel("7 month"));
-        durationList.add(new DurationModel("8 month"));
-        durationList.add(new DurationModel("9 month"));
-        durationList.add(new DurationModel("10 month"));
-        durationList.add(new DurationModel("11 month"));
-        durationList.add(new DurationModel("12 month"));
-
+        addDuration();
         durationAdapter = new DurationAdapter(context,durationList,HomeFragment.this);
         LinearLayoutManager linearLayoutManager0 = new LinearLayoutManager(context);
         binding.recyclerDuration.setLayoutManager(linearLayoutManager0);
         binding.recyclerDuration.setHasFixedSize(true);
+        binding.recyclerDuration.setNestedScrollingEnabled(false);
         binding.recyclerDuration.setAdapter(durationAdapter);
 
         locationDailyList = new ArrayList<>();
@@ -172,6 +176,20 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick,Du
         binding.recyclerLocationCollect.setLayoutManager(linearLayoutManager2);
         binding.recyclerLocationCollect.setHasFixedSize(true);
         binding.recyclerLocationCollect.setAdapter(locationMonthlyAdapter);
+
+        deliverEmirateList = new ArrayList<>();
+        deliverEmirateAdapter = new EmirateAdapter(getActivity(),deliverEmirateList,HomeFragment.this,deliverEmirateFlag);
+        binding.recyclerDeliverEmirate.setLayoutManager(new LinearLayoutManager(getActivity()));
+        binding.recyclerDeliverEmirate.setHasFixedSize(true);
+        binding.recyclerDeliverEmirate.setNestedScrollingEnabled(false);
+        binding.recyclerDeliverEmirate.setAdapter(deliverEmirateAdapter);
+
+        collectEmirateList = new ArrayList<>();
+        collectEmirateAdapter = new EmirateAdapter(getActivity(),collectEmirateList,HomeFragment.this,collectEmirateFlag);
+        binding.recyclerCollectEmirate.setLayoutManager(new LinearLayoutManager(getActivity()));
+        binding.recyclerCollectEmirate.setHasFixedSize(true);
+        binding.recyclerCollectEmirate.setNestedScrollingEnabled(false);
+        binding.recyclerCollectEmirate.setAdapter(collectEmirateAdapter);
 
         hitHomeData();
         hitLocationData();
@@ -191,10 +209,29 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick,Du
 
     @Override
     public void onDurationClick(DurationModel model) {
-        monthDuration = model.getDuration();
+        monthDuration = model.getDuration().replace("month","").trim();
         binding.txtDurationMessage.setVisibility(View.VISIBLE);
         binding.txtDurationMessage.setText(monthDuration);
         hideDuration();
+        setDateMonthTime(binding.txtDropDate, binding.txtDropMonth,monthDuration);
+    }
+
+
+    @Override
+    public void onEmirateClick(int flag, EmirateModel model) {
+
+        if (flag==deliverEmirateFlag){
+            binding.txtDeliverEmirateMessage.setVisibility(View.VISIBLE);
+            binding.txtDeliverEmirateMessage.setText(model.getEmirate_name());
+            deleveryEmirateID = model.getId();
+            hideDeliverEmirate();
+        }else if (flag==collectEmirateFlag){
+            binding.txtCollectEmirateMessage.setVisibility(View.VISIBLE);
+            binding.txtCollectEmirateMessage.setText(model.getEmirate_name());
+            collectEmirateID = model.getId();
+            hideCollectEmirate();
+        }
+
     }
 
     @Override
@@ -312,7 +349,9 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick,Du
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-                setDateTime(binding.txtDropDate, binding.txtDropMonth, dropUpFlag);
+                if (!bookingTYpe.equals(Config.monthly)){
+                    setDateTime(binding.txtDropDate, binding.txtDropMonth, dropUpFlag);
+                }
             }
         });
 
@@ -337,13 +376,39 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick,Du
             public void onClick(View v) {
                 Click.preventTwoClick(v);
 
-                if (TextUtils.isEmpty(pickUpId)) {
-                    H.showMessage(context, getResources().getString(R.string.selectSelftPickUpLocation));
-                } else if (TextUtils.isEmpty(dropUpId)) {
-                    H.showMessage(context, getResources().getString(R.string.selectSelfReturnUpLocation));
-                } else {
-                    hitVerifyPickUpData(pickUpId, pickUpDate, pickUpTime, dropUpId, dropUpDate, dropUpTime);
+                if (binding.radioMonthlyDeals.isChecked()){
+                     if (TextUtils.isEmpty(monthDuration)) {
+                        H.showMessage(context, getResources().getString(R.string.selectDuration));
+                        return;
+                    }
                 }
+
+                if (binding.radioDeliverYes.isChecked()){
+                    if (TextUtils.isEmpty(deleveryEmirateID)) {
+                        H.showMessage(context, getResources().getString(R.string.selectDeliverEmirate));
+                        return;
+                    }
+                }else {
+                    if (TextUtils.isEmpty(pickUpId)) {
+                        H.showMessage(context, getResources().getString(R.string.selectSelftPickUpLocation));
+                        return;
+                    }
+                }
+
+                if (binding.radioCollectYes.isChecked()){
+                    if (TextUtils.isEmpty(collectEmirateID)) {
+                        H.showMessage(context, getResources().getString(R.string.selectCollectEmirate));
+                        return;
+                    }
+                }else {
+                    if (TextUtils.isEmpty(dropUpId)) {
+                        H.showMessage(context, getResources().getString(R.string.selectDropOffLocation));
+                        return;
+                    }
+                }
+
+                hitVerifyPickUpData(pickUpId, pickUpDate, pickUpTime, dropUpId, dropUpDate, dropUpTime);
+
             }
         });
 
@@ -351,30 +416,97 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick,Du
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-                pickupType = Config.daily;
-                dropupType =  Config.daily;
+//                monthDuration = "";
+//                binding.txtDurationMessage.setText("");
+//                binding.txtDurationMessage.setVisibility(View.GONE);
+                bookingTYpe = Config.daily;
                 binding.radioMonthlyDeals.setChecked(false);
                 blueTin(binding.radioDailyRental);
                 blackTin(binding.radioMonthlyDeals);
                 binding.cardDuration.setVisibility(View.GONE);
                 hideDuration();
                 hideAllCardView();
+                getCurrentDate();
             }
         });
 
         binding.radioMonthlyDeals.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                pickupType =  Config.monthly;
-                dropupType = Config.monthly;
+//                monthDuration = "";
+//                binding.txtDurationMessage.setText("");
+//                binding.txtDurationMessage.setVisibility(View.GONE);
+                bookingTYpe =  Config.monthly;
                 Click.preventTwoClick(v);
                 binding.radioDailyRental.setChecked(false);
                 blueTin(binding.radioMonthlyDeals);
                 blackTin(binding.radioDailyRental);
                 binding.cardDuration.setVisibility(View.VISIBLE);
                 hideAllCardView();
+                getCurrentDate();
             }
         });
+
+        binding.radioDeliverYes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                binding.radioDeliverNo.setChecked(false);
+                blueTin(binding.radioDeliverYes);
+                blackTin(binding.radioDeliverNo);
+                pickupType = "deliver";
+                binding.cardPickLocation.setVisibility(View.GONE);
+                binding.cardDeliverEmirate.setVisibility(View.VISIBLE);
+                hideOnYesNo();
+
+            }
+        });
+
+
+        binding.radioDeliverNo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                binding.radioDeliverYes.setChecked(false);
+                blueTin(binding.radioDeliverNo);
+                blackTin(binding.radioDeliverYes);
+                pickupType = "self_pickup";
+                binding.cardPickLocation.setVisibility(View.VISIBLE);
+                binding.cardDeliverEmirate.setVisibility(View.GONE);
+                hideOnYesNo();
+
+            }
+        });
+
+        binding.radioCollectYes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                binding.radioCollectNo.setChecked(false);
+                blueTin(binding.radioCollectYes);
+                blackTin(binding.radioCollectNo);
+                dropupType = "collect";
+                binding.cardDropLocation.setVisibility(View.GONE);
+                binding.cardCollectEmirate.setVisibility(View.VISIBLE);
+                hideOnYesNo();
+            }
+        });
+
+
+        binding.radioCollectNo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                binding.radioCollectYes.setChecked(false);
+                blueTin(binding.radioCollectNo);
+                blackTin(binding.radioCollectYes);
+                dropupType = "self_dropoff";
+                binding.cardDropLocation.setVisibility(View.VISIBLE);
+                binding.cardCollectEmirate.setVisibility(View.GONE);
+                hideOnYesNo();
+            }
+        });
+
 
         binding.cardPickLocation.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -411,8 +543,40 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick,Du
                 hideDropUpLocation();
             }
         });
+
+        binding.cardDeliverEmirate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                cardDeliverEmirateClick();
+                hideCollectEmirate();
+                hideDuration();
+                hidePickupLocation();
+                hideDropUpLocation();
+            }
+        });
+
+        binding.cardCollectEmirate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                cardCollectEmirateClick();
+                hideDeliverEmirate();
+                hideDuration();
+                hidePickupLocation();
+                hideDropUpLocation();
+            }
+        });
     }
 
+
+    private void hideOnYesNo(){
+        hideDuration();
+        hideDeliverEmirate();
+        hidePickupLocation();
+        hideCollectEmirate();
+        hideDropUpLocation();
+    }
 
     private void hidePickupLocation(){
         binding.imgDeliverArrowDown.setVisibility(View.VISIBLE);
@@ -431,6 +595,19 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick,Du
         binding.imgDurationArrowUp.setVisibility(View.GONE);
         binding.imgDurationArrowDown.setVisibility(View.VISIBLE);
     }
+
+    private void hideDeliverEmirate(){
+        binding.cardDeliverEmirateView.setVisibility(View.GONE);
+        binding.imgDeliverEmirateArrowUp.setVisibility(View.GONE);
+        binding.imgDeliverEmirateArrowDown.setVisibility(View.VISIBLE);
+    }
+
+    private void hideCollectEmirate(){
+        binding.cardCollectEmirateView.setVisibility(View.GONE);
+        binding.imgCollectEmirateArrowUp.setVisibility(View.GONE);
+        binding.imgCollectEmirateArrowDown.setVisibility(View.VISIBLE);
+    }
+
 
     private void hideAllCardView() {
 
@@ -485,6 +662,34 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick,Du
 
     }
 
+    private void cardDeliverEmirateClick() {
+
+        if (binding.imgDeliverEmirateArrowDown.getVisibility() == View.VISIBLE) {
+            binding.imgDeliverEmirateArrowDown.setVisibility(View.GONE);
+            binding.imgDeliverEmirateArrowUp.setVisibility(View.VISIBLE);
+            binding.cardDeliverEmirateView.setVisibility(View.VISIBLE);
+        } else if (binding.imgDeliverEmirateArrowUp.getVisibility() == View.VISIBLE) {
+            binding.imgDeliverEmirateArrowUp.setVisibility(View.GONE);
+            binding.imgDeliverEmirateArrowDown.setVisibility(View.VISIBLE);
+            binding.cardDeliverEmirateView.setVisibility(View.GONE);
+        }
+
+    }
+
+    private void cardCollectEmirateClick() {
+
+        if (binding.imgCollectEmirateArrowDown.getVisibility() == View.VISIBLE) {
+            binding.imgCollectEmirateArrowDown.setVisibility(View.GONE);
+            binding.imgCollectEmirateArrowUp.setVisibility(View.VISIBLE);
+            binding.cardCollectEmirateView.setVisibility(View.VISIBLE);
+        } else if (binding.imgCollectEmirateArrowUp.getVisibility() == View.VISIBLE) {
+            binding.imgCollectEmirateArrowUp.setVisibility(View.GONE);
+            binding.imgCollectEmirateArrowDown.setVisibility(View.VISIBLE);
+            binding.cardCollectEmirateView.setVisibility(View.GONE);
+        }
+
+    }
+
     private void setDateTime(TextView txtDay, TextView txtMonth, int flag) {
 
         Calendar newCalendar = Calendar.getInstance();
@@ -518,8 +723,29 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick,Du
         }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
 //        mDatePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
         mDatePickerDialog.show();
+    }
+
+    private void setDateMonthTime(TextView txtDay, TextView txtMonth,String month) {
+
+        Calendar newDate = Calendar.getInstance();
+        newDate.add(Calendar.MONTH, Integer.parseInt(month));
+        SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
+        final Date date = newDate.getTime();
+
+        String dayOfTheWeek = (String) DateFormat.format("EEEE", date); // Thursday
+        String dayString = (String) DateFormat.format("dd", date); // 20
+        String monthString = (String) DateFormat.format("MMM", date); // Jun
+        String monthNumber = (String) DateFormat.format("MM", date); // 06
+        String yeare = (String) DateFormat.format("yyyy", date); // 2013
+
+        String currentDate = yeare + "-" + monthString + "-" + dayString;
+        dropUpDate = currentDate;
+
+        txtDay.setText(dayString);
+        txtMonth.setText(monthString.toUpperCase());
 
     }
+
 
     private void setTime(TextView txtTime, int flag) {
         Calendar mcurrentTime = Calendar.getInstance();
@@ -629,6 +855,23 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick,Du
 
                         json = json.getJson(P.data);
                         emirate_list = json.getJsonList(P.emirate_list);
+
+                        if (emirate_list != null && emirate_list.size() != 0) {
+                            for (Json jsonE : emirate_list) {
+                                String id = jsonE.getString(P.id);
+                                String emirate_name = jsonE.getString(P.emirate_name);
+                                String status = jsonE.getString(P.status);
+                                EmirateModel model = new EmirateModel();
+                                model.setId(id);
+                                model.setEmirate_name(emirate_name);
+                                model.setStatus(status);
+                                deliverEmirateList.add(model);
+                                collectEmirateList.add(model);
+                            }
+                        }
+
+                        deliverEmirateAdapter.notifyDataSetChanged();
+                        collectEmirateAdapter.notifyDataSetChanged();
                     } else {
                         H.showMessage(context, json.getString(P.error));
                     }
@@ -688,14 +931,31 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick,Du
 
         ProgressView.show(context, loadingDialog);
         Json j = new Json();
+
+        j.addString(P.booking_type, bookingTYpe);
+
+        if (binding.radioMonthlyDeals.isChecked()){
+            j.addString(P.month_time, monthDuration);
+        }else {
+            j.addString(P.month_time, "");
+        }
+
         j.addString(P.pickup_type, pickupType);
-        j.addString(P.pickup_emirate_id, pickUpEmirateID);
-        j.addString(P.pickup_address, pickUpAddress);
-        j.addString(P.pickup_landmark, pickUpLandmark);
-        j.addString(P.pickup_location_id, pickUpID);
+
+        if (binding.radioDeliverYes.isChecked()){
+            j.addString(P.pickup_emirate_id, deleveryEmirateID);
+            j.addString(P.pickup_location_id, "0");
+            j.addString(P.pickup_address, "");
+            j.addString(P.pickup_landmark, "");
+        }else {
+            j.addString(P.pickup_emirate_id, pickUpEmirateID);
+            j.addString(P.pickup_location_id, pickUpID);
+            j.addString(P.pickup_address, pickUpAddress);
+            j.addString(P.pickup_landmark, pickUpLandmark);
+        }
+
         j.addString(P.pickup_date, pickUpDate);
         j.addString(P.pickup_time, pickUpTime);
-        j.addString(P.booking_type, "daily");
 
         Api.newApi(context, P.BaseUrl + "verify_pickup_location_date_time").addJson(j)
                 .setMethod(Api.POST)
@@ -731,13 +991,25 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick,Du
 
         ProgressView.show(context, loadingDialog);
         Json j = new Json();
+
+        j.addString(P.action, "");
+
         j.addString(P.pickup_date, pickUpDate);
         j.addString(P.pickup_time, pickUpTime);
         j.addString(P.dropoff_type, dropupType);
-        j.addString(P.dropoff_emirate_id, dropUpEmirateID);
-        j.addString(P.dropoff_address, dropUpAddress);
-        j.addString(P.dropoff_landmark, dropUpLandmark);
-        j.addString(P.dropoff_location_id, id);
+
+        if (binding.radioCollectYes.isChecked()){
+            j.addString(P.dropoff_emirate_id, collectEmirateID);
+            j.addString(P.dropoff_location_id, "0");
+            j.addString(P.dropoff_address, "");
+            j.addString(P.dropoff_landmark, "");
+        }else {
+            j.addString(P.dropoff_emirate_id, dropUpEmirateID);
+            j.addString(P.dropoff_location_id, id);
+            j.addString(P.dropoff_address, dropUpAddress);
+            j.addString(P.dropoff_landmark, dropUpLandmark);
+        }
+
         j.addString(P.dropoff_date, date);
         j.addString(P.dropoff_time, time);
 
@@ -761,7 +1033,13 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick,Du
                         Config.SelectedDropUpTime = dropUpTime;
 
                         Intent intent = new Intent(context, SelectCarActivity.class);
-                        intent.putExtra(Config.pickUpEmirateID, pickUpEmirateID);
+                        intent.putExtra(Config.monthDuration, monthDuration);
+                        intent.putExtra(Config.bookingTYpe, bookingTYpe);
+                        if (binding.radioDeliverYes.isChecked()){
+                            intent.putExtra(Config.pickUpEmirateID, deleveryEmirateID);
+                        }else {
+                            intent.putExtra(Config.pickUpEmirateID, pickUpEmirateID);
+                        }
                         intent.putExtra(Config.dropUpEmirateID, dropUpEmirateID);
                         intent.putExtra(Config.pickUpDate, pickUpDate);
                         intent.putExtra(Config.dropUpDate, dropUpDate);
@@ -780,6 +1058,7 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick,Du
                     } else {
                         H.showMessage(context, json.getString(P.error));
                     }
+
                     ProgressView.dismiss(loadingDialog);
 
                 })
@@ -791,4 +1070,46 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick,Du
         return fragment;
     }
 
+
+    public void addDuration(){
+        durationList.add(new DurationModel("1 month"));
+        durationList.add(new DurationModel("2 month"));
+        durationList.add(new DurationModel("3 month"));
+        durationList.add(new DurationModel("4 month"));
+        durationList.add(new DurationModel("5 month"));
+        durationList.add(new DurationModel("6 month"));
+        durationList.add(new DurationModel("7 month"));
+        durationList.add(new DurationModel("8 month"));
+        durationList.add(new DurationModel("9 month"));
+        durationList.add(new DurationModel("10 month"));
+        durationList.add(new DurationModel("11 month"));
+        durationList.add(new DurationModel("12 month"));
+        durationList.add(new DurationModel("13 month"));
+        durationList.add(new DurationModel("14 month"));
+        durationList.add(new DurationModel("15 month"));
+        durationList.add(new DurationModel("16 month"));
+        durationList.add(new DurationModel("17 month"));
+        durationList.add(new DurationModel("18 month"));
+        durationList.add(new DurationModel("19 month"));
+        durationList.add(new DurationModel("20 month"));
+        durationList.add(new DurationModel("21 month"));
+        durationList.add(new DurationModel("22 month"));
+        durationList.add(new DurationModel("23 month"));
+        durationList.add(new DurationModel("24 month"));
+        durationList.add(new DurationModel("25 month"));
+        durationList.add(new DurationModel("26 month"));
+        durationList.add(new DurationModel("27 month"));
+        durationList.add(new DurationModel("28 month"));
+        durationList.add(new DurationModel("29 month"));
+        durationList.add(new DurationModel("30 month"));
+        durationList.add(new DurationModel("31 month"));
+        durationList.add(new DurationModel("32 month"));
+        durationList.add(new DurationModel("33 month"));
+        durationList.add(new DurationModel("34 month"));
+        durationList.add(new DurationModel("35 month"));
+        durationList.add(new DurationModel("36 month"));
+        durationList.add(new DurationModel("37 month"));
+        durationList.add(new DurationModel("38 month"));
+        durationList.add(new DurationModel("39 month"));
+    }
 }

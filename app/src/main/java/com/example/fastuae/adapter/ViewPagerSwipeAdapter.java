@@ -20,6 +20,7 @@ import androidx.viewpager.widget.PagerAdapter;
 import com.example.fastuae.R;
 import com.example.fastuae.activity.AddOnsActivity;
 import com.example.fastuae.activity.CarDetailOneActivity;
+import com.example.fastuae.activity.SelectCarActivity;
 import com.example.fastuae.fragment.HomeFragment;
 import com.example.fastuae.model.CarModel;
 import com.example.fastuae.util.Click;
@@ -126,14 +127,14 @@ public class ViewPagerSwipeAdapter extends PagerAdapter {
         }
         txtParkingSensor.setText(checkString(parkingSensor));
 
-        if(Config.dropUpTypeValue.equals(Config.daily)){
+        if(SelectCarActivity.bookingTYpe.equals(Config.daily)){
             lnrAEDMonth.setVisibility(View.GONE);
             txtPayNow.setText(context.getResources().getString(R.string.payNow) + "\n" + model.getPay_now_rate() + " AED");
             txtPayLatter.setText(context.getResources().getString(R.string.payLater) + "\n" + model.getPay_later_rate() + " AED");
-        }else if(Config.dropUpTypeValue.equals(Config.monthly)){
+        }else if(SelectCarActivity.bookingTYpe.equals(Config.monthly)){
             lnrAEDMonth.setVisibility(View.VISIBLE);
-            txtMonthAED.setText(model.getPay_now_rate() + " AED");
-            txtMonthAEDFor.setText("("+context.getResources().getString(R.string.fore) + " 1 " + context.getResources().getString(R.string.month)+")");
+            txtMonthAED.setText(checkString(model.getPay_now_rate()) + " AED");
+            txtMonthAEDFor.setText("("+context.getResources().getString(R.string.fore) +" "+ SelectCarActivity.monthDuration + " " + context.getResources().getString(R.string.month)+")");
             txtPayNow.setText(context.getResources().getString(R.string.payNow));
             txtPayLatter.setText(context.getResources().getString(R.string.payLater));
         }
