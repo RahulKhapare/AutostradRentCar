@@ -427,6 +427,7 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick,Du
                 hideDuration();
                 hideAllCardView();
                 getCurrentDate();
+                updateDropDateBGDark();
             }
         });
 
@@ -444,6 +445,7 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick,Du
                 binding.cardDuration.setVisibility(View.VISIBLE);
                 hideAllCardView();
                 getCurrentDate();
+                updateDropDateBGGray();
             }
         });
 
@@ -569,6 +571,20 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick,Du
         });
     }
 
+
+    private void updateDropDateBGDark(){
+        binding.lnrDropoffDate.setBackground(getResources().getDrawable(R.drawable.corner_blue_bg));
+        binding.txtDropOffText.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+        binding.txtDropDate.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+        binding.txtDropMonth.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+    }
+
+    private void updateDropDateBGGray(){
+        binding.lnrDropoffDate.setBackground(getResources().getDrawable(R.drawable.corner_light_gray_bg));
+        binding.txtDropOffText.setTextColor(getResources().getColor(R.color.semi_transparent));
+        binding.txtDropDate.setTextColor(getResources().getColor(R.color.semi_transparent));
+        binding.txtDropMonth.setTextColor(getResources().getColor(R.color.semi_transparent));
+    }
 
     private void hideOnYesNo(){
         hideDuration();
@@ -738,7 +754,7 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick,Du
         String monthNumber = (String) DateFormat.format("MM", date); // 06
         String yeare = (String) DateFormat.format("yyyy", date); // 2013
 
-        String currentDate = yeare + "-" + monthString + "-" + dayString;
+        String currentDate = yeare + "-" + monthNumber + "-" + dayString;
         dropUpDate = currentDate;
 
         txtDay.setText(dayString);

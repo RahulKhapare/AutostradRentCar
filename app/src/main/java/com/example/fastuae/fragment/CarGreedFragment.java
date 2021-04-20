@@ -182,6 +182,7 @@ public class CarGreedFragment extends Fragment {
                             model.setSuitcase(jsonData.getString(P.suitcase));
                             model.setPay_later_rate(jsonData.getString(P.pay_later_rate));
                             model.setPay_now_rate(jsonData.getString(P.pay_now_rate));
+                            model.setMore_car_image(jsonData.getJsonArray(P.more_car_image));
                             carModelList.add(model);
                         }
 

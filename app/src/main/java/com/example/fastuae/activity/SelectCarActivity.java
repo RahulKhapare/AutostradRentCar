@@ -1,44 +1,28 @@
 package com.example.fastuae.activity;
 
-import androidx.annotation.RequiresApi;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import android.content.Intent;
-import android.content.res.ColorStateList;
-import android.media.Image;
-import android.os.Build;
-import android.os.Bundle;
-import android.text.TextUtils;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.RadioButton;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-
-import com.adoisstudio.helper.Api;
-import com.adoisstudio.helper.H;
-import com.adoisstudio.helper.Json;
-import com.adoisstudio.helper.JsonList;
 import com.adoisstudio.helper.LoadingDialog;
 import com.example.fastuae.R;
 import com.example.fastuae.databinding.ActivitySelectCarBinding;
 import com.example.fastuae.fragment.CarCardFragment;
 import com.example.fastuae.fragment.CarGreedFragment;
 import com.example.fastuae.model.CarFilterModel;
-import com.example.fastuae.model.CarModel;
-import com.example.fastuae.model.HomeLocationModel;
 import com.example.fastuae.util.Config;
-import com.example.fastuae.util.P;
-import com.example.fastuae.util.ProgressView;
 import com.example.fastuae.util.WindowView;
 import com.google.android.material.tabs.TabLayout;
 

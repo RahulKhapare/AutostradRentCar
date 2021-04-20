@@ -134,6 +134,7 @@ public class P {
     public static String sunroof = "sunroof";
     public static String pay_later_rate = "pay_later_rate";
     public static String pay_now_rate = "pay_now_rate";
+    public static String more_car_image = "more_car_image";
 
     public static String group = "group";
     public static String passengers = "passengers";

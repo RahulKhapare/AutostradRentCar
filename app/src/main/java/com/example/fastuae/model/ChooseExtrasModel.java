@@ -7,6 +7,15 @@ public class ChooseExtrasModel {
     String description;
     String max_quantity;
     String price;
+    String quantity;
+
+    public String getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(String quantity) {
+        this.quantity = quantity;
+    }
 
     public String getTitle() {
         return title;

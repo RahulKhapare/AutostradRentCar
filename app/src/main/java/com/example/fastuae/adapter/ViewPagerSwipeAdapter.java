@@ -15,22 +15,26 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.PagerAdapter;
 
+import com.adoisstudio.helper.Json;
 import com.example.fastuae.R;
 import com.example.fastuae.activity.AddOnsActivity;
 import com.example.fastuae.activity.CarDetailOneActivity;
 import com.example.fastuae.activity.SelectCarActivity;
 import com.example.fastuae.fragment.HomeFragment;
+import com.example.fastuae.model.CarImageModel;
 import com.example.fastuae.model.CarModel;
 import com.example.fastuae.util.Click;
 import com.example.fastuae.util.Config;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ViewPagerSwipeAdapter extends PagerAdapter {
-
     private List<CarModel> carModelList;
     private Context context;
 
@@ -62,9 +66,6 @@ public class ViewPagerSwipeAdapter extends PagerAdapter {
         TextView txtGroup = view.findViewById(R.id.txtGroup);
         ImageView imgCar = view.findViewById(R.id.imgCar);
         TextView txtSUV = view.findViewById(R.id.txtSUV);
-        ImageView img1 = view.findViewById(R.id.img1);
-        ImageView img2 = view.findViewById(R.id.img2);
-        ImageView img3 = view.findViewById(R.id.img3);
         TextView txtPayLatter = view.findViewById(R.id.txtPayLatter);
         TextView txtPayNow = view.findViewById(R.id.txtPayNow);
 
@@ -82,6 +83,7 @@ public class ViewPagerSwipeAdapter extends PagerAdapter {
         LinearLayout lnrAEDMonth = view.findViewById(R.id.lnrAEDMonth);
         TextView txtMonthAED = view.findViewById(R.id.txtMonthAED);
         TextView txtMonthAEDFor = view.findViewById(R.id.txtMonthAEDFor);
+        RecyclerView recyclerCarImage = view.findViewById(R.id.recyclerCarImage);
 
 //        Picasso.get().load(R.drawable.ic_car_four).into(imgCar);
 //        Picasso.get().load(R.drawable.ic_view_one).into(img1);
@@ -139,34 +141,22 @@ public class ViewPagerSwipeAdapter extends PagerAdapter {
             txtPayLatter.setText(context.getResources().getString(R.string.payLater));
         }
 
-        img1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Click.preventTwoClick(v);
-                BitmapDrawable drawable = (BitmapDrawable) img1.getDrawable();
-                Bitmap bitmap = drawable.getBitmap();
-                imgCar.setImageBitmap(bitmap);
 
+
+        recyclerCarImage.setLayoutManager(new LinearLayoutManager(context,RecyclerView.HORIZONTAL,false));
+        recyclerCarImage.setHasFixedSize(true);
+        List<CarImageModel> carImageModelList = new ArrayList<>();
+        try{
+            for (int i=0; i<model.getMore_car_image().length(); i++){
+                CarImageModel carImageModel = new CarImageModel();
+                carImageModel.setImage(model.getMore_car_image().getString(i));
+                carImageModelList.add(carImageModel);
             }
-        });
-        img2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Click.preventTwoClick(v);
-                BitmapDrawable drawable = (BitmapDrawable) img2.getDrawable();
-                Bitmap bitmap = drawable.getBitmap();
-                imgCar.setImageBitmap(bitmap);
-            }
-        });
-        img3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Click.preventTwoClick(v);
-                BitmapDrawable drawable = (BitmapDrawable) img3.getDrawable();
-                Bitmap bitmap = drawable.getBitmap();
-                imgCar.setImageBitmap(bitmap);
-            }
-        });
+        }catch (Exception e){
+
+        }
+        CarImageAdapter carImageAdapter = new CarImageAdapter(context,carImageModelList,imgCar);
+        recyclerCarImage.setAdapter(carImageAdapter);
 
         txtPayNow.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -208,4 +198,5 @@ public class ViewPagerSwipeAdapter extends PagerAdapter {
         }
         return value;
     }
+
 }

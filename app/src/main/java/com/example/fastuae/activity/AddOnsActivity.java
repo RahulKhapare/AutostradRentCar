@@ -2,6 +2,7 @@ package com.example.fastuae.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -44,6 +45,7 @@ public class AddOnsActivity extends AppCompatActivity{
     private String flag;
     private String payType = "";
     private String aedSelected = "";
+    public static JsonList jsonAddOnsList = new JsonList();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +91,13 @@ public class AddOnsActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
+                jsonAddOnsList.clear();
+                for (ChooseExtrasModel model : AddOnsActivity.addOnsList){
+                    Json json = new Json();
+                    json.addString("value",model.getKey_value());
+                    json.addString("quantity",model.getQuantity());
+                    jsonAddOnsList.add(json);
+                }
                 if (session.getBool(P.userLogin)){
                     Intent intent = new Intent(activity,CarDetailOneActivity.class);
                     intent.putExtra(Config.PAY_TYPE,payType);
@@ -116,8 +125,8 @@ public class AddOnsActivity extends AppCompatActivity{
                         "&car_id=" + model.getId()+
                         "&pickup_date=" + SelectCarActivity.pickUpDate +
                         "&dropoff_date=" + SelectCarActivity.dropUpDate +
-                        "&booking_type=" + Config.pickUpTypeValue +
-                        "&month_time=" + "2" ;
+                        "&booking_type=" + SelectCarActivity.bookingTYpe +
+                        "&month_time=" + SelectCarActivity.monthDuration ;
 
         Api.newApi(activity, P.BaseUrl + "cars_choose_extras?" + extraParams).addJson(j)
                 .setMethod(Api.GET)

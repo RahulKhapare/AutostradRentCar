@@ -479,8 +479,8 @@ public class CarDetailOneActivity extends AppCompatActivity {
 
         ProgressView.show(activity,loadingDialog);
         Json j = new Json();
-        j.addString(P.booking_type,"daily");
-        j.addString(P.month_time,"");
+        j.addString(P.booking_type,SelectCarActivity.bookingTYpe);
+        j.addString(P.month_time,SelectCarActivity.monthDuration);
         j.addString(P.car_id,model.getId());
         j.addString(P.pay_type,payType);
         j.addString(P.emirate_id,Config.SelectedPickUpEmirateID);
@@ -505,6 +505,9 @@ public class CarDetailOneActivity extends AppCompatActivity {
         j.addString(P.dropoff_time,Config.SelectedDropUpTime);
 
         JSONArray array = new JSONArray();
+        for (Json jsonData : AddOnsActivity.jsonAddOnsList){
+            array.put(jsonData);
+        }
         j.addJSONArray(P.car_extra,array);
 
         Api.newApi(activity, P.BaseUrl + "car_booking_data").addJson(j)

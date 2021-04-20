@@ -38,7 +38,7 @@ public class ChooseExtrasAdapter extends RecyclerView.Adapter<ChooseExtrasAdapte
     private Session session;
 
     public interface onClick {
-        void cancelBooking(BookingModel model);
+        void cancelBooking(String quantity,BookingModel model);
     }
 
     public ChooseExtrasAdapter(Context context, List<ChooseExtrasModel> chooseExtrasModelList) {
@@ -61,6 +61,7 @@ public class ChooseExtrasAdapter extends RecyclerView.Adapter<ChooseExtrasAdapte
         holder.binding.txtName.setText(model.getTitle());
         holder.binding.txtDesc.setText(RemoveHtml.html2text(model.getDescription()));
         holder.binding.txtPrice.setText("AED " + model.getPrice());
+
 
         if (model.getTitle().contains("Baby seater")){
             Picasso.get().load(R.drawable.ic_baby_seat).into(holder.binding.imgExtra);
@@ -104,8 +105,9 @@ public class ChooseExtrasAdapter extends RecyclerView.Adapter<ChooseExtrasAdapte
         holder.binding.spinnerQuantity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                CountryCodeModel model = countryCodeModelList.get(position);
-                String quantitySelected = model.getPhone_code();
+                CountryCodeModel modelData = countryCodeModelList.get(position);
+                String quantitySelected = modelData.getPhone_code();
+                model.setQuantity(quantitySelected);
             }
 
             @Override

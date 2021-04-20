@@ -1,5 +1,9 @@
 package com.example.fastuae.model;
 
+import com.adoisstudio.helper.JsonList;
+
+import org.json.JSONArray;
+
 public class CarModel {
 
     String id;
@@ -21,6 +25,15 @@ public class CarModel {
     String suitcase;
     String pay_later_rate;
     String pay_now_rate;
+    JSONArray more_car_image;
+
+    public JSONArray getMore_car_image() {
+        return more_car_image;
+    }
+
+    public void setMore_car_image(JSONArray more_car_image) {
+        this.more_car_image = more_car_image;
+    }
 
     public String getId() {
         return id;
