@@ -2,12 +2,8 @@ package com.example.fastuae.activity;
 
 import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Paint;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,16 +12,12 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
-import androidx.viewpager2.widget.CompositePageTransformer;
-import androidx.viewpager2.widget.MarginPageTransformer;
-import androidx.viewpager2.widget.ViewPager2;
 
 import com.adoisstudio.helper.Api;
 import com.adoisstudio.helper.H;
@@ -39,6 +31,7 @@ import com.example.fastuae.adapter.CarImageAdapter;
 import com.example.fastuae.adapter.CarUpgradeAdapter;
 import com.example.fastuae.adapter.RentalAdapter;
 import com.example.fastuae.databinding.ActivityCarDetailOneBinding;
+import com.example.fastuae.fragment.HomeFragment;
 import com.example.fastuae.model.CarImageModel;
 import com.example.fastuae.model.CarModel;
 import com.example.fastuae.model.CarUpgradeModel;
@@ -46,11 +39,10 @@ import com.example.fastuae.model.ChooseExtrasModel;
 import com.example.fastuae.model.RentalModel;
 import com.example.fastuae.util.Click;
 import com.example.fastuae.util.Config;
+import com.example.fastuae.util.LoadImage;
 import com.example.fastuae.util.P;
 import com.example.fastuae.util.ProgressView;
 import com.example.fastuae.util.WindowView;
-import com.example.fastuae.util.ZoomFadeTransformer;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 
@@ -157,9 +149,7 @@ public class CarDetailOneActivity extends AppCompatActivity {
 
     private void setData() {
 
-        hitBookingCarData();
-
-        Picasso.get().load(model.getCar_image()).error(R.drawable.ic_image).into(binding.imgCar);
+        LoadImage.glideString(activity,binding.imgCar,model.getCar_image());
         binding.txtCarName.setText(model.getCar_name());
         String pickUpDate = getFormatedDate("yyyy-MM-dd", "dd, MMM yyyy", Config.SelectedPickUpDate);
         String dropUpDate = getFormatedDate("yyyy-MM-dd", "dd, MMM yyyy", Config.SelectedDropUpDate);
@@ -180,6 +170,8 @@ public class CarDetailOneActivity extends AppCompatActivity {
         if (flag.equals(Config.ARABIC)) {
             binding.txtCarName.setGravity(Gravity.RIGHT);
         }
+
+        hitBookingCarData();
     }
 
 
@@ -237,10 +229,10 @@ public class CarDetailOneActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-//                Intent intent = new Intent(activity, CarBookingDetailsActivity.class);
-//                intent.putExtra(Config.PAY_TYPE,payType);
-//                intent.putExtra(Config.SELECTED_AED,carAED);
-//                startActivity(intent);
+                Intent intent = new Intent(activity, CarBookingDetailsActivity.class);
+                intent.putExtra(Config.PAY_TYPE,payType);
+                intent.putExtra(Config.SELECTED_AED,carAED);
+                startActivity(intent);
             }
         });
 
@@ -378,11 +370,7 @@ public class CarDetailOneActivity extends AppCompatActivity {
                 binding.txtTotalAED.setText(getResources().getString(R.string.aed) + " " +carAED);
                 binding.txtCarRate.setText(getResources().getString(R.string.aed) + " " + carAED);
 
-                if (!TextUtils.isEmpty(updateImage)){
-                    Picasso.get().load(model.getCar_image()).error(R.drawable.ic_no_car).into(binding.imgCar);
-                }else {
-                    Picasso.get().load(R.drawable.ic_no_car).into(binding.imgCar);
-                }
+                LoadImage.glideString(activity,binding.imgCar,updateImage);
 
                 CarUpgradeModel carModel = carUpgradeModelList.get(currentPosition);
                 List<CarImageModel> carImageModelList = new ArrayList<>();
@@ -396,6 +384,8 @@ public class CarDetailOneActivity extends AppCompatActivity {
                 }
                 CarImageAdapter carImageAdapter = new CarImageAdapter(activity,carImageModelList,binding.imgCar,2);
                 binding.recyclerCarRelated.setAdapter(carImageAdapter);
+
+                hitBookingCarData();
 
             }
         });
@@ -415,26 +405,43 @@ public class CarDetailOneActivity extends AppCompatActivity {
         j.addString(P.month_time,SelectCarActivity.monthDuration);
         j.addString(P.car_id,carID);
         j.addString(P.pay_type,payType);
-        j.addString(P.emirate_id,Config.SelectedPickUpEmirateID);
+        j.addString(P.emirate_id,SelectCarActivity.pickUpEmirateID);
         j.addString(P.coupon_code,"");
 
-        j.addString(P.pickup_type,Config.pickUpTypeValue);
-        j.addString(P.pickup_emirate_id,Config.SelectedPickUpEmirateID);
-        j.addString(P.pickup_location_id,SelectCarActivity.pickUpLocationID);
-        j.addString(P.pickup_location_name,Config.SelectedPickUpAddress);
-        j.addString(P.pickup_address,SelectCarActivity.pickUpAddress);
-        j.addString(P.pickup_landmark,Config.SelectedPickUpLandmark);
-        j.addString(P.pickup_date,Config.SelectedPickUpDate);
-        j.addString(P.pickup_time,Config.SelectedPickUpTime);
+        j.addString(P.pickup_type,SelectCarActivity.pickUpType);
+        if (HomeFragment.binding.radioDeliverYes.isChecked()){
+            j.addString(P.pickup_emirate_id, SelectCarActivity.pickUpEmirateID);
+            j.addString(P.pickup_location_id, "0");
+            j.addString(P.pickup_address, "");
+            j.addString(P.pickup_landmark, "");
+            j.addString(P.pickup_location_name,"");
+        }else {
+            j.addString(P.pickup_emirate_id, SelectCarActivity.pickUpEmirateID);
+            j.addString(P.pickup_location_id, SelectCarActivity.pickUpLocationID);
+            j.addString(P.pickup_address, SelectCarActivity.pickUpAddress);
+            j.addString(P.pickup_landmark, Config.SelectedPickUpLandmark);
+            j.addString(P.pickup_location_name,Config.SelectedPickUpAddress);
 
-        j.addString(P.dropoff_type,Config.dropUpTypeValue);
-        j.addString(P.dropoff_emirate_id,Config.SelectedDropUpEmirateID);
-        j.addString(P.dropoff_location_id,SelectCarActivity.dropUpLocationID);
-        j.addString(P.dropoff_location_name,Config.SelectedDropUpAddress);
-        j.addString(P.dropoff_address,SelectCarActivity.dropUpAddress);
-        j.addString(P.dropoff_landmark,Config.SelectedDropUpLandmark);
-        j.addString(P.dropoff_date,Config.SelectedDropUpDate);
-        j.addString(P.dropoff_time,Config.SelectedDropUpTime);
+        }
+        j.addString(P.pickup_date,SelectCarActivity.pickUpDate);
+        j.addString(P.pickup_time,SelectCarActivity.pickUpTime);
+
+
+        j.addString(P.dropoff_type,SelectCarActivity.dropUpType);
+        if (HomeFragment.binding.radioCollectYes.isChecked()){
+            j.addString(P.dropoff_emirate_id, SelectCarActivity.dropUpEmirateID);
+            j.addString(P.dropoff_location_id, "0");
+            j.addString(P.dropoff_address, "");
+            j.addString(P.dropoff_landmark, "");
+        }else {
+            j.addString(P.dropoff_emirate_id, SelectCarActivity.dropUpEmirateID);
+            j.addString(P.dropoff_location_id, SelectCarActivity.dropUpLocationID);
+            j.addString(P.dropoff_address, SelectCarActivity.dropUpAddress);
+            j.addString(P.dropoff_landmark, Config.SelectedDropUpLandmark);
+        }
+        j.addString(P.dropoff_date,SelectCarActivity.dropUpDate);
+        j.addString(P.dropoff_time,SelectCarActivity.dropUpTime);
+
 
         JSONArray array = new JSONArray();
         for (Json jsonData : AddOnsActivity.jsonAddOnsList){

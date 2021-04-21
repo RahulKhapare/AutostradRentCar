@@ -13,7 +13,7 @@ import androidx.viewpager.widget.PagerAdapter;
 
 import com.example.fastuae.R;
 import com.example.fastuae.model.CarUpgradeModel;
-import com.squareup.picasso.Picasso;
+import com.example.fastuae.util.LoadImage;
 
 import java.util.List;
 
@@ -55,11 +55,8 @@ public class CarUpgradeAdapter extends PagerAdapter {
         final ImageView imageView = imageLayout
                 .findViewById(R.id.imgCar);
         CarUpgradeModel model = imageModelList.get(position);
-        if (!TextUtils.isEmpty(model.getCar_image())){
-            Picasso.get().load(model.getCar_image()).error(R.drawable.ic_no_car).into(imageView);
-        }else {
-            Picasso.get().load(R.drawable.ic_no_car).into(imageView);
-        }
+
+        LoadImage.glideString(context,imageView,model.getCar_image());
 
         view.addView(imageLayout, 0);
 

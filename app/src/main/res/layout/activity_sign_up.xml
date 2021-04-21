@@ -31,8 +31,7 @@
                             android:layout_width="136dp"
                             android:layout_height="28dp"
                             android:layout_centerHorizontal="true"
-                            android:layout_marginTop="40dp"
-                            android:src="@drawable/ic_name"></ImageView>
+                            android:layout_marginTop="40dp"></ImageView>
 
                     </RelativeLayout>
 
@@ -44,8 +43,7 @@
                         android:layout_width="290dp"
                         android:layout_height="300dp"
                         android:scaleType="fitXY"
-                        android:layout_alignParentRight="true"
-                        android:src="@drawable/ic_car_blue_new"></ImageView>
+                        android:layout_alignParentRight="true"></ImageView>
 
                 </RelativeLayout>
 

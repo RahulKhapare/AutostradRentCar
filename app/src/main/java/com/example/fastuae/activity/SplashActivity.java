@@ -18,11 +18,13 @@ import com.adoisstudio.helper.H;
 import com.adoisstudio.helper.Json;
 import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
+import com.bumptech.glide.Glide;
 import com.example.fastuae.BuildConfig;
 import com.example.fastuae.R;
 import com.example.fastuae.databinding.ActivitySplashBinding;
 import com.example.fastuae.util.Config;
 import com.example.fastuae.util.ConnectionUtil;
+import com.example.fastuae.util.LoadImage;
 import com.example.fastuae.util.P;
 import com.example.fastuae.util.ProgressView;
 import com.example.fastuae.util.WindowView;
@@ -46,6 +48,10 @@ public class SplashActivity extends AppCompatActivity {
     private void initView(){
         session = new Session(activity);
         loadingDialog = new LoadingDialog(activity);
+
+        LoadImage.glide(activity,binding.imgCar,getResources().getDrawable(R.drawable.ic_car_black));
+        LoadImage.glide(activity,binding.imgName,getResources().getDrawable(R.drawable.ic_name));
+
         if (ConnectionUtil.isOnline(activity)){
             hitInit();
         }else {

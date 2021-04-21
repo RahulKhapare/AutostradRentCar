@@ -23,6 +23,7 @@ import com.example.fastuae.model.CountryCodeModel;
 import com.example.fastuae.util.Click;
 import com.example.fastuae.util.Config;
 import com.example.fastuae.util.ConnectionUtil;
+import com.example.fastuae.util.LoadImage;
 import com.example.fastuae.util.P;
 import com.example.fastuae.util.ProgressView;
 import com.example.fastuae.util.WindowView;
@@ -51,6 +52,9 @@ public class LoginActivity extends AppCompatActivity {
         session = new Session(activity);
         loadingDialog = new LoadingDialog(activity);
         binding.txtSkipNow.setPaintFlags(binding.txtSkipNow.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+
+        LoadImage.glide(activity,binding.imgName,getResources().getDrawable(R.drawable.ic_name));
+        LoadImage.glide(activity,binding.imgCar,getResources().getDrawable(R.drawable.ic_car_red_new));
 
         List<CountryCodeModel> countryCodeModelList = new ArrayList<>();
 

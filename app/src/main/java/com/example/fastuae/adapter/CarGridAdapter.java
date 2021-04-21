@@ -30,8 +30,8 @@ import com.example.fastuae.model.CarModel;
 import com.example.fastuae.util.CheckString;
 import com.example.fastuae.util.Click;
 import com.example.fastuae.util.Config;
+import com.example.fastuae.util.LoadImage;
 import com.example.fastuae.util.P;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -58,7 +58,7 @@ public class CarGridAdapter extends RecyclerView.Adapter<CarGridAdapter.viewHold
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
         CarModel model = carModelList.get(position);
 
-        Picasso.get().load(model.getCar_image()).error(R.drawable.ic_image).into(holder.binding.imgCar);
+        LoadImage.glideString(context,holder.binding.imgCar,model.getCar_image());
         holder.binding.txtCarName.setText(model.getCar_name());
         holder.binding.txtModel.setText(model.getCategory_name());
         holder.binding.txtCarGroup.setText(context.getResources().getString(R.string.group) + " " +model.getGroup_name());

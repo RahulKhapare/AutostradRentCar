@@ -3,19 +3,14 @@ package com.example.fastuae.activity;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.MediaStore;
-import android.provider.OpenableColumns;
 import android.provider.Settings;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -41,18 +36,16 @@ import com.adoisstudio.helper.JsonList;
 import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
 import com.example.fastuae.R;
-import com.example.fastuae.adapter.AddressSelectionAdapter;
 import com.example.fastuae.adapter.AddressSelectionLightAdapter;
 import com.example.fastuae.databinding.ActivityCarDetailTwoBinding;
 import com.example.fastuae.model.AddressModel;
 import com.example.fastuae.model.CarModel;
-import com.example.fastuae.model.CountryCodeModel;
 import com.example.fastuae.util.Click;
 import com.example.fastuae.util.Config;
+import com.example.fastuae.util.LoadImage;
 import com.example.fastuae.util.P;
 import com.example.fastuae.util.ProgressView;
 import com.example.fastuae.util.WindowView;
-import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -143,7 +136,7 @@ public class CarDetailTwoActivity extends AppCompatActivity {
         binding.spinnerCountry.setAdapter(adapterEmirate);
 
         model = Config.carModel;
-        Picasso.get().load(model.getCar_image()).error(R.drawable.ic_image).into(binding.imgCar);
+        LoadImage.glideString(activity,binding.imgCar,model.getCar_image());
 
         binding.txtConfirmPayment.setText(getResources().getString(R.string.confirmPayment)+ " : AED " + aedSelected);
         binding.txtCarName.setText(model.getCar_name());

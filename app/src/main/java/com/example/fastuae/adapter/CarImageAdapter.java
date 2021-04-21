@@ -13,14 +13,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.adoisstudio.helper.Session;
 import com.example.fastuae.R;
-import com.example.fastuae.databinding.ActivityAddOnsListBinding;
 import com.example.fastuae.databinding.ActivityImageListBinding;
-import com.example.fastuae.model.BookingModel;
 import com.example.fastuae.model.CarImageModel;
-import com.example.fastuae.model.ChooseExtrasModel;
-import com.squareup.picasso.Picasso;
-
-import org.w3c.dom.Text;
+import com.example.fastuae.util.LoadImage;
 
 import java.util.List;
 
@@ -59,13 +54,13 @@ public class CarImageAdapter extends RecyclerView.Adapter<CarImageAdapter.viewHo
             holder.binding.lnr1.setVisibility(View.VISIBLE);
             holder.binding.lnr2.setVisibility(View.GONE);
             if (!TextUtils.isEmpty(model.getImage())){
-                Picasso.get().load(model.getImage()).into(holder.binding.img1);
+                LoadImage.glideString(context,holder.binding.img1,model.getImage());
             }
             holder.binding.img1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (!TextUtils.isEmpty(model.getImage())){
-                        Picasso.get().load(model.getImage()).into(imgCar);
+                        LoadImage.glideString(context,imgCar,model.getImage());
                     }
                 }
             });
@@ -73,13 +68,13 @@ public class CarImageAdapter extends RecyclerView.Adapter<CarImageAdapter.viewHo
             holder.binding.lnr2.setVisibility(View.VISIBLE);
             holder.binding.lnr1.setVisibility(View.GONE);
             if (!TextUtils.isEmpty(model.getImage())){
-                Picasso.get().load(model.getImage()).into(holder.binding.img2);
+                LoadImage.glideString(context,holder.binding.img2,model.getImage());
             }
             holder.binding.img2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (!TextUtils.isEmpty(model.getImage())){
-                        Picasso.get().load(model.getImage()).into(imgCar);
+                        LoadImage.glideString(context,imgCar,model.getImage());
                     }
                 }
             });

@@ -15,7 +15,7 @@ import com.example.fastuae.R;
 import com.example.fastuae.activity.SpecialOffersActivity;
 import com.example.fastuae.model.SliderModel;
 import com.example.fastuae.util.Click;
-import com.squareup.picasso.Picasso;
+import com.example.fastuae.util.LoadImage;
 
 import java.util.List;
 
@@ -58,7 +58,7 @@ public class SliderImageAdapter extends PagerAdapter {
         final ImageView imageView = imageLayout
                 .findViewById(R.id.imgView);
         SliderModel model = imageModelList.get(position);
-        Picasso.get().load(model.getBanner_image()).error(R.drawable.ic_image).into(imageView);
+        LoadImage.glideString(context,imageView,model.getBanner_image());
 
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override

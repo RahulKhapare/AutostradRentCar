@@ -17,6 +17,7 @@ import com.example.fastuae.databinding.ActivityLoginDashboardBinding;
 import com.example.fastuae.fragment.InstructionFragmentOne;
 import com.example.fastuae.fragment.InstructionFragmentTwo;
 import com.example.fastuae.util.Click;
+import com.example.fastuae.util.LoadImage;
 import com.example.fastuae.util.Localization;
 import com.example.fastuae.util.P;
 import com.example.fastuae.util.WindowView;
@@ -41,6 +42,7 @@ public class LoginDashboardActivity extends AppCompatActivity implements ViewPag
     }
 
     private void initView(){
+        LoadImage.glide(activity,binding.imgCar,getResources().getDrawable(R.drawable.ic_car_two));
         setUpViewPager();
         binding.txtSkip.setOnClickListener(new View.OnClickListener() {
             @Override

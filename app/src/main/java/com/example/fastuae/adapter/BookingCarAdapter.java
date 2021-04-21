@@ -21,8 +21,8 @@ import com.example.fastuae.fragment.UpcomingReservationFragment;
 import com.example.fastuae.model.BookingModel;
 import com.example.fastuae.util.Click;
 import com.example.fastuae.util.Config;
+import com.example.fastuae.util.LoadImage;
 import com.example.fastuae.util.P;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -57,11 +57,7 @@ public class BookingCarAdapter extends RecyclerView.Adapter<BookingCarAdapter.vi
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
         BookingModel model = bookingModelList.get(position);
 
-        if (!TextUtils.isEmpty(model.getCar_image())){
-            Picasso.get().load(model.getCar_image()).placeholder(R.drawable.ic_no_car).error(R.drawable.ic_no_car).into(holder.binding.imgCar);
-        }else {
-            Picasso.get().load(R.drawable.ic_no_car).into(holder.binding.imgCar);
-        }
+        LoadImage.glideString(context,holder.binding.imgCar,model.getCar_image());
         holder.binding.txtCarName.setText(model.getCar_name());
         holder.binding.txtRegisterNo.setText(context.getResources().getString(R.string.reservationNo)+"\n"+model.getBooking_id());
         holder.binding.txtFrom.setText(model.getPickup_address());

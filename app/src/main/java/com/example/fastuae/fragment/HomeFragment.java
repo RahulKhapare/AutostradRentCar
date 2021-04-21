@@ -57,7 +57,7 @@ import java.util.List;
 public class HomeFragment extends Fragment implements LocationAdapter.onClick,DurationAdapter.onClick,EmirateAdapter.onClick {
 
     private Context context;
-    private FragmentHomeBinding binding;
+    public static FragmentHomeBinding binding;
     private List<SliderModel> sliderModelList;
     private SliderImageAdapter sliderImageAdapter;
     private List<HomeLocationModel> locationDailyList;
@@ -1056,7 +1056,13 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick,Du
                         }else {
                             intent.putExtra(Config.pickUpEmirateID, pickUpEmirateID);
                         }
-                        intent.putExtra(Config.dropUpEmirateID, dropUpEmirateID);
+
+                        if (binding.radioCollectYes.isChecked()){
+                            intent.putExtra(Config.dropUpEmirateID, collectEmirateID);
+                        }else {
+                            intent.putExtra(Config.dropUpEmirateID, dropUpEmirateID);
+                        }
+
                         intent.putExtra(Config.pickUpDate, pickUpDate);
                         intent.putExtra(Config.dropUpDate, dropUpDate);
 //                        intent.putExtra(Config.pickUpTime,pickUpTime);

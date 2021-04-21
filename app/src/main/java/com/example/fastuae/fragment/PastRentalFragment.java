@@ -32,7 +32,6 @@ import com.example.fastuae.model.BookingModel;
 import com.example.fastuae.util.Click;
 import com.example.fastuae.util.P;
 import com.example.fastuae.util.ProgressView;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;

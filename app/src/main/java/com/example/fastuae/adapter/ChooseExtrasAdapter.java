@@ -2,7 +2,6 @@ package com.example.fastuae.adapter;
 
 import android.content.Context;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +10,8 @@ import android.widget.CompoundButton;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.adoisstudio.helper.Json;
-import com.adoisstudio.helper.JsonList;
 import com.adoisstudio.helper.Session;
 import com.example.fastuae.R;
 import com.example.fastuae.activity.AddOnsActivity;
@@ -23,10 +19,8 @@ import com.example.fastuae.databinding.ActivityChooseExtraListBinding;
 import com.example.fastuae.model.BookingModel;
 import com.example.fastuae.model.ChooseExtrasModel;
 import com.example.fastuae.model.CountryCodeModel;
-import com.example.fastuae.util.Config;
-import com.example.fastuae.util.P;
+import com.example.fastuae.util.LoadImage;
 import com.example.fastuae.util.RemoveHtml;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,11 +58,11 @@ public class ChooseExtrasAdapter extends RecyclerView.Adapter<ChooseExtrasAdapte
 
 
         if (model.getTitle().contains("Baby seater")){
-            Picasso.get().load(R.drawable.ic_baby_seat).into(holder.binding.imgExtra);
+            LoadImage.glide(context,holder.binding.imgExtra,context.getResources().getDrawable(R.drawable.ic_baby_seat));
         }else if (model.getTitle().contains("GPS")){
-            Picasso.get().load(R.drawable.ic_gps).into(holder.binding.imgExtra);
+            LoadImage.glide(context,holder.binding.imgExtra,context.getResources().getDrawable(R.drawable.ic_gps));
         }else if (model.getTitle().contains("Additional Driver")){
-            Picasso.get().load(R.drawable.ic_driver).into(holder.binding.imgExtra);
+            LoadImage.glide(context,holder.binding.imgExtra,context.getResources().getDrawable(R.drawable.ic_driver));
         }else {
             holder.binding.imgExtra.setVisibility(View.GONE);
         }

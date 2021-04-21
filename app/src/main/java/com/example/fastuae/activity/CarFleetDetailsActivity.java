@@ -12,9 +12,9 @@ import com.example.fastuae.R;
 import com.example.fastuae.databinding.ActivityCarFleetDetailsBinding;
 import com.example.fastuae.model.CarFleetModel;
 import com.example.fastuae.util.Config;
+import com.example.fastuae.util.LoadImage;
 import com.example.fastuae.util.P;
 import com.example.fastuae.util.WindowView;
-import com.squareup.picasso.Picasso;
 
 public class CarFleetDetailsActivity extends AppCompatActivity{
 
@@ -51,11 +51,11 @@ public class CarFleetDetailsActivity extends AppCompatActivity{
     }
 
     private void setData(){
-        Picasso.get().load(R.drawable.ic_car_horizontal).placeholder(R.drawable.ic_no_car).error(R.drawable.ic_no_car).into(binding.imgCar);
-//        Picasso.get().load(carFleetModel.getImage()).placeholder(R.drawable.ic_no_car).error(R.drawable.ic_no_car).into(binding.imgCar);
-        Picasso.get().load(carFleetModel.getImage1()).placeholder(R.drawable.ic_no_car).error(R.drawable.ic_no_car).into(binding.img1);
-        Picasso.get().load(carFleetModel.getImage2()).placeholder(R.drawable.ic_no_car).error(R.drawable.ic_no_car).into(binding.img2);
-        Picasso.get().load(carFleetModel.getImage3()).placeholder(R.drawable.ic_no_car).error(R.drawable.ic_no_car).into(binding.img3);
+
+        LoadImage.glide(activity,binding.imgCar,getResources().getDrawable(R.drawable.ic_car_horizontal));
+        LoadImage.glide(activity,binding.img1,getResources().getDrawable(carFleetModel.getImage1()));
+        LoadImage.glide(activity,binding.img2,getResources().getDrawable(carFleetModel.getImage2()));
+        LoadImage.glide(activity,binding.img3,getResources().getDrawable(carFleetModel.getImage3()));
 
         binding.txtCarName.setText(carFleetModel.getCarName());
         binding.txtCarGroup.setText(carFleetModel.getGroupName());

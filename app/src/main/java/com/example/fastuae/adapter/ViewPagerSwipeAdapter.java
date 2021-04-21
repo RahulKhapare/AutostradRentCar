@@ -29,7 +29,7 @@ import com.example.fastuae.model.CarImageModel;
 import com.example.fastuae.model.CarModel;
 import com.example.fastuae.util.Click;
 import com.example.fastuae.util.Config;
-import com.squareup.picasso.Picasso;
+import com.example.fastuae.util.LoadImage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -90,7 +90,7 @@ public class ViewPagerSwipeAdapter extends PagerAdapter {
 //        Picasso.get().load(R.drawable.ic_view_two).into(img2);
 //        Picasso.get().load(R.drawable.ic_view_three).into(img3);
 
-        Picasso.get().load(model.getCar_image()).error(R.drawable.ic_image).into(imgCar);
+        LoadImage.glideString(context,imgCar,model.getCar_image());
         txtCarName.setText(model.getCar_name());
         txtGroup.setText(context.getResources().getString(R.string.group) + " " + model.getGroup_name());
         txtSUV.setText(model.getCategory_name());

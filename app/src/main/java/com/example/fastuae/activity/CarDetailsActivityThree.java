@@ -20,10 +20,10 @@ import com.example.fastuae.databinding.ActivityCarDetailsThreeBinding;
 import com.example.fastuae.model.CarModel;
 import com.example.fastuae.util.Click;
 import com.example.fastuae.util.Config;
+import com.example.fastuae.util.LoadImage;
 import com.example.fastuae.util.P;
 import com.example.fastuae.util.ProgressView;
 import com.example.fastuae.util.WindowView;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 
@@ -108,7 +108,7 @@ public class CarDetailsActivityThree extends AppCompatActivity {
 
         model = Config.carModel;
 
-        Picasso.get().load(model.getCar_image()).error(R.drawable.ic_image).into(binding.imgCar);
+        LoadImage.glideString(activity,binding.imgCar,model.getCar_image());
 
         binding.txtCarName.setText(model.getCar_name());
         binding.txtAED.setText("AED " + selectedAed + " in Total");

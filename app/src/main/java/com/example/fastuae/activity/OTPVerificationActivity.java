@@ -19,6 +19,7 @@ import com.example.fastuae.databinding.ActivityOTPVerificationBinding;
 import com.example.fastuae.util.Click;
 import com.example.fastuae.util.Config;
 import com.example.fastuae.util.ConnectionUtil;
+import com.example.fastuae.util.LoadImage;
 import com.example.fastuae.util.P;
 import com.example.fastuae.util.ProgressView;
 import com.example.fastuae.util.WindowView;
@@ -51,9 +52,13 @@ public class OTPVerificationActivity extends AppCompatActivity {
         verificationFor = getIntent().getStringExtra(Config.VERIFICATION_FOR);
 
         if(verificationFor.equals(Config.LOGIN)){
+            LoadImage.glide(activity,binding.imgName,getResources().getDrawable(R.drawable.ic_name));
+            LoadImage.glide(activity,binding.imgCarLogin,getResources().getDrawable(R.drawable.ic_car_red_new));
             binding.imgCarLogin.setVisibility(View.VISIBLE);
             binding.imgCarSignup.setVisibility(View.GONE);
         }else if(verificationFor.equals(Config.SIGN_UP)){
+            LoadImage.glide(activity,binding.imgName,getResources().getDrawable(R.drawable.ic_name));
+            LoadImage.glide(activity,binding.imgCarSignup,getResources().getDrawable(R.drawable.ic_car_blue_new));
             binding.imgCarLogin.setVisibility(View.GONE);
             binding.imgCarSignup.setVisibility(View.VISIBLE);
         }
