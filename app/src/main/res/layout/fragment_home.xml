@@ -42,6 +42,7 @@
                             android:textColor="@color/textDark"
                             android:textSize="16sp"
                             android:checked="true"
+                            android:fontFamily="@font/nunito_sans_regular"
                             android:layout_marginRight="10dp"
                             android:layout_marginLeft="10dp"
                             android:text="@string/dailyRental">
@@ -55,6 +56,7 @@
                             android:buttonTint="@color/grayDark"
                             android:textColor="@color/textDark"
                             android:textSize="16sp"
+                            android:fontFamily="@font/nunito_sans_regular"
                             android:layout_marginRight="10dp"
                             android:layout_marginLeft="10dp"
                             android:text="@string/monthlyDeals">
@@ -76,6 +78,7 @@
                             android:layout_height="wrap_content"
                             android:textColor="@color/textDark"
                             android:textSize="16sp"
+                            android:fontFamily="@font/nunito_sans_semibold"
                             android:text="@string/deliverExtraMessage">
 
                         </TextView>
@@ -376,6 +379,7 @@
                             android:layout_height="wrap_content"
                             android:textColor="@color/textDark"
                             android:textSize="16sp"
+                            android:fontFamily="@font/nunito_sans_semibold"
                             android:text="@string/collectExtraMessage">
 
                         </TextView>

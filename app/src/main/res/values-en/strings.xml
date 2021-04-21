@@ -323,6 +323,9 @@
     <string name="selectDropOffLocation">Please select drop off location</string>
     <string name="selectDeliverEmirate">Select deliver emirate</string>
     <string name="selectCollectEmirate">Select collect emirate</string>
+    <string name="payAED">PAY AED</string>
+    <string name="extra">EXTRA</string>
+    <string name="unableFondUpdateData">Unable to found car update data</string>
 
     <string name="txt1">Leading Car Rental Company with the largest network of Branches &amp; Pickup points</string>
     <string name="txt2">Leading Car Rental Company with the largest network of Branches &amp; Pickup points</string>

@@ -1,48 +1,52 @@
 package com.example.fastuae.model;
 
+import org.json.JSONArray;
+
 public class CarUpgradeModel {
 
-    int image;
-    String carName;
-    String reservationFee;
-    String estimateTotal;
+    String car_id;
+    String car_name;
+    String car_image;
+    String amount_difference;
+    JSONArray more_car_image;
 
-    public CarUpgradeModel(int image, String carName, String reservationFee, String estimateTotal) {
-        this.image = image;
-        this.carName = carName;
-        this.reservationFee = reservationFee;
-        this.estimateTotal = estimateTotal;
+    public JSONArray getMore_car_image() {
+        return more_car_image;
     }
 
-    public int getImage() {
-        return image;
+    public void setMore_car_image(JSONArray more_car_image) {
+        this.more_car_image = more_car_image;
     }
 
-    public void setImage(int image) {
-        this.image = image;
+    public String getCar_id() {
+        return car_id;
     }
 
-    public String getCarName() {
-        return carName;
+    public void setCar_id(String car_id) {
+        this.car_id = car_id;
     }
 
-    public void setCarName(String carName) {
-        this.carName = carName;
+    public String getCar_name() {
+        return car_name;
     }
 
-    public String getReservationFee() {
-        return reservationFee;
+    public void setCar_name(String car_name) {
+        this.car_name = car_name;
     }
 
-    public void setReservationFee(String reservationFee) {
-        this.reservationFee = reservationFee;
+    public String getCar_image() {
+        return car_image;
     }
 
-    public String getEstimateTotal() {
-        return estimateTotal;
+    public void setCar_image(String car_image) {
+        this.car_image = car_image;
     }
 
-    public void setEstimateTotal(String estimateTotal) {
-        this.estimateTotal = estimateTotal;
+    public String getAmount_difference() {
+        return amount_difference;
+    }
+
+    public void setAmount_difference(String amount_difference) {
+        this.amount_difference = amount_difference;
     }
 }

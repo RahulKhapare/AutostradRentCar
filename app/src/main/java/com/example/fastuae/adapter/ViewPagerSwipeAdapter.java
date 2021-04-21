@@ -155,7 +155,7 @@ public class ViewPagerSwipeAdapter extends PagerAdapter {
         }catch (Exception e){
 
         }
-        CarImageAdapter carImageAdapter = new CarImageAdapter(context,carImageModelList,imgCar);
+        CarImageAdapter carImageAdapter = new CarImageAdapter(context,carImageModelList,imgCar,1);
         recyclerCarImage.setAdapter(carImageAdapter);
 
         txtPayNow.setOnClickListener(new View.OnClickListener() {

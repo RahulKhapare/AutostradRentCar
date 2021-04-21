@@ -1,6 +1,8 @@
 package com.example.fastuae.adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.text.TextUtils;
@@ -58,8 +60,7 @@ public class RentalAdapter extends RecyclerView.Adapter<RentalAdapter.viewHolder
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com"));
-                context.startActivity(browserIntent);
+                alertDialog(model.getTitle(),RemoveHtml.html2text(model.getDescription()));
             }
         });
 
@@ -78,4 +79,23 @@ public class RentalAdapter extends RecyclerView.Adapter<RentalAdapter.viewHolder
             this.binding = binding;
         }
     }
+
+    private void alertDialog(String title,String description){
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
+        builder1.setTitle(title);
+        builder1.setMessage(description);
+        builder1.setCancelable(true);
+        builder1.setPositiveButton(
+                "Cancel",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
+        alert11.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(context.getResources().getColor(R.color.colorPrimaryDark));
+    }
+
 }

@@ -8,6 +8,7 @@ public class P {
     public static String userLogin = "userLogin";
 
 
+    public static String list = "list";
     public static String emirate_list = "emirate_list";
     public static String status = "status";
     public static String data = "data";
@@ -60,6 +61,7 @@ public class P {
     public static String door = "door";
     public static String passenger = "passenger";
     public static String suitcase = "suitcase";
+    public static String amount_difference = "amount_difference";
 
     public static String blog_list = "blog_list";
     public static String title = "title";

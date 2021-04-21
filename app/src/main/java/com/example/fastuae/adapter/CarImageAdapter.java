@@ -30,15 +30,17 @@ public class CarImageAdapter extends RecyclerView.Adapter<CarImageAdapter.viewHo
     private List<CarImageModel> carImageModelList;
     private Session session;
     private ImageView imgCar;
+    private int flag;
 
     public interface onClick {
         void imageClick(String imagePath);
     }
 
-    public CarImageAdapter(Context context, List<CarImageModel> carImageModelList, ImageView imgCar) {
+    public CarImageAdapter(Context context, List<CarImageModel> carImageModelList, ImageView imgCar,int flag) {
         this.context = context;
         this.carImageModelList = carImageModelList;
         this.imgCar = imgCar;
+        this.flag = flag;
         session = new Session(context);
     }
 
@@ -52,17 +54,37 @@ public class CarImageAdapter extends RecyclerView.Adapter<CarImageAdapter.viewHo
     @Override
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
         CarImageModel model = carImageModelList.get(position);
-        if (!TextUtils.isEmpty(model.getImage())){
-            Picasso.get().load(model.getImage()).into(holder.binding.img);
-        }
-        holder.binding.img.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!TextUtils.isEmpty(model.getImage())){
-                    Picasso.get().load(model.getImage()).into(imgCar);
-                }
+
+        if (flag==1){
+            holder.binding.lnr1.setVisibility(View.VISIBLE);
+            holder.binding.lnr2.setVisibility(View.GONE);
+            if (!TextUtils.isEmpty(model.getImage())){
+                Picasso.get().load(model.getImage()).into(holder.binding.img1);
             }
-        });
+            holder.binding.img1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (!TextUtils.isEmpty(model.getImage())){
+                        Picasso.get().load(model.getImage()).into(imgCar);
+                    }
+                }
+            });
+        }else if (flag==2){
+            holder.binding.lnr2.setVisibility(View.VISIBLE);
+            holder.binding.lnr1.setVisibility(View.GONE);
+            if (!TextUtils.isEmpty(model.getImage())){
+                Picasso.get().load(model.getImage()).into(holder.binding.img2);
+            }
+            holder.binding.img2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (!TextUtils.isEmpty(model.getImage())){
+                        Picasso.get().load(model.getImage()).into(imgCar);
+                    }
+                }
+            });
+        }
+
     }
 
     @Override

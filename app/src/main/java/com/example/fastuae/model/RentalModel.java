@@ -3,10 +3,14 @@ package com.example.fastuae.model;
 public class RentalModel {
 
     String title;
-    String url;
+    String description;
 
-    public RentalModel(String title) {
-        this.title = title;
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getTitle() {
@@ -17,11 +21,4 @@ public class RentalModel {
         this.title = title;
     }
 
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
 }

@@ -35,9 +35,11 @@ import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
 import com.example.fastuae.R;
 import com.example.fastuae.adapter.AddOnsAdapter;
+import com.example.fastuae.adapter.CarImageAdapter;
 import com.example.fastuae.adapter.CarUpgradeAdapter;
 import com.example.fastuae.adapter.RentalAdapter;
 import com.example.fastuae.databinding.ActivityCarDetailOneBinding;
+import com.example.fastuae.model.CarImageModel;
 import com.example.fastuae.model.CarModel;
 import com.example.fastuae.model.CarUpgradeModel;
 import com.example.fastuae.model.ChooseExtrasModel;
@@ -69,6 +71,18 @@ public class CarDetailOneActivity extends AppCompatActivity {
     private String payType = "";
     private String aedSelected = "";
     private CarModel model;
+    private List<CarUpgradeModel> carUpgradeModelList;
+    private String carID = "";
+    private String carNAME = "";
+    private String carAED = "";
+
+    String updateImage ;
+    String updateId;
+    String updateAmount;
+    String updateName;
+
+    List<RentalModel> rentalModelList;
+    RentalAdapter rentalAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,10 +100,33 @@ public class CarDetailOneActivity extends AppCompatActivity {
 
     private void initView() {
 
+        model = Config.carModel;
+
+        carID = model.getId();
+        carNAME = model.getCar_name();
+        carAED = aedSelected;
+
         binding.toolbar.setTitle(getResources().getString(R.string.booking));
         setSupportActionBar(binding.toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+
+        binding.recyclerCarRelated.setLayoutManager(new LinearLayoutManager(activity,RecyclerView.HORIZONTAL,false));
+        binding.recyclerCarRelated.setHasFixedSize(true);
+        binding.recyclerCarRelated.setNestedScrollingEnabled(false);
+
+        List<CarImageModel> carImageModelList = new ArrayList<>();
+        try{
+            for (int i=0; i<model.getMore_car_image().length(); i++){
+                CarImageModel carImageModel = new CarImageModel();
+                carImageModel.setImage(model.getMore_car_image().getString(i));
+                carImageModelList.add(carImageModel);
+            }
+        }catch (Exception e){
+        }
+        CarImageAdapter carImageAdapter = new CarImageAdapter(activity,carImageModelList,binding.imgCar,2);
+        binding.recyclerCarRelated.setAdapter(carImageAdapter);
+
 
         List<ChooseExtrasModel> chooseExtrasModelList = new ArrayList<>();
         chooseExtrasModelList.addAll(AddOnsActivity.addOnsList);
@@ -103,54 +140,40 @@ public class CarDetailOneActivity extends AppCompatActivity {
             binding.lnrAddOns.setVisibility(View.GONE);
         }
 
-        List<RentalModel> rentalModelList = new ArrayList<>();
-        rentalModelList.add(new RentalModel("Security Deposit"));
-        rentalModelList.add(new RentalModel("Insurance"));
-        rentalModelList.add(new RentalModel("Insurance Excess"));
-        rentalModelList.add(new RentalModel("Refund"));
-        rentalModelList.add(new RentalModel("Oman NOC"));
-        rentalModelList.add(new RentalModel("Additional Driver"));
-        rentalModelList.add(new RentalModel("Mileage"));
-        rentalModelList.add(new RentalModel("Cancellation/ No Show"));
-        rentalModelList.add(new RentalModel("Toll Charges"));
-        rentalModelList.add(new RentalModel("Fuel Policy"));
-        rentalModelList.add(new RentalModel("Driving License"));
-        rentalModelList.add(new RentalModel("Premature Termination"));
-        rentalModelList.add(new RentalModel("Administration Charges"));
-        rentalModelList.add(new RentalModel("International Driving License"));
-        rentalModelList.add(new RentalModel("Inter Emirate Transfer Cost"));
-        rentalModelList.add(new RentalModel("Airport Parking Fee"));
-
+        rentalModelList = new ArrayList<>();
         binding.recyclerRentalView.setLayoutManager(new GridLayoutManager(activity,2));
         binding.recyclerRentalView.setHasFixedSize(true);
         binding.recyclerRentalView.setNestedScrollingEnabled(false);
-        RentalAdapter rentalAdapter = new RentalAdapter(activity,rentalModelList);
+        rentalAdapter = new RentalAdapter(activity,rentalModelList);
         binding.recyclerRentalView.setAdapter(rentalAdapter);
 
-        model = Config.carModel;
         setData();
         onClick();
+
+        carUpgradeModelList = new ArrayList<>();
+        hitUpdateCarData();
+        hitRentalTermsData();
     }
 
     private void setData() {
 
-        hitBookingCarData(model);
+        hitBookingCarData();
 
         Picasso.get().load(model.getCar_image()).error(R.drawable.ic_image).into(binding.imgCar);
         binding.txtCarName.setText(model.getCar_name());
         String pickUpDate = getFormatedDate("yyyy-MM-dd", "dd, MMM yyyy", Config.SelectedPickUpDate);
         String dropUpDate = getFormatedDate("yyyy-MM-dd", "dd, MMM yyyy", Config.SelectedDropUpDate);
 
-        binding.txtTotalAED.setText("AED "+aedSelected);
+        binding.txtTotalAED.setText(getResources().getString(R.string.aed) + " " +carAED);
 
-        binding.txtPickUpLocation.setText(pickUpDate+", "+Config.SelectedPickUpTime+",\n"+Config.SelectedPickUpAddress);
-        binding.txtDropOffLocation.setText(dropUpDate+", "+Config.SelectedDropUpTime+",\n"+Config.SelectedDropUpAddress);
+        binding.txtPickUpLocation.setText(Config.SelectedPickUpAddress+",\n"+pickUpDate+", "+Config.SelectedPickUpTime);
+        binding.txtDropOffLocation.setText(Config.SelectedDropUpAddress+",\n"+dropUpDate+", "+Config.SelectedDropUpTime);
 
         if (payType.equals(Config.pay_now)){
-            binding.txtCarRate.setText("AED " + model.getPay_now_rate());
+            binding.txtCarRate.setText(getResources().getString(R.string.aed) + " " + model.getPay_now_rate());
             binding.txtPayMethod.setText(getResources().getString(R.string.prePay));
         }else if (payType.equals(Config.pay_latter)){
-            binding.txtCarRate.setText("AED " + model.getPay_later_rate());
+            binding.txtCarRate.setText(getResources().getString(R.string.aed) + " " + model.getPay_later_rate());
             binding.txtPayMethod.setText(getResources().getString(R.string.postPay));
         }
 
@@ -167,7 +190,11 @@ public class CarDetailOneActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-                updateCarDialog();
+                if (!carUpgradeModelList.isEmpty()){
+                    updateCarDialog();
+                }else {
+                    H.showMessage(activity,getResources().getString(R.string.unableFondUpdateData));
+                }
             }
         });
 
@@ -210,39 +237,10 @@ public class CarDetailOneActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-                Intent intent = new Intent(activity, CarBookingDetailsActivity.class);
-                intent.putExtra(Config.PAY_TYPE,payType);
-                intent.putExtra(Config.SELECTED_AED,aedSelected);
-                startActivity(intent);
-            }
-        });
-
-        binding.img1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Click.preventTwoClick(v);
-                BitmapDrawable drawable = (BitmapDrawable) binding.img1.getDrawable();
-                Bitmap bitmap = drawable.getBitmap();
-                binding.imgCar.setImageBitmap(bitmap);
-
-            }
-        });
-        binding.img2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Click.preventTwoClick(v);
-                BitmapDrawable drawable = (BitmapDrawable) binding.img2.getDrawable();
-                Bitmap bitmap = drawable.getBitmap();
-                binding.imgCar.setImageBitmap(bitmap);
-            }
-        });
-        binding.img3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Click.preventTwoClick(v);
-                BitmapDrawable drawable = (BitmapDrawable) binding.img3.getDrawable();
-                Bitmap bitmap = drawable.getBitmap();
-                binding.imgCar.setImageBitmap(bitmap);
+//                Intent intent = new Intent(activity, CarBookingDetailsActivity.class);
+//                intent.putExtra(Config.PAY_TYPE,payType);
+//                intent.putExtra(Config.SELECTED_AED,carAED);
+//                startActivity(intent);
             }
         });
 
@@ -273,6 +271,7 @@ public class CarDetailOneActivity extends AppCompatActivity {
     private void checkInsuranceView() {
         if (binding.viewInsurance.getVisibility() == View.VISIBLE) {
             binding.viewInsurance.setVisibility(View.GONE);
+//            binding.nestedSroll.fullScroll(View.FOCUS_UP);
             if (flag.equals(Config.ARABIC)) {
                 binding.imgInsuranceLeft.setImageResource(R.drawable.ic_down_arrow);
             } else if (flag.equals(Config.ENGLISH)) {
@@ -280,6 +279,7 @@ public class CarDetailOneActivity extends AppCompatActivity {
             }
         } else if (binding.viewInsurance.getVisibility() == View.GONE) {
             binding.viewInsurance.setVisibility(View.VISIBLE);
+//            binding.nestedSroll.fullScroll(View.FOCUS_DOWN);
             if (flag.equals(Config.ARABIC)) {
                 binding.imgInsuranceLeft.setImageResource(R.drawable.ic_up_arrow);
             } else if (flag.equals(Config.ENGLISH)) {
@@ -289,14 +289,7 @@ public class CarDetailOneActivity extends AppCompatActivity {
     }
 
     private void updateCarDialog() {
-
-        List<CarUpgradeModel> carUpgradeModelList = new ArrayList<>();
-        carUpgradeModelList.add(new CarUpgradeModel(R.drawable.ic_car, "Hyundai Creta", "Reservation Fee: AED 100", "Estimated Total: AED 200"));
-        carUpgradeModelList.add(new CarUpgradeModel(R.drawable.ic_car_black, "Maruti Suzuki", "Reservation Fee: AED 300", "Estimated Total: AED 400"));
-        carUpgradeModelList.add(new CarUpgradeModel(R.drawable.ic_car_blue_new, "Maruti Alto", "Reservation Fee: AED 500", "Estimated Total: AED 600"));
-        carUpgradeModelList.add(new CarUpgradeModel(R.drawable.ic_car_new, "Hyundai Creta", "Reservation Fee: AED 700", "Estimated Total: AED 800"));
-        carUpgradeModelList.add(new CarUpgradeModel(R.drawable.ic_car_red_new, "Maruti Zen", "Reservation Fee: AED 900", "Estimated Total: AED 1000"));
-
+        currentPosition = 0;
         CarUpgradeAdapter adapter = new CarUpgradeAdapter(activity, carUpgradeModelList);
 
         final Dialog dialog = new Dialog(activity);
@@ -306,110 +299,17 @@ public class CarDetailOneActivity extends AppCompatActivity {
         ViewPager viewPager = dialog.findViewById(R.id.viewPager);
         viewPager.setAdapter(adapter);
 
-//        viewPager.setPageMargin(40);
-//        viewPager.setClipToPadding(false);
-//        viewPager.setClipChildren(false);
-//        viewPager.setOffscreenPageLimit(3);
-//        viewPager.setPageTransformer(false, new ZoomFadeTransformer(viewPager.getPaddingLeft(), 0.85f, 0));
-
-
-//        viewPager.setPageMargin(100);
-//        viewPager.setPageTransformer(false, new ViewPager.PageTransformer()
-//        {
-//            @Override
-//            public void transformPage(View page, float position)
-//            {
-//                int pageWidth = viewPager.getMeasuredWidth() -
-//                        viewPager.getPaddingLeft() - viewPager.getPaddingRight();
-//                int pageHeight = viewPager.getHeight();
-//                int paddingLeft = viewPager.getPaddingLeft();
-//                float transformPos = (float) (page.getLeft() -
-//                        (viewPager.getScrollX() + paddingLeft)) / pageWidth;
-//                int max = pageHeight / 10;
-//                if (transformPos < -1)
-//                {
-//                    // [-Infinity,-1)
-//                    // This page is way off-screen to the left.
-//                    page.setAlpha(0.5f);// to make left transparent
-//                    page.setScaleY(0.7f);
-//                }
-//                else if (transformPos <= 1)
-//                {
-//                    // [-1,1]
-//                    page.setScaleY(1f);
-//                }
-//                else
-//                {
-//                    // (1,+Infinity]
-//                    // This page is way off-screen to the right.
-//                    page.setAlpha(0.5f);// to make right transparent
-//                    page.setScaleY(0.7f);
-//                }
-//            }
-//        });
-
-//        viewPager.setPageMargin(40);
-//        viewPager.setClipToPadding(false);
-//        viewPager.setClipChildren(false);
-//        viewPager.setOffscreenPageLimit(3);
-//        viewPager.setPageTransformer(false, new ViewPager.PageTransformer() {
-//                    @Override
-//                    public void transformPage(View page, float position) {
-//                        float r = 1 - Math.abs(position);
-//                        page.setScaleY(0.85f + r * 0.15f);
-//
-////                        int pageWidth = viewPager.getMeasuredWidth() -
-////                                viewPager.getPaddingLeft() - viewPager.getPaddingRight();
-////                        int paddingLeft = viewPager.getPaddingLeft();
-////                        float transformPos = (float) (page.getLeft() -
-////                                (viewPager.getScrollX() + paddingLeft)) / pageWidth;
-////
-////                        if (transformPos < -1){
-////                            page.setScaleY(0.8f);
-////                        } else if (transformPos <= 1) {
-////                            page.setScaleY(1f);
-////                        } else {
-////                            page.setScaleY(0.8f);
-////                        }
-//
-//                    }
-//                }
-//        );
-
-//        viewPager.setClipToPadding(false);
-//        DisplayMetrics displayMetrics = new DisplayMetrics();
-//        activity.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-//        int width = displayMetrics.widthPixels;
-//        int paddingToSet = width/4; //set this ratio according to how much of the next and previos screen you want to show.
-//        viewPager.setPadding(paddingToSet,0,paddingToSet,0);
-//
-//        viewPager.setClipToPadding(false);
-//        viewPager.setClipChildren(false);
-//        viewPager.setOffscreenPageLimit(3);
-//        viewPager.getChildAt(0).setOverScrollMode(RecyclerView.OVER_SCROLL_NEVER);
-//        CompositePageTransformer compositePageTransformer = new CompositePageTransformer();
-//        compositePageTransformer.addTransformer(new MarginPageTransformer(40));
-//        compositePageTransformer.addTransformer(new ViewPager2.PageTransformer() {
-//            @Override
-//            public void transformPage(@NonNull View page, float position) {
-//                float r = 1 - Math.abs(position);
-//                page.setScaleY(0.85f + r * 0.15f);
-//            }
-//        });
-//        viewPager.setPageTransformer(compositePageTransformer);
-
         TextView txtCarName = dialog.findViewById(R.id.txtCarName);
-        TextView txtReservationFee = dialog.findViewById(R.id.txtReservationFee);
-        TextView txtEstimateTotal = dialog.findViewById(R.id.txtEstimateTotal);
+        TextView txtExtraFee = dialog.findViewById(R.id.txtExtraFee);
         TextView txtCancel = dialog.findViewById(R.id.txtCancel);
         TextView txtUpgrade = dialog.findViewById(R.id.txtUpgrade);
         ImageView imgLeft = dialog.findViewById(R.id.imgLeft);
         ImageView imgRight = dialog.findViewById(R.id.imgRight);
 
-        CarUpgradeModel model = carUpgradeModelList.get(0);
-        txtCarName.setText(model.getCarName());
-        txtReservationFee.setText(model.getReservationFee());
-        txtEstimateTotal.setText(model.getEstimateTotal());
+        CarUpgradeModel model = carUpgradeModelList.get(currentPosition);
+        txtCarName.setText(model.getCar_name());
+        txtExtraFee.setText(getResources().getString(R.string.payAED) + " " + model.getAmount_difference()+ " " +getResources().getString(R.string.extra));
+
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             public void onPageScrollStateChanged(int state) {
@@ -423,9 +323,9 @@ public class CarDetailOneActivity extends AppCompatActivity {
             public void onPageSelected(int position) {
                 currentPosition = position;
                 CarUpgradeModel model = carUpgradeModelList.get(position);
-                txtCarName.setText(model.getCarName());
-                txtReservationFee.setText(model.getReservationFee());
-                txtEstimateTotal.setText(model.getEstimateTotal());
+                txtCarName.setText(model.getCar_name());
+                txtExtraFee.setText(getResources().getString(R.string.payAED) + " " + model.getAmount_difference()+ " " +getResources().getString(R.string.extra));
+
             }
         });
 
@@ -464,7 +364,39 @@ public class CarDetailOneActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Click.preventTwoClick(v);
                 dialog.dismiss();
-//                binding.imgCar.setImageResource(carUpgradeModelList.get(currentPosition).getImage());
+
+                updateImage = carUpgradeModelList.get(currentPosition).getCar_image();
+                updateId = carUpgradeModelList.get(currentPosition).getCar_id();
+                updateAmount = carUpgradeModelList.get(currentPosition).getAmount_difference();
+                updateName = carUpgradeModelList.get(currentPosition).getCar_name();
+
+                carID = carUpgradeModelList.get(currentPosition).getCar_id();
+                double totalAmount = Double.parseDouble(aedSelected) + Double.parseDouble(updateAmount);
+                carAED = totalAmount + "";
+
+                binding.txtCarName.setText(updateName);
+                binding.txtTotalAED.setText(getResources().getString(R.string.aed) + " " +carAED);
+                binding.txtCarRate.setText(getResources().getString(R.string.aed) + " " + carAED);
+
+                if (!TextUtils.isEmpty(updateImage)){
+                    Picasso.get().load(model.getCar_image()).error(R.drawable.ic_no_car).into(binding.imgCar);
+                }else {
+                    Picasso.get().load(R.drawable.ic_no_car).into(binding.imgCar);
+                }
+
+                CarUpgradeModel carModel = carUpgradeModelList.get(currentPosition);
+                List<CarImageModel> carImageModelList = new ArrayList<>();
+                try{
+                    for (int i=0; i<carModel.getMore_car_image().length(); i++){
+                        CarImageModel carImageModel = new CarImageModel();
+                        carImageModel.setImage(carModel.getMore_car_image().getString(i));
+                        carImageModelList.add(carImageModel);
+                    }
+                }catch (Exception e){
+                }
+                CarImageAdapter carImageAdapter = new CarImageAdapter(activity,carImageModelList,binding.imgCar,2);
+                binding.recyclerCarRelated.setAdapter(carImageAdapter);
+
             }
         });
 
@@ -475,13 +407,13 @@ public class CarDetailOneActivity extends AppCompatActivity {
 
     }
 
-    private void hitBookingCarData(CarModel model) {
+    private void hitBookingCarData() {
 
         ProgressView.show(activity,loadingDialog);
         Json j = new Json();
         j.addString(P.booking_type,SelectCarActivity.bookingTYpe);
         j.addString(P.month_time,SelectCarActivity.monthDuration);
-        j.addString(P.car_id,model.getId());
+        j.addString(P.car_id,carID);
         j.addString(P.pay_type,payType);
         j.addString(P.emirate_id,Config.SelectedPickUpEmirateID);
         j.addString(P.coupon_code,"");
@@ -586,6 +518,97 @@ public class CarDetailOneActivity extends AppCompatActivity {
                 })
                 .run("hitBookingCarData");
     }
+
+
+    private void hitUpdateCarData() {
+
+        ProgressView.show(activity, loadingDialog);
+        Json j = new Json();
+
+        String extraParams =
+                "emirate_id=" + SelectCarActivity.pickUpEmirateID+
+                        "&car_id=" + model.getId()+
+                        "&pickup_date=" + SelectCarActivity.pickUpDate +
+                        "&dropoff_date=" + SelectCarActivity.dropUpDate +
+                        "&booking_type=" + SelectCarActivity.bookingTYpe +
+                        "&month_time=" + SelectCarActivity.monthDuration +
+                        "&pay_type=" + payType ;
+
+        Api.newApi(activity, P.BaseUrl + "upgrade_car?" + extraParams).addJson(j)
+                .setMethod(Api.GET)
+                //.onHeaderRequest(App::getHeaders)
+                .onError(() -> {
+                    ProgressView.dismiss(loadingDialog);
+                    H.showMessage(activity, "On error is called");
+                })
+                .onSuccess(json ->
+                {
+                    if (json.getInt(P.status) == 1) {
+
+                        json = json.getJson(P.data);
+                        JsonList car_list = json.getJsonList(P.car_list);
+                        for (int i = 0; i < car_list.size(); i++) {
+                            Json jsonData = car_list.get(i);
+                            String car_id = jsonData.getString(P.car_id);
+                            String car_name = jsonData.getString(P.car_name);
+                            String car_image = jsonData.getString(P.car_image);
+                            String amount_difference = jsonData.getString(P.amount_difference);
+                            JSONArray more_car_image = jsonData.getJsonArray(P.more_car_image);
+                            CarUpgradeModel model = new CarUpgradeModel();
+                            model.setCar_id(car_id);
+                            model.setCar_name(car_name);
+                            model.setCar_image(car_image);
+                            model.setAmount_difference(amount_difference);
+                            model.setMore_car_image(more_car_image);
+
+                            carUpgradeModelList.add(model);
+
+                        }
+                    }
+                    ProgressView.dismiss(loadingDialog);
+
+                })
+                .run("hitUpdateCarData");
+    }
+
+    private void hitRentalTermsData() {
+
+        ProgressView.show(activity, loadingDialog);
+        Json j = new Json();
+
+        Api.newApi(activity, P.BaseUrl + "car_rental_terms")
+                .setMethod(Api.GET)
+                //.onHeaderRequest(App::getHeaders)
+                .onError(() -> {
+                    ProgressView.dismiss(loadingDialog);
+                    H.showMessage(activity, "On error is called");
+                })
+                .onSuccess(json ->
+                {
+                    if (json.getInt(P.status) == 1) {
+
+                        json = json.getJson(P.data);
+                        JsonList list = json.getJsonList(P.list);
+                        for (int i = 0; i < list.size(); i++) {
+                            Json jsonData = list.get(i);
+                            String title = jsonData.getString(P.title);
+                            String description = jsonData.getString(P.description);
+                            RentalModel rentalModel = new RentalModel();
+                            rentalModel.setTitle(title);
+                            rentalModel.setDescription(description);
+                            if (!TextUtils.isEmpty(title) && !TextUtils.isEmpty(description)){
+                                rentalModelList.add(rentalModel);
+                            }
+                        }
+                        rentalAdapter.notifyDataSetChanged();
+
+                    }
+                    ProgressView.dismiss(loadingDialog);
+
+                })
+                .run("hitRentalTermsData");
+    }
+
 
     private String checkString(String string){
         String value = string;

@@ -309,20 +309,23 @@
     <string name="aed">درهم إماراتي</string>
     <string name="includedRated">المدرجة في الأسعار ال</string>
     <string name="rentalTerm">شروط الإيجار والمؤهلات والمتطلبات</string>
-    <string name="personalInfo">Personal Information</string>
-    <string name="paymentInfo">Payment Information</string>
-    <string name="bookingRemark">Booking Remark</string>
-    <string name="yourDocument">Your Document</string>
-    <string name="deliverExtraMessage">Do you want the car to be Delivered ( Charges Extra ):</string>
-    <string name="collectExtraMessage">Do you want the car to be Collect ( Charges Extra ):</string>
-    <string name="deliverEmirate">Select Deliver Emirate</string>
-    <string name="collectEmirate">Select Collect Emirate</string>
+    <string name="personalInfo">معلومات شخصية</string>
+    <string name="paymentInfo">معلومات الدفع</string>
+    <string name="bookingRemark">ملاحظة الحجز</string>
+    <string name="yourDocument">المستند الخاص بك</string>
+    <string name="deliverExtraMessage">هل تريد تسليم السيارة (رسوم إضافية):</string>
+    <string name="collectExtraMessage">هل تريد أن يتم تحصيل السيارة (رسوم إضافية):</string>
+    <string name="deliverEmirate">حدد تسليم الإمارة</string>
+    <string name="collectEmirate">حدد جمع الإمارة</string>
 
     <string name="selectSelftPickUpLocation">الرجاء تحديد موقع الالتقاط الذاتي</string>
     <string name="selectSelfReturnUpLocation">الرجاء تحديد موقع العودة الذاتية</string>
-    <string name="selectDropOffLocation">Please select drop off location</string>
-    <string name="selectDeliverEmirate">Select deliver emirate</string>
-    <string name="selectCollectEmirate">Select collect emirate</string>
+    <string name="selectDropOffLocation">الرجاء تحديد مكان التسليم</string>
+    <string name="selectDeliverEmirate">حدد تسليم الإمارة</string>
+    <string name="selectCollectEmirate">اختر امارة الاستلام</string>
+    <string name="payAED">ادفع بالدرهم الإماراتي</string>
+    <string name="extra">إضافي</string>
+    <string name="unableFondUpdateData">تعذر العثور على بيانات تحديث السيارة</string>
 
 
     <string name="txt1">شركة رائدة في مجال تأجير السيارات ولديها أكبر شبكة من الفروع ونقاط الالتقاء</string>

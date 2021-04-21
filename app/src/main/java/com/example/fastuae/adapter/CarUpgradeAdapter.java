@@ -2,6 +2,7 @@ package com.example.fastuae.adapter;
 
 import android.content.Context;
 import android.os.Parcelable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.example.fastuae.R;
-import com.example.fastuae.activity.CarDetailOneActivity;
 import com.example.fastuae.model.CarUpgradeModel;
 import com.squareup.picasso.Picasso;
 
@@ -55,7 +55,12 @@ public class CarUpgradeAdapter extends PagerAdapter {
         final ImageView imageView = imageLayout
                 .findViewById(R.id.imgCar);
         CarUpgradeModel model = imageModelList.get(position);
-        Picasso.get().load(model.getImage()).into(imageView);
+        if (!TextUtils.isEmpty(model.getCar_image())){
+            Picasso.get().load(model.getCar_image()).error(R.drawable.ic_no_car).into(imageView);
+        }else {
+            Picasso.get().load(R.drawable.ic_no_car).into(imageView);
+        }
+
         view.addView(imageLayout, 0);
 
         return imageLayout;

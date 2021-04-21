@@ -30,7 +30,7 @@
                 android:layout_height="match_parent">
 
                 <androidx.core.widget.NestedScrollView
-
+                    android:id="@+id/nestedSroll"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_above="@+id/cardBottom"
@@ -107,63 +107,12 @@
                                 android:gravity="center"
                                 android:orientation="horizontal">
 
-                                <androidx.cardview.widget.CardView
-                                    android:layout_width="70dp"
-                                    android:layout_height="70dp"
-                                    android:layout_marginLeft="15dp"
-                                    android:layout_marginRight="15dp"
-                                    app:cardCornerRadius="8dp"
-                                    app:cardElevation="0dp">
+                                <androidx.recyclerview.widget.RecyclerView
+                                    android:id="@+id/recyclerCarRelated"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content">
 
-                                    <ImageView
-                                        android:id="@+id/img1"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:scaleType="fitXY"
-                                        android:src="@drawable/ic_view_one">
-
-                                    </ImageView>
-
-                                </androidx.cardview.widget.CardView>
-
-                                <androidx.cardview.widget.CardView
-                                    android:layout_width="70dp"
-                                    android:layout_height="70dp"
-                                    android:layout_marginLeft="15dp"
-                                    android:layout_marginRight="15dp"
-                                    app:cardCornerRadius="8dp"
-                                    app:cardElevation="0dp">
-
-                                    <ImageView
-                                        android:id="@+id/img2"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:scaleType="fitXY"
-                                        android:src="@drawable/ic_view_two">
-
-                                    </ImageView>
-
-                                </androidx.cardview.widget.CardView>
-
-                                <androidx.cardview.widget.CardView
-                                    android:layout_width="70dp"
-                                    android:layout_height="70dp"
-                                    android:layout_marginLeft="15dp"
-                                    android:layout_marginRight="15dp"
-                                    app:cardCornerRadius="8dp"
-                                    app:cardElevation="0dp">
-
-                                    <ImageView
-                                        android:id="@+id/img3"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:scaleType="fitXY"
-                                        android:src="@drawable/ic_view_three">
-
-                                    </ImageView>
-
-                                </androidx.cardview.widget.CardView>
-
+                                </androidx.recyclerview.widget.RecyclerView>
 
                             </LinearLayout>
 
