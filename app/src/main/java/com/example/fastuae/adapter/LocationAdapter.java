@@ -68,11 +68,12 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.viewHo
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-                if (fromActivity){
-                    ((CarBookingDetailsActivity)context).onLocationClick(model.getLocation_name(),flag,model);
-                }else {
-                    ((HomeFragment)homeFragment).onLocationClick(model.getLocation_name(),flag,model);
-                }
+//                if (fromActivity){
+//                    ((CarBookingDetailsActivity)context).onLocationClick(model.getLocation_name(),flag,model);
+//                }else {
+//                    ((HomeFragment)homeFragment).onLocationClick(model.getLocation_name(),flag,model);
+//                }
+                ((HomeFragment)homeFragment).onLocationClick(model.getLocation_name(),flag,model);
 
             }
         });

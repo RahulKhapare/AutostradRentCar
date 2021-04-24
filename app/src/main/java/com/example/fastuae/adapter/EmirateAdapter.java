@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fastuae.R;
+import com.example.fastuae.activity.CarBookingDetailsActivity;
 import com.example.fastuae.databinding.ActivityLocationListBinding;
 import com.example.fastuae.fragment.HomeFragment;
 import com.example.fastuae.model.EmirateModel;
@@ -38,6 +39,13 @@ public class EmirateAdapter extends RecyclerView.Adapter<EmirateAdapter.viewHold
         fromActivity = false;
     }
 
+    public EmirateAdapter(Context context, List<EmirateModel> emirateModelList,int flag) {
+        this.context = context;
+        this.emirateModelList = emirateModelList;
+        this.flag = flag;
+        fromActivity = true;
+    }
+
     @NonNull
     @Override
     public viewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -54,7 +62,12 @@ public class EmirateAdapter extends RecyclerView.Adapter<EmirateAdapter.viewHold
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-                ((HomeFragment)homeFragment).onEmirateClick(flag,model);
+                if (fromActivity){
+                    ((CarBookingDetailsActivity)context).onEmirateClick(flag,model);
+                }else {
+                    ((HomeFragment)homeFragment).onEmirateClick(flag,model);
+                }
+
             }
         });
 

@@ -38,6 +38,7 @@ public class P {
     public static String googleCode = "googleCode";
     public static String googleKnownName = "googleKnownName";
     public static String locationAddress = "locationAddress";
+    public static String document = "document";
 
     public static String faq_list = "faq_list";
     public static String question = "question";
@@ -71,6 +72,8 @@ public class P {
     public static String slug = "slug";
     public static String thumbnail_image = "thumbnail_image";
     public static String add_date = "add_date";
+    public static String key = "key";
+    public static String field = "field";
 
     public static String gender = "gender";
     public static String user_alt_mobile = "user_alt_mobile";

@@ -47,50 +47,65 @@
                             android:padding="16dp"
                             android:orientation="vertical">
 
-
                             <LinearLayout
-                                android:id="@+id/lnrTopRadio"
+                                android:id="@+id/lnrExtraDeliver"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:layout_gravity="center_horizontal"
-                                android:gravity="center_horizontal"
-                                android:layout_marginTop="10dp">
+                                android:layout_marginTop="10dp"
+                                android:orientation="vertical">
 
-                                <RadioButton
-                                    android:id="@+id/radioDeliver"
-                                    android:layout_width="wrap_content"
+                                <TextView
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:buttonTint="@color/lightBlue"
                                     android:textColor="@color/textDark"
                                     android:textSize="16sp"
-                                    android:checked="true"
-                                    android:layout_marginRight="10dp"
-                                    android:layout_marginLeft="10dp"
-                                    android:text="@string/deliever">
+                                    android:fontFamily="@font/nunito_sans_semibold"
+                                    android:text="@string/deliverExtraMessage">
 
-                                </RadioButton>
+                                </TextView>
 
-                                <RadioButton
-                                    android:id="@+id/radioSelfPickup"
-                                    android:layout_width="wrap_content"
+                                <LinearLayout
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:buttonTint="@color/grayDark"
-                                    android:textColor="@color/textDark"
-                                    android:textSize="16sp"
-                                    android:layout_marginRight="10dp"
-                                    android:layout_marginLeft="10dp"
-                                    android:text="@string/selfPickup">
+                                    android:orientation="horizontal"
+                                    android:layout_gravity="center_horizontal"
+                                    android:gravity="center_horizontal"
+                                    android:layout_marginTop="10dp">
 
-                                </RadioButton>
+                                    <RadioButton
+                                        android:id="@+id/radioDeliverYes"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:buttonTint="@color/grayDark"
+                                        android:textColor="@color/textDark"
+                                        android:textSize="16sp"
+                                        android:checked="false"
+                                        android:layout_marginRight="10dp"
+                                        android:layout_marginLeft="10dp"
+                                        android:text="@string/yes">
+
+                                    </RadioButton>
+
+                                    <RadioButton
+                                        android:id="@+id/radioDeliverNo"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:buttonTint="@color/lightBlue"
+                                        android:textColor="@color/textDark"
+                                        android:checked="true"
+                                        android:layout_marginRight="10dp"
+                                        android:layout_marginLeft="10dp"
+                                        android:text="@string/no">
+
+                                    </RadioButton>
+
+                                </LinearLayout>
 
                             </LinearLayout>
 
-
-
                             <androidx.cardview.widget.CardView
-                                android:layout_below="@+id/lnrTopRadio"
-                                android:id="@+id/cardPickLocation"
+                                android:layout_below="@+id/lnrExtraDeliver"
+                                android:id="@+id/cardDeliverEmirate"
                                 android:layout_width="match_parent"
                                 android:layout_height="60dp"
                                 app:cardElevation="3dp"
@@ -101,9 +116,8 @@
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
+                                    android:layout_height="wrap_content"
                                     android:layout_margin="5dp"
-                                    android:gravity="center_vertical"
                                     android:layout_gravity="center_vertical"
                                     android:orientation="horizontal">
 
@@ -117,32 +131,29 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content">
 
-                                            <ImageView
-                                                android:layout_width="25dp"
-                                                android:layout_height="25dp"
-                                                android:layout_gravity="center_vertical"
-                                                android:src="@drawable/ic_location"></ImageView>
                                             <TextView
-                                                android:id="@+id/txtPickUpTitle"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="wrap_content"
                                                 android:textColor="@color/textDark"
+                                                android:paddingLeft="10dp"
                                                 android:layout_gravity="center_vertical"
                                                 android:fontFamily="@font/nunito_sans_semibold"
-                                                android:text="@string/pickUpLocation"
+                                                android:text="@string/deliverEmirate"
                                                 android:textSize="16sp">
                                             </TextView>
+
 
                                         </LinearLayout>
 
                                         <TextView
-                                            android:id="@+id/txtPickUpMessage"
+                                            android:id="@+id/txtDeliverEmirateMessage"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:textColor="@color/iconicGray"
                                             android:layout_gravity="center_vertical"
                                             android:fontFamily="@font/nunito_sans_semibold"
-                                            android:text="@string/userCurrentLocation"
+                                            android:text=""
+                                            android:visibility="gone"
                                             android:paddingLeft="10dp"
                                             android:textSize="14sp">
                                         </TextView>
@@ -150,79 +161,176 @@
                                     </LinearLayout>
 
                                     <ImageView
-                                        android:id="@+id/imgDeliverArrowUp"
+                                        android:id="@+id/imgDeliverEmirateArrowUp"
                                         android:layout_width="25dp"
                                         android:layout_height="25dp"
                                         android:visibility="gone"
-                                        android:layout_marginRight="10dp"
                                         android:layout_gravity="center_vertical"
                                         android:tint="@color/colorBlack"
                                         android:src="@drawable/ic_up_arrow"></ImageView>
 
                                     <ImageView
-                                        android:id="@+id/imgDeliverArrowDown"
+                                        android:id="@+id/imgDeliverEmirateArrowDown"
                                         android:layout_width="25dp"
                                         android:layout_height="25dp"
-                                        android:layout_marginRight="10dp"
                                         android:layout_gravity="center_vertical"
                                         android:tint="@color/colorBlack"
                                         android:src="@drawable/ic_down_arrow"></ImageView>
 
                                 </LinearLayout>
 
-
                             </androidx.cardview.widget.CardView>
 
                             <LinearLayout
-                                android:layout_below="@+id/cardPickLocation"
-                                android:id="@+id/lnrBottomRadio"
+                                android:layout_below="@+id/cardDeliverEmirate"
+                                android:id="@+id/lnrAddressDeliver"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:layout_gravity="center_horizontal"
-                                android:gravity="center_horizontal"
-                                android:layout_marginTop="10dp">
+                                android:layout_marginLeft="2dp"
+                                android:layout_marginRight="2dp"
+                                android:layout_marginTop="15dp"
+                                android:orientation="vertical">
 
-                                <RadioButton
-                                    android:id="@+id/radioCollect"
-                                    android:layout_width="wrap_content"
+                                <LinearLayout
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:buttonTint="@color/lightBlue"
+                                    android:orientation="horizontal">
+
+                                    <EditText
+                                        android:layout_weight="1"
+                                        android:id="@+id/etxDeliverLandmark"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:padding="16dp"
+                                        android:textColor="@color/colorPrimaryDark"
+                                        android:textColorHint="@color/textDark"
+                                        android:hint="@string/landMark"
+                                        android:background="@drawable/corner_gray_bg">
+
+                                    </EditText>
+
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginRight="5dp"
+                                        android:layout_marginLeft="5dp">
+
+                                    </LinearLayout>
+
+                                    <TextView
+                                        android:id="@+id/txtDeliverSelectAddress"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="right"
+                                        android:background="@drawable/button_blue_bg"
+                                        android:fontFamily="@font/nunito_sans_regular"
+                                        android:gravity="right"
+                                        android:paddingRight="20dp"
+                                        android:paddingLeft="20dp"
+                                        android:paddingBottom="16dp"
+                                        android:paddingTop="16dp"
+                                        android:text="@string/selectAddress"
+                                        android:textColor="@color/colorWhite"
+                                        android:textSize="16dp" />
+
+                                </LinearLayout>
+
+                                <TextView
+                                    android:id="@+id/txtDeliverGoogleAddress"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="@color/textDark"
+                                    android:layout_gravity="center_vertical"
+                                    android:visibility="gone"
+                                    android:fontFamily="@font/nunito_sans_semibold"
+                                    android:textSize="16sp">
+                                </TextView>
+
+                                <EditText
+                                    android:id="@+id/etxDeliveryDetails"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="120dp"
+                                    android:layout_marginTop="15dp"
+                                    android:padding="10dp"
+                                    android:gravity="start"
+                                    android:textColor="@color/colorPrimaryDark"
+                                    android:hint="@string/typeDetailsHere"
+                                    android:layout_gravity="start"
+                                    android:background="@drawable/corner_gray_bg">
+
+                                </EditText>
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_below="@+id/lnrAddressDeliver"
+                                android:id="@+id/lnrExtraCollect"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="30dp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
                                     android:textColor="@color/textDark"
                                     android:textSize="16sp"
-                                    android:checked="true"
-                                    android:layout_marginRight="10dp"
-                                    android:layout_marginLeft="10dp"
-                                    android:text="@string/collect">
+                                    android:fontFamily="@font/nunito_sans_semibold"
+                                    android:text="@string/collectExtraMessage">
 
-                                </RadioButton>
+                                </TextView>
 
-                                <RadioButton
-                                    android:id="@+id/radioSelfReturn"
-                                    android:layout_width="wrap_content"
+                                <LinearLayout
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:buttonTint="@color/grayDark"
-                                    android:textColor="@color/textDark"
-                                    android:textSize="16sp"
-                                    android:layout_marginRight="10dp"
-                                    android:layout_marginLeft="10dp"
-                                    android:text="@string/selfreturn">
+                                    android:orientation="horizontal"
+                                    android:layout_gravity="center_horizontal"
+                                    android:gravity="center_horizontal"
+                                    android:layout_marginTop="10dp">
 
-                                </RadioButton>
+                                    <RadioButton
+                                        android:id="@+id/radioCollectYes"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:buttonTint="@color/grayDark"
+                                        android:textColor="@color/textDark"
+                                        android:textSize="16sp"
+                                        android:checked="false"
+                                        android:layout_marginRight="10dp"
+                                        android:layout_marginLeft="10dp"
+                                        android:text="@string/yes">
+
+                                    </RadioButton>
+
+                                    <RadioButton
+                                        android:id="@+id/radioCollectNo"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:buttonTint="@color/lightBlue"
+                                        android:textColor="@color/textDark"
+                                        android:checked="true"
+                                        android:layout_marginRight="10dp"
+                                        android:layout_marginLeft="10dp"
+                                        android:text="@string/no">
+
+                                    </RadioButton>
+
+                                </LinearLayout>
 
                             </LinearLayout>
 
                             <androidx.cardview.widget.CardView
-                                android:layout_below="@+id/lnrBottomRadio"
-                                android:id="@+id/cardDropLocation"
+                                android:layout_below="@+id/lnrExtraCollect"
+                                android:id="@+id/cardCollectEmirate"
                                 android:layout_width="match_parent"
                                 android:layout_height="60dp"
                                 app:cardElevation="3dp"
                                 app:cardCornerRadius="5dp"
                                 android:layout_marginTop="15dp"
                                 android:layout_marginLeft="1dp"
-                                android:layout_marginRight="1dp"
-                                android:layout_marginBottom="5dp">
+                                android:layout_marginRight="1dp">
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
@@ -241,75 +349,149 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content">
 
-                                            <ImageView
-                                                android:layout_width="25dp"
-                                                android:layout_height="25dp"
-                                                android:layout_gravity="center_vertical"
-                                                android:src="@drawable/ic_location"></ImageView>
                                             <TextView
-                                                android:id="@+id/txtDropUpTitle"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="wrap_content"
                                                 android:textColor="@color/textDark"
+                                                android:paddingLeft="10dp"
                                                 android:layout_gravity="center_vertical"
                                                 android:fontFamily="@font/nunito_sans_semibold"
-                                                android:text="@string/dropOfLocation"
+                                                android:text="@string/collectEmirate"
                                                 android:textSize="16sp">
                                             </TextView>
+
 
                                         </LinearLayout>
 
                                         <TextView
-                                            android:id="@+id/txtDropUpMessage"
+                                            android:id="@+id/txtCollectEmirateMessage"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:textColor="@color/iconicGray"
                                             android:layout_gravity="center_vertical"
                                             android:fontFamily="@font/nunito_sans_semibold"
-                                            android:text="@string/userCurrentLocation"
+                                            android:text=""
+                                            android:visibility="gone"
                                             android:paddingLeft="10dp"
                                             android:textSize="14sp">
                                         </TextView>
 
-
                                     </LinearLayout>
 
                                     <ImageView
-                                        android:id="@+id/imgCollectArrowUp"
+                                        android:id="@+id/imgCollectEmirateArrowUp"
                                         android:layout_width="25dp"
                                         android:layout_height="25dp"
                                         android:visibility="gone"
                                         android:layout_gravity="center_vertical"
                                         android:tint="@color/colorBlack"
-                                        android:layout_marginRight="10dp"
                                         android:src="@drawable/ic_up_arrow"></ImageView>
 
                                     <ImageView
-                                        android:id="@+id/imgCollectArrowDown"
+                                        android:id="@+id/imgCollectEmirateArrowDown"
                                         android:layout_width="25dp"
                                         android:layout_height="25dp"
                                         android:layout_gravity="center_vertical"
                                         android:tint="@color/colorBlack"
-                                        android:layout_marginRight="10dp"
                                         android:src="@drawable/ic_down_arrow"></ImageView>
 
                                 </LinearLayout>
 
                             </androidx.cardview.widget.CardView>
 
+                            <LinearLayout
+                                android:layout_below="@+id/cardCollectEmirate"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="15dp"
+                                android:layout_marginLeft="2dp"
+                                android:layout_marginRight="2dp"
+                                android:orientation="vertical">
 
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <EditText
+                                        android:layout_weight="1"
+                                        android:id="@+id/etxCollectLandmark"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:padding="16dp"
+                                        android:textColor="@color/colorPrimaryDark"
+                                        android:textColorHint="@color/textDark"
+                                        android:hint="@string/landMark"
+                                        android:background="@drawable/corner_gray_bg">
+
+                                    </EditText>
+
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginRight="5dp"
+                                        android:layout_marginLeft="5dp">
+
+                                    </LinearLayout>
+
+                                    <TextView
+                                        android:id="@+id/txtCollectSelectAddress"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="right"
+                                        android:background="@drawable/button_blue_bg"
+                                        android:fontFamily="@font/nunito_sans_regular"
+                                        android:gravity="right"
+                                        android:paddingRight="20dp"
+                                        android:paddingLeft="20dp"
+                                        android:paddingBottom="16dp"
+                                        android:paddingTop="16dp"
+                                        android:text="@string/selectAddress"
+                                        android:textColor="@color/colorWhite"
+                                        android:textSize="16dp" />
+
+                                </LinearLayout>
+
+                                <TextView
+                                    android:id="@+id/txtCollectGoogleAddress"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="@color/textDark"
+                                    android:layout_gravity="center_vertical"
+                                    android:visibility="gone"
+                                    android:fontFamily="@font/nunito_sans_semibold"
+                                    android:textSize="16sp">
+                                </TextView>
+
+
+                                <EditText
+                                    android:id="@+id/etxCollectDetails"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="120dp"
+                                    android:layout_marginTop="15dp"
+                                    android:padding="10dp"
+                                    android:gravity="start"
+                                    android:textColor="@color/colorPrimaryDark"
+                                    android:hint="@string/typeDetailsHere"
+                                    android:layout_gravity="start"
+                                    android:background="@drawable/corner_gray_bg">
+
+                                </EditText>
+
+                            </LinearLayout>
 
                             <androidx.cardview.widget.CardView
-                                android:id="@+id/cardLocationDeliver"
-                                android:layout_below="@+id/cardPickLocation"
+                                android:id="@+id/cardDeliverEmirateView"
+                                android:layout_below="@+id/cardDeliverEmirate"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 app:cardElevation="3dp"
                                 app:cardCornerRadius="5dp"
-                                android:layout_marginBottom="10dp"
                                 android:layout_marginTop="-5dp"
                                 android:layout_marginLeft="1dp"
                                 android:layout_marginRight="1dp"
+                                android:layout_marginBottom="10dp"
                                 android:visibility="gone"
                                 >
 
@@ -328,7 +510,7 @@
                                     </LinearLayout>
 
                                     <androidx.recyclerview.widget.RecyclerView
-                                        android:id="@+id/recyclerDeliverLocation"
+                                        android:id="@+id/recyclerDeliverEmirate"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:scrollbarSize="7dp"
@@ -343,16 +525,16 @@
                             </androidx.cardview.widget.CardView>
 
                             <androidx.cardview.widget.CardView
-                                android:id="@+id/cardLocationCollect"
-                                android:layout_below="@+id/cardDropLocation"
+                                android:id="@+id/cardCollectEmirateView"
+                                android:layout_below="@+id/cardCollectEmirate"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 app:cardElevation="3dp"
                                 app:cardCornerRadius="5dp"
-                                android:layout_marginBottom="10dp"
-                                android:layout_marginTop="-10dp"
+                                android:layout_marginTop="-5dp"
                                 android:layout_marginLeft="1dp"
                                 android:layout_marginRight="1dp"
+                                android:layout_marginBottom="10dp"
                                 android:visibility="gone"
                                 >
 
@@ -371,7 +553,7 @@
                                     </LinearLayout>
 
                                     <androidx.recyclerview.widget.RecyclerView
-                                        android:id="@+id/recyclerLocationCollect"
+                                        android:id="@+id/recyclerCollectEmirate"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:scrollbarSize="7dp"
@@ -384,14 +566,13 @@
                                 </LinearLayout>
 
                             </androidx.cardview.widget.CardView>
-
 
                         </RelativeLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="0.5dp"
-                            android:layout_marginTop="5dp"
+                            android:layout_marginTop="10dp"
                             android:layout_marginBottom="5dp"
                             android:background="@color/customeGray"></LinearLayout>
 
@@ -1261,21 +1442,13 @@
                         </androidx.cardview.widget.CardView>
 
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="0.5dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginBottom="5dp"
-                            android:background="@color/customeGray"></LinearLayout>
-
-
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/bookingRemark"
                             android:textColor="@color/colorPrimaryDark"
                             android:textSize="18sp"
-                            android:paddingTop="16dp"
+                            android:paddingTop="0dp"
                             android:paddingBottom="10dp"
                             android:paddingRight="16dp"
                             android:paddingLeft="16dp"
@@ -1284,6 +1457,7 @@
                         </TextView>
 
                         <EditText
+                            android:id="@+id/etxRemark"
                             android:layout_width="match_parent"
                             android:layout_height="150dp"
                             android:layout_marginLeft="16dp"

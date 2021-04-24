@@ -19,6 +19,7 @@ import com.adoisstudio.helper.Session;
 import com.example.fastuae.R;
 import com.example.fastuae.adapter.ChooseExtrasAdapter;
 import com.example.fastuae.databinding.ActivityAddOnesBinding;
+import com.example.fastuae.fragment.HomeFragment;
 import com.example.fastuae.model.CarModel;
 import com.example.fastuae.model.ChooseExtrasModel;
 import com.example.fastuae.util.Click;
@@ -59,7 +60,9 @@ public class AddOnsActivity extends AppCompatActivity{
     @Override
     protected void onResume() {
         super.onResume();
-
+        if(HomeFragment.forEditAddress){
+            finish();
+        }
     }
 
     private void initView(){

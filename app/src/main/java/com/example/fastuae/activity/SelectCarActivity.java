@@ -21,6 +21,7 @@ import com.example.fastuae.R;
 import com.example.fastuae.databinding.ActivitySelectCarBinding;
 import com.example.fastuae.fragment.CarCardFragment;
 import com.example.fastuae.fragment.CarGreedFragment;
+import com.example.fastuae.fragment.HomeFragment;
 import com.example.fastuae.model.CarFilterModel;
 import com.example.fastuae.util.Config;
 import com.example.fastuae.util.WindowView;
@@ -91,7 +92,9 @@ public class SelectCarActivity extends AppCompatActivity implements ViewPager.On
     @Override
     protected void onResume() {
         super.onResume();
-
+        if(HomeFragment.forEditAddress){
+            finish();
+        }
     }
 
     private void initView(){
@@ -249,6 +252,7 @@ public class SelectCarActivity extends AppCompatActivity implements ViewPager.On
         }
         return false;
     }
+
 
     @Override
     protected void onDestroy() {

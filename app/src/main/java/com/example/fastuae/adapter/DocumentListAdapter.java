@@ -39,8 +39,8 @@ public class DocumentListAdapter extends RecyclerView.Adapter<DocumentListAdapte
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
         DocumentModel model = documentModelList.get(position);
 
-        holder.binding.txtDocument.setText(model.getDocumentName());
-        holder.binding.txtDetails.setText(model.getDocumentDetails());
+        holder.binding.txtDocument.setText(model.getTitle());
+        holder.binding.txtDetails.setText(model.getKey());
 
         holder.binding.imgView.setOnClickListener(new View.OnClickListener() {
             @Override

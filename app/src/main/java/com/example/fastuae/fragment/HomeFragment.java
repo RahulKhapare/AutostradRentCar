@@ -101,6 +101,10 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick,Du
     private EmirateAdapter collectEmirateAdapter;
     private int deliverEmirateFlag = 1;
     private int collectEmirateFlag = 2;
+    public static String deliveryEmirateName = "";
+    public static String collectEmirateName = "";
+
+    public static boolean forEditAddress = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -119,18 +123,6 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick,Du
         super.onResume();
     }
 
-    private void hideDailyView() {
-        binding.imgDeliverArrowDown.setVisibility(View.VISIBLE);
-        binding.imgDeliverArrowUp.setVisibility(View.GONE);
-        binding.cardLocationDeliver.setVisibility(View.GONE);
-    }
-
-    private void hideMonthlyView() {
-        binding.imgCollectArrowDown.setVisibility(View.VISIBLE);
-        binding.imgCollectArrowUp.setVisibility(View.GONE);
-        binding.cardLocationCollect.setVisibility(View.GONE);
-    }
-
 
     public static boolean containsLocation(Collection<HomeLocationModel> list, String location) {
         for (HomeLocationModel model : list) {
@@ -147,6 +139,7 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick,Du
         bookingTYpe = Config.daily;
         pickupType = "self_pickup";
         dropupType = "self_dropoff";
+        forEditAddress = false;
 
         loadingDialog = new LoadingDialog(context);
         sliderModelList = new ArrayList<>();
@@ -224,11 +217,13 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick,Du
             binding.txtDeliverEmirateMessage.setVisibility(View.VISIBLE);
             binding.txtDeliverEmirateMessage.setText(model.getEmirate_name());
             deleveryEmirateID = model.getId();
+            deliveryEmirateName = model.getEmirate_name();
             hideDeliverEmirate();
         }else if (flag==collectEmirateFlag){
             binding.txtCollectEmirateMessage.setVisibility(View.VISIBLE);
             binding.txtCollectEmirateMessage.setText(model.getEmirate_name());
             collectEmirateID = model.getId();
+            collectEmirateName = model.getEmirate_name();
             hideCollectEmirate();
         }
 
@@ -375,7 +370,7 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick,Du
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-
+                forEditAddress = false;
                 if (binding.radioMonthlyDeals.isChecked()){
                      if (TextUtils.isEmpty(monthDuration)) {
                         H.showMessage(context, getResources().getString(R.string.selectDuration));

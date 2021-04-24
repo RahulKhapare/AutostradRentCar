@@ -1,7 +1,6 @@
 package com.example.fastuae.activity;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -28,7 +27,6 @@ import androidx.fragment.app.FragmentActivity;
 import com.adoisstudio.helper.H;
 import com.adoisstudio.helper.Session;
 import com.example.fastuae.R;
-import com.example.fastuae.adapter.LocationAdapter;
 import com.example.fastuae.databinding.ActivitySelectLocationBinding;
 import com.example.fastuae.util.Click;
 import com.example.fastuae.util.Config;
@@ -136,7 +134,6 @@ public class SelectLocationActivity extends FragmentActivity implements Location
                     binding.lnrSearchLocation.setVisibility(View.GONE);
                     binding.etxLocation.setText("");
                     hideKeyboard(activity);
-
                 }
             }
         });

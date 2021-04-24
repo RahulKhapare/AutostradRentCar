@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.adoisstudio.helper.Session;
 import com.example.fastuae.R;
+import com.example.fastuae.activity.CarDetailOneActivity;
 import com.example.fastuae.databinding.ActivityAddOnsListBinding;
 import com.example.fastuae.databinding.ActivityChooseExtraListBinding;
 import com.example.fastuae.model.BookingModel;
@@ -31,7 +32,7 @@ public class AddOnsAdapter extends RecyclerView.Adapter<AddOnsAdapter.viewHolder
     private Session session;
 
     public interface onClick {
-        void cancelBooking(BookingModel model);
+        void aedDetailsClick(ChooseExtrasModel model);
     }
 
     public AddOnsAdapter(Context context, List<ChooseExtrasModel> chooseExtrasModelList) {
@@ -52,6 +53,13 @@ public class AddOnsAdapter extends RecyclerView.Adapter<AddOnsAdapter.viewHolder
         ChooseExtrasModel model = chooseExtrasModelList.get(position);
         holder.binding.txtExtraTitle.setText(model.getTitle());
         holder.binding.txtExtraValue.setText("AED "+model.getPrice());
+
+        holder.binding.txtAEDDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((CarDetailOneActivity)context).aedDetailsClick(model);
+            }
+        });
     }
 
     @Override

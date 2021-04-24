@@ -2,6 +2,7 @@ package com.example.fastuae.activity;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,12 +28,15 @@ import com.adoisstudio.helper.JsonList;
 import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
 import com.example.fastuae.R;
+import com.example.fastuae.adapter.AEDAdapter;
 import com.example.fastuae.adapter.AddOnsAdapter;
 import com.example.fastuae.adapter.CarImageAdapter;
 import com.example.fastuae.adapter.CarUpgradeAdapter;
 import com.example.fastuae.adapter.RentalAdapter;
 import com.example.fastuae.databinding.ActivityCarDetailOneBinding;
 import com.example.fastuae.fragment.HomeFragment;
+import com.example.fastuae.model.AEDModel;
+import com.example.fastuae.model.BookingModel;
 import com.example.fastuae.model.CarImageModel;
 import com.example.fastuae.model.CarModel;
 import com.example.fastuae.model.CarUpgradeModel;
@@ -46,13 +51,14 @@ import com.example.fastuae.util.WindowView;
 
 import org.json.JSONArray;
 
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class CarDetailOneActivity extends AppCompatActivity {
+public class CarDetailOneActivity extends AppCompatActivity implements AddOnsAdapter.onClick{
 
     private CarDetailOneActivity activity = this;
     private ActivityCarDetailOneBinding binding;
@@ -75,6 +81,9 @@ public class CarDetailOneActivity extends AppCompatActivity {
 
     List<RentalModel> rentalModelList;
     RentalAdapter rentalAdapter;
+
+    Json pickup_location_data;
+    Json dropoff_location_data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -156,8 +165,16 @@ public class CarDetailOneActivity extends AppCompatActivity {
 
         binding.txtTotalAED.setText(getResources().getString(R.string.aed) + " " +carAED);
 
-        binding.txtPickUpLocation.setText(Config.SelectedPickUpAddress+",\n"+pickUpDate+", "+Config.SelectedPickUpTime);
-        binding.txtDropOffLocation.setText(Config.SelectedDropUpAddress+",\n"+dropUpDate+", "+Config.SelectedDropUpTime);
+        if (HomeFragment.binding.radioDeliverYes.isChecked()){
+            binding.txtPickUpLocation.setText(HomeFragment.deliveryEmirateName+",\n"+pickUpDate+", "+Config.SelectedPickUpTime);
+        }else {
+            binding.txtPickUpLocation.setText(Config.SelectedPickUpAddress+",\n"+pickUpDate+", "+Config.SelectedPickUpTime);
+        }
+        if (HomeFragment.binding.radioCollectYes.isChecked()){
+            binding.txtDropOffLocation.setText(HomeFragment.collectEmirateName+",\n"+dropUpDate+", "+Config.SelectedDropUpTime);
+        }else {
+            binding.txtDropOffLocation.setText(Config.SelectedDropUpAddress+",\n"+dropUpDate+", "+Config.SelectedDropUpTime);
+        }
 
         if (payType.equals(Config.pay_now)){
             binding.txtCarRate.setText(getResources().getString(R.string.aed) + " " + model.getPay_now_rate());
@@ -171,12 +188,23 @@ public class CarDetailOneActivity extends AppCompatActivity {
             binding.txtCarName.setGravity(Gravity.RIGHT);
         }
 
+        if(SelectCarActivity.pickUpType.equals("self_pickup")){
+            binding.txtPickupDetails.setVisibility(View.VISIBLE);
+        }else {
+            binding.txtPickupDetails.setVisibility(View.GONE);
+        }
+
+        if(SelectCarActivity.dropUpType.equals("self_dropoff")){
+            binding.txtDropupDetails.setVisibility(View.VISIBLE);
+        }else {
+            binding.txtDropupDetails.setVisibility(View.GONE);
+        }
+
         hitBookingCarData();
     }
 
 
     private void onClick() {
-
 
         binding.txtUpgrade.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -194,6 +222,8 @@ public class CarDetailOneActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
+                HomeFragment.forEditAddress = true;
+                finish();
             }
         });
 
@@ -201,13 +231,20 @@ public class CarDetailOneActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
+                try {
+                    updatePickupDropoffDialog(1,pickup_location_data);
+                }catch (Exception e){
+
+                }
             }
         });
 
         binding.txtDropupEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                HomeFragment.forEditAddress = true;
                 Click.preventTwoClick(v);
+                finish();
             }
         });
 
@@ -215,13 +252,11 @@ public class CarDetailOneActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-            }
-        });
+                try {
+                    updatePickupDropoffDialog(2,dropoff_location_data);
+                }catch (Exception e){
 
-        binding.txtAEDDetails.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Click.preventTwoClick(v);
+                }
             }
         });
 
@@ -240,6 +275,14 @@ public class CarDetailOneActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 checkInsuranceView();
+            }
+        });
+
+        binding.txtCarAEDDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                hitAEDDetailsData("rate");
             }
         });
     }
@@ -300,7 +343,7 @@ public class CarDetailOneActivity extends AppCompatActivity {
 
         CarUpgradeModel model = carUpgradeModelList.get(currentPosition);
         txtCarName.setText(model.getCar_name());
-        txtExtraFee.setText(getResources().getString(R.string.payAED) + " " + model.getAmount_difference()+ " " +getResources().getString(R.string.extra));
+        txtExtraFee.setText(getResources().getString(R.string.payAED) + " " + getDouble(model.getAmount_difference())+ " " +getResources().getString(R.string.extra));
 
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -316,7 +359,7 @@ public class CarDetailOneActivity extends AppCompatActivity {
                 currentPosition = position;
                 CarUpgradeModel model = carUpgradeModelList.get(position);
                 txtCarName.setText(model.getCar_name());
-                txtExtraFee.setText(getResources().getString(R.string.payAED) + " " + model.getAmount_difference()+ " " +getResources().getString(R.string.extra));
+                txtExtraFee.setText(getResources().getString(R.string.payAED) + " " + getDouble(model.getAmount_difference())+ " " +getResources().getString(R.string.extra));
 
             }
         });
@@ -462,60 +505,8 @@ public class CarDetailOneActivity extends AppCompatActivity {
 
                         Json data = json.getJson(P.data);
 
-                        data.getString(P.total_booking_days);
-                        data.getString(P.payment_method);
-                        data.getString(P.pay_now_discount_per);
-                        data.getString(P.total_advance_booking_days);
-                        data.getString(P.advance_discount_per);
-                        data.getString(P.total_car_rate);
-                        data.getString(P.total_amount);
-                        data.getString(P.delivery_charges);
-                        data.getString(P.collect_charges);
-
-                        if (data.has(P.car_extra)){
-                            JsonList carExtraData = data.getJsonList(P.car_extra);
-                            for (Json jsonCar :  carExtraData){
-                                jsonCar.getString(P.value);
-                                jsonCar.getString(P.quantity);
-                                jsonCar.getString(P.title);
-                                jsonCar.getString(P.price);
-                            }
-                        }
-
-                        Json couponData = data.getJson(P.coupon);
-                        couponData.getString(P.coupon_code);
-                        couponData.getString(P.msg);
-                        couponData.getString(P.err);
-
-                        Json pickUpData = data.getJson(P.pickup_location_data);
-                        pickUpData.getString(P.location_name);
-                        pickUpData.getString(P.contact_email);
-                        pickUpData.getString(P.contact_number);
-                        pickUpData.getJsonList(P.location_time_data);
-
-                        Json dropUpData = data.getJson(P.dropoff_location_data);
-                        dropUpData.getString(P.location_name);
-                        dropUpData.getString(P.contact_email);
-                        dropUpData.getString(P.contact_number);
-                        dropUpData.getJsonList(P.location_time_data);
-
-                        Json carData = data.getJson(P.car_data);
-                        carData.getString(P.car_name);
-                        carData.getString(P.transmission_name);
-                        carData.getString(P.fuel_type_name);
-                        carData.getString(P.group_name);
-                        carData.getString(P.category_name);
-                        carData.getString(P.air_bags);
-                        carData.getString(P.air_conditioner);
-                        carData.getString(P.parking_sensors);
-                        carData.getString(P.rear_parking_camera);
-                        carData.getString(P.bluetooth);
-                        carData.getString(P.cruise_control);
-                        carData.getString(P.sunroof);
-                        carData.getString(P.car_image);
-                        carData.getString(P.door);
-                        carData.getString(P.passenger);
-                        carData.getString(P.suitcase);
+                        pickup_location_data = data.getJson(P.pickup_location_data);
+                        dropoff_location_data = data.getJson(P.dropoff_location_data);
 
                     }else {
 //                        H.showMessage(activity,json.getString(P.error));
@@ -646,9 +637,188 @@ public class CarDetailOneActivity extends AppCompatActivity {
 
     }
 
+    private void updatePickupDropoffDialog(int type,Json json) {
+
+        final Dialog dialog = new Dialog(activity);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.activity_pickup_dropoff_details);
+
+        ImageView imgClose = dialog.findViewById(R.id.imgClose);
+        TextView txtType = dialog.findViewById(R.id.txtType);
+        TextView txtLocation = dialog.findViewById(R.id.txtLocation);
+        TextView txtAddress = dialog.findViewById(R.id.txtAddress);
+        TextView txtEmail = dialog.findViewById(R.id.txtEmail);
+        TextView txtPhoneNo = dialog.findViewById(R.id.txtPhoneNo);
+        TextView txtTiming = dialog.findViewById(R.id.txtTiming);
+
+        if (type==1){
+            txtType.setText(getResources().getString(R.string.pickUpLocation));
+        }else if (type==2){
+            txtType.setText(getResources().getString(R.string.dropOfLocation));
+        }
+
+        txtLocation.setText(json.getString("location_name"));
+        txtAddress.setText(json.getString("address"));
+        txtEmail.setText(json.getString("contact_email"));
+        txtPhoneNo.setText(json.getString("contact_number"));
+        String timingSlot = "";
+        try {
+            JSONArray timingSlotList = json.getJsonArray("location_time_data");
+        for (int i=0; i<timingSlotList.length(); i++){
+            if (timingSlot.equals("")){
+                timingSlot = timingSlotList.getString(i).toString();
+            }else {
+                timingSlot = timingSlot + "\n"+ timingSlotList.getString(i).toString();
+            }
+        }
+        }catch (Exception e){
+
+        }
+        txtTiming.setText(timingSlot);
+
+        imgClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                dialog.dismiss();
+            }
+        });
+
+        dialog.setCancelable(true);
+        dialog.show();
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+
+    }
+
     private int getCurrentItem(RecyclerView recyclerView) {
         return ((LinearLayoutManager) recyclerView.getLayoutManager())
                 .findFirstVisibleItemPosition();
+    }
+
+    @Override
+    public void aedDetailsClick(ChooseExtrasModel model) {
+        hitAEDDetailsData(model.getKey_value());
+    }
+
+
+    private void hitAEDDetailsData(String detail_type) {
+
+        ProgressView.show(activity, loadingDialog);
+        Json j = new Json();
+
+        String extraParams =
+                "emirate_id=" + SelectCarActivity.pickUpEmirateID+
+                        "&car_id=" + carID+
+                        "&pickup_date=" + SelectCarActivity.pickUpDate +
+                        "&dropoff_date=" + SelectCarActivity.dropUpDate +
+                        "&booking_type=" + SelectCarActivity.bookingTYpe +
+                        "&month_time=" + SelectCarActivity.monthDuration +
+                        "&detail_type=" + detail_type +
+                        "&coupon_code=" + "" ;
+
+        Api.newApi(activity, P.BaseUrl + "car_rate_details?" + extraParams).addJson(j)
+                .setMethod(Api.GET)
+                //.onHeaderRequest(App::getHeaders)
+                .onError(() -> {
+                    ProgressView.dismiss(loadingDialog);
+                    H.showMessage(activity, "On error is called");
+                })
+                .onSuccess(json ->
+                {
+                    if (json.getInt(P.status) == 1) {
+
+                        json = json.getJson(P.data);
+                        AEDDetailsDialog(json,detail_type);
+
+                    }
+                    ProgressView.dismiss(loadingDialog);
+
+                })
+                .run("hitAEDDetailsData");
+    }
+
+    private void AEDDetailsDialog(Json json,String detail_type) {
+
+        final Dialog dialog = new Dialog(activity);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.activity_aed_details);
+
+        ImageView imgClose = dialog.findViewById(R.id.imgClose);
+        LinearLayout lnrTotal = dialog.findViewById(R.id.lnrTotal);
+        LinearLayout lnrPayLater = dialog.findViewById(R.id.lnrPayLater);
+        LinearLayout lnrDiscount = dialog.findViewById(R.id.lnrDiscount);
+        LinearLayout lnrPayNow = dialog.findViewById(R.id.lnrPayNow);
+
+        TextView txtTotalAmount = dialog.findViewById(R.id.txtTotalAmount);
+        TextView txtPayLaterAmount = dialog.findViewById(R.id.txtPayLaterAmount);
+        TextView txtPayDiscountAmount = dialog.findViewById(R.id.txtPayDiscountAmount);
+        TextView txtPayNowAmount = dialog.findViewById(R.id.txtPayNowAmount);
+
+        List<AEDModel> aedModelList = new ArrayList<>();
+
+        for (Json jsonData : json.getJsonList("breakup")){
+            AEDModel model = new AEDModel();
+            model.setDate(jsonData.getString("date"));
+            model.setPrice(jsonData.getString("price"));
+            model.setSurge(jsonData.getString("surge"));
+            model.setDiscount(jsonData.getString("discount"));
+//            model.setType(jsonData.getString(detail_type));
+            aedModelList.add(model);
+        }
+
+        RecyclerView recyclerAED = dialog.findViewById(R.id.recyclerAED);
+        recyclerAED.setLayoutManager(new LinearLayoutManager(activity));
+        recyclerAED.setNestedScrollingEnabled(false);
+        AEDAdapter aedAdapter = new AEDAdapter(activity,aedModelList);
+        recyclerAED.setAdapter(aedAdapter);
+
+        String aed  = getResources().getString(R.string.aed);
+        txtTotalAmount.setText(aed + " " + checkView(json.getString("breakup_total"),lnrTotal));
+        txtPayLaterAmount.setText(aed + " " + checkView(json.getString("pay_later_price"),lnrPayLater));
+        txtPayDiscountAmount.setText(aed + " " + checkView(json.getString("pay_now_discount"),lnrDiscount));
+        txtPayNowAmount.setText(aed + " " + checkView(json.getString("pay_now_price"),lnrPayNow));
+
+        imgClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                dialog.dismiss();
+            }
+        });
+
+        dialog.setCancelable(true);
+        dialog.show();
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+
+    }
+
+    private String checkView(String string, LinearLayout linearLayout){
+        String value = "";
+        if (TextUtils.isEmpty(string) || string.equals("null")){
+            linearLayout.setVisibility(View.GONE);
+        }else {
+            try {
+                double doubleValue = Double.parseDouble(string);
+                value = new DecimalFormat("##.##").format(doubleValue);
+            }catch (Exception e){
+                value = string;
+            }
+        }
+        return value;
+    }
+
+    public String getDouble(String string) {
+        String value = "";
+        try {
+            double doubleValue = Double.parseDouble(string);
+            value = new DecimalFormat("##.##").format(doubleValue);
+        } catch (Exception e) {
+            value = string;
+        }
+
+        return value;
     }
 
     @Override
@@ -658,4 +828,5 @@ public class CarDetailOneActivity extends AppCompatActivity {
         }
         return false;
     }
+
 }

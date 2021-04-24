@@ -7,6 +7,7 @@
     <color name="colorBlack">#000</color>
     <color name="colorTrans">#00000000</color>
     <color name="semi_transparent">#39000000</color>
+    <color name="gray_light">#39E6E5E5</color>
     <color name="iconicGray">#9B9B9B</color>
     <color name="customeGray">#5B687466</color>
     <color name="lightOrange">#FFC78F</color>

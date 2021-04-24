@@ -2,6 +2,7 @@ package com.example.fastuae.activity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.RadioButton;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,9 +30,8 @@ import com.adoisstudio.helper.Session;
 import com.example.fastuae.R;
 import com.example.fastuae.adapter.AddressSelectionAdapter;
 import com.example.fastuae.adapter.CodeSelectionAdapter;
-import com.example.fastuae.adapter.DocumentAdapter;
 import com.example.fastuae.adapter.DocumentListAdapter;
-import com.example.fastuae.adapter.LocationAdapter;
+import com.example.fastuae.adapter.EmirateAdapter;
 import com.example.fastuae.adapter.PaymentCardAdapter;
 import com.example.fastuae.databinding.ActivityCarBookingDetailBinding;
 import com.example.fastuae.fragment.HomeFragment;
@@ -38,8 +39,7 @@ import com.example.fastuae.model.AddressModel;
 import com.example.fastuae.model.CarModel;
 import com.example.fastuae.model.CountryCodeModel;
 import com.example.fastuae.model.DocumentModel;
-import com.example.fastuae.model.HomeLocationModel;
-import com.example.fastuae.model.LocationModel;
+import com.example.fastuae.model.EmirateModel;
 import com.example.fastuae.model.PaymentCardModel;
 import com.example.fastuae.util.CheckString;
 import com.example.fastuae.util.Click;
@@ -51,7 +51,7 @@ import com.example.fastuae.util.WindowView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CarBookingDetailsActivity extends AppCompatActivity implements LocationAdapter.onClick{
+public class CarBookingDetailsActivity extends AppCompatActivity implements  EmirateAdapter.onClick{
 
     private CarBookingDetailsActivity activity = this;
     private ActivityCarBookingDetailBinding binding;
@@ -62,26 +62,6 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Loca
     private String aedSelected = "";
     private CarModel model;
 
-    private String pickupType = "deliver";
-    private String dropupType = "collect";
-
-    private int pickUpFlag = 1;
-    private int dropUpFlag = 2;
-    private String pickUpId = "";
-    private String pickUpLocation = "";
-    private String dropUpId = "";
-    private String dropUpLocation = "";
-    private String pickUpEmirateID = "";
-    private String dropUpEmirateID = "";
-    private String pickUpAddress = "";
-    private String dropUpAddress = "";
-    private String pickUpLandmark = "";
-    private String dropUpLandmark = "";
-
-    private List<HomeLocationModel> locationDeliverList;
-    private List<HomeLocationModel> locationCollectList;
-    private LocationAdapter locationDeliverAdapter;
-    private LocationAdapter locationCollectAdapter;
 
     private List<PaymentCardModel> paymentCardModelList;
     private PaymentCardAdapter paymentCardAdapter;
@@ -95,6 +75,17 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Loca
     private List<DocumentModel> documentModelList;
 
     private int positionNumber = 0;
+
+    private List<EmirateModel> deliverEmirateList;
+    private List<EmirateModel> collectEmirateList;
+    private EmirateAdapter deliverEmirateAdapter;
+    private EmirateAdapter collectEmirateAdapter;
+    private int deliverEmirateFlag = 1;
+    private int collectEmirateFlag = 2;
+    private String deleveryEmirateID = "";
+    private String collectEmirateID = "";
+    private boolean forDeliveryLocation = false;
+    private boolean forCollectLocation = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,19 +113,20 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Loca
         binding.txtMessage2.setText(Html.fromHtml(message2));
         binding.txtMessage3.setText(message3);
 
-        locationDeliverList = new ArrayList<>();
-        locationDeliverAdapter = new LocationAdapter(activity, locationDeliverList, pickUpFlag);
-        LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(activity);
-        binding.recyclerDeliverLocation.setLayoutManager(linearLayoutManager1);
-        binding.recyclerDeliverLocation.setHasFixedSize(true);
-        binding.recyclerDeliverLocation.setAdapter(locationDeliverAdapter);
+        deliverEmirateList = new ArrayList<>();
+        deliverEmirateAdapter = new EmirateAdapter(activity,deliverEmirateList,deliverEmirateFlag);
+        binding.recyclerDeliverEmirate.setLayoutManager(new LinearLayoutManager(activity));
+        binding.recyclerDeliverEmirate.setHasFixedSize(true);
+        binding.recyclerDeliverEmirate.setNestedScrollingEnabled(false);
+        binding.recyclerDeliverEmirate.setAdapter(deliverEmirateAdapter);
 
-        locationCollectList = new ArrayList<>();
-        locationCollectAdapter = new LocationAdapter(activity, locationCollectList, dropUpFlag);
-        LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(activity);
-        binding.recyclerLocationCollect.setLayoutManager(linearLayoutManager2);
-        binding.recyclerLocationCollect.setHasFixedSize(true);
-        binding.recyclerLocationCollect.setAdapter(locationCollectAdapter);
+        collectEmirateList = new ArrayList<>();
+        collectEmirateAdapter = new EmirateAdapter(activity,collectEmirateList,collectEmirateFlag);
+        binding.recyclerCollectEmirate.setLayoutManager(new LinearLayoutManager(activity));
+        binding.recyclerCollectEmirate.setHasFixedSize(true);
+        binding.recyclerCollectEmirate.setNestedScrollingEnabled(false);
+        binding.recyclerCollectEmirate.setAdapter(collectEmirateAdapter);
+
 
         lisAddressEmirate = new ArrayList<>();
         AddressModel modelAddress1 = new AddressModel();
@@ -178,8 +170,8 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Loca
 
         documentModelList = new ArrayList<>();
         DocumentModel documentModel = new DocumentModel();
-        documentModel.setDocumentName("GCC ID");
-        documentModel.setDocumentDetails("Number - GCCID0000\nExpiry Date - 01/ 21");
+        documentModel.setTitle("GCC ID");
+        documentModel.setKey("Number - GCCID0000\nExpiry Date - 01/ 21");
         documentModelList.add(documentModel);
         documentModelList.add(documentModel);
         documentModelList.add(documentModel);
@@ -194,10 +186,10 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Loca
         updateIcons();
         setData();
         onClick();
-        hitLocationData();
         hitUserPaymentDetails();
         hitPersonalDetails();
         hitAddressDetails();
+        hitEmirateData();
 
     }
 
@@ -241,32 +233,62 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Loca
 
     }
 
-
-    private void setData(){
-        binding.txtTotalAED.setText("AED "+aedSelected);
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (Config.FROM_MAP){
+            Config.FROM_MAP = false;
+            if (forDeliveryLocation){
+                forDeliveryLocation = false;
+                binding.txtDeliverGoogleAddress.setVisibility(View.VISIBLE);
+                binding.txtDeliverGoogleAddress.setText(session.getString(P.locationAddress));
+            }else if (forCollectLocation){
+                forCollectLocation = false;
+                binding.txtCollectGoogleAddress.setVisibility(View.VISIBLE);
+                binding.txtCollectGoogleAddress.setText(session.getString(P.locationAddress));
+            }
+        }
     }
 
-    @Override
-    public void onLocationClick(String location, int flag, HomeLocationModel model) {
+    private void setData(){
 
-        if (flag == pickUpFlag) {
-            pickUpId = model.getId();
-            pickUpLocation = model.getLocation_name();
-            pickUpEmirateID = model.getEmirate_id();
-            binding.txtPickUpMessage.setText(location);
-            pickUpAddress = model.getAddress();
-            pickUpLandmark = model.getLocation_name();
-            hideDeliverView();
-            hideCollectView();
-        } else if (flag == dropUpFlag) {
-            dropUpId = model.getId();
-            dropUpLocation = model.getLocation_name();
-            dropUpEmirateID = model.getEmirate_id();
-            binding.txtDropUpMessage.setText(location);
-            dropUpAddress = model.getAddress();
-            dropUpLandmark = model.getLocation_name();
-            hideCollectView();
-            hideDeliverView();
+        if (HomeFragment.binding.radioDeliverYes.isChecked()){
+            binding.radioDeliverYes.setChecked(true);
+            binding.radioDeliverNo.setChecked(false);
+            blueTin(binding.radioDeliverYes);
+            blackTin(binding.radioDeliverNo);
+            binding.radioDeliverNo.setEnabled(false);
+        }else {
+            disablebleDelverView();
+        }
+
+        if (HomeFragment.binding.radioCollectYes.isChecked()){
+            binding.radioCollectYes.setChecked(true);
+            binding.radioCollectNo.setChecked(false);
+            blueTin(binding.radioCollectYes);
+            blackTin(binding.radioCollectNo);
+            binding.radioCollectNo.setEnabled(false);
+        }else {
+            disablebleCollectView();
+        }
+
+        binding.txtTotalAED.setText(getResources().getString(R.string.aed)+" "+aedSelected);
+
+    }
+
+
+    @Override
+    public void onEmirateClick(int flag, EmirateModel model) {
+        if (flag==deliverEmirateFlag){
+            binding.txtDeliverEmirateMessage.setVisibility(View.VISIBLE);
+            binding.txtDeliverEmirateMessage.setText(model.getEmirate_name());
+            hideDeliverEmirate();
+            deleveryEmirateID = model.getId();
+        }else if (flag==collectEmirateFlag){
+            binding.txtCollectEmirateMessage.setVisibility(View.VISIBLE);
+            binding.txtCollectEmirateMessage.setText(model.getEmirate_name());
+            hideCollectEmirate();
+            collectEmirateID = model.getId();
         }
 
     }
@@ -274,79 +296,100 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Loca
 
     private void onClick(){
 
-        binding.radioDeliver.setOnClickListener(new View.OnClickListener() {
+        binding.radioDeliverYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-                pickupType = "deliver";
-                binding.radioSelfPickup.setChecked(false);
-                blueTin(binding.radioDeliver);
-                blackTin(binding.radioSelfPickup);
-                binding.cardLocationDeliver.setVisibility(View.GONE);
-                hideDeliverView();
-                hideCollectView();
+                binding.radioDeliverNo.setChecked(false);
+                blueTin(binding.radioDeliverYes);
+                blackTin(binding.radioDeliverNo);
+                enableDelverView();
             }
         });
 
-        binding.radioSelfPickup.setOnClickListener(new View.OnClickListener() {
+        binding.radioDeliverNo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-                pickupType = "self-pickup";
-                binding.radioDeliver.setChecked(false);
-                blueTin(binding.radioSelfPickup);
-                blackTin(binding.radioDeliver);
-                binding.cardLocationDeliver.setVisibility(View.GONE);
-                hideDeliverView();
-                hideCollectView();
+                binding.radioDeliverYes.setChecked(false);
+                blueTin(binding.radioDeliverNo);
+                blackTin(binding.radioDeliverYes);
+                disablebleDelverView();
+                binding.txtDeliverGoogleAddress.setText("");
+                binding.txtDeliverGoogleAddress.setVisibility(View.GONE);
             }
         });
 
-        binding.radioCollect.setOnClickListener(new View.OnClickListener() {
+        binding.radioCollectYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-                dropupType = "collect";
-                binding.radioSelfReturn.setChecked(false);
-                blueTin(binding.radioCollect);
-                blackTin(binding.radioSelfReturn);
-                binding.cardLocationCollect.setVisibility(View.GONE);
-                hideCollectView();
-                hideDeliverView();
+                binding.radioCollectNo.setChecked(false);
+                blueTin(binding.radioCollectYes);
+                blackTin(binding.radioCollectNo);
+                enableCollectView();
             }
         });
 
-        binding.radioSelfReturn.setOnClickListener(new View.OnClickListener() {
+
+        binding.radioCollectNo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-                dropupType = "self-return";
-                binding.radioCollect.setChecked(false);
-                blueTin(binding.radioSelfReturn);
-                blackTin(binding.radioCollect);
-                binding.cardLocationCollect.setVisibility(View.GONE);
-                hideCollectView();
-                hideDeliverView();
+                binding.radioCollectYes.setChecked(false);
+                blueTin(binding.radioCollectNo);
+                blackTin(binding.radioCollectYes);
+                disablebleCollectView();
+                binding.txtCollectGoogleAddress.setText("");
+                binding.txtCollectGoogleAddress.setVisibility(View.GONE);
             }
         });
 
-        binding.cardPickLocation.setOnClickListener(new View.OnClickListener() {
+        binding.cardDeliverEmirate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-                cardPickupClick();
-                hideCollectView();
-
+                if (binding.radioDeliverYes.isChecked()){
+                    cardDeliverEmirateClick();
+                    hideCollectEmirate();
+                }
             }
         });
 
-        binding.cardDropLocation.setOnClickListener(new View.OnClickListener() {
+        binding.cardCollectEmirate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-                cardDropUpClick();
-                hideDeliverView();
+                if (binding.radioCollectYes.isChecked()){
+                    cardCollectEmirateClick();
+                    hideDeliverEmirate();
+                }
+            }
+        });
 
+        binding.txtDeliverSelectAddress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                if (binding.radioDeliverYes.isChecked()){
+                    forDeliveryLocation = true;
+                    forCollectLocation = false;
+                    Intent intent = new Intent(activity,SelectLocationActivity.class);
+                    startActivity(intent);
+                }
+            }
+        });
+
+          binding.txtCollectSelectAddress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                if (binding.radioCollectYes.isChecked()){
+                    forCollectLocation = true;
+                    forDeliveryLocation = false;
+                    Intent intent = new Intent(activity,SelectLocationActivity.class);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -445,44 +488,6 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Loca
 
     }
 
-    private void hideDeliverView(){
-        binding.cardLocationDeliver.setVisibility(View.GONE);
-        binding.imgDeliverArrowUp.setVisibility(View.GONE);
-        binding.imgDeliverArrowDown.setVisibility(View.VISIBLE);
-    }
-
-    private void hideCollectView(){
-        binding.cardLocationCollect.setVisibility(View.GONE);
-        binding.imgCollectArrowUp.setVisibility(View.GONE);
-        binding.imgCollectArrowDown.setVisibility(View.VISIBLE);
-    }
-
-    private void cardPickupClick() {
-        if (binding.imgDeliverArrowDown.getVisibility() == View.VISIBLE) {
-            binding.imgDeliverArrowDown.setVisibility(View.GONE);
-            binding.imgDeliverArrowUp.setVisibility(View.VISIBLE);
-            binding.cardLocationDeliver.setVisibility(View.VISIBLE);
-
-        } else if (binding.imgDeliverArrowUp.getVisibility() == View.VISIBLE) {
-            binding.imgDeliverArrowUp.setVisibility(View.GONE);
-            binding.imgDeliverArrowDown.setVisibility(View.VISIBLE);
-            binding.cardLocationDeliver.setVisibility(View.GONE);
-        }
-    }
-
-    private void cardDropUpClick() {
-
-        if (binding.imgCollectArrowDown.getVisibility() == View.VISIBLE) {
-            binding.imgCollectArrowDown.setVisibility(View.GONE);
-            binding.imgCollectArrowUp.setVisibility(View.VISIBLE);
-            binding.cardLocationCollect.setVisibility(View.VISIBLE);
-        } else if (binding.imgCollectArrowUp.getVisibility() == View.VISIBLE) {
-            binding.imgCollectArrowUp.setVisibility(View.GONE);
-            binding.imgCollectArrowDown.setVisibility(View.VISIBLE);
-            binding.cardLocationCollect.setVisibility(View.GONE);
-        }
-
-    }
 
     private void blackTin(RadioButton radioButton) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -511,51 +516,6 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Loca
     }
 
 
-    private void hitLocationData() {
-
-        ProgressView.show(activity, loadingDialog);
-        Json j = new Json();
-
-        Api.newApi(activity, P.BaseUrl + "location").addJson(j)
-                .setMethod(Api.GET)
-                //.onHeaderRequest(App::getHeaders)
-                .onError(() -> {
-                    ProgressView.dismiss(loadingDialog);
-                    H.showMessage(activity, "On error is called");
-                })
-                .onSuccess(json ->
-                {
-                    if (json.getInt(P.status) == 1) {
-
-                        json = json.getJson(P.data);
-                        JsonList location_list = json.getJsonList(P.location_list);
-                        for (int i = 0; i < location_list.size(); i++) {
-                            Json jsonData = location_list.get(i);
-                            HomeLocationModel model = new HomeLocationModel();
-                            model.setId(jsonData.getString(P.id));
-                            model.setEmirate_id(jsonData.getString(P.emirate_id));
-                            model.setEmirate_name(jsonData.getString(P.emirate_name));
-                            model.setLocation_name(jsonData.getString(P.location_name));
-                            model.setAddress(jsonData.getString(P.address));
-                            model.setStatus(jsonData.getString(P.status));
-                            model.setContact_number(jsonData.getString(P.contact_number));
-                            model.setContact_email(jsonData.getString(P.contact_email));
-                            model.setLocation_time_data(jsonData.getJsonList(P.location_time_data));
-                            locationCollectList.add(model);
-                            locationDeliverList.add(model);
-                        }
-
-                        locationCollectAdapter.notifyDataSetChanged();
-                        locationDeliverAdapter.notifyDataSetChanged();
-
-                    } else {
-                        H.showMessage(activity, json.getString(P.error));
-                    }
-                    ProgressView.dismiss(loadingDialog);
-
-                })
-                .run("hitLocationData");
-    }
 
     private boolean checkAddCardDetails() {
         boolean value = true;
@@ -768,10 +728,10 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Loca
                         String bill_country_id = json.getString(P.bill_country_id);
                         String bill_zipcode = json.getString(P.bill_zipcode);
 
-                        binding.etxAddress.setText(bill_address_line_1);
-                        binding.etxZipcode.setText(bill_zipcode);
-                        binding.etxCity.setText(bill_city);
-                        binding.etxState.setText(bill_state);
+                        binding.etxAddress.setText(checkString(bill_address_line_1));
+                        binding.etxZipcode.setText(checkString(bill_zipcode));
+                        binding.etxCity.setText(checkString(bill_city));
+                        binding.etxState.setText(checkString(bill_state));
 
                         JsonList jsonList = Config.countryJsonList;
                         for (int i = 0; i < jsonList.size(); i++) {
@@ -788,6 +748,50 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Loca
                 })
                 .run("hitAddressDetails",session.getString(P.token));
 
+    }
+
+    private void hitEmirateData() {
+
+        ProgressView.show(activity, loadingDialog);
+        Json j = new Json();
+
+        Api.newApi(activity, P.BaseUrl + "emirate_list").addJson(j)
+                .setMethod(Api.GET)
+                //.onHeaderRequest(App::getHeaders)
+                .onError(() -> {
+                    ProgressView.dismiss(loadingDialog);
+                    H.showMessage(activity, "On error is called");
+                })
+                .onSuccess(json ->
+                {
+                    if (json.getInt(P.status) == 1) {
+
+                        json = json.getJson(P.data);
+                        JsonList emirate_list = json.getJsonList(P.emirate_list);
+
+                        if (emirate_list != null && emirate_list.size() != 0) {
+                            for (Json jsonE : emirate_list) {
+                                String id = jsonE.getString(P.id);
+                                String emirate_name = jsonE.getString(P.emirate_name);
+                                String status = jsonE.getString(P.status);
+                                EmirateModel model = new EmirateModel();
+                                model.setId(id);
+                                model.setEmirate_name(emirate_name);
+                                model.setStatus(status);
+                                deliverEmirateList.add(model);
+                                collectEmirateList.add(model);
+                            }
+                        }
+
+                        deliverEmirateAdapter.notifyDataSetChanged();
+                        collectEmirateAdapter.notifyDataSetChanged();
+                    } else {
+                        H.showMessage(activity, json.getString(P.error));
+                    }
+                    ProgressView.dismiss(loadingDialog);
+
+                })
+                .run("hitEmirateData");
     }
 
     private void checkPersonalInfoView() {
@@ -862,6 +866,102 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Loca
         }
     }
 
+    private void hideDeliverEmirate(){
+        binding.cardDeliverEmirateView.setVisibility(View.GONE);
+        binding.imgDeliverEmirateArrowUp.setVisibility(View.GONE);
+        binding.imgDeliverEmirateArrowDown.setVisibility(View.VISIBLE);
+    }
+
+    private void hideCollectEmirate(){
+        binding.cardCollectEmirateView.setVisibility(View.GONE);
+        binding.imgCollectEmirateArrowUp.setVisibility(View.GONE);
+        binding.imgCollectEmirateArrowDown.setVisibility(View.VISIBLE);
+    }
+
+    private void cardDeliverEmirateClick() {
+
+        if (binding.imgDeliverEmirateArrowDown.getVisibility() == View.VISIBLE) {
+            binding.imgDeliverEmirateArrowDown.setVisibility(View.GONE);
+            binding.imgDeliverEmirateArrowUp.setVisibility(View.VISIBLE);
+            binding.cardDeliverEmirateView.setVisibility(View.VISIBLE);
+        } else if (binding.imgDeliverEmirateArrowUp.getVisibility() == View.VISIBLE) {
+            binding.imgDeliverEmirateArrowUp.setVisibility(View.GONE);
+            binding.imgDeliverEmirateArrowDown.setVisibility(View.VISIBLE);
+            binding.cardDeliverEmirateView.setVisibility(View.GONE);
+        }
+
+    }
+
+    private void cardCollectEmirateClick() {
+
+        if (binding.imgCollectEmirateArrowDown.getVisibility() == View.VISIBLE) {
+            binding.imgCollectEmirateArrowDown.setVisibility(View.GONE);
+            binding.imgCollectEmirateArrowUp.setVisibility(View.VISIBLE);
+            binding.cardCollectEmirateView.setVisibility(View.VISIBLE);
+        } else if (binding.imgCollectEmirateArrowUp.getVisibility() == View.VISIBLE) {
+            binding.imgCollectEmirateArrowUp.setVisibility(View.GONE);
+            binding.imgCollectEmirateArrowDown.setVisibility(View.VISIBLE);
+            binding.cardCollectEmirateView.setVisibility(View.GONE);
+        }
+
+    }
+
+    private void enableDelverView(){
+
+        binding.etxDeliverLandmark.setBackground(getResources().getDrawable(R.drawable.corner_gray_bg));
+        binding.etxDeliveryDetails.setBackground(getResources().getDrawable(R.drawable.corner_gray_bg));
+        trueEdit(binding.etxDeliverLandmark);
+        trueEdit(binding.etxDeliveryDetails);
+
+    }
+
+    private void disablebleDelverView(){
+
+        deleveryEmirateID = "";
+        binding.txtDeliverEmirateMessage.setText("");
+        binding.etxDeliverLandmark.setText("");
+        binding.etxDeliveryDetails.setText("");
+        binding.txtDeliverEmirateMessage.setVisibility(View.GONE);
+        binding.etxDeliverLandmark.setBackground(getResources().getDrawable(R.drawable.corner_blur_bg));
+        binding.etxDeliveryDetails.setBackground(getResources().getDrawable(R.drawable.corner_blur_bg));
+        falseEdit(binding.etxDeliverLandmark);
+        falseEdit(binding.etxDeliveryDetails);
+
+    }
+
+    private void enableCollectView(){
+
+        binding.etxCollectLandmark.setBackground(getResources().getDrawable(R.drawable.corner_gray_bg));
+        binding.etxCollectDetails.setBackground(getResources().getDrawable(R.drawable.corner_gray_bg));
+        trueEdit(binding.etxCollectLandmark);
+        trueEdit(binding.etxCollectDetails);
+    }
+
+    private void disablebleCollectView(){
+
+        collectEmirateID = "";
+        binding.txtCollectEmirateMessage.setText("");
+        binding.etxCollectLandmark.setText("");
+        binding.etxCollectDetails.setText("");
+        binding.txtCollectEmirateMessage.setVisibility(View.GONE);
+        binding.etxCollectLandmark.setBackground(getResources().getDrawable(R.drawable.corner_blur_bg));
+        binding.etxCollectDetails.setBackground(getResources().getDrawable(R.drawable.corner_blur_bg));
+        falseEdit(binding.etxCollectLandmark);
+        falseEdit(binding.etxCollectDetails);
+    }
+
+    private void falseEdit(EditText editTextPassword){
+        editTextPassword.setFocusable(false);
+        editTextPassword.setFocusableInTouchMode(false);
+        editTextPassword.setClickable(false);
+    }
+
+    private void trueEdit(EditText editTextPassword){
+        editTextPassword.setFocusable(true);
+        editTextPassword.setFocusableInTouchMode(true);
+        editTextPassword.setClickable(true);
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
@@ -869,4 +969,14 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Loca
         }
         return false;
     }
+
+    private String checkString(String string){
+        String value = "";
+
+        if (!TextUtils.isEmpty(string) && !string.equals("null")){
+            value = string;
+        }
+        return value;
+    }
+
 }

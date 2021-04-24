@@ -38,5 +38,19 @@
                                     </TextView>
 
 
+                                    <TextView
+                                        android:id="@+id/txtAEDDetails"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:gravity="right|center"
+                                        android:fontFamily="@font/nunito_sans_semibold"
+                                        android:text="@string/details"
+                                        android:textColor="@color/lightBlue"
+                                        android:textSize="14sp">
+
+                                    </TextView>
+
+
                                 </LinearLayout>
 </layout>

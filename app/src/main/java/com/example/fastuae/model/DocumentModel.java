@@ -1,42 +1,39 @@
 package com.example.fastuae.model;
 
+import com.adoisstudio.helper.Json;
+import com.adoisstudio.helper.JsonList;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 public class DocumentModel {
 
-    String documentName;
-    String documentDetails;
-    String path;
+    String title;
+    String key;
+    JSONArray field;
 
-    public DocumentModel(String documentName,String path) {
-        this.documentName = documentName;
-        this.path = path;
+    public String getTitle() {
+        return title;
     }
 
-    public DocumentModel() {
-
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-
-    public String getDocumentDetails() {
-        return documentDetails;
+    public String getKey() {
+        return key;
     }
 
-    public void setDocumentDetails(String documentDetails) {
-        this.documentDetails = documentDetails;
+    public void setKey(String key) {
+        this.key = key;
     }
 
-    public String getDocumentName() {
-        return documentName;
+    public JSONArray getField() {
+        return field;
     }
 
-    public void setDocumentName(String documentName) {
-        this.documentName = documentName;
+    public void setField(JSONArray field) {
+        this.field = field;
     }
 
-    public String getPath() {
-        return path;
-    }
-
-    public void setPath(String path) {
-        this.path = path;
-    }
 }

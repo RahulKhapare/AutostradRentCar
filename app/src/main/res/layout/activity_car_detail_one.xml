@@ -148,7 +148,7 @@
                                       android:layout_width="match_parent"
                                       android:layout_height="wrap_content"
                                       android:fontFamily="@font/nunito_sans_semibold"
-                                      android:text="@string/pickUp"
+                                      android:text="@string/pickupLocationTime"
                                       android:textColor="@color/colorPrimaryDark"
                                       android:textSize="18sp">
 
@@ -172,8 +172,6 @@
                                       android:layout_height="wrap_content"
                                       android:fontFamily="@font/nunito_sans_semibold"
                                       android:text="@string/details"
-                                      android:layout_marginLeft="5dp"
-                                      android:layout_marginRight="5dp"
                                       android:textColor="@color/lightBlue"
                                       android:textSize="14sp">
 
@@ -220,7 +218,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
                                         android:fontFamily="@font/nunito_sans_semibold"
-                                        android:text="@string/dropOf"
+                                        android:text="@string/dropoffLocationTime"
                                         android:textColor="@color/colorPrimaryDark"
                                         android:textSize="18sp">
 
@@ -244,8 +242,6 @@
                                         android:layout_height="wrap_content"
                                         android:fontFamily="@font/nunito_sans_semibold"
                                         android:text="@string/details"
-                                        android:layout_marginLeft="5dp"
-                                        android:layout_marginRight="5dp"
                                         android:textColor="@color/lightBlue"
                                         android:textSize="14sp">
 
@@ -351,19 +347,6 @@
 
                                 </TextView>
 
-                                <TextView
-                                    android:id="@+id/txtAEDDetails"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/nunito_sans_semibold"
-                                    android:text="@string/details"
-                                    android:layout_marginLeft="5dp"
-                                    android:layout_marginRight="5dp"
-                                    android:textColor="@color/lightBlue"
-                                    android:textSize="14sp">
-
-                                </TextView>
-
                             </LinearLayout>
 
 
@@ -378,7 +361,7 @@
                                    android:layout_height="wrap_content"
                                    android:layout_marginTop="5dp"
                                    android:fontFamily="@font/nunito_sans_regular"
-                                   android:text="Car Rate"
+                                   android:text="@string/carRate"
                                    android:alpha="0.8"
                                    android:textColor="@color/textDark"
                                    android:textSize="16sp">
@@ -387,7 +370,8 @@
 
                                <TextView
                                    android:id="@+id/txtCarRate"
-                                   android:layout_width="wrap_content"
+                                   android:layout_weight="1"
+                                   android:layout_width="match_parent"
                                    android:layout_height="wrap_content"
                                    android:textColor="@color/textDark"
                                    android:gravity="center_vertical"
@@ -397,6 +381,17 @@
                                    android:fontFamily="@font/nunit_sans_bold"
                                    android:text="@string/app_name"
                                    android:textSize="18sp">
+                               </TextView>
+
+                               <TextView
+                                   android:id="@+id/txtCarAEDDetails"
+                                   android:layout_width="wrap_content"
+                                   android:layout_height="wrap_content"
+                                   android:fontFamily="@font/nunito_sans_semibold"
+                                   android:text="@string/details"
+                                   android:textColor="@color/lightBlue"
+                                   android:textSize="14sp">
+
                                </TextView>
 
 

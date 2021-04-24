@@ -319,6 +319,11 @@
     <string name="aed">AED</string>
     <string name="includedRated">Included in th rates</string>
     <string name="rentalTerm">Rental Terms, Qualifications &amp; Requirements</string>
+    <string name="selectAddress">Select Address</string>
+    <string name="typeDetailsHere">Type details here...</string>
+    <string name="timings">Timings</string>
+    <string name="pickupLocationTime">Pickup Location &amp; Time</string>
+    <string name="dropoffLocationTime">Drop-Off Location &amp; Time</string>
 
 
     <string name="selectSelftPickUpLocation">Please select self pickup location</string>
@@ -329,6 +334,17 @@
     <string name="payAED">PAY AED</string>
     <string name="extra">EXTRA</string>
     <string name="unableFondUpdateData">Unable to found car update data</string>
+    <string name="date">Date</string>
+    <string name="dicsountBooking">(Minus) 5% Discount - 13 day booking</string>
+    <string name="payLaterAmount">Pay Later Amount</string>
+    <string name="payNowAmount">Pay Now Amount</string>
+    <string name="discountAmount">10 % Discount to Pay Now Discount</string>
+    <string name="addSurge">(Add) Surge</string>
+    <string name="addDiscount">(Add) Discount</string>
+    <string name="carRate">Car Rate</string>
+    <string name="upload">Upload</string>
+
+
 
 
     <string name="txt1">Leading Car Rental Company with the largest network of Branches &amp; Pickup points</string>
