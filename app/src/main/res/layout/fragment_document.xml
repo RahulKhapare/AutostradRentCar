@@ -38,6 +38,7 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:textSize="18dp"
+                android:visibility="gone"
                 android:background="@drawable/button_blue_bg"></TextView>
 
         </LinearLayout>

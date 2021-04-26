@@ -8,6 +8,9 @@ public class P {
     public static String userLogin = "userLogin";
 
 
+    public static String image_url = "image_url";
+    public static String image = "image";
+    public static String extension = "extension";
     public static String list = "list";
     public static String emirate_list = "emirate_list";
     public static String status = "status";

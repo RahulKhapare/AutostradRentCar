@@ -11,6 +11,8 @@ public class DocumentModel {
     String title;
     String key;
     JSONArray field;
+    Json json;
+    String checkValue;
 
     public String getTitle() {
         return title;
@@ -36,4 +38,19 @@ public class DocumentModel {
         this.field = field;
     }
 
+    public Json getJson() {
+        return json;
+    }
+
+    public void setJson(Json json) {
+        this.json = json;
+    }
+
+    public String getCheckValue() {
+        return checkValue;
+    }
+
+    public void setCheckValue(String checkValue) {
+        this.checkValue = checkValue;
+    }
 }

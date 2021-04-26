@@ -33,7 +33,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.adoisstudio.helper.Api;
 import com.adoisstudio.helper.H;
+import com.adoisstudio.helper.Json;
+import com.adoisstudio.helper.JsonList;
+import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
 import com.example.fastuae.R;
 import com.example.fastuae.databinding.ActivityMainBinding;
@@ -41,16 +45,24 @@ import com.example.fastuae.fragment.FleetFragment;
 import com.example.fastuae.fragment.HomeFragment;
 import com.example.fastuae.fragment.MenuFragment;
 import com.example.fastuae.fragment.ProfileFragment;
+import com.example.fastuae.model.DocumentModel;
+import com.example.fastuae.model.ImagePathModel;
 import com.example.fastuae.util.Click;
 import com.example.fastuae.util.Config;
 import com.example.fastuae.util.P;
 import com.example.fastuae.util.PdfDownloader;
+import com.example.fastuae.util.ProgressView;
 import com.example.fastuae.util.WindowView;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -72,24 +84,13 @@ public class MainActivity extends AppCompatActivity {
     String pdf_title;
     String documentName;
     String base64Image;
-
-    private String Upload_UAE_Driving_ID = "Upload UAE Driving ID";
-    private String Upload_International_ID = "Upload International ID";
-    private String Upload_GCC_ID = "Upload GCC ID";
-    private String Upload_Emirates_ID = "Upload Emirates ID";
-    private String Upload_Passport_Details = "Upload Passport Details";
-    private String Upload_Credit_Debit_Card_Details = "Upload Credit/ Debit Card Details";
-
-    public static String Upload_UAE_Driving_ID_PATH;
-    public static String Upload_International_ID_PATH;
-    public static String Upload_GCC_ID_PATH;
-    public static String Upload_Emirates_ID_PATH;
-    public static String Upload_Passport_Details_PATH;
-    public static String Upload_Credit_Debit_Card_Details_PATH;
+    public static List<ImagePathModel> imagePathModelList;
 
     public int download = 1;
     public int upload = 2;
     public int click = 0;
+
+    private LoadingDialog loadingDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,6 +105,8 @@ public class MainActivity extends AppCompatActivity {
     private void initView() {
         session = new Session(activity);
 
+        loadingDialog = new LoadingDialog(activity);
+        imagePathModelList = new ArrayList<>();
         binding.toolbar.setTitle(getResources().getString(R.string.welcome) + " " + session.getString(P.user_name));
         setSupportActionBar(binding.toolbar);
 
@@ -319,7 +322,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void uploadDocument(String name) {
+    public void uploadDocument(String name, Json documentJson) {
         documentName = name;
         click = upload;
         getPermission();
@@ -368,7 +371,7 @@ public class MainActivity extends AppCompatActivity {
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     if (click==upload){
-                        getPDF();
+                        getDocument();
                     }else if (click==download){
                         checkDirectory(activity, pdf_url, pdf_title);
                     }
@@ -391,19 +394,8 @@ public class MainActivity extends AppCompatActivity {
                     try {
                         Uri selectedPDF = data.getData();
 
-                        if (documentName.equals(Upload_UAE_Driving_ID)){
-                            Upload_UAE_Driving_ID_PATH = getBase64Image(selectedPDF);
-                        }else  if (documentName.equals(Upload_International_ID)){
-                            Upload_International_ID_PATH = getBase64Image(selectedPDF);
-                        }else  if (documentName.equals(Upload_GCC_ID)){
-                            Upload_GCC_ID_PATH = getBase64Image(selectedPDF);
-                        }else  if (documentName.equals(Upload_Emirates_ID)){
-                            Upload_Emirates_ID_PATH = getBase64Image(selectedPDF);
-                        }else  if (documentName.equals(Upload_Passport_Details)){
-                            Upload_Passport_Details_PATH = getBase64Image(selectedPDF);
-                        }else  if (documentName.equals(Upload_Credit_Debit_Card_Details)){
-                            Upload_Credit_Debit_Card_Details_PATH = getBase64Image(selectedPDF);
-                        }
+                        String path = getBase64Image(selectedPDF);
+                        hitUploadImage(path);
 
                     } catch (Exception e) {
                         H.showMessage(activity,e.getMessage());
@@ -414,7 +406,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void getPDF(){
+    private void getDocument(){
         try {
             Intent i = new Intent(
                     Intent.ACTION_PICK,
@@ -488,6 +480,48 @@ public class MainActivity extends AppCompatActivity {
         byte[] b = baos.toByteArray();
         String encImage = Base64.encodeToString(b, Base64.DEFAULT);
         return encImage;
+    }
+
+
+    private void hitUploadImage(String base64Image) {
+
+        ProgressView.show(activity,loadingDialog);
+        Json j = new Json();
+        j.addString(P.image,base64Image);
+        j.addString(P.extension,"png");
+        Api.newApi(activity, P.BaseUrl + "upload_image").addJson(j)
+                .setMethod(Api.POST)
+                //.onHeaderRequest(App::getHeaders)
+                .onError(() -> {
+                    ProgressView.dismiss(loadingDialog);
+                    H.showMessage(activity, "On error is called");
+                })
+                .onSuccess(json ->
+                {
+                    ProgressView.dismiss(loadingDialog);
+                    if (json.getInt(P.status) == 1) {
+                        json = json.getJson(P.data);
+                        String image = json.getString(P.image);
+                        String image_url = json.getString(P.image_url);
+                        ImagePathModel model = new ImagePathModel();
+                        model.setPath(image);
+                        model.setTitle(documentName);
+                        imagePathModelList.add(model);
+                        H.showMessage(activity,getResources().getString(R.string.imageUploaded));
+                    }else {
+                        H.showMessage(activity,json.getString(P.error));
+                    }
+                })
+                .run("hitUploadImage",session.getString(P.token));
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (imagePathModelList!=null){
+            imagePathModelList.clear();
+        }
     }
 
     @Override

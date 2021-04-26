@@ -33,7 +33,7 @@ public class DocumentAdapter extends RecyclerView.Adapter<DocumentAdapter.viewHo
     private DocumentFragment fragment;
 
     public interface onClick{
-        void downloadDocument(String name);
+        void downloadDocument(String name,Json json);
     }
 
     public DocumentAdapter(Context context, List<DocumentModel> documentModelList,DocumentFragment fragment) {
@@ -53,7 +53,6 @@ public class DocumentAdapter extends RecyclerView.Adapter<DocumentAdapter.viewHo
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
         DocumentModel model = documentModelList.get(position);
 
-
         holder.binding.txtTitle.setText(model.getTitle());
         holder.binding.txtDocument.setText(context.getResources().getString(R.string.upload)+" "+model.getTitle());
 
@@ -62,21 +61,23 @@ public class DocumentAdapter extends RecyclerView.Adapter<DocumentAdapter.viewHo
             public void onClick(View v) {
                 if ( holder.binding.checkBox.isChecked()){
                     holder.binding.checkBox.setChecked(false);
-
+                    model.setCheckValue("0");
+                    model.setJson(new Json());
                 }else {
+                    model.setCheckValue("1");
                     holder.binding.checkBox.setChecked(true);
                 }
 
             }
         });
+
         holder.binding.lnrDocument.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-//                ((DocumentFragment)fragment).downloadDocument(model.getTitle());
+                ((DocumentFragment)fragment).downloadDocument(model.getTitle(),model.getJson());
             }
         });
-
 
         List<FieldModel> fieldList = new ArrayList<>();
         try {
@@ -89,7 +90,7 @@ public class DocumentAdapter extends RecyclerView.Adapter<DocumentAdapter.viewHo
         }catch (Exception e){
         }
 
-        DocumentFieldAdapter documentFieldAdapter = new DocumentFieldAdapter(context,fieldList);
+        DocumentFieldAdapter documentFieldAdapter = new DocumentFieldAdapter(context,fieldList,model.getJson());
         holder.binding.recyclerExtraFields.setLayoutManager(new LinearLayoutManager(context));
         holder.binding.recyclerExtraFields.setHasFixedSize(true);
         holder.binding.recyclerExtraFields.setAdapter(documentFieldAdapter);
