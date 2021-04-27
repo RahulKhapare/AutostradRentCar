@@ -344,6 +344,9 @@
     <string name="carRate">Car Rate</string>
     <string name="upload">Upload</string>
     <string name="imageUploaded">Image uploaded successfully</string>
+    <string name="uploaded">Uploaded</string>
+    <string name="editCard">Edit Card</string>
+
 
 
 

@@ -341,7 +341,8 @@
     <string name="carRate">Car Rate</string>
     <string name="upload">Upload</string>
     <string name="imageUploaded">Image uploaded successfully</string>
-
+    <string name="uploaded">Uploaded</string>
+    <string name="editCard">Edit Card</string>
 
     <string name="txt1">Leading Car Rental Company with the largest network of Branches &amp; Pickup points</string>
     <string name="txt2">Leading Car Rental Company with the largest network of Branches &amp; Pickup points</string>

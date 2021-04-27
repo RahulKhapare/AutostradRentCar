@@ -1,6 +1,7 @@
 package com.example.fastuae.activity;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
@@ -10,16 +11,23 @@ import android.text.Editable;
 import android.text.Html;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.adoisstudio.helper.Api;
 import com.adoisstudio.helper.H;
@@ -28,6 +36,7 @@ import com.adoisstudio.helper.JsonList;
 import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
 import com.example.fastuae.R;
+import com.example.fastuae.adapter.AEDAdapter;
 import com.example.fastuae.adapter.AddressSelectionAdapter;
 import com.example.fastuae.adapter.CodeSelectionAdapter;
 import com.example.fastuae.adapter.DocumentListAdapter;
@@ -35,6 +44,7 @@ import com.example.fastuae.adapter.EmirateAdapter;
 import com.example.fastuae.adapter.PaymentCardAdapter;
 import com.example.fastuae.databinding.ActivityCarBookingDetailBinding;
 import com.example.fastuae.fragment.HomeFragment;
+import com.example.fastuae.model.AEDModel;
 import com.example.fastuae.model.AddressModel;
 import com.example.fastuae.model.CarModel;
 import com.example.fastuae.model.CountryCodeModel;
@@ -44,6 +54,7 @@ import com.example.fastuae.model.PaymentCardModel;
 import com.example.fastuae.util.CheckString;
 import com.example.fastuae.util.Click;
 import com.example.fastuae.util.Config;
+import com.example.fastuae.util.LoadImage;
 import com.example.fastuae.util.P;
 import com.example.fastuae.util.ProgressView;
 import com.example.fastuae.util.WindowView;
@@ -51,7 +62,8 @@ import com.example.fastuae.util.WindowView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CarBookingDetailsActivity extends AppCompatActivity implements  EmirateAdapter.onClick{
+public class CarBookingDetailsActivity extends AppCompatActivity implements  EmirateAdapter.onClick,DocumentListAdapter.onClick,
+PaymentCardAdapter.onClick{
 
     private CarBookingDetailsActivity activity = this;
     private ActivityCarBookingDetailBinding binding;
@@ -163,7 +175,7 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements  Emi
         binding.spinnerAddress.setAdapter(adapterAddress);
 
         paymentCardModelList = new ArrayList<>();
-        paymentCardAdapter = new PaymentCardAdapter(activity, paymentCardModelList);
+        paymentCardAdapter = new PaymentCardAdapter(activity, paymentCardModelList,2);
         binding.recyclerCard.setLayoutManager(new LinearLayoutManager(activity));
         binding.recyclerCard.setNestedScrollingEnabled(false);
         binding.recyclerCard.setAdapter(paymentCardAdapter);
@@ -977,6 +989,188 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements  Emi
             value = string;
         }
         return value;
+    }
+
+
+    @Override
+    public void documentView(String imagePath) {
+        documentDialog(imagePath);
+    }
+
+    private void documentDialog(String imagePath) {
+
+        final Dialog dialog = new Dialog(activity);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.activity_document_view);
+
+        ImageView imgDocument = dialog.findViewById(R.id.imgDocument);
+        LoadImage.glideString(activity,imgDocument,imagePath);
+
+        dialog.setCancelable(true);
+        dialog.show();
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+
+    }
+
+    @Override
+    public void onEditPayment(PaymentCardModel model) {
+        editPaymentDialog(model);
+    }
+
+    private void editPaymentDialog(PaymentCardModel model) {
+
+        final Dialog dialog = new Dialog(activity);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.activity_edit_payment_view);
+
+        Log.e("TAG", "editPaymentDialog: "+model.getExpiry_month() + "  --  "+model.getExpiry_year() );
+
+        EditText etxCardNumber = dialog.findViewById(R.id.etxCardNumber);
+        EditText etxCardName = dialog.findViewById(R.id.etxCardName);
+        EditText etxValidMonth = dialog.findViewById(R.id.etxValidMonth);
+        EditText etxCvv = dialog.findViewById(R.id.etxCvv);
+        TextView txtSave = dialog.findViewById(R.id.txtSave);
+        ImageView imgCancel = dialog.findViewById(R.id.imgCancel);
+
+        etxCardNumber.setText(model.getCard_number());
+        etxCardName.setText(model.getName_on_card());
+        etxCvv.setText(model.getCvv());
+
+        String month = "";
+        if (model.getExpiry_month().length()==1){
+            month = "0"+model.getExpiry_month();
+        }else {
+            month = model.getExpiry_month();
+        }
+
+        String year = "";
+        if (model.getExpiry_year().length()==1){
+            year = "0"+model.getExpiry_year();
+        }else {
+            year = model.getExpiry_year();
+        }
+
+        etxValidMonth.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+                if (editable.length() > 0 && (editable.length() % 3) == 0) {
+                    final char c = editable.charAt(editable.length() - 1);
+                    if ('/' == c) {
+                        editable.delete(editable.length() - 1, editable.length());
+                    }
+                }
+                if (editable.length() > 0 && (editable.length() % 3) == 0) {
+                    char c = editable.charAt(editable.length() - 1);
+                    if (Character.isDigit(c) && TextUtils.split(editable.toString(), String.valueOf("/")).length <= 2) {
+                        editable.insert(editable.length() - 1, String.valueOf("/"));
+                    }
+                }
+            }
+        });
+
+        etxValidMonth.setText(month+"/"+year);
+
+        imgCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                dialog.dismiss();
+            }
+        });
+
+        txtSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+
+                if (TextUtils.isEmpty(etxCardNumber.getText().toString().trim())) {
+                    H.showMessage(activity, getResources().getString(R.string.enterCardNumber));
+                    return;
+                } else if (etxCardNumber.getText().toString().trim().length() < 16 || etxCardNumber.getText().toString().trim().length() > 16) {
+                    H.showMessage(activity, getResources().getString(R.string.enterValidCarNumber));
+                    return;
+                } else if (TextUtils.isEmpty(etxCardName.getText().toString().trim())) {
+                    H.showMessage(activity, getResources().getString(R.string.enterCardName));
+                    return;
+                } else if (TextUtils.isEmpty(etxValidMonth.getText().toString().trim())) {
+                    H.showMessage(activity, getResources().getString(R.string.enterMonth));
+                    return;
+                } else if (etxValidMonth.getText().toString().trim().length() < 5 || etxValidMonth.getText().toString().trim().length() > 5) {
+                    H.showMessage(activity, getResources().getString(R.string.enterValidMonth));
+                    return;
+                } else if (!etxValidMonth.getText().toString().matches("(?:0[1-9]|1[0-2])/[0-9]{2}")) {
+                    H.showMessage(activity, getResources().getString(R.string.checkCardFormat));
+                    return;
+                } else if (TextUtils.isEmpty(etxCvv.getText().toString().trim())) {
+                    H.showMessage(activity, getResources().getString(R.string.enterCvv));
+                    return;
+                } else if (etxCvv.getText().toString().trim().length() < 3 || etxCvv.getText().toString().trim().length() > 3) {
+                    H.showMessage(activity, getResources().getString(R.string.enterValidCvv));
+                    return;
+                }
+
+                hideKeyboard(activity);
+                hitEditUserPaymentDetails(dialog,model,etxCardNumber,etxCardName,etxValidMonth,etxCvv);
+
+            }
+        });
+
+
+        dialog.setCancelable(true);
+        dialog.show();
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+
+    }
+
+    private void hitEditUserPaymentDetails(Dialog dialog,PaymentCardModel model,EditText etxCardNumber,EditText etxCardName,EditText etxValidMonth,EditText etxCvv) {
+
+        ProgressView.show(activity,loadingDialog);
+        Json j = new Json();
+        j.addString(P.id,model.getId());
+        j.addString(P.card_number,etxCardNumber.getText().toString().trim());
+        j.addString(P.name_on_card,etxCardName.getText().toString().trim());
+        String inputMonthYear = etxValidMonth.getText().toString().trim();
+        String[] separated = inputMonthYear.split("/");
+        String expireMonth = separated[0];
+        String expireYear = separated[1];
+        j.addString(P.expiry_month,expireMonth);
+        j.addString(P.expiry_year,expireYear);
+        j.addString(P.cvv,etxCvv.getText().toString().trim());
+
+        Api.newApi(activity, P.BaseUrl + "add_user_payment_option").addJson(j)
+                .setMethod(Api.POST)
+                //.onHeaderRequest(App::getHeaders)
+                .onError(() -> {
+                    ProgressView.dismiss(loadingDialog);
+                    H.showMessage(activity, "On error is called");
+                })
+                .onSuccess(json ->
+                {
+                    if (json.getInt(P.status) == 1) {
+                        dialog.dismiss();
+                        json = json.getJson(P.data);
+                        H.showMessage(activity,getResources().getString(R.string.dataUpdated));
+                        paymentCardModelList.clear();
+                        hitUserPaymentDetails();
+                    }else {
+                        H.showMessage(activity,json.getString(P.error));
+                    }
+
+                    ProgressView.dismiss(loadingDialog);
+
+                })
+                .run("hitAddUserPaymentDetails",session.getString(P.token));
     }
 
 }

@@ -43,9 +43,10 @@ public class DocumentFieldAdapter extends RecyclerView.Adapter<DocumentFieldAdap
     String credit_card_number = "credit_card_number";
     String name_on_card = "name_on_card";
     String entry_stamp = "entry_stamp";
-    Json jsonItem;
 
-    public DocumentFieldAdapter(Context context, List<FieldModel> filedList, Json json) {
+    Json jsonItem ;
+
+    public DocumentFieldAdapter(Context context, List<FieldModel> filedList,Json json) {
         this.context = context;
         this.filedList = filedList;
         this.jsonItem = json;
@@ -75,7 +76,7 @@ public class DocumentFieldAdapter extends RecyclerView.Adapter<DocumentFieldAdap
                 public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                     Calendar newDate = Calendar.getInstance();
                     newDate.set(year, monthOfYear, dayOfMonth);
-                    SimpleDateFormat sd = new SimpleDateFormat("dd MMM yyyy");
+                    SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
                     final Date startDate = newDate.getTime();
                     String fdate = sd.format(startDate);
 
@@ -147,7 +148,9 @@ public class DocumentFieldAdapter extends RecyclerView.Adapter<DocumentFieldAdap
 
         }
 
+        model.setJson(jsonItem);
+
         Log.e("TAG", "checkJson: "+ model.getFiled() + " " + value );
-        Log.e("TAG", "checkJsonDAA: "+ jsonItem.toString() );
+        Log.e("TAG", "checkJsonDAA: "+ model.getJson().toString() );
     }
 }

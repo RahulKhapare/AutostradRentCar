@@ -77,7 +77,7 @@ public class ManagePaymentFragment extends Fragment {
         loadingDialog = new LoadingDialog(context);
         session = new Session(context);
         paymentCardModelList = new ArrayList<>();
-        paymentCardAdapter = new PaymentCardAdapter(context, paymentCardModelList);
+        paymentCardAdapter = new PaymentCardAdapter(context, paymentCardModelList,1);
         binding.recyclerCard.setLayoutManager(new LinearLayoutManager(context));
         binding.recyclerCard.setNestedScrollingEnabled(false);
         binding.recyclerCard.setAdapter(paymentCardAdapter);

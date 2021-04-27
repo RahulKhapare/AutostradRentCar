@@ -1,6 +1,7 @@
 package com.example.fastuae.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,11 +11,14 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fastuae.R;
+import com.example.fastuae.activity.CarBookingDetailsActivity;
+import com.example.fastuae.activity.DocumentEditActivity;
 import com.example.fastuae.databinding.ActivityDocumentDetailsListBinding;
 import com.example.fastuae.databinding.ActivityDocumentListBinding;
 import com.example.fastuae.fragment.DocumentFragment;
 import com.example.fastuae.model.DocumentModel;
 import com.example.fastuae.util.Click;
+import com.example.fastuae.util.P;
 
 import java.util.List;
 
@@ -22,10 +26,15 @@ public class DocumentListAdapter extends RecyclerView.Adapter<DocumentListAdapte
 
     private Context context;
     private List<DocumentModel> documentModelList;
+    String documentPath = "https://media.itpro.co.uk/image/upload/v1570817631/itpro/2019/09/document_shutterstock_1416401996.jpg";
 
     public DocumentListAdapter(Context context, List<DocumentModel> documentModelList) {
         this.context = context;
         this.documentModelList = documentModelList;
+    }
+
+    public interface onClick{
+        void documentView(String imagePath);
     }
 
     @NonNull
@@ -46,6 +55,7 @@ public class DocumentListAdapter extends RecyclerView.Adapter<DocumentListAdapte
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
+                ((CarBookingDetailsActivity)context).documentView(documentPath);
             }
         });
 
@@ -53,6 +63,8 @@ public class DocumentListAdapter extends RecyclerView.Adapter<DocumentListAdapte
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
+                Intent intent = new Intent(context, DocumentEditActivity.class);
+                context.startActivity(intent);
             }
         });
 

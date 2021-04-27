@@ -6,13 +6,15 @@ import com.adoisstudio.helper.JsonList;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.List;
+
 public class DocumentModel {
 
     String title;
     String key;
     JSONArray field;
-    Json json;
     String checkValue;
+    List<FieldModel> fieldList;
 
     public String getTitle() {
         return title;
@@ -38,19 +40,19 @@ public class DocumentModel {
         this.field = field;
     }
 
-    public Json getJson() {
-        return json;
-    }
-
-    public void setJson(Json json) {
-        this.json = json;
-    }
-
     public String getCheckValue() {
         return checkValue;
     }
 
     public void setCheckValue(String checkValue) {
         this.checkValue = checkValue;
+    }
+
+    public List<FieldModel> getFieldList() {
+        return fieldList;
+    }
+
+    public void setFieldList(List<FieldModel> fieldList) {
+        this.fieldList = fieldList;
     }
 }

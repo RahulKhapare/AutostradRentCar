@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_margin="10dp"
+    android:background="@drawable/custome_dialog_bg">
+
+    <LinearLayout
+        android:id="@+id/lnrAddNewView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/editCard"
+                android:fontFamily="@font/nunit_sans_bold"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18sp">
+
+            </TextView>
+
+            <ImageView
+                android:id="@+id/imgCancel"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:tint="@color/textDark"
+                android:src="@drawable/ic_action_navigation_close_inverted"
+                >
+            </ImageView>
+
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/etxCardNumber"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="20dp"
+            android:textSize="18sp"
+            android:imeOptions="actionNext"
+            android:textColor="@color/textDark"
+            android:textColorHint="@color/iconicGray"
+            android:textCursorDrawable="@drawable/color_cursor"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:fontFamily="@font/nunito_sans_regular"
+            android:inputType="number"
+            android:maxLength="16"
+            android:digits="01234 56789"
+            android:hint="@string/cardNumber">
+
+        </EditText>
+
+        <EditText
+            android:id="@+id/etxCardName"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="0dp"
+            android:textSize="18sp"
+            android:imeOptions="actionNext"
+            android:textColor="@color/textDark"
+            android:textColorHint="@color/iconicGray"
+            android:textCursorDrawable="@drawable/color_cursor"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:fontFamily="@font/nunito_sans_regular"
+            android:inputType="textCapWords"
+            android:hint="@string/nameOnCard">
+
+        </EditText>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="0dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/etxValidMonth"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                android:textSize="18sp"
+                android:imeOptions="actionNext"
+                android:textColor="@color/textDark"
+                android:textColorHint="@color/iconicGray"
+                android:textCursorDrawable="@drawable/color_cursor"
+                android:backgroundTint="@color/colorPrimaryDark"
+                android:fontFamily="@font/nunito_sans_regular"
+                android:inputType="number"
+                android:maxLength="5"
+                android:digits="0123456789/"
+                android:layout_marginRight="20dp"
+                android:hint="@string/validThrough">
+
+            </EditText>
+
+            <EditText
+                android:id="@+id/etxCvv"
+                android:layout_width="100dp"
+                android:layout_height="?actionBarSize"
+                android:textSize="18sp"
+                android:digits="0123456789"
+                android:maxLength="3"
+                android:imeOptions="actionNext"
+                android:textColor="@color/textDark"
+                android:textColorHint="@color/iconicGray"
+                android:textCursorDrawable="@drawable/color_cursor"
+                android:backgroundTint="@color/colorPrimaryDark"
+                android:fontFamily="@font/nunito_sans_regular"
+                android:inputType="number"
+                android:hint="@string/ccv">
+
+            </EditText>
+
+        </LinearLayout>
+
+        <CheckBox
+            android:id="@+id/checkSecure"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/green"
+            android:textColor="@color/grayTwo"
+            android:fontFamily="@font/nunito_sans_regular"
+            android:textSize="16sp"
+            android:checked="true"
+            android:text="@string/securelyMessage">
+
+        </CheckBox>
+
+        <TextView
+            android:id="@+id/txtSave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunit_sans_bold"
+            android:textColor="@color/colorWhite"
+            android:text="@string/save"
+            android:padding="16dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textSize="18dp"
+            android:background="@drawable/button_blue_bg"></TextView>
+
+
+    </LinearLayout>
+
+</LinearLayout>

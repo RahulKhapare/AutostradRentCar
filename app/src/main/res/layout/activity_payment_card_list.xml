@@ -43,7 +43,19 @@
             android:layout_height="15dp"
             android:layout_gravity="center_vertical"
             android:src="@drawable/ic_checked"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             ></ImageView>
+
+        <ImageView
+            android:id="@+id/imgEdit"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:src="@drawable/ic_edit_view">
+
+        </ImageView>
 
     </LinearLayout>
 </layout>

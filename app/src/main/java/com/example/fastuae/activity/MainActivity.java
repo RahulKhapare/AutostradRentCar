@@ -91,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
     public int click = 0;
 
     private LoadingDialog loadingDialog;
+    TextView textViewDocumnt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -322,7 +323,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void uploadDocument(String name, Json documentJson) {
+    public void uploadDocument(String name,TextView textView) {
+        textViewDocumnt = textView;
         documentName = name;
         click = upload;
         getPermission();
@@ -507,6 +509,7 @@ public class MainActivity extends AppCompatActivity {
                         model.setPath(image);
                         model.setTitle(documentName);
                         imagePathModelList.add(model);
+                        textViewDocumnt.setText(getResources().getString(R.string.uploaded) + " " +documentName);
                         H.showMessage(activity,getResources().getString(R.string.imageUploaded));
                     }else {
                         H.showMessage(activity,json.getString(P.error));

@@ -2,6 +2,7 @@ package com.example.fastuae.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -10,9 +11,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.adoisstudio.helper.Session;
 import com.example.fastuae.R;
+import com.example.fastuae.activity.CarBookingDetailsActivity;
 import com.example.fastuae.databinding.ActivityCarBookingListBinding;
 import com.example.fastuae.databinding.ActivityPaymentCardListBinding;
 import com.example.fastuae.model.PaymentCardModel;
+import com.example.fastuae.util.Click;
 
 import java.util.List;
 
@@ -21,11 +24,17 @@ public class PaymentCardAdapter extends RecyclerView.Adapter<PaymentCardAdapter.
     private Context context;
     private List<PaymentCardModel> paymentCardModelList;
     private Session session;
+    private int valueFlag;
 
-    public PaymentCardAdapter(Context context, List<PaymentCardModel> paymentCardModelList) {
+    public PaymentCardAdapter(Context context, List<PaymentCardModel> paymentCardModelList,int value) {
         this.context = context;
         this.paymentCardModelList = paymentCardModelList;
         session = new Session(context);
+        valueFlag = value;
+    }
+
+    public interface onClick{
+        void onEditPayment(PaymentCardModel model);
     }
 
     @NonNull
@@ -54,6 +63,20 @@ public class PaymentCardAdapter extends RecyclerView.Adapter<PaymentCardAdapter.
 
         String outputNo = firstFour + "-" + hideNumber + "-" + lastFour;
         holder.binding.txtCardNumber.setText(outputNo);
+
+        if (valueFlag==1){
+            holder.binding.imgEdit.setVisibility(View.GONE);
+        }else if (valueFlag==2){
+            holder.binding.imgEdit.setVisibility(View.VISIBLE);
+        }
+
+        holder.binding.imgEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                ((CarBookingDetailsActivity)context).onEditPayment(model);
+            }
+        });
 
     }
 

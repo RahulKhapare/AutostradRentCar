@@ -5,6 +5,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -13,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.adoisstudio.helper.Json;
 import com.example.fastuae.R;
+import com.example.fastuae.activity.DocumentEditActivity;
 import com.example.fastuae.databinding.ActivityDocumentListBinding;
 import com.example.fastuae.fragment.DocumentFragment;
 import com.example.fastuae.model.DocumentModel;
@@ -31,15 +34,23 @@ public class DocumentAdapter extends RecyclerView.Adapter<DocumentAdapter.viewHo
     private Context context;
     private List<DocumentModel> documentModelList;
     private DocumentFragment fragment;
+    boolean fromActivity;
 
     public interface onClick{
-        void downloadDocument(String name,Json json);
+        void downloadDocument(String name, TextView textView);
     }
 
     public DocumentAdapter(Context context, List<DocumentModel> documentModelList,DocumentFragment fragment) {
         this.context = context;
         this.documentModelList = documentModelList;
         this.fragment = fragment;
+        fromActivity = false;
+    }
+
+    public DocumentAdapter(Context context, List<DocumentModel> documentModelList) {
+        this.context = context;
+        this.documentModelList = documentModelList;
+        fromActivity = true;
     }
 
     @NonNull
@@ -59,15 +70,24 @@ public class DocumentAdapter extends RecyclerView.Adapter<DocumentAdapter.viewHo
         holder.binding.lnrCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if ( holder.binding.checkBox.isChecked()){
+                if (holder.binding.checkBox.isChecked()){
                     holder.binding.checkBox.setChecked(false);
                     model.setCheckValue("0");
-                    model.setJson(new Json());
                 }else {
                     model.setCheckValue("1");
                     holder.binding.checkBox.setChecked(true);
                 }
+            }
+        });
 
+        holder.binding.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    model.setCheckValue("1");
+                }else {
+                    model.setCheckValue("0");
+                }
             }
         });
 
@@ -75,7 +95,11 @@ public class DocumentAdapter extends RecyclerView.Adapter<DocumentAdapter.viewHo
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-                ((DocumentFragment)fragment).downloadDocument(model.getTitle(),model.getJson());
+                if (fromActivity){
+                    ((DocumentEditActivity)context).downloadDocument(model.getTitle(),holder.binding.txtDocument);
+                }else {
+                    ((DocumentFragment)fragment).downloadDocument(model.getTitle(),holder.binding.txtDocument);
+                }
             }
         });
 
@@ -84,15 +108,16 @@ public class DocumentAdapter extends RecyclerView.Adapter<DocumentAdapter.viewHo
             for (int i=0; i<model.getField().length(); i++){
                 String value = model.getField().getString(i);
                 if (!value.equals("image")){
-                    fieldList.add(new FieldModel(model.getField().getString(i)));
+                    fieldList.add(new FieldModel(model.getField().getString(i),new Json()));
                 }
             }
         }catch (Exception e){
         }
-
-        DocumentFieldAdapter documentFieldAdapter = new DocumentFieldAdapter(context,fieldList,model.getJson());
+        model.setFieldList(fieldList);
+        DocumentFieldAdapter documentFieldAdapter = new DocumentFieldAdapter(context,model.getFieldList(),new Json());
         holder.binding.recyclerExtraFields.setLayoutManager(new LinearLayoutManager(context));
         holder.binding.recyclerExtraFields.setHasFixedSize(true);
+        holder.binding.recyclerExtraFields.setNestedScrollingEnabled(true);
         holder.binding.recyclerExtraFields.setAdapter(documentFieldAdapter);
 
         if (position==documentModelList.size()-1){
