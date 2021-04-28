@@ -86,6 +86,9 @@ public class DocumentFieldAdapter extends RecyclerView.Adapter<DocumentFieldAdap
 
                 }
             }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+            if (model.getFiled().equals(expiry)){
+                mDatePicker.getDatePicker().setMinDate(System.currentTimeMillis());
+            }
 
             holder.binding.editText.setFocusable(false);
             holder.binding.editText.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_date_range_24, 0);

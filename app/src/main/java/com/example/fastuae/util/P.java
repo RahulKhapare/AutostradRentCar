@@ -22,6 +22,9 @@ public class P {
     public static String otp = "otp";
     public static String user_info = "user_info";
     public static String user = "user";
+    public static String user_profile_document = "user_profile_document";
+    public static String uploaded_document = "uploaded_document";
+    public static String pending_document = "pending_document";
     public static String id = "id";
     public static String user_name = "user_name";
     public static String user_email = "user_email";
@@ -213,8 +216,17 @@ public class P {
     public static String bill_country_id = "bill_country_id";
     public static String bill_zipcode = "bill_zipcode";
 
-
-
+    public static String document_key = "document_key";
+    public static String license_number = "license_number";
+    public static String issue_date = "issue_date";
+    public static String expiry = "expiry";
+    public static String passport_number = "passport_number";
+    public static String visa_issue_date = "visa_issue_date";
+    public static String credit_card_number = "credit_card_number";
+    public static String id_number = "id_number";
+    public static String entry_stamp = "entry_stamp";
+    public static String is_approved = "is_approved";
+    public static String data_field_status = "data_field_status";
 
 
 }

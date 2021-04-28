@@ -346,6 +346,11 @@
     <string name="imageUploaded">Image uploaded successfully</string>
     <string name="uploaded">Uploaded</string>
     <string name="editCard">Edit Card</string>
+    <string name="selectCountryCode">Select country code</string>
+    <string name="number">Number</string>
+    <string name="issuedate">Issue Date</string>
+    <string name="expiryDate">Expiry Date</string>
+    <string name="entryStamp">Entry Stamp</string>
 
 
 

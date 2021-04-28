@@ -30,7 +30,7 @@
                 android:layout_height="match_parent">
 
                 <androidx.core.widget.NestedScrollView
-
+                    android:id="@+id/nestedCroll"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_above="@+id/cardBottom"
@@ -758,6 +758,78 @@
 
                                     </LinearLayout>
 
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="?actionBarSize"
+                                        android:layout_marginTop="20dp"
+                                        android:layout_marginBottom="10dp"
+                                        android:orientation="horizontal">
+
+                                        <Spinner
+                                            android:id="@+id/spinnerCodeAlternate"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="match_parent"
+                                            android:layout_marginRight="5dp"
+                                            android:layout_marginLeft="5dp"
+                                            style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                                            android:backgroundTint="@color/colorPrimaryDark">
+
+                                        </Spinner>
+
+                                        <com.google.android.material.textfield.TextInputLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="?actionBarSize"
+                                            android:hint="@string/alternateNumber"
+                                            app:hintTextColor="@color/iconicGray"
+                                            android:textColorHint="@color/iconicGray"
+                                            app:theme="@style/styleText"
+                                            android:backgroundTint="@color/colorPrimaryDark">
+
+                                            <com.google.android.material.textfield.TextInputEditText
+                                                android:id="@+id/etxAlternameNumber"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:singleLine="true"
+                                                android:textSize="18sp"
+                                                android:imeOptions="actionNext"
+                                                android:inputType="number"
+                                                android:fontFamily="@font/nunito_sans_semibold"
+                                                android:textColor="@color/textDark"
+                                                android:backgroundTint="@color/colorPrimaryDark"
+                                                />
+
+                                        </com.google.android.material.textfield.TextInputLayout>
+
+
+                                    </LinearLayout>
+
+
+                                    <com.google.android.material.textfield.TextInputLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="?actionBarSize"
+                                        android:hint="@string/dateBirth"
+                                        android:layout_marginBottom="10dp"
+                                        android:layout_marginTop="20dp"
+                                        app:hintTextColor="@color/iconicGray"
+                                        android:textColorHint="@color/iconicGray"
+                                        app:theme="@style/styleText"
+                                        android:backgroundTint="@color/colorPrimaryDark">
+
+                                        <com.google.android.material.textfield.TextInputEditText
+                                            android:id="@+id/etxBirtDate"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:singleLine="true"
+                                            android:textSize="18sp"
+                                            android:imeOptions="actionNext"
+                                            android:inputType="text"
+                                            android:fontFamily="@font/nunito_sans_semibold"
+                                            android:textColor="@color/textDark"
+                                            android:backgroundTint="@color/colorPrimaryDark"
+                                            />
+
+                                    </com.google.android.material.textfield.TextInputLayout>
+
 
 
                                     <com.google.android.material.textfield.TextInputLayout
@@ -785,6 +857,42 @@
                                             />
 
                                     </com.google.android.material.textfield.TextInputLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="20dp"
+                                        android:layout_marginBottom="10dp"
+                                        android:orientation="horizontal">
+
+                                        <RadioButton
+                                            android:id="@+id/radioMale"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:buttonTint="@color/lightBlue"
+                                            android:text="@string/male"
+                                            android:textSize="16sp"
+                                            android:fontFamily="@font/nunito_sans_regular"
+                                            android:checked="true"
+                                            android:textColor="@color/textDark">
+
+                                        </RadioButton>
+
+                                        <RadioButton
+                                            android:id="@+id/radioFemale"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:buttonTint="@color/textDark"
+                                            android:text="@string/female"
+                                            android:textSize="16sp"
+                                            android:fontFamily="@font/nunito_sans_regular"
+                                            android:layout_marginLeft="10dp"
+                                            android:layout_marginRight="10dp"
+                                            android:textColor="@color/textDark">
+
+                                        </RadioButton>
+
+                                    </LinearLayout>
 
                                 </LinearLayout>
 

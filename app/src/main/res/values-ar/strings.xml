@@ -326,23 +326,29 @@
     <string name="payAED">ادفع بالدرهم الإماراتي</string>
     <string name="extra">إضافي</string>
     <string name="unableFondUpdateData">تعذر العثور على بيانات تحديث السيارة</string>
-    <string name="selectAddress">Select Address</string>
-    <string name="typeDetailsHere">Type details here...</string>
-    <string name="timings">Timings</string>
-    <string name="pickupLocationTime">Pickup Location &amp; Time</string>
-    <string name="dropoffLocationTime">Drop-Off Location &amp; Time</string>
-    <string name="date">Date</string>
-    <string name="dicsountBooking">(Minus) 5% Discount - 13 day booking</string>
-    <string name="payLaterAmount">Pay Later Amount</string>
-    <string name="payNowAmount">Pay Now Amount</string>
-    <string name="discountAmount">10 % Discount to Pay Now Discount</string>
-    <string name="addSurge">(Add) Surge</string>
-    <string name="addDiscount">(Add) Discount</string>
-    <string name="carRate">Car Rate</string>
-    <string name="upload">Upload</string>
-    <string name="imageUploaded">Image uploaded successfully</string>
-    <string name="uploaded">Uploaded</string>
-    <string name="editCard">Edit Card</string>
+    <string name="selectAddress">حدد العنوان</string>
+    <string name="typeDetailsHere">اكتب التفاصيل هنا ...</string>
+    <string name="timings">المواعيد</string>
+    <string name="pickupLocationTime">موقع ووقت الالتقاط</string>
+    <string name="dropoffLocationTime">موقع الانزال والوقت</string>
+    <string name="date">تاريخ</string>
+    <string name="dicsountBooking">(ناقص) 5٪ خصم - 13 يوم للحجز</string>
+    <string name="payLaterAmount">ادفع المبلغ لاحقًا</string>
+    <string name="payNowAmount">ادفع الآن المبلغ</string>
+    <string name="discountAmount">خصم 10٪ للدفع الآن الخصم</string>
+    <string name="addSurge">(أضف) تصاعد</string>
+    <string name="addDiscount">(أضف) خصم</string>
+    <string name="carRate">سعر السيارة</string>
+    <string name="upload">تحميل</string>
+    <string name="imageUploaded">تم تحميل الصورة بنجاح</string>
+    <string name="uploaded">تم الرفع</string>
+    <string name="editCard">تحرير البطاقة</string>
+    <string name="selectCountryCode">حدد رمز الدولة</string>
+    <string name="number">عدد</string>
+    <string name="issuedate">تاريخ الإصدار</string>
+    <string name="expiryDate">تاريخ الانتهاء</string>
+    <string name="entryStamp">ختم الدخول</string>
+
 
 
     <string name="txt1">شركة رائدة في مجال تأجير السيارات ولديها أكبر شبكة من الفروع ونقاط الالتقاء</string>

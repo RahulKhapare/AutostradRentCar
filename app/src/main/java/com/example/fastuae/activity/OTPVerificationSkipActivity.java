@@ -37,6 +37,8 @@ public class OTPVerificationSkipActivity extends AppCompatActivity {
     private CountDownTimer timer;
     private String resetOTP;
     private String verificationFor;
+    private String payType = "";
+    private String aedSelected = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +58,8 @@ public class OTPVerificationSkipActivity extends AppCompatActivity {
         number = getIntent().getStringExtra(Config.MOBILE_NUMBER);
         countryCode = getIntent().getStringExtra(Config.COUNTRY_CODE);
         verificationFor = getIntent().getStringExtra(Config.VERIFICATION_FOR);
+        payType = getIntent().getStringExtra(Config.PAY_TYPE);
+        aedSelected = getIntent().getStringExtra(Config.SELECTED_AED);
 
         loadingDialog = new LoadingDialog(activity);
         resetOTP = getResources().getString(R.string.resendOTP);
@@ -163,10 +167,12 @@ public class OTPVerificationSkipActivity extends AppCompatActivity {
                         session.addString(P.user_mobile,userJson.getString(P.user_mobile));
                         session.addString(P.token,userJson.getString(P.token));
 
-                        Intent mainIntent = new Intent(activity,MainActivity.class);
-                        mainIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(mainIntent);
+                        Intent intent = new Intent(activity,CarDetailOneActivity.class);
+                        intent.putExtra(Config.PAY_TYPE,payType);
+                        intent.putExtra(Config.SELECTED_AED,aedSelected);
+                        startActivity(intent);
                         finish();
+
                     }else {
                         H.showMessage(activity,json.getString(P.error));
                     }

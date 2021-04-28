@@ -654,10 +654,10 @@ public class MyAccountFragment extends Fragment {
                         String bill_country_id = json.getString(P.bill_country_id);
                         String bill_zipcode = json.getString(P.bill_zipcode);
 
-                        binding.etxAddress.setText(bill_address_line_1);
-                        binding.etxZipcode.setText(bill_zipcode);
-                        binding.etxCity.setText(bill_city);
-                        binding.etxState.setText(bill_state);
+                        binding.etxAddress.setText(CheckString.check(bill_address_line_1));
+                        binding.etxZipcode.setText(CheckString.check(bill_zipcode));
+                        binding.etxCity.setText(CheckString.check(bill_city));
+                        binding.etxState.setText(CheckString.check(bill_state));
                         countryId = bill_country_id;
 
                         JsonList jsonList = Config.countryJsonList;

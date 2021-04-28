@@ -61,12 +61,12 @@ public class LoginSignUpSkipActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
+        loadingDialog = new LoadingDialog(activity);
+        session = new Session(activity);
+
         flag = session.getString(P.languageFlag);
         payType = getIntent().getStringExtra(Config.PAY_TYPE);
         aedSelected = getIntent().getStringExtra(Config.SELECTED_AED);
-
-        loadingDialog = new LoadingDialog(activity);
-        session = new Session(activity);
 
         List<CountryCodeModel> countryCodeModelList = new ArrayList<>();
 
@@ -237,7 +237,10 @@ public class LoginSignUpSkipActivity extends AppCompatActivity {
                         intent.putExtra(Config.VERIFICATION_FOR,Config.LOGIN);
                         intent.putExtra(Config.MOBILE_NUMBER,binding.etxMobileNumberLogin.getText().toString().trim());
                         intent.putExtra(Config.COUNTRY_CODE,countryCode);
+                        intent.putExtra(Config.PAY_TYPE,payType);
+                        intent.putExtra(Config.SELECTED_AED,aedSelected);
                         startActivity(intent);
+                        finish();
                     }else {
                         H.showMessage(activity,json.getString(P.error));
                     }
@@ -268,7 +271,10 @@ public class LoginSignUpSkipActivity extends AppCompatActivity {
                         intent.putExtra(Config.VERIFICATION_FOR,Config.SIGN_UP);
                         intent.putExtra(Config.MOBILE_NUMBER,binding.etxMobileNumberSignup.getText().toString().trim());
                         intent.putExtra(Config.COUNTRY_CODE,countryCode);
+                        intent.putExtra(Config.PAY_TYPE,payType);
+                        intent.putExtra(Config.SELECTED_AED,aedSelected);
                         startActivity(intent);
+                        finish();
                     }else {
                         H.showMessage(activity,json.getString(P.error));
                     }

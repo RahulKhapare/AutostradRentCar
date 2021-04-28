@@ -1,6 +1,7 @@
 package com.example.fastuae.activity;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -11,13 +12,17 @@ import android.text.Editable;
 import android.text.Html;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.CompoundButton;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -49,6 +54,7 @@ import com.example.fastuae.model.AddressModel;
 import com.example.fastuae.model.CarModel;
 import com.example.fastuae.model.CountryCodeModel;
 import com.example.fastuae.model.DocumentModel;
+import com.example.fastuae.model.DocumentUploadedModel;
 import com.example.fastuae.model.EmirateModel;
 import com.example.fastuae.model.PaymentCardModel;
 import com.example.fastuae.util.CheckString;
@@ -57,9 +63,13 @@ import com.example.fastuae.util.Config;
 import com.example.fastuae.util.LoadImage;
 import com.example.fastuae.util.P;
 import com.example.fastuae.util.ProgressView;
+import com.example.fastuae.util.Validation;
 import com.example.fastuae.util.WindowView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class CarBookingDetailsActivity extends AppCompatActivity implements  EmirateAdapter.onClick,DocumentListAdapter.onClick,
@@ -73,7 +83,11 @@ PaymentCardAdapter.onClick{
     private String payType = "";
     private String aedSelected = "";
     private CarModel model;
+    private String codePrimary = "";
+    private String codeSecondary = "";
+    private String countryId = "";
 
+    private DatePickerDialog mDatePickerDialog;
 
     private List<PaymentCardModel> paymentCardModelList;
     private PaymentCardAdapter paymentCardAdapter;
@@ -84,7 +98,8 @@ PaymentCardAdapter.onClick{
 
     private List<CountryCodeModel> countryCodeModelList;
     private List<AddressModel> lisAddressEmirate;
-    private List<DocumentModel> documentModelList;
+    private List<DocumentUploadedModel> documentUploadedModelList;
+    private DocumentListAdapter documentUploadedAdapter;
 
     private int positionNumber = 0;
 
@@ -171,6 +186,10 @@ PaymentCardAdapter.onClick{
         binding.spinnerCodeMobile.setAdapter(adapterOne);
         binding.spinnerCodeMobile.setSelection(positionNumber);
 
+        CodeSelectionAdapter adapterTwo = new CodeSelectionAdapter(activity, countryCodeModelList);
+        binding.spinnerCodeAlternate.setAdapter(adapterTwo);
+        binding.spinnerCodeAlternate.setSelection(positionNumber);
+
         AddressSelectionAdapter adapterAddress = new AddressSelectionAdapter(activity, lisAddressEmirate);
         binding.spinnerAddress.setAdapter(adapterAddress);
 
@@ -180,29 +199,33 @@ PaymentCardAdapter.onClick{
         binding.recyclerCard.setNestedScrollingEnabled(false);
         binding.recyclerCard.setAdapter(paymentCardAdapter);
 
-        documentModelList = new ArrayList<>();
-        DocumentModel documentModel = new DocumentModel();
-        documentModel.setTitle("GCC ID");
-        documentModel.setKey("Number - GCCID0000\nExpiry Date - 01/ 21");
-        documentModelList.add(documentModel);
-        documentModelList.add(documentModel);
-        documentModelList.add(documentModel);
-        documentModelList.add(documentModel);
-        documentModelList.add(documentModel);
-        DocumentListAdapter documentAdapter = new DocumentListAdapter(activity,documentModelList);
+        documentUploadedModelList = new ArrayList<>();
+        documentUploadedAdapter = new DocumentListAdapter(activity,documentUploadedModelList);
         binding.recyclerDocument.setLayoutManager(new LinearLayoutManager(activity));
         binding.recyclerDocument.setHasFixedSize(true);
         binding.recyclerDocument.setNestedScrollingEnabled(true);
-        binding.recyclerDocument.setAdapter(documentAdapter);
+        binding.recyclerDocument.setAdapter(documentUploadedAdapter);
+
+        setDateTimeField(binding.etxBirtDate);
+        binding.etxBirtDate.setFocusable(false);
+        binding.etxBirtDate.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.calender_bg, 0);
+        binding.etxBirtDate.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                mDatePickerDialog.show();
+                return false;
+            }
+        });
+
 
         updateIcons();
         setData();
-        onClick();
-        hitUserPaymentDetails();
         hitPersonalDetails();
+        hitUserPaymentDetails();
         hitAddressDetails();
         hitEmirateData();
-
+        hitUserDocumentDetails();
+        onClick();
     }
 
     private void updateIcons() {
@@ -307,6 +330,70 @@ PaymentCardAdapter.onClick{
 
 
     private void onClick(){
+
+        binding.radioMale.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                binding.radioFemale.setChecked(false);
+                blueTin(binding.radioMale);
+                blackTin(binding.radioFemale);
+            }
+        });
+
+        binding.radioFemale.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                binding.radioMale.setChecked(false);
+                blueTin(binding.radioFemale);
+                blackTin(binding.radioMale);
+            }
+        });
+
+        binding.spinnerCodeMobile.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                CountryCodeModel model = countryCodeModelList.get(position);
+                codePrimary = model.getPhone_code();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        binding.spinnerCodeAlternate.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                CountryCodeModel model = countryCodeModelList.get(position);
+                codeSecondary = model.getPhone_code();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+        binding.spinnerAddress.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                AddressModel model = lisAddressEmirate.get(position);
+                if (!model.getCountry_name().equals(getResources().getString(R.string.country))){
+                    countryId = model.getId();
+                }else {
+                    countryId = "";
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         binding.radioDeliverYes.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -494,6 +581,19 @@ PaymentCardAdapter.onClick{
                     hideKeyboard(activity);
                     hitAddUserPaymentDetails();
                 }
+            }
+        });
+
+        binding.txtConfirmBook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                if(checkPersonalDetailValidation()){
+                    if (checkAddressDetailValidation()){
+                        hitUpdatePersonalDetails();
+                    }
+                }
+
             }
         });
 
@@ -691,17 +791,37 @@ PaymentCardAdapter.onClick{
                         binding.etxFirstName.setText(CheckString.check(json.getString(P.user_name)));
                         binding.etxLastName.setText(CheckString.check(json.getString(P.user_lastname)));
                         binding.etxEmail.setText(CheckString.check(json.getString(P.user_email)));
+                        binding.etxBirtDate.setText(CheckString.check(json.getString(P.user_dob)));
                         binding.etxNumber.setText(CheckString.check(json.getString(P.user_mobile)));
+                        binding.etxAlternameNumber.setText(CheckString.check(json.getString(P.user_alt_mobile)));
 
+                        String gender = json.getString(P.gender);
+                        if (CheckString.check(gender).equalsIgnoreCase("1")){
+                            binding.radioFemale.setChecked(false);
+                            binding.radioMale.setChecked(true);
+                            blueTin(binding.radioMale);
+                            blackTin(binding.radioFemale);
+                        }else if (CheckString.check(gender).equalsIgnoreCase("2")){
+                            binding.radioMale.setChecked(false);
+                            binding.radioFemale.setChecked(true);
+                            blueTin(binding.radioFemale);
+                            blackTin(binding.radioMale);
+                        }
 
-                        String codePrimary = CheckString.check(json.getString(P.user_country_code));
-                        String codeSecondary = CheckString.check(json.getString(P.user_alt_country_code));
+                        String code1= CheckString.check(json.getString(P.user_country_code));
+                        String code2 = CheckString.check(json.getString(P.user_alt_country_code));
 
                         JsonList jsonList = Config.countryJsonList;
                         for (int i = 0; i < jsonList.size(); i++) {
                             Json jsonData = jsonList.get(i);
-                            if (jsonData.getString(P.phone_code).equalsIgnoreCase(codePrimary)) {
+                            if (jsonData.getString(P.phone_code).equalsIgnoreCase(code1)) {
                                 binding.spinnerCodeMobile.setSelection(i);
+                                codePrimary = code1;
+                            }
+
+                            if (jsonData.getString(P.phone_code).equalsIgnoreCase(code2)) {
+                                binding.spinnerCodeAlternate.setSelection(i);
+                                codeSecondary = code2;
                             }
                         }
 
@@ -750,6 +870,7 @@ PaymentCardAdapter.onClick{
                             Json jsonData = jsonList.get(i);
                             if (jsonData.getString(P.id).equals(bill_country_id)) {
                                 binding.spinnerAddress.setSelection(i+1);
+                                countryId = bill_country_id;
                             }
                         }
                     }else {
@@ -1171,6 +1292,258 @@ PaymentCardAdapter.onClick{
 
                 })
                 .run("hitAddUserPaymentDetails",session.getString(P.token));
+    }
+
+    private void hitUpdatePersonalDetails() {
+
+        ProgressView.show(activity,loadingDialog);
+        Json j = new Json();
+        j.addString(P.user_name,binding.etxFirstName.getText().toString().trim());
+        j.addString(P.user_lastname,binding.etxLastName.getText().toString().trim());
+        j.addString(P.user_dob,binding.etxBirtDate.getText().toString().trim());
+        j.addString(P.user_email,binding.etxEmail.getText().toString().trim());
+        if (binding.radioMale.isChecked()){
+            j.addString(P.gender,"1");
+        }else if (binding.radioFemale.isChecked()){
+            j.addString(P.gender,"2");
+        }
+        j.addString(P.user_country_code,codePrimary);
+        j.addString(P.user_mobile,binding.etxNumber.getText().toString().trim());
+        j.addString(P.user_alt_country_code,codeSecondary);
+        j.addString(P.user_alt_mobile,binding.etxAlternameNumber.getText().toString().trim());
+
+
+        Api.newApi(activity, P.BaseUrl + "update_user_data").addJson(j)
+                .setMethod(Api.POST)
+                //.onHeaderRequest(App::getHeaders)
+                .onError(() -> {
+                    ProgressView.dismiss(loadingDialog);
+                    H.showMessage(activity, "On error is called");
+                })
+                .onSuccess(json ->
+                {
+                    if (json.getInt(P.status) == 1) {
+                        json = json.getJson(P.data);
+                        hitUpdateAddressDetails();
+                    }else {
+                        H.showMessage(activity,json.getString(P.error));
+                    }
+
+                    ProgressView.dismiss(loadingDialog);
+
+                })
+                .run("hitUpdatePersonalDetails",session.getString(P.token));
+    }
+
+    private void hitUpdateAddressDetails() {
+
+        ProgressView.show(activity,loadingDialog);
+        Json j = new Json();
+        j.addString(P.bill_address_line_1,binding.etxAddress.getText().toString().trim());
+        j.addString(P.bill_address_line_2,binding.etxAddress.getText().toString().trim());
+        j.addString(P.bill_city,binding.etxCity.getText().toString().trim());
+        j.addString(P.bill_state,binding.etxState.getText().toString().trim());
+        j.addString(P.bill_country_id,countryId);
+        j.addString(P.bill_zipcode,binding.etxZipcode.getText().toString().trim());
+
+        Api.newApi(activity, P.BaseUrl + "update_user_bill_data").addJson(j)
+                .setMethod(Api.POST)
+                //.onHeaderRequest(App::getHeaders)
+                .onError(() -> {
+                    ProgressView.dismiss(loadingDialog);
+                    H.showMessage(activity, "On error is called");
+                })
+                .onSuccess(json ->
+                {
+                    if (json.getInt(P.status) == 1) {
+
+                        json = json.getJson(P.data);
+
+                    }else {
+                        H.showMessage(activity,json.getString(P.error));
+                    }
+
+                    ProgressView.dismiss(loadingDialog);
+
+                })
+                .run("hitUpdateAddressDetails",session.getString(P.token));
+    }
+
+    private boolean checkPersonalDetailValidation() {
+
+        boolean value = true;
+
+        if (TextUtils.isEmpty(binding.etxFirstName.getText().toString().trim())) {
+            value = false;
+            H.showMessage(activity, getResources().getString(R.string.pleaseEnterFirstName));
+            checkPersonalErrorView();
+        } else if (TextUtils.isEmpty(binding.etxLastName.getText().toString().trim())) {
+            value = false;
+            H.showMessage(activity, getResources().getString(R.string.pleaseEnterLastName));
+            checkPersonalErrorView();
+        }else if (TextUtils.isEmpty(codePrimary)) {
+            value = false;
+            H.showMessage(activity, getResources().getString(R.string.selectCountryCode));
+            checkPersonalErrorView();
+        }  else if (TextUtils.isEmpty(binding.etxNumber.getText().toString().trim())) {
+            value = false;
+            H.showMessage(activity, getResources().getString(R.string.enterMobile));
+            checkPersonalErrorView();
+        } else if (TextUtils.isEmpty(binding.etxBirtDate.getText().toString().trim())) {
+            value = false;
+            H.showMessage(activity, getResources().getString(R.string.pleaseEnterDOB));
+            checkPersonalErrorView();
+        } else if (TextUtils.isEmpty(binding.etxEmail.getText().toString().trim())) {
+            value = false;
+            H.showMessage(activity, getResources().getString(R.string.enterEmailId));
+            checkPersonalErrorView();
+        } else if (!Validation.validEmail(binding.etxEmail.getText().toString().trim())) {
+            value = false;
+            H.showMessage(activity, getResources().getString(R.string.enterEmailValid));
+            checkPersonalErrorView();
+        }
+
+        return value;
+    }
+
+    private void checkPersonalErrorView(){
+        if (binding.viewPersonalInfo.getVisibility()==View.GONE){
+            binding.viewPersonalInfo.setVisibility(View.VISIBLE);
+            binding.nestedCroll.post(new Runnable() {
+                @Override
+                public void run() {
+                    binding.nestedCroll.scrollTo(0, binding.viewPersonalInfo.getBottom());
+                }
+            });
+        }
+    }
+
+    private void checkBillingErrorView(){
+        if (binding.viewBillingInfo.getVisibility()==View.GONE){
+            binding.viewBillingInfo.setVisibility(View.VISIBLE);
+            binding.nestedCroll.post(new Runnable() {
+                @Override
+                public void run() {
+                    binding.nestedCroll.scrollTo(0, binding.viewBillingInfo.getBottom());
+                }
+            });
+        }
+    }
+
+    private boolean checkAddressDetailValidation() {
+
+        boolean value = true;
+
+        if (TextUtils.isEmpty(binding.etxAddress.getText().toString().trim())) {
+            value = false;
+            H.showMessage(activity, getResources().getString(R.string.enterAddress));
+            checkBillingErrorView();
+        } else if (TextUtils.isEmpty(countryId)) {
+            value = false;
+            H.showMessage(activity, getResources().getString(R.string.country));
+            checkBillingErrorView();
+        }else if (TextUtils.isEmpty(binding.etxState.getText().toString().trim())) {
+            value = false;
+            H.showMessage(activity, getResources().getString(R.string.enterState));
+            checkBillingErrorView();
+        } else if (TextUtils.isEmpty(binding.etxCity.getText().toString().trim())) {
+            value = false;
+            H.showMessage(activity, getResources().getString(R.string.selectCity1));
+            checkBillingErrorView();
+        }else if (TextUtils.isEmpty(binding.etxZipcode.getText().toString().trim())) {
+            value = false;
+            H.showMessage(activity, getResources().getString(R.string.selectZip));
+            checkBillingErrorView();
+        }
+        return value;
+    }
+
+
+    private void setDateTimeField(EditText editText) {
+
+        Calendar newCalendar = Calendar.getInstance();
+        mDatePickerDialog = new DatePickerDialog(activity, R.style.DialogTheme,new DatePickerDialog.OnDateSetListener() {
+
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                Calendar newDate = Calendar.getInstance();
+                newDate.set(year, monthOfYear, dayOfMonth);
+                SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
+                final Date date = newDate.getTime();
+                String fdate = sd.format(date);
+
+                editText.setText(fdate);
+
+                String dayOfTheWeek = (String) DateFormat.format("EEEE", date); // Thursday
+                String dayString         = (String) DateFormat.format("dd",   date); // 20
+                String monthString  = (String) DateFormat.format("MMM",  date); // Jun
+                String monthNumber  = (String) DateFormat.format("MM",   date); // 06
+                String yeare         = (String) DateFormat.format("yyyy", date); // 2013
+
+            }
+        }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+//        mDatePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+    }
+
+
+    private void hitUserDocumentDetails() {
+
+        ProgressView.show(activity,loadingDialog);
+        Api.newApi(activity, P.BaseUrl + "user_data_for_booking")
+                .setMethod(Api.GET)
+                //.onHeaderRequest(App::getHeaders)
+                .onError(() -> {
+                    ProgressView.dismiss(loadingDialog);
+                    H.showMessage(activity, "On error is called");
+                })
+                .onSuccess(json ->
+                {
+                    if (json.getInt(P.status) == 1) {
+
+                        json = json.getJson(P.data);
+                        Json userJson = json.getJson(P.user);
+                        Json userDocument = userJson.getJson(P.user_profile_document);
+                        JsonList uploaded_document = userDocument.getJsonList(P.uploaded_document);
+                        JsonList pending_document = userDocument.getJsonList(P.pending_document);
+
+                        for(Json jsonUploaded : uploaded_document){
+
+//                            Log.e("TAG", "hitUserDocumentDetails:121212 "+ jsonUploaded.toString() );
+
+                            DocumentUploadedModel model = new DocumentUploadedModel();
+
+                            model.setId(jsonUploaded.getString(P.id));
+                            model.setUser_id(jsonUploaded.getString(P.user_id));
+                            model.setDocument_key(jsonUploaded.getString(P.document_key));
+                            model.setLicense_number(jsonUploaded.getString(P.license_number));
+                            model.setIssue_date(jsonUploaded.getString(P.issue_date));
+                            model.setExpiry(jsonUploaded.getString(P.expiry));
+                            model.setImage(jsonUploaded.getString(P.image));
+                            model.setPassport_number(jsonUploaded.getString(P.passport_number));
+                            model.setVisa_issue_date(jsonUploaded.getString(P.visa_issue_date));
+                            model.setCredit_card_number(jsonUploaded.getString(P.credit_card_number));
+                            model.setName_on_card(jsonUploaded.getString(P.name_on_card));
+                            model.setId_number(jsonUploaded.getString(P.id_number));
+                            model.setEntry_stamp(jsonUploaded.getString(P.entry_stamp));
+                            model.setStatus(jsonUploaded.getString(P.status));
+                            model.setIs_approved(jsonUploaded.getString(P.is_approved));
+                            model.setAdd_date(jsonUploaded.getString(P.add_date));
+                            model.setData_field_status(jsonUploaded.getString(P.data_field_status));
+                            model.setUpdate_date(jsonUploaded.getString(P.update_date));
+                            model.setImage_url(jsonUploaded.getString(P.image_url));
+//                            model.setTitle(jsonUploaded.getString(P.title));
+
+                            documentUploadedModelList.add(model);
+                        }
+
+                        documentUploadedAdapter.notifyDataSetChanged();
+                    }else {
+                        H.showMessage(activity,json.getString(P.error));
+                    }
+
+                    ProgressView.dismiss(loadingDialog);
+
+                })
+                .run("hitUserDocumentDetails",session.getString(P.token));
     }
 
 }

@@ -22,5 +22,20 @@
         </ImageView>
     </androidx.cardview.widget.CardView>
 
+<!--    <androidx.cardview.widget.CardView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:cardCornerRadius="5dp">-->
+
+<!--        <ImageView-->
+<!--            android:id="@+id/imgDocument"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:adjustViewBounds="true"-->
+<!--            android:scaleType="fitCenter">-->
+
+<!--        </ImageView>-->
+<!--    </androidx.cardview.widget.CardView>-->
+
 
 </LinearLayout>
