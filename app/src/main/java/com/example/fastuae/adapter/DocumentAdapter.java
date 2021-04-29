@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.adoisstudio.helper.Json;
 import com.example.fastuae.R;
+import com.example.fastuae.activity.CarBookingDetailsActivity;
 import com.example.fastuae.activity.DocumentEditActivity;
 import com.example.fastuae.databinding.ActivityDocumentListBinding;
 import com.example.fastuae.fragment.DocumentFragment;
@@ -35,9 +36,10 @@ public class DocumentAdapter extends RecyclerView.Adapter<DocumentAdapter.viewHo
     private List<DocumentModel> documentModelList;
     private DocumentFragment fragment;
     boolean fromActivity;
+    int flagValue;
 
     public interface onClick{
-        void downloadDocument(String name, TextView textView);
+        void downloadDocument(String name, TextView textView,TextView txtImagePath);
     }
 
     public DocumentAdapter(Context context, List<DocumentModel> documentModelList,DocumentFragment fragment) {
@@ -47,10 +49,11 @@ public class DocumentAdapter extends RecyclerView.Adapter<DocumentAdapter.viewHo
         fromActivity = false;
     }
 
-    public DocumentAdapter(Context context, List<DocumentModel> documentModelList) {
+    public DocumentAdapter(Context context, List<DocumentModel> documentModelList,int flag) {
         this.context = context;
         this.documentModelList = documentModelList;
         fromActivity = true;
+        flagValue = flag;
     }
 
     @NonNull
@@ -96,9 +99,13 @@ public class DocumentAdapter extends RecyclerView.Adapter<DocumentAdapter.viewHo
             public void onClick(View v) {
                 Click.preventTwoClick(v);
                 if (fromActivity){
-                    ((DocumentEditActivity)context).downloadDocument(model.getTitle(),holder.binding.txtDocument);
+                    if (flagValue==1){
+                        ((CarBookingDetailsActivity)context).downloadDocument(model.getTitle(),holder.binding.txtDocument,holder.binding.txtImagePath);
+                    }else if (flagValue==2){
+                        ((DocumentEditActivity)context).downloadDocument(model.getTitle(),holder.binding.txtDocument,holder.binding.txtImagePath);
+                    }
                 }else {
-                    ((DocumentFragment)fragment).downloadDocument(model.getTitle(),holder.binding.txtDocument);
+                    ((DocumentFragment)fragment).downloadDocument(model.getTitle(),holder.binding.txtDocument,holder.binding.txtImagePath);
                 }
             }
         });
@@ -114,7 +121,7 @@ public class DocumentAdapter extends RecyclerView.Adapter<DocumentAdapter.viewHo
         }catch (Exception e){
         }
         model.setFieldList(fieldList);
-        DocumentFieldAdapter documentFieldAdapter = new DocumentFieldAdapter(context,model.getFieldList(),new Json());
+        DocumentFieldAdapter documentFieldAdapter = new DocumentFieldAdapter(context,model.getFieldList(),new Json(),model.getSave_data());
         holder.binding.recyclerExtraFields.setLayoutManager(new LinearLayoutManager(context));
         holder.binding.recyclerExtraFields.setHasFixedSize(true);
         holder.binding.recyclerExtraFields.setNestedScrollingEnabled(true);

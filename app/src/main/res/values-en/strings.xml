@@ -348,7 +348,12 @@
     <string name="issuedate">Issue Date</string>
     <string name="expiryDate">Expiry Date</string>
     <string name="entryStamp">Entry Stamp</string>
-
+    <string name="selectPaymentMethod">Select payment method</string>
+    <string name="imagePath">Image :</string>
+    <string name="selectImage">Select Image</string>
+    <string name="enter">Enter</string>
+    <string name="select">Select</string>
+    <string name="allowTemCondition">Please allow term and conditions</string>
 
     <string name="txt1">Leading Car Rental Company with the largest network of Branches &amp; Pickup points</string>
     <string name="txt2">Leading Car Rental Company with the largest network of Branches &amp; Pickup points</string>

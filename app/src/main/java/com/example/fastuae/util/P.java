@@ -80,6 +80,7 @@ public class P {
     public static String add_date = "add_date";
     public static String key = "key";
     public static String field = "field";
+    public static String save_data = "save_data";
 
     public static String gender = "gender";
     public static String user_alt_mobile = "user_alt_mobile";
@@ -227,6 +228,11 @@ public class P {
     public static String entry_stamp = "entry_stamp";
     public static String is_approved = "is_approved";
     public static String data_field_status = "data_field_status";
+
+    public static String pickup_lat = "pickup_lat";
+    public static String pickup_long = "pickup_long";
+    public static String dropoff_lat = "dropoff_lat";
+    public static String dropoff_long = "dropoff_long";
 
 
 }

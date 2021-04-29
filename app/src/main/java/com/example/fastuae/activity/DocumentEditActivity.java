@@ -2,6 +2,7 @@ package com.example.fastuae.activity;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -15,6 +16,9 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,6 +38,7 @@ import com.example.fastuae.databinding.ActivityEditDocumentBinding;
 import com.example.fastuae.model.DocumentModel;
 import com.example.fastuae.model.FieldModel;
 import com.example.fastuae.model.ImagePathModel;
+import com.example.fastuae.util.LoadImage;
 import com.example.fastuae.util.P;
 import com.example.fastuae.util.ProgressView;
 import com.example.fastuae.util.WindowView;
@@ -60,6 +65,7 @@ public class DocumentEditActivity extends AppCompatActivity implements DocumentA
     String documentName;
     String base64Image;
     TextView textViewDocumnt;
+    TextView txtImagePath;
     private static final int READ_WRITE = 20;
     private static final int PDF_DATA = 22;
 
@@ -90,7 +96,7 @@ public class DocumentEditActivity extends AppCompatActivity implements DocumentA
         imagePathModelList = new ArrayList<>();
 
         documentModelList = new ArrayList<>();
-        adapter = new DocumentAdapter(activity,documentModelList);
+        adapter = new DocumentAdapter(activity,documentModelList,2);
         binding.recyclerDocument.setLayoutManager(new LinearLayoutManager(activity));
 //        binding.recyclerDocument.setNestedScrollingEnabled(false);
         binding.recyclerDocument.setAdapter(adapter);
@@ -272,8 +278,9 @@ public class DocumentEditActivity extends AppCompatActivity implements DocumentA
     }
 
     @Override
-    public void downloadDocument(String name, TextView textView) {
+    public void downloadDocument(String name, TextView textView,TextView txtImage) {
         textViewDocumnt = textView;
+        txtImagePath = txtImage;
         documentName = name;
         getPermission();
     }
@@ -398,12 +405,37 @@ public class DocumentEditActivity extends AppCompatActivity implements DocumentA
                         model.setTitle(documentName);
                         imagePathModelList.add(model);
                         textViewDocumnt.setText(getResources().getString(R.string.uploaded) + " " +documentName);
+                        txtImagePath.setText(getResources().getString(R.string.imagePath) + " " +image);
+                        txtImagePath.setVisibility(View.VISIBLE);
+                        txtImagePath.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                documentDialog(image_url);
+                            }
+                        });
                         H.showMessage(activity,getResources().getString(R.string.imageUploaded));
                     }else {
                         H.showMessage(activity,json.getString(P.error));
                     }
                 })
                 .run("hitUploadImage",session.getString(P.token));
+
+    }
+
+
+    private void documentDialog(String imagePath) {
+
+        final Dialog dialog = new Dialog(activity);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.activity_document_view);
+
+        ImageView imgDocument = dialog.findViewById(R.id.imgDocument);
+        LoadImage.glideString(activity, imgDocument, imagePath);
+
+        dialog.setCancelable(true);
+        dialog.show();
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
 
     }
 

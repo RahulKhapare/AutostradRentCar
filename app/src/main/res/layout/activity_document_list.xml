@@ -69,6 +69,8 @@
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
                     android:layout_gravity="center_vertical"
                     android:src="@drawable/ic_download"></ImageView>
 
@@ -89,6 +91,20 @@
 
                 </TextView>
             </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/txtImagePath"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="16sp"
+                android:visibility="gone"
+                android:fontFamily="@font/nunito_sans_semibold"
+                android:text="@string/app_name">
+
+            </TextView>
 
         </LinearLayout>
 

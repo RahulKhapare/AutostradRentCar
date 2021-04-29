@@ -70,7 +70,7 @@ public class CarDetailOneActivity extends AppCompatActivity implements AddOnsAda
     private String aedSelected = "";
     private CarModel model;
     private List<CarUpgradeModel> carUpgradeModelList;
-    private String carID = "";
+    public static String carID = "";
     private String carNAME = "";
     private String carAED = "";
 

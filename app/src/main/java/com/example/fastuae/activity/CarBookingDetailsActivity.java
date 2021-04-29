@@ -1,18 +1,26 @@
 package com.example.fastuae.activity;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.StrictMode;
+import android.provider.Settings;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.format.DateFormat;
+import android.util.Base64;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -30,6 +38,7 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -44,10 +53,12 @@ import com.example.fastuae.R;
 import com.example.fastuae.adapter.AEDAdapter;
 import com.example.fastuae.adapter.AddressSelectionAdapter;
 import com.example.fastuae.adapter.CodeSelectionAdapter;
+import com.example.fastuae.adapter.DocumentAdapter;
 import com.example.fastuae.adapter.DocumentListAdapter;
 import com.example.fastuae.adapter.EmirateAdapter;
 import com.example.fastuae.adapter.PaymentCardAdapter;
 import com.example.fastuae.databinding.ActivityCarBookingDetailBinding;
+import com.example.fastuae.fragment.DocumentFragment;
 import com.example.fastuae.fragment.HomeFragment;
 import com.example.fastuae.model.AEDModel;
 import com.example.fastuae.model.AddressModel;
@@ -56,6 +67,8 @@ import com.example.fastuae.model.CountryCodeModel;
 import com.example.fastuae.model.DocumentModel;
 import com.example.fastuae.model.DocumentUploadedModel;
 import com.example.fastuae.model.EmirateModel;
+import com.example.fastuae.model.FieldModel;
+import com.example.fastuae.model.ImagePathModel;
 import com.example.fastuae.model.PaymentCardModel;
 import com.example.fastuae.util.CheckString;
 import com.example.fastuae.util.Click;
@@ -66,14 +79,21 @@ import com.example.fastuae.util.ProgressView;
 import com.example.fastuae.util.Validation;
 import com.example.fastuae.util.WindowView;
 
+import org.json.JSONArray;
+
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-public class CarBookingDetailsActivity extends AppCompatActivity implements  EmirateAdapter.onClick,DocumentListAdapter.onClick,
-PaymentCardAdapter.onClick{
+public class CarBookingDetailsActivity extends AppCompatActivity implements EmirateAdapter.onClick, DocumentListAdapter.onClick,
+        PaymentCardAdapter.onClick, PaymentCardAdapter.onView,DocumentAdapter.onClick {
 
     private CarBookingDetailsActivity activity = this;
     private ActivityCarBookingDetailBinding binding;
@@ -101,6 +121,9 @@ PaymentCardAdapter.onClick{
     private List<DocumentUploadedModel> documentUploadedModelList;
     private DocumentListAdapter documentUploadedAdapter;
 
+    private List<DocumentModel> documentModelList;
+    private DocumentAdapter documentAdapter;
+
     private int positionNumber = 0;
 
     private List<EmirateModel> deliverEmirateList;
@@ -113,6 +136,19 @@ PaymentCardAdapter.onClick{
     private String collectEmirateID = "";
     private boolean forDeliveryLocation = false;
     private boolean forCollectLocation = false;
+
+    private String paymentId = "";
+    private String user_country_id = "";
+    String documentName;
+    String base64Image;
+    TextView textViewDocumnt;
+    TextView txtImagePath;
+    private static final int READ_WRITE = 20;
+    private static final int PDF_DATA = 22;
+    private List<ImagePathModel> imagePathModelList;
+
+    Json jsonMain;
+    Json jsonChild;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,10 +165,14 @@ PaymentCardAdapter.onClick{
 
     private void initView() {
 
+        getAccess();
+
         binding.toolbar.setTitle(getResources().getString(R.string.confirmBooking));
         setSupportActionBar(binding.toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+
+        imagePathModelList = new ArrayList<>();
 
         message2 = message2.replace("Rental Terms, Qualification and Requirements, Reservation Term & Conditions", "<font color='#159dd8'>Rental Terms, Qualification and Requirements, Reservation Term & Conditions</font>");
         model = Config.carModel;
@@ -141,14 +181,14 @@ PaymentCardAdapter.onClick{
         binding.txtMessage3.setText(message3);
 
         deliverEmirateList = new ArrayList<>();
-        deliverEmirateAdapter = new EmirateAdapter(activity,deliverEmirateList,deliverEmirateFlag);
+        deliverEmirateAdapter = new EmirateAdapter(activity, deliverEmirateList, deliverEmirateFlag);
         binding.recyclerDeliverEmirate.setLayoutManager(new LinearLayoutManager(activity));
         binding.recyclerDeliverEmirate.setHasFixedSize(true);
         binding.recyclerDeliverEmirate.setNestedScrollingEnabled(false);
         binding.recyclerDeliverEmirate.setAdapter(deliverEmirateAdapter);
 
         collectEmirateList = new ArrayList<>();
-        collectEmirateAdapter = new EmirateAdapter(activity,collectEmirateList,collectEmirateFlag);
+        collectEmirateAdapter = new EmirateAdapter(activity, collectEmirateList, collectEmirateFlag);
         binding.recyclerCollectEmirate.setLayoutManager(new LinearLayoutManager(activity));
         binding.recyclerCollectEmirate.setHasFixedSize(true);
         binding.recyclerCollectEmirate.setNestedScrollingEnabled(false);
@@ -194,17 +234,23 @@ PaymentCardAdapter.onClick{
         binding.spinnerAddress.setAdapter(adapterAddress);
 
         paymentCardModelList = new ArrayList<>();
-        paymentCardAdapter = new PaymentCardAdapter(activity, paymentCardModelList,2);
+        paymentCardAdapter = new PaymentCardAdapter(activity, paymentCardModelList, 2);
         binding.recyclerCard.setLayoutManager(new LinearLayoutManager(activity));
         binding.recyclerCard.setNestedScrollingEnabled(false);
         binding.recyclerCard.setAdapter(paymentCardAdapter);
 
         documentUploadedModelList = new ArrayList<>();
-        documentUploadedAdapter = new DocumentListAdapter(activity,documentUploadedModelList);
+        documentUploadedAdapter = new DocumentListAdapter(activity, documentUploadedModelList);
+        binding.recyclerUploadedDocument.setLayoutManager(new LinearLayoutManager(activity));
+        binding.recyclerUploadedDocument.setHasFixedSize(true);
+        binding.recyclerUploadedDocument.setNestedScrollingEnabled(true);
+        binding.recyclerUploadedDocument.setAdapter(documentUploadedAdapter);
+
+        documentModelList = new ArrayList<>();
+        documentAdapter = new DocumentAdapter(activity,documentModelList,1);
         binding.recyclerDocument.setLayoutManager(new LinearLayoutManager(activity));
-        binding.recyclerDocument.setHasFixedSize(true);
-        binding.recyclerDocument.setNestedScrollingEnabled(true);
-        binding.recyclerDocument.setAdapter(documentUploadedAdapter);
+        binding.recyclerDocument.setNestedScrollingEnabled(false);
+        binding.recyclerDocument.setAdapter(documentAdapter);
 
         setDateTimeField(binding.etxBirtDate);
         binding.etxBirtDate.setFocusable(false);
@@ -271,13 +317,13 @@ PaymentCardAdapter.onClick{
     @Override
     protected void onResume() {
         super.onResume();
-        if (Config.FROM_MAP){
+        if (Config.FROM_MAP) {
             Config.FROM_MAP = false;
-            if (forDeliveryLocation){
+            if (forDeliveryLocation) {
                 forDeliveryLocation = false;
                 binding.txtDeliverGoogleAddress.setVisibility(View.VISIBLE);
                 binding.txtDeliverGoogleAddress.setText(session.getString(P.locationAddress));
-            }else if (forCollectLocation){
+            } else if (forCollectLocation) {
                 forCollectLocation = false;
                 binding.txtCollectGoogleAddress.setVisibility(View.VISIBLE);
                 binding.txtCollectGoogleAddress.setText(session.getString(P.locationAddress));
@@ -285,41 +331,41 @@ PaymentCardAdapter.onClick{
         }
     }
 
-    private void setData(){
+    private void setData() {
 
-        if (HomeFragment.binding.radioDeliverYes.isChecked()){
+        if (HomeFragment.binding.radioDeliverYes.isChecked()) {
             binding.radioDeliverYes.setChecked(true);
             binding.radioDeliverNo.setChecked(false);
             blueTin(binding.radioDeliverYes);
             blackTin(binding.radioDeliverNo);
             binding.radioDeliverNo.setEnabled(false);
-        }else {
+        } else {
             disablebleDelverView();
         }
 
-        if (HomeFragment.binding.radioCollectYes.isChecked()){
+        if (HomeFragment.binding.radioCollectYes.isChecked()) {
             binding.radioCollectYes.setChecked(true);
             binding.radioCollectNo.setChecked(false);
             blueTin(binding.radioCollectYes);
             blackTin(binding.radioCollectNo);
             binding.radioCollectNo.setEnabled(false);
-        }else {
+        } else {
             disablebleCollectView();
         }
 
-        binding.txtTotalAED.setText(getResources().getString(R.string.aed)+" "+aedSelected);
+        binding.txtTotalAED.setText(getResources().getString(R.string.aed) + " " + aedSelected);
 
     }
 
 
     @Override
     public void onEmirateClick(int flag, EmirateModel model) {
-        if (flag==deliverEmirateFlag){
+        if (flag == deliverEmirateFlag) {
             binding.txtDeliverEmirateMessage.setVisibility(View.VISIBLE);
             binding.txtDeliverEmirateMessage.setText(model.getEmirate_name());
             hideDeliverEmirate();
             deleveryEmirateID = model.getId();
-        }else if (flag==collectEmirateFlag){
+        } else if (flag == collectEmirateFlag) {
             binding.txtCollectEmirateMessage.setVisibility(View.VISIBLE);
             binding.txtCollectEmirateMessage.setText(model.getEmirate_name());
             hideCollectEmirate();
@@ -329,7 +375,7 @@ PaymentCardAdapter.onClick{
     }
 
 
-    private void onClick(){
+    private void onClick() {
 
         binding.radioMale.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -382,9 +428,9 @@ PaymentCardAdapter.onClick{
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 AddressModel model = lisAddressEmirate.get(position);
-                if (!model.getCountry_name().equals(getResources().getString(R.string.country))){
+                if (!model.getCountry_name().equals(getResources().getString(R.string.country))) {
                     countryId = model.getId();
-                }else {
+                } else {
                     countryId = "";
                 }
             }
@@ -448,7 +494,7 @@ PaymentCardAdapter.onClick{
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-                if (binding.radioDeliverYes.isChecked()){
+                if (binding.radioDeliverYes.isChecked()) {
                     cardDeliverEmirateClick();
                     hideCollectEmirate();
                 }
@@ -459,7 +505,7 @@ PaymentCardAdapter.onClick{
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-                if (binding.radioCollectYes.isChecked()){
+                if (binding.radioCollectYes.isChecked()) {
                     cardCollectEmirateClick();
                     hideDeliverEmirate();
                 }
@@ -470,23 +516,23 @@ PaymentCardAdapter.onClick{
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-                if (binding.radioDeliverYes.isChecked()){
+                if (binding.radioDeliverYes.isChecked()) {
                     forDeliveryLocation = true;
                     forCollectLocation = false;
-                    Intent intent = new Intent(activity,SelectLocationActivity.class);
+                    Intent intent = new Intent(activity, SelectLocationActivity.class);
                     startActivity(intent);
                 }
             }
         });
 
-          binding.txtCollectSelectAddress.setOnClickListener(new View.OnClickListener() {
+        binding.txtCollectSelectAddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-                if (binding.radioCollectYes.isChecked()){
+                if (binding.radioCollectYes.isChecked()) {
                     forCollectLocation = true;
                     forDeliveryLocation = false;
-                    Intent intent = new Intent(activity,SelectLocationActivity.class);
+                    Intent intent = new Intent(activity, SelectLocationActivity.class);
                     startActivity(intent);
                 }
             }
@@ -525,10 +571,12 @@ PaymentCardAdapter.onClick{
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
             }
+
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
             }
+
             @Override
             public void afterTextChanged(Editable editable) {
 
@@ -588,18 +636,79 @@ PaymentCardAdapter.onClick{
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-                if(checkPersonalDetailValidation()){
-                    if (checkAddressDetailValidation()){
-                        hitUpdatePersonalDetails();
+
+                if (checkPersonalDetailValidation()) {
+                    if (TextUtils.isEmpty(paymentId)) {
+                        H.showMessage(activity,getResources().getString(R.string.selectPaymentMethod));
+                        checkPaymentErrorView();
+                    }else {
+                        if (checkAddressDetailValidation()) {
+                            checkDocumentValidation();
+                        }
                     }
                 }
-
             }
         });
 
-
     }
 
+    private void checkDocumentValidation(){
+
+        jsonMain = new Json();
+        jsonChild = new Json();
+
+        try {
+            for (DocumentModel model : documentModelList){
+
+                if (model.getCheckValue().equals("1")){
+                    jsonMain.addString(model.getKey(),"1");
+                    for (FieldModel fieldModel : model.getFieldList()){
+
+                        for (ImagePathModel imageModel : imagePathModelList){
+                            if (imageModel.getTitle().equals(model.getTitle())){
+                                if (fieldModel.getJson().has(P.image)){
+                                    fieldModel.getJson().remove(P.image);
+                                    fieldModel.getJson().addString(P.image,imageModel.getPath());
+                                }else {
+                                    fieldModel.getJson().addString(P.image,imageModel.getPath());
+                                }
+                            }
+                        }
+
+                        jsonChild.addJSON(model.getKey(),fieldModel.getJson());
+
+                        if (!fieldModel.getJson().has(fieldModel.getFiled())){
+                            String valueKey = fieldModel.getFiled().replace("_"," ");
+                            H.showMessage(activity,getResources().getString(R.string.enter) + " " + capitalize(valueKey));
+                            checkDocumentErrorView();
+                            return;
+                        }
+
+                        if (!fieldModel.getJson().has("image")){
+                            H.showMessage(activity,getResources().getString(R.string.selectImage));
+                            checkDocumentErrorView();
+                            return;
+                        }
+
+                    }
+
+                }else {
+                    H.showMessage(activity,getResources().getString(R.string.select)+ " " + model.getTitle());
+                    checkDocumentErrorView();
+                    return;
+                }
+
+                jsonMain.addJSON(P.document,jsonChild);
+
+                hitUpdatePersonalDetails();
+            }
+
+        }catch (Exception e){
+            H.showMessage(activity,getResources().getString(R.string.somethingWrong));
+        }
+
+        Log.e("TAG", "onClickJSJJS: "+ jsonMain.toString() );
+    }
 
     private void blackTin(RadioButton radioButton) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -626,7 +735,6 @@ PaymentCardAdapter.onClick{
             radioButton.setButtonTintList(myColorStateList);
         }
     }
-
 
 
     private boolean checkAddCardDetails() {
@@ -667,13 +775,14 @@ PaymentCardAdapter.onClick{
                     .getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(((Activity) mContext).getWindow()
                     .getCurrentFocus().getWindowToken(), 0);
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
     }
+
     private void hitUserPaymentDetails() {
 
-        ProgressView.show(activity,loadingDialog);
+        ProgressView.show(activity, loadingDialog);
         Json j = new Json();
 
         Api.newApi(activity, P.BaseUrl + "user_payments").addJson(j)
@@ -689,7 +798,7 @@ PaymentCardAdapter.onClick{
                         paymentCardModelList.clear();
                         json = json.getJson(P.data);
                         JsonList jsonList = json.getJsonList(P.user_payment_option_list);
-                        for (Json jsonData : jsonList){
+                        for (Json jsonData : jsonList) {
 
                             PaymentCardModel model = new PaymentCardModel();
 
@@ -707,32 +816,32 @@ PaymentCardAdapter.onClick{
 
                         }
 
-                    }else {
-                        H.showMessage(activity,json.getString(P.error));
+                    } else {
+                        H.showMessage(activity, json.getString(P.error));
                     }
 
                     paymentCardAdapter.notifyDataSetChanged();
                     ProgressView.dismiss(loadingDialog);
 
                 })
-                .run("hitUserPaymentDetails",session.getString(P.token));
+                .run("hitUserPaymentDetails", session.getString(P.token));
 
     }
 
     private void hitAddUserPaymentDetails() {
 
-        ProgressView.show(activity,loadingDialog);
+        ProgressView.show(activity, loadingDialog);
         Json j = new Json();
-        j.addString(P.id,"");
-        j.addString(P.card_number,binding.etxCardNumber.getText().toString().trim());
-        j.addString(P.name_on_card,binding.etxCardName.getText().toString().trim());
+        j.addString(P.id, "");
+        j.addString(P.card_number, binding.etxCardNumber.getText().toString().trim());
+        j.addString(P.name_on_card, binding.etxCardName.getText().toString().trim());
         String inputMonthYear = binding.etxValidMonth.getText().toString().trim();
         String[] separated = inputMonthYear.split("/");
         String expireMonth = separated[0];
         String expireYear = separated[1];
-        j.addString(P.expiry_month,expireMonth);
-        j.addString(P.expiry_year,expireYear);
-        j.addString(P.cvv,binding.etxCvv.getText().toString().trim());
+        j.addString(P.expiry_month, expireMonth);
+        j.addString(P.expiry_year, expireYear);
+        j.addString(P.cvv, binding.etxCvv.getText().toString().trim());
 
         Api.newApi(activity, P.BaseUrl + "add_user_payment_option").addJson(j)
                 .setMethod(Api.POST)
@@ -746,19 +855,19 @@ PaymentCardAdapter.onClick{
                     if (json.getInt(P.status) == 1) {
 
                         json = json.getJson(P.data);
-                        H.showMessage(activity,getResources().getString(R.string.dataUpdated));
+                        H.showMessage(activity, getResources().getString(R.string.dataUpdated));
                         clearPaymentView();
-                    }else {
-                        H.showMessage(activity,json.getString(P.error));
+                    } else {
+                        H.showMessage(activity, json.getString(P.error));
                     }
 
                     ProgressView.dismiss(loadingDialog);
 
                 })
-                .run("hitAddUserPaymentDetails",session.getString(P.token));
+                .run("hitAddUserPaymentDetails", session.getString(P.token));
     }
 
-    private void clearPaymentView(){
+    private void clearPaymentView() {
         binding.etxCardNumber.setText("");
         binding.etxCardName.setText("");
         binding.etxValidMonth.setText("");
@@ -771,7 +880,7 @@ PaymentCardAdapter.onClick{
 
     private void hitPersonalDetails() {
 
-        ProgressView.show(activity,loadingDialog);
+        ProgressView.show(activity, loadingDialog);
         Json j = new Json();
 
         Api.newApi(activity, P.BaseUrl + "user_data").addJson(j)
@@ -796,19 +905,19 @@ PaymentCardAdapter.onClick{
                         binding.etxAlternameNumber.setText(CheckString.check(json.getString(P.user_alt_mobile)));
 
                         String gender = json.getString(P.gender);
-                        if (CheckString.check(gender).equalsIgnoreCase("1")){
+                        if (CheckString.check(gender).equalsIgnoreCase("1")) {
                             binding.radioFemale.setChecked(false);
                             binding.radioMale.setChecked(true);
                             blueTin(binding.radioMale);
                             blackTin(binding.radioFemale);
-                        }else if (CheckString.check(gender).equalsIgnoreCase("2")){
+                        } else if (CheckString.check(gender).equalsIgnoreCase("2")) {
                             binding.radioMale.setChecked(false);
                             binding.radioFemale.setChecked(true);
                             blueTin(binding.radioFemale);
                             blackTin(binding.radioMale);
                         }
 
-                        String code1= CheckString.check(json.getString(P.user_country_code));
+                        String code1 = CheckString.check(json.getString(P.user_country_code));
                         String code2 = CheckString.check(json.getString(P.user_alt_country_code));
 
                         JsonList jsonList = Config.countryJsonList;
@@ -825,19 +934,19 @@ PaymentCardAdapter.onClick{
                             }
                         }
 
-                    }else {
-                        H.showMessage(activity,json.getString(P.error));
+                    } else {
+                        H.showMessage(activity, json.getString(P.error));
                     }
                     ProgressView.dismiss(loadingDialog);
 
                 })
-                .run("hitPersonalDetails",session.getString(P.token));
+                .run("hitPersonalDetails", session.getString(P.token));
 
     }
 
     private void hitAddressDetails() {
 
-        ProgressView.show(activity,loadingDialog);
+        ProgressView.show(activity, loadingDialog);
         Json j = new Json();
 
         Api.newApi(activity, P.BaseUrl + "user_bill_data").addJson(j)
@@ -869,17 +978,17 @@ PaymentCardAdapter.onClick{
                         for (int i = 0; i < jsonList.size(); i++) {
                             Json jsonData = jsonList.get(i);
                             if (jsonData.getString(P.id).equals(bill_country_id)) {
-                                binding.spinnerAddress.setSelection(i+1);
+                                binding.spinnerAddress.setSelection(i + 1);
                                 countryId = bill_country_id;
                             }
                         }
-                    }else {
-                        H.showMessage(activity,json.getString(P.error));
+                    } else {
+                        H.showMessage(activity, json.getString(P.error));
                     }
                     ProgressView.dismiss(loadingDialog);
 
                 })
-                .run("hitAddressDetails",session.getString(P.token));
+                .run("hitAddressDetails", session.getString(P.token));
 
     }
 
@@ -999,13 +1108,13 @@ PaymentCardAdapter.onClick{
         }
     }
 
-    private void hideDeliverEmirate(){
+    private void hideDeliverEmirate() {
         binding.cardDeliverEmirateView.setVisibility(View.GONE);
         binding.imgDeliverEmirateArrowUp.setVisibility(View.GONE);
         binding.imgDeliverEmirateArrowDown.setVisibility(View.VISIBLE);
     }
 
-    private void hideCollectEmirate(){
+    private void hideCollectEmirate() {
         binding.cardCollectEmirateView.setVisibility(View.GONE);
         binding.imgCollectEmirateArrowUp.setVisibility(View.GONE);
         binding.imgCollectEmirateArrowDown.setVisibility(View.VISIBLE);
@@ -1039,7 +1148,7 @@ PaymentCardAdapter.onClick{
 
     }
 
-    private void enableDelverView(){
+    private void enableDelverView() {
 
         binding.etxDeliverLandmark.setBackground(getResources().getDrawable(R.drawable.corner_gray_bg));
         binding.etxDeliveryDetails.setBackground(getResources().getDrawable(R.drawable.corner_gray_bg));
@@ -1048,7 +1157,7 @@ PaymentCardAdapter.onClick{
 
     }
 
-    private void disablebleDelverView(){
+    private void disablebleDelverView() {
 
         deleveryEmirateID = "";
         binding.txtDeliverEmirateMessage.setText("");
@@ -1062,7 +1171,7 @@ PaymentCardAdapter.onClick{
 
     }
 
-    private void enableCollectView(){
+    private void enableCollectView() {
 
         binding.etxCollectLandmark.setBackground(getResources().getDrawable(R.drawable.corner_gray_bg));
         binding.etxCollectDetails.setBackground(getResources().getDrawable(R.drawable.corner_gray_bg));
@@ -1070,7 +1179,7 @@ PaymentCardAdapter.onClick{
         trueEdit(binding.etxCollectDetails);
     }
 
-    private void disablebleCollectView(){
+    private void disablebleCollectView() {
 
         collectEmirateID = "";
         binding.txtCollectEmirateMessage.setText("");
@@ -1083,13 +1192,13 @@ PaymentCardAdapter.onClick{
         falseEdit(binding.etxCollectDetails);
     }
 
-    private void falseEdit(EditText editTextPassword){
+    private void falseEdit(EditText editTextPassword) {
         editTextPassword.setFocusable(false);
         editTextPassword.setFocusableInTouchMode(false);
         editTextPassword.setClickable(false);
     }
 
-    private void trueEdit(EditText editTextPassword){
+    private void trueEdit(EditText editTextPassword) {
         editTextPassword.setFocusable(true);
         editTextPassword.setFocusableInTouchMode(true);
         editTextPassword.setClickable(true);
@@ -1103,10 +1212,10 @@ PaymentCardAdapter.onClick{
         return false;
     }
 
-    private String checkString(String string){
+    private String checkString(String string) {
         String value = "";
 
-        if (!TextUtils.isEmpty(string) && !string.equals("null")){
+        if (!TextUtils.isEmpty(string) && !string.equals("null")) {
             value = string;
         }
         return value;
@@ -1125,7 +1234,7 @@ PaymentCardAdapter.onClick{
         dialog.setContentView(R.layout.activity_document_view);
 
         ImageView imgDocument = dialog.findViewById(R.id.imgDocument);
-        LoadImage.glideString(activity,imgDocument,imagePath);
+        LoadImage.glideString(activity, imgDocument, imagePath);
 
         dialog.setCancelable(true);
         dialog.show();
@@ -1145,7 +1254,7 @@ PaymentCardAdapter.onClick{
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.activity_edit_payment_view);
 
-        Log.e("TAG", "editPaymentDialog: "+model.getExpiry_month() + "  --  "+model.getExpiry_year() );
+        Log.e("TAG", "editPaymentDialog: " + model.getExpiry_month() + "  --  " + model.getExpiry_year());
 
         EditText etxCardNumber = dialog.findViewById(R.id.etxCardNumber);
         EditText etxCardName = dialog.findViewById(R.id.etxCardName);
@@ -1159,16 +1268,16 @@ PaymentCardAdapter.onClick{
         etxCvv.setText(model.getCvv());
 
         String month = "";
-        if (model.getExpiry_month().length()==1){
-            month = "0"+model.getExpiry_month();
-        }else {
+        if (model.getExpiry_month().length() == 1) {
+            month = "0" + model.getExpiry_month();
+        } else {
             month = model.getExpiry_month();
         }
 
         String year = "";
-        if (model.getExpiry_year().length()==1){
-            year = "0"+model.getExpiry_year();
-        }else {
+        if (model.getExpiry_year().length() == 1) {
+            year = "0" + model.getExpiry_year();
+        } else {
             year = model.getExpiry_year();
         }
 
@@ -1177,10 +1286,12 @@ PaymentCardAdapter.onClick{
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
             }
+
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
             }
+
             @Override
             public void afterTextChanged(Editable editable) {
 
@@ -1199,7 +1310,7 @@ PaymentCardAdapter.onClick{
             }
         });
 
-        etxValidMonth.setText(month+"/"+year);
+        etxValidMonth.setText(month + "/" + year);
 
         imgCancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1241,7 +1352,7 @@ PaymentCardAdapter.onClick{
                 }
 
                 hideKeyboard(activity);
-                hitEditUserPaymentDetails(dialog,model,etxCardNumber,etxCardName,etxValidMonth,etxCvv);
+                hitEditUserPaymentDetails(dialog, model, etxCardNumber, etxCardName, etxValidMonth, etxCvv);
 
             }
         });
@@ -1254,20 +1365,20 @@ PaymentCardAdapter.onClick{
 
     }
 
-    private void hitEditUserPaymentDetails(Dialog dialog,PaymentCardModel model,EditText etxCardNumber,EditText etxCardName,EditText etxValidMonth,EditText etxCvv) {
+    private void hitEditUserPaymentDetails(Dialog dialog, PaymentCardModel model, EditText etxCardNumber, EditText etxCardName, EditText etxValidMonth, EditText etxCvv) {
 
-        ProgressView.show(activity,loadingDialog);
+        ProgressView.show(activity, loadingDialog);
         Json j = new Json();
-        j.addString(P.id,model.getId());
-        j.addString(P.card_number,etxCardNumber.getText().toString().trim());
-        j.addString(P.name_on_card,etxCardName.getText().toString().trim());
+        j.addString(P.id, model.getId());
+        j.addString(P.card_number, etxCardNumber.getText().toString().trim());
+        j.addString(P.name_on_card, etxCardName.getText().toString().trim());
         String inputMonthYear = etxValidMonth.getText().toString().trim();
         String[] separated = inputMonthYear.split("/");
         String expireMonth = separated[0];
         String expireYear = separated[1];
-        j.addString(P.expiry_month,expireMonth);
-        j.addString(P.expiry_year,expireYear);
-        j.addString(P.cvv,etxCvv.getText().toString().trim());
+        j.addString(P.expiry_month, expireMonth);
+        j.addString(P.expiry_year, expireYear);
+        j.addString(P.cvv, etxCvv.getText().toString().trim());
 
         Api.newApi(activity, P.BaseUrl + "add_user_payment_option").addJson(j)
                 .setMethod(Api.POST)
@@ -1281,36 +1392,36 @@ PaymentCardAdapter.onClick{
                     if (json.getInt(P.status) == 1) {
                         dialog.dismiss();
                         json = json.getJson(P.data);
-                        H.showMessage(activity,getResources().getString(R.string.dataUpdated));
+                        H.showMessage(activity, getResources().getString(R.string.dataUpdated));
                         paymentCardModelList.clear();
                         hitUserPaymentDetails();
-                    }else {
-                        H.showMessage(activity,json.getString(P.error));
+                    } else {
+                        H.showMessage(activity, json.getString(P.error));
                     }
 
                     ProgressView.dismiss(loadingDialog);
 
                 })
-                .run("hitAddUserPaymentDetails",session.getString(P.token));
+                .run("hitAddUserPaymentDetails", session.getString(P.token));
     }
 
     private void hitUpdatePersonalDetails() {
 
-        ProgressView.show(activity,loadingDialog);
+        ProgressView.show(activity, loadingDialog);
         Json j = new Json();
-        j.addString(P.user_name,binding.etxFirstName.getText().toString().trim());
-        j.addString(P.user_lastname,binding.etxLastName.getText().toString().trim());
-        j.addString(P.user_dob,binding.etxBirtDate.getText().toString().trim());
-        j.addString(P.user_email,binding.etxEmail.getText().toString().trim());
-        if (binding.radioMale.isChecked()){
-            j.addString(P.gender,"1");
-        }else if (binding.radioFemale.isChecked()){
-            j.addString(P.gender,"2");
+        j.addString(P.user_name, binding.etxFirstName.getText().toString().trim());
+        j.addString(P.user_lastname, binding.etxLastName.getText().toString().trim());
+        j.addString(P.user_dob, binding.etxBirtDate.getText().toString().trim());
+        j.addString(P.user_email, binding.etxEmail.getText().toString().trim());
+        if (binding.radioMale.isChecked()) {
+            j.addString(P.gender, "1");
+        } else if (binding.radioFemale.isChecked()) {
+            j.addString(P.gender, "2");
         }
-        j.addString(P.user_country_code,codePrimary);
-        j.addString(P.user_mobile,binding.etxNumber.getText().toString().trim());
-        j.addString(P.user_alt_country_code,codeSecondary);
-        j.addString(P.user_alt_mobile,binding.etxAlternameNumber.getText().toString().trim());
+        j.addString(P.user_country_code, codePrimary);
+        j.addString(P.user_mobile, binding.etxNumber.getText().toString().trim());
+        j.addString(P.user_alt_country_code, codeSecondary);
+        j.addString(P.user_alt_mobile, binding.etxAlternameNumber.getText().toString().trim());
 
 
         Api.newApi(activity, P.BaseUrl + "update_user_data").addJson(j)
@@ -1325,26 +1436,26 @@ PaymentCardAdapter.onClick{
                     if (json.getInt(P.status) == 1) {
                         json = json.getJson(P.data);
                         hitUpdateAddressDetails();
-                    }else {
-                        H.showMessage(activity,json.getString(P.error));
+                    } else {
+                        H.showMessage(activity, json.getString(P.error));
                     }
 
                     ProgressView.dismiss(loadingDialog);
 
                 })
-                .run("hitUpdatePersonalDetails",session.getString(P.token));
+                .run("hitUpdatePersonalDetails", session.getString(P.token));
     }
 
     private void hitUpdateAddressDetails() {
 
-        ProgressView.show(activity,loadingDialog);
+        ProgressView.show(activity, loadingDialog);
         Json j = new Json();
-        j.addString(P.bill_address_line_1,binding.etxAddress.getText().toString().trim());
-        j.addString(P.bill_address_line_2,binding.etxAddress.getText().toString().trim());
-        j.addString(P.bill_city,binding.etxCity.getText().toString().trim());
-        j.addString(P.bill_state,binding.etxState.getText().toString().trim());
-        j.addString(P.bill_country_id,countryId);
-        j.addString(P.bill_zipcode,binding.etxZipcode.getText().toString().trim());
+        j.addString(P.bill_address_line_1, binding.etxAddress.getText().toString().trim());
+        j.addString(P.bill_address_line_2, binding.etxAddress.getText().toString().trim());
+        j.addString(P.bill_city, binding.etxCity.getText().toString().trim());
+        j.addString(P.bill_state, binding.etxState.getText().toString().trim());
+        j.addString(P.bill_country_id, countryId);
+        j.addString(P.bill_zipcode, binding.etxZipcode.getText().toString().trim());
 
         Api.newApi(activity, P.BaseUrl + "update_user_bill_data").addJson(j)
                 .setMethod(Api.POST)
@@ -1359,14 +1470,20 @@ PaymentCardAdapter.onClick{
 
                         json = json.getJson(P.data);
 
-                    }else {
-                        H.showMessage(activity,json.getString(P.error));
+                        if (binding.checkBoxAccept.isChecked()){
+                            hitBookCarData(model);
+                        }else {
+                            H.showMessage(activity,getResources().getString(R.string.allowTemCondition));
+                        }
+
+                    } else {
+                        H.showMessage(activity, json.getString(P.error));
                     }
 
                     ProgressView.dismiss(loadingDialog);
 
                 })
-                .run("hitUpdateAddressDetails",session.getString(P.token));
+                .run("hitUpdateAddressDetails", session.getString(P.token));
     }
 
     private boolean checkPersonalDetailValidation() {
@@ -1381,11 +1498,11 @@ PaymentCardAdapter.onClick{
             value = false;
             H.showMessage(activity, getResources().getString(R.string.pleaseEnterLastName));
             checkPersonalErrorView();
-        }else if (TextUtils.isEmpty(codePrimary)) {
+        } else if (TextUtils.isEmpty(codePrimary)) {
             value = false;
             H.showMessage(activity, getResources().getString(R.string.selectCountryCode));
             checkPersonalErrorView();
-        }  else if (TextUtils.isEmpty(binding.etxNumber.getText().toString().trim())) {
+        } else if (TextUtils.isEmpty(binding.etxNumber.getText().toString().trim())) {
             value = false;
             H.showMessage(activity, getResources().getString(R.string.enterMobile));
             checkPersonalErrorView();
@@ -1406,8 +1523,8 @@ PaymentCardAdapter.onClick{
         return value;
     }
 
-    private void checkPersonalErrorView(){
-        if (binding.viewPersonalInfo.getVisibility()==View.GONE){
+    private void checkPersonalErrorView() {
+        if (binding.viewPersonalInfo.getVisibility() == View.GONE) {
             binding.viewPersonalInfo.setVisibility(View.VISIBLE);
             binding.nestedCroll.post(new Runnable() {
                 @Override
@@ -1418,13 +1535,37 @@ PaymentCardAdapter.onClick{
         }
     }
 
-    private void checkBillingErrorView(){
-        if (binding.viewBillingInfo.getVisibility()==View.GONE){
+    private void checkPaymentErrorView() {
+        if (binding.viewPaymentInfo.getVisibility() == View.GONE) {
+            binding.viewPaymentInfo.setVisibility(View.VISIBLE);
+            binding.nestedCroll.post(new Runnable() {
+                @Override
+                public void run() {
+                    binding.nestedCroll.scrollTo(0, binding.viewPaymentInfo.getBottom());
+                }
+            });
+        }
+    }
+
+    private void checkBillingErrorView() {
+        if (binding.viewBillingInfo.getVisibility() == View.GONE) {
             binding.viewBillingInfo.setVisibility(View.VISIBLE);
             binding.nestedCroll.post(new Runnable() {
                 @Override
                 public void run() {
                     binding.nestedCroll.scrollTo(0, binding.viewBillingInfo.getBottom());
+                }
+            });
+        }
+    }
+
+    private void checkDocumentErrorView() {
+        if (binding.viewDocument.getVisibility() == View.GONE) {
+            binding.viewDocument.setVisibility(View.VISIBLE);
+            binding.nestedCroll.post(new Runnable() {
+                @Override
+                public void run() {
+                    binding.nestedCroll.scrollTo(0, binding.viewDocument.getBottom());
                 }
             });
         }
@@ -1442,7 +1583,7 @@ PaymentCardAdapter.onClick{
             value = false;
             H.showMessage(activity, getResources().getString(R.string.country));
             checkBillingErrorView();
-        }else if (TextUtils.isEmpty(binding.etxState.getText().toString().trim())) {
+        } else if (TextUtils.isEmpty(binding.etxState.getText().toString().trim())) {
             value = false;
             H.showMessage(activity, getResources().getString(R.string.enterState));
             checkBillingErrorView();
@@ -1450,7 +1591,7 @@ PaymentCardAdapter.onClick{
             value = false;
             H.showMessage(activity, getResources().getString(R.string.selectCity1));
             checkBillingErrorView();
-        }else if (TextUtils.isEmpty(binding.etxZipcode.getText().toString().trim())) {
+        } else if (TextUtils.isEmpty(binding.etxZipcode.getText().toString().trim())) {
             value = false;
             H.showMessage(activity, getResources().getString(R.string.selectZip));
             checkBillingErrorView();
@@ -1462,7 +1603,7 @@ PaymentCardAdapter.onClick{
     private void setDateTimeField(EditText editText) {
 
         Calendar newCalendar = Calendar.getInstance();
-        mDatePickerDialog = new DatePickerDialog(activity, R.style.DialogTheme,new DatePickerDialog.OnDateSetListener() {
+        mDatePickerDialog = new DatePickerDialog(activity, R.style.DialogTheme, new DatePickerDialog.OnDateSetListener() {
 
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 Calendar newDate = Calendar.getInstance();
@@ -1474,10 +1615,10 @@ PaymentCardAdapter.onClick{
                 editText.setText(fdate);
 
                 String dayOfTheWeek = (String) DateFormat.format("EEEE", date); // Thursday
-                String dayString         = (String) DateFormat.format("dd",   date); // 20
-                String monthString  = (String) DateFormat.format("MMM",  date); // Jun
-                String monthNumber  = (String) DateFormat.format("MM",   date); // 06
-                String yeare         = (String) DateFormat.format("yyyy", date); // 2013
+                String dayString = (String) DateFormat.format("dd", date); // 20
+                String monthString = (String) DateFormat.format("MMM", date); // Jun
+                String monthNumber = (String) DateFormat.format("MM", date); // 06
+                String yeare = (String) DateFormat.format("yyyy", date); // 2013
 
             }
         }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
@@ -1487,7 +1628,7 @@ PaymentCardAdapter.onClick{
 
     private void hitUserDocumentDetails() {
 
-        ProgressView.show(activity,loadingDialog);
+        ProgressView.show(activity, loadingDialog);
         Api.newApi(activity, P.BaseUrl + "user_data_for_booking")
                 .setMethod(Api.GET)
                 //.onHeaderRequest(App::getHeaders)
@@ -1501,49 +1642,335 @@ PaymentCardAdapter.onClick{
 
                         json = json.getJson(P.data);
                         Json userJson = json.getJson(P.user);
+                        Json userInfo = userJson.getJson(P.user_info);
+                        user_country_id = userInfo.getString(P.country_id);
                         Json userDocument = userJson.getJson(P.user_profile_document);
                         JsonList uploaded_document = userDocument.getJsonList(P.uploaded_document);
                         JsonList pending_document = userDocument.getJsonList(P.pending_document);
 
-                        for(Json jsonUploaded : uploaded_document){
+                        if (uploaded_document!=null && !uploaded_document.isEmpty() && uploaded_document.size()!=0){
+                            for (Json jsonUploaded : uploaded_document) {
 
 //                            Log.e("TAG", "hitUserDocumentDetails:121212 "+ jsonUploaded.toString() );
 
-                            DocumentUploadedModel model = new DocumentUploadedModel();
+                                DocumentUploadedModel model = new DocumentUploadedModel();
 
-                            model.setId(jsonUploaded.getString(P.id));
-                            model.setUser_id(jsonUploaded.getString(P.user_id));
-                            model.setDocument_key(jsonUploaded.getString(P.document_key));
-                            model.setLicense_number(jsonUploaded.getString(P.license_number));
-                            model.setIssue_date(jsonUploaded.getString(P.issue_date));
-                            model.setExpiry(jsonUploaded.getString(P.expiry));
-                            model.setImage(jsonUploaded.getString(P.image));
-                            model.setPassport_number(jsonUploaded.getString(P.passport_number));
-                            model.setVisa_issue_date(jsonUploaded.getString(P.visa_issue_date));
-                            model.setCredit_card_number(jsonUploaded.getString(P.credit_card_number));
-                            model.setName_on_card(jsonUploaded.getString(P.name_on_card));
-                            model.setId_number(jsonUploaded.getString(P.id_number));
-                            model.setEntry_stamp(jsonUploaded.getString(P.entry_stamp));
-                            model.setStatus(jsonUploaded.getString(P.status));
-                            model.setIs_approved(jsonUploaded.getString(P.is_approved));
-                            model.setAdd_date(jsonUploaded.getString(P.add_date));
-                            model.setData_field_status(jsonUploaded.getString(P.data_field_status));
-                            model.setUpdate_date(jsonUploaded.getString(P.update_date));
-                            model.setImage_url(jsonUploaded.getString(P.image_url));
+                                model.setId(jsonUploaded.getString(P.id));
+                                model.setUser_id(jsonUploaded.getString(P.user_id));
+                                model.setDocument_key(jsonUploaded.getString(P.document_key));
+                                model.setLicense_number(jsonUploaded.getString(P.license_number));
+                                model.setIssue_date(jsonUploaded.getString(P.issue_date));
+                                model.setExpiry(jsonUploaded.getString(P.expiry));
+                                model.setImage(jsonUploaded.getString(P.image));
+                                model.setPassport_number(jsonUploaded.getString(P.passport_number));
+                                model.setVisa_issue_date(jsonUploaded.getString(P.visa_issue_date));
+                                model.setCredit_card_number(jsonUploaded.getString(P.credit_card_number));
+                                model.setName_on_card(jsonUploaded.getString(P.name_on_card));
+                                model.setId_number(jsonUploaded.getString(P.id_number));
+                                model.setEntry_stamp(jsonUploaded.getString(P.entry_stamp));
+                                model.setStatus(jsonUploaded.getString(P.status));
+                                model.setIs_approved(jsonUploaded.getString(P.is_approved));
+                                model.setAdd_date(jsonUploaded.getString(P.add_date));
+                                model.setData_field_status(jsonUploaded.getString(P.data_field_status));
+                                model.setUpdate_date(jsonUploaded.getString(P.update_date));
+                                model.setImage_url(jsonUploaded.getString(P.image_url));
 //                            model.setTitle(jsonUploaded.getString(P.title));
 
-                            documentUploadedModelList.add(model);
+                                documentUploadedModelList.add(model);
+                            }
                         }
 
+                        if (pending_document!=null && !pending_document.isEmpty() && pending_document.size()!=0){
+                            for (Json jsonData : pending_document){
+                                Log.e("TAG", "hitUserDocumentDetailsSDSD: "+ jsonData.toString() );
+                                DocumentModel documentModel = new DocumentModel();
+                                documentModel.setTitle(jsonData.getString(P.title));
+                                documentModel.setKey(jsonData.getString(P.key));
+                                documentModel.setField(jsonData.getJsonArray(P.field));
+                                documentModel.setCheckValue("0");
+                                try{
+                                    documentModel.setSave_data(jsonData.getJson(P.save_data));
+                                }catch (Exception e){
+                                    documentModel.setSave_data(new Json());
+                                }
+                                documentModelList.add(documentModel);
+                            }
+                        }
                         documentUploadedAdapter.notifyDataSetChanged();
-                    }else {
-                        H.showMessage(activity,json.getString(P.error));
+                        documentAdapter.notifyDataSetChanged();
+
+                    } else {
+                        H.showMessage(activity, json.getString(P.error));
                     }
 
                     ProgressView.dismiss(loadingDialog);
 
                 })
-                .run("hitUserDocumentDetails",session.getString(P.token));
+                .run("hitUserDocumentDetails", session.getString(P.token));
+    }
+
+    @Override
+    public void onCheckPayment(PaymentCardModel model) {
+        paymentId = model.getId();
+    }
+
+    @Override
+    public void downloadDocument(String name, TextView textView,TextView txtImage) {
+        textViewDocumnt = textView;
+        txtImagePath = txtImage;
+        documentName = name;
+        getPermission();
+    }
+
+    private void getAccess() {
+        try {
+            StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+            StrictMode.setVmPolicy(builder.build());
+        } catch (Exception e) {
+        }
+    }
+
+    private void getPermission() {
+        ActivityCompat.requestPermissions(activity,
+                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE},
+                READ_WRITE);
+    }
+
+    public void jumpToSetting() {
+        H.showMessage(activity, getResources().getString(R.string.allowPermission));
+        Intent intent = new Intent();
+        intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+        Uri uri = Uri.fromParts("package", activity.getPackageName(), null);
+        intent.setData(uri);
+        startActivity(intent);
+    }
+
+    private void getDocument(){
+        try {
+            Intent i = new Intent(
+                    Intent.ACTION_PICK,
+                    android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            startActivityForResult(i, PDF_DATA);
+        } catch (Exception e) {
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case READ_WRITE: {
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    getDocument();
+                } else if (grantResults[0] == PackageManager.PERMISSION_DENIED) {
+                    jumpToSetting();
+                } else {
+                    getPermission();
+                }
+                return;
+            }
+
+        }
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case PDF_DATA:
+                if (resultCode == Activity.RESULT_OK && data != null) {
+                    try {
+                        Uri selectedPDF = data.getData();
+
+                        String path = getBase64Image(selectedPDF);
+                        hitUploadImage(path);
+
+                    } catch (Exception e) {
+                        H.showMessage(activity,e.getMessage());
+                    }
+                }
+                break;
+        }
+    }
+
+
+    private String getBase64Image(Uri uri) {
+        base64Image = "";
+        try {
+            InputStream imageStream = getContentResolver().openInputStream(uri);
+            Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+            base64Image = encodeImage(selectedImage);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            Log.e("TAG", "setImageDataEE: "+ e.getMessage() );
+            H.showMessage(activity, "Unable to get image, try again.");
+        }
+
+        return base64Image;
+    }
+
+    private String encodeImage(Bitmap bm) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bm.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] b = baos.toByteArray();
+        String encImage = Base64.encodeToString(b, Base64.DEFAULT);
+        return encImage;
+    }
+
+    private void hitUploadImage(String base64Image) {
+
+        ProgressView.show(activity,loadingDialog);
+        Json j = new Json();
+        j.addString(P.image,base64Image);
+        j.addString(P.extension,"png");
+        Api.newApi(activity, P.BaseUrl + "upload_image").addJson(j)
+                .setMethod(Api.POST)
+                //.onHeaderRequest(App::getHeaders)
+                .onError(() -> {
+                    ProgressView.dismiss(loadingDialog);
+                    H.showMessage(activity, "On error is called");
+                })
+                .onSuccess(json ->
+                {
+                    ProgressView.dismiss(loadingDialog);
+                    if (json.getInt(P.status) == 1) {
+                        json = json.getJson(P.data);
+                        String image = json.getString(P.image);
+                        String image_url = json.getString(P.image_url);
+                        ImagePathModel model = new ImagePathModel();
+                        model.setPath(image);
+                        model.setTitle(documentName);
+                        imagePathModelList.add(model);
+                        textViewDocumnt.setText(getResources().getString(R.string.uploaded) + " " +documentName);
+                        txtImagePath.setText(getResources().getString(R.string.imagePath) + " " +image);
+                        txtImagePath.setVisibility(View.VISIBLE);
+                        txtImagePath.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                documentDialog(image_url);
+                            }
+                        });
+                        H.showMessage(activity,getResources().getString(R.string.imageUploaded));
+                    }else {
+                        H.showMessage(activity,json.getString(P.error));
+                    }
+                })
+                .run("hitUploadImage",session.getString(P.token));
+
+    }
+
+    private String capitalize(String capString){
+        StringBuffer capBuffer = new StringBuffer();
+        Matcher capMatcher = Pattern.compile("([a-z])([a-z]*)", Pattern.CASE_INSENSITIVE).matcher(capString);
+        while (capMatcher.find()){
+            capMatcher.appendReplacement(capBuffer, capMatcher.group(1).toUpperCase() + capMatcher.group(2).toLowerCase());
+        }
+
+        return capMatcher.appendTail(capBuffer).toString();
+    }
+
+
+    private void hitBookCarData(CarModel model) {
+
+        ProgressView.show(activity,loadingDialog);
+        Json j = new Json();
+        j.addString(P.booking_type,SelectCarActivity.bookingTYpe);
+        j.addString(P.month_time,SelectCarActivity.monthDuration);
+        j.addString(P.car_id,CarDetailOneActivity.carID);
+        j.addString(P.pay_type,payType);
+
+        j.addString(P.emirate_id,SelectCarActivity.pickUpEmirateID);
+        j.addString(P.coupon_code,"");
+
+        j.addString(P.pickup_type,SelectCarActivity.pickUpType);
+        if (HomeFragment.binding.radioDeliverYes.isChecked()){
+            j.addString(P.pickup_emirate_id, SelectCarActivity.pickUpEmirateID);
+            j.addString(P.pickup_location_id, "0");
+            j.addString(P.pickup_address, "");
+            j.addString(P.pickup_landmark, "");
+            j.addString(P.pickup_location_name,"");
+        }else {
+            j.addString(P.pickup_emirate_id, SelectCarActivity.pickUpEmirateID);
+            j.addString(P.pickup_location_id, SelectCarActivity.pickUpLocationID);
+            j.addString(P.pickup_address, SelectCarActivity.pickUpAddress);
+            j.addString(P.pickup_landmark, Config.SelectedPickUpLandmark);
+            j.addString(P.pickup_location_name,Config.SelectedPickUpAddress);
+
+        }
+        j.addString(P.pickup_lat,"");
+        j.addString(P.pickup_long,"");
+        j.addString(P.pickup_date,SelectCarActivity.pickUpDate);
+        j.addString(P.pickup_time,SelectCarActivity.pickUpTime);
+
+        j.addString(P.dropoff_type,SelectCarActivity.dropUpType);
+        if (HomeFragment.binding.radioCollectYes.isChecked()){
+            j.addString(P.dropoff_emirate_id, SelectCarActivity.dropUpEmirateID);
+            j.addString(P.dropoff_location_id, "0");
+            j.addString(P.dropoff_address, "");
+            j.addString(P.dropoff_landmark, "");
+        }else {
+            j.addString(P.dropoff_emirate_id, SelectCarActivity.dropUpEmirateID);
+            j.addString(P.dropoff_location_id, SelectCarActivity.dropUpLocationID);
+            j.addString(P.dropoff_address, SelectCarActivity.dropUpAddress);
+            j.addString(P.dropoff_landmark, Config.SelectedDropUpLandmark);
+        }
+        j.addString(P.dropoff_lat,"");
+        j.addString(P.dropoff_long,"");
+        j.addString(P.dropoff_date,SelectCarActivity.dropUpDate);
+        j.addString(P.dropoff_time,SelectCarActivity.dropUpTime);
+
+        JSONArray array = new JSONArray();
+        for (Json jsonData : AddOnsActivity.jsonAddOnsList){
+            array.put(jsonData);
+        }
+        j.addJSONArray(P.car_extra,array);
+
+        j.addString(P.user_name,binding.etxFirstName.getText().toString().trim());
+        j.addString(P.user_lastname,binding.etxLastName.getText().toString().trim());
+        j.addString(P.user_email,binding.etxEmail.getText().toString().trim());
+        j.addString(P.user_country_code,codePrimary);
+        j.addString(P.user_mobile,binding.etxNumber.getText().toString().trim());
+
+        j.addString(P.user_payment_option_id,paymentId);
+
+        j.addString(P.address_line_1,binding.etxAddress.getText().toString().trim());
+        j.addString(P.country_id,countryId);
+        j.addString(P.state,binding.etxState.getText().toString().trim());
+        j.addString(P.city,binding.etxCity.getText().toString().trim());
+        j.addString(P.zipcode,binding.etxZipcode.getText().toString().trim());
+
+        j.addString(P.booking_remark,binding.etxRemark.getText().toString().trim());
+        j.addString(P.failed_url,"");
+        j.addString(P.booking_from,"mobile");
+        j.addString(P.success_url,"");
+
+        Api.newApi(activity, P.BaseUrl + "book_car").addJson(j)
+                .setMethod(Api.POST)
+                //.onHeaderRequest(App::getHeaders)
+                .onError(() -> {
+                    ProgressView.dismiss(loadingDialog);
+                    H.showMessage(activity, "On error is called");
+                })
+                .onSuccess(json ->
+                {
+                    if (json.getInt(P.status) == 1) {
+                        Json data = json.getJson(P.data);
+                        String paymentLink = "";
+                        try {
+                            paymentLink = data.getString(P.payment_link);
+                        }catch (Exception e){
+                        }
+                        Intent intent = new Intent(activity,BookingSucessfullActivity.class);
+                        intent.putExtra(Config.WEB_URL,paymentLink);
+                        intent.putExtra(Config.PAY_TYPE,payType);
+                        startActivity(intent);
+                    }else {
+                        H.showMessage(activity,json.getString(P.error));
+                    }
+                    ProgressView.dismiss(loadingDialog);
+
+                })
+                .run("hitBookCarData",session.getString(P.token));
     }
 
 }

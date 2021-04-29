@@ -348,6 +348,12 @@
     <string name="issuedate">تاريخ الإصدار</string>
     <string name="expiryDate">تاريخ الانتهاء</string>
     <string name="entryStamp">ختم الدخول</string>
+    <string name="selectPaymentMethod">اختار طريقة الدفع</string>
+    <string name="imagePath">صورة :</string>
+    <string name="selectImage">اختر صورة</string>
+    <string name="enter">يدخل</string>
+    <string name="select">يختار</string>
+    <string name="allowTemCondition">يرجى السماح بالمصطلحات والشروط</string>
 
 
 

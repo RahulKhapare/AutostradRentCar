@@ -15,6 +15,7 @@ public class DocumentModel {
     JSONArray field;
     String checkValue;
     List<FieldModel> fieldList;
+    Json save_data;
 
     public String getTitle() {
         return title;
@@ -54,5 +55,13 @@ public class DocumentModel {
 
     public void setFieldList(List<FieldModel> fieldList) {
         this.fieldList = fieldList;
+    }
+
+    public Json getSave_data() {
+        return save_data;
+    }
+
+    public void setSave_data(Json save_data) {
+        this.save_data = save_data;
     }
 }

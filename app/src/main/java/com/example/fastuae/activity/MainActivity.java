@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentManager;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.ActivityNotFoundException;
 import android.content.ContentUris;
 import android.content.Context;
@@ -29,6 +30,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -49,6 +52,7 @@ import com.example.fastuae.model.DocumentModel;
 import com.example.fastuae.model.ImagePathModel;
 import com.example.fastuae.util.Click;
 import com.example.fastuae.util.Config;
+import com.example.fastuae.util.LoadImage;
 import com.example.fastuae.util.P;
 import com.example.fastuae.util.PdfDownloader;
 import com.example.fastuae.util.ProgressView;
@@ -92,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
 
     private LoadingDialog loadingDialog;
     TextView textViewDocumnt;
+    TextView txtImagePath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -323,8 +328,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void uploadDocument(String name,TextView textView) {
+    public void uploadDocument(String name,TextView textView,TextView txtImage) {
         textViewDocumnt = textView;
+        txtImagePath = txtImage;
         documentName = name;
         click = upload;
         getPermission();
@@ -510,12 +516,36 @@ public class MainActivity extends AppCompatActivity {
                         model.setTitle(documentName);
                         imagePathModelList.add(model);
                         textViewDocumnt.setText(getResources().getString(R.string.uploaded) + " " +documentName);
+                        txtImagePath.setText(getResources().getString(R.string.imagePath) + " " +image);
+                        txtImagePath.setVisibility(View.VISIBLE);
+                        txtImagePath.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                documentDialog(image_url);
+                            }
+                        });
                         H.showMessage(activity,getResources().getString(R.string.imageUploaded));
                     }else {
                         H.showMessage(activity,json.getString(P.error));
                     }
                 })
                 .run("hitUploadImage",session.getString(P.token));
+
+    }
+
+    private void documentDialog(String imagePath) {
+
+        final Dialog dialog = new Dialog(activity);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.activity_document_view);
+
+        ImageView imgDocument = dialog.findViewById(R.id.imgDocument);
+        LoadImage.glideString(activity, imgDocument, imagePath);
+
+        dialog.setCancelable(true);
+        dialog.show();
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
 
     }
 

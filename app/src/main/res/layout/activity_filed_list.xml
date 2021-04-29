@@ -20,7 +20,8 @@
             android:textColorHint="@color/textDark"
             android:textColor="@color/textDark"
             android:fontFamily="@font/nunito_sans_regular"
-            android:background="@drawable/corner_gray_bg">
+            android:background="@drawable/corner_gray_bg"
+            android:textCursorDrawable="@drawable/color_cursor">
 
         </EditText>
 

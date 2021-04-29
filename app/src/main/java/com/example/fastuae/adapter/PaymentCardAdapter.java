@@ -25,17 +25,26 @@ public class PaymentCardAdapter extends RecyclerView.Adapter<PaymentCardAdapter.
     private List<PaymentCardModel> paymentCardModelList;
     private Session session;
     private int valueFlag;
+    private int lastCheckPosition = -1;
+    private boolean firstClick = true;
 
     public PaymentCardAdapter(Context context, List<PaymentCardModel> paymentCardModelList,int value) {
         this.context = context;
         this.paymentCardModelList = paymentCardModelList;
         session = new Session(context);
         valueFlag = value;
+        firstClick = true;
     }
 
     public interface onClick{
         void onEditPayment(PaymentCardModel model);
+
     }
+
+    public interface onView{
+        void onCheckPayment(PaymentCardModel model);
+    }
+
 
     @NonNull
     @Override
@@ -77,6 +86,31 @@ public class PaymentCardAdapter extends RecyclerView.Adapter<PaymentCardAdapter.
                 ((CarBookingDetailsActivity)context).onEditPayment(model);
             }
         });
+
+        holder.binding.lnrPayment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                if (valueFlag==2){
+                    lastCheckPosition = holder.getAdapterPosition();
+                    notifyItemRangeChanged(0,paymentCardModelList.size());
+                    ((CarBookingDetailsActivity)context).onCheckPayment(model);
+                }
+            }
+        });
+
+//        if (valueFlag==2 && firstClick){
+//            firstClick = false;
+//            if (position==0){
+//                ((CarBookingDetailsActivity)context).onCheckPayment(model);
+//            }
+//        }
+
+        if (lastCheckPosition==position){
+            holder.binding.lnrMain.setBackgroundColor(context.getResources().getColor(R.color.customeGray));
+        }else {
+            holder.binding.lnrMain.setBackgroundColor(context.getResources().getColor(R.color.colorWhite));
+        }
 
     }
 
