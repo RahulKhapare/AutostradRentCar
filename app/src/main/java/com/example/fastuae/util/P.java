@@ -44,7 +44,12 @@ public class P {
     public static String googleCode = "googleCode";
     public static String googleKnownName = "googleKnownName";
     public static String locationAddress = "locationAddress";
+    public static String lat = "lat";
+    public static String logn = "logn";
     public static String document = "document";
+    public static String booking_document = "booking_document";
+    public static String dropoff_details = "dropoff_details";
+    public static String pickup_details = "pickup_details";
 
     public static String faq_list = "faq_list";
     public static String question = "question";

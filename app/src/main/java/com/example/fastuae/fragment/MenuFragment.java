@@ -223,4 +223,19 @@ public class MenuFragment extends Fragment {
         return fragment;
     }
 
+    @Override
+    public void onDestroyView()
+    {
+        if (binding.getRoot() != null)
+        {
+            ViewGroup parentViewGroup = (ViewGroup) binding.getRoot().getParent();
+
+            if (parentViewGroup != null)
+            {
+                parentViewGroup.removeAllViews();
+            }
+        }
+
+        super.onDestroyView();
+    }
 }

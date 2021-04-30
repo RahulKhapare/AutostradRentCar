@@ -116,4 +116,12 @@ public class Config {
 
     public static JsonList countryJsonList = new JsonList();
 
+
+    public static String collect = "collect";
+    public static String deliver = "deliver";
+    public static String self_pickup = "self_pickup";
+    public static String self_dropoff = "self_dropoff";
+    public static boolean HOME_DELIVERY_CHECK = false;
+    public static boolean HOME_COLLECT_CHECK = false;
+
 }

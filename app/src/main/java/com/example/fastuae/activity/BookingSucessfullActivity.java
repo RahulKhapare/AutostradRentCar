@@ -101,7 +101,7 @@ public class BookingSucessfullActivity extends AppCompatActivity {
 
     private void goToHome() {
         Intent mainIntent = new Intent(activity, MainActivity.class);
-        mainIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        mainIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(mainIntent);
         finish();
     }

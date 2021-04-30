@@ -355,6 +355,8 @@ public class SelectLocationActivity extends FragmentActivity implements Location
             binding.txtAddress.setText(getAddress(currentLat,currentLong));
             binding.btnLocation.setText(setLocation);
             new Session(activity).addString(P.locationAddress, binding.txtAddress.getText().toString());
+            new Session(activity).addString(P.lat,currentLat + "");
+            new Session(activity).addString(P.logn, currentLong + "");
         }
     }
 

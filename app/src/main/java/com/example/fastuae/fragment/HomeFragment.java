@@ -57,7 +57,7 @@ import java.util.List;
 public class HomeFragment extends Fragment implements LocationAdapter.onClick,DurationAdapter.onClick,EmirateAdapter.onClick {
 
     private Context context;
-    public static FragmentHomeBinding binding;
+    private FragmentHomeBinding binding;
     private List<SliderModel> sliderModelList;
     private SliderImageAdapter sliderImageAdapter;
     private List<HomeLocationModel> locationDailyList;
@@ -137,8 +137,8 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick,Du
     private void initView() {
 
         bookingTYpe = Config.daily;
-        pickupType = "self_pickup";
-        dropupType = "self_dropoff";
+        pickupType = Config.self_pickup;
+        dropupType = Config.self_dropoff;
         forEditAddress = false;
 
         loadingDialog = new LoadingDialog(context);
@@ -448,10 +448,11 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick,Du
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
+                Config.HOME_DELIVERY_CHECK = true;
                 binding.radioDeliverNo.setChecked(false);
                 blueTin(binding.radioDeliverYes);
                 blackTin(binding.radioDeliverNo);
-                pickupType = "deliver";
+                pickupType = Config.deliver;
                 binding.cardPickLocation.setVisibility(View.GONE);
                 binding.cardDeliverEmirate.setVisibility(View.VISIBLE);
                 hideOnYesNo();
@@ -464,10 +465,11 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick,Du
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
+                Config.HOME_DELIVERY_CHECK = false;
                 binding.radioDeliverYes.setChecked(false);
                 blueTin(binding.radioDeliverNo);
                 blackTin(binding.radioDeliverYes);
-                pickupType = "self_pickup";
+                pickupType = Config.self_pickup;
                 binding.cardPickLocation.setVisibility(View.VISIBLE);
                 binding.cardDeliverEmirate.setVisibility(View.GONE);
                 hideOnYesNo();
@@ -479,10 +481,11 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick,Du
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
+                Config.HOME_COLLECT_CHECK = true;
                 binding.radioCollectNo.setChecked(false);
                 blueTin(binding.radioCollectYes);
                 blackTin(binding.radioCollectNo);
-                dropupType = "collect";
+                dropupType = Config.collect;
                 binding.cardDropLocation.setVisibility(View.GONE);
                 binding.cardCollectEmirate.setVisibility(View.VISIBLE);
                 hideOnYesNo();
@@ -494,10 +497,11 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick,Du
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
+                Config.HOME_COLLECT_CHECK = false;
                 binding.radioCollectYes.setChecked(false);
                 blueTin(binding.radioCollectNo);
                 blackTin(binding.radioCollectYes);
-                dropupType = "self_dropoff";
+                dropupType = Config.self_dropoff;
                 binding.cardDropLocation.setVisibility(View.VISIBLE);
                 binding.cardCollectEmirate.setVisibility(View.GONE);
                 hideOnYesNo();
@@ -1128,5 +1132,22 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick,Du
         durationList.add(new DurationModel("37 month"));
         durationList.add(new DurationModel("38 month"));
         durationList.add(new DurationModel("39 month"));
+    }
+
+
+    @Override
+    public void onDestroyView()
+    {
+        if (binding.getRoot() != null)
+        {
+            ViewGroup parentViewGroup = (ViewGroup) binding.getRoot().getParent();
+
+            if (parentViewGroup != null)
+            {
+                parentViewGroup.removeAllViews();
+            }
+        }
+
+        super.onDestroyView();
     }
 }

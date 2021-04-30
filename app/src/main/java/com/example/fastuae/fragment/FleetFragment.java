@@ -207,4 +207,20 @@ public class FleetFragment extends Fragment implements CategorySelectionAdapter.
         fuilValue = "";
     }
 
+
+    @Override
+    public void onDestroyView()
+    {
+        if (binding.getRoot() != null)
+        {
+            ViewGroup parentViewGroup = (ViewGroup) binding.getRoot().getParent();
+
+            if (parentViewGroup != null)
+            {
+                parentViewGroup.removeAllViews();
+            }
+        }
+
+        super.onDestroyView();
+    }
 }

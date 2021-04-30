@@ -165,12 +165,12 @@ public class CarDetailOneActivity extends AppCompatActivity implements AddOnsAda
 
         binding.txtTotalAED.setText(getResources().getString(R.string.aed) + " " +carAED);
 
-        if (HomeFragment.binding.radioDeliverYes.isChecked()){
+        if (Config.HOME_DELIVERY_CHECK){
             binding.txtPickUpLocation.setText(HomeFragment.deliveryEmirateName+",\n"+pickUpDate+", "+Config.SelectedPickUpTime);
         }else {
             binding.txtPickUpLocation.setText(Config.SelectedPickUpAddress+",\n"+pickUpDate+", "+Config.SelectedPickUpTime);
         }
-        if (HomeFragment.binding.radioCollectYes.isChecked()){
+        if (Config.HOME_COLLECT_CHECK){
             binding.txtDropOffLocation.setText(HomeFragment.collectEmirateName+",\n"+dropUpDate+", "+Config.SelectedDropUpTime);
         }else {
             binding.txtDropOffLocation.setText(Config.SelectedDropUpAddress+",\n"+dropUpDate+", "+Config.SelectedDropUpTime);
@@ -452,7 +452,7 @@ public class CarDetailOneActivity extends AppCompatActivity implements AddOnsAda
         j.addString(P.coupon_code,"");
 
         j.addString(P.pickup_type,SelectCarActivity.pickUpType);
-        if (HomeFragment.binding.radioDeliverYes.isChecked()){
+        if (Config.HOME_DELIVERY_CHECK){
             j.addString(P.pickup_emirate_id, SelectCarActivity.pickUpEmirateID);
             j.addString(P.pickup_location_id, "0");
             j.addString(P.pickup_address, "");
@@ -471,7 +471,7 @@ public class CarDetailOneActivity extends AppCompatActivity implements AddOnsAda
 
 
         j.addString(P.dropoff_type,SelectCarActivity.dropUpType);
-        if (HomeFragment.binding.radioCollectYes.isChecked()){
+        if (Config.HOME_COLLECT_CHECK){
             j.addString(P.dropoff_emirate_id, SelectCarActivity.dropUpEmirateID);
             j.addString(P.dropoff_location_id, "0");
             j.addString(P.dropoff_address, "");

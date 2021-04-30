@@ -353,10 +353,14 @@
     <string name="entryStamp">Entry Stamp</string>
     <string name="selectPaymentMethod">Select payment method</string>
     <string name="imagePath">Image :</string>
-    <string name="selectImage">Select Image</string>
+    <string name="selectImage">Select image for</string>
     <string name="enter">Enter</string>
     <string name="select">Select</string>
     <string name="allowTemCondition">Please allow term and conditions</string>
+    <string name="selectDeliverAdd">Select deliver address</string>
+    <string name="selectCollectAdd">Select collect address</string>
+    <string name="enterDeliveryLandmark">Enter deliver landmark</string>
+    <string name="enterCollectLandmark">Enter collect landmark</string>
 
 
 

@@ -33,7 +33,6 @@ import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
@@ -41,7 +40,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.adoisstudio.helper.Api;
 import com.adoisstudio.helper.H;
@@ -50,7 +48,6 @@ import com.adoisstudio.helper.JsonList;
 import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
 import com.example.fastuae.R;
-import com.example.fastuae.adapter.AEDAdapter;
 import com.example.fastuae.adapter.AddressSelectionAdapter;
 import com.example.fastuae.adapter.CodeSelectionAdapter;
 import com.example.fastuae.adapter.DocumentAdapter;
@@ -58,9 +55,7 @@ import com.example.fastuae.adapter.DocumentListAdapter;
 import com.example.fastuae.adapter.EmirateAdapter;
 import com.example.fastuae.adapter.PaymentCardAdapter;
 import com.example.fastuae.databinding.ActivityCarBookingDetailBinding;
-import com.example.fastuae.fragment.DocumentFragment;
 import com.example.fastuae.fragment.HomeFragment;
-import com.example.fastuae.model.AEDModel;
 import com.example.fastuae.model.AddressModel;
 import com.example.fastuae.model.CarModel;
 import com.example.fastuae.model.CountryCodeModel;
@@ -93,7 +88,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CarBookingDetailsActivity extends AppCompatActivity implements EmirateAdapter.onClick, DocumentListAdapter.onClick,
-        PaymentCardAdapter.onClick, PaymentCardAdapter.onView,DocumentAdapter.onClick {
+        PaymentCardAdapter.onClick, PaymentCardAdapter.onView, DocumentAdapter.onClick {
 
     private CarBookingDetailsActivity activity = this;
     private ActivityCarBookingDetailBinding binding;
@@ -132,10 +127,20 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Emir
     private EmirateAdapter collectEmirateAdapter;
     private int deliverEmirateFlag = 1;
     private int collectEmirateFlag = 2;
+    private String deleveryEmirateName = "";
     private String deleveryEmirateID = "";
+    private String collectEmirateName = "";
     private String collectEmirateID = "";
     private boolean forDeliveryLocation = false;
     private boolean forCollectLocation = false;
+    private String deliveryLat = "";
+    private String deliveryLogn = "";
+    private String collectLat = "";
+    private String collectLogn = "";
+    private String deliveryAddress = "";
+    private String collectAddress = "";
+    private String deliverType = "";
+    private String collectType = "";
 
     private String paymentId = "";
     private String user_country_id = "";
@@ -149,6 +154,7 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Emir
 
     Json jsonMain;
     Json jsonChild;
+    boolean updateFlag = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -247,7 +253,7 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Emir
         binding.recyclerUploadedDocument.setAdapter(documentUploadedAdapter);
 
         documentModelList = new ArrayList<>();
-        documentAdapter = new DocumentAdapter(activity,documentModelList,1);
+        documentAdapter = new DocumentAdapter(activity, documentModelList, 1);
         binding.recyclerDocument.setLayoutManager(new LinearLayoutManager(activity));
         binding.recyclerDocument.setNestedScrollingEnabled(false);
         binding.recyclerDocument.setAdapter(documentAdapter);
@@ -323,17 +329,26 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Emir
                 forDeliveryLocation = false;
                 binding.txtDeliverGoogleAddress.setVisibility(View.VISIBLE);
                 binding.txtDeliverGoogleAddress.setText(session.getString(P.locationAddress));
+                deliveryAddress = session.getString(P.locationAddress);
+                deliveryLat = session.getString(P.lat);
+                deliveryLogn = session.getString(P.logn);
             } else if (forCollectLocation) {
                 forCollectLocation = false;
                 binding.txtCollectGoogleAddress.setVisibility(View.VISIBLE);
                 binding.txtCollectGoogleAddress.setText(session.getString(P.locationAddress));
+                collectAddress = session.getString(P.locationAddress);
+                collectLat = session.getString(P.lat);
+                collectLogn = session.getString(P.logn);
             }
         }
     }
 
     private void setData() {
 
-        if (HomeFragment.binding.radioDeliverYes.isChecked()) {
+        deliverType = SelectCarActivity.pickUpType;
+        collectType = SelectCarActivity.dropUpType;
+
+        if (Config.HOME_DELIVERY_CHECK) {
             binding.radioDeliverYes.setChecked(true);
             binding.radioDeliverNo.setChecked(false);
             blueTin(binding.radioDeliverYes);
@@ -343,7 +358,7 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Emir
             disablebleDelverView();
         }
 
-        if (HomeFragment.binding.radioCollectYes.isChecked()) {
+        if (Config.HOME_COLLECT_CHECK) {
             binding.radioCollectYes.setChecked(true);
             binding.radioCollectNo.setChecked(false);
             blueTin(binding.radioCollectYes);
@@ -364,11 +379,13 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Emir
             binding.txtDeliverEmirateMessage.setVisibility(View.VISIBLE);
             binding.txtDeliverEmirateMessage.setText(model.getEmirate_name());
             hideDeliverEmirate();
+            deleveryEmirateName = model.getEmirate_name();
             deleveryEmirateID = model.getId();
         } else if (flag == collectEmirateFlag) {
             binding.txtCollectEmirateMessage.setVisibility(View.VISIBLE);
             binding.txtCollectEmirateMessage.setText(model.getEmirate_name());
             hideCollectEmirate();
+            collectEmirateName = model.getEmirate_name();
             collectEmirateID = model.getId();
         }
 
@@ -445,6 +462,7 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Emir
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
+                deliverType = Config.deliver;
                 binding.radioDeliverNo.setChecked(false);
                 blueTin(binding.radioDeliverYes);
                 blackTin(binding.radioDeliverNo);
@@ -456,6 +474,7 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Emir
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
+                deliverType = Config.self_pickup;
                 binding.radioDeliverYes.setChecked(false);
                 blueTin(binding.radioDeliverNo);
                 blackTin(binding.radioDeliverYes);
@@ -469,6 +488,7 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Emir
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
+                collectType = Config.collect;
                 binding.radioCollectNo.setChecked(false);
                 blueTin(binding.radioCollectYes);
                 blackTin(binding.radioCollectNo);
@@ -481,6 +501,7 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Emir
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
+                collectType = Config.self_dropoff;
                 binding.radioCollectYes.setChecked(false);
                 blueTin(binding.radioCollectNo);
                 blackTin(binding.radioCollectYes);
@@ -639,11 +660,15 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Emir
 
                 if (checkPersonalDetailValidation()) {
                     if (TextUtils.isEmpty(paymentId)) {
-                        H.showMessage(activity,getResources().getString(R.string.selectPaymentMethod));
+                        H.showMessage(activity, getResources().getString(R.string.selectPaymentMethod));
                         checkPaymentErrorView();
-                    }else {
+                    } else {
                         if (checkAddressDetailValidation()) {
-                            checkDocumentValidation();
+                            if (documentModelList.isEmpty()) {
+                                hitUpdatePersonalDetails();
+                            } else {
+                                checkDocumentValidation();
+                            }
                         }
                     }
                 }
@@ -652,62 +677,70 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Emir
 
     }
 
-    private void checkDocumentValidation(){
+    private void checkDocumentValidation() {
+
+        updateFlag = true;
 
         jsonMain = new Json();
         jsonChild = new Json();
 
         try {
-            for (DocumentModel model : documentModelList){
+            for (DocumentModel model : documentModelList) {
 
-                if (model.getCheckValue().equals("1")){
-                    jsonMain.addString(model.getKey(),"1");
-                    for (FieldModel fieldModel : model.getFieldList()){
+                if (model.getCheckValue().equals("1")) {
+                    jsonMain.addString(model.getKey(), "1");
+                    for (FieldModel fieldModel : model.getFieldList()) {
 
-                        for (ImagePathModel imageModel : imagePathModelList){
-                            if (imageModel.getTitle().equals(model.getTitle())){
-                                if (fieldModel.getJson().has(P.image)){
+                        for (ImagePathModel imageModel : imagePathModelList) {
+                            if (imageModel.getTitle().equals(model.getTitle())) {
+                                if (fieldModel.getJson().has(P.image)) {
                                     fieldModel.getJson().remove(P.image);
-                                    fieldModel.getJson().addString(P.image,imageModel.getPath());
-                                }else {
-                                    fieldModel.getJson().addString(P.image,imageModel.getPath());
+                                    fieldModel.getJson().addString(P.image, imageModel.getPath());
+                                } else {
+                                    fieldModel.getJson().addString(P.image, imageModel.getPath());
                                 }
                             }
                         }
 
-                        jsonChild.addJSON(model.getKey(),fieldModel.getJson());
+                        jsonChild.addJSON(model.getKey(), fieldModel.getJson());
 
-                        if (!fieldModel.getJson().has(fieldModel.getFiled())){
-                            String valueKey = fieldModel.getFiled().replace("_"," ");
-                            H.showMessage(activity,getResources().getString(R.string.enter) + " " + capitalize(valueKey));
+                        if (!fieldModel.getJson().has(fieldModel.getFiled())) {
+                            String valueKey = fieldModel.getFiled().replace("_", " ");
+                            H.showMessage(activity, getResources().getString(R.string.enter) + " " + capitalize(valueKey));
+                            updateFlag = false;
                             checkDocumentErrorView();
                             return;
                         }
 
-                        if (!fieldModel.getJson().has("image")){
-                            H.showMessage(activity,getResources().getString(R.string.selectImage));
+                        if (!fieldModel.getJson().has("image")) {
+                            H.showMessage(activity, getResources().getString(R.string.selectImage)+ " " + model.getTitle());
+                            updateFlag = false;
                             checkDocumentErrorView();
                             return;
                         }
 
                     }
 
-                }else {
-                    H.showMessage(activity,getResources().getString(R.string.select)+ " " + model.getTitle());
+                } else {
+                    H.showMessage(activity, getResources().getString(R.string.select) + " " + model.getTitle());
+                    updateFlag = false;
                     checkDocumentErrorView();
                     return;
                 }
 
-                jsonMain.addJSON(P.document,jsonChild);
+                jsonMain.addJSON(P.document, jsonChild);
 
+            }
+
+            if (updateFlag) {
                 hitUpdatePersonalDetails();
             }
 
-        }catch (Exception e){
-            H.showMessage(activity,getResources().getString(R.string.somethingWrong));
+        } catch (Exception e) {
+            H.showMessage(activity, getResources().getString(R.string.somethingWrong));
         }
 
-        Log.e("TAG", "onClickJSJJS: "+ jsonMain.toString() );
+        Log.e("TAG", "onClickJSJJS: " + jsonMain.toString());
     }
 
     private void blackTin(RadioButton radioButton) {
@@ -1022,6 +1055,25 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Emir
                                 model.setStatus(status);
                                 deliverEmirateList.add(model);
                                 collectEmirateList.add(model);
+
+                                if (Config.HOME_DELIVERY_CHECK) {
+                                    if (id.equals(SelectCarActivity.pickUpEmirateID)) {
+                                        binding.txtDeliverEmirateMessage.setVisibility(View.VISIBLE);
+                                        binding.txtDeliverEmirateMessage.setText(model.getEmirate_name());
+                                        hideDeliverEmirate();
+                                        deleveryEmirateID = model.getId();
+                                    }
+                                }
+
+                                if (Config.HOME_DELIVERY_CHECK) {
+                                    if (id.equals(SelectCarActivity.dropUpEmirateID)) {
+                                        binding.txtCollectEmirateMessage.setVisibility(View.VISIBLE);
+                                        binding.txtCollectEmirateMessage.setText(model.getEmirate_name());
+                                        hideCollectEmirate();
+                                        collectEmirateID = model.getId();
+                                    }
+                                }
+
                             }
                         }
 
@@ -1159,6 +1211,10 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Emir
 
     private void disablebleDelverView() {
 
+        deleveryEmirateName = "";
+        deliveryAddress = "";
+        deliveryLat = "";
+        deliveryLogn = "";
         deleveryEmirateID = "";
         binding.txtDeliverEmirateMessage.setText("");
         binding.etxDeliverLandmark.setText("");
@@ -1181,6 +1237,10 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Emir
 
     private void disablebleCollectView() {
 
+        collectEmirateName = "";
+        collectAddress = "";
+        collectLat = "";
+        collectLogn = "";
         collectEmirateID = "";
         binding.txtCollectEmirateMessage.setText("");
         binding.etxCollectLandmark.setText("");
@@ -1470,10 +1530,10 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Emir
 
                         json = json.getJson(P.data);
 
-                        if (binding.checkBoxAccept.isChecked()){
+                        if (binding.checkBoxAccept.isChecked()) {
                             hitBookCarData(model);
-                        }else {
-                            H.showMessage(activity,getResources().getString(R.string.allowTemCondition));
+                        } else {
+                            H.showMessage(activity, getResources().getString(R.string.allowTemCondition));
                         }
 
                     } else {
@@ -1648,7 +1708,7 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Emir
                         JsonList uploaded_document = userDocument.getJsonList(P.uploaded_document);
                         JsonList pending_document = userDocument.getJsonList(P.pending_document);
 
-                        if (uploaded_document!=null && !uploaded_document.isEmpty() && uploaded_document.size()!=0){
+                        if (uploaded_document != null && !uploaded_document.isEmpty() && uploaded_document.size() != 0) {
                             for (Json jsonUploaded : uploaded_document) {
 
 //                            Log.e("TAG", "hitUserDocumentDetails:121212 "+ jsonUploaded.toString() );
@@ -1680,17 +1740,17 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Emir
                             }
                         }
 
-                        if (pending_document!=null && !pending_document.isEmpty() && pending_document.size()!=0){
-                            for (Json jsonData : pending_document){
-                                Log.e("TAG", "hitUserDocumentDetailsSDSD: "+ jsonData.toString() );
+                        if (pending_document != null && !pending_document.isEmpty() && pending_document.size() != 0) {
+                            for (Json jsonData : pending_document) {
+                                Log.e("TAG", "hitUserDocumentDetailsSDSD: " + jsonData.toString());
                                 DocumentModel documentModel = new DocumentModel();
                                 documentModel.setTitle(jsonData.getString(P.title));
                                 documentModel.setKey(jsonData.getString(P.key));
                                 documentModel.setField(jsonData.getJsonArray(P.field));
                                 documentModel.setCheckValue("0");
-                                try{
+                                try {
                                     documentModel.setSave_data(jsonData.getJson(P.save_data));
-                                }catch (Exception e){
+                                } catch (Exception e) {
                                     documentModel.setSave_data(new Json());
                                 }
                                 documentModelList.add(documentModel);
@@ -1715,7 +1775,7 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Emir
     }
 
     @Override
-    public void downloadDocument(String name, TextView textView,TextView txtImage) {
+    public void downloadDocument(String name, TextView textView, TextView txtImage) {
         textViewDocumnt = textView;
         txtImagePath = txtImage;
         documentName = name;
@@ -1745,7 +1805,7 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Emir
         startActivity(intent);
     }
 
-    private void getDocument(){
+    private void getDocument() {
         try {
             Intent i = new Intent(
                     Intent.ACTION_PICK,
@@ -1786,7 +1846,7 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Emir
                         hitUploadImage(path);
 
                     } catch (Exception e) {
-                        H.showMessage(activity,e.getMessage());
+                        H.showMessage(activity, e.getMessage());
                     }
                 }
                 break;
@@ -1802,7 +1862,7 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Emir
             base64Image = encodeImage(selectedImage);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-            Log.e("TAG", "setImageDataEE: "+ e.getMessage() );
+            Log.e("TAG", "setImageDataEE: " + e.getMessage());
             H.showMessage(activity, "Unable to get image, try again.");
         }
 
@@ -1819,10 +1879,10 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Emir
 
     private void hitUploadImage(String base64Image) {
 
-        ProgressView.show(activity,loadingDialog);
+        ProgressView.show(activity, loadingDialog);
         Json j = new Json();
-        j.addString(P.image,base64Image);
-        j.addString(P.extension,"png");
+        j.addString(P.image, base64Image);
+        j.addString(P.extension, "png");
         Api.newApi(activity, P.BaseUrl + "upload_image").addJson(j)
                 .setMethod(Api.POST)
                 //.onHeaderRequest(App::getHeaders)
@@ -1841,8 +1901,8 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Emir
                         model.setPath(image);
                         model.setTitle(documentName);
                         imagePathModelList.add(model);
-                        textViewDocumnt.setText(getResources().getString(R.string.uploaded) + " " +documentName);
-                        txtImagePath.setText(getResources().getString(R.string.imagePath) + " " +image);
+                        textViewDocumnt.setText(getResources().getString(R.string.uploaded) + " " + documentName);
+                        txtImagePath.setText(getResources().getString(R.string.imagePath) + " " + image);
                         txtImagePath.setVisibility(View.VISIBLE);
                         txtImagePath.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -1850,19 +1910,19 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Emir
                                 documentDialog(image_url);
                             }
                         });
-                        H.showMessage(activity,getResources().getString(R.string.imageUploaded));
-                    }else {
-                        H.showMessage(activity,json.getString(P.error));
+                        H.showMessage(activity, getResources().getString(R.string.imageUploaded));
+                    } else {
+                        H.showMessage(activity, json.getString(P.error));
                     }
                 })
-                .run("hitUploadImage",session.getString(P.token));
+                .run("hitUploadImage", session.getString(P.token));
 
     }
 
-    private String capitalize(String capString){
+    private String capitalize(String capString) {
         StringBuffer capBuffer = new StringBuffer();
         Matcher capMatcher = Pattern.compile("([a-z])([a-z]*)", Pattern.CASE_INSENSITIVE).matcher(capString);
-        while (capMatcher.find()){
+        while (capMatcher.find()) {
             capMatcher.appendReplacement(capBuffer, capMatcher.group(1).toUpperCase() + capMatcher.group(2).toLowerCase());
         }
 
@@ -1872,77 +1932,130 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Emir
 
     private void hitBookCarData(CarModel model) {
 
-        ProgressView.show(activity,loadingDialog);
+        ProgressView.show(activity, loadingDialog);
         Json j = new Json();
-        j.addString(P.booking_type,SelectCarActivity.bookingTYpe);
-        j.addString(P.month_time,SelectCarActivity.monthDuration);
-        j.addString(P.car_id,CarDetailOneActivity.carID);
-        j.addString(P.pay_type,payType);
+        j.addString(P.booking_type, SelectCarActivity.bookingTYpe);
+        j.addString(P.month_time, SelectCarActivity.monthDuration);
+        j.addString(P.car_id, CarDetailOneActivity.carID);
+        j.addString(P.pay_type, payType);
 
-        j.addString(P.emirate_id,SelectCarActivity.pickUpEmirateID);
-        j.addString(P.coupon_code,"");
+        j.addString(P.emirate_id, deleveryEmirateID);
+        j.addString(P.coupon_code, "");
 
-        j.addString(P.pickup_type,SelectCarActivity.pickUpType);
-        if (HomeFragment.binding.radioDeliverYes.isChecked()){
-            j.addString(P.pickup_emirate_id, SelectCarActivity.pickUpEmirateID);
+        j.addString(P.pickup_type, deliverType);
+        if (binding.radioDeliverYes.isChecked()) {
+
+            if (TextUtils.isEmpty(deleveryEmirateID)){
+                H.showMessage(activity,getResources().getString(R.string.selectDeliverEmirate));
+                return;
+            }else {
+                j.addString(P.pickup_emirate_id, deleveryEmirateID);
+            }
+
             j.addString(P.pickup_location_id, "0");
-            j.addString(P.pickup_address, "");
-            j.addString(P.pickup_landmark, "");
-            j.addString(P.pickup_location_name,"");
-        }else {
+
+            if (TextUtils.isEmpty(binding.etxDeliverLandmark.getText().toString())){
+                H.showMessage(activity,getResources().getString(R.string.enterDeliveryLandmark));
+                return;
+            }else {
+                j.addString(P.pickup_landmark, binding.etxDeliverLandmark.getText().toString().trim());
+            }
+
+            if (TextUtils.isEmpty(deliveryAddress)){
+                H.showMessage(activity,getResources().getString(R.string.selectDeliverAdd));
+                return;
+            }else {
+                j.addString(P.pickup_address, deliveryAddress);
+            }
+
+            j.addString(P.pickup_location_name, deleveryEmirateName);
+            j.addString(P.pickup_lat, deliveryLat);
+            j.addString(P.pickup_long, deliveryLogn);
+            j.addString(P.pickup_details, binding.etxDeliveryDetails.getText().toString().trim());
+
+        } else {
             j.addString(P.pickup_emirate_id, SelectCarActivity.pickUpEmirateID);
             j.addString(P.pickup_location_id, SelectCarActivity.pickUpLocationID);
             j.addString(P.pickup_address, SelectCarActivity.pickUpAddress);
             j.addString(P.pickup_landmark, Config.SelectedPickUpLandmark);
-            j.addString(P.pickup_location_name,Config.SelectedPickUpAddress);
-
+            j.addString(P.pickup_location_name, Config.SelectedPickUpAddress);
+            j.addString(P.pickup_lat, "");
+            j.addString(P.pickup_long, "");
+            j.addString(P.pickup_details, "");
         }
-        j.addString(P.pickup_lat,"");
-        j.addString(P.pickup_long,"");
-        j.addString(P.pickup_date,SelectCarActivity.pickUpDate);
-        j.addString(P.pickup_time,SelectCarActivity.pickUpTime);
+        j.addString(P.pickup_date, SelectCarActivity.pickUpDate);
+        j.addString(P.pickup_time, SelectCarActivity.pickUpTime);
 
-        j.addString(P.dropoff_type,SelectCarActivity.dropUpType);
-        if (HomeFragment.binding.radioCollectYes.isChecked()){
-            j.addString(P.dropoff_emirate_id, SelectCarActivity.dropUpEmirateID);
+        j.addString(P.dropoff_type, collectType);
+        if (binding.radioCollectYes.isChecked()) {
+
+            if (TextUtils.isEmpty(collectEmirateID)){
+                H.showMessage(activity,getResources().getString(R.string.selectCollectEmirate));
+                return;
+            }else {
+                j.addString(P.dropoff_emirate_id, collectEmirateID);
+            }
+
             j.addString(P.dropoff_location_id, "0");
-            j.addString(P.dropoff_address, "");
-            j.addString(P.dropoff_landmark, "");
-        }else {
+
+            if (TextUtils.isEmpty(binding.etxCollectLandmark.getText().toString())){
+                H.showMessage(activity,getResources().getString(R.string.enterCollectLandmark));
+                return;
+            }else {
+                j.addString(P.dropoff_landmark, binding.etxCollectLandmark.getText().toString().trim());
+            }
+
+            if (TextUtils.isEmpty(collectAddress)){
+                H.showMessage(activity,getResources().getString(R.string.selectCollectAdd));
+                return;
+            }else {
+                j.addString(P.dropoff_address, collectAddress);
+            }
+
+            j.addString(P.dropoff_location_name, collectEmirateName);
+            j.addString(P.dropoff_lat, collectLat);
+            j.addString(P.dropoff_long, collectLogn);
+            j.addString(P.dropoff_details, binding.etxCollectDetails.getText().toString().trim());
+
+        } else {
             j.addString(P.dropoff_emirate_id, SelectCarActivity.dropUpEmirateID);
             j.addString(P.dropoff_location_id, SelectCarActivity.dropUpLocationID);
             j.addString(P.dropoff_address, SelectCarActivity.dropUpAddress);
             j.addString(P.dropoff_landmark, Config.SelectedDropUpLandmark);
+            j.addString(P.dropoff_lat, "");
+            j.addString(P.dropoff_long, "");
+            j.addString(P.dropoff_details, "");
         }
-        j.addString(P.dropoff_lat,"");
-        j.addString(P.dropoff_long,"");
-        j.addString(P.dropoff_date,SelectCarActivity.dropUpDate);
-        j.addString(P.dropoff_time,SelectCarActivity.dropUpTime);
+        j.addString(P.dropoff_date, SelectCarActivity.dropUpDate);
+        j.addString(P.dropoff_time, SelectCarActivity.dropUpTime);
 
         JSONArray array = new JSONArray();
-        for (Json jsonData : AddOnsActivity.jsonAddOnsList){
+        for (Json jsonData : AddOnsActivity.jsonAddOnsList) {
             array.put(jsonData);
         }
-        j.addJSONArray(P.car_extra,array);
+        j.addJSONArray(P.car_extra, array);
 
-        j.addString(P.user_name,binding.etxFirstName.getText().toString().trim());
-        j.addString(P.user_lastname,binding.etxLastName.getText().toString().trim());
-        j.addString(P.user_email,binding.etxEmail.getText().toString().trim());
-        j.addString(P.user_country_code,codePrimary);
-        j.addString(P.user_mobile,binding.etxNumber.getText().toString().trim());
+        j.addString(P.user_name, binding.etxFirstName.getText().toString().trim());
+        j.addString(P.user_lastname, binding.etxLastName.getText().toString().trim());
+        j.addString(P.user_email, binding.etxEmail.getText().toString().trim());
+        j.addString(P.user_country_code, codePrimary);
+        j.addString(P.user_mobile, binding.etxNumber.getText().toString().trim());
 
-        j.addString(P.user_payment_option_id,paymentId);
+        j.addString(P.user_payment_option_id, paymentId);
 
-        j.addString(P.address_line_1,binding.etxAddress.getText().toString().trim());
-        j.addString(P.country_id,countryId);
-        j.addString(P.state,binding.etxState.getText().toString().trim());
-        j.addString(P.city,binding.etxCity.getText().toString().trim());
-        j.addString(P.zipcode,binding.etxZipcode.getText().toString().trim());
+        j.addString(P.address_line_1, binding.etxAddress.getText().toString().trim());
+        j.addString(P.country_id, countryId);
+        j.addString(P.state, binding.etxState.getText().toString().trim());
+        j.addString(P.city, binding.etxCity.getText().toString().trim());
+        j.addString(P.zipcode, binding.etxZipcode.getText().toString().trim());
 
-        j.addString(P.booking_remark,binding.etxRemark.getText().toString().trim());
-        j.addString(P.failed_url,"");
-        j.addString(P.booking_from,"mobile");
-        j.addString(P.success_url,"");
+        j.addString(P.booking_remark, binding.etxRemark.getText().toString().trim());
+        j.addString(P.failed_url, "");
+        j.addString(P.booking_from, "mobile");
+        j.addString(P.success_url, "");
+        j.addJSON(P.booking_document, jsonMain);
+
+        Log.e("TAG", "hitBookCarDataJSON: " + j.toString());
 
         Api.newApi(activity, P.BaseUrl + "book_car").addJson(j)
                 .setMethod(Api.POST)
@@ -1971,6 +2084,7 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Emir
 
                 })
                 .run("hitBookCarData",session.getString(P.token));
+
     }
 
 }

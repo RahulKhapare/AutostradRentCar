@@ -205,6 +205,7 @@
                                         android:textColor="@color/colorPrimaryDark"
                                         android:textColorHint="@color/textDark"
                                         android:hint="@string/landMark"
+                                        android:textCursorDrawable="@drawable/color_cursor"
                                         android:background="@drawable/corner_gray_bg">
 
                                     </EditText>
@@ -257,6 +258,7 @@
                                     android:textColor="@color/colorPrimaryDark"
                                     android:hint="@string/typeDetailsHere"
                                     android:layout_gravity="start"
+                                    android:textCursorDrawable="@drawable/color_cursor"
                                     android:background="@drawable/corner_gray_bg">
 
                                 </EditText>
@@ -422,6 +424,7 @@
                                         android:textColor="@color/colorPrimaryDark"
                                         android:textColorHint="@color/textDark"
                                         android:hint="@string/landMark"
+                                        android:textCursorDrawable="@drawable/color_cursor"
                                         android:background="@drawable/corner_gray_bg">
 
                                     </EditText>
@@ -475,6 +478,7 @@
                                     android:textColor="@color/colorPrimaryDark"
                                     android:hint="@string/typeDetailsHere"
                                     android:layout_gravity="start"
+                                    android:textCursorDrawable="@drawable/color_cursor"
                                     android:background="@drawable/corner_gray_bg">
 
                                 </EditText>

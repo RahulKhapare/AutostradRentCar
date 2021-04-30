@@ -550,12 +550,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         if (imagePathModelList!=null){
             imagePathModelList.clear();
         }
     }
+
 
     @Override
     public void onBackPressed() {
