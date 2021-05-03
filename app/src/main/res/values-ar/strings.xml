@@ -359,6 +359,7 @@
     <string name="selectCollectAdd">حدد عنوان جمع</string>
     <string name="enterDeliveryLandmark">أدخل تسليم المعالم</string>
     <string name="enterCollectLandmark">أدخل جمع المعالم</string>
+    <string name="checkDocument">يرجى التحقق من الوثيقة يجب ألا تكون فارغة</string>
 
     <string name="txt1">شركة رائدة في مجال تأجير السيارات ولديها أكبر شبكة من الفروع ونقاط الالتقاء</string>
     <string name="txt2">شركة رائدة في مجال تأجير السيارات ولديها أكبر شبكة من الفروع ونقاط الالتقاء</string>

@@ -30,10 +30,20 @@ public class DocumentListAdapter extends RecyclerView.Adapter<DocumentListAdapte
 
     private Context context;
     private List<DocumentUploadedModel> documentModelList;
+    private DocumentFragment fragment;
+    boolean fromActivity;
 
     public DocumentListAdapter(Context context, List<DocumentUploadedModel> documentModelList) {
         this.context = context;
         this.documentModelList = documentModelList;
+        fromActivity = true;
+    }
+
+    public DocumentListAdapter(Context context, List<DocumentUploadedModel> documentModelList,DocumentFragment fragment) {
+        this.context = context;
+        this.documentModelList = documentModelList;
+        this.fragment = fragment;
+        fromActivity = false;
     }
 
     public interface onClick{
@@ -73,14 +83,18 @@ public class DocumentListAdapter extends RecyclerView.Adapter<DocumentListAdapte
         title = title.replace("_"," ");
         title = capitalize(title);
 
-        holder.binding.txtDocument.setText(title);
-        holder.binding.txtDetails.setText(details);
+        holder.binding.txtDocument.setText(title.trim());
+        holder.binding.txtDetails.setText(details.trim());
 
         holder.binding.imgView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-                ((CarBookingDetailsActivity)context).documentView(model.getImage_url());
+                if (fromActivity){
+                    ((CarBookingDetailsActivity)context).documentView(model.getImage_url());
+                }else {
+                    ((DocumentFragment)fragment).documentView(model.getImage_url());
+                }
             }
         });
 

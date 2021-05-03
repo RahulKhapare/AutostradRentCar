@@ -49,8 +49,8 @@ public class SplashActivity extends AppCompatActivity {
         session = new Session(activity);
         loadingDialog = new LoadingDialog(activity);
 
-        LoadImage.glide(activity,binding.imgCar,getResources().getDrawable(R.drawable.ic_car_black));
         LoadImage.glide(activity,binding.imgName,getResources().getDrawable(R.drawable.ic_name));
+        LoadImage.glide(activity,binding.imgCar,getResources().getDrawable(R.drawable.ic_car_black));
 
         if (ConnectionUtil.isOnline(activity)){
             hitInit();

@@ -13,6 +13,7 @@ import com.example.fastuae.R;
 import com.example.fastuae.databinding.ActivityLanguageSelectionBinding;
 import com.example.fastuae.util.Click;
 import com.example.fastuae.util.Config;
+import com.example.fastuae.util.LoadImage;
 import com.example.fastuae.util.Localization;
 import com.example.fastuae.util.P;
 import com.example.fastuae.util.WindowView;
@@ -37,6 +38,9 @@ public class LanguageSelectionActivity extends AppCompatActivity {
     }
 
     private void initView() {
+
+        LoadImage.glide(activity,binding.imgName,getResources().getDrawable(R.drawable.ic_name));
+        LoadImage.glide(activity,binding.imgCar,getResources().getDrawable(R.drawable.ic_car_black));
 
         if (session.getString(P.languageFlag).equals(Config.ENGLISH)){
             updateEnglishLanguage(Config.ENGLISH);

@@ -42,8 +42,10 @@ public class LoginDashboardActivity extends AppCompatActivity implements ViewPag
     }
 
     private void initView(){
+
         LoadImage.glide(activity,binding.imgCar,getResources().getDrawable(R.drawable.ic_car_two));
         setUpViewPager();
+
         binding.txtSkip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

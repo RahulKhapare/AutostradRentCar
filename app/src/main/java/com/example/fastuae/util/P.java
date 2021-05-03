@@ -23,6 +23,7 @@ public class P {
     public static String user_info = "user_info";
     public static String user = "user";
     public static String user_profile_document = "user_profile_document";
+    public static String document_list = "document_list";
     public static String uploaded_document = "uploaded_document";
     public static String pending_document = "pending_document";
     public static String id = "id";

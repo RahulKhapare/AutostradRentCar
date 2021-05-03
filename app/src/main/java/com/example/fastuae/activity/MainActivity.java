@@ -334,6 +334,7 @@ public class MainActivity extends AppCompatActivity {
         documentName = name;
         click = upload;
         getPermission();
+
     }
 
     public void checkPDF(String path) {
