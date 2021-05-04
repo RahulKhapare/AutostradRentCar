@@ -19,6 +19,7 @@ import com.example.fastuae.databinding.ActivityChooseExtraListBinding;
 import com.example.fastuae.model.BookingModel;
 import com.example.fastuae.model.ChooseExtrasModel;
 import com.example.fastuae.model.CountryCodeModel;
+import com.example.fastuae.util.Click;
 import com.example.fastuae.util.LoadImage;
 import com.example.fastuae.util.RemoveHtml;
 
@@ -110,6 +111,15 @@ public class ChooseExtrasAdapter extends RecyclerView.Adapter<ChooseExtrasAdapte
             }
         });
 
+        holder.binding.cardSpinner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                if ( holder.binding.spinnerQuantity!=null){
+                    holder.binding.spinnerQuantity.performClick();
+                }
+            }
+        });
 
     }
 

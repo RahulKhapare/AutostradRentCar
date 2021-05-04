@@ -1,6 +1,8 @@
 package com.example.fastuae.activity;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
@@ -10,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -117,6 +120,7 @@ public class CarDetailOneActivity extends AppCompatActivity implements AddOnsAda
         binding.recyclerCarRelated.setNestedScrollingEnabled(false);
 
         List<CarImageModel> carImageModelList = new ArrayList<>();
+        carImageModelList.add(new CarImageModel(model.getCar_image()));
         try{
             for (int i=0; i<model.getMore_car_image().length(); i++){
                 CarImageModel carImageModel = new CarImageModel();
@@ -222,8 +226,7 @@ public class CarDetailOneActivity extends AppCompatActivity implements AddOnsAda
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-                HomeFragment.forEditAddress = true;
-                finish();
+                onEditClick(getResources().getString(R.string.editAddressMessagePickUp));
             }
         });
 
@@ -232,9 +235,13 @@ public class CarDetailOneActivity extends AppCompatActivity implements AddOnsAda
             public void onClick(View v) {
                 Click.preventTwoClick(v);
                 try {
-                    updatePickupDropoffDialog(1,pickup_location_data);
+                    if (pickup_location_data==null || pickup_location_data.length()==0 || pickup_location_data.toString().equals("{}")){
+                        H.showMessage(activity,getResources().getString(R.string.unableToOpenDetails));
+                    }else {
+                        updatePickupDropoffDialog(1,pickup_location_data);
+                    }
                 }catch (Exception e){
-
+                    H.showMessage(activity,getResources().getString(R.string.unableToOpenDetails));
                 }
             }
         });
@@ -242,9 +249,8 @@ public class CarDetailOneActivity extends AppCompatActivity implements AddOnsAda
         binding.txtDropupEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                HomeFragment.forEditAddress = true;
                 Click.preventTwoClick(v);
-                finish();
+                onEditClick(getResources().getString(R.string.editAddressMessageDropOff));
             }
         });
 
@@ -253,9 +259,13 @@ public class CarDetailOneActivity extends AppCompatActivity implements AddOnsAda
             public void onClick(View v) {
                 Click.preventTwoClick(v);
                 try {
-                    updatePickupDropoffDialog(2,dropoff_location_data);
+                    if (dropoff_location_data==null || dropoff_location_data.length()==0 || pickup_location_data.toString().equals("{}")){
+                        H.showMessage(activity,getResources().getString(R.string.unableToOpenDetails));
+                    }else {
+                        updatePickupDropoffDialog(2,dropoff_location_data);
+                    }
                 }catch (Exception e){
-
+                    H.showMessage(activity,getResources().getString(R.string.unableToOpenDetails));
                 }
             }
         });
@@ -417,6 +427,8 @@ public class CarDetailOneActivity extends AppCompatActivity implements AddOnsAda
 
                 CarUpgradeModel carModel = carUpgradeModelList.get(currentPosition);
                 List<CarImageModel> carImageModelList = new ArrayList<>();
+                CarUpgradeModel modelCurrent = carUpgradeModelList.get(currentPosition);
+                carImageModelList.add(new CarImageModel(modelCurrent.getCar_image()));
                 try{
                     for (int i=0; i<carModel.getMore_car_image().length(); i++){
                         CarImageModel carImageModel = new CarImageModel();
@@ -427,6 +439,8 @@ public class CarDetailOneActivity extends AppCompatActivity implements AddOnsAda
                 }
                 CarImageAdapter carImageAdapter = new CarImageAdapter(activity,carImageModelList,binding.imgCar,2);
                 binding.recyclerCarRelated.setAdapter(carImageAdapter);
+
+                binding.txtUpgrade.setVisibility(View.GONE);
 
                 hitBookingCarData();
 
@@ -796,7 +810,7 @@ public class CarDetailOneActivity extends AppCompatActivity implements AddOnsAda
 
     private String checkView(String string, LinearLayout linearLayout){
         String value = "";
-        if (TextUtils.isEmpty(string) || string.equals("null")){
+        if (TextUtils.isEmpty(string) || string.equals("null") || string.equals("0")){
             linearLayout.setVisibility(View.GONE);
         }else {
             try {
@@ -827,6 +841,40 @@ public class CarDetailOneActivity extends AppCompatActivity implements AddOnsAda
             finish();
         }
         return false;
+    }
+
+    private void onEditClick(String message){
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(activity);
+        builder1.setMessage(message);
+        builder1.setCancelable(true);
+
+        builder1.setPositiveButton(
+                getResources().getString(R.string.yes),
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                        HomeFragment.forEditAddress = true;
+                        finish();
+                    }
+                });
+
+        builder1.setNegativeButton(
+                getResources().getString(R.string.no),
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
+
+
+        Button positiveButton = alert11.getButton(DialogInterface.BUTTON_POSITIVE);
+        Button nigativeButton = alert11.getButton(DialogInterface.BUTTON_NEGATIVE);
+        positiveButton.setTextColor(getResources().getColor(R.color.lightBlue));
+        nigativeButton.setTextColor(getResources().getColor(R.color.lightBlue));
+
     }
 
 }

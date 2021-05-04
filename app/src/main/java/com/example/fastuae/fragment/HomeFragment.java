@@ -54,7 +54,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
-public class HomeFragment extends Fragment implements LocationAdapter.onClick,DurationAdapter.onClick,EmirateAdapter.onClick {
+public class HomeFragment extends Fragment implements LocationAdapter.onClick, DurationAdapter.onClick, EmirateAdapter.onClick {
 
     private Context context;
     private FragmentHomeBinding binding;
@@ -106,6 +106,10 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick,Du
 
     public static boolean forEditAddress = false;
 
+    private int pickupYEAR = 0;
+    private int pickupMONTH = 0;
+    private int pickupDAY = 0;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -149,7 +153,7 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick,Du
 
         durationList = new ArrayList<>();
         addDuration();
-        durationAdapter = new DurationAdapter(context,durationList,HomeFragment.this);
+        durationAdapter = new DurationAdapter(context, durationList, HomeFragment.this);
         LinearLayoutManager linearLayoutManager0 = new LinearLayoutManager(context);
         binding.recyclerDuration.setLayoutManager(linearLayoutManager0);
         binding.recyclerDuration.setHasFixedSize(true);
@@ -171,14 +175,14 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick,Du
         binding.recyclerLocationCollect.setAdapter(locationMonthlyAdapter);
 
         deliverEmirateList = new ArrayList<>();
-        deliverEmirateAdapter = new EmirateAdapter(getActivity(),deliverEmirateList,HomeFragment.this,deliverEmirateFlag);
+        deliverEmirateAdapter = new EmirateAdapter(getActivity(), deliverEmirateList, HomeFragment.this, deliverEmirateFlag);
         binding.recyclerDeliverEmirate.setLayoutManager(new LinearLayoutManager(getActivity()));
         binding.recyclerDeliverEmirate.setHasFixedSize(true);
         binding.recyclerDeliverEmirate.setNestedScrollingEnabled(false);
         binding.recyclerDeliverEmirate.setAdapter(deliverEmirateAdapter);
 
         collectEmirateList = new ArrayList<>();
-        collectEmirateAdapter = new EmirateAdapter(getActivity(),collectEmirateList,HomeFragment.this,collectEmirateFlag);
+        collectEmirateAdapter = new EmirateAdapter(getActivity(), collectEmirateList, HomeFragment.this, collectEmirateFlag);
         binding.recyclerCollectEmirate.setLayoutManager(new LinearLayoutManager(getActivity()));
         binding.recyclerCollectEmirate.setHasFixedSize(true);
         binding.recyclerCollectEmirate.setNestedScrollingEnabled(false);
@@ -202,24 +206,24 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick,Du
 
     @Override
     public void onDurationClick(DurationModel model) {
-        monthDuration = model.getDuration().replace("month","").trim();
+        monthDuration = model.getDuration().replace("month", "").trim();
         binding.txtDurationMessage.setVisibility(View.VISIBLE);
         binding.txtDurationMessage.setText(monthDuration);
         hideDuration();
-        setDateMonthTime(binding.txtDropDate, binding.txtDropMonth,monthDuration);
+        setDateMonthTime(binding.txtDropDate, binding.txtDropMonth, monthDuration);
     }
 
 
     @Override
     public void onEmirateClick(int flag, EmirateModel model) {
 
-        if (flag==deliverEmirateFlag){
+        if (flag == deliverEmirateFlag) {
             binding.txtDeliverEmirateMessage.setVisibility(View.VISIBLE);
             binding.txtDeliverEmirateMessage.setText(model.getEmirate_name());
             deleveryEmirateID = model.getId();
             deliveryEmirateName = model.getEmirate_name();
             hideDeliverEmirate();
-        }else if (flag==collectEmirateFlag){
+        } else if (flag == collectEmirateFlag) {
             binding.txtCollectEmirateMessage.setVisibility(View.VISIBLE);
             binding.txtCollectEmirateMessage.setText(model.getEmirate_name());
             collectEmirateID = model.getId();
@@ -253,6 +257,11 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick,Du
     }
 
     private void getCurrentDate() {
+        setCurrentDate();
+        setNextDate();
+    }
+
+    private void setCurrentDate() {
         Calendar c = Calendar.getInstance();
         final Date date = c.getTime();
 
@@ -266,14 +275,55 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick,Du
         binding.txtPickMonth.setText(monthString.toUpperCase());
         binding.txtPickTime.setText(getCurrentTime() + "");
 
+        String currentDate = yeare + "-" + monthNumber + "-" + dayString;
+        pickUpDate = currentDate;
+
+        pickupYEAR = Integer.parseInt(yeare);
+        if (monthNumber.equals("1")) {
+            pickupMONTH = Integer.parseInt(monthNumber);
+        } else {
+            pickupMONTH = Integer.parseInt(monthNumber) - 1;
+        }
+        pickupDAY = Integer.parseInt(dayString) + 1;
+
+    }
+
+    private void setNextDate() {
+        Calendar c = Calendar.getInstance();
+        c.add(Calendar.DAY_OF_YEAR, 1);
+        final Date date = c.getTime();
+
+        String dayOfTheWeek = (String) DateFormat.format("EEEE", date); // Thursday
+        String dayString = (String) DateFormat.format("dd", date); // 20
+        String monthString = (String) DateFormat.format("MMM", date); // Jun
+        String monthNumber = (String) DateFormat.format("MM", date); // 06
+        String yeare = (String) DateFormat.format("yyyy", date); // 2013
+
         binding.txtDropDate.setText(dayString);
         binding.txtDropMonth.setText(monthString.toUpperCase());
         binding.txtDropTime.setText(getCurrentTime());
 
-        String currentDate = yeare + "-" + monthNumber + "-" + dayString;
-        pickUpDate = currentDate;
-        dropUpDate = currentDate;
+        String nextDate = yeare + "-" + monthNumber + "-" + dayString;
+        dropUpDate = nextDate;
+    }
 
+    private void setNextSelectionDate() {
+        Calendar c = Calendar.getInstance();
+        c.set(pickupYEAR, pickupMONTH, pickupDAY);
+        final Date date = c.getTime();
+
+        String dayOfTheWeek = (String) DateFormat.format("EEEE", date); // Thursday
+        String dayString = (String) DateFormat.format("dd", date); // 20
+        String monthString = (String) DateFormat.format("MMM", date); // Jun
+        String monthNumber = (String) DateFormat.format("MM", date); // 06
+        String yeare = (String) DateFormat.format("yyyy", date); // 2013
+
+        binding.txtDropDate.setText(dayString);
+        binding.txtDropMonth.setText(monthString.toUpperCase());
+        binding.txtDropTime.setText(getCurrentTime());
+
+        String nextDate = yeare + "-" + monthNumber + "-" + dayString;
+        dropUpDate = nextDate;
     }
 
 
@@ -336,7 +386,7 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick,Du
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-                setDateTime(binding.txtPickDate, binding.txtPickMonth, pickUpFlag);
+                setPickupDateTime(binding.txtPickDate, binding.txtPickMonth, pickUpFlag);
             }
         });
 
@@ -344,8 +394,8 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick,Du
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-                if (!bookingTYpe.equals(Config.monthly)){
-                    setDateTime(binding.txtDropDate, binding.txtDropMonth, dropUpFlag);
+                if (!bookingTYpe.equals(Config.monthly)) {
+                    setDropoffDateTime(binding.txtDropDate, binding.txtDropMonth, dropUpFlag);
                 }
             }
         });
@@ -371,31 +421,31 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick,Du
             public void onClick(View v) {
                 Click.preventTwoClick(v);
                 forEditAddress = false;
-                if (binding.radioMonthlyDeals.isChecked()){
-                     if (TextUtils.isEmpty(monthDuration)) {
+                if (binding.radioMonthlyDeals.isChecked()) {
+                    if (TextUtils.isEmpty(monthDuration)) {
                         H.showMessage(context, getResources().getString(R.string.selectDuration));
                         return;
                     }
                 }
 
-                if (binding.radioDeliverYes.isChecked()){
+                if (binding.radioDeliverYes.isChecked()) {
                     if (TextUtils.isEmpty(deleveryEmirateID)) {
                         H.showMessage(context, getResources().getString(R.string.selectDeliverEmirate));
                         return;
                     }
-                }else {
+                } else {
                     if (TextUtils.isEmpty(pickUpId)) {
                         H.showMessage(context, getResources().getString(R.string.selectSelftPickUpLocation));
                         return;
                     }
                 }
 
-                if (binding.radioCollectYes.isChecked()){
+                if (binding.radioCollectYes.isChecked()) {
                     if (TextUtils.isEmpty(collectEmirateID)) {
                         H.showMessage(context, getResources().getString(R.string.selectCollectEmirate));
                         return;
                     }
-                }else {
+                } else {
                     if (TextUtils.isEmpty(dropUpId)) {
                         H.showMessage(context, getResources().getString(R.string.selectDropOffLocation));
                         return;
@@ -432,7 +482,7 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick,Du
 //                monthDuration = "";
 //                binding.txtDurationMessage.setText("");
 //                binding.txtDurationMessage.setVisibility(View.GONE);
-                bookingTYpe =  Config.monthly;
+                bookingTYpe = Config.monthly;
                 Click.preventTwoClick(v);
                 binding.radioDailyRental.setChecked(false);
                 blueTin(binding.radioMonthlyDeals);
@@ -571,21 +621,21 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick,Du
     }
 
 
-    private void updateDropDateBGDark(){
+    private void updateDropDateBGDark() {
         binding.lnrDropoffDate.setBackground(getResources().getDrawable(R.drawable.corner_blue_bg));
         binding.txtDropOffText.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
         binding.txtDropDate.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
         binding.txtDropMonth.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
     }
 
-    private void updateDropDateBGGray(){
+    private void updateDropDateBGGray() {
         binding.lnrDropoffDate.setBackground(getResources().getDrawable(R.drawable.corner_light_gray_bg));
         binding.txtDropOffText.setTextColor(getResources().getColor(R.color.semi_transparent));
         binding.txtDropDate.setTextColor(getResources().getColor(R.color.semi_transparent));
         binding.txtDropMonth.setTextColor(getResources().getColor(R.color.semi_transparent));
     }
 
-    private void hideOnYesNo(){
+    private void hideOnYesNo() {
         hideDuration();
         hideDeliverEmirate();
         hidePickupLocation();
@@ -593,31 +643,31 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick,Du
         hideDropUpLocation();
     }
 
-    private void hidePickupLocation(){
+    private void hidePickupLocation() {
         binding.imgDeliverArrowDown.setVisibility(View.VISIBLE);
         binding.imgDeliverArrowUp.setVisibility(View.GONE);
         binding.cardLocationDeliver.setVisibility(View.GONE);
     }
 
-    private void hideDropUpLocation(){
+    private void hideDropUpLocation() {
         binding.imgCollectArrowDown.setVisibility(View.VISIBLE);
         binding.imgCollectArrowUp.setVisibility(View.GONE);
         binding.cardLocationCollect.setVisibility(View.GONE);
     }
 
-    private void hideDuration(){
+    private void hideDuration() {
         binding.cardDurationView.setVisibility(View.GONE);
         binding.imgDurationArrowUp.setVisibility(View.GONE);
         binding.imgDurationArrowDown.setVisibility(View.VISIBLE);
     }
 
-    private void hideDeliverEmirate(){
+    private void hideDeliverEmirate() {
         binding.cardDeliverEmirateView.setVisibility(View.GONE);
         binding.imgDeliverEmirateArrowUp.setVisibility(View.GONE);
         binding.imgDeliverEmirateArrowDown.setVisibility(View.VISIBLE);
     }
 
-    private void hideCollectEmirate(){
+    private void hideCollectEmirate() {
         binding.cardCollectEmirateView.setVisibility(View.GONE);
         binding.imgCollectEmirateArrowUp.setVisibility(View.GONE);
         binding.imgCollectEmirateArrowDown.setVisibility(View.VISIBLE);
@@ -705,7 +755,52 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick,Du
 
     }
 
-    private void setDateTime(TextView txtDay, TextView txtMonth, int flag) {
+    private void setPickupDateTime(TextView txtDay, TextView txtMonth, int flag) {
+
+        Calendar newCalendar = Calendar.getInstance();
+        DatePickerDialog mDatePickerDialog = new DatePickerDialog(context, R.style.DialogTheme, new DatePickerDialog.OnDateSetListener() {
+
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                Calendar newDate = Calendar.getInstance();
+                newDate.set(year, monthOfYear, dayOfMonth);
+                SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
+                final Date date = newDate.getTime();
+                String fdate = sd.format(date);
+
+                String dayOfTheWeek = (String) DateFormat.format("EEEE", date); // Thursday
+                String dayString = (String) DateFormat.format("dd", date); // 20
+                String monthString = (String) DateFormat.format("MMM", date); // Jun
+                String monthNumber = (String) DateFormat.format("MM", date); // 06
+                String yeare = (String) DateFormat.format("yyyy", date); // 2013
+
+                if (flag == pickUpFlag) {
+                    String currentDate = yeare + "-" + monthNumber + "-" + dayString;
+                    pickUpDate = currentDate;
+                } else if (flag == dropUpFlag) {
+                    String currentDate = yeare + "-" + monthNumber + "-" + dayString;
+                    dropUpDate = currentDate;
+                }
+
+                txtDay.setText(dayString);
+                txtMonth.setText(monthString.toUpperCase());
+
+                pickupYEAR = Integer.parseInt(yeare);
+                if (monthNumber.equals("1")) {
+                    pickupMONTH = Integer.parseInt(monthNumber);
+                } else {
+                    pickupMONTH = Integer.parseInt(monthNumber) - 1;
+                }
+                pickupDAY = Integer.parseInt(dayString) + 1;
+
+                setNextSelectionDate();
+
+            }
+        }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+        mDatePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
+        mDatePickerDialog.show();
+    }
+
+    private void setDropoffDateTime(TextView txtDay, TextView txtMonth, int flag) {
 
         Calendar newCalendar = Calendar.getInstance();
         DatePickerDialog mDatePickerDialog = new DatePickerDialog(context, R.style.DialogTheme, new DatePickerDialog.OnDateSetListener() {
@@ -736,11 +831,16 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick,Du
 
             }
         }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
-//        mDatePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+
+        Calendar c = Calendar.getInstance();
+        c.set(pickupYEAR, pickupMONTH, pickupDAY);
+
+        mDatePickerDialog.getDatePicker().setMinDate(c.getTimeInMillis());
+//        mDatePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
         mDatePickerDialog.show();
     }
 
-    private void setDateMonthTime(TextView txtDay, TextView txtMonth,String month) {
+    private void setDateMonthTime(TextView txtDay, TextView txtMonth, String month) {
 
         Calendar newDate = Calendar.getInstance();
         newDate.add(Calendar.MONTH, Integer.parseInt(month));
@@ -949,20 +1049,20 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick,Du
 
         j.addString(P.booking_type, bookingTYpe);
 
-        if (binding.radioMonthlyDeals.isChecked()){
+        if (binding.radioMonthlyDeals.isChecked()) {
             j.addString(P.month_time, monthDuration);
-        }else {
+        } else {
             j.addString(P.month_time, "");
         }
 
         j.addString(P.pickup_type, pickupType);
 
-        if (binding.radioDeliverYes.isChecked()){
+        if (binding.radioDeliverYes.isChecked()) {
             j.addString(P.pickup_emirate_id, deleveryEmirateID);
             j.addString(P.pickup_location_id, "0");
             j.addString(P.pickup_address, "");
             j.addString(P.pickup_landmark, "");
-        }else {
+        } else {
             j.addString(P.pickup_emirate_id, pickUpEmirateID);
             j.addString(P.pickup_location_id, pickUpID);
             j.addString(P.pickup_address, pickUpAddress);
@@ -1013,12 +1113,12 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick,Du
         j.addString(P.pickup_time, pickUpTime);
         j.addString(P.dropoff_type, dropupType);
 
-        if (binding.radioCollectYes.isChecked()){
+        if (binding.radioCollectYes.isChecked()) {
             j.addString(P.dropoff_emirate_id, collectEmirateID);
             j.addString(P.dropoff_location_id, "0");
             j.addString(P.dropoff_address, "");
             j.addString(P.dropoff_landmark, "");
-        }else {
+        } else {
             j.addString(P.dropoff_emirate_id, dropUpEmirateID);
             j.addString(P.dropoff_location_id, id);
             j.addString(P.dropoff_address, dropUpAddress);
@@ -1050,15 +1150,15 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick,Du
                         Intent intent = new Intent(context, SelectCarActivity.class);
                         intent.putExtra(Config.monthDuration, monthDuration);
                         intent.putExtra(Config.bookingTYpe, bookingTYpe);
-                        if (binding.radioDeliverYes.isChecked()){
+                        if (binding.radioDeliverYes.isChecked()) {
                             intent.putExtra(Config.pickUpEmirateID, deleveryEmirateID);
-                        }else {
+                        } else {
                             intent.putExtra(Config.pickUpEmirateID, pickUpEmirateID);
                         }
 
-                        if (binding.radioCollectYes.isChecked()){
+                        if (binding.radioCollectYes.isChecked()) {
                             intent.putExtra(Config.dropUpEmirateID, collectEmirateID);
-                        }else {
+                        } else {
                             intent.putExtra(Config.dropUpEmirateID, dropUpEmirateID);
                         }
 
@@ -1092,7 +1192,7 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick,Du
     }
 
 
-    public void addDuration(){
+    public void addDuration() {
         durationList.add(new DurationModel("1 month"));
         durationList.add(new DurationModel("2 month"));
         durationList.add(new DurationModel("3 month"));
@@ -1136,14 +1236,11 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick,Du
 
 
     @Override
-    public void onDestroyView()
-    {
-        if (binding.getRoot() != null)
-        {
+    public void onDestroyView() {
+        if (binding.getRoot() != null) {
             ViewGroup parentViewGroup = (ViewGroup) binding.getRoot().getParent();
 
-            if (parentViewGroup != null)
-            {
+            if (parentViewGroup != null) {
                 parentViewGroup.removeAllViews();
             }
         }

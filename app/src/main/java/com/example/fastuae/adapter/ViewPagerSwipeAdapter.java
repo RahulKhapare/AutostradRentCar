@@ -146,6 +146,7 @@ public class ViewPagerSwipeAdapter extends PagerAdapter {
         recyclerCarImage.setLayoutManager(new LinearLayoutManager(context,RecyclerView.HORIZONTAL,false));
         recyclerCarImage.setHasFixedSize(true);
         List<CarImageModel> carImageModelList = new ArrayList<>();
+        carImageModelList.add(new CarImageModel(model.getCar_image()));
         try{
             for (int i=0; i<model.getMore_car_image().length(); i++){
                 CarImageModel carImageModel = new CarImageModel();

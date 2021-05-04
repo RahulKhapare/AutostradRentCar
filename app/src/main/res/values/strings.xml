@@ -362,6 +362,9 @@
     <string name="enterDeliveryLandmark">Enter deliver landmark</string>
     <string name="enterCollectLandmark">Enter collect landmark</string>
     <string name="checkDocument">Please check document should not empty</string>
+    <string name="unableToOpenDetails">Unable to open details</string>
+    <string name="editAddressMessagePickUp">Do you want to edit pickup location and time ?</string>
+    <string name="editAddressMessageDropOff">Do you want to edit drop-off location and time ?</string>
 
 
 

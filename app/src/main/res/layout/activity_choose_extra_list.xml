@@ -107,6 +107,7 @@
                 </TextView>
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/cardSpinner"
                     android:layout_width="50dp"
                     android:layout_height="35dp"
                     android:layout_marginRight="10dp"
@@ -154,33 +155,42 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="right|center"
                 android:gravity="right|center"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
-                <TextView
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="16sp"
-                    android:singleLine="true"
-                    android:text="@string/price"
-                    android:layout_marginLeft="2dp"
-                    android:layout_marginRight="2dp"
-                    android:fontFamily="@font/nunito_sans_semibold">
+                    android:orientation="horizontal">
 
-                </TextView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="16sp"
+                        android:singleLine="true"
+                        android:text="@string/price"
+                        android:layout_marginLeft="2dp"
+                        android:layout_marginRight="2dp"
+                        android:fontFamily="@font/nunito_sans_semibold">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/iconicGray"
-                    android:textSize="12sp"
-                    android:singleLine="true"
-                    android:text="@string/priceRental"
-                    android:layout_marginLeft="2dp"
-                    android:layout_marginRight="2dp"
-                    android:fontFamily="@font/nunito_sans_regular">
+                    </TextView>
 
-                </TextView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/iconicGray"
+                        android:textSize="12sp"
+                        android:singleLine="true"
+                        android:text="@string/priceRental"
+                        android:layout_marginLeft="2dp"
+                        android:layout_marginRight="2dp"
+                        android:fontFamily="@font/nunito_sans_regular">
+
+                    </TextView>
+
+                </LinearLayout>
+
+
 
                 <TextView
                     android:id="@+id/txtPrice"

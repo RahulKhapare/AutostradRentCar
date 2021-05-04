@@ -2,162 +2,153 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimaryDark">
+        android:fillViewport="true">
 
-        <ScrollView
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fillViewport="true">
+            android:background="@color/colorPrimaryDark">
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    android:layout_height="350dp"
+                    android:background="@drawable/curve_white_bg"
+                    android:orientation="vertical"
+                    android:padding="20dp">
 
                     <LinearLayout
-                        android:layout_weight="1"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:padding="20dp"
-                        android:orientation="vertical"
-                        android:background="@drawable/curve_white_bg">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_weight="1"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/nunit_sans_bold"
-                                android:textSize="27sp"
-                                android:text="@string/welcomeTo"
-                                android:textColor="@color/textDark">
-
-                            </TextView>
-
-                            <TextView
-                                android:id="@+id/txtSkip"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/nunit_sans_bold"
-                                android:textSize="16sp"
-                                android:text="@string/skip"
-                                android:padding="10dp"
-                                android:textColor="@color/textDark">
-
-                            </TextView>
-                        </LinearLayout>
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:fontFamily="@font/nunit_sans_bold"
-                            android:textSize="20sp"
-                            android:text="@string/app_name"
-                            android:textColor="@color/textDark">
+                            android:text="@string/welcomeTo"
+                            android:textColor="@color/textDark"
+                            android:textSize="27sp">
 
                         </TextView>
 
-                       <RelativeLayout
-                           android:layout_width="match_parent"
-                           android:layout_height="match_parent">
+                        <TextView
+                            android:id="@+id/txtSkip"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/nunit_sans_bold"
+                            android:padding="10dp"
+                            android:text="@string/skip"
+                            android:textColor="@color/textDark"
+                            android:textSize="16sp">
 
-                           <androidx.viewpager.widget.ViewPager
-                               android:id="@+id/viewPagerTop"
-                               android:layout_width="match_parent"
-                               android:layout_height="match_parent"
-                               android:layout_above="@+id/tabLayoutTop"/>
-
-                           <com.google.android.material.tabs.TabLayout
-                               android:id="@+id/tabLayoutTop"
-                               android:layout_width="match_parent"
-                               android:layout_height="wrap_content"
-                               android:clipToPadding="true"
-                               app:tabBackground="@drawable/tab_selector"
-                               app:tabGravity="center"
-                               android:layout_alignParentBottom="true"
-                               app:tabIndicatorColor="@color/colorTrans" />
-
-                       </RelativeLayout>
-
+                        </TextView>
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_weight="1"
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunit_sans_bold"
+                        android:text="@string/app_name"
+                        android:textColor="@color/textDark"
+                        android:textSize="20sp">
+
+                    </TextView>
+
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
-                    </LinearLayout>
+                        <androidx.viewpager.widget.ViewPager
+                            android:id="@+id/viewPagerTop"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_above="@+id/tabLayoutTop" />
+
+                        <com.google.android.material.tabs.TabLayout
+                            android:id="@+id/tabLayoutTop"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:clipToPadding="true"
+                            app:tabBackground="@drawable/tab_selector"
+                            app:tabGravity="center"
+                            app:tabIndicatorColor="@color/colorTrans" />
+
+                    </RelativeLayout>
 
                 </LinearLayout>
-
 
                 <ImageView
                     android:id="@+id/imgCar"
                     android:layout_width="wrap_content"
-                    android:layout_height="350dp"
-                    android:layout_centerInParent="true"
-                    android:layout_alignParentRight="true"
-                    android:paddingTop="40dp"
-                    android:paddingRight="-400dp"></ImageView>
-
+                    android:layout_height="300dp"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="-120dp"
+                    android:paddingRight="-410dp"></ImageView>
 
                 <LinearLayout
-                    android:layout_below="@+id/imgCar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:padding="10dp">
 
                     <TextView
                         android:id="@+id/txtLogin"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/nunit_sans_bold"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:text="@string/login"
-                        android:padding="16dp"
                         android:layout_gravity="center"
-                        android:gravity="center"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
-                        android:textSize="18dp"
-                        android:background="@drawable/button_bg"></TextView>
+                        android:background="@drawable/button_bg"
+                        android:fontFamily="@font/nunit_sans_bold"
+                        android:gravity="center"
+                        android:padding="16dp"
+                        android:text="@string/login"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="18dp"></TextView>
 
                     <TextView
                         android:id="@+id/txtSignUp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:fontFamily="@font/nunit_sans_bold"
-                        android:textColor="@color/lightOrange"
-                        android:text="@string/signUp"
-                        android:padding="16dp"
                         android:layout_gravity="center"
-                        android:gravity="center"
-                        android:textSize="18dp"
                         android:layout_marginLeft="20dp"
+                        android:layout_marginTop="20dp"
                         android:layout_marginRight="20dp"
-                        android:background="@drawable/corner_bg"></TextView>
+                        android:background="@drawable/corner_bg"
+                        android:fontFamily="@font/nunit_sans_bold"
+                        android:gravity="center"
+                        android:padding="16dp"
+                        android:text="@string/signUp"
+                        android:textColor="@color/lightOrange"
+                        android:textSize="18dp"></TextView>
 
                 </LinearLayout>
 
-            </RelativeLayout>
-
-        </ScrollView>
-
-    </LinearLayout>
+            </LinearLayout>
 
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true">
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
 </layout>
