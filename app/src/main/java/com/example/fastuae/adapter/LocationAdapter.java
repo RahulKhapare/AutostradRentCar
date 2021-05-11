@@ -1,7 +1,6 @@
 package com.example.fastuae.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,17 +10,11 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fastuae.R;
-import com.example.fastuae.activity.CarBookingDetailsActivity;
-import com.example.fastuae.activity.SelectLocationActivity;
-import com.example.fastuae.databinding.ActivityCarFleetListBinding;
 import com.example.fastuae.databinding.ActivityLocationListBinding;
 import com.example.fastuae.fragment.HomeFragment;
-import com.example.fastuae.model.CarFleetModel;
 import com.example.fastuae.model.HomeLocationModel;
-import com.example.fastuae.model.LocationModel;
 import com.example.fastuae.util.Click;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.viewHolder> {

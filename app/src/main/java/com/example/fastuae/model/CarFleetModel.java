@@ -2,60 +2,134 @@ package com.example.fastuae.model;
 
 public class CarFleetModel {
 
-    String carName;
-    String groupName;
-    String carType;
-    String description;
-    String seat;
-    String automatic;
-    String passenger;
-    String door;
-    String petrol;
-    String suitcase;
-    String engine;
-    int image;
-    int image1;
-    int image2;
-    int image3;
+   String id;
+   String car_name;
+   String transmission_name;
+   String fuel_type_name;
+   String group_name;
+   String category_name;
+   String air_bags;
+   String air_conditioner;
+   String parking_sensors;
+   String rear_parking_camera;
+   String bluetooth;
+   String cruise_control;
+   String sunroof;
+   String car_image;
+   String door;
+   String passenger;
+   String suitcase;
 
-    public String getCarType() {
-        return carType;
+    public String getId() {
+        return id;
     }
 
-    public void setCarType(String carType) {
-        this.carType = carType;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getDescription() {
-        return description;
+    public String getCar_name() {
+        return car_name;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setCar_name(String car_name) {
+        this.car_name = car_name;
     }
 
-    public String getSeat() {
-        return seat;
+    public String getTransmission_name() {
+        return transmission_name;
     }
 
-    public void setSeat(String seat) {
-        this.seat = seat;
+    public void setTransmission_name(String transmission_name) {
+        this.transmission_name = transmission_name;
     }
 
-    public String getAutomatic() {
-        return automatic;
+    public String getFuel_type_name() {
+        return fuel_type_name;
     }
 
-    public void setAutomatic(String automatic) {
-        this.automatic = automatic;
+    public void setFuel_type_name(String fuel_type_name) {
+        this.fuel_type_name = fuel_type_name;
     }
 
-    public String getPassenger() {
-        return passenger;
+    public String getGroup_name() {
+        return group_name;
     }
 
-    public void setPassenger(String passenger) {
-        this.passenger = passenger;
+    public void setGroup_name(String group_name) {
+        this.group_name = group_name;
+    }
+
+    public String getCategory_name() {
+        return category_name;
+    }
+
+    public void setCategory_name(String category_name) {
+        this.category_name = category_name;
+    }
+
+    public String getAir_bags() {
+        return air_bags;
+    }
+
+    public void setAir_bags(String air_bags) {
+        this.air_bags = air_bags;
+    }
+
+    public String getAir_conditioner() {
+        return air_conditioner;
+    }
+
+    public void setAir_conditioner(String air_conditioner) {
+        this.air_conditioner = air_conditioner;
+    }
+
+    public String getParking_sensors() {
+        return parking_sensors;
+    }
+
+    public void setParking_sensors(String parking_sensors) {
+        this.parking_sensors = parking_sensors;
+    }
+
+    public String getRear_parking_camera() {
+        return rear_parking_camera;
+    }
+
+    public void setRear_parking_camera(String rear_parking_camera) {
+        this.rear_parking_camera = rear_parking_camera;
+    }
+
+    public String getBluetooth() {
+        return bluetooth;
+    }
+
+    public void setBluetooth(String bluetooth) {
+        this.bluetooth = bluetooth;
+    }
+
+    public String getCruise_control() {
+        return cruise_control;
+    }
+
+    public void setCruise_control(String cruise_control) {
+        this.cruise_control = cruise_control;
+    }
+
+    public String getSunroof() {
+        return sunroof;
+    }
+
+    public void setSunroof(String sunroof) {
+        this.sunroof = sunroof;
+    }
+
+    public String getCar_image() {
+        return car_image;
+    }
+
+    public void setCar_image(String car_image) {
+        this.car_image = car_image;
     }
 
     public String getDoor() {
@@ -66,12 +140,12 @@ public class CarFleetModel {
         this.door = door;
     }
 
-    public String getPetrol() {
-        return petrol;
+    public String getPassenger() {
+        return passenger;
     }
 
-    public void setPetrol(String petrol) {
-        this.petrol = petrol;
+    public void setPassenger(String passenger) {
+        this.passenger = passenger;
     }
 
     public String getSuitcase() {
@@ -80,61 +154,5 @@ public class CarFleetModel {
 
     public void setSuitcase(String suitcase) {
         this.suitcase = suitcase;
-    }
-
-    public String getEngine() {
-        return engine;
-    }
-
-    public void setEngine(String engine) {
-        this.engine = engine;
-    }
-
-    public int getImage1() {
-        return image1;
-    }
-
-    public void setImage1(int image1) {
-        this.image1 = image1;
-    }
-
-    public int getImage2() {
-        return image2;
-    }
-
-    public void setImage2(int image2) {
-        this.image2 = image2;
-    }
-
-    public int getImage3() {
-        return image3;
-    }
-
-    public void setImage3(int image3) {
-        this.image3 = image3;
-    }
-
-    public String getCarName() {
-        return carName;
-    }
-
-    public void setCarName(String carName) {
-        this.carName = carName;
-    }
-
-    public String getGroupName() {
-        return groupName;
-    }
-
-    public void setGroupName(String groupName) {
-        this.groupName = groupName;
-    }
-
-    public int getImage() {
-        return image;
-    }
-
-    public void setImage(int image) {
-        this.image = image;
     }
 }

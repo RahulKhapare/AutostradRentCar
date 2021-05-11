@@ -40,7 +40,7 @@
                        android:id="@+id/imgCar"
                        android:layout_marginTop="30dp"
                        android:layout_width="match_parent"
-                       android:layout_height="117dp"
+                       android:layout_height="120dp"
                        android:scaleType="fitXY">
 
                    </ImageView>
@@ -125,10 +125,10 @@
                                       android:layout_width="15dp"
                                       android:layout_height="15dp"
                                       android:layout_gravity="center"
-                                      android:src="@drawable/ic_ceat"></ImageView>
+                                      android:src="@drawable/ic_suitcase"></ImageView>
 
                                   <TextView
-                                      android:id="@+id/txtSeat"
+                                      android:id="@+id/txtSuitcase"
                                       android:layout_weight="1"
                                       android:layout_width="wrap_content"
                                       android:layout_height="wrap_content"
@@ -154,11 +154,11 @@
                                       android:layout_width="15dp"
                                       android:layout_height="15dp"
                                       android:layout_gravity="center"
-                                      android:src="@drawable/ic_mode"></ImageView>
+                                      android:src="@drawable/ic_doore"></ImageView>
 
                                   <TextView
                                       android:layout_weight="1"
-                                      android:id="@+id/txtAutomatic"
+                                      android:id="@+id/txtDoor"
                                       android:layout_width="wrap_content"
                                       android:layout_height="wrap_content"
                                       android:text="@string/app_name"
@@ -202,6 +202,15 @@
 
                               </LinearLayout>
 
+
+                          </LinearLayout>
+
+                          <LinearLayout
+                              android:layout_marginTop="16dp"
+                              android:orientation="horizontal"
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content">
+
                               <LinearLayout
                                   android:layout_weight="1"
                                   android:layout_width="match_parent"
@@ -212,11 +221,11 @@
                                       android:layout_width="15dp"
                                       android:layout_height="15dp"
                                       android:layout_gravity="center"
-                                      android:src="@drawable/ic_doore"></ImageView>
+                                      android:src="@drawable/ic_mode"></ImageView>
 
                                   <TextView
                                       android:layout_weight="1"
-                                      android:id="@+id/txtDoors"
+                                      android:id="@+id/txtMode"
                                       android:layout_width="wrap_content"
                                       android:layout_height="wrap_content"
                                       android:text="@string/app_name"
@@ -230,14 +239,6 @@
                                   </TextView>
 
                               </LinearLayout>
-
-                          </LinearLayout>
-
-                          <LinearLayout
-                              android:layout_marginTop="16dp"
-                              android:orientation="horizontal"
-                              android:layout_width="match_parent"
-                              android:layout_height="wrap_content">
 
                               <LinearLayout
                                   android:layout_weight="1"
@@ -268,6 +269,7 @@
 
                               </LinearLayout>
 
+
                               <LinearLayout
                                   android:layout_weight="1"
                                   android:layout_width="match_parent"
@@ -278,11 +280,53 @@
                                       android:layout_width="15dp"
                                       android:layout_height="15dp"
                                       android:layout_gravity="center"
-                                      android:src="@drawable/suitcase_bg"></ImageView>
+                                      android:tint="@color/colorBlack"
+                                      android:scaleType="fitXY"
+                                      android:src="@drawable/ic_ac_unit"></ImageView>
 
                                   <TextView
                                       android:layout_weight="1"
-                                      android:id="@+id/txtSuitcase"
+                                      android:id="@+id/txtAirCondition"
+                                      android:layout_width="wrap_content"
+                                      android:layout_height="wrap_content"
+                                      android:text="@string/app_name"
+                                      android:fontFamily="@font/nunito_sans_regular"
+                                      android:textSize="14sp"
+                                      android:layout_marginLeft="3dp"
+                                      android:layout_marginRight="3dp"
+                                      android:singleLine="true"
+                                      android:textColor="@color/textDark">
+
+                                  </TextView>
+
+                              </LinearLayout>
+
+
+                          </LinearLayout>
+
+                          <LinearLayout
+                              android:layout_marginTop="16dp"
+                              android:orientation="horizontal"
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content">
+
+                              <LinearLayout
+                                  android:layout_weight="1"
+                                  android:layout_width="match_parent"
+                                  android:layout_height="wrap_content"
+                                  android:orientation="horizontal">
+
+                                  <ImageView
+                                      android:layout_width="15dp"
+                                      android:layout_height="18dp"
+                                      android:layout_gravity="center"
+                                      android:scaleType="fitXY"
+                                      android:src="@drawable/ic_air_bag"
+                                      android:tint="@color/colorBlack"></ImageView>
+
+                                  <TextView
+                                      android:layout_weight="1"
+                                      android:id="@+id/txtAirBag"
                                       android:layout_width="wrap_content"
                                       android:layout_height="wrap_content"
                                       android:text="@string/app_name"
@@ -308,25 +352,25 @@
                                       android:layout_height="15dp"
                                       android:layout_gravity="center"
                                       android:tint="@color/colorBlack"
-                                      android:scaleType="fitXY"
-                                      android:src="@drawable/engine_bg"></ImageView>
+                                      android:src="@drawable/ic_camera"></ImageView>
 
                                   <TextView
+                                      android:id="@+id/txtParkingCamera"
                                       android:layout_weight="1"
-                                      android:id="@+id/txtEngine"
                                       android:layout_width="wrap_content"
                                       android:layout_height="wrap_content"
                                       android:text="@string/app_name"
-                                      android:fontFamily="@font/nunito_sans_regular"
-                                      android:textSize="14sp"
+                                      android:singleLine="true"
                                       android:layout_marginLeft="3dp"
                                       android:layout_marginRight="3dp"
-                                      android:singleLine="true"
+                                      android:fontFamily="@font/nunito_sans_regular"
+                                      android:textSize="14sp"
                                       android:textColor="@color/textDark">
 
                                   </TextView>
 
                               </LinearLayout>
+
 
                               <LinearLayout
                                   android:layout_weight="1"
@@ -338,11 +382,13 @@
                                       android:layout_width="15dp"
                                       android:layout_height="15dp"
                                       android:layout_gravity="center"
-                                      android:src="@drawable/ic_suitcase"></ImageView>
+                                      android:tint="@color/colorBlack"
+                                      android:scaleType="fitXY"
+                                      android:src="@drawable/ic_bluetooth"></ImageView>
 
                                   <TextView
                                       android:layout_weight="1"
-                                      android:id="@+id/txtSuitcaseTwo"
+                                      android:id="@+id/txtBluetooth"
                                       android:layout_width="wrap_content"
                                       android:layout_height="wrap_content"
                                       android:text="@string/app_name"
@@ -356,6 +402,7 @@
                                   </TextView>
 
                               </LinearLayout>
+
 
                           </LinearLayout>
 
@@ -374,6 +421,19 @@
 
                       </TextView>
 
+                      <TextView
+                          android:layout_marginTop="0dp"
+                          android:id="@+id/txtReadMore"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_gravity="center"
+                          android:textSize="16sp"
+                          android:textColor="@color/lightBlue"
+                          android:fontFamily="@font/nunito_sans_regular"
+                          android:text="Read More">
+
+                      </TextView>
+
                       <HorizontalScrollView
                           android:layout_width="match_parent"
                           android:layout_height="wrap_content">
@@ -385,55 +445,12 @@
                               android:layout_marginBottom="20dp"
                               android:orientation="horizontal">
 
-                              <androidx.cardview.widget.CardView
-                                  android:layout_width="116dp"
-                                  android:layout_height="88dp"
-                                  app:cardElevation="0dp"
-                                  app:cardCornerRadius="5dp">
+                             <androidx.recyclerview.widget.RecyclerView
+                                 android:id="@+id/recyclerCarRelated"
+                                 android:layout_width="match_parent"
+                                 android:layout_height="wrap_content">
 
-                                  <ImageView
-                                      android:id="@+id/img1"
-                                      android:layout_width="match_parent"
-                                      android:layout_height="match_parent"
-                                      android:scaleType="fitXY">
-
-                                  </ImageView>
-
-                              </androidx.cardview.widget.CardView>
-
-                              <androidx.cardview.widget.CardView
-                                  android:layout_width="116dp"
-                                  android:layout_height="88dp"
-                                  app:cardElevation="0dp"
-                                  app:cardCornerRadius="5dp"
-                                  android:layout_marginRight="5dp"
-                                  android:layout_marginLeft="5dp">
-
-                                  <ImageView
-                                      android:id="@+id/img2"
-                                      android:layout_width="match_parent"
-                                      android:layout_height="match_parent"
-                                      android:scaleType="fitXY">
-
-                                  </ImageView>
-
-                              </androidx.cardview.widget.CardView>
-
-                              <androidx.cardview.widget.CardView
-                                  android:layout_width="116dp"
-                                  android:layout_height="88dp"
-                                  app:cardElevation="0dp"
-                                  app:cardCornerRadius="5dp">
-
-                                  <ImageView
-                                      android:id="@+id/img3"
-                                      android:layout_width="match_parent"
-                                      android:layout_height="match_parent"
-                                      android:scaleType="fitXY">
-
-                                  </ImageView>
-
-                              </androidx.cardview.widget.CardView>
+                             </androidx.recyclerview.widget.RecyclerView>
 
                           </LinearLayout>
 

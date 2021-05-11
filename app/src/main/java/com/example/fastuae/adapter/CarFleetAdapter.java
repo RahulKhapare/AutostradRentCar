@@ -24,6 +24,7 @@ import com.example.fastuae.databinding.ActivityCarFleetListBinding;
 import com.example.fastuae.model.CarFleetModel;
 import com.example.fastuae.util.Click;
 import com.example.fastuae.util.Config;
+import com.example.fastuae.util.LoadImage;
 import com.example.fastuae.util.P;
 
 import java.util.List;
@@ -51,20 +52,20 @@ public class CarFleetAdapter extends RecyclerView.Adapter<CarFleetAdapter.viewHo
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
         CarFleetModel model = carFleetModelList.get(position);
 
-        holder.binding.imgCar.setImageResource(model.getImage());
-        holder.binding.txtCarName.setText(model.getCarName());
+        LoadImage.glideString(context,holder.binding.imgCar,model.getCar_image());
+        holder.binding.txtCarName.setText(model.getCar_name());
 
-        holder.binding.txtSeat.setText(model.getSeat());
-        holder.binding.txtAutomatic.setText(model.getAutomatic());
+        holder.binding.txtSuitcase.setText(model.getSuitcase());
+        holder.binding.txtAutomatic.setText(model.getTransmission_name());
         holder.binding.txtDoor.setText(model.getDoor());
-        holder.binding.txtPassengerOne.setText(model.getPassenger());
+        holder.binding.txtFuil.setText(model.getFuel_type_name());
 
         holder.binding.txtMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-                Config.carFleetModel = model;
                 Intent intent = new Intent(context, CarFleetDetailsActivity.class);
+                intent.putExtra(Config.CAR_ID,model.getId());
                 context.startActivity(intent);
             }
         });
@@ -89,11 +90,10 @@ public class CarFleetAdapter extends RecyclerView.Adapter<CarFleetAdapter.viewHo
 
 
         if (session.getString(P.languageFlag).equals(Config.ARABIC)){
-
-            holder.binding.txtSeat.setGravity(Gravity.RIGHT);
+            holder.binding.txtSuitcase.setGravity(Gravity.RIGHT);
             holder.binding.txtAutomatic.setGravity(Gravity.RIGHT);
             holder.binding.txtDoor.setGravity(Gravity.RIGHT);
-            holder.binding.txtPassengerOne.setGravity(Gravity.RIGHT);
+            holder.binding.txtFuil.setGravity(Gravity.RIGHT);
         }
 
     }

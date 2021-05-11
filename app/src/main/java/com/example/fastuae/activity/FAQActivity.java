@@ -74,19 +74,19 @@ public class FAQActivity extends AppCompatActivity implements CategorySelectionA
     private void setData() {
 
         CategoryModel categoryModel1 = new CategoryModel();
-        categoryModel1.setCategoryFlag(Config.General);
+        categoryModel1.setCategory_name_slug(Config.General);
         categoryModel1.setCategoryName(getResources().getString(R.string.general));
         categoryModelList.add(categoryModel1);
         CategoryModel categoryModel2 = new CategoryModel();
-        categoryModel2.setCategoryFlag(Config.Payment_Related);
+        categoryModel2.setCategory_name_slug(Config.Payment_Related);
         categoryModel2.setCategoryName(getResources().getString(R.string.paymentRelated));
         categoryModelList.add(categoryModel2);
         CategoryModel categoryModel3 = new CategoryModel();
-        categoryModel3.setCategoryFlag(Config.Vehicle_Related);
+        categoryModel3.setCategory_name_slug(Config.Vehicle_Related);
         categoryModel3.setCategoryName(getResources().getString(R.string.vehicleRelated));
         categoryModelList.add(categoryModel3);
         CategoryModel categoryModel4 = new CategoryModel();
-        categoryModel4.setCategoryFlag(Config.Insurance_Related);
+        categoryModel4.setCategory_name_slug(Config.Insurance_Related);
         categoryModel4.setCategoryName(getResources().getString(R.string.insuranceRelated));
         categoryModelList.add(categoryModel4);
 

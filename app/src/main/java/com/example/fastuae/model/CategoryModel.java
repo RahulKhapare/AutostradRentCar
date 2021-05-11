@@ -3,20 +3,7 @@ package com.example.fastuae.model;
 public class CategoryModel {
 
     String categoryName;
-    String categoryFlag;
-
-    public void CategoryModel(String categoryFlag, String categoryName){
-        this.categoryFlag = categoryFlag;
-        this.categoryName = categoryName;
-    }
-
-    public String getCategoryFlag() {
-        return categoryFlag;
-    }
-
-    public void setCategoryFlag(String categoryFlag) {
-        this.categoryFlag = categoryFlag;
-    }
+    String category_name_slug;
 
     public String getCategoryName() {
         return categoryName;
@@ -24,5 +11,13 @@ public class CategoryModel {
 
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
+    }
+
+    public String getCategory_name_slug() {
+        return category_name_slug;
+    }
+
+    public void setCategory_name_slug(String category_name_slug) {
+        this.category_name_slug = category_name_slug;
     }
 }

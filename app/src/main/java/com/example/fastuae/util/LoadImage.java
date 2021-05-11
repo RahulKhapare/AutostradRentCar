@@ -28,6 +28,7 @@ public class LoadImage {
 
         if(!TextUtils.isEmpty(imagePath)){
             Glide.with(context).load(imagePath)
+                    .placeholder(R.drawable.progress_animation)
                     .error(R.drawable.ic_no_car)
                     .apply(new RequestOptions()
                             .fitCenter()

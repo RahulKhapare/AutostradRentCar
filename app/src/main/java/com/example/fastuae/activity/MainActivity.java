@@ -139,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
             binding.toolbar.setTitle(getResources().getString(R.string.carFleet));
             showBackArrow();
             if (ic_filter!=null){
-                ic_filter.setVisible(true);
+                ic_filter.setVisible(false);
             }
         }else if (tag.equals(Config.MENU)){
             binding.toolbar.setTitle(getResources().getString(R.string.menu));

@@ -66,6 +66,36 @@
 
         </RelativeLayout>
 
+        <RelativeLayout
+            android:id="@+id/lnr3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/corner_blue_bg"
+            android:padding="5dp"
+            android:visibility="gone"
+            android:gravity="center">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="116dp"
+                android:layout_height="88dp"
+                app:cardElevation="0dp"
+                app:cardCornerRadius="10dp">
+
+                <ImageView
+                    android:id="@+id/img3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_view_one"
+                    android:scaleType="fitXY">
+
+                </ImageView>
+
+            </androidx.cardview.widget.CardView>
+
+        </RelativeLayout>
+
     </RelativeLayout>
 
 

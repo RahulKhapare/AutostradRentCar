@@ -46,12 +46,6 @@ public class Config {
     public static String Salik_Charges = "Salik Charges";
     public static String Traffic_Lines = "Traffic Lines";
 
-    public static String Compact_Cars = "Compact Cars";
-    public static String Economy_Cars = "Economy Cars";
-    public static String Big_Size_Cars = "Big Size Cars";
-    public static String Mid_Size_Cars = "Mid Size Cars";
-    public static String Small_Size_Cars = "Small Size Cars";
-
     public static String General = "General";
     public static String Payment_Related = "Payment Related";
     public static String Vehicle_Related = "Vehicle Related";
@@ -62,6 +56,7 @@ public class Config {
     public static String FLEET_TAG = "FLEET_TAG";
     public static String PAY_TYPE = "PAY_TYPE";
     public static String PAY_ID = "PAY_ID";
+    public static String CAR_ID = "CAR_ID";
     public static String SELECTED_AED = "SELECTED_AED";
     public static String pay_now = "pay_now";
     public static String pay_latter = "pay_latter";
@@ -102,7 +97,6 @@ public class Config {
     public static int FILTER_VALUE = 0;
     public static boolean FROM_MAP = false;
 
-
     public static String firstName = "";
     public static String lastName = "";
     public static String email = "";
@@ -110,9 +104,6 @@ public class Config {
     public static String code = "";
     public static Integer positionCode = null;
     public static boolean isEditDetails;
-
-    public static CarFleetModel carFleetModel;
-
 
     public static JsonList countryJsonList = new JsonList();
 

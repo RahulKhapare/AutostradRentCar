@@ -1,10 +1,13 @@
 package com.example.fastuae.adapter;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
@@ -53,6 +56,7 @@ public class CarImageAdapter extends RecyclerView.Adapter<CarImageAdapter.viewHo
         if (flag==1){
             holder.binding.lnr1.setVisibility(View.VISIBLE);
             holder.binding.lnr2.setVisibility(View.GONE);
+            holder.binding.lnr3.setVisibility(View.GONE);
             if (!TextUtils.isEmpty(model.getImage())){
                 LoadImage.glideString(context,holder.binding.img1,model.getImage());
             }
@@ -67,6 +71,7 @@ public class CarImageAdapter extends RecyclerView.Adapter<CarImageAdapter.viewHo
         }else if (flag==2){
             holder.binding.lnr2.setVisibility(View.VISIBLE);
             holder.binding.lnr1.setVisibility(View.GONE);
+            holder.binding.lnr3.setVisibility(View.GONE);
             if (!TextUtils.isEmpty(model.getImage())){
                 LoadImage.glideString(context,holder.binding.img2,model.getImage());
             }
@@ -75,6 +80,21 @@ public class CarImageAdapter extends RecyclerView.Adapter<CarImageAdapter.viewHo
                 public void onClick(View v) {
                     if (!TextUtils.isEmpty(model.getImage())){
                         LoadImage.glideString(context,imgCar,model.getImage());
+                    }
+                }
+            });
+        }else if (flag==3){
+            holder.binding.lnr3.setVisibility(View.VISIBLE);
+            holder.binding.lnr2.setVisibility(View.GONE);
+            holder.binding.lnr1.setVisibility(View.GONE);
+            if (!TextUtils.isEmpty(model.getImage())){
+                LoadImage.glideString(context,holder.binding.img3,model.getImage());
+            }
+            holder.binding.img3.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (!TextUtils.isEmpty(model.getImage())){
+                        carViewDialog(model.getImage());
                     }
                 }
             });
@@ -94,5 +114,21 @@ public class CarImageAdapter extends RecyclerView.Adapter<CarImageAdapter.viewHo
             super(binding.getRoot());
             this.binding = binding;
         }
+    }
+
+    private void carViewDialog(String imagePath) {
+
+        final Dialog dialog = new Dialog(context);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.activity_car_view);
+
+        ImageView imgCar = dialog.findViewById(R.id.imgCar);
+        LoadImage.glideString(context, imgCar, imagePath);
+
+        dialog.setCancelable(true);
+        dialog.show();
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+
     }
 }

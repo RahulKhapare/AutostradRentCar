@@ -31,6 +31,7 @@ public class CategorySelectionAdapter extends RecyclerView.Adapter<CategorySelec
     ProfileFragment profileFragment;
     FleetFragment fleetFragment;
     String tag = "";
+    boolean checkFlag;
 
     public interface onClick{
         void onCategoryClick(String category);
@@ -43,11 +44,12 @@ public class CategorySelectionAdapter extends RecyclerView.Adapter<CategorySelec
         this.tag = tag;
     }
 
-    public CategorySelectionAdapter(Context context, List<CategoryModel> categoryModelList, FleetFragment fleetFragment,String tag) {
+    public CategorySelectionAdapter(Context context, List<CategoryModel> categoryModelList, FleetFragment fleetFragment,String tag,boolean checkFlag) {
         this.context = context;
         this.categoryModelList = categoryModelList;
         this.fleetFragment = fleetFragment;
         this.tag = tag;
+        this.checkFlag = checkFlag;
     }
 
     public CategorySelectionAdapter(Context context, List<CategoryModel> categoryModelList,String tag) {
@@ -77,11 +79,11 @@ public class CategorySelectionAdapter extends RecyclerView.Adapter<CategorySelec
                 lastCheckPosition = holder.getAdapterPosition();
                 notifyItemRangeChanged(0,categoryModelList.size());
                 if (tag.equals(Config.PROFILE_TAG)){
-                    ((ProfileFragment)profileFragment).onCategoryClick(model.getCategoryFlag());
+                    ((ProfileFragment)profileFragment).onCategoryClick(model.getCategory_name_slug());
                 }else if (tag.equals(Config.FAQ_TAG)){
-                    ((FAQActivity)context).onCategoryClick(model.getCategoryFlag());
+                    ((FAQActivity)context).onCategoryClick(model.getCategory_name_slug());
                 }else if (tag.equals(Config.FLEET_TAG)){
-                    ((FleetFragment)fleetFragment).onCategoryClick(model.getCategoryFlag());
+                    ((FleetFragment)fleetFragment).onCategoryClick(model.getCategoryName());
                 }
 
             }
@@ -96,6 +98,12 @@ public class CategorySelectionAdapter extends RecyclerView.Adapter<CategorySelec
             holder.binding.txtCategory.setTypeface(typefaceRegular);
             holder.binding.txtCategory.setTextColor(context.getResources().getColor(R.color.textDark));
         }
+
+        if (tag.equals(Config.FLEET_TAG) && position==0 && checkFlag){
+            checkFlag = false;
+            ((FleetFragment)fleetFragment).onCategoryClick(model.getCategoryName());
+        }
+
     }
 
     @Override

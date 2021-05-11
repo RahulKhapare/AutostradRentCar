@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.adoisstudio.helper.H;
 import com.example.fastuae.R;
 import com.example.fastuae.adapter.CategorySelectionAdapter;
 import com.example.fastuae.databinding.FragmentProfileBinding;
@@ -95,35 +96,35 @@ public class ProfileFragment extends Fragment implements CategorySelectionAdapte
     private void setData() {
 
         CategoryModel categoryModel1 = new CategoryModel();
-        categoryModel1.setCategoryFlag(Config.My_Account);
+        categoryModel1.setCategory_name_slug(Config.My_Account);
         categoryModel1.setCategoryName(getResources().getString(R.string.myAccount));
         categoryModelList.add(categoryModel1);
         CategoryModel categoryModel2 = new CategoryModel();
-        categoryModel2.setCategoryFlag(Config.Documents);
+        categoryModel2.setCategory_name_slug(Config.Documents);
         categoryModel2.setCategoryName(getResources().getString(R.string.document));
         categoryModelList.add(categoryModel2);
         CategoryModel categoryModel3 = new CategoryModel();
-        categoryModel3.setCategoryFlag(Config.Additional_Driver);
+        categoryModel3.setCategory_name_slug(Config.Additional_Driver);
         categoryModel3.setCategoryName(getResources().getString(R.string.additionalDriver));
         categoryModelList.add(categoryModel3);
         CategoryModel categoryModel4 = new CategoryModel();
-        categoryModel4.setCategoryFlag(Config.Booking);
+        categoryModel4.setCategory_name_slug(Config.Booking);
         categoryModel4.setCategoryName(getResources().getString(R.string.booking));
         categoryModelList.add(categoryModel4);
         CategoryModel categoryModel5 = new CategoryModel();
-        categoryModel5.setCategoryFlag(Config.Manage_Payments);
+        categoryModel5.setCategory_name_slug(Config.Manage_Payments);
         categoryModel5.setCategoryName(getResources().getString(R.string.managePayment));
         categoryModelList.add(categoryModel5);
         CategoryModel categoryModel6 = new CategoryModel();
-        categoryModel6.setCategoryFlag(Config.Invoices);
+        categoryModel6.setCategory_name_slug(Config.Invoices);
         categoryModel6.setCategoryName(getResources().getString(R.string.invoices));
         categoryModelList.add(categoryModel6);
         CategoryModel categoryModel7 = new CategoryModel();
-        categoryModel7.setCategoryFlag(Config.Salik_Charges);
+        categoryModel7.setCategory_name_slug(Config.Salik_Charges);
         categoryModel7.setCategoryName(getResources().getString(R.string.salik_Charges));
         categoryModelList.add(categoryModel7);
         CategoryModel categoryModel8 = new CategoryModel();
-        categoryModel8.setCategoryFlag(Config.Traffic_Lines);
+        categoryModel8.setCategory_name_slug(Config.Traffic_Lines);
         categoryModel8.setCategoryName(getResources().getString(R.string.traffic_Lines));
         categoryModelList.add(categoryModel8);
 

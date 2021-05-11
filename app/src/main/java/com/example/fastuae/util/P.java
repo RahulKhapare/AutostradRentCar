@@ -14,6 +14,7 @@ public class P {
     public static String list = "list";
     public static String emirate_list = "emirate_list";
     public static String status = "status";
+    public static String detail = "detail";
     public static String data = "data";
     public static String bill_info = "bill_info";
     public static String user_payment_option_list = "user_payment_option_list";
@@ -62,6 +63,7 @@ public class P {
     public static String image_alt_text = "image_alt_text";
     public static String url = "url";
 
+    public static String category_list = "category_list";
     public static String car_list = "car_list";
     public static String min_price = "min_price";
     public static String num_rows = "num_rows";
@@ -69,11 +71,14 @@ public class P {
     public static String transmission_name = "transmission_name";
     public static String fuel_type_name = "fuel_type_name";
     public static String group_name = "group_name";
+    public static String category_name_slug = "category_name_slug";
     public static String category_name = "category_name";
     public static String car_image = "car_image";
     public static String door = "door";
     public static String passenger = "passenger";
     public static String suitcase = "suitcase";
+    public static String car_detail_banner_file_image = "car_detail_banner_file_image";
+    public static String detail_description = "detail_description";
     public static String amount_difference = "amount_difference";
 
     public static String blog_list = "blog_list";
