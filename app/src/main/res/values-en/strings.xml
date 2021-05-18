@@ -362,6 +362,9 @@
     <string name="unableToOpenDetails">Unable to open details</string>
     <string name="editAddressMessagePickUp">Do you want to edit pickup location and time ?</string>
     <string name="editAddressMessageDropOff">Do you want to edit drop-off location and time ?</string>
+    <string name="useCode">Use Code</string>
+    <string name="codeCopied">Code copied</string>
+    <string name="tel">Tel</string>
 
     <string name="txt1">Leading Car Rental Company with the largest network of Branches &amp; Pickup points</string>
     <string name="txt2">Leading Car Rental Company with the largest network of Branches &amp; Pickup points</string>

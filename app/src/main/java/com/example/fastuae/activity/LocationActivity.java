@@ -1,18 +1,26 @@
 package com.example.fastuae.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
+import com.adoisstudio.helper.Api;
+import com.adoisstudio.helper.H;
+import com.adoisstudio.helper.Json;
+import com.adoisstudio.helper.JsonList;
+import com.adoisstudio.helper.LoadingDialog;
+import com.adoisstudio.helper.Session;
 import com.example.fastuae.R;
 import com.example.fastuae.adapter.LocationDetailAdapter;
 import com.example.fastuae.databinding.ActivityLocationBinding;
 import com.example.fastuae.model.LocationModel;
 import com.example.fastuae.util.Click;
+import com.example.fastuae.util.P;
+import com.example.fastuae.util.ProgressView;
 import com.example.fastuae.util.WindowView;
 
 import java.util.ArrayList;
@@ -24,6 +32,9 @@ public class LocationActivity extends AppCompatActivity {
     private ActivityLocationBinding binding;
     private List<LocationModel> locationModelList;
     private LocationDetailAdapter adapter;
+    private LoadingDialog loadingDialog;
+    private Session session;
+    private boolean callTime = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,12 +50,16 @@ public class LocationActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
+        callTime = false;
+        session = new Session(activity);
+        loadingDialog = new LoadingDialog(activity);
+
         locationModelList = new ArrayList<>();
         adapter = new LocationDetailAdapter(activity,locationModelList);
         binding.recyclerLocation.setLayoutManager(new LinearLayoutManager(activity));
         binding.recyclerLocation.setAdapter(adapter);
 
-        setData();
+        hitLocationData();
         onClick();
     }
 
@@ -55,30 +70,77 @@ public class LocationActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Click.preventTwoClick(v);
                 binding.txtViewMore.setVisibility(View.GONE);
-                setData();
+                hitLocationData();
             }
         });
 
-        binding.cardPickLocation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Click.preventTwoClick(v);
-            }
-        });
     }
 
-    private void setData(){
 
-        LocationModel model = new LocationModel();
-        model.setBranchCode("A8");
-        model.setBranchName("Mussafah");
-        model.setDetails("Mussafah Industrial 2, Mussafah, Abu Dhabi,\nUnited Arab Emirates\nTel : 02 551 2916 Email : a8@fastuae.com");
-        model.setOperation("Sunday to Wednesday: 08.00 to 17.00\nThursday: 08.00 to 17.00\nFriday: Closed\nSaturday: 08.00 to 17.00");
-        locationModelList.add(model);
-        locationModelList.add(model);
-        locationModelList.add(model);
-        adapter.notifyDataSetChanged();
+    private void hitLocationData() {
+        locationModelList.clear();
+        ProgressView.show(activity,loadingDialog);
+        Api.newApi(activity, P.BaseUrl + "location")
+                .setMethod(Api.GET)
+//                .onHeaderRequest(App::getHeaders)
+                .onError(() -> {
+                    ProgressView.dismiss(loadingDialog);
+                    H.showMessage(activity, "On error is called");
+                    checkData();
+                })
+                .onSuccess(json ->
+                {
+                    if (json.getInt(P.status) == 1) {
+                        json = json.getJson(P.data);
+                        JsonList location_list = json.getJsonList(P.location_list);
 
+                        if (location_list!=null && location_list.size()!=0){
+
+                            for (Json jsonData : location_list){
+                                LocationModel model = new LocationModel();
+                                model.setId(jsonData.getString(P.id));
+                                model.setEmirate_id(jsonData.getString(P.emirate_id));
+                                model.setEmirate_name(jsonData.getString(P.emirate_name));
+                                model.setLocation_name(jsonData.getString(P.location_name));
+                                model.setLocation_timing(jsonData.getString(P.location_timing));
+                                model.setAddress(jsonData.getString(P.address));
+                                model.setStatus(jsonData.getString(P.status));
+                                model.setContact_number(jsonData.getString(P.contact_number));
+                                model.setContact_email(jsonData.getString(P.contact_email));
+                                model.setLocation_time_data(jsonData.getJsonArray(P.location_time_data));
+
+                                if (!callTime){
+                                    if (locationModelList.size()<3){
+                                        locationModelList.add(model);
+                                    }
+                                }else {
+                                    locationModelList.add(model);
+                                }
+
+                            }
+
+                            callTime = true;
+                            adapter.notifyDataSetChanged();
+
+                        }
+                        checkData();
+                    }else {
+                        checkData();
+                        H.showMessage(activity,json.getString(P.error));
+                    }
+                    ProgressView.dismiss(loadingDialog);
+
+                })
+                .run("hitLocationData");
+
+    }
+
+    private void checkData(){
+        if (locationModelList.isEmpty()){
+            binding.txtError.setVisibility(View.VISIBLE);
+        }else {
+            binding.txtError.setVisibility(View.GONE);
+        }
     }
 
     @Override

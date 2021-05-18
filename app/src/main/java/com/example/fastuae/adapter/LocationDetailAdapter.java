@@ -42,10 +42,12 @@ public class LocationDetailAdapter extends RecyclerView.Adapter<LocationDetailAd
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
         LocationModel model = locationModelList.get(position);
 
-        holder.binding.txtBranchCode.setText(model.getBranchCode());
-        holder.binding.txtBranchName.setText(model.getBranchName());
-        holder.binding.txtDetails.setText(model.getDetails());
-        holder.binding.txtNormalOperation.setText(model.getOperation());
+        holder.binding.txtBranchCode.setText(model.getEmirate_id());
+        holder.binding.txtBranchName.setText(model.getLocation_name());
+        holder.binding.txtDetails.setText(model.getAddress()+
+                "\n" + context.getResources().getString(R.string.tel)+ ": "+ model.getContact_number()
+                +"\n"+ context.getResources().getString(R.string.email) + ": "  + model.getContact_email());
+        holder.binding.txtNormalOperation.setText(model.getLocation_timing());
 
         if (session.getString(P.languageFlag).equals(Config.ARABIC)){
             holder.binding.txtBranchName.setGravity(Gravity.RIGHT);

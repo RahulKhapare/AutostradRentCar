@@ -1,58 +1,107 @@
 package com.example.fastuae.model;
 
+import com.adoisstudio.helper.JsonList;
+
+import org.json.JSONArray;
+
 public class LocationModel {
 
-    String location;
-    String branchCode;
-    String branchName;
-    String details;
-    String operation;
+    String id;
+    String emirate_id;
+    String emirate_name;
+    String location_name;
+    String location_timing;
+    String address;
+    String status;
+    String contact_number;
+    String contact_email;
+    JSONArray location_time_data;
+
+    public LocationModel(String location_name) {
+        this.location_name = location_name;
+    }
 
     public LocationModel() {
 
     }
 
-    public LocationModel(String location) {
-        this.location = location;
+    public String getId() {
+        return id;
     }
 
-    public String getBranchCode() {
-        return branchCode;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public void setBranchCode(String branchCode) {
-        this.branchCode = branchCode;
+    public String getEmirate_id() {
+        return emirate_id;
     }
 
-    public String getBranchName() {
-        return branchName;
+    public void setEmirate_id(String emirate_id) {
+        this.emirate_id = emirate_id;
     }
 
-    public void setBranchName(String branchName) {
-        this.branchName = branchName;
+    public String getEmirate_name() {
+        return emirate_name;
     }
 
-    public String getDetails() {
-        return details;
+    public void setEmirate_name(String emirate_name) {
+        this.emirate_name = emirate_name;
     }
 
-    public void setDetails(String details) {
-        this.details = details;
+    public String getLocation_name() {
+        return location_name;
     }
 
-    public String getOperation() {
-        return operation;
+    public void setLocation_name(String location_name) {
+        this.location_name = location_name;
     }
 
-    public void setOperation(String operation) {
-        this.operation = operation;
+    public String getLocation_timing() {
+        return location_timing;
     }
 
-    public String getLocation() {
-        return location;
+    public void setLocation_timing(String location_timing) {
+        this.location_timing = location_timing;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getContact_number() {
+        return contact_number;
+    }
+
+    public void setContact_number(String contact_number) {
+        this.contact_number = contact_number;
+    }
+
+    public String getContact_email() {
+        return contact_email;
+    }
+
+    public void setContact_email(String contact_email) {
+        this.contact_email = contact_email;
+    }
+
+    public JSONArray getLocation_time_data() {
+        return location_time_data;
+    }
+
+    public void setLocation_time_data(JSONArray location_time_data) {
+        this.location_time_data = location_time_data;
     }
 }

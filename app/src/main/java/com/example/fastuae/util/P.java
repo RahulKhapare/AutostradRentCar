@@ -28,6 +28,9 @@ public class P {
     public static String uploaded_document = "uploaded_document";
     public static String pending_document = "pending_document";
     public static String id = "id";
+    public static String title_name = "title_name";
+    public static String offer_validity = "offer_validity";
+    public static String offer_code = "offer_code";
     public static String user_name = "user_name";
     public static String user_email = "user_email";
     public static String agreement_vehicle_no = "agreement_vehicle_no";
@@ -129,6 +132,7 @@ public class P {
     public static String duration = "duration";
     public static String emirate_name = "emirate_name";
     public static String location_name = "location_name";
+    public static String location_timing = "location_timing";
     public static String address = "address";
     public static String contact_number = "contact_number";
     public static String contact_email = "contact_email";
@@ -244,6 +248,7 @@ public class P {
     public static String pickup_long = "pickup_long";
     public static String dropoff_lat = "dropoff_lat";
     public static String dropoff_long = "dropoff_long";
+    public static String offers = "offers";
 
 
 }

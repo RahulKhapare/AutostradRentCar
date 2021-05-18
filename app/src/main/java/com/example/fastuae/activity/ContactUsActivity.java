@@ -130,7 +130,7 @@ public class ContactUsActivity extends AppCompatActivity implements LocationList
         binding.txtEmail.setText("assist@fastuae.com");
         binding.txtTelephoneNo.setText("600-500-101");
         binding.txtMobileNo.setText("971 2815 2700");
-        binding.txtArea.setText(locationModelList.get(0).getLocation());
+        binding.txtArea.setText(locationModelList.get(0).getLocation_name());
 
     }
 

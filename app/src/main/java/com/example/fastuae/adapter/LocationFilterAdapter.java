@@ -43,12 +43,12 @@ public class LocationFilterAdapter extends RecyclerView.Adapter<LocationFilterAd
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
         LocationModel model = locationModelList.get(position);
 
-        holder.binding.txtFilter.setText(model.getLocation());
+        holder.binding.txtFilter.setText(model.getLocation_name());
         holder.binding.txtFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-                ((ContactUsActivity)context).onFilterClick(model.getLocation());
+                ((ContactUsActivity)context).onFilterClick(model.getLocation_name());
 
             }
         });

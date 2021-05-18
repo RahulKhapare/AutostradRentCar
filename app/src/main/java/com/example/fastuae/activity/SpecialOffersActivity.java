@@ -2,15 +2,24 @@ package com.example.fastuae.activity;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.adoisstudio.helper.Api;
+import com.adoisstudio.helper.H;
+import com.adoisstudio.helper.Json;
+import com.adoisstudio.helper.JsonList;
+import com.adoisstudio.helper.LoadingDialog;
+import com.adoisstudio.helper.Session;
 import com.example.fastuae.R;
 import com.example.fastuae.adapter.SpecialOffersAdapter;
 import com.example.fastuae.databinding.ActivitySpecialOffersBinding;
 import com.example.fastuae.model.SpecialOffersModel;
+import com.example.fastuae.util.P;
+import com.example.fastuae.util.ProgressView;
 import com.example.fastuae.util.WindowView;
 
 import java.util.ArrayList;
@@ -22,6 +31,8 @@ public class SpecialOffersActivity extends AppCompatActivity {
     private ActivitySpecialOffersBinding binding;
     private List<SpecialOffersModel> specialOffersModelList;
     private SpecialOffersAdapter adapter;
+    private LoadingDialog loadingDialog;
+    private Session session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,29 +48,70 @@ public class SpecialOffersActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
+        session = new Session(activity);
+        loadingDialog = new LoadingDialog(activity);
         specialOffersModelList = new ArrayList<>();
         adapter = new SpecialOffersAdapter(activity,specialOffersModelList);
         binding.recyclerOffers.setLayoutManager(new LinearLayoutManager(activity));
         binding.recyclerOffers.setAdapter(adapter);
 
-        setData();
+        hitSpecialOffersData();
 
     }
 
-    private void setData(){
 
-        SpecialOffersModel model = new SpecialOffersModel();
-        model.setCode("Use Code: FAST100");
-        model.setValidUpTo("Validity: 15 December 2020 to 15 January 2021");
-        model.setDescription("Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.");
+    private void hitSpecialOffersData() {
 
-        specialOffersModelList.add(model);
-        specialOffersModelList.add(model);
+        ProgressView.show(activity,loadingDialog);
+        Api.newApi(activity, P.BaseUrl + "offers_list")
+                .setMethod(Api.GET)
+//                .onHeaderRequest(App::getHeaders)
+                .onError(() -> {
+                    ProgressView.dismiss(loadingDialog);
+                    H.showMessage(activity, "On error is called");
+                    checkData();
+                })
+                .onSuccess(json ->
+                {
+                    if (json.getInt(P.status) == 1) {
+                        json = json.getJson(P.data);
+                        JsonList offers = json.getJsonList(P.offers);
 
-        adapter.notifyDataSetChanged();
+                        if (offers!=null && offers.size()!=0){
+                            for (Json jsonData : offers){
+                                SpecialOffersModel model = new SpecialOffersModel();
+                                model.setId(jsonData.getString(P.id));
+                                model.setTitle_name(jsonData.getString(P.title_name));
+                                model.setDescription(jsonData.getString(P.description));
+                                model.setOffer_validity(jsonData.getString(P.offer_validity));
+                                model.setOffer_code(jsonData.getString(P.offer_code));
+                                model.setImage_alt_text(jsonData.getString(P.image_alt_text));
+                                model.setStatus(jsonData.getString(P.status));
+                                model.setImage(jsonData.getString(P.image));
+                                specialOffersModelList.add(model);
+                            }
+                            adapter.notifyDataSetChanged();
+                        }
+                        checkData();
+                    }else {
+                        checkData();
+                        H.showMessage(activity,json.getString(P.error));
+                    }
+                    ProgressView.dismiss(loadingDialog);
+
+                })
+                .run("hitSpecialOffersData");
 
     }
 
+
+    private void checkData(){
+        if (specialOffersModelList.isEmpty()){
+            binding.txtError.setVisibility(View.VISIBLE);
+        }else {
+            binding.txtError.setVisibility(View.GONE);
+        }
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
