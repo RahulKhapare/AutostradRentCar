@@ -115,4 +115,5 @@ public class Config {
     public static boolean HOME_DELIVERY_CHECK = false;
     public static boolean HOME_COLLECT_CHECK = false;
 
+
 }

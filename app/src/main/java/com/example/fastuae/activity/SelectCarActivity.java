@@ -132,13 +132,17 @@ public class SelectCarActivity extends AppCompatActivity implements ViewPager.On
 //        binding.tabLayout.getTabAt(1).setIcon(tabIcons[1]);
 
         View view1 = LayoutInflater.from(this).inflate(R.layout.activity_customt_ab, null);
-        ((ImageView) view1.findViewById(R.id.icon)).setImageResource(R.drawable.ic_card_pink);
-        ((TextView) view1.findViewById(R.id.text)).setText(getResources().getString(R.string.cardview));
+        ((ImageView) view1.findViewById(R.id.icon)).setImageResource(R.drawable.ic_greed_pink);
+        ((TextView) view1.findViewById(R.id.text)).setText(getResources().getString(R.string.gridview));
         ((TextView) view1.findViewById(R.id.text)).setTextColor(getResources().getColor(R.color.lightBlue));
 
         View view2 = LayoutInflater.from(this).inflate(R.layout.activity_customt_ab, null);
-        ((ImageView) view2.findViewById(R.id.icon)).setImageResource(R.drawable.ic_greed_dark);
-        ((TextView) view2.findViewById(R.id.text)).setText(getResources().getString(R.string.gridview));
+        ((ImageView) view2.findViewById(R.id.icon)).setImageResource(R.drawable.ic_card_dark);
+        ((TextView) view2.findViewById(R.id.text)).setText(getResources().getString(R.string.cardview));
+
+//        View view2 = LayoutInflater.from(this).inflate(R.layout.activity_customt_ab, null);
+//        ((ImageView) view2.findViewById(R.id.icon)).setImageResource(R.drawable.ic_greed_dark);
+//        ((TextView) view2.findViewById(R.id.text)).setText(getResources().getString(R.string.gridview));
 
         binding.tabLayout.getTabAt(0).setCustomView(view1);
         binding.tabLayout.getTabAt(1).setCustomView(view2);
@@ -149,9 +153,9 @@ public class SelectCarActivity extends AppCompatActivity implements ViewPager.On
                 View view = tab.getCustomView();
                 ((TextView) view.findViewById(R.id.text)).setTextColor(getResources().getColor(R.color.lightBlue));
                 if (tab.getPosition()==0){
-                    ((ImageView) view.findViewById(R.id.icon)).setImageResource(R.drawable.ic_card_pink);
-                }else if (tab.getPosition()==1){
                     ((ImageView) view.findViewById(R.id.icon)).setImageResource(R.drawable.ic_greed_pink);
+                }else if (tab.getPosition()==1){
+                    ((ImageView) view.findViewById(R.id.icon)).setImageResource(R.drawable.ic_card_pink);
                 }
             }
 
@@ -160,9 +164,9 @@ public class SelectCarActivity extends AppCompatActivity implements ViewPager.On
                 View view = tab.getCustomView();
                 ((TextView) view.findViewById(R.id.text)).setTextColor(getResources().getColor(R.color.textDark));
                 if (tab.getPosition()==0){
-                    ((ImageView) view.findViewById(R.id.icon)).setImageResource(R.drawable.ic_card_dark);
-                }else if (tab.getPosition()==1){
                     ((ImageView) view.findViewById(R.id.icon)).setImageResource(R.drawable.ic_greed_dark);
+                }else if (tab.getPosition()==1){
+                    ((ImageView) view.findViewById(R.id.icon)).setImageResource(R.drawable.ic_card_dark);
                 }
             }
 
@@ -185,8 +189,8 @@ public class SelectCarActivity extends AppCompatActivity implements ViewPager.On
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 //        adapter.addFragment(carCardFragment,getResources().getString(R.string.cardview));
 //        adapter.addFragment(carGreedFragment, getResources().getString(R.string.gridview));
-        adapter.addFragment(carCardFragment,"");
         adapter.addFragment(carGreedFragment, "");
+        adapter.addFragment(carCardFragment,"");
         viewPager.setAdapter(adapter);
     }
 

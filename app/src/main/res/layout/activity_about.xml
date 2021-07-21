@@ -1,0 +1,678 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimaryDark">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:background="@color/colorPrimaryDark"
+            android:theme="@style/ToolbarColoredBackArrow"
+            app:subtitleTextColor="@color/colorWhite"
+            app:titleTextColor="@color/colorWhite"></androidx.appcompat.widget.Toolbar>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/toolbar"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/curve_main_bg">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.core.widget.NestedScrollView
+                    android:layout_marginTop="0dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_above="@+id/cardBottom"
+                    android:fillViewport="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/imgBanner"
+                            android:layout_width="match_parent"
+                            android:layout_height="150dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/ic_carrer">
+
+                        </ImageView>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="16dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_marginTop="5dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:text="Fast Rent A Car"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:fontFamily="@font/nunit_sans_bold"
+                                android:textSize="20sp"></TextView>
+
+                            <TextView
+                                android:layout_marginTop="10dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/textDark"
+                                android:text="“Creating memorable car rental experiences, one drive at a time!”"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:fontFamily="@font/nunito_sans_regular"
+                                android:textSize="18sp"></TextView>
+
+                            <TextView
+                                android:layout_marginTop="10dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/textDark"
+                                android:text="It’s just a drive …. just a journey from one place to the other, a road that you may have travelled many times over! Yet, each drive is a unique experience!"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:fontFamily="@font/nunito_sans_regular"
+                                android:textSize="16sp"></TextView>
+
+
+                            <LinearLayout
+                                android:layout_marginTop="20dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="@color/colorPrimaryDark"
+                                    android:text="Our Heritage"
+                                    android:fontFamily="@font/nunito_sans_semibold"
+                                    android:textSize="18sp"></TextView>
+
+                                <LinearLayout
+                                    android:layout_marginTop="10dp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <ImageView
+                                        android:layout_width="120dp"
+                                        android:layout_height="120dp"
+                                        android:src="@drawable/ic_heritage"></ImageView>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginRight="10dp"
+                                        android:layout_marginLeft="10dp"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:textColor="@color/textDark"
+                                            android:text="Fast Rent A Car is part of the prestigious Emirates National Group, which owns &amp; operates brands that offer private and public transportation, along with ancillary services."
+                                            android:fontFamily="@font/nunito_sans_regular"
+                                            android:textSize="16sp"></TextView>
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:textColor="@color/lightBlue"
+                                            android:text="View More"
+                                            android:layout_marginTop="5dp"
+                                            android:fontFamily="@font/nunito_sans_regular"
+                                            android:textSize="14sp"></TextView>
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:alpha="0.5"
+                            android:background="@color/textDark"></LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="16dp"
+                            android:orientation="vertical">
+
+                           <LinearLayout
+                               android:layout_width="match_parent"
+                               android:layout_height="wrap_content"
+                               android:orientation="horizontal">
+
+                               <ImageView
+                                   android:layout_width="50dp"
+                                   android:layout_height="50dp"
+                                   android:src="@drawable/ic_mission"></ImageView>
+                               <TextView
+                                   android:layout_width="wrap_content"
+                                   android:layout_height="wrap_content"
+                                   android:textColor="@color/colorPrimaryDark"
+                                   android:text="Our Mission"
+                                   android:paddingLeft="15dp"
+                                   android:paddingRight="15dp"
+                                   android:layout_gravity="center"
+                                   android:fontFamily="@font/nunito_sans_semibold"
+                                   android:textSize="18sp"></TextView>
+
+                           </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_marginTop="10dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="@color/textDark"
+                                        android:text="To win the heart of each customer. by consistently providing high quality customized transport solutions. We back our commitment with our investment in cutting-edge technology and world class customer service so that each customer experience is a memorable one!"
+                                        android:fontFamily="@font/nunito_sans_regular"
+                                        android:textSize="14sp"></TextView>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:alpha="0.5"
+                            android:background="@color/textDark"></LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="16dp"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:src="@drawable/ic_vission"></ImageView>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="@color/colorPrimaryDark"
+                                    android:text="Our Vision"
+                                    android:paddingLeft="15dp"
+                                    android:paddingRight="15dp"
+                                    android:layout_gravity="center"
+                                    android:fontFamily="@font/nunito_sans_semibold"
+                                    android:textSize="18sp"></TextView>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_marginTop="10dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="@color/textDark"
+                                        android:text="To be the most loved, trusted and profitable transport solution provider"
+                                        android:fontFamily="@font/nunito_sans_regular"
+                                        android:textSize="14sp"></TextView>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:alpha="0.5"
+                            android:background="@color/textDark"></LinearLayout>
+
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="16dp"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="@color/colorPrimaryDark"
+                                    android:text="Our Values"
+                                    android:layout_gravity="center"
+                                    android:fontFamily="@font/nunito_sans_semibold"
+                                    android:textSize="18sp"></TextView>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_marginTop="10dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+                                        <ImageView
+                                            android:layout_width="50dp"
+                                            android:layout_height="50dp"
+                                            android:layout_marginLeft="10dp"
+                                            android:layout_marginRight="10dp"
+                                            android:src="@drawable/ic_transferency"></ImageView>
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:textColor="@color/colorPrimaryDark"
+                                            android:text="Transparency and Integrity"
+                                            android:layout_gravity="center"
+                                            android:fontFamily="@font/nunito_sans_semibold"
+                                            android:textSize="18sp"></TextView>
+
+                                    </LinearLayout>
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="@color/textDark"
+                                        android:text="We pride ourselves in always honoring our commitments. Be it in our dealings with stakeholders, partners or customers, we believe in doing things the right way – with transparency and integrity."
+                                        android:fontFamily="@font/nunito_sans_regular"
+                                        android:textSize="14sp"></TextView>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_marginTop="10dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+                                        <ImageView
+                                            android:layout_width="50dp"
+                                            android:layout_height="50dp"
+                                            android:layout_marginLeft="10dp"
+                                            android:layout_marginRight="10dp"
+                                            android:src="@drawable/ic_on_touch"></ImageView>
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:textColor="@color/colorPrimaryDark"
+                                            android:text="Top-notch Customer Service"
+                                            android:layout_gravity="center"
+                                            android:fontFamily="@font/nunito_sans_semibold"
+                                            android:textSize="18sp"></TextView>
+
+                                    </LinearLayout>
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="@color/textDark"
+                                        android:text="We recognize that our customers seek a smooth experience both on and off the road. To ensure that, we constantly strive to not only provide high quality vehicles but also world class customer service at all times. We work hard to win the hearts of each one of our customers so that we continue to be their first choice."
+                                        android:fontFamily="@font/nunito_sans_regular"
+                                        android:textSize="14sp"></TextView>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_marginTop="10dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+                                        <ImageView
+                                            android:layout_width="50dp"
+                                            android:layout_height="50dp"
+                                            android:layout_marginLeft="10dp"
+                                            android:layout_marginRight="10dp"
+                                            android:src="@drawable/ic_auality"></ImageView>
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:textColor="@color/colorPrimaryDark"
+                                            android:text="Quality"
+                                            android:layout_gravity="center"
+                                            android:fontFamily="@font/nunito_sans_semibold"
+                                            android:textSize="18sp"></TextView>
+
+                                    </LinearLayout>
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="@color/textDark"
+                                        android:text="We are driven by our commitment to deliver exceptional quality and experiences to our customers. It’s the small every day improvements that we make in the maintenance of our vehicles, hygiene and safety processes and training of our personnel that make the big difference in assuring our custom -ers a safe and smooth driving experience."
+                                        android:fontFamily="@font/nunito_sans_regular"
+                                        android:textSize="14sp"></TextView>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_marginTop="10dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+                                        <ImageView
+                                            android:layout_width="50dp"
+                                            android:layout_height="50dp"
+                                            android:layout_marginLeft="10dp"
+                                            android:layout_marginRight="10dp"
+                                            android:src="@drawable/ic_creativity"></ImageView>
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:textColor="@color/colorPrimaryDark"
+                                            android:text="Creativity and Innovation"
+                                            android:layout_gravity="center"
+                                            android:fontFamily="@font/nunito_sans_semibold"
+                                            android:textSize="18sp"></TextView>
+
+                                    </LinearLayout>
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="@color/textDark"
+                                        android:text="We are constantly looking for new and better ways forward. Our team is constantly encouraged to challenge the status quo and push the boundaries. Finding solutions to almost imposs -ible challenges is part of our success and a source of inspira -tion to move on to the next challenge."
+                                        android:fontFamily="@font/nunito_sans_regular"
+                                        android:textSize="14sp"></TextView>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_marginTop="10dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+                                        <ImageView
+                                            android:layout_width="50dp"
+                                            android:layout_height="50dp"
+                                            android:layout_marginLeft="10dp"
+                                            android:layout_marginRight="10dp"
+                                            android:src="@drawable/ic_solution"></ImageView>
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:textColor="@color/colorPrimaryDark"
+                                            android:text="Value Added Solutions"
+                                            android:layout_gravity="center"
+                                            android:fontFamily="@font/nunito_sans_semibold"
+                                            android:textSize="18sp"></TextView>
+
+                                    </LinearLayout>
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="@color/textDark"
+                                        android:text="We believe in going the extra mile and adding the extra zing to our transport solutions. Whether it is value added solutions or end to end project management solutions, we are always looking for ways to simplify the lives of our customers."
+                                        android:fontFamily="@font/nunito_sans_regular"
+                                        android:textSize="14sp"></TextView>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:alpha="0.5"
+                            android:background="@color/textDark"></LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="16dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:text="Our Fleet"
+                                android:fontFamily="@font/nunito_sans_semibold"
+                                android:textSize="18sp"></TextView>
+
+                            <LinearLayout
+                                android:layout_marginTop="10dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="120dp"
+                                    android:layout_height="120dp"
+                                    android:src="@drawable/ic_our_fleet"></ImageView>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="10dp"
+                                    android:layout_marginLeft="10dp"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="@color/textDark"
+                                        android:text="Over the years, UAE’s population has grown exponentially and UAE has becom a global hub for business &amp; tourism. With ever-changing customer demands, there is an increasing need to expand our serv -ices and cater to the new discerning"
+                                        android:fontFamily="@font/nunito_sans_regular"
+                                        android:textSize="16sp"></TextView>
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="@color/lightBlue"
+                                        android:text="View More"
+                                        android:layout_marginTop="5dp"
+                                        android:fontFamily="@font/nunito_sans_regular"
+                                        android:textSize="14sp"></TextView>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:alpha="0.5"
+                            android:background="@color/textDark"></LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="16dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:text="Miles To Go ...."
+                                android:fontFamily="@font/nunito_sans_semibold"
+                                android:textSize="18sp"></TextView>
+
+                            <LinearLayout
+                                android:layout_marginTop="10dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="120dp"
+                                    android:layout_height="120dp"
+                                    android:src="@drawable/ic_mile_go"></ImageView>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="10dp"
+                                    android:layout_marginLeft="10dp"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="@color/textDark"
+                                        android:text="Fast Rent A Car is part of the prestigious Emirates National Group, which owns &amp; operates brands that offer private and public transportation, along with ancillary services."
+                                        android:fontFamily="@font/nunito_sans_regular"
+                                        android:textSize="16sp"></TextView>
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="@color/lightBlue"
+                                        android:text="View More"
+                                        android:layout_marginTop="5dp"
+                                        android:fontFamily="@font/nunito_sans_regular"
+                                        android:textSize="14sp"></TextView>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+
+                </androidx.core.widget.NestedScrollView>
+
+                <TextView
+                    android:id="@+id/txtError"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/noDataFound"
+                    android:textSize="22sp"
+                    android:visibility="gone"
+                    android:layout_centerInParent="true"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:fontFamily="@font/nunito_sans_semibold">
+
+                </TextView>
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</layout>

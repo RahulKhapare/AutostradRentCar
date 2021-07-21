@@ -1,5 +1,6 @@
 package com.example.fastuae.fragment;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
@@ -863,6 +864,13 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick, D
 
 
     private void setTime(TextView txtTime, int flag) {
+
+        //AlertDialog.THEME_DEVICE_DEFAULT_LIGHT
+        //AlertDialog.THEME_DEVICE_DEFAULT_DARK
+        //AlertDialog.THEME_HOLO_DARK
+        //AlertDialog.THEME_HOLO_LIGHT
+        //AlertDialog.THEME_TRADITIONAL
+
         Calendar mcurrentTime = Calendar.getInstance();
         int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
         int minute = mcurrentTime.get(Calendar.MINUTE);
@@ -890,8 +898,9 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick, D
 
             }
         }, hour, minute, true);//Yes 24 hour time
-        mTimePicker.setTitle("Select Time");
+//        mTimePicker.setTitle("Select Time");
         mTimePicker.show();
+
     }
 
 

@@ -365,6 +365,15 @@
     <string name="useCode">Use Code</string>
     <string name="codeCopied">Code copied</string>
     <string name="tel">Tel</string>
+    <string name="logOut">LogOut</string>
+    <string name="logOutMessage">Do you want to log out ?</string>
+    <string name="careerText">All set to explore, learn &amp; implement with one of the most amazing teams. Head-start your career with a company is like walking into world full of creative ideas. We are eager to hear from you soon.</string>
+    <string name="productManager">Product Manager</string>
+    <string name="location">Location</string>
+    <string name="experience">Experience</string>
+    <string name="applyNow">Apply Now</string>
+    <string name="shareToFriend">Share to friend</string>
+    <string name="about">About</string>
 
     <string name="txt1">Leading Car Rental Company with the largest network of Branches &amp; Pickup points</string>
     <string name="txt2">Leading Car Rental Company with the largest network of Branches &amp; Pickup points</string>

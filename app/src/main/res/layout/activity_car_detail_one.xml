@@ -94,7 +94,7 @@
                                     android:id="@+id/imgCar"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:scaleType="fitXY"
+                                    android:adjustViewBounds="true"
                                     android:src="@drawable/ic_car_four"></ImageView>
 
                             </androidx.cardview.widget.CardView>

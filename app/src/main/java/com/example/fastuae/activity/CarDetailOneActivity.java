@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -61,7 +62,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class CarDetailOneActivity extends AppCompatActivity implements AddOnsAdapter.onClick{
+public class CarDetailOneActivity extends AppCompatActivity implements AddOnsAdapter.onClick,AddOnsAdapter.onCalculation{
 
     private CarDetailOneActivity activity = this;
     private ActivityCarDetailOneBinding binding;
@@ -87,6 +88,9 @@ public class CarDetailOneActivity extends AppCompatActivity implements AddOnsAda
 
     Json pickup_location_data;
     Json dropoff_location_data;
+    double totalAEDAmount = 0;
+    double currentCarAED = 0;
+    double showAED = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -167,7 +171,9 @@ public class CarDetailOneActivity extends AppCompatActivity implements AddOnsAda
         String pickUpDate = getFormatedDate("yyyy-MM-dd", "dd, MMM yyyy", Config.SelectedPickUpDate);
         String dropUpDate = getFormatedDate("yyyy-MM-dd", "dd, MMM yyyy", Config.SelectedDropUpDate);
 
-        binding.txtTotalAED.setText(getResources().getString(R.string.aed) + " " +carAED);
+        if (carAED!=null && !carAED.equals("")){
+            currentCarAED = Double.parseDouble(carAED);
+        }
 
         if (Config.HOME_DELIVERY_CHECK){
             binding.txtPickUpLocation.setText(HomeFragment.deliveryEmirateName+",\n"+pickUpDate+", "+Config.SelectedPickUpTime);
@@ -207,6 +213,26 @@ public class CarDetailOneActivity extends AppCompatActivity implements AddOnsAda
         hitBookingCarData();
     }
 
+
+    @Override
+    public void aedCalculation(ChooseExtrasModel model,int position) {
+
+        if (model.getPrice()!=null && !model.getPrice().equals("")){
+            double aedAmount = Double.parseDouble(model.getPrice());
+            totalAEDAmount = totalAEDAmount + aedAmount;
+        }
+
+        if (position==AddOnsActivity.addOnsList.size()-1){
+
+            showAED = totalAEDAmount + currentCarAED;
+
+            DecimalFormat format = new DecimalFormat("#.##");
+            double formatedAED = Double.valueOf(format.format(showAED));
+            showAED = formatedAED;
+            binding.txtTotalAED.setText(getResources().getString(R.string.aed) + " " +showAED + "");
+        }
+
+    }
 
     private void onClick() {
 
@@ -276,7 +302,7 @@ public class CarDetailOneActivity extends AppCompatActivity implements AddOnsAda
                 Click.preventTwoClick(v);
                 Intent intent = new Intent(activity, CarBookingDetailsActivity.class);
                 intent.putExtra(Config.PAY_TYPE,payType);
-                intent.putExtra(Config.SELECTED_AED,carAED);
+                intent.putExtra(Config.SELECTED_AED,showAED + "");
                 startActivity(intent);
             }
         });
@@ -416,12 +442,18 @@ public class CarDetailOneActivity extends AppCompatActivity implements AddOnsAda
                 updateName = carUpgradeModelList.get(currentPosition).getCar_name();
 
                 carID = carUpgradeModelList.get(currentPosition).getCar_id();
-                double totalAmount = Double.parseDouble(aedSelected) + Double.parseDouble(updateAmount);
-                carAED = totalAmount + "";
+                double totalAmount = currentCarAED + Double.parseDouble(updateAmount);
+
+                showAED = totalAEDAmount + totalAmount;
+
+                DecimalFormat format = new DecimalFormat("#.##");
+                double formatedAED = Double.valueOf(format.format(showAED));
+                showAED = formatedAED;
+                binding.txtTotalAED.setText(getResources().getString(R.string.aed) + " " +showAED + "");
 
                 binding.txtCarName.setText(updateName);
-                binding.txtTotalAED.setText(getResources().getString(R.string.aed) + " " +carAED);
-                binding.txtCarRate.setText(getResources().getString(R.string.aed) + " " + carAED);
+                binding.txtCarRate.setText(getResources().getString(R.string.aed) + " " + totalAmount + "");
+                binding.txtTotalAED.setText(getResources().getString(R.string.aed) + " " +showAED + "");
 
                 LoadImage.glideString(activity,binding.imgCar,updateImage);
 

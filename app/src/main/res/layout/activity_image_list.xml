@@ -28,7 +28,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@drawable/ic_view_one"
-                    android:scaleType="fitXY">
+                    android:adjustViewBounds="true">
 
                 </ImageView>
 
@@ -58,7 +58,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@drawable/ic_view_one"
-                    android:scaleType="fitXY">
+                    android:adjustViewBounds="true">
 
                 </ImageView>
 
@@ -88,7 +88,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@drawable/ic_view_one"
-                    android:scaleType="fitXY">
+                    android:adjustViewBounds="true">
 
                 </ImageView>
 

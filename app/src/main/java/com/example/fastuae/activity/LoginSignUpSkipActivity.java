@@ -1,9 +1,5 @@
 package com.example.fastuae.activity;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
-
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Build;
@@ -13,6 +9,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.RadioButton;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
 import com.adoisstudio.helper.Api;
 import com.adoisstudio.helper.H;

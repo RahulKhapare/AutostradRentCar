@@ -26,7 +26,7 @@ public class LoadImage {
 
     public static void glideString(Context context, ImageView imageView, String imagePath){
 
-        if(!TextUtils.isEmpty(imagePath)){
+        if(!TextUtils.isEmpty(imagePath) && !imagePath.equals("null")){
             Glide.with(context).load(imagePath)
                     .placeholder(R.drawable.progress_animation)
                     .error(R.drawable.ic_no_car)

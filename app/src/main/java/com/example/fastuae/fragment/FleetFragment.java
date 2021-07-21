@@ -39,6 +39,7 @@ public class FleetFragment extends Fragment implements CategorySelectionAdapter.
 
     private Context context;
     private FragmentFleetBinding binding;
+    private List<CarFleetModel> carFleetModelListAll;
     private List<CarFleetModel> carFleetModelListOne;
     private List<CarFleetModel> carFleetModelListTwo;
     private CarFleetAdapter carFleetAdapterOne;
@@ -89,6 +90,8 @@ public class FleetFragment extends Fragment implements CategorySelectionAdapter.
         suitcaseSelectionList = new ArrayList<>();
         transmissionSelectionList = new ArrayList<>();
         fuilSelectionList = new ArrayList<>();
+
+        carFleetModelListAll = new ArrayList<>();
 
         categoryModelList = new ArrayList<>();
         categorySelectionAdapter = new CategorySelectionAdapter(context, categoryModelList,FleetFragment.this,Config.FLEET_TAG,true);
@@ -164,6 +167,7 @@ public class FleetFragment extends Fragment implements CategorySelectionAdapter.
     private void setCarListData(String category,JsonList jsonList) {
 
         boolean availableData = false;
+        carFleetModelListAll.clear();
         carFleetModelListOne.clear();
         carFleetModelListTwo.clear();
 
@@ -189,18 +193,21 @@ public class FleetFragment extends Fragment implements CategorySelectionAdapter.
             model.setPassenger(json.getString(P.passenger));
             model.setSuitcase(json.getString(P.suitcase));
 
-            Log.e("TAG", "onCategoryClickAASAS: "+model.getCategory_name() + " - " + category  );
-
             if (model.getCategory_name().equals(category)){
-                if ((i % 2) == 0) {
-                    availableData = true;
-                    carFleetModelListOne.add(model);
-                }else {
-                    availableData = true;
-                    carFleetModelListTwo.add(model);
-                }
+                carFleetModelListAll.add(model);
             }
 
+        }
+
+        for (int k=0; k<carFleetModelListAll.size(); k++){
+            CarFleetModel carFleetModel = carFleetModelListAll.get(k);
+            if ((k % 2) == 0) {
+                availableData = true;
+                carFleetModelListOne.add(carFleetModel);
+            }else {
+                availableData = true;
+                carFleetModelListTwo.add(carFleetModel);
+            }
         }
 
         carFleetAdapterOne.notifyDataSetChanged();

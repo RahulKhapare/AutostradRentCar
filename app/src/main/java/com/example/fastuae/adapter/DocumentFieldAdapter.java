@@ -24,6 +24,7 @@ import com.example.fastuae.databinding.ActivityFiledListBinding;
 import com.example.fastuae.fragment.DocumentFragment;
 import com.example.fastuae.model.ChooseExtrasModel;
 import com.example.fastuae.model.FieldModel;
+import com.example.fastuae.util.Config;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -97,13 +98,12 @@ public class DocumentFieldAdapter extends RecyclerView.Adapter<DocumentFieldAdap
 
             holder.binding.editText.setFocusable(false);
             holder.binding.editText.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_date_range_24, 0);
-            holder.binding.editText.setOnTouchListener(new View.OnTouchListener() {
+            holder.binding.editText.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public boolean onTouch(View v, MotionEvent event) {
+                public void onClick(View v) {
                     if (mDatePicker!=null){
                         mDatePicker.show();
                     }
-                    return false;
                 }
             });
 

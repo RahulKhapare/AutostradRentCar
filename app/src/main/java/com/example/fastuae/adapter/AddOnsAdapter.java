@@ -35,6 +35,10 @@ public class AddOnsAdapter extends RecyclerView.Adapter<AddOnsAdapter.viewHolder
         void aedDetailsClick(ChooseExtrasModel model);
     }
 
+    public interface onCalculation {
+        void aedCalculation(ChooseExtrasModel model,int pos);
+    }
+
     public AddOnsAdapter(Context context, List<ChooseExtrasModel> chooseExtrasModelList) {
         this.context = context;
         this.chooseExtrasModelList = chooseExtrasModelList;
@@ -53,6 +57,8 @@ public class AddOnsAdapter extends RecyclerView.Adapter<AddOnsAdapter.viewHolder
         ChooseExtrasModel model = chooseExtrasModelList.get(position);
         holder.binding.txtExtraTitle.setText(model.getTitle());
         holder.binding.txtExtraValue.setText("AED "+model.getPrice());
+
+        ((CarDetailOneActivity)context).aedCalculation(model,position);
 
         holder.binding.txtAEDDetails.setOnClickListener(new View.OnClickListener() {
             @Override

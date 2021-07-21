@@ -366,6 +366,15 @@
     <string name="useCode">استخدم الكود</string>
     <string name="codeCopied">تم نسخ الرمز</string>
     <string name="tel">هاتف</string>
+    <string name="logOut">تسجيل خروج</string>
+    <string name="logOutMessage">هل ترغب بالخروج ؟</string>
+    <string name="careerText">كل شيء جاهز للاستكشاف والتعلم التنفيذ مع أحد أروع الفرق. ابدأ حياتك المهنية مع شركة مثل السير في عالم مليء بالأفكار الإبداعية. نحن حريصون على أن نسمع منك قريبًا.</string>
+    <string name="productManager">مدير الإنتاج</string>
+    <string name="location">موقع</string>
+    <string name="experience">خبرة</string>
+    <string name="applyNow">قدم الآن</string>
+    <string name="shareToFriend">شارك مع صديق</string>
+    <string name="about">حول</string>
 
     <string name="txt1">شركة رائدة في مجال تأجير السيارات ولديها أكبر شبكة من الفروع ونقاط الالتقاء</string>
     <string name="txt2">شركة رائدة في مجال تأجير السيارات ولديها أكبر شبكة من الفروع ونقاط الالتقاء</string>

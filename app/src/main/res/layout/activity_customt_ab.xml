@@ -13,7 +13,7 @@
            android:id="@+id/icon"
            android:layout_width="14dp"
            android:layout_height="17dp"
-           android:src="@drawable/ic_card"
+           android:src="@drawable/ic_greed_dark"
            android:layout_gravity="center"
            android:layout_centerHorizontal="true" />
 
