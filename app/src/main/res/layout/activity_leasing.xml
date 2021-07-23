@@ -1,0 +1,2333 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimaryDark">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:background="@color/colorPrimaryDark"
+            android:theme="@style/ToolbarColoredBackArrow"
+            app:subtitleTextColor="@color/colorWhite"
+            app:titleTextColor="@color/colorWhite"></androidx.appcompat.widget.Toolbar>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/toolbar"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/curve_main_bg">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.core.widget.NestedScrollView
+                    android:layout_marginTop="0dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_above="@+id/cardBottom"
+                    android:fillViewport="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/imgBanner"
+                            android:layout_width="match_parent"
+                            android:layout_height="150dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/ic_carrer">
+
+                        </ImageView>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="16dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:id="@+id/lnrClickOne"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_weight="1"
+                                        android:id="@+id/txtTitle"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:textSize="20sp"
+                                        android:textColor="@color/textDark"
+                                        android:fontFamily="@font/nunit_sans_bold"
+                                        android:text="Who is it right for?">
+
+                                    </TextView>
+
+                                    <ImageView
+                                        android:id="@+id/imgUpOne"
+                                        android:layout_width="30dp"
+                                        android:layout_height="30dp"
+                                        android:tint="@color/colorBlack"
+                                        android:src="@drawable/ic_up_arrow"
+                                        android:visibility="gone"
+                                        ></ImageView>
+
+                                    <ImageView
+                                        android:id="@+id/imgDownOne"
+                                        android:layout_width="30dp"
+                                        android:layout_height="30dp"
+                                        android:tint="@color/colorBlack"
+                                        android:src="@drawable/ic_down_arrow"
+                                        ></ImageView>
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/lnrViewOne"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:visibility="gone"
+                                    android:orientation="vertical">
+
+                                    <LinearLayout
+                                        android:layout_marginTop="10dp"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+                                        <ImageView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="7dp"
+                                            android:tint="@color/colorBlack"
+                                            android:src="@drawable/circle_bg"></ImageView>
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="16sp"
+                                            android:paddingLeft="10dp"
+                                            android:paddingRight="10dp"
+                                            android:textColor="@color/textDark"
+                                            android:alpha="0.7"
+                                            android:fontFamily="@font/nunito_sans_regular"
+                                            android:text="Are you a business or a company looking for vehicles to transport your goods, materials or to simply provide an option to commute for your employees?">
+
+                                        </TextView>
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="10dp"
+                                        android:orientation="horizontal">
+
+                                        <ImageView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="7dp"
+                                            android:tint="@color/colorBlack"
+                                            android:src="@drawable/circle_bg"></ImageView>
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="16sp"
+                                            android:paddingLeft="10dp"
+                                            android:paddingRight="10dp"
+                                            android:textColor="@color/textDark"
+                                            android:alpha="0.7"
+                                            android:fontFamily="@font/nunito_sans_regular"
+                                            android:text="Does your enterprise require more than 80 vehicles?">
+                                        </TextView>
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="10dp"
+                                        android:orientation="horizontal">
+
+                                        <ImageView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="7dp"
+                                            android:tint="@color/colorBlack"
+                                            android:src="@drawable/circle_bg"></ImageView>
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="16sp"
+                                            android:paddingLeft="10dp"
+                                            android:paddingRight="10dp"
+                                            android:textColor="@color/textDark"
+                                            android:alpha="0.7"
+                                            android:fontFamily="@font/nunito_sans_regular"
+                                            android:text="Do you want to avoid paying lump sum amounts to purchase your own vehicles?">
+                                        </TextView>
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="10dp"
+                                        android:orientation="horizontal">
+
+                                        <ImageView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="7dp"
+                                            android:tint="@color/colorBlack"
+                                            android:src="@drawable/circle_bg"></ImageView>
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="16sp"
+                                            android:paddingLeft="10dp"
+                                            android:paddingRight="10dp"
+                                            android:textColor="@color/textDark"
+                                            android:alpha="0.7"
+                                            android:fontFamily="@font/nunito_sans_regular"
+                                            android:text="Are you looking for a professional fleet management service at a fixed cost, to free up your time and resources so you can focus on running your business?">
+                                        </TextView>
+                                    </LinearLayout>
+
+
+                                    <TextView
+                                        android:layout_marginTop="10dp"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:textSize="16sp"
+                                        android:textColor="@color/colorPrimaryDark"
+                                        android:fontFamily="@font/nunito_sans_semibold"
+                                        android:text="If the answer to any or all of these questions is yes then you and your company will definitely benefit from leasing your corporate fleet from Fast Rent a Car.">
+                                    </TextView>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:background="@color/textDark"
+                            android:alpha="0.5"></LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="16dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:id="@+id/lnrClickTwo"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_weight="1"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:textSize="20sp"
+                                        android:textColor="@color/textDark"
+                                        android:fontFamily="@font/nunit_sans_bold"
+                                        android:text="Why choose a fast rent a car?">
+
+                                    </TextView>
+
+                                    <ImageView
+                                        android:id="@+id/imgUpTwo"
+                                        android:layout_width="30dp"
+                                        android:layout_height="30dp"
+                                        android:tint="@color/colorBlack"
+                                        android:src="@drawable/ic_up_arrow"
+                                        android:visibility="gone"
+                                        ></ImageView>
+
+                                    <ImageView
+                                        android:id="@+id/imgDownTwo"
+                                        android:layout_width="30dp"
+                                        android:layout_height="30dp"
+                                        android:tint="@color/colorBlack"
+                                        android:src="@drawable/ic_down_arrow"
+                                        ></ImageView>
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/lnrViewTwo"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:visibility="gone"
+                                    android:orientation="vertical">
+
+                                    <LinearLayout
+                                        android:layout_marginTop="10dp"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="16sp"
+                                            android:textColor="@color/textDark"
+                                            android:alpha="0.7"
+                                            android:fontFamily="@font/nunito_sans_regular"
+                                            android:text="With over 30 years of experience, Fast Rent A Car has become one of the leading transport solution providers in the UAE market for corporate leasing and fleet management solutions.">
+
+                                        </TextView>
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="16sp"
+                                            android:layout_marginTop="10dp"
+                                            android:textColor="@color/textDark"
+                                            android:alpha="0.7"
+                                            android:fontFamily="@font/nunito_sans_regular"
+                                            android:text="We provide our services with proven expertise and experience in managing lease operations for over 300 clients with more than 5,000 vehicles.">
+
+                                        </TextView>
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:background="@color/textDark"
+                            android:alpha="0.5"></LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="16dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:id="@+id/lnrClickThree"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_weight="1"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:textSize="20sp"
+                                        android:textColor="@color/textDark"
+                                        android:fontFamily="@font/nunit_sans_bold"
+                                        android:text="Sectors we cater to">
+
+                                    </TextView>
+
+                                    <ImageView
+                                        android:id="@+id/imgUpThree"
+                                        android:layout_width="30dp"
+                                        android:layout_height="30dp"
+                                        android:tint="@color/colorBlack"
+                                        android:src="@drawable/ic_up_arrow"
+                                        android:visibility="gone"
+                                        ></ImageView>
+
+                                    <ImageView
+                                        android:id="@+id/imgDownThree"
+                                        android:layout_width="30dp"
+                                        android:layout_height="30dp"
+                                        android:tint="@color/colorBlack"
+                                        android:src="@drawable/ic_down_arrow"
+                                        ></ImageView>
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/lnrViewThree"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:visibility="gone"
+                                    android:orientation="vertical">
+
+                                    <LinearLayout
+                                        android:layout_marginTop="10dp"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+                                        <LinearLayout
+                                            android:layout_weight="1"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="vertical">
+
+                                            <LinearLayout
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:orientation="horizontal">
+
+                                                <ImageView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_marginTop="7dp"
+                                                    android:tint="@color/colorBlack"
+                                                    android:src="@drawable/circle_bg"></ImageView>
+
+                                                <TextView
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:textSize="16sp"
+                                                    android:paddingLeft="10dp"
+                                                    android:paddingRight="10dp"
+                                                    android:textColor="@color/textDark"
+                                                    android:alpha="0.7"
+                                                    android:fontFamily="@font/nunito_sans_regular"
+                                                    android:text="Vehicles for company executives including for senior management">
+
+                                                </TextView>
+                                            </LinearLayout>
+
+                                            <LinearLayout
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginTop="10dp"
+                                                android:orientation="horizontal">
+
+                                                <ImageView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_marginTop="7dp"
+                                                    android:tint="@color/colorBlack"
+                                                    android:src="@drawable/circle_bg"></ImageView>
+
+                                                <TextView
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:textSize="16sp"
+                                                    android:paddingLeft="10dp"
+                                                    android:paddingRight="10dp"
+                                                    android:textColor="@color/textDark"
+                                                    android:alpha="0.7"
+                                                    android:fontFamily="@font/nunito_sans_regular"
+                                                    android:text="Sales and Field force vehicle requirement">
+                                                </TextView>
+                                            </LinearLayout>
+
+                                        </LinearLayout>
+
+                                        <ImageView
+                                            android:layout_width="100dp"
+                                            android:layout_height="100dp"
+                                            android:layout_gravity="center_vertical"
+                                            android:src="@drawable/ic_car_blue"></ImageView>
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+                                        <LinearLayout
+                                            android:layout_weight="1"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="vertical">
+
+                                            <LinearLayout
+                                                android:layout_marginTop="10dp"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:orientation="horizontal">
+
+                                                <ImageView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_marginTop="7dp"
+                                                    android:tint="@color/colorBlack"
+                                                    android:src="@drawable/circle_bg"></ImageView>
+
+                                                <TextView
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:textSize="16sp"
+                                                    android:paddingLeft="10dp"
+                                                    android:paddingRight="10dp"
+                                                    android:textColor="@color/textDark"
+                                                    android:alpha="0.7"
+                                                    android:fontFamily="@font/nunito_sans_regular"
+                                                    android:text="Distribution of perishable food and non- food items">
+
+                                                </TextView>
+                                            </LinearLayout>
+
+                                            <LinearLayout
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginTop="10dp"
+                                                android:orientation="horizontal">
+
+                                                <ImageView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_marginTop="7dp"
+                                                    android:tint="@color/colorBlack"
+                                                    android:src="@drawable/circle_bg"></ImageView>
+
+                                                <TextView
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:textSize="16sp"
+                                                    android:paddingLeft="10dp"
+                                                    android:paddingRight="10dp"
+                                                    android:textColor="@color/textDark"
+                                                    android:alpha="0.7"
+                                                    android:fontFamily="@font/nunito_sans_regular"
+                                                    android:text="Construction &amp; project related movement of goods and man power">
+                                                </TextView>
+                                            </LinearLayout>
+
+                                        </LinearLayout>
+
+                                        <ImageView
+                                            android:layout_width="100dp"
+                                            android:layout_height="100dp"
+                                            android:layout_gravity="center_vertical"
+                                            android:src="@drawable/ic_car_blue"></ImageView>
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="10dp"
+                                        android:orientation="horizontal">
+
+                                        <ImageView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="7dp"
+                                            android:tint="@color/colorBlack"
+                                            android:src="@drawable/circle_bg"></ImageView>
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="16sp"
+                                            android:paddingLeft="10dp"
+                                            android:paddingRight="10dp"
+                                            android:textColor="@color/textDark"
+                                            android:alpha="0.7"
+                                            android:fontFamily="@font/nunito_sans_regular"
+                                            android:text="Hotels and travel sector’s requirement for guest movement">
+                                        </TextView>
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="10dp"
+                                        android:orientation="horizontal">
+
+                                        <ImageView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="7dp"
+                                            android:tint="@color/colorBlack"
+                                            android:src="@drawable/circle_bg"></ImageView>
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="16sp"
+                                            android:paddingLeft="10dp"
+                                            android:paddingRight="10dp"
+                                            android:textColor="@color/textDark"
+                                            android:alpha="0.7"
+                                            android:fontFamily="@font/nunito_sans_regular"
+                                            android:text="Logistics sector’s requirement">
+                                        </TextView>
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="10dp"
+                                        android:orientation="horizontal">
+
+                                        <ImageView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="7dp"
+                                            android:tint="@color/colorBlack"
+                                            android:src="@drawable/circle_bg"></ImageView>
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="16sp"
+                                            android:paddingLeft="10dp"
+                                            android:paddingRight="10dp"
+                                            android:textColor="@color/textDark"
+                                            android:alpha="0.7"
+                                            android:fontFamily="@font/nunito_sans_regular"
+                                            android:text="Oil &amp; Gas sector’s field movement">
+                                        </TextView>
+                                    </LinearLayout>
+
+
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:background="@color/textDark"
+                            android:alpha="0.5"></LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="16dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:id="@+id/lnrClickFour"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_weight="1"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:textSize="20sp"
+                                        android:textColor="@color/textDark"
+                                        android:fontFamily="@font/nunit_sans_bold"
+                                        android:text="End to End solutions we provide">
+
+                                    </TextView>
+
+                                    <ImageView
+                                        android:id="@+id/imgUpFour"
+                                        android:layout_width="30dp"
+                                        android:layout_height="30dp"
+                                        android:tint="@color/colorBlack"
+                                        android:src="@drawable/ic_up_arrow"
+                                        android:visibility="gone"
+                                        ></ImageView>
+
+                                    <ImageView
+                                        android:id="@+id/imgDownFour"
+                                        android:layout_width="30dp"
+                                        android:layout_height="30dp"
+                                        android:tint="@color/colorBlack"
+                                        android:src="@drawable/ic_down_arrow"
+                                        ></ImageView>
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/lnrViewFour"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:visibility="gone"
+                                    android:orientation="vertical">
+
+                                    <LinearLayout
+                                        android:layout_marginTop="10dp"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+                                        <LinearLayout
+                                            android:layout_weight="1"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="vertical">
+
+                                            <LinearLayout
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:orientation="horizontal">
+
+                                                <ImageView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_marginTop="7dp"
+                                                    android:tint="@color/colorBlack"
+                                                    android:src="@drawable/circle_bg"></ImageView>
+
+                                                <TextView
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:textSize="16sp"
+                                                    android:paddingLeft="10dp"
+                                                    android:paddingRight="10dp"
+                                                    android:textColor="@color/textDark"
+                                                    android:alpha="0.7"
+                                                    android:fontFamily="@font/nunito_sans_regular"
+                                                    android:text="Complete fleet life cycle management services including analysis and advisory of fleet usage">
+
+                                                </TextView>
+                                            </LinearLayout>
+
+                                            <LinearLayout
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginTop="10dp"
+                                                android:orientation="horizontal">
+
+                                                <ImageView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_marginTop="7dp"
+                                                    android:tint="@color/colorBlack"
+                                                    android:src="@drawable/circle_bg"></ImageView>
+
+                                                <TextView
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:textSize="16sp"
+                                                    android:paddingLeft="10dp"
+                                                    android:paddingRight="10dp"
+                                                    android:textColor="@color/textDark"
+                                                    android:alpha="0.7"
+                                                    android:fontFamily="@font/nunito_sans_regular"
+                                                    android:text="MIS &amp; Reports provided">
+                                                </TextView>
+                                            </LinearLayout>
+
+                                        </LinearLayout>
+
+                                        <ImageView
+                                            android:layout_width="100dp"
+                                            android:layout_height="100dp"
+                                            android:layout_gravity="center_vertical"
+                                            android:src="@drawable/ic_car_solution_1"></ImageView>
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+                                        <LinearLayout
+                                            android:layout_weight="1"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="vertical">
+
+                                            <LinearLayout
+                                                android:layout_marginTop="10dp"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:orientation="horizontal">
+
+                                                <ImageView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_marginTop="7dp"
+                                                    android:tint="@color/colorBlack"
+                                                    android:src="@drawable/circle_bg"></ImageView>
+
+                                                <TextView
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:textSize="16sp"
+                                                    android:paddingLeft="10dp"
+                                                    android:paddingRight="10dp"
+                                                    android:textColor="@color/textDark"
+                                                    android:alpha="0.7"
+                                                    android:fontFamily="@font/nunito_sans_regular"
+                                                    android:text="Dedicated lease experts and coordinators for large fleet support">
+
+                                                </TextView>
+                                            </LinearLayout>
+
+                                            <LinearLayout
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginTop="10dp"
+                                                android:orientation="horizontal">
+
+                                                <ImageView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_marginTop="7dp"
+                                                    android:tint="@color/colorBlack"
+                                                    android:src="@drawable/circle_bg"></ImageView>
+
+                                                <TextView
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:textSize="16sp"
+                                                    android:paddingLeft="10dp"
+                                                    android:paddingRight="10dp"
+                                                    android:textColor="@color/textDark"
+                                                    android:alpha="0.7"
+                                                    android:fontFamily="@font/nunito_sans_regular"
+                                                    android:text="Worldwide reservations with global merchant tie-ups">
+                                                </TextView>
+                                            </LinearLayout>
+
+                                        </LinearLayout>
+
+                                        <ImageView
+                                            android:layout_width="100dp"
+                                            android:layout_height="100dp"
+                                            android:layout_gravity="center_vertical"
+                                            android:src="@drawable/ic_car_solution_2"></ImageView>
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="10dp"
+                                        android:orientation="horizontal">
+
+                                        <ImageView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="7dp"
+                                            android:tint="@color/colorBlack"
+                                            android:src="@drawable/circle_bg"></ImageView>
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="16sp"
+                                            android:paddingLeft="10dp"
+                                            android:paddingRight="10dp"
+                                            android:textColor="@color/textDark"
+                                            android:alpha="0.7"
+                                            android:fontFamily="@font/nunito_sans_regular"
+                                            android:text="Network in 5 Emirates to ensure accessibility &amp; faster service delivery">
+                                        </TextView>
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="10dp"
+                                        android:orientation="horizontal">
+
+                                        <ImageView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="7dp"
+                                            android:tint="@color/colorBlack"
+                                            android:src="@drawable/circle_bg"></ImageView>
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="16sp"
+                                            android:paddingLeft="10dp"
+                                            android:paddingRight="10dp"
+                                            android:textColor="@color/textDark"
+                                            android:alpha="0.7"
+                                            android:fontFamily="@font/nunito_sans_regular"
+                                            android:text="Complete freedom to choose vehicle of choice from any manufacturer">
+                                        </TextView>
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="10dp"
+                                        android:orientation="horizontal">
+
+                                        <ImageView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="7dp"
+                                            android:tint="@color/colorBlack"
+                                            android:src="@drawable/circle_bg"></ImageView>
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="16sp"
+                                            android:paddingLeft="10dp"
+                                            android:paddingRight="10dp"
+                                            android:textColor="@color/textDark"
+                                            android:alpha="0.7"
+                                            android:fontFamily="@font/nunito_sans_regular"
+                                            android:text="Customised vehicle solutions completely tailored to your business needs">
+                                        </TextView>
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="10dp"
+                                        android:orientation="horizontal">
+
+                                        <ImageView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="7dp"
+                                            android:tint="@color/colorBlack"
+                                            android:src="@drawable/circle_bg"></ImageView>
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="16sp"
+                                            android:paddingLeft="10dp"
+                                            android:paddingRight="10dp"
+                                            android:textColor="@color/textDark"
+                                            android:alpha="0.7"
+                                            android:fontFamily="@font/nunito_sans_regular"
+                                            android:text="Flexible lease options with no hidden costs">
+                                        </TextView>
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="10dp"
+                                        android:orientation="horizontal">
+
+                                        <ImageView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="7dp"
+                                            android:tint="@color/colorBlack"
+                                            android:src="@drawable/circle_bg"></ImageView>
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="16sp"
+                                            android:paddingLeft="10dp"
+                                            android:paddingRight="10dp"
+                                            android:textColor="@color/textDark"
+                                            android:alpha="0.7"
+                                            android:fontFamily="@font/nunito_sans_regular"
+                                            android:text="Single monthly bill covering entire vehicle usage activity">
+                                        </TextView>
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="10dp"
+                                        android:orientation="horizontal">
+
+                                        <ImageView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="7dp"
+                                            android:tint="@color/colorBlack"
+                                            android:src="@drawable/circle_bg"></ImageView>
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="16sp"
+                                            android:paddingLeft="10dp"
+                                            android:paddingRight="10dp"
+                                            android:textColor="@color/textDark"
+                                            android:alpha="0.7"
+                                            android:fontFamily="@font/nunito_sans_regular"
+                                            android:text="Pick up &amp; Drop facility for fleet services">
+                                        </TextView>
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="10dp"
+                                        android:orientation="horizontal">
+
+                                        <ImageView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="7dp"
+                                            android:tint="@color/colorBlack"
+                                            android:src="@drawable/circle_bg"></ImageView>
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="16sp"
+                                            android:paddingLeft="10dp"
+                                            android:paddingRight="10dp"
+                                            android:textColor="@color/textDark"
+                                            android:alpha="0.7"
+                                            android:fontFamily="@font/nunito_sans_regular"
+                                            android:text="With our 4000 strong fleet replacement vehicles will be provided to ensure uninterrupted mobility">
+                                        </TextView>
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="10dp"
+                                        android:orientation="horizontal">
+
+                                        <ImageView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="7dp"
+                                            android:tint="@color/colorBlack"
+                                            android:src="@drawable/circle_bg"></ImageView>
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="16sp"
+                                            android:paddingLeft="10dp"
+                                            android:paddingRight="10dp"
+                                            android:textColor="@color/textDark"
+                                            android:alpha="0.7"
+                                            android:fontFamily="@font/nunito_sans_regular"
+                                            android:text="Paper less approach to vehicle delivery &amp; services">
+                                        </TextView>
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="10dp"
+                                        android:orientation="horizontal">
+
+                                        <ImageView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="7dp"
+                                            android:tint="@color/colorBlack"
+                                            android:src="@drawable/circle_bg"></ImageView>
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="16sp"
+                                            android:paddingLeft="10dp"
+                                            android:paddingRight="10dp"
+                                            android:textColor="@color/textDark"
+                                            android:alpha="0.7"
+                                            android:fontFamily="@font/nunito_sans_regular"
+                                            android:text="Minimum administration procedures">
+                                        </TextView>
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="10dp"
+                                        android:orientation="horizontal">
+
+                                        <ImageView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="7dp"
+                                            android:tint="@color/colorBlack"
+                                            android:src="@drawable/circle_bg"></ImageView>
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="16sp"
+                                            android:paddingLeft="10dp"
+                                            android:paddingRight="10dp"
+                                            android:textColor="@color/textDark"
+                                            android:alpha="0.7"
+                                            android:fontFamily="@font/nunito_sans_regular"
+                                            android:text="Easy Exit facility">
+                                        </TextView>
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:background="@color/textDark"
+                            android:alpha="0.5"></LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="16dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:id="@+id/lnrClickFive"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_weight="1"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:textSize="20sp"
+                                        android:textColor="@color/textDark"
+                                        android:fontFamily="@font/nunit_sans_bold"
+                                        android:text="Advantages of leasing a fleet of vehicles over owning a fleet for your corporate fleet requirements">
+
+                                    </TextView>
+
+                                    <ImageView
+                                        android:id="@+id/imgUpFive"
+                                        android:layout_width="30dp"
+                                        android:layout_height="30dp"
+                                        android:tint="@color/colorBlack"
+                                        android:src="@drawable/ic_up_arrow"
+                                        android:visibility="gone"
+                                        ></ImageView>
+
+                                    <ImageView
+                                        android:id="@+id/imgDownFive"
+                                        android:layout_width="30dp"
+                                        android:layout_height="30dp"
+                                        android:tint="@color/colorBlack"
+                                        android:src="@drawable/ic_down_arrow"
+                                        ></ImageView>
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/lnrViewFive"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:visibility="gone"
+                                    android:orientation="vertical">
+
+                                    <LinearLayout
+                                        android:layout_marginTop="10dp"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="18sp"
+                                            android:textColor="@color/colorPrimaryDark"
+                                            android:fontFamily="@font/nunit_sans_bold"
+                                            android:text="List of criterias">
+
+                                        </TextView>
+
+                                        <LinearLayout
+                                            android:layout_marginTop="10dp"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:layout_weight="1"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:textSize="16sp"
+                                                android:textColor="@color/colorPrimaryDark"
+                                                android:fontFamily="@font/nunito_sans_regular"
+                                                android:text="Best Vehicle purchase pricing">
+
+                                            </TextView>
+
+                                            <ImageView
+                                                android:layout_width="30dp"
+                                                android:layout_height="30dp"
+                                                android:tint="@color/colorBlack"
+                                                android:src="@drawable/ic_right_arrow"
+                                                ></ImageView>
+
+                                        </LinearLayout>
+
+                                        <TextView
+                                            android:layout_marginTop="10dp"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="16sp"
+                                            android:textColor="@color/colorPrimaryDark"
+                                            android:fontFamily="@font/nunito_sans_semibold"
+                                            android:text="Company Owned Fleet">
+
+                                        </TextView>
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="16sp"
+                                            android:layout_marginTop="5dp"
+                                            android:textColor="@color/textDark"
+                                            android:alpha="0.7"
+                                            android:fontFamily="@font/nunito_sans_semibold"
+                                            android:text="You need to negotiate for each vehicle">
+
+                                        </TextView>
+
+                                        <TextView
+                                            android:layout_marginTop="10dp"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="16sp"
+                                            android:textColor="@color/colorPrimaryDark"
+                                            android:fontFamily="@font/nunito_sans_semibold"
+                                            android:text="Leasing From Fast Rent a Car">
+
+                                        </TextView>
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="16sp"
+                                            android:layout_marginTop="5dp"
+                                            android:textColor="@color/textDark"
+                                            android:alpha="0.7"
+                                            android:fontFamily="@font/nunito_sans_semibold"
+                                            android:text="Managed for you along with best prices as a fleet buyer">
+
+                                        </TextView>
+
+                                        <LinearLayout
+                                            android:layout_marginTop="20dp"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="0.5dp"
+                                            android:background="@color/textDark"
+                                            android:alpha="0.5"></LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_marginTop="20dp"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:layout_weight="1"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:textSize="16sp"
+                                                android:textColor="@color/colorPrimaryDark"
+                                                android:fontFamily="@font/nunito_sans_regular"
+                                                android:text="Insurance">
+
+                                            </TextView>
+
+                                            <ImageView
+                                                android:layout_width="30dp"
+                                                android:layout_height="30dp"
+                                                android:tint="@color/colorBlack"
+                                                android:src="@drawable/ic_right_arrow"
+                                                ></ImageView>
+
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_marginTop="20dp"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="0.5dp"
+                                            android:background="@color/textDark"
+                                            android:alpha="0.5"></LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_marginTop="20dp"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:layout_weight="1"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:textSize="16sp"
+                                                android:textColor="@color/colorPrimaryDark"
+                                                android:fontFamily="@font/nunito_sans_regular"
+                                                android:text="Salik &amp; Traffic fines management">
+
+                                            </TextView>
+
+                                            <ImageView
+                                                android:layout_width="30dp"
+                                                android:layout_height="30dp"
+                                                android:tint="@color/colorBlack"
+                                                android:src="@drawable/ic_right_arrow"
+                                                ></ImageView>
+
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_marginTop="20dp"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="0.5dp"
+                                            android:background="@color/textDark"
+                                            android:alpha="0.5"></LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_marginTop="20dp"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:layout_weight="1"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:textSize="16sp"
+                                                android:textColor="@color/colorPrimaryDark"
+                                                android:fontFamily="@font/nunito_sans_regular"
+                                                android:text="Vehicle routine service tracking">
+
+                                            </TextView>
+
+                                            <ImageView
+                                                android:layout_width="30dp"
+                                                android:layout_height="30dp"
+                                                android:tint="@color/colorBlack"
+                                                android:src="@drawable/ic_right_arrow"
+                                                ></ImageView>
+
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_marginTop="20dp"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="0.5dp"
+                                            android:background="@color/textDark"
+                                            android:alpha="0.5"></LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_marginTop="20dp"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:layout_weight="1"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:textSize="16sp"
+                                                android:textColor="@color/colorPrimaryDark"
+                                                android:fontFamily="@font/nunito_sans_regular"
+                                                android:text="Vehicle break down">
+
+                                            </TextView>
+
+                                            <ImageView
+                                                android:layout_width="30dp"
+                                                android:layout_height="30dp"
+                                                android:tint="@color/colorBlack"
+                                                android:src="@drawable/ic_right_arrow"
+                                                ></ImageView>
+
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_marginTop="20dp"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="0.5dp"
+                                            android:background="@color/textDark"
+                                            android:alpha="0.5"></LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_marginTop="20dp"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:layout_weight="1"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:textSize="16sp"
+                                                android:textColor="@color/colorPrimaryDark"
+                                                android:fontFamily="@font/nunito_sans_regular"
+                                                android:text="Repairs, tyres and battery replacement">
+
+                                            </TextView>
+
+                                            <ImageView
+                                                android:layout_width="30dp"
+                                                android:layout_height="30dp"
+                                                android:tint="@color/colorBlack"
+                                                android:src="@drawable/ic_right_arrow"
+                                                ></ImageView>
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:background="@color/textDark"
+                            android:alpha="0.5"></LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="16dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:id="@+id/lnrClickSix"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_weight="1"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:textSize="20sp"
+                                        android:textColor="@color/textDark"
+                                        android:fontFamily="@font/nunit_sans_bold"
+                                        android:text="The fast rent a car leasing process">
+
+                                    </TextView>
+
+                                    <ImageView
+                                        android:id="@+id/imgUpSix"
+                                        android:layout_width="30dp"
+                                        android:layout_height="30dp"
+                                        android:tint="@color/colorBlack"
+                                        android:src="@drawable/ic_up_arrow"
+                                        android:visibility="gone"
+                                        ></ImageView>
+
+                                    <ImageView
+                                        android:id="@+id/imgDownSix"
+                                        android:layout_width="30dp"
+                                        android:layout_height="30dp"
+                                        android:tint="@color/colorBlack"
+                                        android:src="@drawable/ic_down_arrow"
+                                        ></ImageView>
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/lnrViewSix"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:visibility="gone"
+                                    android:orientation="vertical">
+
+                                    <LinearLayout
+                                        android:layout_marginTop="10dp"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="16sp"
+                                            android:textColor="@color/textDark"
+                                            android:alpha="0.7"
+                                            android:fontFamily="@font/nunito_sans_regular"
+                                            android:text="At Fast Rent A Car we make leasing as easy as we can with minimal paperwork. After receiving an initial sales inquiry, we set up a meeting to assess your requirements and understand any further needs that you may have as we believe in providing tailor made solutions to suit our client’s needs. Based on this we then present to you a solution proposal. Upon agreement to this proposal, we only require a few documents">
+
+                                        </TextView>
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="vertical"
+                                            android:layout_margin="10dp">
+
+                                            <LinearLayout
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:orientation="horizontal">
+
+                                                <ImageView
+                                                    android:layout_width="40dp"
+                                                    android:layout_height="40dp"
+                                                    android:scaleType="fitXY"
+                                                    android:adjustViewBounds="true"
+                                                    android:src="@drawable/ic_licence">
+
+                                                </ImageView>
+
+                                                <TextView
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:textSize="16sp"
+                                                    android:textColor="@color/textDark"
+                                                    android:alpha="0.7"
+                                                    android:layout_gravity="center_vertical"
+                                                    android:paddingRight="10dp"
+                                                    android:paddingLeft="10dp"
+                                                    android:fontFamily="@font/nunito_sans_regular"
+                                                    android:text="A valid trade license copy">
+
+                                                </TextView>
+
+
+                                            </LinearLayout>
+
+                                            <LinearLayout
+                                                android:layout_marginTop="10dp"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginLeft="5dp"
+                                                android:layout_marginRight="5dp"
+                                                android:orientation="horizontal">
+
+                                                <ImageView
+                                                    android:layout_width="30dp"
+                                                    android:layout_height="30dp"
+                                                    android:adjustViewBounds="true"
+                                                    android:scaleType="fitXY"
+                                                    android:src="@drawable/ic_certificute">
+
+                                                </ImageView>
+
+                                                <TextView
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:textSize="16sp"
+                                                    android:textColor="@color/textDark"
+                                                    android:alpha="0.7"
+                                                    android:layout_gravity="center_vertical"
+                                                    android:paddingRight="10dp"
+                                                    android:paddingLeft="10dp"
+                                                    android:fontFamily="@font/nunito_sans_regular"
+                                                    android:text="A valid tax certificate copy">
+
+                                                </TextView>
+
+
+                                            </LinearLayout>
+
+                                            <LinearLayout
+                                                android:layout_marginTop="10dp"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:orientation="horizontal">
+
+                                                <ImageView
+                                                    android:layout_width="40dp"
+                                                    android:layout_height="40dp"
+                                                    android:adjustViewBounds="true"
+                                                    android:scaleType="fitXY"
+                                                    android:src="@drawable/ic_visa">
+
+                                                </ImageView>
+
+                                                <TextView
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:textSize="16sp"
+                                                    android:textColor="@color/textDark"
+                                                    android:alpha="0.7"
+                                                    android:layout_gravity="center_vertical"
+                                                    android:paddingRight="10dp"
+                                                    android:paddingLeft="10dp"
+                                                    android:fontFamily="@font/nunito_sans_regular"
+                                                    android:text="A valid copy of passport, VISA, EID of the authorized signatory and his power of attorney">
+
+                                                </TextView>
+
+
+                                            </LinearLayout>
+
+                                        </LinearLayout>
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="16sp"
+                                            android:textColor="@color/textDark"
+                                            android:alpha="0.7"
+                                            android:fontFamily="@font/nunito_sans_regular"
+                                            android:text="The above is then submitted for document verification and approval. Once cleared, all we require is a signature from the Hirer on the VLC (Vehicle Leasing Contract) and you’re good to go!">
+
+                                        </TextView>
+
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:background="@color/textDark"
+                            android:alpha="0.5"></LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="16dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:id="@+id/lnrClickSeven"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_weight="1"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:textSize="20sp"
+                                        android:textColor="@color/textDark"
+                                        android:fontFamily="@font/nunit_sans_bold"
+                                        android:text="School Buses Services">
+
+                                    </TextView>
+
+                                    <ImageView
+                                        android:id="@+id/imgUpSeven"
+                                        android:layout_width="30dp"
+                                        android:layout_height="30dp"
+                                        android:tint="@color/colorBlack"
+                                        android:src="@drawable/ic_up_arrow"
+                                        android:visibility="gone"
+                                        ></ImageView>
+
+                                    <ImageView
+                                        android:id="@+id/imgDownSeven"
+                                        android:layout_width="30dp"
+                                        android:layout_height="30dp"
+                                        android:tint="@color/colorBlack"
+                                        android:src="@drawable/ic_down_arrow"
+                                        ></ImageView>
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/lnrViewSeven"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:visibility="gone"
+                                    android:orientation="vertical">
+
+                                    <LinearLayout
+                                        android:layout_marginTop="10dp"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="16sp"
+                                            android:textColor="@color/textDark"
+                                            android:alpha="0.7"
+                                            android:fontFamily="@font/nunito_sans_regular"
+                                            android:text="Fast Rent A Car has been providing short &amp; long term school bus rental leasing for prestigious schools in Abu Dhabi and Dubai, for more than a decade. All our drivers are fully certified ensuring safety and care for school children and peace of mind for school and parents.">
+
+                                        </TextView>
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="16sp"
+                                            android:layout_marginTop="10dp"
+                                            android:textColor="@color/textDark"
+                                            android:alpha="0.7"
+                                            android:fontFamily="@font/nunito_sans_regular"
+                                            android:text="We have a variety of Buses from top of the line brands to suit all your transport requirements. From the large 58 seater Ashok Leyland busses to the smaller 33 and 26 seater Rosa from Mitsubishi">
+
+                                        </TextView>
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:background="@color/textDark"
+                            android:alpha="0.5"></LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="16dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:id="@+id/lnrClickEight"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_weight="1"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:textSize="20sp"
+                                        android:textColor="@color/textDark"
+                                        android:fontFamily="@font/nunit_sans_bold"
+                                        android:text="All our buses are equipped with these special features to ensure the safety of your child">
+
+                                    </TextView>
+
+                                    <ImageView
+                                        android:id="@+id/imgUpEight"
+                                        android:layout_width="30dp"
+                                        android:layout_height="30dp"
+                                        android:tint="@color/colorBlack"
+                                        android:src="@drawable/ic_up_arrow"
+                                        android:visibility="gone"
+                                        ></ImageView>
+
+                                    <ImageView
+                                        android:id="@+id/imgDownEight"
+                                        android:layout_width="30dp"
+                                        android:layout_height="30dp"
+                                        android:tint="@color/colorBlack"
+                                        android:src="@drawable/ic_down_arrow"
+                                        ></ImageView>
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/lnrViewEight"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:visibility="gone"
+                                    android:orientation="vertical">
+
+                                    <LinearLayout
+                                        android:layout_marginTop="10dp"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+                                        <LinearLayout
+                                            android:layout_weight="1"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="vertical">
+
+                                            <LinearLayout
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:orientation="horizontal">
+
+                                                <ImageView
+                                                    android:layout_width="30dp"
+                                                    android:layout_height="30dp"
+                                                    android:scaleType="fitXY"
+                                                    android:src="@drawable/ic_bus_mini"></ImageView>
+
+                                                <TextView
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:textSize="16sp"
+                                                    android:paddingLeft="10dp"
+                                                    android:paddingRight="10dp"
+                                                    android:textColor="@color/textDark"
+                                                    android:alpha="0.7"
+                                                    android:fontFamily="@font/nunito_sans_regular"
+                                                    android:text="Yellow colour school buses with the name of the school on both sides.">
+
+                                                </TextView>
+                                            </LinearLayout>
+
+                                            <LinearLayout
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginTop="10dp"
+                                                android:orientation="horizontal">
+
+                                                <ImageView
+                                                    android:layout_width="30dp"
+                                                    android:layout_height="30dp"
+                                                    android:scaleType="fitXY"
+                                                    android:src="@drawable/ic_cctv_mini"></ImageView>
+
+                                                <TextView
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:textSize="16sp"
+                                                    android:paddingLeft="10dp"
+                                                    android:paddingRight="10dp"
+                                                    android:textColor="@color/textDark"
+                                                    android:alpha="0.7"
+                                                    android:fontFamily="@font/nunito_sans_regular"
+                                                    android:text="A surveillance system with cameras inside and outside bus to monitor safety of the children at all times with recording backup for upto 6 month">
+                                                </TextView>
+                                            </LinearLayout>
+
+                                        </LinearLayout>
+
+                                        <ImageView
+                                            android:layout_width="100dp"
+                                            android:layout_height="100dp"
+                                            android:src="@drawable/ic_bus"></ImageView>
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+                                        <LinearLayout
+                                            android:layout_weight="1"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="vertical">
+
+                                            <LinearLayout
+                                                android:layout_marginTop="10dp"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:orientation="horizontal">
+
+                                                <ImageView
+                                                    android:layout_width="30dp"
+                                                    android:layout_height="30dp"
+                                                    android:scaleType="fitXY"
+                                                    android:src="@drawable/ic_seat_mini"></ImageView>
+
+                                                <TextView
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:textSize="16sp"
+                                                    android:paddingLeft="10dp"
+                                                    android:paddingRight="10dp"
+                                                    android:textColor="@color/textDark"
+                                                    android:alpha="0.7"
+                                                    android:fontFamily="@font/nunito_sans_regular"
+                                                    android:text="A surveillance system with cameras inside and outside the bus to monitor safety of the children at all times with recording backup for upto 6 month">
+
+                                                </TextView>
+                                            </LinearLayout>
+
+                                            <LinearLayout
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginTop="10dp"
+                                                android:orientation="horizontal">
+
+                                                <ImageView
+                                                    android:layout_width="30dp"
+                                                    android:layout_height="30dp"
+                                                    android:scaleType="fitXY"
+                                                    android:src="@drawable/ic_exit_mini"></ImageView>
+
+                                                <TextView
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:textSize="16sp"
+                                                    android:paddingLeft="10dp"
+                                                    android:paddingRight="10dp"
+                                                    android:textColor="@color/textDark"
+                                                    android:alpha="0.7"
+                                                    android:fontFamily="@font/nunito_sans_regular"
+                                                    android:text="All buses have an emergency exit and are equipped with hammers and knives to break the windows or cut the seat belts in case of emergencies.">
+                                                </TextView>
+                                            </LinearLayout>
+
+                                        </LinearLayout>
+
+                                        <ImageView
+                                            android:layout_width="100dp"
+                                            android:layout_height="100dp"
+                                            android:src="@drawable/ic_bus"></ImageView>
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="10dp"
+                                        android:orientation="horizontal">
+
+                                        <ImageView
+                                            android:layout_width="30dp"
+                                            android:layout_height="30dp"
+                                            android:scaleType="fitXY"
+                                            android:src="@drawable/ic_door_mini"></ImageView>
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="16sp"
+                                            android:paddingLeft="10dp"
+                                            android:paddingRight="10dp"
+                                            android:textColor="@color/textDark"
+                                            android:alpha="0.7"
+                                            android:fontFamily="@font/nunito_sans_regular"
+                                            android:text="Doors sensors to ensure that the door doesn’t close while somebody is entering the bus">
+                                        </TextView>
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="10dp"
+                                        android:orientation="horizontal">
+
+                                        <ImageView
+                                            android:layout_width="30dp"
+                                            android:layout_height="30dp"
+                                            android:scaleType="fitXY"
+                                            android:src="@drawable/ic_fire_mini"></ImageView>
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="16sp"
+                                            android:paddingLeft="10dp"
+                                            android:paddingRight="10dp"
+                                            android:textColor="@color/textDark"
+                                            android:alpha="0.7"
+                                            android:fontFamily="@font/nunito_sans_regular"
+                                            android:text="Fire detectors inside the engine to pre-emptively warn in case of a fire">
+                                        </TextView>
+                                    </LinearLayout>
+
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:background="@color/textDark"
+                            android:alpha="0.5"></LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="16dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:id="@+id/lnrClickNine"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_weight="1"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:textSize="20sp"
+                                        android:textColor="@color/textDark"
+                                        android:fontFamily="@font/nunit_sans_bold"
+                                        android:text="End to End solutions we provide for school bus leasing">
+
+                                    </TextView>
+
+                                    <ImageView
+                                        android:id="@+id/imgUpNine"
+                                        android:layout_width="30dp"
+                                        android:layout_height="30dp"
+                                        android:tint="@color/colorBlack"
+                                        android:src="@drawable/ic_up_arrow"
+                                        android:visibility="gone"
+                                        ></ImageView>
+
+                                    <ImageView
+                                        android:id="@+id/imgDownNine"
+                                        android:layout_width="30dp"
+                                        android:layout_height="30dp"
+                                        android:tint="@color/colorBlack"
+                                        android:src="@drawable/ic_down_arrow"
+                                        ></ImageView>
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/lnrViewNine"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:visibility="gone"
+                                    android:orientation="vertical">
+
+                                    <LinearLayout
+                                        android:layout_marginTop="10dp"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+                                        <LinearLayout
+                                            android:layout_weight="1"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="vertical">
+
+                                            <LinearLayout
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:orientation="horizontal">
+
+                                                <ImageView
+                                                    android:layout_width="30dp"
+                                                    android:layout_height="30dp"
+                                                    android:scaleType="fitXY"
+                                                    android:src="@drawable/ic_truck_mini"></ImageView>
+
+                                                <TextView
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:textSize="16sp"
+                                                    android:paddingLeft="10dp"
+                                                    android:paddingRight="10dp"
+                                                    android:textColor="@color/textDark"
+                                                    android:alpha="0.7"
+                                                    android:fontFamily="@font/nunito_sans_regular"
+                                                    android:text="Full ITC specifications, drivers, fuel and a coordinator for each school to manage the buses and drivers">
+
+                                                </TextView>
+                                            </LinearLayout>
+
+                                            <LinearLayout
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginTop="10dp"
+                                                android:orientation="horizontal">
+
+                                                <ImageView
+                                                    android:layout_width="30dp"
+                                                    android:layout_height="30dp"
+                                                    android:scaleType="fitXY"
+                                                    android:src="@drawable/ic_setting_mini"></ImageView>
+
+                                                <TextView
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:textSize="16sp"
+                                                    android:paddingLeft="10dp"
+                                                    android:paddingRight="10dp"
+                                                    android:textColor="@color/textDark"
+                                                    android:alpha="0.7"
+                                                    android:fontFamily="@font/nunito_sans_regular"
+                                                    android:text="Regular bus maintenance including a major servicing after each term.">
+                                                </TextView>
+                                            </LinearLayout>
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+                                        <LinearLayout
+                                            android:layout_weight="1"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="vertical">
+
+                                            <LinearLayout
+                                                android:layout_marginTop="10dp"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:orientation="horizontal">
+
+                                                <ImageView
+                                                    android:layout_width="30dp"
+                                                    android:layout_height="30dp"
+                                                    android:scaleType="fitXY"
+                                                    android:src="@drawable/ic_page_mini"></ImageView>
+
+                                                <TextView
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:textSize="16sp"
+                                                    android:paddingLeft="10dp"
+                                                    android:paddingRight="10dp"
+                                                    android:textColor="@color/textDark"
+                                                    android:alpha="0.7"
+                                                    android:fontFamily="@font/nunito_sans_regular"
+                                                    android:text="Daily check- ups for all before the first trip.">
+
+                                                </TextView>
+                                            </LinearLayout>
+
+                                            <LinearLayout
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginTop="10dp"
+                                                android:orientation="horizontal">
+
+                                                <ImageView
+                                                    android:layout_width="30dp"
+                                                    android:layout_height="30dp"
+                                                    android:scaleType="fitXY"
+                                                    android:src="@drawable/ic_sanitizer"></ImageView>
+
+                                                <TextView
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:textSize="16sp"
+                                                    android:paddingLeft="10dp"
+                                                    android:paddingRight="10dp"
+                                                    android:textColor="@color/textDark"
+                                                    android:alpha="0.7"
+                                                    android:fontFamily="@font/nunito_sans_regular"
+                                                    android:text="Sterilization for all buses before and after any trip">
+                                                </TextView>
+                                            </LinearLayout>
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="10dp"
+                                        android:orientation="horizontal">
+
+                                        <ImageView
+                                            android:layout_width="30dp"
+                                            android:layout_height="30dp"
+                                            android:scaleType="fitXY"
+                                            android:src="@drawable/ic_shuffel"></ImageView>
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="16sp"
+                                            android:paddingLeft="10dp"
+                                            android:paddingRight="10dp"
+                                            android:textColor="@color/textDark"
+                                            android:alpha="0.7"
+                                            android:fontFamily="@font/nunito_sans_regular"
+                                            android:text="Replacement bus in-case of a breakdown and replacement driver in case the driver is sick">
+                                        </TextView>
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:background="@color/textDark"
+                            android:alpha="0.5"></LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="16dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:id="@+id/lnrClickTen"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_weight="1"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:textSize="20sp"
+                                        android:textColor="@color/textDark"
+                                        android:fontFamily="@font/nunit_sans_bold"
+                                        android:text="Private and Airport Bus Rentals">
+
+                                    </TextView>
+
+                                    <ImageView
+                                        android:id="@+id/imgUpTen"
+                                        android:layout_width="30dp"
+                                        android:layout_height="30dp"
+                                        android:tint="@color/colorBlack"
+                                        android:src="@drawable/ic_up_arrow"
+                                        android:visibility="gone"
+                                        ></ImageView>
+
+                                    <ImageView
+                                        android:id="@+id/imgDownTen"
+                                        android:layout_width="30dp"
+                                        android:layout_height="30dp"
+                                        android:tint="@color/colorBlack"
+                                        android:src="@drawable/ic_down_arrow"
+                                        ></ImageView>
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/lnrViewTen"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:visibility="gone"
+                                    android:orientation="vertical">
+
+                                    <LinearLayout
+                                        android:layout_marginTop="10dp"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="16sp"
+                                            android:textColor="@color/textDark"
+                                            android:alpha="0.7"
+                                            android:fontFamily="@font/nunito_sans_regular"
+                                            android:text="We also offer safe and dependable luxury charters, airport transfers, flexible group transportation services and other transportation solutions at affordable costs to domestic and international travellers in the UAE. All our buses are equipped with comfortable reclining seats, large windows, audio/video systems, luggage racks and ample storage beneath the vehicle for your belongings so that your group travel is a breeze!">
+
+                                        </TextView>
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:background="@color/textDark"
+                            android:alpha="0.5"></LinearLayout>
+
+                    </LinearLayout>
+
+
+                </androidx.core.widget.NestedScrollView>
+
+                <TextView
+                    android:id="@+id/txtError"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/noDataFound"
+                    android:textSize="22sp"
+                    android:visibility="gone"
+                    android:layout_centerInParent="true"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:fontFamily="@font/nunito_sans_semibold">
+
+                </TextView>
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</layout>

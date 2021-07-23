@@ -21,6 +21,7 @@ import com.example.fastuae.activity.CareerActivity;
 import com.example.fastuae.activity.ContactUsActivity;
 import com.example.fastuae.activity.EnquireyNowActivity;
 import com.example.fastuae.activity.FAQActivity;
+import com.example.fastuae.activity.LeasingActivity;
 import com.example.fastuae.activity.LoastAndFoundActivity;
 import com.example.fastuae.activity.LocationActivity;
 import com.example.fastuae.activity.LoginDashboardActivity;
@@ -140,6 +141,8 @@ public class MenuFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
+                Intent intent = new Intent(context, LeasingActivity.class);
+                startActivity(intent);
             }
         });
 

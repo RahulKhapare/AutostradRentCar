@@ -1,23 +1,16 @@
 package com.example.fastuae.fragment;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
-import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.adoisstudio.helper.Api;
@@ -26,7 +19,6 @@ import com.adoisstudio.helper.Json;
 import com.adoisstudio.helper.JsonList;
 import com.adoisstudio.helper.LoadingDialog;
 import com.example.fastuae.R;
-import com.example.fastuae.activity.LanguageSelectionActivity;
 import com.example.fastuae.activity.SelectCarActivity;
 import com.example.fastuae.adapter.ViewPagerSwipeAdapter;
 import com.example.fastuae.model.CarModel;

@@ -41,8 +41,8 @@
         <ImageView
             android:layout_below="@+id/imgCar"
             android:id="@+id/imgName"
-            android:layout_width="232dp"
-            android:layout_height="48dp"
+            android:layout_width="283dp"
+            android:layout_height="61dp"
             android:scaleType="fitXY"
             android:layout_marginTop="20dp"
             android:layout_centerInParent="true"></ImageView>

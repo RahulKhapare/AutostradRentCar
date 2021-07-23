@@ -61,7 +61,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/colorPrimaryDark"
-                                android:text="Fast Rent A Car"
+                                android:text="@string/fastRentCar"
                                 android:layout_gravity="center"
                                 android:gravity="center"
                                 android:fontFamily="@font/nunit_sans_bold"
@@ -72,7 +72,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/textDark"
-                                android:text="“Creating memorable car rental experiences, one drive at a time!”"
+                                android:text="@string/aboutMessage1"
                                 android:layout_gravity="center"
                                 android:gravity="center"
                                 android:fontFamily="@font/nunito_sans_regular"
@@ -83,7 +83,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/textDark"
-                                android:text="It’s just a drive …. just a journey from one place to the other, a road that you may have travelled many times over! Yet, each drive is a unique experience!"
+                                android:text="@string/aboutMessage2"
                                 android:layout_gravity="center"
                                 android:gravity="center"
                                 android:fontFamily="@font/nunito_sans_regular"
@@ -100,7 +100,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="@color/colorPrimaryDark"
-                                    android:text="Our Heritage"
+                                    android:text="@string/ourHeritage"
                                     android:fontFamily="@font/nunito_sans_semibold"
                                     android:textSize="18sp"></TextView>
 
@@ -126,7 +126,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:textColor="@color/textDark"
-                                            android:text="Fast Rent A Car is part of the prestigious Emirates National Group, which owns &amp; operates brands that offer private and public transportation, along with ancillary services."
+                                            android:text="@string/ourHeritageMsg"
                                             android:fontFamily="@font/nunito_sans_regular"
                                             android:textSize="16sp"></TextView>
 
@@ -134,7 +134,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:textColor="@color/lightBlue"
-                                            android:text="View More"
+                                            android:text="@string/moreView1"
                                             android:layout_marginTop="5dp"
                                             android:fontFamily="@font/nunito_sans_regular"
                                             android:textSize="14sp"></TextView>
@@ -172,7 +172,7 @@
                                    android:layout_width="wrap_content"
                                    android:layout_height="wrap_content"
                                    android:textColor="@color/colorPrimaryDark"
-                                   android:text="Our Mission"
+                                   android:text="@string/ourMission"
                                    android:paddingLeft="15dp"
                                    android:paddingRight="15dp"
                                    android:layout_gravity="center"
@@ -196,7 +196,7 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:textColor="@color/textDark"
-                                        android:text="To win the heart of each customer. by consistently providing high quality customized transport solutions. We back our commitment with our investment in cutting-edge technology and world class customer service so that each customer experience is a memorable one!"
+                                        android:text="@string/ourMissionMsg"
                                         android:fontFamily="@font/nunito_sans_regular"
                                         android:textSize="14sp"></TextView>
 
@@ -231,7 +231,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="@color/colorPrimaryDark"
-                                    android:text="Our Vision"
+                                    android:text="@string/ourVission"
                                     android:paddingLeft="15dp"
                                     android:paddingRight="15dp"
                                     android:layout_gravity="center"
@@ -255,7 +255,7 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:textColor="@color/textDark"
-                                        android:text="To be the most loved, trusted and profitable transport solution provider"
+                                        android:text="@string/ourVissionMsg"
                                         android:fontFamily="@font/nunito_sans_regular"
                                         android:textSize="14sp"></TextView>
 
@@ -288,7 +288,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="@color/colorPrimaryDark"
-                                    android:text="Our Values"
+                                    android:text="@string/ourValue"
                                     android:layout_gravity="center"
                                     android:fontFamily="@font/nunito_sans_semibold"
                                     android:textSize="18sp"></TextView>
@@ -322,7 +322,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:textColor="@color/colorPrimaryDark"
-                                            android:text="Transparency and Integrity"
+                                            android:text="@string/transparency"
                                             android:layout_gravity="center"
                                             android:fontFamily="@font/nunito_sans_semibold"
                                             android:textSize="18sp"></TextView>
@@ -333,7 +333,7 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:textColor="@color/textDark"
-                                        android:text="We pride ourselves in always honoring our commitments. Be it in our dealings with stakeholders, partners or customers, we believe in doing things the right way – with transparency and integrity."
+                                        android:text="@string/transparencyMsg"
                                         android:fontFamily="@font/nunito_sans_regular"
                                         android:textSize="14sp"></TextView>
 
@@ -368,7 +368,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:textColor="@color/colorPrimaryDark"
-                                            android:text="Top-notch Customer Service"
+                                            android:text="@string/topNotch"
                                             android:layout_gravity="center"
                                             android:fontFamily="@font/nunito_sans_semibold"
                                             android:textSize="18sp"></TextView>
@@ -379,7 +379,7 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:textColor="@color/textDark"
-                                        android:text="We recognize that our customers seek a smooth experience both on and off the road. To ensure that, we constantly strive to not only provide high quality vehicles but also world class customer service at all times. We work hard to win the hearts of each one of our customers so that we continue to be their first choice."
+                                        android:text="@string/topNotchMsg"
                                         android:fontFamily="@font/nunito_sans_regular"
                                         android:textSize="14sp"></TextView>
 
@@ -414,7 +414,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:textColor="@color/colorPrimaryDark"
-                                            android:text="Quality"
+                                            android:text="@string/quality"
                                             android:layout_gravity="center"
                                             android:fontFamily="@font/nunito_sans_semibold"
                                             android:textSize="18sp"></TextView>
@@ -425,7 +425,7 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:textColor="@color/textDark"
-                                        android:text="We are driven by our commitment to deliver exceptional quality and experiences to our customers. It’s the small every day improvements that we make in the maintenance of our vehicles, hygiene and safety processes and training of our personnel that make the big difference in assuring our custom -ers a safe and smooth driving experience."
+                                        android:text="@string/qualityMsg"
                                         android:fontFamily="@font/nunito_sans_regular"
                                         android:textSize="14sp"></TextView>
 
@@ -460,7 +460,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:textColor="@color/colorPrimaryDark"
-                                            android:text="Creativity and Innovation"
+                                            android:text="@string/creativityInnovation"
                                             android:layout_gravity="center"
                                             android:fontFamily="@font/nunito_sans_semibold"
                                             android:textSize="18sp"></TextView>
@@ -471,7 +471,7 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:textColor="@color/textDark"
-                                        android:text="We are constantly looking for new and better ways forward. Our team is constantly encouraged to challenge the status quo and push the boundaries. Finding solutions to almost imposs -ible challenges is part of our success and a source of inspira -tion to move on to the next challenge."
+                                        android:text="@string/creativityInnovationMsg"
                                         android:fontFamily="@font/nunito_sans_regular"
                                         android:textSize="14sp"></TextView>
 
@@ -506,7 +506,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:textColor="@color/colorPrimaryDark"
-                                            android:text="Value Added Solutions"
+                                            android:text="@string/valueAdded"
                                             android:layout_gravity="center"
                                             android:fontFamily="@font/nunito_sans_semibold"
                                             android:textSize="18sp"></TextView>
@@ -517,7 +517,7 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:textColor="@color/textDark"
-                                        android:text="We believe in going the extra mile and adding the extra zing to our transport solutions. Whether it is value added solutions or end to end project management solutions, we are always looking for ways to simplify the lives of our customers."
+                                        android:text="@string/valueAddedMsg"
                                         android:fontFamily="@font/nunito_sans_regular"
                                         android:textSize="14sp"></TextView>
 
@@ -543,7 +543,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/colorPrimaryDark"
-                                android:text="Our Fleet"
+                                android:text="@string/ourFleet"
                                 android:fontFamily="@font/nunito_sans_semibold"
                                 android:textSize="18sp"></TextView>
 
@@ -569,7 +569,7 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:textColor="@color/textDark"
-                                        android:text="Over the years, UAE’s population has grown exponentially and UAE has becom a global hub for business &amp; tourism. With ever-changing customer demands, there is an increasing need to expand our serv -ices and cater to the new discerning"
+                                        android:text="@string/ourFleetMessage"
                                         android:fontFamily="@font/nunito_sans_regular"
                                         android:textSize="16sp"></TextView>
 
@@ -577,7 +577,7 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:textColor="@color/lightBlue"
-                                        android:text="View More"
+                                        android:text="@string/moreView1"
                                         android:layout_marginTop="5dp"
                                         android:fontFamily="@font/nunito_sans_regular"
                                         android:textSize="14sp"></TextView>
@@ -604,7 +604,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/colorPrimaryDark"
-                                android:text="Miles To Go ...."
+                                android:text="@string/mileGo"
                                 android:fontFamily="@font/nunito_sans_semibold"
                                 android:textSize="18sp"></TextView>
 
@@ -630,7 +630,7 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:textColor="@color/textDark"
-                                        android:text="Fast Rent A Car is part of the prestigious Emirates National Group, which owns &amp; operates brands that offer private and public transportation, along with ancillary services."
+                                        android:text="@string/mileGoMsg"
                                         android:fontFamily="@font/nunito_sans_regular"
                                         android:textSize="16sp"></TextView>
 
@@ -638,7 +638,7 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:textColor="@color/lightBlue"
-                                        android:text="View More"
+                                        android:text="@string/moreView1"
                                         android:layout_marginTop="5dp"
                                         android:fontFamily="@font/nunito_sans_regular"
                                         android:textSize="14sp"></TextView>

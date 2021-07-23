@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 
 import com.adoisstudio.helper.H;
@@ -83,15 +84,29 @@ public class LanguageSelectionActivity extends AppCompatActivity {
 
     private void updateEnglishLanguage(String language) {
         languageFlag = englishFlag;
-        binding.lnrEnglish.setBackground(getResources().getDrawable(R.drawable.layout_color_bg));
+        binding.lnrEnglish.setBackground(getResources().getDrawable(R.drawable.layout_language_color_bg));
         binding.lnrArabic.setBackground(getResources().getDrawable(R.drawable.layout_bg));
+
+        binding.imgEnglish.setColorFilter(ContextCompat.getColor(activity, R.color.lightBlue), android.graphics.PorterDuff.Mode.MULTIPLY);
+        binding.imgUrdu.setColorFilter(ContextCompat.getColor(activity, R.color.colorWhite), android.graphics.PorterDuff.Mode.MULTIPLY);
+
+        binding.txtEnglish.setTextColor(getResources().getColor(R.color.lightBlue));
+        binding.txtUrdu.setTextColor(getResources().getColor(R.color.colorWhite));
+
         session.addString(P.languageFlag, language);
     }
 
     private void updateArabicLanguage(String language) {
         languageFlag = urduFlag;
         binding.lnrEnglish.setBackground(getResources().getDrawable(R.drawable.layout_bg));
-        binding.lnrArabic.setBackground(getResources().getDrawable(R.drawable.layout_color_bg));
+        binding.lnrArabic.setBackground(getResources().getDrawable(R.drawable.layout_language_color_bg));
+
+        binding.imgEnglish.setColorFilter(ContextCompat.getColor(activity, R.color.colorWhite), android.graphics.PorterDuff.Mode.MULTIPLY);
+        binding.imgUrdu.setColorFilter(ContextCompat.getColor(activity, R.color.lightBlue), android.graphics.PorterDuff.Mode.MULTIPLY);
+
+        binding.txtUrdu.setTextColor(getResources().getColor(R.color.lightBlue));
+        binding.txtEnglish.setTextColor(getResources().getColor(R.color.colorWhite));
+
         session.addString(P.languageFlag, language);
     }
 
