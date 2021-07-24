@@ -201,8 +201,6 @@ public class MenuFragment extends Fragment {
             binding.imgLoastFoundRight.setVisibility(View.GONE);
             binding.imgLoastFoundLeft.setVisibility(View.VISIBLE);
 
-            binding.imgLogOutRight.setVisibility(View.GONE);
-            binding.imgLogOutLeft.setVisibility(View.VISIBLE);
 
         } else if (flag.equals(Config.ENGLISH)) {
 
@@ -238,9 +236,6 @@ public class MenuFragment extends Fragment {
 
             binding.imgLoastFoundRight.setVisibility(View.VISIBLE);
             binding.imgLoastFoundLeft.setVisibility(View.GONE);
-
-            binding.imgLogOutRight.setVisibility(View.VISIBLE);
-            binding.imgLogOutLeft.setVisibility(View.GONE);
 
         }
     }

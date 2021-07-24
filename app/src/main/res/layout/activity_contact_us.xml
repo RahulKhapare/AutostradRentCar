@@ -114,6 +114,8 @@
                                 android:textSize="16sp"
                                 android:paddingLeft="10dp"
                                 android:paddingRight="10dp"
+                                android:autoLink="email"
+                                android:textColorLink="@color/textDark"
                                 android:layout_gravity="center_vertical"
                                 android:text="@string/app_name">
 
@@ -143,6 +145,8 @@
                                 android:textSize="16sp"
                                 android:paddingLeft="10dp"
                                 android:paddingRight="10dp"
+                                android:autoLink="phone"
+                                android:textColorLink="@color/textDark"
                                 android:layout_gravity="center_vertical"
                                 android:text="@string/app_name">
 
@@ -172,6 +176,8 @@
                                 android:textSize="16sp"
                                 android:paddingLeft="10dp"
                                 android:paddingRight="10dp"
+                                android:autoLink="phone"
+                                android:textColorLink="@color/textDark"
                                 android:layout_gravity="center_vertical"
                                 android:text="@string/app_name">
 

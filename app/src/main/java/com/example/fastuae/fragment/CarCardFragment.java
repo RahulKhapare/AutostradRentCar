@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -37,6 +38,8 @@ public class CarCardFragment extends Fragment {
     private List<CarModel> carModelList;
     private ScrollView scrollView;
     private LoadingDialog loadingDialog;
+    private ImageView imgLeft;
+    private ImageView imgRigth;
 
     int count;
     int pageCount = 1;
@@ -51,6 +54,8 @@ public class CarCardFragment extends Fragment {
         scrollView = view.findViewById(R.id.scrollview);
         viewPagesSwipe = view.findViewById(R.id.viewPagesSwipe);
         txtError = view.findViewById(R.id.txtError);
+        imgLeft = view.findViewById(R.id.imgLeft);
+        imgRigth = view.findViewById(R.id.imgRigth);
 
         carModelList = new ArrayList<>();
         setAdapter(0);
@@ -152,6 +157,7 @@ public class CarCardFragment extends Fragment {
     }
 
     private void setAdapter(int lastPosition) {
+
         swipeAdapter = new ViewPagerSwipeAdapter(context, carModelList);
         viewPagesSwipe.setPageTransformer(true, new ViewPagerStack());
         viewPagesSwipe.setOffscreenPageLimit(3);
@@ -166,6 +172,7 @@ public class CarCardFragment extends Fragment {
 
             @Override
             public void onPageSelected(int position) {
+
                 int page = position + 1;
                 if (carModelList != null && !carModelList.isEmpty()) {
                     if (page == carModelList.size()) {
@@ -185,8 +192,12 @@ public class CarCardFragment extends Fragment {
 
         if (carModelList.isEmpty()) {
             txtError.setVisibility(View.VISIBLE);
+            imgRigth.setVisibility(View.GONE);
+            imgLeft.setVisibility(View.GONE);
         } else {
             txtError.setVisibility(View.GONE);
+            imgRigth.setVisibility(View.VISIBLE);
+            imgLeft.setVisibility(View.VISIBLE);
         }
     }
 

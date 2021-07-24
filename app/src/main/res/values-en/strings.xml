@@ -283,7 +283,7 @@
     <string name="addOes">Add Ons</string>
     <string name="chooseAdsOn">Choose Add ons</string>
     <string name="Price">Price</string>
-    <string name="quantity">Quantity</string>
+    <string name="quantity">Qty</string>
     <string name="priceRental">(Per item per rental)</string>
     <string name="prePay">Pre Pay</string>
     <string name="postPay">Post Pay</string>
@@ -400,7 +400,8 @@
     <string name="fastRentCar">Fast Rent A Car</string>
     <string name="aboutMessage1">“Creating memorable car rental experiences, one drive at a time!”</string>
     <string name="aboutMessage2">It’s just a drive …. just a journey from one place to the other, a road that you may have travelled many times over! Yet, each drive is a unique experience!</string>
-
+    <string name="addressMessage">Enter flat No./ Building name, street name, area...</string>
+    <string name="noMoreQty">No more quantity available</string>
 
     <string name="txt1">Leading Car Rental Company with the largest network of Branches &amp; Pickup points</string>
     <string name="txt2">Leading Car Rental Company with the largest network of Branches &amp; Pickup points</string>

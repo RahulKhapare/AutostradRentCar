@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.adoisstudio.helper.H;
 import com.adoisstudio.helper.Session;
 import com.example.fastuae.R;
 import com.example.fastuae.activity.AddOnsActivity;
@@ -52,6 +53,7 @@ public class ChooseExtrasAdapter extends RecyclerView.Adapter<ChooseExtrasAdapte
     @Override
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
         ChooseExtrasModel model = chooseExtrasModelList.get(position);
+        int target = 0;
 
         holder.binding.txtName.setText(model.getTitle());
         holder.binding.txtDesc.setText(RemoveHtml.html2text(model.getDescription()));
@@ -84,42 +86,76 @@ public class ChooseExtrasAdapter extends RecyclerView.Adapter<ChooseExtrasAdapte
             }
         });
 
-        List<CountryCodeModel> countryCodeModelList = new ArrayList<>();
-
-        if (!TextUtils.isEmpty(model.getMax_quantity()) && !model.getMax_quantity().equals("null")){
-            int target = Integer.parseInt(model.getMax_quantity());
-            for (int i=0; i<target; i++){
-                int value = i+1;
-                countryCodeModelList.add(new CountryCodeModel(value+""));
-            }
+        if (!TextUtils.isEmpty(model.getMax_quantity()) && !model.getMax_quantity().equals("null")) {
+            target = Integer.parseInt(model.getMax_quantity());
         }
 
-        CountryCodeAdapter adapterLogin = new CountryCodeAdapter(context, countryCodeModelList,3);
-        holder.binding.spinnerQuantity.setAdapter(adapterLogin);
+//        List<CountryCodeModel> countryCodeModelList = new ArrayList<>();
 
-        holder.binding.spinnerQuantity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                CountryCodeModel modelData = countryCodeModelList.get(position);
-                String quantitySelected = modelData.getPhone_code();
-                model.setQuantity(quantitySelected);
-            }
+//        if (!TextUtils.isEmpty(model.getMax_quantity()) && !model.getMax_quantity().equals("null")){
+//            int target = Integer.parseInt(model.getMax_quantity());
+//            for (int i=0; i<target; i++){
+//                int value = i+1;
+//                countryCodeModelList.add(new CountryCodeModel(value+""));
+//            }
+//        }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+//        CountryCodeAdapter adapterLogin = new CountryCodeAdapter(context, countryCodeModelList,3);
+//        holder.binding.spinnerQuantity.setAdapter(adapterLogin);
+//
+//        holder.binding.spinnerQuantity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                CountryCodeModel modelData = countryCodeModelList.get(position);
+//                String quantitySelected = modelData.getPhone_code();
+//                model.setQuantity(quantitySelected);
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//
+//            }
+//        });
 
-            }
-        });
-
-        holder.binding.cardSpinner.setOnClickListener(new View.OnClickListener() {
+        model.setQuantity("1");
+        int finalTarget = target;
+        holder.binding.imgPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-                if ( holder.binding.spinnerQuantity!=null){
-                    holder.binding.spinnerQuantity.performClick();
+                int countValue = H.getInt(holder.binding.txtCount.getText().toString());
+                if(countValue< finalTarget){
+                    int itemCount = countValue + 1;
+                    holder.binding.txtCount.setText(itemCount + "");
+                    model.setQuantity(itemCount + "");
+                }else {
+                    H.showMessage(context,context.getResources().getString(R.string.noMoreQty));
                 }
             }
         });
+
+        holder.binding.imhMinus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                int countValue = H.getInt(holder.binding.txtCount.getText().toString());
+                if (countValue > 1) {
+                    int itemCount = countValue - 1;
+                    holder.binding.txtCount.setText(itemCount + "");
+                    model.setQuantity(itemCount + "");
+                }
+            }
+        });
+
+//        holder.binding.cardSpinner.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Click.preventTwoClick(v);
+//                if ( holder.binding.spinnerQuantity!=null){
+//                    holder.binding.spinnerQuantity.performClick();
+//                }
+//            }
+//        });
 
     }
 

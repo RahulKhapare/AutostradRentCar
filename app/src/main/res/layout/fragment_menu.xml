@@ -728,9 +728,11 @@
                 android:background="@color/customeGray"></LinearLayout>
 
             <RelativeLayout
+                android:layout_marginTop="10dp"
                 android:id="@+id/lnrLogOut"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/colorPrimaryDark"
                 android:padding="16dp">
 
                 <LinearLayout
@@ -743,6 +745,7 @@
                         android:layout_height="30dp"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
+                        android:tint="@color/colorWhite"
                         android:src="@drawable/ic_log_out">
 
                     </ImageView>
@@ -750,7 +753,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/textDark"
+                        android:textColor="@color/colorWhite"
                         android:gravity="center_vertical"
                         android:layout_gravity="center_vertical"
                         android:fontFamily="@font/nunito_sans_regular"
@@ -760,27 +763,6 @@
 
                 </LinearLayout>
 
-
-                <ImageView
-                    android:id="@+id/imgLogOutRight"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_marginRight="15dp"
-                    android:src="@drawable/ic_right_arrow"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true">
-                </ImageView>
-
-                <ImageView
-                    android:id="@+id/imgLogOutLeft"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_marginLeft="15dp"
-                    android:src="@drawable/ic_left_arrow"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:visibility="gone">
-                </ImageView>
 
             </RelativeLayout>
 

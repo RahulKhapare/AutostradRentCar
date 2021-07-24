@@ -190,10 +190,11 @@ public class LoastAndFoundActivity extends AppCompatActivity {
         } else if (!Validation.validEmail(binding.etxEmail.getText().toString().trim())) {
             value = false;
             H.showMessage(activity, getResources().getString(R.string.enterEmailValid));
-        } else if (TextUtils.isEmpty(binding.etxVehicleNo.getText().toString().trim())) {
-            value = false;
-            H.showMessage(activity, getResources().getString(R.string.enterVehicleNo));
         }
+//        else if (TextUtils.isEmpty(binding.etxVehicleNo.getText().toString().trim())) {
+//            value = false;
+//            H.showMessage(activity, getResources().getString(R.string.enterVehicleNo));
+//        }
 
         return value;
     }

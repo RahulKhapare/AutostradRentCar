@@ -42,10 +42,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginRight="12dp"
-                    android:layout_marginBottom="12dp"
-                    android:layout_marginTop="10dp">
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"
+                    android:paddingBottom="12dp"
+                    android:paddingTop="10dp"
+                    android:background="@color/colorPrimaryDark"
+                    >
 
                     <TextView
                         android:id="@+id/txtCarName"
@@ -53,7 +55,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/nunito_sans_semibold"
                         android:textSize="14sp"
-                        android:textColor="@color/textDark"
+                        android:textColor="@color/colorWhite"
                         android:text="@string/app_name">
                     </TextView>
 
@@ -76,8 +78,10 @@
 
                                 <ImageView
                                     android:layout_width="15dp"
-                                    android:layout_height="15dp"
-                                    android:src="@drawable/ic_suitcase"></ImageView>
+                                    android:layout_height="20dp"
+                                    android:tint="@color/colorWhite"
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/ic_suitcase_new"></ImageView>
 
                                 <TextView
                                     android:id="@+id/txtSuitcase"
@@ -90,7 +94,7 @@
                                     android:layout_marginRight="3dp"
                                     android:fontFamily="@font/nunito_sans_regular"
                                     android:textSize="12sp"
-                                    android:textColor="@color/textDark">
+                                    android:textColor="@color/colorWhite">
 
                                 </TextView>
 
@@ -105,6 +109,7 @@
                                 <ImageView
                                     android:layout_width="15dp"
                                     android:layout_height="15dp"
+                                    android:tint="@color/colorWhite"
                                     android:src="@drawable/ic_mode"></ImageView>
 
                                 <TextView
@@ -118,7 +123,7 @@
                                     android:layout_marginLeft="3dp"
                                     android:layout_marginRight="3dp"
                                     android:singleLine="true"
-                                    android:textColor="@color/textDark">
+                                    android:textColor="@color/colorWhite">
 
                                 </TextView>
 
@@ -144,6 +149,7 @@
                                 <ImageView
                                     android:layout_width="15dp"
                                     android:layout_height="15dp"
+                                    android:tint="@color/colorWhite"
                                     android:src="@drawable/ic_doore"></ImageView>
 
                                 <TextView
@@ -157,7 +163,7 @@
                                     android:layout_marginRight="3dp"
                                     android:fontFamily="@font/nunito_sans_regular"
                                     android:textSize="12sp"
-                                    android:textColor="@color/textDark">
+                                    android:textColor="@color/colorWhite">
 
                                 </TextView>
 
@@ -172,6 +178,7 @@
                                 <ImageView
                                     android:layout_width="15dp"
                                     android:layout_height="15dp"
+                                    android:tint="@color/colorWhite"
                                     android:src="@drawable/ic_fuil"></ImageView>
 
                                 <TextView
@@ -185,7 +192,7 @@
                                     android:layout_marginLeft="3dp"
                                     android:layout_marginRight="3dp"
                                     android:singleLine="true"
-                                    android:textColor="@color/textDark">
+                                    android:textColor="@color/colorWhite">
 
                                 </TextView>
 
@@ -204,7 +211,7 @@
                         android:textSize="12sp"
                         android:layout_marginTop="15dp"
                         android:layout_marginBottom="0dp"
-                        android:textColor="@color/lightBlue"
+                        android:textColor="@color/lightOrange"
                         android:text="@string/viewMore">
                     </TextView>
 

@@ -47,10 +47,12 @@
                 android:textSize="16sp"
                 android:paddingRight="10dp"
                 android:paddingLeft="10dp"
+                android:autoLink="phone"
                 android:layout_gravity="center_horizontal"
                 android:gravity="center_horizontal"
                 android:fontFamily="@font/nunito_sans_regular"
                 android:textColor="@color/textDark"
+                android:textColorLink="@color/textDark"
                 android:text="@string/app_name">
 
             </TextView>
@@ -80,10 +82,12 @@
                 android:textSize="16sp"
                 android:paddingRight="10dp"
                 android:paddingLeft="10dp"
+                android:autoLink="email"
                 android:layout_gravity="center_horizontal"
                 android:gravity="center_horizontal"
                 android:fontFamily="@font/nunito_sans_regular"
                 android:textColor="@color/textDark"
+                android:textColorLink="@color/textDark"
                 android:text="@string/app_name">
 
             </TextView>
