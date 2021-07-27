@@ -405,6 +405,11 @@
     <string name="aboutMessage2">It’s just a drive …. just a journey from one place to the other, a road that you may have travelled many times over! Yet, each drive is a unique experience!</string>
     <string name="addressMessage">Enter flat No./ Building name, street name, area...</string>
     <string name="noMoreQty">No more quantity available</string>
+    <string name="sharjah">Sharjah</string>
+    <string name="sharjahPick">(Pickup)</string>
+    <string name="sharjahDrop">(Dropo-ff)</string>
+    <string name="downloadInvoice">Download Invoice</string>
+    <string name="cancelled">Cancelled</string>
 
     <string name="txt1">Leading Car Rental Company with the largest network of Branches &amp; Pickup points</string>
     <string name="txt2">Leading Car Rental Company with the largest network of Branches &amp; Pickup points</string>

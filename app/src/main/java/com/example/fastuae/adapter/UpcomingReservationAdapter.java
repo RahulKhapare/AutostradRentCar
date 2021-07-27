@@ -2,7 +2,6 @@ package com.example.fastuae.adapter;
 
 import android.app.ActionBar;
 import android.content.Context;
-import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,7 +25,7 @@ import com.example.fastuae.util.P;
 
 import java.util.List;
 
-public class BookingCarAdapter extends RecyclerView.Adapter<BookingCarAdapter.viewHolder> {
+public class UpcomingReservationAdapter extends RecyclerView.Adapter<UpcomingReservationAdapter.viewHolder> {
 
     private Context context;
     private List<BookingModel> bookingModelList;
@@ -38,7 +37,7 @@ public class BookingCarAdapter extends RecyclerView.Adapter<BookingCarAdapter.vi
         void cancelBooking(BookingModel model);
     }
 
-    public BookingCarAdapter(Context context, List<BookingModel> bookingModelList,Fragment fragment,int flag) {
+    public UpcomingReservationAdapter(Context context, List<BookingModel> bookingModelList, Fragment fragment, int flag) {
         this.context = context;
         this.bookingModelList = bookingModelList;
         this.fragment = fragment;
@@ -73,11 +72,7 @@ public class BookingCarAdapter extends RecyclerView.Adapter<BookingCarAdapter.vi
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-                if (flag==1){
-                    ((UpcomingReservationFragment)fragment).cancelBooking(model);
-                }else if (flag==2){
-                    ((PastRentalFragment)fragment).cancelBooking(model);
-                }
+                ((UpcomingReservationFragment)fragment).cancelBooking(model);
             }
         });
 

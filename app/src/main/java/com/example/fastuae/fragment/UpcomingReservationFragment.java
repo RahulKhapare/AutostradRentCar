@@ -4,7 +4,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,24 +23,22 @@ import com.adoisstudio.helper.JsonList;
 import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
 import com.example.fastuae.R;
-import com.example.fastuae.adapter.BookingCarAdapter;
+import com.example.fastuae.adapter.UpcomingReservationAdapter;
 import com.example.fastuae.databinding.FragmentUpcomingReservationBinding;
 import com.example.fastuae.model.BookingModel;
-import com.example.fastuae.util.CheckString;
 import com.example.fastuae.util.Click;
-import com.example.fastuae.util.Config;
 import com.example.fastuae.util.P;
 import com.example.fastuae.util.ProgressView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class UpcomingReservationFragment extends Fragment implements BookingCarAdapter.onClick{
+public class UpcomingReservationFragment extends Fragment implements UpcomingReservationAdapter.onClick{
 
     private Context context;
     private FragmentUpcomingReservationBinding binding;
     private List<BookingModel> bookingModelList;
-    private BookingCarAdapter bookingCarAdapter;
+    private UpcomingReservationAdapter upcomingReservationAdapter;
     private LoadingDialog loadingDialog;
     private Session session;
 
@@ -62,9 +59,9 @@ public class UpcomingReservationFragment extends Fragment implements BookingCarA
         session = new Session(context);
         loadingDialog = new LoadingDialog(context);
         bookingModelList = new ArrayList<>();
-        bookingCarAdapter = new BookingCarAdapter(context,bookingModelList,UpcomingReservationFragment.this,1);
+        upcomingReservationAdapter = new UpcomingReservationAdapter(context,bookingModelList,UpcomingReservationFragment.this,1);
         binding.recyclerReservation.setLayoutManager(new LinearLayoutManager(context));
-        binding.recyclerReservation.setAdapter(bookingCarAdapter);
+        binding.recyclerReservation.setAdapter(upcomingReservationAdapter);
         hitUpcomingBookingDetails();
     }
 
@@ -75,7 +72,7 @@ public class UpcomingReservationFragment extends Fragment implements BookingCarA
 
     private void hitUpcomingBookingDetails() {
         bookingModelList.clear();
-        bookingCarAdapter.notifyDataSetChanged();
+        upcomingReservationAdapter.notifyDataSetChanged();
         ProgressView.show(context,loadingDialog);
         Json j = new Json();
         j.addString(P.booking_number,"");
@@ -137,7 +134,7 @@ public class UpcomingReservationFragment extends Fragment implements BookingCarA
                                 bookingModelList.add(model);
                             }
 
-                            bookingCarAdapter.notifyDataSetChanged();
+                            upcomingReservationAdapter.notifyDataSetChanged();
                         }
 
                     }else {

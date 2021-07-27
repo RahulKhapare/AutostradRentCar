@@ -26,6 +26,7 @@ public class BookingFragment extends Fragment implements ViewPager.OnPageChangeL
     private FragmentBookingBinding binding;
     private UpcomingReservationFragment upcomingReservationFragment = UpcomingReservationFragment.newInstance();
     private PastRentalFragment pastRentalFragment = PastRentalFragment.newInstance();
+    private CancelBookingFragment cancelBookingFragment = CancelBookingFragment.newInstance();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -69,8 +70,12 @@ public class BookingFragment extends Fragment implements ViewPager.OnPageChangeL
         View view2 = LayoutInflater.from(context).inflate(R.layout.activity_customt_child_tab, null);
         ((TextView) view2.findViewById(R.id.text)).setText(getResources().getString(R.string.pastRental));
 
+        View view3 = LayoutInflater.from(context).inflate(R.layout.activity_customt_child_tab, null);
+        ((TextView) view3.findViewById(R.id.text)).setText(getResources().getString(R.string.cancelled));
+
         binding.tabLayout.getTabAt(0).setCustomView(view1);
         binding.tabLayout.getTabAt(1).setCustomView(view2);
+        binding.tabLayout.getTabAt(2).setCustomView(view3);
 
         binding.tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -103,6 +108,7 @@ public class BookingFragment extends Fragment implements ViewPager.OnPageChangeL
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
         adapter.addFragment(upcomingReservationFragment,"");
         adapter.addFragment(pastRentalFragment, "");
+        adapter.addFragment(cancelBookingFragment, "");
         viewPager.setAdapter(adapter);
     }
 

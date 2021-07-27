@@ -403,6 +403,11 @@
     <string name="aboutMessage2">انها مجرد قيادة…. مجرد رحلة من مكان إلى آخر ، طريق ربما تكون قد سافرت عليه عدة مرات! ومع ذلك ، فإن كل رحلة هي تجربة فريدة من نوعها!</string>
     <string name="addressMessage">أدخل رقم الشقة / اسم المبنى واسم الشارع والمنطقة ...</string>
     <string name="noMoreQty">لا مزيد من الكمية المتاحة</string>
+    <string name="sharjah">Sharjah</string>
+    <string name="sharjahPick">(Pickup)</string>
+    <string name="sharjahDrop">(Dropo-ff)</string>
+    <string name="downloadInvoice">Download Invoice</string>
+    <string name="cancelled">Cancelled</string>
 
     <string name="txt1">شركة رائدة في مجال تأجير السيارات ولديها أكبر شبكة من الفروع ونقاط الالتقاء</string>
     <string name="txt2">شركة رائدة في مجال تأجير السيارات ولديها أكبر شبكة من الفروع ونقاط الالتقاء</string>

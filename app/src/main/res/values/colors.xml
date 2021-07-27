@@ -18,5 +18,7 @@
     <color name="darkOrange">#EC6262</color>
     <color name="green">#52AC03</color>
     <color name="grayTwo">#7C7B7C</color>
+    <color name="redText">#FF0007</color>
+    <color name="redWhite">#88E68E90</color>
 
 </resources>

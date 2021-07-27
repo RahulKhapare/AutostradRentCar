@@ -1,17 +1,10 @@
 package com.example.fastuae.fragment;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.EditText;
-import android.widget.TextView;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
@@ -25,23 +18,22 @@ import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
 import com.example.fastuae.R;
 import com.example.fastuae.activity.MainActivity;
+import com.example.fastuae.adapter.CancelBookingAdapter;
 import com.example.fastuae.adapter.PastRentalAdapter;
-import com.example.fastuae.adapter.UpcomingReservationAdapter;
 import com.example.fastuae.databinding.FragmentPastRentalBinding;
 import com.example.fastuae.model.BookingModel;
-import com.example.fastuae.util.Click;
 import com.example.fastuae.util.P;
 import com.example.fastuae.util.ProgressView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PastRentalFragment extends Fragment implements PastRentalAdapter.onClick{
+public class CancelBookingFragment extends Fragment implements PastRentalAdapter.onClick {
 
     private Context context;
     private FragmentPastRentalBinding binding;
     private List<BookingModel> bookingModelList;
-    private PastRentalAdapter pastRentalAdapter;
+    private CancelBookingAdapter cancelBookingAdapter;
     private LoadingDialog loadingDialog;
     private Session session;
 
@@ -61,18 +53,42 @@ public class PastRentalFragment extends Fragment implements PastRentalAdapter.on
         session = new Session(context);
         loadingDialog = new LoadingDialog(context);
         bookingModelList = new ArrayList<>();
-        pastRentalAdapter = new PastRentalAdapter(context, bookingModelList,PastRentalFragment.this,2);
+        cancelBookingAdapter = new CancelBookingAdapter(context, bookingModelList, CancelBookingFragment.this, 2);
         binding.recyclerPastRental.setLayoutManager(new LinearLayoutManager(context));
-        binding.recyclerPastRental.setAdapter(pastRentalAdapter);
-        hitPastBookingDetails();
+        binding.recyclerPastRental.setAdapter(cancelBookingAdapter);
+//        hitCancelBookingDetails();
+        setData();
 
     }
-    private void hitPastBookingDetails() {
+
+    private void setData(){
+        BookingModel model = new BookingModel();
+        model.setId("3");
+        model.setBooking_id("16197831949");
+        model.setRefund_status_msg("We have received the refund request and will get back to you in 4-5 working days");
+        model.setCar_image("https://www.pivotmkg.com/fastcarmodule/uploads/car/thumbnail/2c193415961deb706c649056d7600363.png");
+        model.setCar_name("Mitsubishi Attrage");
+        model.setPickup_type("self_pickup");
+        model.setPickup_datetime("2021-04-30 17:14:00");
+        model.setPickup_location_name("Al Quoz - Service/sales branch");
+        model.setPickup_address("Behind Ajmal Perfume factory, near Oasis Center, Sheikh Zayed Road, Dubai, United Arab Emirates");
+        model.setPickup_landmark("Al Quoz - Service/sales branch");
+        model.setDropoff_type("self_dropoff");
+        model.setDropoff_datetime("2021-05-01 17:14:00");
+        model.setDropoff_location_name("Ras Al Khaimah");
+        model.setDropoff_address("Al Jazah Street, Opp RAK Chambers of Commerce - Ras Al-Khaimah, United Arab Emirates");
+        model.setDropoff_landmark("Ras Al Khaimah");
+
+        bookingModelList.add(model);
+        cancelBookingAdapter.notifyDataSetChanged();
+    }
+
+    private void hitCancelBookingDetails() {
         bookingModelList.clear();
-        pastRentalAdapter.notifyDataSetChanged();
-        ProgressView.show(context,loadingDialog);
+        cancelBookingAdapter.notifyDataSetChanged();
+        ProgressView.show(context, loadingDialog);
         Json j = new Json();
-        j.addString(P.booking_number,"");
+        j.addString(P.booking_number, "");
 
         Api.newApi(context, P.BaseUrl + "user_bookings").addJson(j)
                 .setMethod(Api.POST)
@@ -92,8 +108,8 @@ public class PastRentalFragment extends Fragment implements PastRentalAdapter.on
                         JsonList past_list = json.getJsonList(P.past_list);
                         JsonList cancel_list = json.getJsonList(P.cancel_list);
 
-                        if (past_list!=null && past_list.size()!=0){
-                            for (Json jsonData : past_list){
+                        if (past_list != null && past_list.size() != 0) {
+                            for (Json jsonData : past_list) {
 
                                 String id = jsonData.getString(P.id);
                                 String booking_id = jsonData.getString(P.booking_id);
@@ -131,17 +147,17 @@ public class PastRentalFragment extends Fragment implements PastRentalAdapter.on
                                 bookingModelList.add(model);
                             }
 
-                            pastRentalAdapter.notifyDataSetChanged();
+                            cancelBookingAdapter.notifyDataSetChanged();
                         }
 
-                    }else {
-                        H.showMessage(context,json.getString(P.error));
+                    } else {
+                        H.showMessage(context, json.getString(P.error));
                     }
                     checkError();
                     ProgressView.dismiss(loadingDialog);
 
                 })
-                .run("hitPastBookingDetails",session.getString(P.token));
+                .run("hitCancelBookingDetails", session.getString(P.token));
 
     }
 
@@ -155,15 +171,15 @@ public class PastRentalFragment extends Fragment implements PastRentalAdapter.on
         }
     }
 
-    public static PastRentalFragment newInstance() {
-        PastRentalFragment fragment = new PastRentalFragment();
+    public static CancelBookingFragment newInstance() {
+        CancelBookingFragment fragment = new CancelBookingFragment();
         return fragment;
     }
 
     @Override
     public void downloadInvoice(BookingModel model) {
         String path = "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf";
-        ((MainActivity)getActivity()).checkPDF(path);
+        ((MainActivity) getActivity()).checkPDF(path);
     }
 
 }
