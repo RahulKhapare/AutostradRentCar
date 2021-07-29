@@ -15,8 +15,10 @@ import com.adoisstudio.helper.JsonList;
 import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
 import com.example.fastuae.R;
+import com.example.fastuae.adapter.LocationAdapter;
 import com.example.fastuae.adapter.LocationDetailAdapter;
 import com.example.fastuae.databinding.ActivityLocationBinding;
+import com.example.fastuae.model.HomeLocationModel;
 import com.example.fastuae.model.LocationModel;
 import com.example.fastuae.util.Click;
 import com.example.fastuae.util.P;
@@ -26,7 +28,7 @@ import com.example.fastuae.util.WindowView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LocationActivity extends AppCompatActivity {
+public class LocationActivity extends AppCompatActivity implements LocationAdapter.onClick{
 
     private LocationActivity activity = this;
     private ActivityLocationBinding binding;
@@ -35,6 +37,9 @@ public class LocationActivity extends AppCompatActivity {
     private LoadingDialog loadingDialog;
     private Session session;
     private boolean callTime = false;
+
+    private List<HomeLocationModel> locationDailyList;
+    private LocationAdapter locationDailyAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,17 +59,34 @@ public class LocationActivity extends AppCompatActivity {
         session = new Session(activity);
         loadingDialog = new LoadingDialog(activity);
 
+        locationDailyList = new ArrayList<>();
+        locationDailyAdapter = new LocationAdapter(activity, locationDailyList);
+        LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(activity);
+        binding.recyclerDailyLocation.setLayoutManager(linearLayoutManager1);
+        binding.recyclerDailyLocation.setHasFixedSize(true);
+        binding.recyclerDailyLocation.setAdapter(locationDailyAdapter);
+
         locationModelList = new ArrayList<>();
         adapter = new LocationDetailAdapter(activity,locationModelList);
         binding.recyclerLocation.setLayoutManager(new LinearLayoutManager(activity));
         binding.recyclerLocation.setAdapter(adapter);
 
+        hitLocationListData();
         hitLocationData();
         onClick();
     }
 
 
     private void onClick(){
+
+        binding.cardPickLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                cardPickupClick();
+            }
+        });
+
         binding.txtViewMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,6 +98,55 @@ public class LocationActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onLocationClick(String location, int flag, HomeLocationModel model) {
+        binding.txtPickUpMessage.setText(location);
+        cardPickupClick();
+    }
+
+    private void hitLocationListData() {
+
+        ProgressView.show(activity, loadingDialog);
+        Json j = new Json();
+
+        Api.newApi(activity, P.BaseUrl + "location").addJson(j)
+                .setMethod(Api.GET)
+                //.onHeaderRequest(App::getHeaders)
+                .onError(() -> {
+                    ProgressView.dismiss(loadingDialog);
+                    H.showMessage(activity, "On error is called");
+                })
+                .onSuccess(json ->
+                {
+                    if (json.getInt(P.status) == 1) {
+
+                        json = json.getJson(P.data);
+                        JsonList location_list = json.getJsonList(P.location_list);
+                        for (int i = 0; i < location_list.size(); i++) {
+                            Json jsonData = location_list.get(i);
+                            HomeLocationModel model = new HomeLocationModel();
+                            model.setId(jsonData.getString(P.id));
+                            model.setEmirate_id(jsonData.getString(P.emirate_id));
+                            model.setEmirate_name(jsonData.getString(P.emirate_name));
+                            model.setLocation_name(jsonData.getString(P.location_name));
+                            model.setAddress(jsonData.getString(P.address));
+                            model.setStatus(jsonData.getString(P.status));
+                            model.setContact_number(jsonData.getString(P.contact_number));
+                            model.setContact_email(jsonData.getString(P.contact_email));
+                            model.setLocation_time_data(jsonData.getJsonList(P.location_time_data));
+                            locationDailyList.add(model);
+                        }
+
+                        locationDailyAdapter.notifyDataSetChanged();
+
+                    } else {
+                        H.showMessage(activity, json.getString(P.error));
+                    }
+                    ProgressView.dismiss(loadingDialog);
+
+                })
+                .run("hitLocationListData");
+    }
 
     private void hitLocationData() {
         locationModelList.clear();
@@ -143,6 +214,19 @@ public class LocationActivity extends AppCompatActivity {
         }
     }
 
+    private void cardPickupClick() {
+        if (binding.imgDeliverArrowDown.getVisibility() == View.VISIBLE) {
+            binding.imgDeliverArrowDown.setVisibility(View.GONE);
+            binding.imgDeliverArrowUp.setVisibility(View.VISIBLE);
+            binding.cardLocationDeliver.setVisibility(View.VISIBLE);
+
+        } else if (binding.imgDeliverArrowUp.getVisibility() == View.VISIBLE) {
+            binding.imgDeliverArrowUp.setVisibility(View.GONE);
+            binding.imgDeliverArrowDown.setVisibility(View.VISIBLE);
+            binding.cardLocationDeliver.setVisibility(View.GONE);
+        }
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
@@ -150,4 +234,5 @@ public class LocationActivity extends AppCompatActivity {
         }
         return false;
     }
+
 }

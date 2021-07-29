@@ -45,6 +45,8 @@ public class Config {
     public static String Invoices = "Invoices";
     public static String Salik_Charges = "Salik Charges";
     public static String Traffic_Lines = "Traffic Lines";
+    public static String Fast_Loyalty = "Fast Loyalty";
+    public static String Refund = "Refund";
 
     public static String General = "General";
     public static String Payment_Related = "Payment Related";

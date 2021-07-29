@@ -37,12 +37,6 @@ public class CategorySelectionAdapter extends RecyclerView.Adapter<CategorySelec
         void onCategoryClick(String category);
     }
 
-    public CategorySelectionAdapter(Context context, List<CategoryModel> categoryModelList, ProfileFragment profileFragment,String tag) {
-        this.context = context;
-        this.categoryModelList = categoryModelList;
-        this.profileFragment = profileFragment;
-        this.tag = tag;
-    }
 
     public CategorySelectionAdapter(Context context, List<CategoryModel> categoryModelList, FleetFragment fleetFragment,String tag,boolean checkFlag) {
         this.context = context;
@@ -78,9 +72,7 @@ public class CategorySelectionAdapter extends RecyclerView.Adapter<CategorySelec
                 Click.preventTwoClick(v);
                 lastCheckPosition = holder.getAdapterPosition();
                 notifyItemRangeChanged(0,categoryModelList.size());
-                if (tag.equals(Config.PROFILE_TAG)){
-                    ((ProfileFragment)profileFragment).onCategoryClick(model.getCategory_name_slug());
-                }else if (tag.equals(Config.FAQ_TAG)){
+                if (tag.equals(Config.FAQ_TAG)){
                     ((FAQActivity)context).onCategoryClick(model.getCategory_name_slug());
                 }else if (tag.equals(Config.FLEET_TAG)){
                     ((FleetFragment)fleetFragment).onCategoryClick(model.getCategoryName());

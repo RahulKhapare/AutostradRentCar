@@ -7,29 +7,570 @@
         android:layout_height="match_parent"
         android:fillViewport="true">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:background="@color/colorWhite">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerProfileCategory"
+            <RelativeLayout
+                android:id="@+id/lnrMyAccount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="6dp"
-                android:layout_marginRight="6dp">
+                android:padding="16dp">
 
-            </androidx.recyclerview.widget.RecyclerView>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-            <FrameLayout
-                android:layout_below="@+id/recyclerProfileCategory"
-                android:id="@+id/fragmentFrame"
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:src="@drawable/ic_my_account">
+
+                    </ImageView>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/textDark"
+                        android:gravity="center_vertical"
+                        android:layout_gravity="center_vertical"
+                        android:fontFamily="@font/nunito_sans_regular"
+                        android:text="@string/myAccount"
+                        android:textSize="18sp">
+                    </TextView>
+
+                </LinearLayout>
+
+
+                <ImageView
+                    android:id="@+id/imgMyAccountRight"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginRight="15dp"
+                    android:src="@drawable/ic_right_arrow"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true">
+                </ImageView>
+
+                <ImageView
+                    android:id="@+id/imgMyAccountLeft"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="15dp"
+                    android:src="@drawable/ic_left_arrow"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:visibility="gone">
+                </ImageView>
+
+            </RelativeLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="0.5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@color/customeGray"></LinearLayout>
 
-            </FrameLayout>
-        </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/lnrDocument"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:src="@drawable/ic_document">
+
+                    </ImageView>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/textDark"
+                        android:gravity="center_vertical"
+                        android:layout_gravity="center_vertical"
+                        android:fontFamily="@font/nunito_sans_regular"
+                        android:text="@string/document"
+                        android:textSize="18sp">
+                    </TextView>
+
+                </LinearLayout>
+
+
+                <ImageView
+                    android:id="@+id/imgDocumentRight"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginRight="15dp"
+                    android:src="@drawable/ic_right_arrow"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true">
+                </ImageView>
+
+                <ImageView
+                    android:id="@+id/imgDocumentLeft"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="15dp"
+                    android:src="@drawable/ic_left_arrow"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:visibility="gone">
+                </ImageView>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@color/customeGray"></LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/lnrAdditionalDrive"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:src="@drawable/ic_additional_drive">
+
+                    </ImageView>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/textDark"
+                        android:gravity="center_vertical"
+                        android:layout_gravity="center_vertical"
+                        android:fontFamily="@font/nunito_sans_regular"
+                        android:text="@string/additionalDriver"
+                        android:textSize="18sp">
+                    </TextView>
+
+                </LinearLayout>
+
+
+                <ImageView
+                    android:id="@+id/imgAdditionalDriveRight"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginRight="15dp"
+                    android:src="@drawable/ic_right_arrow"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true">
+                </ImageView>
+
+                <ImageView
+                    android:id="@+id/imgAdditionalDriveLeft"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="15dp"
+                    android:src="@drawable/ic_left_arrow"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:visibility="gone">
+                </ImageView>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@color/customeGray"></LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/lnrBooking"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:src="@drawable/ic_booking">
+
+                    </ImageView>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/textDark"
+                        android:gravity="center_vertical"
+                        android:layout_gravity="center_vertical"
+                        android:fontFamily="@font/nunito_sans_regular"
+                        android:text="@string/booking"
+                        android:textSize="18sp">
+                    </TextView>
+
+                </LinearLayout>
+
+
+                <ImageView
+                    android:id="@+id/imgBookingRight"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginRight="15dp"
+                    android:src="@drawable/ic_right_arrow"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true">
+                </ImageView>
+
+                <ImageView
+                    android:id="@+id/imgBookingLeft"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="15dp"
+                    android:src="@drawable/ic_left_arrow"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:visibility="gone">
+                </ImageView>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@color/customeGray"></LinearLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/lnrPayment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:src="@drawable/ic_payment">
+
+                    </ImageView>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/textDark"
+                        android:gravity="center_vertical"
+                        android:layout_gravity="center_vertical"
+                        android:fontFamily="@font/nunito_sans_regular"
+                        android:text="@string/yourPayment"
+                        android:textSize="18sp">
+                    </TextView>
+
+                </LinearLayout>
+
+
+                <ImageView
+                    android:id="@+id/imgPaymentRight"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginRight="15dp"
+                    android:src="@drawable/ic_right_arrow"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true">
+                </ImageView>
+
+                <ImageView
+                    android:id="@+id/imgPaymentLeft"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="15dp"
+                    android:src="@drawable/ic_left_arrow"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:visibility="gone">
+                </ImageView>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@color/customeGray"></LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/lnrCharges"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:src="@drawable/ic_charges">
+
+                    </ImageView>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/textDark"
+                        android:gravity="center_vertical"
+                        android:layout_gravity="center_vertical"
+                        android:fontFamily="@font/nunito_sans_regular"
+                        android:text="@string/chargesFine"
+                        android:textSize="18sp">
+                    </TextView>
+
+                </LinearLayout>
+
+
+                <ImageView
+                    android:id="@+id/imgChargesRight"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginRight="15dp"
+                    android:src="@drawable/ic_right_arrow"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true">
+                </ImageView>
+
+                <ImageView
+                    android:id="@+id/imgChargesLeft"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="15dp"
+                    android:src="@drawable/ic_left_arrow"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:visibility="gone">
+                </ImageView>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@color/customeGray"></LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/lnrFastLoyalty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:src="@drawable/ic_fast_loyalty">
+
+                    </ImageView>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/textDark"
+                        android:gravity="center_vertical"
+                        android:layout_gravity="center_vertical"
+                        android:fontFamily="@font/nunito_sans_regular"
+                        android:text="@string/fastLoyalty"
+                        android:textSize="18sp">
+                    </TextView>
+
+                </LinearLayout>
+
+
+                <ImageView
+                    android:id="@+id/imgFastLoyaltyRight"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginRight="15dp"
+                    android:src="@drawable/ic_right_arrow"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true">
+                </ImageView>
+
+                <ImageView
+                    android:id="@+id/imgFastLoyaltyLeft"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="15dp"
+                    android:src="@drawable/ic_left_arrow"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:visibility="gone">
+                </ImageView>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@color/customeGray"></LinearLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/lnrRefund"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:src="@drawable/ic_refund">
+
+                    </ImageView>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/textDark"
+                        android:gravity="center_vertical"
+                        android:layout_gravity="center_vertical"
+                        android:fontFamily="@font/nunito_sans_regular"
+                        android:text="@string/refund"
+                        android:textSize="18sp">
+                    </TextView>
+
+                </LinearLayout>
+
+
+                <ImageView
+                    android:id="@+id/imgRefundRight"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginRight="15dp"
+                    android:src="@drawable/ic_right_arrow"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true">
+                </ImageView>
+
+                <ImageView
+                    android:id="@+id/imgRefundLeft"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="15dp"
+                    android:src="@drawable/ic_left_arrow"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:visibility="gone">
+                </ImageView>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@color/customeGray"></LinearLayout>
+
+
+
+            <RelativeLayout
+                android:layout_below="@+id/recyclerProfileCategory"
+                android:layout_marginTop="20dp"
+                android:id="@+id/lnrLogOut"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimaryDark"
+                android:padding="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:tint="@color/colorWhite"
+                        android:src="@drawable/ic_log_out">
+
+                    </ImageView>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorWhite"
+                        android:gravity="center_vertical"
+                        android:layout_gravity="center_vertical"
+                        android:fontFamily="@font/nunito_sans_regular"
+                        android:text="@string/logOut"
+                        android:textSize="18sp">
+                    </TextView>
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+        </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
 

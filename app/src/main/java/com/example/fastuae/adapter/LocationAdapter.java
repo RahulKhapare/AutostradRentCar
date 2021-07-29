@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fastuae.R;
+import com.example.fastuae.activity.LocationActivity;
 import com.example.fastuae.databinding.ActivityLocationListBinding;
 import com.example.fastuae.fragment.HomeFragment;
 import com.example.fastuae.model.HomeLocationModel;
@@ -28,6 +29,12 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.viewHo
 
     public interface onClick{
         void onLocationClick(String location,int flag,HomeLocationModel model);
+    }
+
+    public LocationAdapter(Context context, List<HomeLocationModel> locationModelList) {
+        this.context = context;
+        this.locationModelList = locationModelList;
+        fromActivity = true;
     }
 
     public LocationAdapter(Context context, List<HomeLocationModel> locationModelList,HomeFragment fragment,int flag) {
@@ -66,7 +73,12 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.viewHo
 //                }else {
 //                    ((HomeFragment)homeFragment).onLocationClick(model.getLocation_name(),flag,model);
 //                }
-                ((HomeFragment)homeFragment).onLocationClick(model.getLocation_name(),flag,model);
+                if (fromActivity){
+                    ((LocationActivity)context).onLocationClick(model.getLocation_name(),flag,model);
+                }else {
+                    ((HomeFragment)homeFragment).onLocationClick(model.getLocation_name(),flag,model);
+                }
+
 
             }
         });

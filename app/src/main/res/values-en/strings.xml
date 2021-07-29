@@ -194,7 +194,7 @@
     <string name="fastReward">Fast Rewards</string>
     <string name="specialOffers">Special Offers</string>
     <string name="faqs">FAQs</string>
-    <string name="locations">Locations</string>
+    <string name="locations">Location</string>
     <string name="aboutCompany">About the Company</string>
     <string name="contactUs">Contact Us</string>
     <string name="getReceipt">Get E-Receipt</string>
@@ -365,7 +365,7 @@
     <string name="useCode">Use Code</string>
     <string name="codeCopied">Code copied</string>
     <string name="tel">Tel</string>
-    <string name="logOut">LogOut</string>
+    <string name="logOut">Log out</string>
     <string name="logOutMessage">Do you want to log out ?</string>
     <string name="careerText">All set to explore, learn &amp; implement with one of the most amazing teams. Head-start your career with a company is like walking into world full of creative ideas. We are eager to hear from you soon.</string>
     <string name="productManager">Product Manager</string>
@@ -407,6 +407,11 @@
     <string name="sharjahDrop">(Dropo-ff)</string>
     <string name="downloadInvoice">Download Invoice</string>
     <string name="cancelled">Cancelled</string>
+    <string name="yourPayment">Your Payment</string>
+    <string name="chargesFine">Charges/ Fines</string>
+    <string name="fastLoyalty">Fast Loyalty</string>
+    <string name="refund">Refund</string>
+    <string name="yourAutoStard">Your AutoStrad in UAE</string>
 
     <string name="txt1">Leading Car Rental Company with the largest network of Branches &amp; Pickup points</string>
     <string name="txt2">Leading Car Rental Company with the largest network of Branches &amp; Pickup points</string>

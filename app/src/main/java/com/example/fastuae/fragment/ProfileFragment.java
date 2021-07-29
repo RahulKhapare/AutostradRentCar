@@ -1,42 +1,34 @@
 package com.example.fastuae.fragment;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.adoisstudio.helper.H;
+import com.adoisstudio.helper.Session;
 import com.example.fastuae.R;
-import com.example.fastuae.adapter.CategorySelectionAdapter;
+import com.example.fastuae.activity.LoginDashboardActivity;
+import com.example.fastuae.activity.ProfileViewActivity;
 import com.example.fastuae.databinding.FragmentProfileBinding;
-import com.example.fastuae.model.CategoryModel;
+import com.example.fastuae.util.Click;
 import com.example.fastuae.util.Config;
+import com.example.fastuae.util.P;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class ProfileFragment extends Fragment implements CategorySelectionAdapter.onClick {
+public class ProfileFragment extends Fragment{
 
     private Context context;
     private FragmentProfileBinding binding;
-    private List<CategoryModel> categoryModelList;
-    private CategorySelectionAdapter adapter;
-
-    private MyAccountFragment myAccountFragment;
-    private DocumentFragment documentFragment;
-    private AdditionalDriverFragment additionalDriverFragment;
-    private BookingFragment bookingFragment;
-    private ManagePaymentFragment managePaymentFragment;
-    private InvoiceFragment invoiceFragment;
-    private SalikChargesFragment salikChargesFragment;
-    private TrafficLinesFragment trafficLinesFragment;
+    private Session session;
+    private String flag;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -55,16 +47,11 @@ public class ProfileFragment extends Fragment implements CategorySelectionAdapte
 
     private void initView() {
 
-        categoryModelList = new ArrayList<>();
-        adapter = new CategorySelectionAdapter(context, categoryModelList, ProfileFragment.this,Config.PROFILE_TAG);
-        binding.recyclerProfileCategory.setLayoutManager(new LinearLayoutManager(context, RecyclerView.HORIZONTAL, false));
-        binding.recyclerProfileCategory.setNestedScrollingEnabled(false);
-        binding.recyclerProfileCategory.setAdapter(adapter);
-        setData();
+        session = new Session(context);
+        flag = session.getString(P.languageFlag);
 
-        myAccountFragment = MyAccountFragment.newInstance();
-        fragmentLoader(myAccountFragment, Config.My_Account);
-
+        onClick();
+        updateIcons();
     }
 
     @Override
@@ -83,107 +70,189 @@ public class ProfileFragment extends Fragment implements CategorySelectionAdapte
         super.onDestroyView();
     }
 
-    public void fragmentLoader(Fragment fragment, String tag) {
-        Config.currentProfileFlag = tag;
-        getChildFragmentManager().beginTransaction()
-                .setCustomAnimations(R.anim.anim_enter, R.anim.anim_exit)
-                .replace(R.id.fragmentFrame, fragment, tag)
-                .addToBackStack(tag)
-                .commit();
-    }
-
-
-    private void setData() {
-
-        CategoryModel categoryModel1 = new CategoryModel();
-        categoryModel1.setCategory_name_slug(Config.My_Account);
-        categoryModel1.setCategoryName(getResources().getString(R.string.myAccount));
-        categoryModelList.add(categoryModel1);
-        CategoryModel categoryModel2 = new CategoryModel();
-        categoryModel2.setCategory_name_slug(Config.Documents);
-        categoryModel2.setCategoryName(getResources().getString(R.string.document));
-        categoryModelList.add(categoryModel2);
-        CategoryModel categoryModel3 = new CategoryModel();
-        categoryModel3.setCategory_name_slug(Config.Additional_Driver);
-        categoryModel3.setCategoryName(getResources().getString(R.string.additionalDriver));
-        categoryModelList.add(categoryModel3);
-        CategoryModel categoryModel4 = new CategoryModel();
-        categoryModel4.setCategory_name_slug(Config.Booking);
-        categoryModel4.setCategoryName(getResources().getString(R.string.booking));
-        categoryModelList.add(categoryModel4);
-        CategoryModel categoryModel5 = new CategoryModel();
-        categoryModel5.setCategory_name_slug(Config.Manage_Payments);
-        categoryModel5.setCategoryName(getResources().getString(R.string.managePayment));
-        categoryModelList.add(categoryModel5);
-        CategoryModel categoryModel6 = new CategoryModel();
-        categoryModel6.setCategory_name_slug(Config.Invoices);
-        categoryModel6.setCategoryName(getResources().getString(R.string.invoices));
-        categoryModelList.add(categoryModel6);
-        CategoryModel categoryModel7 = new CategoryModel();
-        categoryModel7.setCategory_name_slug(Config.Salik_Charges);
-        categoryModel7.setCategoryName(getResources().getString(R.string.salik_Charges));
-        categoryModelList.add(categoryModel7);
-        CategoryModel categoryModel8 = new CategoryModel();
-        categoryModel8.setCategory_name_slug(Config.Traffic_Lines);
-        categoryModel8.setCategoryName(getResources().getString(R.string.traffic_Lines));
-        categoryModelList.add(categoryModel8);
-
-        adapter.notifyDataSetChanged();
-
-    }
-
-    @Override
-    public void onCategoryClick(String categoryFlag) {
-        String currentFlag = Config.currentProfileFlag;
-        if (categoryFlag.equals(Config.My_Account)) {
-            if (!TextUtils.isEmpty(currentFlag) && !currentFlag.equals(Config.My_Account)) {
-                myAccountFragment = MyAccountFragment.newInstance();
-                fragmentLoader(myAccountFragment, Config.My_Account);
-            }
-        } else if (categoryFlag.equals(Config.Documents)) {
-            if (!TextUtils.isEmpty(currentFlag) && !currentFlag.equals(Config.Documents)) {
-                documentFragment = DocumentFragment.newInstance();
-                fragmentLoader(documentFragment, Config.Documents);
-            }
-        } else if (categoryFlag.equals(Config.Additional_Driver)) {
-            if (!TextUtils.isEmpty(currentFlag) && !currentFlag.equals(Config.Additional_Driver)) {
-                additionalDriverFragment = AdditionalDriverFragment.newInstance();
-                fragmentLoader(additionalDriverFragment, Config.Additional_Driver);
-            }
-        } else if (categoryFlag.equals(Config.Booking)) {
-            if (!TextUtils.isEmpty(currentFlag) && !currentFlag.equals(Config.Booking)) {
-                bookingFragment = BookingFragment.newInstance();
-                fragmentLoader(bookingFragment, Config.Booking);
-            }
-        } else if (categoryFlag.equals(Config.Manage_Payments)) {
-            if (!TextUtils.isEmpty(currentFlag) && !currentFlag.equals(Config.Manage_Payments)) {
-                managePaymentFragment = ManagePaymentFragment.newInstance();
-                fragmentLoader(managePaymentFragment, Config.Manage_Payments);
-            }
-        } else if (categoryFlag.equals(Config.Invoices)) {
-            if (!TextUtils.isEmpty(currentFlag) && !currentFlag.equals(Config.Invoices)) {
-                invoiceFragment = InvoiceFragment.newInstance();
-                fragmentLoader(invoiceFragment, Config.Invoices);
-            }
-        } else if (categoryFlag.equals(Config.Salik_Charges)) {
-            if (!TextUtils.isEmpty(currentFlag) && !currentFlag.equals(Config.Salik_Charges)) {
-                salikChargesFragment = SalikChargesFragment.newInstance();
-                fragmentLoader(salikChargesFragment, Config.Salik_Charges);
-            }
-        } else if (categoryFlag.equals(Config.Traffic_Lines)) {
-            if (!TextUtils.isEmpty(currentFlag) && !currentFlag.equals(Config.Traffic_Lines)) {
-                trafficLinesFragment = TrafficLinesFragment.newInstance();
-                fragmentLoader(trafficLinesFragment, Config.Traffic_Lines);
-            }
-        }
-
-    }
 
     public static ProfileFragment newInstance() {
         ProfileFragment fragment = new ProfileFragment();
         return fragment;
     }
 
+    private void onClick(){
+
+        binding.lnrMyAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                Config.currentProfileFlag = Config.My_Account;
+                jumpToProfile();
+
+            }
+        });
+
+        binding.lnrDocument.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                Config.currentProfileFlag = Config.Documents;
+                jumpToProfile();
+            }
+        });
+
+        binding.lnrAdditionalDrive.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                Config.currentProfileFlag = Config.Additional_Driver;
+                jumpToProfile();
+            }
+        });
+
+        binding.lnrBooking.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                Config.currentProfileFlag = Config.Booking;
+                jumpToProfile();
+            }
+        });
+
+        binding.lnrPayment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                Config.currentProfileFlag = Config.Manage_Payments;
+                jumpToProfile();
+            }
+        });
+
+        binding.lnrCharges.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                Config.currentProfileFlag = Config.Invoices;
+                jumpToProfile();
+
+            }
+        });
+
+        binding.lnrFastLoyalty.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                Config.currentProfileFlag = Config.Fast_Loyalty;
+                jumpToProfile();
+            }
+        });
+
+        binding.lnrRefund.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                Config.currentProfileFlag = Config.Refund;
+                jumpToProfile();
+            }
+        });
+
+        binding.lnrLogOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                onLogoutClick();
+            }
+        });
+
+    }
+
+    private void jumpToProfile(){
+        Intent intent = new Intent(context, ProfileViewActivity.class);
+        startActivity(intent);
+    }
+
+    private void updateIcons() {
+
+        if (flag.equals(Config.ARABIC)) {
+
+            binding.imgMyAccountRight.setVisibility(View.GONE);
+            binding.imgMyAccountLeft.setVisibility(View.VISIBLE);
+
+            binding.imgDocumentRight.setVisibility(View.GONE);
+            binding.imgDocumentLeft.setVisibility(View.VISIBLE);
+
+            binding.imgAdditionalDriveRight.setVisibility(View.GONE);
+            binding.imgAdditionalDriveLeft.setVisibility(View.VISIBLE);
+
+            binding.imgBookingRight.setVisibility(View.GONE);
+            binding.imgBookingLeft.setVisibility(View.VISIBLE);
+
+            binding.imgPaymentRight.setVisibility(View.GONE);
+            binding.imgPaymentLeft.setVisibility(View.VISIBLE);
+
+            binding.imgChargesRight.setVisibility(View.GONE);
+            binding.imgChargesLeft.setVisibility(View.VISIBLE);
+
+            binding.imgFastLoyaltyRight.setVisibility(View.GONE);
+            binding.imgFastLoyaltyLeft.setVisibility(View.VISIBLE);
+
+            binding.imgRefundRight.setVisibility(View.GONE);
+            binding.imgRefundLeft.setVisibility(View.VISIBLE);
+
+        } else if (flag.equals(Config.ENGLISH)) {
+
+            binding.imgMyAccountRight.setVisibility(View.VISIBLE);
+            binding.imgMyAccountLeft.setVisibility(View.GONE);
+
+            binding.imgDocumentRight.setVisibility(View.VISIBLE);
+            binding.imgDocumentLeft.setVisibility(View.GONE);
+
+            binding.imgAdditionalDriveRight.setVisibility(View.VISIBLE);
+            binding.imgAdditionalDriveLeft.setVisibility(View.GONE);
+
+            binding.imgBookingRight.setVisibility(View.VISIBLE);
+            binding.imgBookingLeft.setVisibility(View.GONE);
+
+            binding.imgPaymentRight.setVisibility(View.VISIBLE);
+            binding.imgPaymentLeft.setVisibility(View.GONE);
+
+            binding.imgChargesRight.setVisibility(View.VISIBLE);
+            binding.imgChargesLeft.setVisibility(View.GONE);
+
+            binding.imgFastLoyaltyRight.setVisibility(View.VISIBLE);
+            binding.imgFastLoyaltyLeft.setVisibility(View.GONE);
+
+            binding.imgRefundRight.setVisibility(View.VISIBLE);
+            binding.imgRefundLeft.setVisibility(View.GONE);
+
+        }
+    }
+
+    private void onLogoutClick() {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity(), R.style.DialogTheme);
+        alertDialogBuilder.setTitle(getResources().getString(R.string.logOut));
+        alertDialogBuilder.setMessage(getResources().getString(R.string.logOutMessage));
+        alertDialogBuilder.setPositiveButton(getResources().getString(R.string.yes),
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int arg1) {
+                        dialog.dismiss();
+                        session.clear();
+                        new Session(getActivity()).addString(P.languageFlag, Config.ENGLISH);
+                        Intent intent = new Intent(context, LoginDashboardActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                    }
+                });
+
+        alertDialogBuilder.setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+        Window window = alertDialog.getWindow();
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+    }
 
 
 }

@@ -43,7 +43,164 @@
                         android:orientation="vertical"
                         android:background="@color/colorWhite">
 
+                      <LinearLayout
+                          android:id="@+id/lnrView"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_marginTop="10dp"
+                          android:layout_marginLeft="16dp"
+                          android:layout_marginRight="16dp"
+                          android:orientation="vertical">
+
+                          <TextView
+                              android:id="@+id/txtTitle"
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:textColor="@color/colorPrimaryDark"
+                              android:textSize="18sp"
+                              android:fontFamily="@font/nunit_sans_bold"
+                              android:text="@string/yourAutoStard">
+
+                          </TextView>
+
+                          <RelativeLayout
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content">
+
+                              <androidx.cardview.widget.CardView
+                                  android:layout_below="@+id/cardDuration"
+                                  android:id="@+id/cardPickLocation"
+                                  android:layout_width="match_parent"
+                                  android:layout_height="60dp"
+                                  app:cardElevation="3dp"
+                                  app:cardCornerRadius="5dp"
+                                  android:layout_marginTop="15dp"
+                                  android:layout_marginBottom="5dp"
+                                  android:layout_marginLeft="1dp"
+                                  android:layout_marginRight="1dp">
+
+                                  <LinearLayout
+                                      android:layout_width="match_parent"
+                                      android:layout_height="match_parent"
+                                      android:layout_margin="5dp"
+                                      android:gravity="center_vertical"
+                                      android:layout_gravity="center_vertical"
+                                      android:orientation="horizontal">
+
+                                      <LinearLayout
+                                          android:layout_weight="1"
+                                          android:layout_width="match_parent"
+                                          android:layout_height="wrap_content"
+                                          android:orientation="vertical">
+
+                                          <LinearLayout
+                                              android:layout_width="match_parent"
+                                              android:layout_height="wrap_content">
+
+                                              <ImageView
+                                                  android:layout_width="25dp"
+                                                  android:layout_height="25dp"
+                                                  android:layout_gravity="center_vertical"
+                                                  android:src="@drawable/ic_location"></ImageView>
+                                              <TextView
+                                                  android:id="@+id/txtPickUpTitle"
+                                                  android:layout_width="match_parent"
+                                                  android:layout_height="wrap_content"
+                                                  android:textColor="@color/textDark"
+                                                  android:layout_gravity="center_vertical"
+                                                  android:fontFamily="@font/nunito_sans_semibold"
+                                                  android:text="@string/pickUpLocation"
+                                                  android:textSize="16sp">
+                                              </TextView>
+
+                                          </LinearLayout>
+
+                                          <TextView
+                                              android:id="@+id/txtPickUpMessage"
+                                              android:layout_width="match_parent"
+                                              android:layout_height="wrap_content"
+                                              android:textColor="@color/iconicGray"
+                                              android:layout_gravity="center_vertical"
+                                              android:fontFamily="@font/nunito_sans_semibold"
+                                              android:text="@string/userCurrentLocation"
+                                              android:paddingLeft="10dp"
+                                              android:textSize="14sp">
+                                          </TextView>
+
+                                      </LinearLayout>
+
+                                      <ImageView
+                                          android:id="@+id/imgDeliverArrowUp"
+                                          android:layout_width="25dp"
+                                          android:layout_height="25dp"
+                                          android:visibility="gone"
+                                          android:layout_gravity="center_vertical"
+                                          android:tint="@color/colorBlack"
+                                          android:src="@drawable/ic_up_arrow"></ImageView>
+
+                                      <ImageView
+                                          android:id="@+id/imgDeliverArrowDown"
+                                          android:layout_width="25dp"
+                                          android:layout_height="25dp"
+                                          android:layout_gravity="center_vertical"
+                                          android:tint="@color/colorBlack"
+                                          android:src="@drawable/ic_down_arrow"></ImageView>
+
+                                  </LinearLayout>
+
+
+                              </androidx.cardview.widget.CardView>
+
+                              <androidx.cardview.widget.CardView
+                                  android:id="@+id/cardLocationDeliver"
+                                  android:layout_below="@+id/cardPickLocation"
+                                  android:layout_width="match_parent"
+                                  android:layout_height="wrap_content"
+                                  app:cardElevation="3dp"
+                                  app:cardCornerRadius="5dp"
+                                  android:layout_marginBottom="10dp"
+                                  android:layout_marginTop="-10dp"
+                                  android:layout_marginLeft="1dp"
+                                  android:layout_marginRight="1dp"
+                                  android:visibility="gone"
+                                  >
+
+                                  <LinearLayout
+                                      android:layout_width="match_parent"
+                                      android:layout_height="wrap_content"
+                                      android:orientation="vertical">
+
+                                      <LinearLayout
+                                          android:layout_width="match_parent"
+                                          android:layout_height="0.5dp"
+                                          android:layout_marginTop="5dp"
+                                          android:background="@color/customeGray"
+                                          tools:ignore="Suspicious0dp">
+
+                                      </LinearLayout>
+
+                                      <androidx.recyclerview.widget.RecyclerView
+                                          android:id="@+id/recyclerDailyLocation"
+                                          android:layout_width="match_parent"
+                                          android:layout_height="wrap_content"
+                                          android:scrollbarSize="7dp"
+                                          android:scrollbarFadeDuration="0"
+                                          android:scrollbarThumbVertical="@drawable/scrollbar_shape"
+                                          android:scrollbars="vertical">
+
+                                      </androidx.recyclerview.widget.RecyclerView>
+
+                                  </LinearLayout>
+
+                              </androidx.cardview.widget.CardView>
+
+                          </RelativeLayout>
+
+                      </LinearLayout>
+
                         <androidx.recyclerview.widget.RecyclerView
+                            android:layout_below="@+id/lnrView"
+                            android:layout_marginTop="20dp"
                             android:id="@+id/recyclerLocation"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
