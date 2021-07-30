@@ -60,9 +60,7 @@ public class AddOnsActivity extends AppCompatActivity{
     @Override
     protected void onResume() {
         super.onResume();
-        if(HomeFragment.forEditAddress){
-            finish();
-        }
+
     }
 
     private void initView(){

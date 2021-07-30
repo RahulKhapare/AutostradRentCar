@@ -56,6 +56,8 @@ public class SelectCarActivity extends AppCompatActivity implements ViewPager.On
     public static String dropUpLocationID = "";
     public static String pickUpAddress = "";
     public static String dropUpAddress = "";
+    public static String dropUpLocation = "";
+    public static String pickupLocation = "";
 
     public static String groupValue = "";
     public static String passengerValue = "";
@@ -92,9 +94,7 @@ public class SelectCarActivity extends AppCompatActivity implements ViewPager.On
     @Override
     protected void onResume() {
         super.onResume();
-        if(HomeFragment.forEditAddress){
-            finish();
-        }
+
     }
 
     private void initView(){
@@ -119,6 +119,8 @@ public class SelectCarActivity extends AppCompatActivity implements ViewPager.On
         dropUpLocationID = getIntent().getStringExtra(Config.dropUpLocationID);
         pickUpAddress = getIntent().getStringExtra(Config.pickUpAddress);
         dropUpAddress = getIntent().getStringExtra(Config.dropUpAddress);
+        dropUpLocation = getIntent().getStringExtra(Config.SelectedDropUpAddress);
+        pickupLocation = getIntent().getStringExtra(Config.SelectedPickUpAddress);
 
         loadingDialog = new LoadingDialog(activity);
         setUpViewPager();

@@ -415,6 +415,8 @@
     <string name="fastLoyalty">Fast Loyalty</string>
     <string name="refund">Refund</string>
     <string name="yourAutoStard">Your AutoStrad in UAE</string>
+    <string name="editAddressMessage">Do you want to edit location and time ?</string>
+    <string name="editLocationTime">Edit Location &amp; Time</string>
 
     <string name="txt1">Leading Car Rental Company with the largest network of Branches &amp; Pickup points</string>
     <string name="txt2">Leading Car Rental Company with the largest network of Branches &amp; Pickup points</string>

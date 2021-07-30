@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fastuae.R;
+import com.example.fastuae.activity.EditPickupDropofftActivity;
 import com.example.fastuae.activity.LocationActivity;
 import com.example.fastuae.databinding.ActivityLocationListBinding;
 import com.example.fastuae.fragment.HomeFragment;
@@ -25,6 +26,7 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.viewHo
     private HomeFragment homeFragment;
     private int flag = 0;
     private boolean fromActivity = false;
+    private boolean value = false;
 
 
     public interface onClick{
@@ -35,6 +37,7 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.viewHo
         this.context = context;
         this.locationModelList = locationModelList;
         fromActivity = true;
+        value = false;
     }
 
     public LocationAdapter(Context context, List<HomeLocationModel> locationModelList,HomeFragment fragment,int flag) {
@@ -43,6 +46,15 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.viewHo
         this.homeFragment = fragment;
         this.flag = flag;
         fromActivity = false;
+        value = false;
+    }
+
+    public LocationAdapter(Context context, List<HomeLocationModel> locationModelList,int flag,boolean value2) {
+        this.context = context;
+        this.locationModelList = locationModelList;
+        this.flag = flag;
+        fromActivity = true;
+        value = value2;
     }
 
     public LocationAdapter(Context context, List<HomeLocationModel> locationModelList,int flag) {
@@ -50,6 +62,7 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.viewHo
         this.locationModelList = locationModelList;
         this.flag = flag;
         fromActivity = true;
+        value = false;
     }
 
     @NonNull
@@ -74,7 +87,11 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.viewHo
 //                    ((HomeFragment)homeFragment).onLocationClick(model.getLocation_name(),flag,model);
 //                }
                 if (fromActivity){
-                    ((LocationActivity)context).onLocationClick(model.getLocation_name(),flag,model);
+                    if (value){
+                        ((EditPickupDropofftActivity)context).onLocationClick(model.getLocation_name(),flag,model);
+                    }else {
+                        ((LocationActivity)context).onLocationClick(model.getLocation_name(),flag,model);
+                    }
                 }else {
                     ((HomeFragment)homeFragment).onLocationClick(model.getLocation_name(),flag,model);
                 }

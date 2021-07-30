@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fastuae.R;
 import com.example.fastuae.activity.CarBookingDetailsActivity;
+import com.example.fastuae.activity.EditPickupDropofftActivity;
 import com.example.fastuae.databinding.ActivityLocationListBinding;
 import com.example.fastuae.fragment.HomeFragment;
 import com.example.fastuae.model.EmirateModel;
@@ -25,6 +26,7 @@ public class EmirateAdapter extends RecyclerView.Adapter<EmirateAdapter.viewHold
     private HomeFragment homeFragment;
     private int flag = 0;
     private boolean fromActivity = false;
+    private boolean value = false;
 
 
     public interface onClick{
@@ -37,6 +39,15 @@ public class EmirateAdapter extends RecyclerView.Adapter<EmirateAdapter.viewHold
         this.homeFragment = fragment;
         this.flag = flag;
         fromActivity = false;
+        value = false;
+    }
+
+    public EmirateAdapter(Context context, List<EmirateModel> emirateModelList, int flag,boolean value1) {
+        this.context = context;
+        this.emirateModelList = emirateModelList;
+        this.flag = flag;
+        fromActivity = true;
+        value = value1;
     }
 
     public EmirateAdapter(Context context, List<EmirateModel> emirateModelList,int flag) {
@@ -44,6 +55,7 @@ public class EmirateAdapter extends RecyclerView.Adapter<EmirateAdapter.viewHold
         this.emirateModelList = emirateModelList;
         this.flag = flag;
         fromActivity = true;
+        value = false;
     }
 
     @NonNull
@@ -63,7 +75,11 @@ public class EmirateAdapter extends RecyclerView.Adapter<EmirateAdapter.viewHold
             public void onClick(View v) {
                 Click.preventTwoClick(v);
                 if (fromActivity){
-                    ((CarBookingDetailsActivity)context).onEmirateClick(flag,model);
+                    if (value){
+                        ((EditPickupDropofftActivity)context).onEmirateClick(flag,model);
+                    }else {
+                        ((CarBookingDetailsActivity)context).onEmirateClick(flag,model);
+                    }
                 }else {
                     ((HomeFragment)homeFragment).onEmirateClick(flag,model);
                 }

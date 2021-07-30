@@ -171,19 +171,36 @@ public class CarDetailOneActivity extends AppCompatActivity implements AddOnsAda
         String pickUpDate = getFormatedDate("yyyy-MM-dd", "dd, MMM yyyy", Config.SelectedPickUpDate);
         String dropUpDate = getFormatedDate("yyyy-MM-dd", "dd, MMM yyyy", Config.SelectedDropUpDate);
 
-        if (carAED!=null && !carAED.equals("")){
+        if (!carAED.equals("")){
             currentCarAED = Double.parseDouble(carAED);
         }
 
+        if (AddOnsActivity.addOnsList.isEmpty()){
+            binding.txtTotalAED.setText(getResources().getString(R.string.aed) + " " +carAED + "");
+        }
+
         if (Config.HOME_DELIVERY_CHECK){
-            binding.txtPickUpLocation.setText(HomeFragment.deliveryEmirateName+",\n"+pickUpDate+", "+Config.SelectedPickUpTime);
+            if (Config.FOR_EDIT_LOCATION){
+                binding.txtPickUpLocation.setText(EditPickupDropofftActivity.deliveryEmirateName+",\n"+pickUpDate+", "+Config.SelectedPickUpTime);
+            }else {
+                binding.txtPickUpLocation.setText(HomeFragment.deliveryEmirateName+",\n"+pickUpDate+", "+Config.SelectedPickUpTime);
+            }
         }else {
             binding.txtPickUpLocation.setText(Config.SelectedPickUpAddress+",\n"+pickUpDate+", "+Config.SelectedPickUpTime);
         }
+
         if (Config.HOME_COLLECT_CHECK){
-            binding.txtDropOffLocation.setText(HomeFragment.collectEmirateName+",\n"+dropUpDate+", "+Config.SelectedDropUpTime);
+            if (Config.FOR_EDIT_LOCATION){
+                binding.txtDropOffLocation.setText(EditPickupDropofftActivity.collectEmirateName+",\n"+dropUpDate+", "+Config.SelectedDropUpTime);
+            }else {
+                binding.txtDropOffLocation.setText(HomeFragment.collectEmirateName+",\n"+dropUpDate+", "+Config.SelectedDropUpTime);
+            }
         }else {
-            binding.txtDropOffLocation.setText(Config.SelectedDropUpAddress+",\n"+dropUpDate+", "+Config.SelectedDropUpTime);
+            if (Config.FOR_EDIT_LOCATION){
+                binding.txtDropOffLocation.setText(Config.SelectedDropUpAddress+",\n"+dropUpDate+", "+Config.SelectedDropUpTime);
+            }else {
+                binding.txtDropOffLocation.setText(Config.SelectedDropUpAddress+",\n"+dropUpDate+", "+Config.SelectedDropUpTime);
+            }
         }
 
         if (payType.equals(Config.pay_now)){
@@ -213,6 +230,20 @@ public class CarDetailOneActivity extends AppCompatActivity implements AddOnsAda
         hitBookingCarData();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (Config.FOR_EDIT_LOCATION){
+            hitUpdateCarData();
+            setData();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Config.FOR_EDIT_LOCATION = false;
+    }
 
     @Override
     public void aedCalculation(ChooseExtrasModel model,int position) {
@@ -252,7 +283,7 @@ public class CarDetailOneActivity extends AppCompatActivity implements AddOnsAda
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-                onEditClick(getResources().getString(R.string.editAddressMessagePickUp));
+                onEditClick(getResources().getString(R.string.editAddressMessage));
             }
         });
 
@@ -276,7 +307,7 @@ public class CarDetailOneActivity extends AppCompatActivity implements AddOnsAda
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-                onEditClick(getResources().getString(R.string.editAddressMessageDropOff));
+                onEditClick(getResources().getString(R.string.editAddressMessage));
             }
         });
 
@@ -302,7 +333,11 @@ public class CarDetailOneActivity extends AppCompatActivity implements AddOnsAda
                 Click.preventTwoClick(v);
                 Intent intent = new Intent(activity, CarBookingDetailsActivity.class);
                 intent.putExtra(Config.PAY_TYPE,payType);
-                intent.putExtra(Config.SELECTED_AED,showAED + "");
+                if (AddOnsActivity.addOnsList.isEmpty()){
+                    intent.putExtra(Config.SELECTED_AED,carAED + "");
+                }else {
+                    intent.putExtra(Config.SELECTED_AED,showAED + "");
+                }
                 startActivity(intent);
             }
         });
@@ -588,7 +623,7 @@ public class CarDetailOneActivity extends AppCompatActivity implements AddOnsAda
                 .onSuccess(json ->
                 {
                     if (json.getInt(P.status) == 1) {
-
+                        carUpgradeModelList.clear();
                         json = json.getJson(P.data);
                         JsonList car_list = json.getJsonList(P.car_list);
                         for (int i = 0; i < car_list.size(); i++) {
@@ -885,8 +920,8 @@ public class CarDetailOneActivity extends AppCompatActivity implements AddOnsAda
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
-                        HomeFragment.forEditAddress = true;
-                        finish();
+                        Intent intent = new Intent(activity,EditPickupDropofftActivity.class);
+                        startActivity(intent);
                     }
                 });
 

@@ -110,12 +110,25 @@ public class Config {
     public static JsonList countryJsonList = new JsonList();
 
 
+    public static String pickupDay = "";
+    public static String pickupMonth = "";
+    public static String pickupYear = "";
+    public static String pickupTime = "";
+
+    public static String dropOffDay = "";
+    public static String dropOffMonth = "";
+    public static String dropOffYear = "";
+    public static String dropOffTime = "";
+
+    public static String deliveryEmirateName = "";
+    public static String collectEmirateName = "";
     public static String collect = "collect";
     public static String deliver = "deliver";
     public static String self_pickup = "self_pickup";
     public static String self_dropoff = "self_dropoff";
     public static boolean HOME_DELIVERY_CHECK = false;
     public static boolean HOME_COLLECT_CHECK = false;
+    public static boolean FOR_EDIT_LOCATION = false;
 
 
 }

@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fastuae.R;
+import com.example.fastuae.activity.EditPickupDropofftActivity;
 import com.example.fastuae.databinding.ActivityLocationListBinding;
 import com.example.fastuae.fragment.HomeFragment;
 import com.example.fastuae.model.DurationModel;
@@ -22,6 +23,7 @@ public class DurationAdapter extends RecyclerView.Adapter<DurationAdapter.viewHo
     private Context context;
     private List<DurationModel> durationModelList;
     private HomeFragment homeFragment;
+    private boolean value = false;
 
     public interface onClick{
         void onDurationClick(DurationModel model);
@@ -31,6 +33,13 @@ public class DurationAdapter extends RecyclerView.Adapter<DurationAdapter.viewHo
         this.context = context;
         this.durationModelList = durationModelList;
         this.homeFragment = fragment;
+        value = false;
+    }
+
+    public DurationAdapter(Context context, List<DurationModel> durationModelList,boolean value1) {
+        this.context = context;
+        this.durationModelList = durationModelList;
+        value = value1;
     }
 
     @NonNull
@@ -49,7 +58,11 @@ public class DurationAdapter extends RecyclerView.Adapter<DurationAdapter.viewHo
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-                ((HomeFragment)homeFragment).onDurationClick(model);
+                if (value){
+                    ((EditPickupDropofftActivity)context).onDurationClick(model);
+                }else {
+                    ((HomeFragment)homeFragment).onDurationClick(model);
+                }
             }
         });
 
