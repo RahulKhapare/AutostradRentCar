@@ -19,6 +19,7 @@
     <color name="green">#52AC03</color>
     <color name="grayTwo">#7C7B7C</color>
     <color name="redText">#FF0007</color>
-    <color name="redWhite">#88E68E90</color>
+    <color name="redWhite">#FFF2F2</color>
+    <color name="grayLightNew">#F3F3F3</color>
 
 </resources>

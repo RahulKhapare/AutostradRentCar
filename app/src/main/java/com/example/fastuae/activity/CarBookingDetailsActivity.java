@@ -22,6 +22,7 @@ import android.text.TextWatcher;
 import android.text.format.DateFormat;
 import android.util.Base64;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -107,10 +108,6 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Emir
     private List<PaymentCardModel> paymentCardModelList;
     private PaymentCardAdapter paymentCardAdapter;
 
-    private String message1 = "'Total' does not include any additional items you may select at the location or any costs arising from the rental (such as damage, fuel or road traffic charges). For renters under the age of 25, additional charges may apply, and are payable at the location.";
-    private String message2 = "By clicking on \"Pay & Confirm Booking\" you confirm that you understand and accept our , Rental Terms, Qualification and Requirements, Reservation Term & Conditions and you understand the Age Restrictions.";
-    private String message3 = "I agree to the terms and conditions and acknowledge that this is a prepaid rate";
-
     private List<CountryCodeModel> countryCodeModelList;
     private List<AddressModel> lisAddressEmirate;
     private List<DocumentUploadedModel> documentUploadedModelList;
@@ -178,13 +175,17 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Emir
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
+        model = Config.carModel;
+
         imagePathModelList = new ArrayList<>();
 
-        message2 = message2.replace("Rental Terms, Qualification and Requirements, Reservation Term & Conditions", "<font color='#159dd8'>Rental Terms, Qualification and Requirements, Reservation Term & Conditions</font>");
-        model = Config.carModel;
-        binding.txtMessage1.setText(message1);
+        String message2 = getResources().getString(R.string.bookingMsg2);
+        if (session.getString(P.languageFlag).equals(Config.ARABIC)){
+            message2 = message2.replace("شروط الإيجار والمؤهلات والمتطلبات وشروط وأحكام الحجز", "<font color='#159dd8'>شروط الإيجار والمؤهلات والمتطلبات وشروط وأحكام الحجز</font>");
+        }else if (session.getString(P.languageFlag).equals(Config.ENGLISH)){
+            message2 = message2.replace("Rental Terms, Qualification and Requirements, Reservation Term & Conditions", "<font color='#159dd8'>Rental Terms, Qualification and Requirements, Reservation Term & Conditions</font>");
+        }
         binding.txtMessage2.setText(Html.fromHtml(message2));
-        binding.txtMessage3.setText(message3);
 
         deliverEmirateList = new ArrayList<>();
         deliverEmirateAdapter = new EmirateAdapter(activity, deliverEmirateList, deliverEmirateFlag);
@@ -261,11 +262,10 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Emir
         setDateTimeField(binding.etxBirtDate);
         binding.etxBirtDate.setFocusable(false);
         binding.etxBirtDate.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.calender_bg, 0);
-        binding.etxBirtDate.setOnTouchListener(new View.OnTouchListener() {
+        binding.etxBirtDate.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
+            public void onClick(View v) {
                 mDatePickerDialog.show();
-                return false;
             }
         });
 

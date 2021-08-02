@@ -193,7 +193,7 @@
                         android:layout_marginBottom="10dp"
                         android:layout_width="match_parent"
                         android:layout_height="300dp"
-                        app:cardCornerRadius="10dp"
+                        app:cardCornerRadius="5dp"
                         app:cardElevation="0dp">
 
                         <fragment
@@ -313,6 +313,7 @@
 
 
                         <androidx.recyclerview.widget.RecyclerView
+                            android:layout_marginTop="10dp"
                             android:id="@+id/recyclerContacts"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">

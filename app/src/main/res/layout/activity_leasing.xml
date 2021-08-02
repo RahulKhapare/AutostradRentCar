@@ -72,13 +72,12 @@
 
                                     <TextView
                                         android:layout_weight="1"
-                                        android:id="@+id/txtTitle"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:textSize="20sp"
                                         android:textColor="@color/textDark"
                                         android:fontFamily="@font/nunit_sans_bold"
-                                        android:text="Who is it right for?">
+                                        android:text="@string/whoIsRight">
 
                                     </TextView>
 
@@ -130,7 +129,7 @@
                                             android:textColor="@color/textDark"
                                             android:alpha="0.7"
                                             android:fontFamily="@font/nunito_sans_regular"
-                                            android:text="Are you a business or a company looking for vehicles to transport your goods, materials or to simply provide an option to commute for your employees?">
+                                            android:text="@string/whoIsRightMsg">
 
                                         </TextView>
                                     </LinearLayout>
@@ -157,7 +156,7 @@
                                             android:textColor="@color/textDark"
                                             android:alpha="0.7"
                                             android:fontFamily="@font/nunito_sans_regular"
-                                            android:text="Does your enterprise require more than 80 vehicles?">
+                                            android:text="@string/doesYour">
                                         </TextView>
                                     </LinearLayout>
 
@@ -183,7 +182,7 @@
                                             android:textColor="@color/textDark"
                                             android:alpha="0.7"
                                             android:fontFamily="@font/nunito_sans_regular"
-                                            android:text="Do you want to avoid paying lump sum amounts to purchase your own vehicles?">
+                                            android:text="@string/doYouWant">
                                         </TextView>
                                     </LinearLayout>
 
@@ -209,7 +208,7 @@
                                             android:textColor="@color/textDark"
                                             android:alpha="0.7"
                                             android:fontFamily="@font/nunito_sans_regular"
-                                            android:text="Are you looking for a professional fleet management service at a fixed cost, to free up your time and resources so you can focus on running your business?">
+                                            android:text="@string/areYouLooking">
                                         </TextView>
                                     </LinearLayout>
 
@@ -221,7 +220,7 @@
                                         android:textSize="16sp"
                                         android:textColor="@color/colorPrimaryDark"
                                         android:fontFamily="@font/nunito_sans_semibold"
-                                        android:text="If the answer to any or all of these questions is yes then you and your company will definitely benefit from leasing your corporate fleet from Fast Rent a Car.">
+                                        android:text="@string/ifAnswer">
                                     </TextView>
 
                                 </LinearLayout>
@@ -262,7 +261,7 @@
                                         android:textSize="20sp"
                                         android:textColor="@color/textDark"
                                         android:fontFamily="@font/nunit_sans_bold"
-                                        android:text="Why choose a fast rent a car?">
+                                        android:text="@string/whoChoose">
 
                                     </TextView>
 
@@ -305,7 +304,7 @@
                                             android:textColor="@color/textDark"
                                             android:alpha="0.7"
                                             android:fontFamily="@font/nunito_sans_regular"
-                                            android:text="With over 30 years of experience, Fast Rent A Car has become one of the leading transport solution providers in the UAE market for corporate leasing and fleet management solutions.">
+                                            android:text="@string/withOver">
 
                                         </TextView>
 
@@ -317,7 +316,7 @@
                                             android:textColor="@color/textDark"
                                             android:alpha="0.7"
                                             android:fontFamily="@font/nunito_sans_regular"
-                                            android:text="We provide our services with proven expertise and experience in managing lease operations for over 300 clients with more than 5,000 vehicles.">
+                                            android:text="@string/weProvided">
 
                                         </TextView>
                                     </LinearLayout>
@@ -360,7 +359,7 @@
                                         android:textSize="20sp"
                                         android:textColor="@color/textDark"
                                         android:fontFamily="@font/nunit_sans_bold"
-                                        android:text="Sectors we cater to">
+                                        android:text="@string/sectorsWe">
 
                                     </TextView>
 
@@ -423,7 +422,7 @@
                                                     android:textColor="@color/textDark"
                                                     android:alpha="0.7"
                                                     android:fontFamily="@font/nunito_sans_regular"
-                                                    android:text="Vehicles for company executives including for senior management">
+                                                    android:text="@string/vehicleFor">
 
                                                 </TextView>
                                             </LinearLayout>
@@ -450,7 +449,7 @@
                                                     android:textColor="@color/textDark"
                                                     android:alpha="0.7"
                                                     android:fontFamily="@font/nunito_sans_regular"
-                                                    android:text="Sales and Field force vehicle requirement">
+                                                    android:text="@string/salesAndField">
                                                 </TextView>
                                             </LinearLayout>
 
@@ -497,7 +496,7 @@
                                                     android:textColor="@color/textDark"
                                                     android:alpha="0.7"
                                                     android:fontFamily="@font/nunito_sans_regular"
-                                                    android:text="Distribution of perishable food and non- food items">
+                                                    android:text="@string/distributionOf">
 
                                                 </TextView>
                                             </LinearLayout>
@@ -524,7 +523,7 @@
                                                     android:textColor="@color/textDark"
                                                     android:alpha="0.7"
                                                     android:fontFamily="@font/nunito_sans_regular"
-                                                    android:text="Construction &amp; project related movement of goods and man power">
+                                                    android:text="@string/constructionAnd">
                                                 </TextView>
                                             </LinearLayout>
 
@@ -560,7 +559,7 @@
                                             android:textColor="@color/textDark"
                                             android:alpha="0.7"
                                             android:fontFamily="@font/nunito_sans_regular"
-                                            android:text="Hotels and travel sector’s requirement for guest movement">
+                                            android:text="@string/hotelsAnd">
                                         </TextView>
                                     </LinearLayout>
 
@@ -586,7 +585,7 @@
                                             android:textColor="@color/textDark"
                                             android:alpha="0.7"
                                             android:fontFamily="@font/nunito_sans_regular"
-                                            android:text="Logistics sector’s requirement">
+                                            android:text="@string/logisticsSector">
                                         </TextView>
                                     </LinearLayout>
 
@@ -612,7 +611,7 @@
                                             android:textColor="@color/textDark"
                                             android:alpha="0.7"
                                             android:fontFamily="@font/nunito_sans_regular"
-                                            android:text="Oil &amp; Gas sector’s field movement">
+                                            android:text="@string/oilGAs">
                                         </TextView>
                                     </LinearLayout>
 
@@ -656,7 +655,7 @@
                                         android:textSize="20sp"
                                         android:textColor="@color/textDark"
                                         android:fontFamily="@font/nunit_sans_bold"
-                                        android:text="End to End solutions we provide">
+                                        android:text="@string/endToEnd">
 
                                     </TextView>
 
@@ -719,7 +718,7 @@
                                                     android:textColor="@color/textDark"
                                                     android:alpha="0.7"
                                                     android:fontFamily="@font/nunito_sans_regular"
-                                                    android:text="Complete fleet life cycle management services including analysis and advisory of fleet usage">
+                                                    android:text="@string/completeFleet">
 
                                                 </TextView>
                                             </LinearLayout>
@@ -746,7 +745,7 @@
                                                     android:textColor="@color/textDark"
                                                     android:alpha="0.7"
                                                     android:fontFamily="@font/nunito_sans_regular"
-                                                    android:text="MIS &amp; Reports provided">
+                                                    android:text="@string/misReport">
                                                 </TextView>
                                             </LinearLayout>
 
@@ -793,7 +792,7 @@
                                                     android:textColor="@color/textDark"
                                                     android:alpha="0.7"
                                                     android:fontFamily="@font/nunito_sans_regular"
-                                                    android:text="Dedicated lease experts and coordinators for large fleet support">
+                                                    android:text="@string/dedicatedLease">
 
                                                 </TextView>
                                             </LinearLayout>
@@ -820,7 +819,7 @@
                                                     android:textColor="@color/textDark"
                                                     android:alpha="0.7"
                                                     android:fontFamily="@font/nunito_sans_regular"
-                                                    android:text="Worldwide reservations with global merchant tie-ups">
+                                                    android:text="@string/worldwideReservations">
                                                 </TextView>
                                             </LinearLayout>
 
@@ -856,7 +855,7 @@
                                             android:textColor="@color/textDark"
                                             android:alpha="0.7"
                                             android:fontFamily="@font/nunito_sans_regular"
-                                            android:text="Network in 5 Emirates to ensure accessibility &amp; faster service delivery">
+                                            android:text="@string/networkIn">
                                         </TextView>
                                     </LinearLayout>
 
@@ -882,7 +881,7 @@
                                             android:textColor="@color/textDark"
                                             android:alpha="0.7"
                                             android:fontFamily="@font/nunito_sans_regular"
-                                            android:text="Complete freedom to choose vehicle of choice from any manufacturer">
+                                            android:text="@string/completeFreedom">
                                         </TextView>
                                     </LinearLayout>
 
@@ -908,7 +907,7 @@
                                             android:textColor="@color/textDark"
                                             android:alpha="0.7"
                                             android:fontFamily="@font/nunito_sans_regular"
-                                            android:text="Customised vehicle solutions completely tailored to your business needs">
+                                            android:text="@string/customisedVehicle">
                                         </TextView>
                                     </LinearLayout>
 
@@ -934,7 +933,7 @@
                                             android:textColor="@color/textDark"
                                             android:alpha="0.7"
                                             android:fontFamily="@font/nunito_sans_regular"
-                                            android:text="Flexible lease options with no hidden costs">
+                                            android:text="@string/flexibleLease">
                                         </TextView>
                                     </LinearLayout>
 
@@ -960,7 +959,7 @@
                                             android:textColor="@color/textDark"
                                             android:alpha="0.7"
                                             android:fontFamily="@font/nunito_sans_regular"
-                                            android:text="Single monthly bill covering entire vehicle usage activity">
+                                            android:text="@string/singleMonthly">
                                         </TextView>
                                     </LinearLayout>
 
@@ -986,7 +985,7 @@
                                             android:textColor="@color/textDark"
                                             android:alpha="0.7"
                                             android:fontFamily="@font/nunito_sans_regular"
-                                            android:text="Pick up &amp; Drop facility for fleet services">
+                                            android:text="@string/pickupDropupFacility">
                                         </TextView>
                                     </LinearLayout>
 
@@ -1012,7 +1011,7 @@
                                             android:textColor="@color/textDark"
                                             android:alpha="0.7"
                                             android:fontFamily="@font/nunito_sans_regular"
-                                            android:text="With our 4000 strong fleet replacement vehicles will be provided to ensure uninterrupted mobility">
+                                            android:text="@string/withOur">
                                         </TextView>
                                     </LinearLayout>
 
@@ -1038,7 +1037,7 @@
                                             android:textColor="@color/textDark"
                                             android:alpha="0.7"
                                             android:fontFamily="@font/nunito_sans_regular"
-                                            android:text="Paper less approach to vehicle delivery &amp; services">
+                                            android:text="@string/paperLess">
                                         </TextView>
                                     </LinearLayout>
 
@@ -1064,7 +1063,7 @@
                                             android:textColor="@color/textDark"
                                             android:alpha="0.7"
                                             android:fontFamily="@font/nunito_sans_regular"
-                                            android:text="Minimum administration procedures">
+                                            android:text="@string/minimumAdministration">
                                         </TextView>
                                     </LinearLayout>
 
@@ -1090,7 +1089,7 @@
                                             android:textColor="@color/textDark"
                                             android:alpha="0.7"
                                             android:fontFamily="@font/nunito_sans_regular"
-                                            android:text="Easy Exit facility">
+                                            android:text="@string/easyExit">
                                         </TextView>
                                     </LinearLayout>
 
@@ -1132,7 +1131,7 @@
                                         android:textSize="20sp"
                                         android:textColor="@color/textDark"
                                         android:fontFamily="@font/nunit_sans_bold"
-                                        android:text="Advantages of leasing a fleet of vehicles over owning a fleet for your corporate fleet requirements">
+                                        android:text="@string/advantagesLeasing">
 
                                     </TextView>
 
@@ -1174,7 +1173,7 @@
                                             android:textSize="18sp"
                                             android:textColor="@color/colorPrimaryDark"
                                             android:fontFamily="@font/nunit_sans_bold"
-                                            android:text="List of criterias">
+                                            android:text="@string/listOfCriteria">
 
                                         </TextView>
 
@@ -1191,7 +1190,7 @@
                                                 android:textSize="16sp"
                                                 android:textColor="@color/colorPrimaryDark"
                                                 android:fontFamily="@font/nunito_sans_regular"
-                                                android:text="Best Vehicle purchase pricing">
+                                                android:text="@string/bestVehicle">
 
                                             </TextView>
 
@@ -1211,7 +1210,7 @@
                                             android:textSize="16sp"
                                             android:textColor="@color/colorPrimaryDark"
                                             android:fontFamily="@font/nunito_sans_semibold"
-                                            android:text="Company Owned Fleet">
+                                            android:text="@string/companyOwned">
 
                                         </TextView>
 
@@ -1223,7 +1222,7 @@
                                             android:textColor="@color/textDark"
                                             android:alpha="0.7"
                                             android:fontFamily="@font/nunito_sans_semibold"
-                                            android:text="You need to negotiate for each vehicle">
+                                            android:text="@string/youNeedTo">
 
                                         </TextView>
 
@@ -1234,7 +1233,7 @@
                                             android:textSize="16sp"
                                             android:textColor="@color/colorPrimaryDark"
                                             android:fontFamily="@font/nunito_sans_semibold"
-                                            android:text="Leasing From Fast Rent a Car">
+                                            android:text="@string/leasingFrom">
 
                                         </TextView>
 
@@ -1246,7 +1245,7 @@
                                             android:textColor="@color/textDark"
                                             android:alpha="0.7"
                                             android:fontFamily="@font/nunito_sans_semibold"
-                                            android:text="Managed for you along with best prices as a fleet buyer">
+                                            android:text="@string/managedForYou">
 
                                         </TextView>
 
@@ -1270,7 +1269,7 @@
                                                 android:textSize="16sp"
                                                 android:textColor="@color/colorPrimaryDark"
                                                 android:fontFamily="@font/nunito_sans_regular"
-                                                android:text="Insurance">
+                                                android:text="@string/insurance">
 
                                             </TextView>
 
@@ -1303,7 +1302,7 @@
                                                 android:textSize="16sp"
                                                 android:textColor="@color/colorPrimaryDark"
                                                 android:fontFamily="@font/nunito_sans_regular"
-                                                android:text="Salik &amp; Traffic fines management">
+                                                android:text="@string/salikTrafficFines">
 
                                             </TextView>
 
@@ -1336,7 +1335,7 @@
                                                 android:textSize="16sp"
                                                 android:textColor="@color/colorPrimaryDark"
                                                 android:fontFamily="@font/nunito_sans_regular"
-                                                android:text="Vehicle routine service tracking">
+                                                android:text="@string/vehicleRouting">
 
                                             </TextView>
 
@@ -1369,7 +1368,7 @@
                                                 android:textSize="16sp"
                                                 android:textColor="@color/colorPrimaryDark"
                                                 android:fontFamily="@font/nunito_sans_regular"
-                                                android:text="Vehicle break down">
+                                                android:text="@string/vehicleBreakDown">
 
                                             </TextView>
 
@@ -1402,7 +1401,7 @@
                                                 android:textSize="16sp"
                                                 android:textColor="@color/colorPrimaryDark"
                                                 android:fontFamily="@font/nunito_sans_regular"
-                                                android:text="Repairs, tyres and battery replacement">
+                                                android:text="@string/repairsTyres">
 
                                             </TextView>
 
@@ -1455,7 +1454,7 @@
                                         android:textSize="20sp"
                                         android:textColor="@color/textDark"
                                         android:fontFamily="@font/nunit_sans_bold"
-                                        android:text="The fast rent a car leasing process">
+                                        android:text="@string/theFastRent">
 
                                     </TextView>
 
@@ -1498,7 +1497,7 @@
                                             android:textColor="@color/textDark"
                                             android:alpha="0.7"
                                             android:fontFamily="@font/nunito_sans_regular"
-                                            android:text="At Fast Rent A Car we make leasing as easy as we can with minimal paperwork. After receiving an initial sales inquiry, we set up a meeting to assess your requirements and understand any further needs that you may have as we believe in providing tailor made solutions to suit our client’s needs. Based on this we then present to you a solution proposal. Upon agreement to this proposal, we only require a few documents">
+                                            android:text="@string/atFastRent">
 
                                         </TextView>
 
@@ -1532,7 +1531,7 @@
                                                     android:paddingRight="10dp"
                                                     android:paddingLeft="10dp"
                                                     android:fontFamily="@font/nunito_sans_regular"
-                                                    android:text="A valid trade license copy">
+                                                    android:text="@string/aValidTrade">
 
                                                 </TextView>
 
@@ -1566,7 +1565,7 @@
                                                     android:paddingRight="10dp"
                                                     android:paddingLeft="10dp"
                                                     android:fontFamily="@font/nunito_sans_regular"
-                                                    android:text="A valid tax certificate copy">
+                                                    android:text="@string/aValidTax">
 
                                                 </TextView>
 
@@ -1598,7 +1597,7 @@
                                                     android:paddingRight="10dp"
                                                     android:paddingLeft="10dp"
                                                     android:fontFamily="@font/nunito_sans_regular"
-                                                    android:text="A valid copy of passport, VISA, EID of the authorized signatory and his power of attorney">
+                                                    android:text="@string/aValidCopy">
 
                                                 </TextView>
 
@@ -1614,7 +1613,7 @@
                                             android:textColor="@color/textDark"
                                             android:alpha="0.7"
                                             android:fontFamily="@font/nunito_sans_regular"
-                                            android:text="The above is then submitted for document verification and approval. Once cleared, all we require is a signature from the Hirer on the VLC (Vehicle Leasing Contract) and you’re good to go!">
+                                            android:text="@string/theAboveIs">
 
                                         </TextView>
 
@@ -1660,7 +1659,7 @@
                                         android:textSize="20sp"
                                         android:textColor="@color/textDark"
                                         android:fontFamily="@font/nunit_sans_bold"
-                                        android:text="School Buses Services">
+                                        android:text="@string/schoolBusService">
 
                                     </TextView>
 
@@ -1703,7 +1702,7 @@
                                             android:textColor="@color/textDark"
                                             android:alpha="0.7"
                                             android:fontFamily="@font/nunito_sans_regular"
-                                            android:text="Fast Rent A Car has been providing short &amp; long term school bus rental leasing for prestigious schools in Abu Dhabi and Dubai, for more than a decade. All our drivers are fully certified ensuring safety and care for school children and peace of mind for school and parents.">
+                                            android:text="@string/fastRentA">
 
                                         </TextView>
 
@@ -1715,7 +1714,7 @@
                                             android:textColor="@color/textDark"
                                             android:alpha="0.7"
                                             android:fontFamily="@font/nunito_sans_regular"
-                                            android:text="We have a variety of Buses from top of the line brands to suit all your transport requirements. From the large 58 seater Ashok Leyland busses to the smaller 33 and 26 seater Rosa from Mitsubishi">
+                                            android:text="@string/weHave">
 
                                         </TextView>
                                     </LinearLayout>
@@ -1758,7 +1757,7 @@
                                         android:textSize="20sp"
                                         android:textColor="@color/textDark"
                                         android:fontFamily="@font/nunit_sans_bold"
-                                        android:text="All our buses are equipped with these special features to ensure the safety of your child">
+                                        android:text="@string/allOur">
 
                                     </TextView>
 
@@ -1820,7 +1819,7 @@
                                                     android:textColor="@color/textDark"
                                                     android:alpha="0.7"
                                                     android:fontFamily="@font/nunito_sans_regular"
-                                                    android:text="Yellow colour school buses with the name of the school on both sides.">
+                                                    android:text="@string/yellowColour">
 
                                                 </TextView>
                                             </LinearLayout>
@@ -1846,7 +1845,7 @@
                                                     android:textColor="@color/textDark"
                                                     android:alpha="0.7"
                                                     android:fontFamily="@font/nunito_sans_regular"
-                                                    android:text="A surveillance system with cameras inside and outside bus to monitor safety of the children at all times with recording backup for upto 6 month">
+                                                    android:text="@string/Asurveillance">
                                                 </TextView>
                                             </LinearLayout>
 
@@ -1891,7 +1890,7 @@
                                                     android:textColor="@color/textDark"
                                                     android:alpha="0.7"
                                                     android:fontFamily="@font/nunito_sans_regular"
-                                                    android:text="A surveillance system with cameras inside and outside the bus to monitor safety of the children at all times with recording backup for upto 6 month">
+                                                    android:text="@string/Asurveillance">
 
                                                 </TextView>
                                             </LinearLayout>
@@ -1917,7 +1916,7 @@
                                                     android:textColor="@color/textDark"
                                                     android:alpha="0.7"
                                                     android:fontFamily="@font/nunito_sans_regular"
-                                                    android:text="All buses have an emergency exit and are equipped with hammers and knives to break the windows or cut the seat belts in case of emergencies.">
+                                                    android:text="@string/allBusesHave">
                                                 </TextView>
                                             </LinearLayout>
 
@@ -1951,7 +1950,7 @@
                                             android:textColor="@color/textDark"
                                             android:alpha="0.7"
                                             android:fontFamily="@font/nunito_sans_regular"
-                                            android:text="Doors sensors to ensure that the door doesn’t close while somebody is entering the bus">
+                                            android:text="@string/doorSensor">
                                         </TextView>
                                     </LinearLayout>
 
@@ -1976,7 +1975,7 @@
                                             android:textColor="@color/textDark"
                                             android:alpha="0.7"
                                             android:fontFamily="@font/nunito_sans_regular"
-                                            android:text="Fire detectors inside the engine to pre-emptively warn in case of a fire">
+                                            android:text="@string/fireDetector">
                                         </TextView>
                                     </LinearLayout>
 
@@ -2019,7 +2018,7 @@
                                         android:textSize="20sp"
                                         android:textColor="@color/textDark"
                                         android:fontFamily="@font/nunit_sans_bold"
-                                        android:text="End to End solutions we provide for school bus leasing">
+                                        android:text="@string/endSoluction">
 
                                     </TextView>
 
@@ -2081,7 +2080,7 @@
                                                     android:textColor="@color/textDark"
                                                     android:alpha="0.7"
                                                     android:fontFamily="@font/nunito_sans_regular"
-                                                    android:text="Full ITC specifications, drivers, fuel and a coordinator for each school to manage the buses and drivers">
+                                                    android:text="@string/fullITC">
 
                                                 </TextView>
                                             </LinearLayout>
@@ -2107,7 +2106,7 @@
                                                     android:textColor="@color/textDark"
                                                     android:alpha="0.7"
                                                     android:fontFamily="@font/nunito_sans_regular"
-                                                    android:text="Regular bus maintenance including a major servicing after each term.">
+                                                    android:text="@string/regularBus">
                                                 </TextView>
                                             </LinearLayout>
 
@@ -2147,7 +2146,7 @@
                                                     android:textColor="@color/textDark"
                                                     android:alpha="0.7"
                                                     android:fontFamily="@font/nunito_sans_regular"
-                                                    android:text="Daily check- ups for all before the first trip.">
+                                                    android:text="@string/dailyCheck">
 
                                                 </TextView>
                                             </LinearLayout>
@@ -2173,7 +2172,7 @@
                                                     android:textColor="@color/textDark"
                                                     android:alpha="0.7"
                                                     android:fontFamily="@font/nunito_sans_regular"
-                                                    android:text="Sterilization for all buses before and after any trip">
+                                                    android:text="@string/sterilizationFor">
                                                 </TextView>
                                             </LinearLayout>
 
@@ -2202,7 +2201,7 @@
                                             android:textColor="@color/textDark"
                                             android:alpha="0.7"
                                             android:fontFamily="@font/nunito_sans_regular"
-                                            android:text="Replacement bus in-case of a breakdown and replacement driver in case the driver is sick">
+                                            android:text="@string/replacementBus">
                                         </TextView>
                                     </LinearLayout>
 
@@ -2244,7 +2243,7 @@
                                         android:textSize="20sp"
                                         android:textColor="@color/textDark"
                                         android:fontFamily="@font/nunit_sans_bold"
-                                        android:text="Private and Airport Bus Rentals">
+                                        android:text="@string/privateAnd">
 
                                     </TextView>
 
@@ -2287,7 +2286,7 @@
                                             android:textColor="@color/textDark"
                                             android:alpha="0.7"
                                             android:fontFamily="@font/nunito_sans_regular"
-                                            android:text="We also offer safe and dependable luxury charters, airport transfers, flexible group transportation services and other transportation solutions at affordable costs to domestic and international travellers in the UAE. All our buses are equipped with comfortable reclining seats, large windows, audio/video systems, luggage racks and ample storage beneath the vehicle for your belongings so that your group travel is a breeze!">
+                                            android:text="@string/weAlso">
 
                                         </TextView>
 

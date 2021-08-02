@@ -47,8 +47,6 @@ public class LoastAndFoundActivity extends AppCompatActivity {
     private String emirateID = "";
     private List<CountryCodeModel> countryCodeModelList;
 
-    String description = "While renting from Fast Rent A Car, it is important to know that you are responsible for your belongings. However, we recognize that there would still be times that you or your family may accidentally lose your belongings in one of our rentals. In such cases, you can be rest assured, that our team will do their best in assisting you with their recovery!";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,8 +64,6 @@ public class LoastAndFoundActivity extends AppCompatActivity {
         loadingDialog = new LoadingDialog(activity);
         session = new Session(activity);
         flag = session.getString(P.languageFlag);
-
-        binding.txtDescription.setText(description);
 
         listLocation = new ArrayList<>();
         countryCodeModelList = new ArrayList<>();

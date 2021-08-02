@@ -139,14 +139,12 @@ public class AdditionalDriverFragment extends Fragment {
         setDateTimeField(binding.etxBirtDate);
         binding.etxBirtDate.setFocusable(false);
         binding.etxBirtDate.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.calender_bg, 0);
-        binding.etxBirtDate.setOnTouchListener(new View.OnTouchListener() {
+        binding.etxBirtDate.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
+            public void onClick(View v) {
                 mDatePickerDialog.show();
-                return false;
             }
         });
-
 
         onClick();
         hitDriverDetails();
