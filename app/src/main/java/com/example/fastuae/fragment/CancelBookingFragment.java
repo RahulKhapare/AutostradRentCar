@@ -2,6 +2,7 @@ package com.example.fastuae.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,8 +57,8 @@ public class CancelBookingFragment extends Fragment implements PastRentalAdapter
         cancelBookingAdapter = new CancelBookingAdapter(context, bookingModelList, CancelBookingFragment.this, 2);
         binding.recyclerPastRental.setLayoutManager(new LinearLayoutManager(context));
         binding.recyclerPastRental.setAdapter(cancelBookingAdapter);
-//        hitCancelBookingDetails();
-        setData();
+        hitCancelBookingDetails();
+//        setData();
 
     }
 
@@ -108,8 +109,10 @@ public class CancelBookingFragment extends Fragment implements PastRentalAdapter
                         JsonList past_list = json.getJsonList(P.past_list);
                         JsonList cancel_list = json.getJsonList(P.cancel_list);
 
-                        if (past_list != null && past_list.size() != 0) {
-                            for (Json jsonData : past_list) {
+//                        Log.e("TAG", "hitCancelBookingDetailsAASAS: "+ cancel_list.toString() );
+
+                        if (cancel_list != null && cancel_list.size() != 0) {
+                            for (Json jsonData : cancel_list) {
 
                                 String id = jsonData.getString(P.id);
                                 String booking_id = jsonData.getString(P.booking_id);

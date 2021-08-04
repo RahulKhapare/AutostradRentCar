@@ -485,6 +485,7 @@
     <string name="bookingMsg1">Total does not include any additional items you may select at the location or any costs arising from the rental (such as damage, fuel or road traffic charges). For renters under the age of 25, additional charges may apply, and are payable at the location.</string>
     <string name="bookingMsg2">By clicking on "Pay &amp; Confirm Booking" you confirm that you understand and accept our , Rental Terms, Qualification and Requirements, Reservation Term &amp; Conditions and you understand the Age Restrictions.</string>
     <string name="bookingMsg3">I agree to the terms and conditions and acknowledge that this is a prepaid rate</string>
+    <string name="caneclBookinError">You don’t have a cancel history yet!</string>
 
     <string name="txt1">Leading Car Rental Company with the largest network of Branches &amp; Pickup points</string>
     <string name="txt2">Leading Car Rental Company with the largest network of Branches &amp; Pickup points</string>
