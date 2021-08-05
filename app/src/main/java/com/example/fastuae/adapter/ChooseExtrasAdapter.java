@@ -74,8 +74,10 @@ public class ChooseExtrasAdapter extends RecyclerView.Adapter<ChooseExtrasAdapte
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked){
+                    holder.binding.lnrQuantity.setVisibility(View.VISIBLE);
                     AddOnsActivity.addOnsList.add(model);
                 }else {
+                    holder.binding.lnrQuantity.setVisibility(View.GONE);
                     for (int i=0; i<AddOnsActivity.addOnsList.size(); i++){
                         String title = AddOnsActivity.addOnsList.get(i).getTitle();
                         if (title.equals(model.getTitle())){

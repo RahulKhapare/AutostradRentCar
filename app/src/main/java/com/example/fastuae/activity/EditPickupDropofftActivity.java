@@ -1,5 +1,6 @@
 package com.example.fastuae.activity;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
@@ -872,7 +873,7 @@ public class EditPickupDropofftActivity extends AppCompatActivity implements Loc
         int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
         int minute = mcurrentTime.get(Calendar.MINUTE);
         TimePickerDialog mTimePicker;
-        mTimePicker = new TimePickerDialog(activity, R.style.DialogTheme, new TimePickerDialog.OnTimeSetListener() {
+        mTimePicker = new TimePickerDialog(activity, AlertDialog.THEME_HOLO_LIGHT, new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
                 String AM_PM = "";

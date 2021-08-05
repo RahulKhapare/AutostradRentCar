@@ -340,7 +340,8 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick, D
 
 
     private String getCurrentTime() {
-        String delegate = "hh:mm aaa";
+//        String delegate = "kk:mm aaa"; //24 HOUR
+        String delegate = "hh:mm aaa"; //12 HOUR
         String oldstr = (String) DateFormat.format(delegate, Calendar.getInstance().getTime());
 
         pickUpTime = oldstr;
@@ -897,8 +898,7 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick, D
         Calendar mcurrentTime = Calendar.getInstance();
         int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
         int minute = mcurrentTime.get(Calendar.MINUTE);
-        TimePickerDialog mTimePicker;
-        mTimePicker = new TimePickerDialog(getActivity(), R.style.DialogTheme, new TimePickerDialog.OnTimeSetListener() {
+        TimePickerDialog mTimePicker = new TimePickerDialog(getActivity(), AlertDialog.THEME_HOLO_LIGHT, new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
                 String AM_PM = "";
