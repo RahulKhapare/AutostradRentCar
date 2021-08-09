@@ -40,6 +40,7 @@ public class Config {
     public static String My_Account = "My Account";
     public static String Documents = "Documents";
     public static String Additional_Driver = "Additional Driver";
+    public static String Additional_Driver_Document = "Additional Driver Document";
     public static String Booking = "Booking";
     public static String Manage_Payments = "Manage Payments";
     public static String Invoices = "Invoices";

@@ -106,6 +106,15 @@ public class ProfileFragment extends Fragment{
             }
         });
 
+        binding.lnrAdditionalDriveDocument.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                Config.currentProfileFlag = Config.Additional_Driver_Document;
+                jumpToProfile();
+            }
+        });
+
         binding.lnrBooking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -180,6 +189,9 @@ public class ProfileFragment extends Fragment{
             binding.imgAdditionalDriveRight.setVisibility(View.GONE);
             binding.imgAdditionalDriveLeft.setVisibility(View.VISIBLE);
 
+            binding.imgAdditionalDriveDocumentRight.setVisibility(View.GONE);
+            binding.imgAdditionalDriveDocumentLeft.setVisibility(View.VISIBLE);
+
             binding.imgBookingRight.setVisibility(View.GONE);
             binding.imgBookingLeft.setVisibility(View.VISIBLE);
 
@@ -205,6 +217,9 @@ public class ProfileFragment extends Fragment{
 
             binding.imgAdditionalDriveRight.setVisibility(View.VISIBLE);
             binding.imgAdditionalDriveLeft.setVisibility(View.GONE);
+
+            binding.imgAdditionalDriveDocumentRight.setVisibility(View.VISIBLE);
+            binding.imgAdditionalDriveDocumentLeft.setVisibility(View.GONE);
 
             binding.imgBookingRight.setVisibility(View.VISIBLE);
             binding.imgBookingLeft.setVisibility(View.GONE);

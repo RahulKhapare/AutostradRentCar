@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.fastuae.R;
 import com.example.fastuae.databinding.ActivityProfileViewBinding;
+import com.example.fastuae.fragment.AdditionalDriverDocumentFragment;
 import com.example.fastuae.fragment.AdditionalDriverFragment;
 import com.example.fastuae.fragment.BookingFragment;
 import com.example.fastuae.fragment.DocumentFragment;
@@ -30,6 +31,7 @@ public class ProfileViewActivity extends AppCompatActivity{
     private MyAccountFragment myAccountFragment;
     private DocumentFragment documentFragment;
     private AdditionalDriverFragment additionalDriverFragment;
+    private AdditionalDriverDocumentFragment additionalDriverDocumentFragment;
     private BookingFragment bookingFragment;
     private ManagePaymentFragment managePaymentFragment;
     private InvoiceFragment invoiceFragment;
@@ -70,6 +72,10 @@ public class ProfileViewActivity extends AppCompatActivity{
             binding.txtTitle.setText(getResources().getString(R.string.additionalDriver));
             additionalDriverFragment = AdditionalDriverFragment.newInstance();
             fragmentLoader(additionalDriverFragment, Config.Additional_Driver);
+        } else if (categoryFlag.equals(Config.Additional_Driver_Document)) {
+            binding.txtTitle.setText(getResources().getString(R.string.additionLaDriveDocument));
+            additionalDriverDocumentFragment = AdditionalDriverDocumentFragment.newInstance();
+            fragmentLoader(additionalDriverDocumentFragment, Config.Additional_Driver_Document);
         } else if (categoryFlag.equals(Config.Booking)) {
             binding.txtTitle.setText(getResources().getString(R.string.booking));
             bookingFragment = BookingFragment.newInstance();

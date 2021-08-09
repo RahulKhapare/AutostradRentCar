@@ -54,6 +54,7 @@ import com.example.fastuae.util.ProgressView;
 import com.example.fastuae.util.WindowView;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 
 import java.text.DecimalFormat;
 import java.text.ParseException;
@@ -91,6 +92,15 @@ public class CarDetailOneActivity extends AppCompatActivity implements AddOnsAda
     double totalAEDAmount = 0;
     double currentCarAED = 0;
     double showAED = 0;
+
+    String total_car_rate;
+    String delivery_charges;
+    String collect_charges;
+    String inter_emirate_charges;
+    String total_amount;
+
+    List<ChooseExtrasModel> chooseExtrasModelList;
+    AddOnsAdapter addOnsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,17 +147,13 @@ public class CarDetailOneActivity extends AppCompatActivity implements AddOnsAda
         binding.recyclerCarRelated.setAdapter(carImageAdapter);
 
 
-        List<ChooseExtrasModel> chooseExtrasModelList = new ArrayList<>();
-        chooseExtrasModelList.addAll(AddOnsActivity.addOnsList);
+        chooseExtrasModelList = new ArrayList<>();
+//        chooseExtrasModelList.addAll(AddOnsActivity.addOnsList);
         binding.recyclerAdOns.setLayoutManager(new LinearLayoutManager(activity));
         binding.recyclerAdOns.setHasFixedSize(true);
         binding.recyclerAdOns.setNestedScrollingEnabled(false);
-        AddOnsAdapter addOnsAdapter = new AddOnsAdapter(activity,chooseExtrasModelList);
+        addOnsAdapter = new AddOnsAdapter(activity,chooseExtrasModelList);
         binding.recyclerAdOns.setAdapter(addOnsAdapter);
-
-        if (chooseExtrasModelList.isEmpty()){
-            binding.lnrAddOns.setVisibility(View.GONE);
-        }
 
         rentalModelList = new ArrayList<>();
         binding.recyclerRentalView.setLayoutManager(new GridLayoutManager(activity,2));
@@ -176,7 +182,7 @@ public class CarDetailOneActivity extends AppCompatActivity implements AddOnsAda
         }
 
         if (AddOnsActivity.addOnsList.isEmpty()){
-            binding.txtTotalAED.setText(getResources().getString(R.string.aed) + " " +carAED + "");
+//            binding.txtTotalAED.setText(getResources().getString(R.string.aed) + " " +carAED + "");
         }
 
         if (Config.HOME_DELIVERY_CHECK){
@@ -204,10 +210,10 @@ public class CarDetailOneActivity extends AppCompatActivity implements AddOnsAda
         }
 
         if (payType.equals(Config.pay_now)){
-            binding.txtCarRate.setText(getResources().getString(R.string.aed) + " " + model.getPay_now_rate());
+//            binding.txtCarRate.setText(getResources().getString(R.string.aed) + " " + model.getPay_now_rate());
             binding.txtPayMethod.setText(getResources().getString(R.string.prePay));
         }else if (payType.equals(Config.pay_latter)){
-            binding.txtCarRate.setText(getResources().getString(R.string.aed) + " " + model.getPay_later_rate());
+//            binding.txtCarRate.setText(getResources().getString(R.string.aed) + " " + model.getPay_later_rate());
             binding.txtPayMethod.setText(getResources().getString(R.string.postPay));
         }
 
@@ -260,7 +266,7 @@ public class CarDetailOneActivity extends AppCompatActivity implements AddOnsAda
             DecimalFormat format = new DecimalFormat("#.##");
             double formatedAED = Double.valueOf(format.format(showAED));
             showAED = formatedAED;
-            binding.txtTotalAED.setText(getResources().getString(R.string.aed) + " " +showAED + "");
+//            binding.txtTotalAED.setText(getResources().getString(R.string.aed) + " " +showAED + "");
         }
 
     }
@@ -333,11 +339,12 @@ public class CarDetailOneActivity extends AppCompatActivity implements AddOnsAda
                 Click.preventTwoClick(v);
                 Intent intent = new Intent(activity, CarBookingDetailsActivity.class);
                 intent.putExtra(Config.PAY_TYPE,payType);
-                if (AddOnsActivity.addOnsList.isEmpty()){
-                    intent.putExtra(Config.SELECTED_AED,carAED + "");
-                }else {
-                    intent.putExtra(Config.SELECTED_AED,showAED + "");
-                }
+                intent.putExtra(Config.SELECTED_AED,total_amount + "");
+//                if (AddOnsActivity.addOnsList.isEmpty()){
+//                    intent.putExtra(Config.SELECTED_AED,carAED + "");
+//                }else {
+//                    intent.putExtra(Config.SELECTED_AED,showAED + "");
+//                }
                 startActivity(intent);
             }
         });
@@ -484,11 +491,11 @@ public class CarDetailOneActivity extends AppCompatActivity implements AddOnsAda
                 DecimalFormat format = new DecimalFormat("#.##");
                 double formatedAED = Double.valueOf(format.format(showAED));
                 showAED = formatedAED;
-                binding.txtTotalAED.setText(getResources().getString(R.string.aed) + " " +showAED + "");
+//                binding.txtTotalAED.setText(getResources().getString(R.string.aed) + " " +showAED + "");
 
                 binding.txtCarName.setText(updateName);
-                binding.txtCarRate.setText(getResources().getString(R.string.aed) + " " + totalAmount + "");
-                binding.txtTotalAED.setText(getResources().getString(R.string.aed) + " " +showAED + "");
+//                binding.txtCarRate.setText(getResources().getString(R.string.aed) + " " + totalAmount + "");
+//                binding.txtTotalAED.setText(getResources().getString(R.string.aed) + " " +showAED + "");
 
                 LoadImage.glideString(activity,binding.imgCar,updateImage);
 
@@ -588,6 +595,36 @@ public class CarDetailOneActivity extends AppCompatActivity implements AddOnsAda
 
                         pickup_location_data = data.getJson(P.pickup_location_data);
                         dropoff_location_data = data.getJson(P.dropoff_location_data);
+
+                        total_car_rate = data.getString("total_car_rate");
+                        delivery_charges = data.getString("delivery_charges");
+                        collect_charges = data.getString("collect_charges");
+                        inter_emirate_charges = data.getString("inter_emirate_charges");
+                        total_amount = data.getString("total_amount");
+
+                        binding.txtCarRate.setText(getResources().getString(R.string.aed) + " " + total_car_rate + "");
+                        binding.txtDeliveryCharges.setText(getResources().getString(R.string.aed) + " " + delivery_charges + "");
+                        binding.txtCollectCharges.setText(getResources().getString(R.string.aed) + " " + collect_charges + "");
+                        binding.txtEnitireECharges.setText(getResources().getString(R.string.aed) + " " + inter_emirate_charges + "");
+                        binding.txtTotalAED.setText(getResources().getString(R.string.aed) + " " +total_amount + "");
+
+                        JsonList car_extra = data.getJsonList("car_extra");
+                        chooseExtrasModelList.clear();
+                        if (car_extra!=null && car_extra.size()!=0){
+                            for (Json jsonValue : car_extra){
+                                ChooseExtrasModel model = new ChooseExtrasModel();
+                                model.setKey_value(jsonValue.getString("value"));
+                                model.setQuantity(jsonValue.getString("quantity"));
+                                model.setTitle(jsonValue.getString("title"));
+                                model.setPrice(jsonValue.getString("price"));
+                                chooseExtrasModelList.add(model);
+                            }
+                            addOnsAdapter.notifyDataSetChanged();
+
+                            if (chooseExtrasModelList.isEmpty()){
+                                binding.lnrAddOns.setVisibility(View.GONE);
+                            }
+                        }
 
                     }else {
 //                        H.showMessage(activity,json.getString(P.error));
@@ -790,6 +827,7 @@ public class CarDetailOneActivity extends AppCompatActivity implements AddOnsAda
 
         String extraParams =
                 "emirate_id=" + SelectCarActivity.pickUpEmirateID+
+                        "&pickup_emirate_id=" + SelectCarActivity.pickUpEmirateID+
                         "&car_id=" + carID+
                         "&pickup_date=" + SelectCarActivity.pickUpDate +
                         "&dropoff_date=" + SelectCarActivity.dropUpDate +

@@ -486,6 +486,10 @@
     <string name="bookingMsg2">By clicking on "Pay &amp; Confirm Booking" you confirm that you understand and accept our , Rental Terms, Qualification and Requirements, Reservation Term &amp; Conditions and you understand the Age Restrictions.</string>
     <string name="bookingMsg3">I agree to the terms and conditions and acknowledge that this is a prepaid rate</string>
     <string name="caneclBookinError">You don’t have a cancel history yet!</string>
+    <string name="additionLaDriveDocument">Additional Driver Document</string>
+    <string name="deliveryCharges">Delivery Charges</string>
+    <string name="collectCharges">Collect Charges</string>
+    <string name="interEmirateCharges">Inter Emirate Charges</string>
 
     <string name="txt1">Leading Car Rental Company with the largest network of Branches &amp; Pickup points</string>
     <string name="txt2">Leading Car Rental Company with the largest network of Branches &amp; Pickup points</string>

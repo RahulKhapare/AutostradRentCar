@@ -2,6 +2,7 @@ package com.example.fastuae.adapter;
 
 import android.content.Context;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,6 +56,11 @@ public class ChooseExtrasAdapter extends RecyclerView.Adapter<ChooseExtrasAdapte
         ChooseExtrasModel model = chooseExtrasModelList.get(position);
         int target = 0;
 
+        if (!TextUtils.isEmpty(model.getMax_quantity()) && !model.getMax_quantity().equals("null")) {
+            target = Integer.parseInt(model.getMax_quantity());
+        }
+
+        int finalTarget = target;
         holder.binding.txtName.setText(model.getTitle());
         holder.binding.txtDesc.setText(RemoveHtml.html2text(model.getDescription()));
         holder.binding.txtPrice.setText("AED " + model.getPrice());
@@ -74,7 +80,11 @@ public class ChooseExtrasAdapter extends RecyclerView.Adapter<ChooseExtrasAdapte
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked){
-                    holder.binding.lnrQuantity.setVisibility(View.VISIBLE);
+                    if (finalTarget >1){
+                        holder.binding.lnrQuantity.setVisibility(View.VISIBLE);
+                    }else {
+                        holder.binding.lnrQuantity.setVisibility(View.GONE);
+                    }
                     AddOnsActivity.addOnsList.add(model);
                 }else {
                     holder.binding.lnrQuantity.setVisibility(View.GONE);
@@ -82,45 +92,15 @@ public class ChooseExtrasAdapter extends RecyclerView.Adapter<ChooseExtrasAdapte
                         String title = AddOnsActivity.addOnsList.get(i).getTitle();
                         if (title.equals(model.getTitle())){
                             AddOnsActivity.addOnsList.remove(i);
+                            holder.binding.txtCount.setText("1");
                         }
                     }
                 }
+
             }
         });
 
-        if (!TextUtils.isEmpty(model.getMax_quantity()) && !model.getMax_quantity().equals("null")) {
-            target = Integer.parseInt(model.getMax_quantity());
-        }
-
-//        List<CountryCodeModel> countryCodeModelList = new ArrayList<>();
-
-//        if (!TextUtils.isEmpty(model.getMax_quantity()) && !model.getMax_quantity().equals("null")){
-//            int target = Integer.parseInt(model.getMax_quantity());
-//            for (int i=0; i<target; i++){
-//                int value = i+1;
-//                countryCodeModelList.add(new CountryCodeModel(value+""));
-//            }
-//        }
-
-//        CountryCodeAdapter adapterLogin = new CountryCodeAdapter(context, countryCodeModelList,3);
-//        holder.binding.spinnerQuantity.setAdapter(adapterLogin);
-//
-//        holder.binding.spinnerQuantity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                CountryCodeModel modelData = countryCodeModelList.get(position);
-//                String quantitySelected = modelData.getPhone_code();
-//                model.setQuantity(quantitySelected);
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//
-//            }
-//        });
-
         model.setQuantity("1");
-        int finalTarget = target;
         holder.binding.imgPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -148,16 +128,6 @@ public class ChooseExtrasAdapter extends RecyclerView.Adapter<ChooseExtrasAdapte
                 }
             }
         });
-
-//        holder.binding.cardSpinner.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Click.preventTwoClick(v);
-//                if ( holder.binding.spinnerQuantity!=null){
-//                    holder.binding.spinnerQuantity.performClick();
-//                }
-//            }
-//        });
 
     }
 

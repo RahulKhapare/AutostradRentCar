@@ -487,6 +487,10 @@
     <string name="bookingMsg2">بالنقر فوق "الدفع وتأكيد الحجز" ، فإنك تؤكد أنك تفهم وتقبل شروط التأجير الخاصة بنا ، والمؤهلات والمتطلبات ، وشروط وأحكام الحجز ، وأنك تفهم قيود العمر.</string>
     <string name="bookingMsg3">أوافق على الشروط والأحكام وأقر بأن هذا سعر مدفوع مقدمًا</string>
     <string name="caneclBookinError">ليس لديك سجل الإلغاء حتى الآن!</string>
+    <string name="additionLaDriveDocument">وثيقة سائق إضافية</string>
+    <string name="deliveryCharges">رسوم التوصيل</string>
+    <string name="collectCharges">جمع الرسوم</string>
+    <string name="interEmirateCharges">الرسوم بين الإمارات</string>
 
     <string name="txt1">شركة رائدة في مجال تأجير السيارات ولديها أكبر شبكة من الفروع ونقاط الالتقاء</string>
     <string name="txt2">شركة رائدة في مجال تأجير السيارات ولديها أكبر شبكة من الفروع ونقاط الالتقاء</string>
