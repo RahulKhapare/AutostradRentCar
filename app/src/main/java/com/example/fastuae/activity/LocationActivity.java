@@ -1,6 +1,7 @@
 package com.example.fastuae.activity;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -17,10 +18,13 @@ import com.adoisstudio.helper.Session;
 import com.example.fastuae.R;
 import com.example.fastuae.adapter.LocationAdapter;
 import com.example.fastuae.adapter.LocationDetailAdapter;
+import com.example.fastuae.adapter.LocationFilterAdapter;
 import com.example.fastuae.databinding.ActivityLocationBinding;
+import com.example.fastuae.fragment.HomeFragment;
 import com.example.fastuae.model.HomeLocationModel;
 import com.example.fastuae.model.LocationModel;
 import com.example.fastuae.util.Click;
+import com.example.fastuae.util.Config;
 import com.example.fastuae.util.P;
 import com.example.fastuae.util.ProgressView;
 import com.example.fastuae.util.WindowView;
@@ -28,7 +32,7 @@ import com.example.fastuae.util.WindowView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LocationActivity extends AppCompatActivity implements LocationAdapter.onClick{
+public class LocationActivity extends AppCompatActivity implements LocationFilterAdapter.onClick{
 
     private LocationActivity activity = this;
     private ActivityLocationBinding binding;
@@ -37,9 +41,12 @@ public class LocationActivity extends AppCompatActivity implements LocationAdapt
     private LoadingDialog loadingDialog;
     private Session session;
     private boolean callTime = false;
+    private String flag;
+    private String emirateID;
 
-    private List<HomeLocationModel> locationDailyList;
-    private LocationAdapter locationDailyAdapter;
+    private List<LocationModel> locationEmirateModelList;
+    private LocationFilterAdapter locationFilterAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,35 +62,71 @@ public class LocationActivity extends AppCompatActivity implements LocationAdapt
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
+
         callTime = false;
         session = new Session(activity);
         loadingDialog = new LoadingDialog(activity);
 
-        locationDailyList = new ArrayList<>();
-        locationDailyAdapter = new LocationAdapter(activity, locationDailyList);
-        LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(activity);
-        binding.recyclerDailyLocation.setLayoutManager(linearLayoutManager1);
-        binding.recyclerDailyLocation.setHasFixedSize(true);
-        binding.recyclerDailyLocation.setAdapter(locationDailyAdapter);
+        flag = session.getString(P.languageFlag);
+
+        locationEmirateModelList = new ArrayList<>();
+        locationFilterAdapter = new LocationFilterAdapter(activity,locationEmirateModelList,2);
+        binding.recyclerEmirateLocation.setLayoutManager(new LinearLayoutManager(activity));
+        binding.recyclerEmirateLocation.setAdapter(locationFilterAdapter);
+        binding.recyclerEmirateLocation.setNestedScrollingEnabled(false);
 
         locationModelList = new ArrayList<>();
         adapter = new LocationDetailAdapter(activity,locationModelList);
         binding.recyclerLocation.setLayoutManager(new LinearLayoutManager(activity));
         binding.recyclerLocation.setAdapter(adapter);
+        binding.recyclerLocation.setNestedScrollingEnabled(false);
 
-        hitLocationListData();
-        hitLocationData();
+        setLocationData();
         onClick();
     }
 
+    private void setLocationData(){
+        locationEmirateModelList.clear();
+        JsonList emirate_list = HomeFragment.emirate_list;
+        if (emirate_list != null && emirate_list.size() != 0) {
+            for (Json json : emirate_list) {
+                String id = json.getString(P.id);
+                String emirate_name = json.getString(P.emirate_name);
+                String status = json.getString(P.status);
+                LocationModel model = new LocationModel();
+                model.setId(id);
+                model.setEmirate_name(emirate_name);
+                model.setStatus(status);
+                locationEmirateModelList.add(model);
+            }
+            binding.txtArea.setText(locationEmirateModelList.get(0).getEmirate_name());
+            emirateID = locationEmirateModelList.get(0).getEmirate_id();
+            hitLocationData(emirateID);
+        }
+
+        if (locationEmirateModelList.isEmpty()){
+            binding.lnrView.setVisibility(View.GONE);
+        }else {
+            binding.lnrView.setVisibility(View.VISIBLE);
+        }
+    }
+
+
+    @Override
+    public void onFilterClick(LocationModel model) {
+        checkLocationViewView();
+        binding.txtArea.setText(model.getEmirate_name());
+        emirateID = model.getEmirate_id();
+        hitLocationData(emirateID);
+    }
 
     private void onClick(){
 
-        binding.cardPickLocation.setOnClickListener(new View.OnClickListener() {
+        binding.cardLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-                cardPickupClick();
+                checkLocationViewView();
             }
         });
 
@@ -92,66 +135,36 @@ public class LocationActivity extends AppCompatActivity implements LocationAdapt
             public void onClick(View v) {
                 Click.preventTwoClick(v);
                 binding.txtViewMore.setVisibility(View.GONE);
-                hitLocationData();
+                hitLocationData(emirateID);
             }
         });
 
     }
 
-    @Override
-    public void onLocationClick(String location, int flag, HomeLocationModel model) {
-        binding.txtPickUpMessage.setText(location);
-        cardPickupClick();
+    private void checkLocationViewView() {
+        if (binding.lnrLocationListView.getVisibility() == View.VISIBLE) {
+            binding.lnrLocationListView.setVisibility(View.GONE);
+            if (flag.equals(Config.ARABIC)) {
+                binding.imgLocationLeft.setImageResource(R.drawable.ic_down_arrow);
+            } else if (flag.equals(Config.ENGLISH)) {
+                binding.imgLocationRight.setImageResource(R.drawable.ic_down_arrow);
+            }
+
+        } else if (binding.lnrLocationListView.getVisibility() == View.GONE) {
+            binding.lnrLocationListView.setVisibility(View.VISIBLE);
+            if (flag.equals(Config.ARABIC)) {
+                binding.imgLocationLeft.setImageResource(R.drawable.ic_up_arrow);
+            } else if (flag.equals(Config.ENGLISH)) {
+                binding.imgLocationRight.setImageResource(R.drawable.ic_up_arrow);
+            }
+        }
     }
 
-    private void hitLocationListData() {
 
-        ProgressView.show(activity, loadingDialog);
-        Json j = new Json();
-
-        Api.newApi(activity, P.BaseUrl + "location").addJson(j)
-                .setMethod(Api.GET)
-                //.onHeaderRequest(App::getHeaders)
-                .onError(() -> {
-                    ProgressView.dismiss(loadingDialog);
-                    H.showMessage(activity, "On error is called");
-                })
-                .onSuccess(json ->
-                {
-                    if (json.getInt(P.status) == 1) {
-
-                        json = json.getJson(P.data);
-                        JsonList location_list = json.getJsonList(P.location_list);
-                        for (int i = 0; i < location_list.size(); i++) {
-                            Json jsonData = location_list.get(i);
-                            HomeLocationModel model = new HomeLocationModel();
-                            model.setId(jsonData.getString(P.id));
-                            model.setEmirate_id(jsonData.getString(P.emirate_id));
-                            model.setEmirate_name(jsonData.getString(P.emirate_name));
-                            model.setLocation_name(jsonData.getString(P.location_name));
-                            model.setAddress(jsonData.getString(P.address));
-                            model.setStatus(jsonData.getString(P.status));
-                            model.setContact_number(jsonData.getString(P.contact_number));
-                            model.setContact_email(jsonData.getString(P.contact_email));
-                            model.setLocation_time_data(jsonData.getJsonList(P.location_time_data));
-                            locationDailyList.add(model);
-                        }
-
-                        locationDailyAdapter.notifyDataSetChanged();
-
-                    } else {
-                        H.showMessage(activity, json.getString(P.error));
-                    }
-                    ProgressView.dismiss(loadingDialog);
-
-                })
-                .run("hitLocationListData");
-    }
-
-    private void hitLocationData() {
+    private void hitLocationData(String emirateID) {
         locationModelList.clear();
         ProgressView.show(activity,loadingDialog);
-        Api.newApi(activity, P.BaseUrl + "location")
+        Api.newApi(activity, P.BaseUrl + "location"+"emirate_id=" + emirateID)
                 .setMethod(Api.GET)
 //                .onHeaderRequest(App::getHeaders)
                 .onError(() -> {
@@ -209,21 +222,9 @@ public class LocationActivity extends AppCompatActivity implements LocationAdapt
     private void checkData(){
         if (locationModelList.isEmpty()){
             binding.txtError.setVisibility(View.VISIBLE);
+            binding.txtViewMore.setVisibility(View.GONE);
         }else {
             binding.txtError.setVisibility(View.GONE);
-        }
-    }
-
-    private void cardPickupClick() {
-        if (binding.imgDeliverArrowDown.getVisibility() == View.VISIBLE) {
-            binding.imgDeliverArrowDown.setVisibility(View.GONE);
-            binding.imgDeliverArrowUp.setVisibility(View.VISIBLE);
-            binding.cardLocationDeliver.setVisibility(View.VISIBLE);
-
-        } else if (binding.imgDeliverArrowUp.getVisibility() == View.VISIBLE) {
-            binding.imgDeliverArrowUp.setVisibility(View.GONE);
-            binding.imgDeliverArrowDown.setVisibility(View.VISIBLE);
-            binding.cardLocationDeliver.setVisibility(View.GONE);
         }
     }
 

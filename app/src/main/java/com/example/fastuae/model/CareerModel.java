@@ -2,9 +2,36 @@ package com.example.fastuae.model;
 
 public class CareerModel {
 
+    String id;
+    String slug;
+    String designation;
     String location;
     String experience;
-    String details;
+    String description;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getSlug() {
+        return slug;
+    }
+
+    public void setSlug(String slug) {
+        this.slug = slug;
+    }
+
+    public String getDesignation() {
+        return designation;
+    }
+
+    public void setDesignation(String designation) {
+        this.designation = designation;
+    }
 
     public String getLocation() {
         return location;
@@ -22,11 +49,11 @@ public class CareerModel {
         this.experience = experience;
     }
 
-    public String getDetails() {
-        return details;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDetails(String details) {
-        this.details = details;
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

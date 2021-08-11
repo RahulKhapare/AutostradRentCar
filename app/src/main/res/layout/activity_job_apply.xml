@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_margin="10dp"
+    android:background="@drawable/custome_dialog_bg">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="10dp"
+           android:padding="10dp"
+           android:orientation="vertical">
+
+           <TextView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:textColor="@color/colorPrimaryDark"
+               android:gravity="center_vertical"
+               android:textSize="20sp"
+               android:padding="10dp"
+               android:fontFamily="@font/nunit_sans_bold"
+               android:text="@string/applyJob">
+
+           </TextView>
+
+           <com.google.android.material.textfield.TextInputLayout
+               android:layout_width="match_parent"
+               android:layout_height="?actionBarSize"
+               android:hint="@string/firstName"
+               android:layout_marginBottom="10dp"
+               android:layout_marginTop="20dp"
+               android:layout_marginLeft="10dp"
+               android:layout_marginRight="10dp"
+               app:hintTextColor="@color/iconicGray"
+               android:textColorHint="@color/iconicGray"
+               app:theme="@style/styleText"
+               android:backgroundTint="@color/colorPrimaryDark">
+
+               <com.google.android.material.textfield.TextInputEditText
+                   android:id="@+id/etxFirstName"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:singleLine="true"
+                   android:textSize="18sp"
+                   android:imeOptions="actionNext"
+                   android:inputType="textCapWords"
+                   android:fontFamily="@font/nunito_sans_semibold"
+                   android:textColor="@color/textDark"
+                   android:backgroundTint="@color/colorPrimaryDark"
+                   />
+
+           </com.google.android.material.textfield.TextInputLayout>
+
+           <com.google.android.material.textfield.TextInputLayout
+               android:layout_width="match_parent"
+               android:layout_height="?actionBarSize"
+               android:hint="@string/lastName"
+               android:layout_marginBottom="10dp"
+               android:layout_marginTop="20dp"
+               android:layout_marginLeft="10dp"
+               android:layout_marginRight="10dp"
+               app:hintTextColor="@color/iconicGray"
+               android:textColorHint="@color/iconicGray"
+               app:theme="@style/styleText"
+               android:backgroundTint="@color/colorPrimaryDark">
+
+               <com.google.android.material.textfield.TextInputEditText
+                   android:id="@+id/etxLastName"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:singleLine="true"
+                   android:textSize="18sp"
+                   android:imeOptions="actionNext"
+                   android:inputType="textCapWords"
+                   android:fontFamily="@font/nunito_sans_semibold"
+                   android:textColor="@color/textDark"
+                   android:backgroundTint="@color/colorPrimaryDark"
+                   />
+
+           </com.google.android.material.textfield.TextInputLayout>
+
+           <com.google.android.material.textfield.TextInputLayout
+               android:layout_width="match_parent"
+               android:layout_height="?actionBarSize"
+               android:hint="@string/email"
+               android:layout_marginBottom="10dp"
+               android:layout_marginTop="20dp"
+               android:layout_marginLeft="10dp"
+               android:layout_marginRight="10dp"
+               app:hintTextColor="@color/iconicGray"
+               android:textColorHint="@color/iconicGray"
+               app:theme="@style/styleText"
+               android:backgroundTint="@color/colorPrimaryDark">
+
+               <com.google.android.material.textfield.TextInputEditText
+                   android:id="@+id/etxEmail"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:singleLine="true"
+                   android:textSize="18sp"
+                   android:imeOptions="actionNext"
+                   android:inputType="textEmailAddress"
+                   android:fontFamily="@font/nunito_sans_semibold"
+                   android:textColor="@color/textDark"
+                   android:backgroundTint="@color/colorPrimaryDark"
+                   />
+
+           </com.google.android.material.textfield.TextInputLayout>
+
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="?actionBarSize"
+               android:layout_marginBottom="10dp"
+               android:layout_marginTop="20dp"
+               android:layout_marginLeft="10dp"
+               android:layout_marginRight="10dp"
+               android:orientation="horizontal">
+
+
+               <com.google.android.material.textfield.TextInputLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="?actionBarSize"
+                   android:hint="@string/mobileNumber"
+                   app:hintTextColor="@color/iconicGray"
+                   android:textColorHint="@color/iconicGray"
+                   app:theme="@style/styleText"
+                   android:backgroundTint="@color/colorPrimaryDark">
+
+                   <com.google.android.material.textfield.TextInputEditText
+                       android:id="@+id/etxNumber"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:singleLine="true"
+                       android:textSize="18sp"
+                       android:imeOptions="actionDone"
+                       android:inputType="number"
+                       android:fontFamily="@font/nunito_sans_semibold"
+                       android:textColor="@color/textDark"
+                       android:backgroundTint="@color/colorPrimaryDark"
+                       />
+
+               </com.google.android.material.textfield.TextInputLayout>
+
+           </LinearLayout>
+
+           <LinearLayout
+               android:id="@+id/lnrDocument"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_gravity="center"
+               android:layout_marginTop="20dp"
+               android:layout_marginLeft="10dp"
+               android:layout_marginRight="10dp"
+               android:orientation="horizontal"
+               android:background="@drawable/corner_gray_bg"
+               android:gravity="center_horizontal">
+
+               <ImageView
+                   android:layout_width="20dp"
+                   android:layout_height="20dp"
+                   android:layout_marginLeft="10dp"
+                   android:layout_marginRight="10dp"
+                   android:layout_gravity="center_vertical"
+                   android:src="@drawable/ic_download"></ImageView>
+
+               <TextView
+                   android:id="@+id/txtDocument"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_gravity="center_horizontal"
+                   android:gravity="center_horizontal"
+                   android:paddingTop="16dp"
+                   android:paddingBottom="16dp"
+                   android:paddingLeft="5dp"
+                   android:paddingRight="5dp"
+                   android:textColor="@color/colorPrimaryDark"
+                   android:textSize="16sp"
+                   android:fontFamily="@font/nunit_sans_bold"
+                   android:text="@string/upload">
+
+               </TextView>
+           </LinearLayout>
+
+           <TextView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:textColor="@color/redText"
+               android:gravity="center_vertical"
+               android:textSize="12sp"
+               android:padding="10dp"
+               android:fontFamily="@font/nunito_sans_regular"
+               android:text="@string/pdfMessage">
+
+           </TextView>
+
+           <TextView
+               android:id="@+id/txtSubmitResume"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:fontFamily="@font/nunit_sans_bold"
+               android:textColor="@color/colorPrimaryDark"
+               android:text="@string/submitResume"
+               android:padding="16dp"
+               android:layout_marginTop="30dp"
+               android:layout_marginLeft="10dp"
+               android:layout_marginRight="10dp"
+               android:layout_marginBottom="20dp"
+               android:layout_gravity="center"
+               android:gravity="center"
+               android:textSize="18dp"
+               android:background="@drawable/button_orange_bg"></TextView>
+
+
+       </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imgClose"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_margin="10dp"
+            android:src="@drawable/ic_close_round">
+
+        </ImageView>
+
+    </RelativeLayout>
+
+
+
+</LinearLayout>

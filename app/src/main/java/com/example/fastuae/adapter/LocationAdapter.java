@@ -90,7 +90,7 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.viewHo
                     if (value){
                         ((EditPickupDropofftActivity)context).onLocationClick(model.getLocation_name(),flag,model);
                     }else {
-                        ((LocationActivity)context).onLocationClick(model.getLocation_name(),flag,model);
+//                        ((LocationActivity)context).onLocationClick(model.getLocation_name(),flag,model);
                     }
                 }else {
                     ((HomeFragment)homeFragment).onLocationClick(model.getLocation_name(),flag,model);

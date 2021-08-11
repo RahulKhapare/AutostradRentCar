@@ -14,6 +14,7 @@ import com.example.fastuae.R;
 import com.example.fastuae.activity.CarBookingDetailsActivity;
 import com.example.fastuae.databinding.ActivityCarBookingListBinding;
 import com.example.fastuae.databinding.ActivityPaymentCardListBinding;
+import com.example.fastuae.fragment.ManagePaymentFragment;
 import com.example.fastuae.model.PaymentCardModel;
 import com.example.fastuae.util.Click;
 
@@ -27,6 +28,7 @@ public class PaymentCardAdapter extends RecyclerView.Adapter<PaymentCardAdapter.
     private int valueFlag;
     private int lastCheckPosition = -1;
     private boolean firstClick = true;
+    private ManagePaymentFragment fragment;
 
     public PaymentCardAdapter(Context context, List<PaymentCardModel> paymentCardModelList,int value) {
         this.context = context;
@@ -36,8 +38,18 @@ public class PaymentCardAdapter extends RecyclerView.Adapter<PaymentCardAdapter.
         firstClick = true;
     }
 
+    public PaymentCardAdapter(Context context, List<PaymentCardModel> paymentCardModelList,int value,ManagePaymentFragment fragment) {
+        this.context = context;
+        this.paymentCardModelList = paymentCardModelList;
+        this.fragment = fragment;
+        session = new Session(context);
+        valueFlag = value;
+        firstClick = true;
+    }
+
     public interface onClick{
         void onEditPayment(PaymentCardModel model);
+        void onDeletePayment(PaymentCardModel model);
 
     }
 
@@ -73,17 +85,33 @@ public class PaymentCardAdapter extends RecyclerView.Adapter<PaymentCardAdapter.
         String outputNo = firstFour + "-" + hideNumber + "-" + lastFour;
         holder.binding.txtCardNumber.setText(outputNo);
 
-        if (valueFlag==1){
-            holder.binding.imgEdit.setVisibility(View.GONE);
-        }else if (valueFlag==2){
-            holder.binding.imgEdit.setVisibility(View.VISIBLE);
-        }
+//        if (valueFlag==1){
+//            holder.binding.imgEdit.setVisibility(View.GONE);
+//        }else if (valueFlag==2){
+//            holder.binding.imgEdit.setVisibility(View.VISIBLE);
+//        }
 
         holder.binding.imgEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-                ((CarBookingDetailsActivity)context).onEditPayment(model);
+                if (valueFlag==1){
+                    ((ManagePaymentFragment)fragment).onEditPayment(model);
+                }else if (valueFlag==2){
+                    ((CarBookingDetailsActivity)context).onEditPayment(model);
+                }
+            }
+        });
+
+        holder.binding.imgDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                if (valueFlag==1){
+                    ((ManagePaymentFragment)fragment).onDeletePayment(model);
+                }else if (valueFlag==2){
+                    ((CarBookingDetailsActivity)context).onDeletePayment(model);
+                }
             }
         });
 

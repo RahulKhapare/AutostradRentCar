@@ -8,6 +8,7 @@ public class P {
     public static String userLogin = "userLogin";
 
 
+    public static String job_list = "job_list";
     public static String image_url = "image_url";
     public static String image = "image";
     public static String extension = "extension";
@@ -16,6 +17,7 @@ public class P {
     public static String status = "status";
     public static String detail = "detail";
     public static String data = "data";
+    public static String career = "career";
     public static String bill_info = "bill_info";
     public static String user_payment_option_list = "user_payment_option_list";
     public static String driver = "driver";
@@ -249,6 +251,8 @@ public class P {
     public static String dropoff_lat = "dropoff_lat";
     public static String dropoff_long = "dropoff_long";
     public static String offers = "offers";
+
+    public static String driver_id = "driver_id";
 
 
 }

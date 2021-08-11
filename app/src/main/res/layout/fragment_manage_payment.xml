@@ -96,12 +96,12 @@
 
                     <EditText
                         android:id="@+id/etxValidMonth"
-                        android:layout_weight="1"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="?actionBarSize"
                         android:textSize="18sp"
                         android:imeOptions="actionNext"
                         android:textColor="@color/textDark"
+                        android:paddingRight="50dp"
                         android:textColorHint="@color/iconicGray"
                         android:textCursorDrawable="@drawable/color_cursor"
                         android:backgroundTint="@color/colorPrimaryDark"
@@ -121,6 +121,7 @@
                         android:textSize="18sp"
                         android:digits="0123456789"
                         android:maxLength="3"
+                        android:visibility="gone"
                         android:imeOptions="actionNext"
                         android:textColor="@color/textDark"
                         android:textColorHint="@color/iconicGray"

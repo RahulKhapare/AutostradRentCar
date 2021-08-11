@@ -47,6 +47,7 @@
             android:src="@drawable/ic_checked"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
+            android:visibility="gone"
             ></ImageView>
 
         <ImageView
@@ -56,6 +57,17 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:src="@drawable/ic_edit_view">
+
+        </ImageView>
+
+        <ImageView
+            android:id="@+id/imgDelete"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:tint="@color/colorBlack"
+            android:src="@drawable/ic_baseline_delete_24">
 
         </ImageView>
 

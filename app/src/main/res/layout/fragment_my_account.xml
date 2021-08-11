@@ -342,6 +342,63 @@
 
                         </LinearLayout>
 
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginLeft="10dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <Spinner
+                                    android:id="@+id/spinnerPersonalCountry"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="?actionBarSize"
+                                    android:background="@android:color/transparent"
+                                    android:backgroundTint="@color/colorPrimaryDark">
+
+                                </Spinner>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:background="@color/colorPrimaryDark"
+                                    android:layout_marginTop="-5dp"
+                                    android:layout_marginLeft="3dp"
+                                    android:layout_marginRight="3dp"></LinearLayout>
+
+                            </LinearLayout>
+
+                            <ImageView
+                                android:id="@+id/imgPersonalEmirateRight"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_marginRight="10dp"
+                                android:src="@drawable/ic_down_arrow"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true">
+
+                            </ImageView>
+
+                            <ImageView
+                                android:id="@+id/imgPersonalEmirateLeft"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_marginLeft="10dp"
+                                android:visibility="gone"
+                                android:src="@drawable/ic_down_arrow"
+                                android:layout_alignParentLeft="true"
+                                android:layout_centerVertical="true">
+                            </ImageView>
+
+
+                        </RelativeLayout>
+
                         <TextView
                             android:id="@+id/txtPersonalDetailsSave"
                             android:layout_width="match_parent"
@@ -759,7 +816,7 @@
                                 android:orientation="vertical">
 
                                 <Spinner
-                                    android:id="@+id/spinnerAddress"
+                                    android:id="@+id/spinnerAddressCountry"
                                     android:layout_width="match_parent"
                                     android:layout_height="?actionBarSize"
                                     android:background="@android:color/transparent"

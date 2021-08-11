@@ -43,6 +43,20 @@
                         android:orientation="vertical"
                         android:background="@color/colorWhite">
 
+                        <TextView
+                            android:id="@+id/txtError"
+                            android:layout_weight="1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/noDataFound"
+                            android:textSize="22sp"
+                            android:visibility="gone"
+                            android:layout_centerInParent="true"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:fontFamily="@font/nunito_sans_semibold">
+
+                        </TextView>
+
                       <LinearLayout
                           android:id="@+id/lnrView"
                           android:layout_width="match_parent"
@@ -59,115 +73,75 @@
                               android:textColor="@color/colorPrimaryDark"
                               android:textSize="18sp"
                               android:fontFamily="@font/nunit_sans_bold"
-                              android:text="@string/yourAutoStard">
+                              android:text="@string/ourLocation">
 
                           </TextView>
 
-                          <RelativeLayout
+                          <androidx.cardview.widget.CardView
+                              android:layout_marginTop="15dp"
+                              android:id="@+id/cardLocation"
                               android:layout_width="match_parent"
-                              android:layout_height="wrap_content">
-
-                              <androidx.cardview.widget.CardView
-                                  android:layout_below="@+id/cardDuration"
-                                  android:id="@+id/cardPickLocation"
-                                  android:layout_width="match_parent"
-                                  android:layout_height="60dp"
-                                  app:cardElevation="3dp"
-                                  app:cardCornerRadius="5dp"
-                                  android:layout_marginTop="15dp"
-                                  android:layout_marginBottom="5dp"
-                                  android:layout_marginLeft="1dp"
-                                  android:layout_marginRight="1dp">
-
-                                  <LinearLayout
-                                      android:layout_width="match_parent"
-                                      android:layout_height="match_parent"
-                                      android:layout_margin="5dp"
-                                      android:gravity="center_vertical"
-                                      android:layout_gravity="center_vertical"
-                                      android:orientation="horizontal">
-
-                                      <LinearLayout
-                                          android:layout_weight="1"
-                                          android:layout_width="match_parent"
-                                          android:layout_height="wrap_content"
-                                          android:orientation="vertical">
-
-                                          <LinearLayout
-                                              android:layout_width="match_parent"
-                                              android:layout_height="wrap_content">
-
-                                              <ImageView
-                                                  android:layout_width="25dp"
-                                                  android:layout_height="25dp"
-                                                  android:layout_gravity="center_vertical"
-                                                  android:src="@drawable/ic_location"></ImageView>
-                                              <TextView
-                                                  android:id="@+id/txtPickUpTitle"
-                                                  android:layout_width="match_parent"
-                                                  android:layout_height="wrap_content"
-                                                  android:textColor="@color/textDark"
-                                                  android:layout_gravity="center_vertical"
-                                                  android:fontFamily="@font/nunito_sans_semibold"
-                                                  android:text="@string/pickUpLocation"
-                                                  android:textSize="16sp">
-                                              </TextView>
-
-                                          </LinearLayout>
-
-                                          <TextView
-                                              android:id="@+id/txtPickUpMessage"
-                                              android:layout_width="match_parent"
-                                              android:layout_height="wrap_content"
-                                              android:textColor="@color/iconicGray"
-                                              android:layout_gravity="center_vertical"
-                                              android:fontFamily="@font/nunito_sans_semibold"
-                                              android:text="@string/userCurrentLocation"
-                                              android:paddingLeft="10dp"
-                                              android:textSize="14sp">
-                                          </TextView>
-
-                                      </LinearLayout>
-
-                                      <ImageView
-                                          android:id="@+id/imgDeliverArrowUp"
-                                          android:layout_width="25dp"
-                                          android:layout_height="25dp"
-                                          android:visibility="gone"
-                                          android:layout_gravity="center_vertical"
-                                          android:tint="@color/colorBlack"
-                                          android:src="@drawable/ic_up_arrow"></ImageView>
-
-                                      <ImageView
-                                          android:id="@+id/imgDeliverArrowDown"
-                                          android:layout_width="25dp"
-                                          android:layout_height="25dp"
-                                          android:layout_gravity="center_vertical"
-                                          android:tint="@color/colorBlack"
-                                          android:src="@drawable/ic_down_arrow"></ImageView>
-
-                                  </LinearLayout>
+                              android:layout_height="wrap_content"
+                              android:layout_marginLeft="2dp"
+                              android:layout_marginRight="2dp"
+                              android:layout_marginBottom="5dp"
+                              app:cardElevation="3dp"
+                              app:cardCornerRadius="5dp">
 
 
-                              </androidx.cardview.widget.CardView>
-
-                              <androidx.cardview.widget.CardView
-                                  android:id="@+id/cardLocationDeliver"
-                                  android:layout_below="@+id/cardPickLocation"
+                              <LinearLayout
                                   android:layout_width="match_parent"
                                   android:layout_height="wrap_content"
-                                  app:cardElevation="3dp"
-                                  app:cardCornerRadius="5dp"
-                                  android:layout_marginBottom="10dp"
-                                  android:layout_marginTop="-10dp"
-                                  android:layout_marginLeft="1dp"
-                                  android:layout_marginRight="1dp"
-                                  android:visibility="gone"
-                                  >
+                                  android:orientation="vertical">
+
+                                  <RelativeLayout
+                                      android:layout_width="match_parent"
+                                      android:layout_height="?actionBarSize">
+
+                                      <TextView
+                                          android:id="@+id/txtArea"
+                                          android:layout_width="match_parent"
+                                          android:layout_height="match_parent"
+                                          android:textColor="@color/textDark"
+                                          android:gravity="center_vertical"
+                                          android:layout_marginLeft="20dp"
+                                          android:layout_marginRight="20dp"
+                                          android:layout_gravity="center_vertical"
+                                          android:fontFamily="@font/nunito_sans_semibold"
+                                          android:text="@string/app_name"
+                                          android:textSize="18sp">
+                                      </TextView>
+
+
+                                      <ImageView
+                                          android:id="@+id/imgLocationRight"
+                                          android:layout_width="25dp"
+                                          android:layout_height="25dp"
+                                          android:layout_marginRight="15dp"
+                                          android:src="@drawable/ic_down_arrow"
+                                          android:layout_alignParentRight="true"
+                                          android:layout_centerVertical="true">
+                                      </ImageView>
+
+                                      <ImageView
+                                          android:id="@+id/imgLocationLeft"
+                                          android:layout_width="25dp"
+                                          android:layout_height="25dp"
+                                          android:layout_marginLeft="15dp"
+                                          android:src="@drawable/ic_down_arrow"
+                                          android:layout_alignParentLeft="true"
+                                          android:layout_centerVertical="true"
+                                          android:visibility="gone">
+                                      </ImageView>
+
+                                  </RelativeLayout>
+
 
                                   <LinearLayout
+                                      android:id="@+id/lnrLocationListView"
                                       android:layout_width="match_parent"
                                       android:layout_height="wrap_content"
+                                      android:visibility="gone"
                                       android:orientation="vertical">
 
                                       <LinearLayout
@@ -180,21 +154,18 @@
                                       </LinearLayout>
 
                                       <androidx.recyclerview.widget.RecyclerView
-                                          android:id="@+id/recyclerDailyLocation"
+                                          android:id="@+id/recyclerEmirateLocation"
                                           android:layout_width="match_parent"
-                                          android:layout_height="wrap_content"
-                                          android:scrollbarSize="7dp"
-                                          android:scrollbarFadeDuration="0"
-                                          android:scrollbarThumbVertical="@drawable/scrollbar_shape"
-                                          android:scrollbars="vertical">
+                                          android:layout_height="wrap_content">
 
                                       </androidx.recyclerview.widget.RecyclerView>
 
                                   </LinearLayout>
 
-                              </androidx.cardview.widget.CardView>
+                              </LinearLayout>
 
-                          </RelativeLayout>
+
+                          </androidx.cardview.widget.CardView>
 
                       </LinearLayout>
 
@@ -209,20 +180,6 @@
 
 
                         <TextView
-                            android:id="@+id/txtError"
-                            android:layout_weight="1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/noDataFound"
-                            android:textSize="22sp"
-                            android:visibility="gone"
-                            android:layout_centerInParent="true"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:fontFamily="@font/nunito_sans_semibold">
-
-                        </TextView>
-
-                        <TextView
                             android:id="@+id/txtViewMore"
                             android:layout_below="@+id/recyclerLocation"
                             android:layout_width="match_parent"
@@ -235,6 +192,7 @@
                             android:padding="10dp"
                             android:text="@string/moreView"
                             android:fontFamily="@font/nunit_sans_bold"/>
+
 
 
                     </RelativeLayout>

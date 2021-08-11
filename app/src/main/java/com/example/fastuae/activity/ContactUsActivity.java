@@ -25,16 +25,24 @@ import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.adoisstudio.helper.Api;
+import com.adoisstudio.helper.H;
+import com.adoisstudio.helper.Json;
+import com.adoisstudio.helper.JsonList;
+import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
 import com.example.fastuae.R;
 import com.example.fastuae.adapter.ContactAdapter;
 import com.example.fastuae.adapter.LocationFilterAdapter;
 import com.example.fastuae.databinding.ActivityContactUsBinding;
+import com.example.fastuae.fragment.HomeFragment;
 import com.example.fastuae.model.ContactModel;
+import com.example.fastuae.model.EmirateModel;
 import com.example.fastuae.model.LocationModel;
 import com.example.fastuae.util.Click;
 import com.example.fastuae.util.Config;
 import com.example.fastuae.util.P;
+import com.example.fastuae.util.ProgressView;
 import com.example.fastuae.util.WindowView;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -52,13 +60,14 @@ public class ContactUsActivity extends AppCompatActivity implements LocationList
 
     private ContactUsActivity activity = this;
     private ActivityContactUsBinding binding;
+    private LoadingDialog loadingDialog;
     private Session session;
     private String flag;
 
     private List<LocationModel> locationModelList;
     private LocationFilterAdapter locationFilterAdapter;
 
-    private List<ContactModel> contactModelList;
+    private List<LocationModel> contactModelList;
     private ContactAdapter contactAdapter;
 
     private GoogleMap mMap;
@@ -75,7 +84,8 @@ public class ContactUsActivity extends AppCompatActivity implements LocationList
     private String country;
     private String postalCode;
     private String knownName;
-
+    private String emirateID;
+    private boolean callTime = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +93,7 @@ public class ContactUsActivity extends AppCompatActivity implements LocationList
         WindowView.getWindow(activity);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_contact_us);
         session = new Session(activity);
+        loadingDialog = new LoadingDialog(activity);
         flag = session.getString(P.languageFlag);
         updateIcons();
         initView();
@@ -94,15 +105,10 @@ public class ContactUsActivity extends AppCompatActivity implements LocationList
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
+        callTime = false;
+
         locationModelList = new ArrayList<>();
-
-        locationModelList.add(new LocationModel("Abu Dhabi"));
-        locationModelList.add(new LocationModel("India"));
-        locationModelList.add(new LocationModel("Africa"));
-        locationModelList.add(new LocationModel("America"));
-        locationModelList.add(new LocationModel("Shree-Lanka"));
-
-        locationFilterAdapter = new LocationFilterAdapter(activity,locationModelList);
+        locationFilterAdapter = new LocationFilterAdapter(activity,locationModelList,1);
         binding.recyclerLocation.setLayoutManager(new LinearLayoutManager(activity));
         binding.recyclerLocation.setAdapter(locationFilterAdapter);
 
@@ -112,7 +118,7 @@ public class ContactUsActivity extends AppCompatActivity implements LocationList
         binding.recyclerContacts.setAdapter(contactAdapter);
 
         setData();
-        updateContactData();
+        setLocationData();
         onClick();
         setMapData();
     }
@@ -130,26 +136,42 @@ public class ContactUsActivity extends AppCompatActivity implements LocationList
         binding.txtEmail.setText("assist@fastuae.com");
         binding.txtTelephoneNo.setText("600-500-101");
         binding.txtMobileNo.setText("971 2815 2700");
-        binding.txtArea.setText(locationModelList.get(0).getLocation_name());
 
     }
 
-    private void updateContactData(){
+    private void setLocationData(){
 
-        contactModelList.add(new ContactModel("Abu Dhabi - Abu Dhabi Mall","+971 2 645 7200","luxcar@fastuae.com"));
-        contactModelList.add(new ContactModel("Abu Dhabi : World Trade Center Mall","+971 2 632 3769","a35@fastuae.com"));
-        contactModelList.add(new ContactModel("Abu Dhabi : Mussafah","+971 2 551 2916","a8@fastuae.com"));
-        contactModelList.add(new ContactModel("Abu Dhabi : Airport Road","+971 2 445 9298","a14@fastuae.com"));
-        contactModelList.add(new ContactModel("Al Ain : Zayed Bin Sultan Street","+971 3 766 7330","a7@fastuae.com"));
-        contactModelList.add(new ContactModel("Dubai : Sheikh Zayed Road","+971 4 338 7171","done@fastuae.com"));
-        contactAdapter.notifyDataSetChanged();
+        JsonList emirate_list = HomeFragment.emirate_list;
+        if (emirate_list != null && emirate_list.size() != 0) {
+            for (Json json : emirate_list) {
+                String id = json.getString(P.id);
+                String emirate_name = json.getString(P.emirate_name);
+                String status = json.getString(P.status);
+                LocationModel model = new LocationModel();
+                model.setId(id);
+                model.setEmirate_name(emirate_name);
+                model.setStatus(status);
+                locationModelList.add(model);
+            }
+            locationFilterAdapter.notifyDataSetChanged();
+            binding.txtArea.setText(locationModelList.get(0).getEmirate_name());
+            emirateID = locationModelList.get(0).getEmirate_id();
+            hitLocationData(emirateID);
+        }
 
+        if (locationModelList.isEmpty()){
+            binding.lnrLocationView.setVisibility(View.GONE);
+        }else {
+            binding.lnrLocationView.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
-    public void onFilterClick(String location) {
-        binding.txtArea.setText(location);
+    public void onFilterClick(LocationModel model) {
         checkLocationViewView();
+        binding.txtArea.setText(model.getEmirate_name());
+        emirateID = model.getEmirate_id();
+        hitLocationData(emirateID);
     }
 
     private void onClick(){
@@ -167,7 +189,7 @@ public class ContactUsActivity extends AppCompatActivity implements LocationList
             public void onClick(View v) {
                 Click.preventTwoClick(v);
                 binding.txtViewMore.setVisibility(View.GONE);
-                updateContactData();
+                hitLocationData(emirateID);
             }
         });
 
@@ -206,6 +228,72 @@ public class ContactUsActivity extends AppCompatActivity implements LocationList
         }
     }
 
+    private void hitLocationData(String emirateID) {
+        contactModelList.clear();
+        ProgressView.show(activity,loadingDialog);
+        Api.newApi(activity, P.BaseUrl + "location"+"emirate_id=" + emirateID)
+                .setMethod(Api.GET)
+//                .onHeaderRequest(App::getHeaders)
+                .onError(() -> {
+                    ProgressView.dismiss(loadingDialog);
+                    H.showMessage(activity, "On error is called");
+                    checkData();
+                })
+                .onSuccess(json ->
+                {
+                    if (json.getInt(P.status) == 1) {
+                        json = json.getJson(P.data);
+                        JsonList location_list = json.getJsonList(P.location_list);
+
+                        if (location_list!=null && location_list.size()!=0){
+
+                            for (Json jsonData : location_list){
+                                LocationModel model = new LocationModel();
+                                model.setId(jsonData.getString(P.id));
+                                model.setEmirate_id(jsonData.getString(P.emirate_id));
+                                model.setEmirate_name(jsonData.getString(P.emirate_name));
+                                model.setLocation_name(jsonData.getString(P.location_name));
+                                model.setLocation_timing(jsonData.getString(P.location_timing));
+                                model.setAddress(jsonData.getString(P.address));
+                                model.setStatus(jsonData.getString(P.status));
+                                model.setContact_number(jsonData.getString(P.contact_number));
+                                model.setContact_email(jsonData.getString(P.contact_email));
+                                model.setLocation_time_data(jsonData.getJsonArray(P.location_time_data));
+
+                                if (!callTime){
+                                    if (contactModelList.size()<3){
+                                        contactModelList.add(model);
+                                    }
+                                }else {
+                                    contactModelList.add(model);
+                                }
+
+                            }
+
+                            callTime = true;
+                            contactAdapter.notifyDataSetChanged();
+
+                        }
+                        checkData();
+                    }else {
+                        checkData();
+                        H.showMessage(activity,json.getString(P.error));
+                    }
+                    ProgressView.dismiss(loadingDialog);
+
+                })
+                .run("hitLocationData");
+
+    }
+
+    private void checkData(){
+        if (contactModelList.isEmpty()){
+            binding.txtError.setVisibility(View.VISIBLE);
+            binding.txtViewMore.setVisibility(View.GONE);
+        }else {
+            binding.txtError.setVisibility(View.GONE);
+        }
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

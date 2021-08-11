@@ -69,6 +69,40 @@
 
 
                 <LinearLayout
+                    android:id="@+id/lnrDriverList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:orientation="vertical">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerDriverData"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    </androidx.recyclerview.widget.RecyclerView>
+
+                    <TextView
+                        android:id="@+id/txtAddNewDriver"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunit_sans_bold"
+                        android:textColor="@color/colorWhite"
+                        android:text="@string/addNewDriver"
+                        android:paddingTop="12dp"
+                        android:paddingBottom="12dp"
+                        android:paddingLeft="50dp"
+                        android:paddingRight="50dp"
+                        android:layout_marginTop="40dp"
+                        android:layout_marginBottom="20dp"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:textSize="18dp"
+                        android:background="@drawable/button_blue_bg"></TextView>
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:id="@+id/lnrAdditionalDetails"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -84,12 +118,20 @@
 
                     </LinearLayout>
 
+                    <ImageView
+                        android:id="@+id/imgCloseDetails"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="right"
+                        android:layout_margin="10dp"
+                        android:src="@drawable/ic_close_round"></ImageView>
+
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="?actionBarSize"
                         android:hint="@string/firstName"
                         android:layout_marginBottom="10dp"
-                        android:layout_marginTop="30dp"
+                        android:layout_marginTop="0dp"
                         android:layout_marginRight="10dp"
                         android:layout_marginLeft="10dp"
                         app:hintTextColor="@color/iconicGray"
@@ -441,6 +483,7 @@
 
 
                 </LinearLayout>
+
             </LinearLayout>
 
 

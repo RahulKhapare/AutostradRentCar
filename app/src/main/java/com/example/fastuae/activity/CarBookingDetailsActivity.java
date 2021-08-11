@@ -2,9 +2,11 @@ package com.example.fastuae.activity;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
@@ -30,6 +32,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -791,13 +794,14 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Emir
         } else if (!binding.etxValidMonth.getText().toString().matches("(?:0[1-9]|1[0-2])/[0-9]{2}")) {
             value = false;
             H.showMessage(activity, getResources().getString(R.string.checkCardFormat));
-        } else if (TextUtils.isEmpty(binding.etxCvv.getText().toString().trim())) {
-            value = false;
-            H.showMessage(activity, getResources().getString(R.string.enterCvv));
-        } else if (binding.etxCvv.getText().toString().trim().length() < 3 || binding.etxCvv.getText().toString().trim().length() > 3) {
-            value = false;
-            H.showMessage(activity, getResources().getString(R.string.enterValidCvv));
         }
+//        else if (TextUtils.isEmpty(binding.etxCvv.getText().toString().trim())) {
+//            value = false;
+//            H.showMessage(activity, getResources().getString(R.string.enterCvv));
+//        } else if (binding.etxCvv.getText().toString().trim().length() < 3 || binding.etxCvv.getText().toString().trim().length() > 3) {
+//            value = false;
+//            H.showMessage(activity, getResources().getString(R.string.enterValidCvv));
+//        }
 
         return value;
     }
@@ -1308,6 +1312,43 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Emir
         editPaymentDialog(model);
     }
 
+    @Override
+    public void onDeletePayment(PaymentCardModel model) {
+        onDeleteClick(model,getResources().getString(R.string.deletePaymentMSG));
+    }
+
+    private void onDeleteClick(PaymentCardModel model, String message){
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(activity);
+        builder1.setMessage(message);
+        builder1.setCancelable(true);
+
+        builder1.setPositiveButton(
+                getResources().getString(R.string.yes),
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                        hitDeleteUserPaymentDetails(dialog,model);
+                    }
+                });
+
+        builder1.setNegativeButton(
+                getResources().getString(R.string.no),
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
+
+        Button positiveButton = alert11.getButton(DialogInterface.BUTTON_POSITIVE);
+        Button nigativeButton = alert11.getButton(DialogInterface.BUTTON_NEGATIVE);
+        positiveButton.setTextColor(getResources().getColor(R.color.lightBlue));
+        nigativeButton.setTextColor(getResources().getColor(R.color.lightBlue));
+
+    }
+
     private void editPaymentDialog(PaymentCardModel model) {
 
         final Dialog dialog = new Dialog(activity);
@@ -1403,13 +1444,14 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Emir
                 } else if (!etxValidMonth.getText().toString().matches("(?:0[1-9]|1[0-2])/[0-9]{2}")) {
                     H.showMessage(activity, getResources().getString(R.string.checkCardFormat));
                     return;
-                } else if (TextUtils.isEmpty(etxCvv.getText().toString().trim())) {
-                    H.showMessage(activity, getResources().getString(R.string.enterCvv));
-                    return;
-                } else if (etxCvv.getText().toString().trim().length() < 3 || etxCvv.getText().toString().trim().length() > 3) {
-                    H.showMessage(activity, getResources().getString(R.string.enterValidCvv));
-                    return;
                 }
+//                else if (TextUtils.isEmpty(etxCvv.getText().toString().trim())) {
+//                    H.showMessage(activity, getResources().getString(R.string.enterCvv));
+//                    return;
+//                } else if (etxCvv.getText().toString().trim().length() < 3 || etxCvv.getText().toString().trim().length() > 3) {
+//                    H.showMessage(activity, getResources().getString(R.string.enterValidCvv));
+//                    return;
+//                }
 
                 hideKeyboard(activity);
                 hitEditUserPaymentDetails(dialog, model, etxCardNumber, etxCardName, etxValidMonth, etxCvv);
@@ -1463,6 +1505,36 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Emir
 
                 })
                 .run("hitAddUserPaymentDetails", session.getString(P.token));
+    }
+
+    private void hitDeleteUserPaymentDetails(DialogInterface dialog,PaymentCardModel model) {
+
+        ProgressView.show(activity, loadingDialog);
+        Json j = new Json();
+        j.addString(P.id, model.getId());
+
+        Api.newApi(activity, P.BaseUrl + "delete_user_payment_option").addJson(j)
+                .setMethod(Api.POST)
+                //.onHeaderRequest(App::getHeaders)
+                .onError(() -> {
+                    ProgressView.dismiss(loadingDialog);
+                    H.showMessage(activity, "On error is called");
+                })
+                .onSuccess(json ->
+                {
+                    if (json.getInt(P.status) == 1) {
+                        dialog.dismiss();
+                        json = json.getJson(P.data);
+                        H.showMessage(activity, getResources().getString(R.string.dataUpdated));
+                        paymentCardModelList.clear();
+                        hitUserPaymentDetails();
+                    } else {
+                        H.showMessage(activity, json.getString(P.error));
+                    }
+                    ProgressView.dismiss(loadingDialog);
+
+                })
+                .run("hitDeleteUserPaymentDetails", session.getString(P.token));
     }
 
     private void hitUpdatePersonalDetails() {

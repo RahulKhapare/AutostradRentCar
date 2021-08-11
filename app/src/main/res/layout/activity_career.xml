@@ -45,15 +45,14 @@
                             android:id="@+id/imgBanner"
                             android:layout_width="match_parent"
                             android:layout_height="150dp"
-                            android:scaleType="fitXY"
-                            android:src="@drawable/ic_carrer">
+                            android:scaleType="fitXY">
 
                         </ImageView>
 
                         <TextView
+                            android:id="@+id/txtPageDesc"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/careerText"
                             android:layout_gravity="center"
                             android:layout_marginTop="16dp"
                             android:layout_marginBottom="10dp"

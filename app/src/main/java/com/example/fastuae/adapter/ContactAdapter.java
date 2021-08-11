@@ -11,18 +11,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.fastuae.R;
 import com.example.fastuae.databinding.ActivityContactUsListBinding;
 import com.example.fastuae.model.ContactModel;
+import com.example.fastuae.model.LocationModel;
 
 import java.util.List;
 
 public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.viewHolder> {
 
     private Context context;
-    private List<ContactModel> contactModelList;
+    private List<LocationModel> locationModelList;
 
 
-    public ContactAdapter(Context context, List<ContactModel> contactModelList) {
+    public ContactAdapter(Context context, List<LocationModel> locationModelList) {
         this.context = context;
-        this.contactModelList = contactModelList;
+        this.locationModelList = locationModelList;
     }
 
     @NonNull
@@ -34,17 +35,17 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.viewHold
 
     @Override
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
-        ContactModel model = contactModelList.get(position);
+        LocationModel model = locationModelList.get(position);
 
-        holder.binding.txtArea.setText(model.getArea());
-        holder.binding.txtNumber.setText(model.getNumber());
-        holder.binding.txtEmail.setText(model.getEmail());
+        holder.binding.txtArea.setText(model.getLocation_name());
+        holder.binding.txtNumber.setText(model.getContact_number());
+        holder.binding.txtEmail.setText(model.getContact_email());
 
     }
 
     @Override
     public int getItemCount() {
-        return contactModelList.size();
+        return locationModelList.size();
     }
 
     public class viewHolder extends RecyclerView.ViewHolder {

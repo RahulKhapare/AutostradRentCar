@@ -213,6 +213,7 @@
     <string name="details">Details</string>
     <string name="normalOperation">Normal hours of operation:</string>
     <string name="moreView">View more</string>
+    <string name="lessView">View less</string>
     <string name="personalInfo">Personal Information</string>
     <string name="paymentInfo">Payment Information</string>
     <string name="bookingRemark">Booking Remark</string>
@@ -493,6 +494,17 @@
     <string name="deliveryCharges">Delivery Charges</string>
     <string name="collectCharges">Collect Charges</string>
     <string name="interEmirateCharges">Inter Emirate Charges</string>
+    <string name="applyJob">Apply for job</string>
+    <string name="submitResume">Submit Resume</string>
+    <string name="pdfMessage">Note. PDF File only under 2MB</string>
+    <string name="deletePaymentMSG">Do you want to delete this payment option ?</string>
+    <string name="less">Less</string>
+    <string name="addNewDriver">Add New Driver</string>
+    <string name="deleteDriver">Do you want to delete this driver ?</string>
+    <string name="name">Name</string>
+    <string name="mobile">Mobile</string>
+    <string name="delete">Delete</string>
+    <string name="uplodNew">Upload New Document</string>
 
     <string name="txt1">Leading Car Rental Company with the largest network of Branches &amp; Pickup points</string>
     <string name="txt2">Leading Car Rental Company with the largest network of Branches &amp; Pickup points</string>

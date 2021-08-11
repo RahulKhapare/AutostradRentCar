@@ -59,7 +59,8 @@ public class MyAccountFragment extends Fragment {
     private LoadingDialog loadingDialog;
     private String codePrimary = "";
     private String codeSecondary = "";
-    private String countryId = "";
+    private String addressCountryId = "";
+    private String personalCountryId = "";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -135,19 +136,23 @@ public class MyAccountFragment extends Fragment {
         binding.spinnerCodeAlternate.setAdapter(adapterTwo);
         binding.spinnerCodeAlternate.setSelection(positionNumber);
 
-        AddressSelectionAdapter adapterAddress = new AddressSelectionAdapter(context, lisAddressEmirate);
-        binding.spinnerAddress.setAdapter(adapterAddress);
+        AddressSelectionAdapter adapterAddressEmirate = new AddressSelectionAdapter(context, lisAddressEmirate);
+        binding.spinnerAddressCountry.setAdapter(adapterAddressEmirate);
+
+        AddressSelectionAdapter adapterPersonalEmirate = new AddressSelectionAdapter(context, lisAddressEmirate);
+        binding.spinnerPersonalCountry.setAdapter(adapterPersonalEmirate);
 
         onClick();
 
         setDateTimeField(binding.etxBirtDate);
         binding.etxBirtDate.setFocusable(false);
         binding.etxBirtDate.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.calender_bg, 0);
-        binding.etxBirtDate.setOnTouchListener(new View.OnTouchListener() {
+
+        binding.etxBirtDate.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
                 mDatePickerDialog.show();
-                return false;
             }
         });
 
@@ -183,14 +188,31 @@ public class MyAccountFragment extends Fragment {
             }
         });
 
-        binding.spinnerAddress.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        binding.spinnerPersonalCountry.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 AddressModel model = lisAddressEmirate.get(position);
                 if (!model.getCountry_name().equals(getResources().getString(R.string.country))){
-                    countryId = model.getId();
+                    personalCountryId = model.getId();
                 }else {
-                    countryId = "";
+                    personalCountryId = "";
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        binding.spinnerAddressCountry.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                AddressModel model = lisAddressEmirate.get(position);
+                if (!model.getCountry_name().equals(getResources().getString(R.string.country))){
+                    addressCountryId = model.getId();
+                }else {
+                    addressCountryId = "";
                 }
             }
 
@@ -291,7 +313,7 @@ public class MyAccountFragment extends Fragment {
         }else if (TextUtils.isEmpty(binding.etxState.getText().toString().trim())) {
             value = false;
             H.showMessage(context, getResources().getString(R.string.enterState));
-        }else if (TextUtils.isEmpty(countryId)) {
+        }else if (TextUtils.isEmpty(addressCountryId)) {
             value = false;
             H.showMessage(context, getResources().getString(R.string.country));
         }
@@ -321,6 +343,9 @@ public class MyAccountFragment extends Fragment {
         } else if (!Validation.validEmail(binding.etxEmail.getText().toString().trim())) {
             value = false;
             H.showMessage(context, getResources().getString(R.string.enterEmailValid));
+        }else if (TextUtils.isEmpty(personalCountryId)){
+            value = false;
+            H.showMessage(context, getResources().getString(R.string.country));
         }
 
         return value;
@@ -366,6 +391,9 @@ public class MyAccountFragment extends Fragment {
             binding.imgEmirateRight.setVisibility(View.GONE);
             binding.imgEmirateLeft.setVisibility(View.VISIBLE);
 
+            binding.imgPersonalEmirateRight.setVisibility(View.GONE);
+            binding.imgPersonalEmirateLeft.setVisibility(View.VISIBLE);
+
         } else if (flag.equals(Config.ENGLISH)) {
 
             binding.imgPersonalRight.setVisibility(View.VISIBLE);
@@ -380,6 +408,8 @@ public class MyAccountFragment extends Fragment {
             binding.imgEmirateRight.setVisibility(View.VISIBLE);
             binding.imgEmirateLeft.setVisibility(View.GONE);
 
+            binding.imgPersonalEmirateRight.setVisibility(View.VISIBLE);
+            binding.imgPersonalEmirateLeft.setVisibility(View.GONE);
         }
 
     }
@@ -511,6 +541,9 @@ public class MyAccountFragment extends Fragment {
                         json = json.getJson(P.data);
                         json = json.getJson(P.user);
 
+                        String country_id = json.getString(P.country_id);
+                        String emirate_id = json.getString(P.emirate_id);
+
                         binding.etxFirstName.setText(CheckString.check(json.getString(P.user_name)));
                         binding.etxLastName.setText(CheckString.check(json.getString(P.user_lastname)));
                         binding.etxEmail.setText(CheckString.check(json.getString(P.user_email)));
@@ -544,6 +577,10 @@ public class MyAccountFragment extends Fragment {
                             if (jsonData.getString(P.phone_code).equalsIgnoreCase(codeSecondary)) {
                                 binding.spinnerCodeAlternate.setSelection(i);
                             }
+
+                            if (jsonData.getString(P.id).equals(country_id)) {
+                                binding.spinnerPersonalCountry.setSelection(i+1);
+                            }
                         }
 
                     }else {
@@ -573,6 +610,8 @@ public class MyAccountFragment extends Fragment {
         j.addString(P.user_mobile,binding.etxNumber.getText().toString().trim());
         j.addString(P.user_alt_country_code,codeSecondary);
         j.addString(P.user_alt_mobile,binding.etxAlternameNumber.getText().toString().trim());
+        j.addString(P.country_id,personalCountryId);
+        j.addString(P.emirate_id,"");
 
         Api.newApi(context, P.BaseUrl + "update_user_data").addJson(j)
                 .setMethod(Api.POST)
@@ -658,13 +697,13 @@ public class MyAccountFragment extends Fragment {
                         binding.etxZipcode.setText(CheckString.check(bill_zipcode));
                         binding.etxCity.setText(CheckString.check(bill_city));
                         binding.etxState.setText(CheckString.check(bill_state));
-                        countryId = bill_country_id;
+                        addressCountryId = bill_country_id;
 
                         JsonList jsonList = Config.countryJsonList;
                         for (int i = 0; i < jsonList.size(); i++) {
                             Json jsonData = jsonList.get(i);
                             if (jsonData.getString(P.id).equals(bill_country_id)) {
-                                binding.spinnerAddress.setSelection(i+1);
+                                binding.spinnerAddressCountry.setSelection(i+1);
                             }
                         }
                     }else {
@@ -685,7 +724,7 @@ public class MyAccountFragment extends Fragment {
         j.addString(P.bill_address_line_2,binding.etxAddress.getText().toString().trim());
         j.addString(P.bill_city,binding.etxCity.getText().toString().trim());
         j.addString(P.bill_state,binding.etxState.getText().toString().trim());
-        j.addString(P.bill_country_id,countryId);
+        j.addString(P.bill_country_id,addressCountryId);
         j.addString(P.bill_zipcode,binding.etxZipcode.getText().toString().trim());
 
         Api.newApi(context, P.BaseUrl + "update_user_bill_data").addJson(j)

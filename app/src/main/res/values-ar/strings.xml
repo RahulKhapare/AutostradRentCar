@@ -206,6 +206,7 @@
     <string name="details">تفاصيل</string>
     <string name="normalOperation">ساعات العمل العادية:</string>
     <string name="moreView">عرض المزيد</string>
+    <string name="lessView">عرض أقل</string>
 
     <string name="general">جنرال لواء</string>
     <string name="paymentRelated">الدفع ذات الصلة</string>
@@ -491,6 +492,17 @@
     <string name="deliveryCharges">رسوم التوصيل</string>
     <string name="collectCharges">جمع الرسوم</string>
     <string name="interEmirateCharges">الرسوم بين الإمارات</string>
+    <string name="applyJob">قدم على عمل</string>
+    <string name="submitResume">تقديم السيرة الذاتية</string>
+    <string name="pdfMessage">ملحوظة. ملف PDF أقل من 2 ميجا بايت فقط</string>
+    <string name="deletePaymentMSG">هل تريد حذف خيار الدفع هذا؟</string>
+    <string name="less">أقل</string>
+    <string name="addNewDriver">إضافة سائق جديد</string>
+    <string name="deleteDriver">هل تريد حذف برنامج التشغيل هذا؟</string>
+    <string name="name">اسم</string>
+    <string name="mobile">التليفون المحمول</string>
+    <string name="delete">حذف</string>
+    <string name="uplodNew">تحميل مستند جديد</string>
 
     <string name="txt1">شركة رائدة في مجال تأجير السيارات ولديها أكبر شبكة من الفروع ونقاط الالتقاء</string>
     <string name="txt2">شركة رائدة في مجال تأجير السيارات ولديها أكبر شبكة من الفروع ونقاط الالتقاء</string>

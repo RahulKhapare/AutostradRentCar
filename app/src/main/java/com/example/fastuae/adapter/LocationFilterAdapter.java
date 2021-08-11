@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.fastuae.R;
 import com.example.fastuae.activity.CarFilterActivity;
 import com.example.fastuae.activity.ContactUsActivity;
+import com.example.fastuae.activity.LocationActivity;
 import com.example.fastuae.databinding.ActivityCarFilterListBinding;
 import com.example.fastuae.model.LocationModel;
 import com.example.fastuae.util.Click;
@@ -22,14 +23,16 @@ public class LocationFilterAdapter extends RecyclerView.Adapter<LocationFilterAd
 
     private Context context;
     private List<LocationModel> locationModelList;
+    private int from;
 
     public interface onClick{
-        void onFilterClick(String location);
+        void onFilterClick(LocationModel model);
     }
 
-    public LocationFilterAdapter(Context context, List<LocationModel> locationModelList) {
+    public LocationFilterAdapter(Context context, List<LocationModel> locationModelList,int from) {
         this.context = context;
         this.locationModelList = locationModelList;
+        this.from = from;
     }
 
     @NonNull
@@ -43,13 +46,16 @@ public class LocationFilterAdapter extends RecyclerView.Adapter<LocationFilterAd
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
         LocationModel model = locationModelList.get(position);
 
-        holder.binding.txtFilter.setText(model.getLocation_name());
+        holder.binding.txtFilter.setText(model.getEmirate_name());
         holder.binding.txtFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-                ((ContactUsActivity)context).onFilterClick(model.getLocation_name());
-
+                if (from==1){
+                    ((ContactUsActivity)context).onFilterClick(model);
+                }else if (from==2){
+                    ((LocationActivity)context).onFilterClick(model);
+                }
             }
         });
     }

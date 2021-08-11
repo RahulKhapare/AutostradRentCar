@@ -1,7 +1,9 @@
 package com.example.fastuae.fragment;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.res.ColorStateList;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,6 +15,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -20,6 +23,7 @@ import android.widget.RadioButton;
 import androidx.annotation.RequiresApi;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.adoisstudio.helper.Api;
 import com.adoisstudio.helper.H;
@@ -28,12 +32,15 @@ import com.adoisstudio.helper.JsonList;
 import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
 import com.example.fastuae.R;
+import com.example.fastuae.adapter.AdditionalDriverListAdapter;
 import com.example.fastuae.adapter.AddressSelectionAdapter;
 import com.example.fastuae.adapter.CodeSelectionAdapter;
 import com.example.fastuae.databinding.FragmentAdditionalDriveBinding;
 import com.example.fastuae.databinding.FragmentMenuBinding;
+import com.example.fastuae.model.AdditionalDriverModel;
 import com.example.fastuae.model.AddressModel;
 import com.example.fastuae.model.CountryCodeModel;
+import com.example.fastuae.model.PaymentCardModel;
 import com.example.fastuae.util.CheckString;
 import com.example.fastuae.util.Click;
 import com.example.fastuae.util.Config;
@@ -41,13 +48,15 @@ import com.example.fastuae.util.P;
 import com.example.fastuae.util.ProgressView;
 import com.example.fastuae.util.Validation;
 
+import org.json.JSONException;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class AdditionalDriverFragment extends Fragment {
+public class AdditionalDriverFragment extends Fragment implements AdditionalDriverListAdapter.onClick{
 
     private Context context;
     private FragmentAdditionalDriveBinding binding;
@@ -62,6 +71,9 @@ public class AdditionalDriverFragment extends Fragment {
     private String codeSecondary = "";
     private String countryId = "";
     private String emirateID = "";
+
+    private List<AdditionalDriverModel> additionalDriverModelList;
+    private AdditionalDriverListAdapter additionalDriverListAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -146,11 +158,84 @@ public class AdditionalDriverFragment extends Fragment {
             }
         });
 
+        additionalDriverModelList = new ArrayList<>();
+        additionalDriverListAdapter = new AdditionalDriverListAdapter(context,additionalDriverModelList,AdditionalDriverFragment.this);
+        binding.recyclerDriverData.setLayoutManager(new LinearLayoutManager(getActivity()));
+        binding.recyclerDriverData.setHasFixedSize(true);
+        binding.recyclerDriverData.setNestedScrollingEnabled(false);
+        binding.recyclerDriverData.setAdapter(additionalDriverListAdapter);
+
         onClick();
-        hitDriverDetails();
+
+        getUserDriverList();
+    }
+
+    @Override
+    public void editClick(AdditionalDriverModel model) {
+        getUserDriverDetails(model.getId());
+    }
+
+    @Override
+    public void deleteClick(AdditionalDriverModel model) {
+        onDeleteClick(model,getResources().getString(R.string.deleteDriver));
+    }
+
+    @Override
+    public void uploadClick(AdditionalDriverModel model) {
+
+    }
+
+    private void onDeleteClick(AdditionalDriverModel model, String message){
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
+        builder1.setMessage(message);
+        builder1.setCancelable(true);
+
+        builder1.setPositiveButton(
+                getResources().getString(R.string.yes),
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                        hitDeleteDriveDetailsDetails(dialog,model.getId());
+                    }
+                });
+
+        builder1.setNegativeButton(
+                getResources().getString(R.string.no),
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
+
+        Button positiveButton = alert11.getButton(DialogInterface.BUTTON_POSITIVE);
+        Button nigativeButton = alert11.getButton(DialogInterface.BUTTON_NEGATIVE);
+        positiveButton.setTextColor(getResources().getColor(R.color.lightBlue));
+        nigativeButton.setTextColor(getResources().getColor(R.color.lightBlue));
+
     }
 
     private void onClick(){
+
+        binding.imgCloseDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                binding.lnrAdditionalDetails.setVisibility(View.GONE);
+                binding.lnrDriverList.setVisibility(View.VISIBLE);
+            }
+        });
+
+        binding.txtAddNewDriver.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                binding.lnrAdditionalDetails.setVisibility(View.VISIBLE);
+                binding.lnrDriverList.setVisibility(View.GONE);
+            }
+        });
 
         binding.spinnerCodeMobile.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -230,22 +315,22 @@ public class AdditionalDriverFragment extends Fragment {
             public void onClick(View v) {
                 Click.preventTwoClick(v);
                 if (checkAdditionalDetailValidation()) {
-                    hitUpdateDriverDetails();
+                    hitSaveDriverDetails();
                 }
             }
         });
     }
 
     private void checkDriverDetailsView(){
-        if (binding.lnrAdditionalDetails.getVisibility() == View.GONE) {
-            binding.lnrAdditionalDetails.setVisibility(View.VISIBLE);
+        if (binding.lnrDriverList.getVisibility() == View.GONE) {
+            binding.lnrDriverList.setVisibility(View.VISIBLE);
             if (flag.equals(Config.ARABIC)) {
                 binding.imgDriveLeft.setImageResource(R.drawable.ic_minus);
             }else if (flag.equals(Config.ENGLISH)) {
                 binding.imgDriveRight.setImageResource(R.drawable.ic_minus);
             }
-        } else if (binding.lnrAdditionalDetails.getVisibility() == View.VISIBLE) {
-            binding.lnrAdditionalDetails.setVisibility(View.GONE);
+        } else if (binding.lnrDriverList.getVisibility() == View.VISIBLE) {
+            binding.lnrDriverList.setVisibility(View.GONE);
             if (flag.equals(Config.ARABIC)) {
                 binding.imgDriveLeft.setImageResource(R.drawable.ic_plus);
             }else if (flag.equals(Config.ENGLISH)) {
@@ -361,12 +446,11 @@ public class AdditionalDriverFragment extends Fragment {
         }
     }
 
-    private void hitDriverDetails() {
+    private void getUserDriverList() {
 
         ProgressView.show(context,loadingDialog);
-        Json j = new Json();
 
-        Api.newApi(context, P.BaseUrl + "user_driver_data").addJson(j)
+        Api.newApi(context, P.BaseUrl + "user_driver_list")
                 .setMethod(Api.GET)
                 //.onHeaderRequest(App::getHeaders)
                 .onError(() -> {
@@ -377,8 +461,71 @@ public class AdditionalDriverFragment extends Fragment {
                 {
                     if (json.getInt(P.status) == 1) {
 
+                        additionalDriverModelList.clear();
+                        additionalDriverListAdapter.notifyDataSetChanged();
+
                         json = json.getJson(P.data);
-                        json = json.getJson(P.driver);
+                        JsonList list = json.getJsonList(P.list);
+
+                        if (list!=null && list.size()!=0){
+
+                            for (Json jsonValue : list){
+                                AdditionalDriverModel model = new AdditionalDriverModel();
+                                model.setId(jsonValue.getString("id"));
+                                model.setDriver_name(jsonValue.getString("driver_name"));
+                                model.setDriver_middlename(jsonValue.getString("driver_middlename"));
+                                model.setDriver_lastname(jsonValue.getString("driver_lastname"));
+                                model.setDriver_dob(jsonValue.getString("driver_dob"));
+                                model.setDriver_country_name(jsonValue.getString("driver_country_name"));
+                                model.setDriver_country_id(jsonValue.getString("driver_country_id"));
+                                model.setDriver_emirate_id(jsonValue.getString("driver_emirate_id"));
+                                model.setDriver_emirate_name(jsonValue.getString("driver_emirate_name"));
+                                model.setDriver_email(jsonValue.getString("driver_email"));
+                                model.setDriver_user_country_code(jsonValue.getString("driver_user_country_code"));
+                                model.setDriver_mobile(jsonValue.getString("driver_mobile"));
+                                model.setDriver_alt_country_code(jsonValue.getString("driver_alt_country_code"));
+                                model.setDriver_alt_mobile(jsonValue.getString("driver_alt_mobile"));
+                                model.setDriver_gender(jsonValue.getString("driver_gender"));
+                                model.setDriver_gender_name(jsonValue.getString("driver_gender_name"));
+                                additionalDriverModelList.add(model);
+                            }
+
+                            additionalDriverListAdapter.notifyDataSetChanged();
+
+                        }
+
+                    }else {
+                        H.showMessage(context,json.getString(P.error));
+                    }
+                    ProgressView.dismiss(loadingDialog);
+
+                })
+                .run("getUserDriverList",session.getString(P.token));
+
+    }
+
+    private void getUserDriverDetails(String driver_id) {
+
+        ProgressView.show(context,loadingDialog);
+        Json j = new Json();
+        j.addString(P.driver_id ,driver_id);
+
+        Api.newApi(context, P.BaseUrl + "user_driver_data").addJson(j)
+                .setMethod(Api.POST)
+                //.onHeaderRequest(App::getHeaders)
+                .onError(() -> {
+                    ProgressView.dismiss(loadingDialog);
+                    H.showMessage(context, "On error is called");
+                })
+                .onSuccess(json ->
+                {
+                    if (json.getInt(P.status) == 1) {
+
+                        binding.lnrAdditionalDetails.setVisibility(View.VISIBLE);
+                        binding.lnrDriverList.setVisibility(View.GONE);
+
+                        json = json.getJson(P.data);
+                        json = json.getJson(P.detail);
 
                         binding.etxFirstName.setText(CheckString.check(json.getString(P.driver_name)));
                         binding.etxMiddleName.setText(CheckString.check(json.getString(P.driver_middlename)));
@@ -407,7 +554,6 @@ public class AdditionalDriverFragment extends Fragment {
                         String countryID = CheckString.check(json.getString(P.driver_country_id));
                         String emirateID = CheckString.check(json.getString(P.driver_emirate_id));
 
-                        Log.e("TAG", "hitDriverDetailsID: "+ countryID  + " : " + emirateID);
 
                         JsonList jsonList = Config.countryJsonList;
                         for (int i = 0; i < jsonList.size(); i++) {
@@ -433,11 +579,20 @@ public class AdditionalDriverFragment extends Fragment {
                     ProgressView.dismiss(loadingDialog);
 
                 })
-                .run("hitDriverDetails",session.getString(P.token));
+                .run("getUserDriverDetails",session.getString(P.token));
 
     }
 
-    private void hitUpdateDriverDetails() {
+    private void clearView(){
+        binding.etxFirstName.setText("");
+        binding.etxMiddleName.setText("");
+        binding.etxLastName.setText("");
+        binding.etxBirtDate.setText("");
+        binding.etxEmail.setText("");
+        binding.spinnerNationality.setSelection(0);
+    }
+
+    private void hitSaveDriverDetails() {
 
         ProgressView.show(context,loadingDialog);
         Json j = new Json();
@@ -458,7 +613,7 @@ public class AdditionalDriverFragment extends Fragment {
         j.addString(P.driver_country_id,countryId);
         j.addString(P.driver_emirate_id,emirateID);
 
-        Api.newApi(context, P.BaseUrl + "update_user_driver_data").addJson(j)
+        Api.newApi(context, P.BaseUrl + "save_driver_data").addJson(j)
                 .setMethod(Api.POST)
                 //.onHeaderRequest(App::getHeaders)
                 .onError(() -> {
@@ -471,7 +626,10 @@ public class AdditionalDriverFragment extends Fragment {
 
                         json = json.getJson(P.data);
                         H.showMessage(context,getResources().getString(R.string.dataUpdated));
-                        checkDriverDetailsView();
+                        clearView();
+                        binding.lnrAdditionalDetails.setVisibility(View.GONE);
+                        binding.lnrDriverList.setVisibility(View.VISIBLE);
+                        getUserDriverList();
 
                     }else {
                         H.showMessage(context,json.getString(P.error));
@@ -480,7 +638,35 @@ public class AdditionalDriverFragment extends Fragment {
                     ProgressView.dismiss(loadingDialog);
 
                 })
-                .run("hitUpdateDriverDetails",session.getString(P.token));
+                .run("hitSaveDriverDetails",session.getString(P.token));
+    }
+
+    private void hitDeleteDriveDetailsDetails(DialogInterface dialog,String driver_id) {
+
+        ProgressView.show(context,loadingDialog);
+        Json j = new Json();
+        j.addString(P.driver_id,driver_id);
+
+        Api.newApi(context, P.BaseUrl + "delete_driver_data").addJson(j)
+                .setMethod(Api.POST)
+                //.onHeaderRequest(App::getHeaders)
+                .onError(() -> {
+                    ProgressView.dismiss(loadingDialog);
+                    H.showMessage(context, "On error is called");
+                })
+                .onSuccess(json ->
+                {
+                    if (json.getInt(P.status) == 1) {
+                        dialog.dismiss();
+                        getUserDriverList();
+                    }else {
+                        H.showMessage(context,json.getString(P.error));
+                    }
+
+                    ProgressView.dismiss(loadingDialog);
+
+                })
+                .run("hitDeleteDriveDetailsDetails",session.getString(P.token));
     }
 
     public static AdditionalDriverFragment newInstance() {

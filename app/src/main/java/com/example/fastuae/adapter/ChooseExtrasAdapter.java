@@ -63,10 +63,20 @@ public class ChooseExtrasAdapter extends RecyclerView.Adapter<ChooseExtrasAdapte
         int finalTarget = target;
         holder.binding.txtName.setText(model.getTitle());
         holder.binding.txtDesc.setText(RemoveHtml.html2text(model.getDescription()));
-        holder.binding.txtPrice.setText("AED " + model.getPrice());
+        holder.binding.txtPrice.setText(context.getResources().getString(R.string.aed) + " " + model.getPrice());
 
+        if (model.getDescription().length()>100){
+            holder.binding.txtDesc.setMaxLines(2);
+            holder.binding.txtDesc.setText(RemoveHtml.html2text(model.getDescription()));
+            holder.binding.txtMore.setVisibility(View.VISIBLE);
+            holder.binding.txtLess.setVisibility(View.GONE);
+        }else {
+            holder.binding.txtMore.setVisibility(View.GONE);
+            holder.binding.txtLess.setVisibility(View.GONE);
+            holder.binding.txtDesc.setText(RemoveHtml.html2text(model.getDescription()));
+        }
 
-        if (model.getTitle().contains("Baby seater")){
+        if (model.getTitle().contains("Baby Seater")){
             LoadImage.glide(context,holder.binding.imgExtra,context.getResources().getDrawable(R.drawable.ic_baby_seat));
         }else if (model.getTitle().contains("GPS")){
             LoadImage.glide(context,holder.binding.imgExtra,context.getResources().getDrawable(R.drawable.ic_gps));
@@ -126,6 +136,28 @@ public class ChooseExtrasAdapter extends RecyclerView.Adapter<ChooseExtrasAdapte
                     holder.binding.txtCount.setText(itemCount + "");
                     model.setQuantity(itemCount + "");
                 }
+            }
+        });
+
+        holder.binding.txtMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                holder.binding.txtMore.setVisibility(View.GONE);
+                holder.binding.txtLess.setVisibility(View.VISIBLE);
+                holder.binding.txtDesc.setMaxLines(5000);
+                holder.binding.txtDesc.setText(RemoveHtml.html2text(model.getDescription()));
+            }
+        });
+
+        holder.binding.txtLess.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                holder.binding.txtMore.setVisibility(View.VISIBLE);
+                holder.binding.txtLess.setVisibility(View.GONE);
+                holder.binding.txtDesc.setMaxLines(2);
+                holder.binding.txtDesc.setText(RemoveHtml.html2text(model.getDescription()));
             }
         });
 
