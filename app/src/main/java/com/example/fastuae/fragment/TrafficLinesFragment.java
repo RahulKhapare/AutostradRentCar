@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.fastuae.R;
 import com.example.fastuae.activity.MainActivity;
+import com.example.fastuae.activity.ProfileViewActivity;
 import com.example.fastuae.adapter.InvoiceAdapter;
 import com.example.fastuae.databinding.FragmentTrafficLinesBinding;
 import com.example.fastuae.model.InvoiceModel;
@@ -87,7 +88,7 @@ public class TrafficLinesFragment extends Fragment implements InvoiceAdapter.onC
 
     @Override
     public void onDownload(String path) {
-        ((MainActivity)getActivity()).checkPDF(path);
+        ((ProfileViewActivity)getActivity()).checkPDF(path);
     }
 
     public static TrafficLinesFragment newInstance() {

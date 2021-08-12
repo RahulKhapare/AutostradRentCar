@@ -25,6 +25,7 @@ import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
 import com.example.fastuae.R;
 import com.example.fastuae.activity.MainActivity;
+import com.example.fastuae.activity.ProfileViewActivity;
 import com.example.fastuae.adapter.PastRentalAdapter;
 import com.example.fastuae.adapter.UpcomingReservationAdapter;
 import com.example.fastuae.databinding.FragmentPastRentalBinding;
@@ -163,7 +164,7 @@ public class PastRentalFragment extends Fragment implements PastRentalAdapter.on
     @Override
     public void downloadInvoice(BookingModel model) {
         String path = "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf";
-        ((MainActivity)getActivity()).checkPDF(path);
+        ((ProfileViewActivity)getActivity()).checkPDF(path);
     }
 
 }

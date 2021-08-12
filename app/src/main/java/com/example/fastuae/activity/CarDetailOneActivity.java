@@ -356,13 +356,6 @@ public class CarDetailOneActivity extends AppCompatActivity implements AddOnsAda
             }
         });
 
-        binding.txtCarAEDDetails.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Click.preventTwoClick(v);
-                hitAEDDetailsData("rate");
-            }
-        });
     }
 
     private void updateIcons() {
@@ -603,9 +596,29 @@ public class CarDetailOneActivity extends AppCompatActivity implements AddOnsAda
                         total_amount = data.getString("total_amount");
 
                         binding.txtCarRate.setText(getResources().getString(R.string.aed) + " " + total_car_rate + "");
-                        binding.txtDeliveryCharges.setText(getResources().getString(R.string.aed) + " " + delivery_charges + "");
-                        binding.txtCollectCharges.setText(getResources().getString(R.string.aed) + " " + collect_charges + "");
                         binding.txtEnitireECharges.setText(getResources().getString(R.string.aed) + " " + inter_emirate_charges + "");
+                        binding.txtCarDeliveryRate.setText(getResources().getString(R.string.aed) + " " + delivery_charges + "");
+                        binding.txtCarPickupRate.setText(getResources().getString(R.string.aed) + " " + collect_charges + "");
+
+//                        if(inter_emirate_charges.equals("") || inter_emirate_charges.equals("null") || inter_emirate_charges.equals("0")){
+//                            binding.lnrEmirateCostView.setVisibility(View.GONE);
+//                            binding.lnrEmirateCostLine.setVisibility(View.GONE);
+//                        }else {
+//                            binding.lnrEmirateCostView.setVisibility(View.VISIBLE);
+//                            binding.lnrEmirateCostLine.setVisibility(View.VISIBLE);
+//                        }
+
+                        checkDeliverRate();
+                        checkCollectRate();
+
+                        if (binding.lnrCarDeliveryRate.getVisibility()==View.GONE && binding.lnrCarPickupRate.getVisibility()==View.GONE){
+                            binding.lnrDeliverAndPickupRateView.setVisibility(View.GONE);
+                            binding.lnrDeliverAndPickupRateLine.setVisibility(View.GONE);
+                        }else {
+                            binding.lnrDeliverAndPickupRateView.setVisibility(View.VISIBLE);
+                            binding.lnrDeliverAndPickupRateLine.setVisibility(View.VISIBLE);
+                        }
+
                         binding.txtTotalAED.setText(getResources().getString(R.string.aed) + " " +total_amount + "");
 
                         JsonList car_extra = data.getJsonList("car_extra");
@@ -620,10 +633,14 @@ public class CarDetailOneActivity extends AppCompatActivity implements AddOnsAda
                                 chooseExtrasModelList.add(model);
                             }
                             addOnsAdapter.notifyDataSetChanged();
+                        }
 
-                            if (chooseExtrasModelList.isEmpty()){
-                                binding.lnrAddOns.setVisibility(View.GONE);
-                            }
+                        if (chooseExtrasModelList.isEmpty() || chooseExtrasModelList.size()==0){
+                            binding.lnrAddOns.setVisibility(View.GONE);
+                            binding.lnrAddONLine.setVisibility(View.GONE);
+                        }else {
+                            binding.lnrAddOns.setVisibility(View.VISIBLE);
+                            binding.lnrAddONLine.setVisibility(View.VISIBLE);
                         }
 
                     }else {
@@ -635,6 +652,32 @@ public class CarDetailOneActivity extends AppCompatActivity implements AddOnsAda
                 .run("hitBookingCarData");
     }
 
+    private void checkDeliverRate(){
+        if (Config.HOME_DELIVERY_CHECK){
+            binding.lnrCarDeliveryRate.setVisibility(View.VISIBLE);
+//            if(delivery_charges.equals("") || delivery_charges.equals("null") || delivery_charges.equals("0")){
+//                binding.lnrCarDeliveryRate.setVisibility(View.GONE);
+//            }else {
+//                binding.lnrCarDeliveryRate.setVisibility(View.VISIBLE);
+//            }
+        }else {
+            binding.lnrCarDeliveryRate.setVisibility(View.GONE);
+        }
+    }
+
+    private void checkCollectRate(){
+        if (Config.HOME_COLLECT_CHECK){
+            binding.lnrCarPickupRate.setVisibility(View.VISIBLE);
+//            if(collect_charges.equals("") || collect_charges.equals("null") || collect_charges.equals("0")){
+//                binding.lnrCarPickupRate.setVisibility(View.GONE);
+//            }else {
+//                binding.lnrCarPickupRate.setVisibility(View.VISIBLE);
+//            }
+
+        }else {
+            binding.lnrCarPickupRate.setVisibility(View.GONE);
+        }
+    }
 
     private void hitUpdateCarData() {
 

@@ -341,155 +341,43 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:fontFamily="@font/nunito_sans_semibold"
-                                    android:text="@string/includedRated"
+                                    android:text="@string/carRate"
                                     android:textColor="@color/colorPrimaryDark"
                                     android:textSize="18sp">
 
                                 </TextView>
 
-                            </LinearLayout>
-
-
-                           <LinearLayout
-                               android:layout_width="match_parent"
-                               android:layout_height="wrap_content"
-                               android:orientation="horizontal">
-
-                               <TextView
-
-                                   android:layout_width="150dp"
-                                   android:layout_height="wrap_content"
-                                   android:layout_marginTop="5dp"
-                                   android:fontFamily="@font/nunito_sans_regular"
-                                   android:text="@string/carRate"
-                                   android:alpha="0.8"
-                                   android:textColor="@color/textDark"
-                                   android:textSize="16sp">
-
-                               </TextView>
-
-                               <TextView
-                                   android:id="@+id/txtCarRate"
-                                   android:layout_weight="1"
-                                   android:layout_width="match_parent"
-                                   android:layout_height="wrap_content"
-                                   android:textColor="@color/textDark"
-                                   android:gravity="center_vertical"
-                                   android:layout_marginLeft="20dp"
-                                   android:layout_marginRight="20dp"
-                                   android:layout_gravity="center_vertical"
-                                   android:fontFamily="@font/nunit_sans_bold"
-                                   android:text=""
-                                   android:textSize="18sp">
-                               </TextView>
-
-                               <TextView
-                                   android:id="@+id/txtCarAEDDetails"
-                                   android:layout_width="wrap_content"
-                                   android:layout_height="wrap_content"
-                                   android:fontFamily="@font/nunito_sans_semibold"
-                                   android:text="@string/details"
-                                   android:textColor="@color/lightBlue"
-                                   android:textSize="14sp">
-
-                               </TextView>
-
-
-                           </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
                                 <TextView
-
-                                    android:layout_width="150dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="5dp"
-                                    android:fontFamily="@font/nunito_sans_regular"
-                                    android:text="@string/deliveryCharges"
-                                    android:alpha="0.8"
-                                    android:textColor="@color/textDark"
-                                    android:textSize="16sp">
-
-                                </TextView>
-
-                                <TextView
-                                    android:id="@+id/txtDeliveryCharges"
-                                    android:layout_weight="1"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:textColor="@color/textDark"
-                                    android:gravity="center_vertical"
-                                    android:layout_marginLeft="20dp"
-                                    android:layout_marginRight="20dp"
-                                    android:layout_gravity="center_vertical"
-                                    android:fontFamily="@font/nunit_sans_bold"
-                                    android:text=""
-                                    android:textSize="18sp">
-                                </TextView>
-
-                                <TextView
+                                    android:id="@+id/txtCarRate"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:fontFamily="@font/nunito_sans_semibold"
-                                    android:text="@string/details"
-                                    android:visibility="invisible"
-                                    android:textColor="@color/lightBlue"
-                                    android:textSize="14sp">
-
-                                </TextView>
-
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-                                <TextView
-
-                                    android:layout_width="150dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="5dp"
-                                    android:fontFamily="@font/nunito_sans_regular"
-                                    android:text="@string/collectCharges"
-                                    android:alpha="0.8"
-                                    android:textColor="@color/textDark"
-                                    android:textSize="16sp">
-
-                                </TextView>
-
-                                <TextView
-                                    android:id="@+id/txtCollectCharges"
-                                    android:layout_weight="1"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:textColor="@color/textDark"
-                                    android:gravity="center_vertical"
-                                    android:layout_marginLeft="20dp"
-                                    android:layout_marginRight="20dp"
-                                    android:layout_gravity="center_vertical"
                                     android:fontFamily="@font/nunit_sans_bold"
                                     android:text=""
+                                    android:textColor="@color/colorBlack"
                                     android:textSize="18sp">
-                                </TextView>
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/nunito_sans_semibold"
-                                    android:text="@string/details"
-                                    android:visibility="invisible"
-                                    android:textColor="@color/lightBlue"
-                                    android:textSize="14sp">
 
                                 </TextView>
-
 
                             </LinearLayout>
+
+
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="@color/customeGray"></LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/lnrEmirateCostView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="16dp"
+                            android:orientation="vertical">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -497,48 +385,43 @@
                                 android:orientation="horizontal">
 
                                 <TextView
-
-                                    android:layout_width="150dp"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="5dp"
-                                    android:fontFamily="@font/nunito_sans_regular"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/nunito_sans_semibold"
                                     android:text="@string/interEmirateCharges"
-                                    android:alpha="0.8"
-                                    android:textColor="@color/textDark"
-                                    android:textSize="16sp">
+                                    android:textColor="@color/colorPrimaryDark"
+                                    android:textSize="18sp">
 
                                 </TextView>
 
                                 <TextView
                                     android:id="@+id/txtEnitireECharges"
-                                    android:layout_weight="1"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:textColor="@color/textDark"
-                                    android:gravity="center_vertical"
-                                    android:layout_marginLeft="20dp"
-                                    android:layout_marginRight="20dp"
-                                    android:layout_gravity="center_vertical"
-                                    android:fontFamily="@font/nunit_sans_bold"
-                                    android:text=""
-                                    android:textSize="18sp">
-                                </TextView>
-
-                                <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:fontFamily="@font/nunito_sans_semibold"
-                                    android:text="@string/details"
-                                    android:visibility="invisible"
-                                    android:textColor="@color/lightBlue"
-                                    android:textSize="14sp">
+                                    android:fontFamily="@font/nunit_sans_bold"
+                                    android:text=""
+                                    android:textColor="@color/colorBlack"
+                                    android:textSize="18sp">
 
                                 </TextView>
-
 
                             </LinearLayout>
 
+
+
+
                         </LinearLayout>
+
+
+                        <LinearLayout
+                            android:id="@+id/lnrEmirateCostLine"
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:orientation="vertical"
+                            android:background="@color/customeGray"></LinearLayout>
 
                         <LinearLayout
                             android:id="@+id/lnrAddOns"
@@ -547,7 +430,7 @@
                             android:paddingLeft="16dp"
                             android:paddingRight="16dp"
                             android:paddingBottom="5dp"
-                            android:paddingTop="0dp"
+                            android:paddingTop="5dp"
                             android:orientation="vertical">
 
                             <LinearLayout
@@ -581,10 +464,92 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/lnrAddONLine"
                             android:layout_width="match_parent"
                             android:layout_height="0.5dp"
                             android:layout_marginTop="5dp"
                             android:layout_marginBottom="5dp"
+                            android:orientation="vertical"
+                            android:background="@color/customeGray"></LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/lnrDeliverAndPickupRateView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="16dp"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:id="@+id/lnrCarDeliveryRate"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/nunito_sans_semibold"
+                                    android:text="@string/carDeliveryRate"
+                                    android:textColor="@color/colorPrimaryDark"
+                                    android:textSize="18sp">
+
+                                </TextView>
+
+                                <TextView
+                                    android:id="@+id/txtCarDeliveryRate"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/nunit_sans_bold"
+                                    android:text=""
+                                    android:textColor="@color/colorBlack"
+                                    android:textSize="18sp">
+
+                                </TextView>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/lnrCarPickupRate"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/nunito_sans_semibold"
+                                    android:text="@string/carPickupRate"
+                                    android:textColor="@color/colorPrimaryDark"
+                                    android:textSize="18sp">
+
+                                </TextView>
+
+                                <TextView
+                                    android:id="@+id/txtCarPickupRate"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/nunit_sans_bold"
+                                    android:text=""
+                                    android:textColor="@color/colorBlack"
+                                    android:textSize="18sp">
+
+                                </TextView>
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/lnrDeliverAndPickupRateLine"
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:orientation="vertical"
                             android:background="@color/customeGray"></LinearLayout>
 
 

@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.adoisstudio.helper.H;
 import com.example.fastuae.R;
 import com.example.fastuae.activity.MainActivity;
+import com.example.fastuae.activity.ProfileViewActivity;
 import com.example.fastuae.adapter.InvoiceAdapter;
 import com.example.fastuae.databinding.FragmentInvoiceBinding;
 import com.example.fastuae.model.InvoiceModel;
@@ -90,7 +91,7 @@ public class InvoiceFragment extends Fragment implements InvoiceAdapter.onClick{
 
     @Override
     public void onDownload(String path) {
-        ((MainActivity)getActivity()).checkPDF(path);
+        ((ProfileViewActivity)getActivity()).checkPDF(path);
     }
 
     public static InvoiceFragment newInstance() {

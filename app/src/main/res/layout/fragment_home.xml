@@ -59,7 +59,7 @@
                             android:fontFamily="@font/nunito_sans_regular"
                             android:layout_marginRight="10dp"
                             android:layout_marginLeft="10dp"
-                            android:text="@string/monthlyDeals">
+                            android:text="@string/monthlyRental">
 
                         </RadioButton>
 

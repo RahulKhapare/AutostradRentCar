@@ -11,8 +11,9 @@
                                     android:orientation="horizontal">
 
                                     <TextView
+                                        android:layout_weight="1"
                                         android:id="@+id/txtExtraTitle"
-                                        android:layout_width="150dp"
+                                        android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_marginTop="5dp"
                                         android:fontFamily="@font/nunito_sans_regular"
@@ -29,8 +30,6 @@
                                         android:layout_height="wrap_content"
                                         android:textColor="@color/textDark"
                                         android:gravity="center_vertical"
-                                        android:layout_marginLeft="20dp"
-                                        android:layout_marginRight="20dp"
                                         android:layout_gravity="center_vertical"
                                         android:fontFamily="@font/nunit_sans_bold"
                                         android:text="@string/app_name"
@@ -46,6 +45,7 @@
                                         android:gravity="right|center"
                                         android:fontFamily="@font/nunito_sans_semibold"
                                         android:text="@string/details"
+                                        android:visibility="gone"
                                         android:textColor="@color/lightBlue"
                                         android:textSize="14sp">
 

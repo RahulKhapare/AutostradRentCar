@@ -50,6 +50,10 @@ public class DocumentListAdapter extends RecyclerView.Adapter<DocumentListAdapte
         void documentView(String imagePath);
     }
 
+    public interface onClickDelete{
+        void documentDelete(DocumentUploadedModel model);
+    }
+
     @NonNull
     @Override
     public viewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -107,6 +111,17 @@ public class DocumentListAdapter extends RecyclerView.Adapter<DocumentListAdapte
             }
         });
 
+        holder.binding.imgDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                if (fromActivity){
+//                    ((CarBookingDetailsActivity)context).documentDelete(model.getImage_url());
+                }else {
+                    ((DocumentFragment)fragment).documentDelete(model);
+                }
+            }
+        });
 
     }
 

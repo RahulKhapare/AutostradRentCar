@@ -111,7 +111,7 @@ public class DocumentEditActivity extends AppCompatActivity implements DocumentA
                     for (DocumentModel model : documentModelList){
 
                         if (model.getCheckValue().equals("1")){
-                            jsonMain.addString(model.getKey(),"1");
+//                            jsonMain.addString(model.getKey(),"1");
                             for (FieldModel fieldModel : model.getFieldList()){
 
                                 for (ImagePathModel imageModel : imagePathModelList){
@@ -126,6 +126,14 @@ public class DocumentEditActivity extends AppCompatActivity implements DocumentA
                                 }
 
                                 json.addJSON(model.getKey(),fieldModel.getJson());
+
+                                if (fieldModel.getJson().has("key")){
+                                    fieldModel.getJson().remove("key");
+                                }else {
+                                    fieldModel.getJson().addString("key","1");
+                                }
+
+
                             }
                         }
 
@@ -138,7 +146,7 @@ public class DocumentEditActivity extends AppCompatActivity implements DocumentA
 
                 Log.e("TAG", "onClickJSJJS: "+ jsonMain.toString() );
 
-                hitSaveUserDocumentDetails(jsonMain);
+//                hitSaveUserDocumentDetails(jsonMain);
 
             }
         });

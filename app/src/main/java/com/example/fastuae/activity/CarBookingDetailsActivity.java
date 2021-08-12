@@ -691,7 +691,7 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Emir
             for (DocumentModel model : documentModelList) {
 
                 if (model.getCheckValue().equals("1")) {
-                    jsonMain.addString(model.getKey(), "1");
+//                    jsonMain.addString(model.getKey(), "1");
                     for (FieldModel fieldModel : model.getFieldList()) {
 
                         for (ImagePathModel imageModel : imagePathModelList) {
@@ -706,6 +706,12 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Emir
                         }
 
                         jsonChild.addJSON(model.getKey(), fieldModel.getJson());
+
+                        if (fieldModel.getJson().has("key")){
+                            fieldModel.getJson().remove("key");
+                        }else {
+                            fieldModel.getJson().addString("key","1");
+                        }
 
                         if (!fieldModel.getJson().has(fieldModel.getFiled())) {
                             String valueKey = fieldModel.getFiled().replace("_", " ");
@@ -1772,18 +1778,16 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Emir
                 {
                     if (json.getInt(P.status) == 1) {
 
-                        json = json.getJson(P.data);
-                        Json userJson = json.getJson(P.user);
-                        Json userInfo = userJson.getJson(P.user_info);
+                        Json data = json.getJson(P.data);
+//                        Json userJson = data.getJson(P.user);
+                        Json userInfo = data.getJson(P.user_info);
                         user_country_id = userInfo.getString(P.country_id);
-                        Json userDocument = userJson.getJson(P.user_profile_document);
+                        Json userDocument = data.getJson(P.user_profile_document);
                         JsonList uploaded_document = userDocument.getJsonList(P.uploaded_document);
                         JsonList pending_document = userDocument.getJsonList(P.pending_document);
 
                         if (uploaded_document != null && !uploaded_document.isEmpty() && uploaded_document.size() != 0) {
                             for (Json jsonUploaded : uploaded_document) {
-
-//                            Log.e("TAG", "hitUserDocumentDetails:121212 "+ jsonUploaded.toString() );
 
                                 DocumentUploadedModel model = new DocumentUploadedModel();
 

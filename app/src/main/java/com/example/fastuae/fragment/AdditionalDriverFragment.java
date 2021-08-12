@@ -72,6 +72,9 @@ public class AdditionalDriverFragment extends Fragment implements AdditionalDriv
     private String countryId = "";
     private String emirateID = "";
 
+    private boolean forEditData = false;
+    private String edit_driver_id = "";
+
     private List<AdditionalDriverModel> additionalDriverModelList;
     private AdditionalDriverListAdapter additionalDriverListAdapter;
 
@@ -105,6 +108,9 @@ public class AdditionalDriverFragment extends Fragment implements AdditionalDriv
     }
 
     private void initView(){
+
+        forEditData = false;
+
         loadingDialog = new LoadingDialog(context);
         session = new Session(context);
         flag = session.getString(P.languageFlag);
@@ -172,6 +178,8 @@ public class AdditionalDriverFragment extends Fragment implements AdditionalDriv
 
     @Override
     public void editClick(AdditionalDriverModel model) {
+        forEditData = true;
+        edit_driver_id = model.getId();
         getUserDriverDetails(model.getId());
     }
 
@@ -232,6 +240,7 @@ public class AdditionalDriverFragment extends Fragment implements AdditionalDriv
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
+                forEditData = false;
                 binding.lnrAdditionalDetails.setVisibility(View.VISIBLE);
                 binding.lnrDriverList.setVisibility(View.GONE);
             }
@@ -322,6 +331,18 @@ public class AdditionalDriverFragment extends Fragment implements AdditionalDriv
     }
 
     private void checkDriverDetailsView(){
+        checkAllView();
+    }
+
+    private void checkAllView(){
+        if (additionalDriverModelList.isEmpty()){
+            checkDetailVisibility();
+        }else {
+            checkListVisibility();
+        }
+    }
+
+    private void checkListVisibility(){
         if (binding.lnrDriverList.getVisibility() == View.GONE) {
             binding.lnrDriverList.setVisibility(View.VISIBLE);
             if (flag.equals(Config.ARABIC)) {
@@ -331,6 +352,24 @@ public class AdditionalDriverFragment extends Fragment implements AdditionalDriv
             }
         } else if (binding.lnrDriverList.getVisibility() == View.VISIBLE) {
             binding.lnrDriverList.setVisibility(View.GONE);
+            if (flag.equals(Config.ARABIC)) {
+                binding.imgDriveLeft.setImageResource(R.drawable.ic_plus);
+            }else if (flag.equals(Config.ENGLISH)) {
+                binding.imgDriveRight.setImageResource(R.drawable.ic_plus);
+            }
+        }
+    }
+
+    private void checkDetailVisibility(){
+        if (binding.lnrAdditionalDetails.getVisibility() == View.GONE) {
+            binding.lnrAdditionalDetails.setVisibility(View.VISIBLE);
+            if (flag.equals(Config.ARABIC)) {
+                binding.imgDriveLeft.setImageResource(R.drawable.ic_minus);
+            }else if (flag.equals(Config.ENGLISH)) {
+                binding.imgDriveRight.setImageResource(R.drawable.ic_minus);
+            }
+        } else if (binding.lnrAdditionalDetails.getVisibility() == View.VISIBLE) {
+            binding.lnrAdditionalDetails.setVisibility(View.GONE);
             if (flag.equals(Config.ARABIC)) {
                 binding.imgDriveLeft.setImageResource(R.drawable.ic_plus);
             }else if (flag.equals(Config.ENGLISH)) {
@@ -491,7 +530,14 @@ public class AdditionalDriverFragment extends Fragment implements AdditionalDriv
                             }
 
                             additionalDriverListAdapter.notifyDataSetChanged();
+                        }
 
+                        if (additionalDriverModelList.isEmpty()){
+                            binding.lnrDriverList.setVisibility(View.GONE);
+                            binding.lnrAdditionalDetails.setVisibility(View.VISIBLE);
+                        }else {
+                            binding.lnrAdditionalDetails.setVisibility(View.GONE);
+                            binding.lnrDriverList.setVisibility(View.VISIBLE);
                         }
 
                     }else {
@@ -589,6 +635,8 @@ public class AdditionalDriverFragment extends Fragment implements AdditionalDriv
         binding.etxLastName.setText("");
         binding.etxBirtDate.setText("");
         binding.etxEmail.setText("");
+        binding.etxNumber.setText("");
+        binding.etxAlternameNumber.setText("");
         binding.spinnerNationality.setSelection(0);
     }
 
@@ -596,6 +644,9 @@ public class AdditionalDriverFragment extends Fragment implements AdditionalDriv
 
         ProgressView.show(context,loadingDialog);
         Json j = new Json();
+        if (forEditData){
+            j.addString(P.driver_id,edit_driver_id);
+        }
         j.addString(P.driver_name,binding.etxFirstName.getText().toString().trim());
         j.addString(P.driver_middlename,binding.etxMiddleName.getText().toString().trim());
         j.addString(P.driver_lastname,binding.etxLastName.getText().toString().trim());
@@ -627,10 +678,7 @@ public class AdditionalDriverFragment extends Fragment implements AdditionalDriv
                         json = json.getJson(P.data);
                         H.showMessage(context,getResources().getString(R.string.dataUpdated));
                         clearView();
-                        binding.lnrAdditionalDetails.setVisibility(View.GONE);
-                        binding.lnrDriverList.setVisibility(View.VISIBLE);
                         getUserDriverList();
-
                     }else {
                         H.showMessage(context,json.getString(P.error));
                     }

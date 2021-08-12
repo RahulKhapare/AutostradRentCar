@@ -54,6 +54,16 @@
 
                     </ImageView>
 
+                    <ImageView
+                        android:id="@+id/imgDelete"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:visibility="gone"
+                        android:tint="@color/colorBlack"
+                        android:src="@drawable/ic_baseline_delete_24">
+
+                    </ImageView>
+
                 </LinearLayout>
 
             </LinearLayout>
