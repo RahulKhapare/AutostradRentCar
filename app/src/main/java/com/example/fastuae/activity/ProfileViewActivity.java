@@ -432,6 +432,13 @@ public class ProfileViewActivity extends AppCompatActivity{
 
     @Override
     public void onBackPressed() {
-        finish();
+        if (AdditionalDriverFragment.forEditData){
+            additionalDriverFragment.callBackEdit();
+        }else if (AdditionalDriverFragment.forAddData){
+            additionalDriverFragment.callBackAdd();
+        }else {
+            finish();
+        }
+
     }
 }

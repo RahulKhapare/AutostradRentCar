@@ -21,6 +21,7 @@ public class Config {
     public static String currentFlag = "";
     public static String currentProfileFlag = "";
     public static String currentFAQFlag = "";
+    public static String driverIDFORDOC = "";
 
     public static String SelectedPickUpID = "";
     public static String SelectedPickUpEmirateID = "";

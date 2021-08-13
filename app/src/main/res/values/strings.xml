@@ -509,6 +509,9 @@
     <string name="carPickupRate">Car Pickup rate</string>
     <string name="monthlyRental">Monthly Rentals</string>
     <string name="deleteDocMessage">Do you want to delete this document ?</string>
+    <string name="docMessage">Would someone be assisting you with the driving? Enter their document here.</string>
+    <string name="uploadNow">Upload Now</string>
+    <string name="uploadNew">Upload New Document</string>
 
     <string name="txt1">Leading Car Rental Company with the largest network of Branches &amp; Pickup points</string>
     <string name="txt2">Leading Car Rental Company with the largest network of Branches &amp; Pickup points</string>

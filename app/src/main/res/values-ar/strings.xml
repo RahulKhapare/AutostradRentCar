@@ -507,6 +507,9 @@
     <string name="carPickupRate">معدل نقل السيارة</string>
     <string name="monthlyRental">تأجير شهري</string>
     <string name="deleteDocMessage">هل تريد حذف هذا المستند؟</string>
+    <string name="docMessage">هل سيساعدك شخص ما في القيادة؟ أدخل وثيقتهم هنا.</string>
+    <string name="uploadNow">تحميل الآن</string>
+    <string name="uploadNew">تحميل مستند جديد</string>
 
     <string name="txt1">شركة رائدة في مجال تأجير السيارات ولديها أكبر شبكة من الفروع ونقاط الالتقاء</string>
     <string name="txt2">شركة رائدة في مجال تأجير السيارات ولديها أكبر شبكة من الفروع ونقاط الالتقاء</string>

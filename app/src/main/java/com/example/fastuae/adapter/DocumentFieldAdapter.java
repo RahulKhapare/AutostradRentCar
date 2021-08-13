@@ -51,11 +51,14 @@ public class DocumentFieldAdapter extends RecyclerView.Adapter<DocumentFieldAdap
     Json jsonItem ;
     Json saveJsonData ;
 
-    public DocumentFieldAdapter(Context context, List<FieldModel> filedList,Json json,Json saveJson) {
+    int value;
+
+    public DocumentFieldAdapter(Context context, List<FieldModel> filedList,Json json,Json saveJson,int value) {
         this.context = context;
         this.filedList = filedList;
         this.jsonItem = json;
         this.saveJsonData = saveJson;
+        this.value = value;
     }
 
     @NonNull
@@ -144,8 +147,19 @@ public class DocumentFieldAdapter extends RecyclerView.Adapter<DocumentFieldAdap
             }
         }catch (Exception e){
         }
+
+        if (value==2){
+            setMargins(holder.binding.lnrView,5,10,5,10);
+        }
     }
 
+    private void setMargins (View view, int left, int top, int right, int bottom) {
+        if (view.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
+            ViewGroup.MarginLayoutParams p = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
+            p.setMargins(left, top, right, bottom);
+            view.requestLayout();
+        }
+    }
     @Override
     public int getItemCount() {
         return filedList.size();

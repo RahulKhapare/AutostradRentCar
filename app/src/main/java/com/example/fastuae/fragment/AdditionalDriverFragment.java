@@ -9,9 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -20,7 +18,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 
-import androidx.annotation.RequiresApi;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -36,11 +33,9 @@ import com.example.fastuae.adapter.AdditionalDriverListAdapter;
 import com.example.fastuae.adapter.AddressSelectionAdapter;
 import com.example.fastuae.adapter.CodeSelectionAdapter;
 import com.example.fastuae.databinding.FragmentAdditionalDriveBinding;
-import com.example.fastuae.databinding.FragmentMenuBinding;
 import com.example.fastuae.model.AdditionalDriverModel;
 import com.example.fastuae.model.AddressModel;
 import com.example.fastuae.model.CountryCodeModel;
-import com.example.fastuae.model.PaymentCardModel;
 import com.example.fastuae.util.CheckString;
 import com.example.fastuae.util.Click;
 import com.example.fastuae.util.Config;
@@ -48,15 +43,13 @@ import com.example.fastuae.util.P;
 import com.example.fastuae.util.ProgressView;
 import com.example.fastuae.util.Validation;
 
-import org.json.JSONException;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class AdditionalDriverFragment extends Fragment implements AdditionalDriverListAdapter.onClick{
+public class AdditionalDriverFragment extends Fragment implements AdditionalDriverListAdapter.onClick {
 
     private Context context;
     private FragmentAdditionalDriveBinding binding;
@@ -72,7 +65,8 @@ public class AdditionalDriverFragment extends Fragment implements AdditionalDriv
     private String countryId = "";
     private String emirateID = "";
 
-    private boolean forEditData = false;
+    public static boolean forEditData = false;
+    public static boolean forAddData = false;
     private String edit_driver_id = "";
 
     private List<AdditionalDriverModel> additionalDriverModelList;
@@ -86,20 +80,46 @@ public class AdditionalDriverFragment extends Fragment implements AdditionalDriv
             context = inflater.getContext();
             initView();
             updateIcons();
+
         }
 
         return binding.getRoot();
     }
 
+    public void callBackEdit() {
+        if (forEditData) {
+            forEditData = false;
+            clearView();
+            binding.additionalDetailView.setVisibility(View.GONE);
+            binding.lnrAdditionalDetails.setVisibility(View.GONE);
+            binding.lnrDriverList.setVisibility(View.VISIBLE);
+            return;
+        }
+    }
+
+    public void callBackAdd() {
+        if (forAddData) {
+            forAddData = false;
+            clearView();
+            if (additionalDriverModelList.isEmpty()) {
+                binding.additionalDetailView.setVisibility(View.VISIBLE);
+                binding.lnrAdditionalDetails.setVisibility(View.GONE);
+                binding.lnrDriverList.setVisibility(View.GONE);
+            } else {
+                binding.additionalDetailView.setVisibility(View.GONE);
+                binding.lnrAdditionalDetails.setVisibility(View.GONE);
+                binding.lnrDriverList.setVisibility(View.VISIBLE);
+            }
+            return;
+        }
+    }
+
     @Override
-    public void onDestroyView()
-    {
-        if (binding.getRoot() != null)
-        {
+    public void onDestroyView() {
+        if (binding.getRoot() != null) {
             ViewGroup parentViewGroup = (ViewGroup) binding.getRoot().getParent();
 
-            if (parentViewGroup != null)
-            {
+            if (parentViewGroup != null) {
                 parentViewGroup.removeAllViews();
             }
         }
@@ -107,9 +127,10 @@ public class AdditionalDriverFragment extends Fragment implements AdditionalDriv
         super.onDestroyView();
     }
 
-    private void initView(){
+    private void initView() {
 
         forEditData = false;
+        forAddData = false;
 
         loadingDialog = new LoadingDialog(context);
         session = new Session(context);
@@ -165,7 +186,7 @@ public class AdditionalDriverFragment extends Fragment implements AdditionalDriv
         });
 
         additionalDriverModelList = new ArrayList<>();
-        additionalDriverListAdapter = new AdditionalDriverListAdapter(context,additionalDriverModelList,AdditionalDriverFragment.this);
+        additionalDriverListAdapter = new AdditionalDriverListAdapter(context, additionalDriverModelList, AdditionalDriverFragment.this);
         binding.recyclerDriverData.setLayoutManager(new LinearLayoutManager(getActivity()));
         binding.recyclerDriverData.setHasFixedSize(true);
         binding.recyclerDriverData.setNestedScrollingEnabled(false);
@@ -179,21 +200,25 @@ public class AdditionalDriverFragment extends Fragment implements AdditionalDriv
     @Override
     public void editClick(AdditionalDriverModel model) {
         forEditData = true;
+        forAddData = false;
         edit_driver_id = model.getId();
         getUserDriverDetails(model.getId());
     }
 
     @Override
     public void deleteClick(AdditionalDriverModel model) {
-        onDeleteClick(model,getResources().getString(R.string.deleteDriver));
+        onDeleteClick(model, getResources().getString(R.string.deleteDriver));
     }
 
     @Override
     public void uploadClick(AdditionalDriverModel model) {
-
+//        Config.currentProfileFlag = Config.Additional_Driver_Document;
+//        Config.driverIDFORDOC = model.getId();
+//        Intent intent = new Intent(context, ProfileViewActivity.class);
+//        startActivity(intent);
     }
 
-    private void onDeleteClick(AdditionalDriverModel model, String message){
+    private void onDeleteClick(AdditionalDriverModel model, String message) {
         AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
         builder1.setMessage(message);
         builder1.setCancelable(true);
@@ -203,7 +228,7 @@ public class AdditionalDriverFragment extends Fragment implements AdditionalDriv
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
-                        hitDeleteDriveDetailsDetails(dialog,model.getId());
+                        hitDeleteDriveDetailsDetails(dialog, model.getId());
                     }
                 });
 
@@ -225,24 +250,17 @@ public class AdditionalDriverFragment extends Fragment implements AdditionalDriv
 
     }
 
-    private void onClick(){
-
-        binding.imgCloseDetails.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Click.preventTwoClick(v);
-                binding.lnrAdditionalDetails.setVisibility(View.GONE);
-                binding.lnrDriverList.setVisibility(View.VISIBLE);
-            }
-        });
+    private void onClick() {
 
         binding.txtAddNewDriver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
                 forEditData = false;
-                binding.lnrAdditionalDetails.setVisibility(View.VISIBLE);
+                forAddData = true;
                 binding.lnrDriverList.setVisibility(View.GONE);
+                binding.additionalDetailView.setVisibility(View.VISIBLE);
+                binding.lnrAdditionalDetails.setVisibility(View.VISIBLE);
             }
         });
 
@@ -276,10 +294,10 @@ public class AdditionalDriverFragment extends Fragment implements AdditionalDriv
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 AddressModel model = lisAddressEmirate.get(position);
-                if (!model.getCountry_name().equals(getResources().getString(R.string.nationality))){
+                if (!model.getCountry_name().equals(getResources().getString(R.string.nationality))) {
                     emirateID = model.getId();
                     countryId = model.getPhone_code();
-                }else {
+                } else {
                     emirateID = "";
                     countryId = "";
                 }
@@ -314,8 +332,7 @@ public class AdditionalDriverFragment extends Fragment implements AdditionalDriv
         binding.additionalDetailView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Click.preventTwoClick(v);
-                checkDriverDetailsView();
+                checkDetailVisibility();
             }
         });
 
@@ -330,49 +347,37 @@ public class AdditionalDriverFragment extends Fragment implements AdditionalDriv
         });
     }
 
-    private void checkDriverDetailsView(){
-        checkAllView();
-    }
-
-    private void checkAllView(){
-        if (additionalDriverModelList.isEmpty()){
-            checkDetailVisibility();
-        }else {
-            checkListVisibility();
-        }
-    }
-
-    private void checkListVisibility(){
+    private void checkListVisibility() {
         if (binding.lnrDriverList.getVisibility() == View.GONE) {
             binding.lnrDriverList.setVisibility(View.VISIBLE);
             if (flag.equals(Config.ARABIC)) {
                 binding.imgDriveLeft.setImageResource(R.drawable.ic_minus);
-            }else if (flag.equals(Config.ENGLISH)) {
+            } else if (flag.equals(Config.ENGLISH)) {
                 binding.imgDriveRight.setImageResource(R.drawable.ic_minus);
             }
         } else if (binding.lnrDriverList.getVisibility() == View.VISIBLE) {
             binding.lnrDriverList.setVisibility(View.GONE);
             if (flag.equals(Config.ARABIC)) {
                 binding.imgDriveLeft.setImageResource(R.drawable.ic_plus);
-            }else if (flag.equals(Config.ENGLISH)) {
+            } else if (flag.equals(Config.ENGLISH)) {
                 binding.imgDriveRight.setImageResource(R.drawable.ic_plus);
             }
         }
     }
 
-    private void checkDetailVisibility(){
+    private void checkDetailVisibility() {
         if (binding.lnrAdditionalDetails.getVisibility() == View.GONE) {
             binding.lnrAdditionalDetails.setVisibility(View.VISIBLE);
             if (flag.equals(Config.ARABIC)) {
                 binding.imgDriveLeft.setImageResource(R.drawable.ic_minus);
-            }else if (flag.equals(Config.ENGLISH)) {
+            } else if (flag.equals(Config.ENGLISH)) {
                 binding.imgDriveRight.setImageResource(R.drawable.ic_minus);
             }
         } else if (binding.lnrAdditionalDetails.getVisibility() == View.VISIBLE) {
             binding.lnrAdditionalDetails.setVisibility(View.GONE);
             if (flag.equals(Config.ARABIC)) {
                 binding.imgDriveLeft.setImageResource(R.drawable.ic_plus);
-            }else if (flag.equals(Config.ENGLISH)) {
+            } else if (flag.equals(Config.ENGLISH)) {
                 binding.imgDriveRight.setImageResource(R.drawable.ic_plus);
             }
         }
@@ -385,7 +390,7 @@ public class AdditionalDriverFragment extends Fragment implements AdditionalDriv
         if (TextUtils.isEmpty(binding.etxFirstName.getText().toString().trim())) {
             value = false;
             H.showMessage(context, getResources().getString(R.string.pleaseEnterFirstName));
-        }else if (TextUtils.isEmpty(binding.etxMiddleName.getText().toString().trim())) {
+        } else if (TextUtils.isEmpty(binding.etxMiddleName.getText().toString().trim())) {
             value = false;
             H.showMessage(context, getResources().getString(R.string.enterMiddleName));
         } else if (TextUtils.isEmpty(binding.etxLastName.getText().toString().trim())) {
@@ -403,7 +408,7 @@ public class AdditionalDriverFragment extends Fragment implements AdditionalDriv
         } else if (!Validation.validEmail(binding.etxEmail.getText().toString().trim())) {
             value = false;
             H.showMessage(context, getResources().getString(R.string.enterEmailValid));
-        } else if (TextUtils.isEmpty(countryId) && TextUtils.isEmpty(emirateID)){
+        } else if (TextUtils.isEmpty(countryId) && TextUtils.isEmpty(emirateID)) {
             value = false;
             H.showMessage(context, getResources().getString(R.string.selectNationality));
         }
@@ -437,7 +442,7 @@ public class AdditionalDriverFragment extends Fragment implements AdditionalDriv
     private void setDateTimeField(EditText editText) {
 
         Calendar newCalendar = Calendar.getInstance();
-        mDatePickerDialog = new DatePickerDialog(context, R.style.DialogTheme,new DatePickerDialog.OnDateSetListener() {
+        mDatePickerDialog = new DatePickerDialog(context, R.style.DialogTheme, new DatePickerDialog.OnDateSetListener() {
 
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 Calendar newDate = Calendar.getInstance();
@@ -449,10 +454,10 @@ public class AdditionalDriverFragment extends Fragment implements AdditionalDriv
                 editText.setText(fdate);
 
                 String dayOfTheWeek = (String) DateFormat.format("EEEE", date); // Thursday
-                String dayString         = (String) DateFormat.format("dd",   date); // 20
-                String monthString  = (String) DateFormat.format("MMM",  date); // Jun
-                String monthNumber  = (String) DateFormat.format("MM",   date); // 06
-                String yeare         = (String) DateFormat.format("yyyy", date); // 2013
+                String dayString = (String) DateFormat.format("dd", date); // 20
+                String monthString = (String) DateFormat.format("MMM", date); // Jun
+                String monthNumber = (String) DateFormat.format("MM", date); // 06
+                String yeare = (String) DateFormat.format("yyyy", date); // 2013
 
             }
         }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
@@ -473,7 +478,7 @@ public class AdditionalDriverFragment extends Fragment implements AdditionalDriv
     }
 
     private void blueTin(RadioButton radioButton) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             ColorStateList myColorStateList = new ColorStateList(
                     new int[][]{
                             new int[]{getResources().getColor(R.color.lightBlue)}
@@ -487,7 +492,7 @@ public class AdditionalDriverFragment extends Fragment implements AdditionalDriv
 
     private void getUserDriverList() {
 
-        ProgressView.show(context,loadingDialog);
+        ProgressView.show(context, loadingDialog);
 
         Api.newApi(context, P.BaseUrl + "user_driver_list")
                 .setMethod(Api.GET)
@@ -506,9 +511,9 @@ public class AdditionalDriverFragment extends Fragment implements AdditionalDriv
                         json = json.getJson(P.data);
                         JsonList list = json.getJsonList(P.list);
 
-                        if (list!=null && list.size()!=0){
+                        if (list != null && list.size() != 0) {
 
-                            for (Json jsonValue : list){
+                            for (Json jsonValue : list) {
                                 AdditionalDriverModel model = new AdditionalDriverModel();
                                 model.setId(jsonValue.getString("id"));
                                 model.setDriver_name(jsonValue.getString("driver_name"));
@@ -532,29 +537,32 @@ public class AdditionalDriverFragment extends Fragment implements AdditionalDriv
                             additionalDriverListAdapter.notifyDataSetChanged();
                         }
 
-                        if (additionalDriverModelList.isEmpty()){
+                        if (additionalDriverModelList.isEmpty()) {
+                            binding.additionalDetailView.setVisibility(View.VISIBLE);
+                            binding.lnrAdditionalDetails.setVisibility(View.GONE);
                             binding.lnrDriverList.setVisibility(View.GONE);
-                            binding.lnrAdditionalDetails.setVisibility(View.VISIBLE);
-                        }else {
+                        } else {
+                            binding.additionalDetailView.setVisibility(View.GONE);
                             binding.lnrAdditionalDetails.setVisibility(View.GONE);
                             binding.lnrDriverList.setVisibility(View.VISIBLE);
                         }
 
-                    }else {
-                        H.showMessage(context,json.getString(P.error));
+                    } else {
+                        H.showMessage(context, json.getString(P.error));
                     }
+                    binding.nestedScroll.fullScroll(View.FOCUS_UP);
                     ProgressView.dismiss(loadingDialog);
 
                 })
-                .run("getUserDriverList",session.getString(P.token));
+                .run("getUserDriverList", session.getString(P.token));
 
     }
 
     private void getUserDriverDetails(String driver_id) {
 
-        ProgressView.show(context,loadingDialog);
+        ProgressView.show(context, loadingDialog);
         Json j = new Json();
-        j.addString(P.driver_id ,driver_id);
+        j.addString(P.driver_id, driver_id);
 
         Api.newApi(context, P.BaseUrl + "user_driver_data").addJson(j)
                 .setMethod(Api.POST)
@@ -567,8 +575,9 @@ public class AdditionalDriverFragment extends Fragment implements AdditionalDriv
                 {
                     if (json.getInt(P.status) == 1) {
 
-                        binding.lnrAdditionalDetails.setVisibility(View.VISIBLE);
                         binding.lnrDriverList.setVisibility(View.GONE);
+                        binding.additionalDetailView.setVisibility(View.VISIBLE);
+                        binding.lnrAdditionalDetails.setVisibility(View.VISIBLE);
 
                         json = json.getJson(P.data);
                         json = json.getJson(P.detail);
@@ -583,12 +592,12 @@ public class AdditionalDriverFragment extends Fragment implements AdditionalDriv
                         binding.etxAlternameNumber.setText(CheckString.check(json.getString(P.driver_alt_mobile)));
 
                         String gender = json.getString(P.driver_gender);
-                        if (CheckString.check(gender).equalsIgnoreCase("1")){
+                        if (CheckString.check(gender).equalsIgnoreCase("1")) {
                             binding.radioFemale.setChecked(false);
                             binding.radioMale.setChecked(true);
                             blueTin(binding.radioMale);
                             blackTin(binding.radioFemale);
-                        }else if (CheckString.check(gender).equalsIgnoreCase("2")){
+                        } else if (CheckString.check(gender).equalsIgnoreCase("2")) {
                             binding.radioMale.setChecked(false);
                             binding.radioFemale.setChecked(true);
                             blueTin(binding.radioFemale);
@@ -613,23 +622,23 @@ public class AdditionalDriverFragment extends Fragment implements AdditionalDriv
                             }
 
                             if (jsonData.getString(P.phone_code).equalsIgnoreCase(countryID)) {
-                                if (i<jsonList.size()){
-                                    binding.spinnerNationality.setSelection(i+1);
+                                if (i < jsonList.size()) {
+                                    binding.spinnerNationality.setSelection(i + 1);
                                 }
                             }
                         }
 
-                    }else {
-                        H.showMessage(context,json.getString(P.error));
+                    } else {
+                        H.showMessage(context, json.getString(P.error));
                     }
                     ProgressView.dismiss(loadingDialog);
 
                 })
-                .run("getUserDriverDetails",session.getString(P.token));
+                .run("getUserDriverDetails", session.getString(P.token));
 
     }
 
-    private void clearView(){
+    private void clearView() {
         binding.etxFirstName.setText("");
         binding.etxMiddleName.setText("");
         binding.etxLastName.setText("");
@@ -642,27 +651,27 @@ public class AdditionalDriverFragment extends Fragment implements AdditionalDriv
 
     private void hitSaveDriverDetails() {
 
-        ProgressView.show(context,loadingDialog);
+        ProgressView.show(context, loadingDialog);
         Json j = new Json();
-        if (forEditData){
-            j.addString(P.driver_id,edit_driver_id);
+        if (forEditData) {
+            j.addString(P.driver_id, edit_driver_id);
         }
-        j.addString(P.driver_name,binding.etxFirstName.getText().toString().trim());
-        j.addString(P.driver_middlename,binding.etxMiddleName.getText().toString().trim());
-        j.addString(P.driver_lastname,binding.etxLastName.getText().toString().trim());
-        j.addString(P.driver_dob,binding.etxBirtDate.getText().toString().trim());
-        j.addString(P.driver_email,binding.etxEmail.getText().toString().trim());
-        if (binding.radioMale.isChecked()){
-            j.addString(P.driver_gender,"1");
-        }else if (binding.radioFemale.isChecked()){
-            j.addString(P.driver_gender,"2");
+        j.addString(P.driver_name, binding.etxFirstName.getText().toString().trim());
+        j.addString(P.driver_middlename, binding.etxMiddleName.getText().toString().trim());
+        j.addString(P.driver_lastname, binding.etxLastName.getText().toString().trim());
+        j.addString(P.driver_dob, binding.etxBirtDate.getText().toString().trim());
+        j.addString(P.driver_email, binding.etxEmail.getText().toString().trim());
+        if (binding.radioMale.isChecked()) {
+            j.addString(P.driver_gender, "1");
+        } else if (binding.radioFemale.isChecked()) {
+            j.addString(P.driver_gender, "2");
         }
-        j.addString(P.driver_user_country_code,codePrimary);
-        j.addString(P.driver_mobile,binding.etxNumber.getText().toString().trim());
-        j.addString(P.driver_alt_country_code,codeSecondary);
-        j.addString(P.driver_alt_mobile,binding.etxAlternameNumber.getText().toString().trim());
-        j.addString(P.driver_country_id,countryId);
-        j.addString(P.driver_emirate_id,emirateID);
+        j.addString(P.driver_user_country_code, codePrimary);
+        j.addString(P.driver_mobile, binding.etxNumber.getText().toString().trim());
+        j.addString(P.driver_alt_country_code, codeSecondary);
+        j.addString(P.driver_alt_mobile, binding.etxAlternameNumber.getText().toString().trim());
+        j.addString(P.driver_country_id, countryId);
+        j.addString(P.driver_emirate_id, emirateID);
 
         Api.newApi(context, P.BaseUrl + "save_driver_data").addJson(j)
                 .setMethod(Api.POST)
@@ -676,24 +685,26 @@ public class AdditionalDriverFragment extends Fragment implements AdditionalDriv
                     if (json.getInt(P.status) == 1) {
 
                         json = json.getJson(P.data);
-                        H.showMessage(context,getResources().getString(R.string.dataUpdated));
+                        H.showMessage(context, getResources().getString(R.string.dataUpdated));
+                        forEditData = false;
+                        forAddData = false;
                         clearView();
                         getUserDriverList();
-                    }else {
-                        H.showMessage(context,json.getString(P.error));
+                    } else {
+                        H.showMessage(context, json.getString(P.error));
                     }
 
                     ProgressView.dismiss(loadingDialog);
 
                 })
-                .run("hitSaveDriverDetails",session.getString(P.token));
+                .run("hitSaveDriverDetails", session.getString(P.token));
     }
 
-    private void hitDeleteDriveDetailsDetails(DialogInterface dialog,String driver_id) {
+    private void hitDeleteDriveDetailsDetails(DialogInterface dialog, String driver_id) {
 
-        ProgressView.show(context,loadingDialog);
+        ProgressView.show(context, loadingDialog);
         Json j = new Json();
-        j.addString(P.driver_id,driver_id);
+        j.addString(P.driver_id, driver_id);
 
         Api.newApi(context, P.BaseUrl + "delete_driver_data").addJson(j)
                 .setMethod(Api.POST)
@@ -707,14 +718,14 @@ public class AdditionalDriverFragment extends Fragment implements AdditionalDriv
                     if (json.getInt(P.status) == 1) {
                         dialog.dismiss();
                         getUserDriverList();
-                    }else {
-                        H.showMessage(context,json.getString(P.error));
+                    } else {
+                        H.showMessage(context, json.getString(P.error));
                     }
 
                     ProgressView.dismiss(loadingDialog);
 
                 })
-                .run("hitDeleteDriveDetailsDetails",session.getString(P.token));
+                .run("hitDeleteDriveDetailsDetails", session.getString(P.token));
     }
 
     public static AdditionalDriverFragment newInstance() {

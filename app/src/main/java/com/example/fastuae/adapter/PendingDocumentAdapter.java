@@ -1,7 +1,6 @@
 package com.example.fastuae.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,60 +14,47 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.adoisstudio.helper.Json;
 import com.example.fastuae.R;
-import com.example.fastuae.activity.CarBookingDetailsActivity;
-import com.example.fastuae.activity.DocumentEditActivity;
-import com.example.fastuae.databinding.ActivityDocumentListBinding;
-import com.example.fastuae.fragment.DocumentFragment;
-import com.example.fastuae.model.DocumentModel;
+import com.example.fastuae.databinding.ActivityPendingDocumentListBinding;
+import com.example.fastuae.fragment.AdditionalDriverDocumentFragment;
 import com.example.fastuae.model.FieldModel;
+import com.example.fastuae.model.PendingDocumentModel;
 import com.example.fastuae.util.Click;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DocumentAdapter extends RecyclerView.Adapter<DocumentAdapter.viewHolder> {
+public class PendingDocumentAdapter extends RecyclerView.Adapter<PendingDocumentAdapter.viewHolder> {
 
     private Context context;
-    private List<DocumentModel> documentModelList;
-    private DocumentFragment fragment;
-    boolean fromActivity;
-    int flagValue;
+    private List<PendingDocumentModel> documentModelList;
+    private AdditionalDriverDocumentFragment fragment;
+
 
     public interface onClick{
         void downloadDocument(String name, TextView textView,TextView txtImagePath);
     }
 
-    public DocumentAdapter(Context context, List<DocumentModel> documentModelList,DocumentFragment fragment) {
+    public PendingDocumentAdapter(Context context, List<PendingDocumentModel> documentModelList, AdditionalDriverDocumentFragment fragment) {
         this.context = context;
         this.documentModelList = documentModelList;
         this.fragment = fragment;
-        fromActivity = false;
+
     }
 
-    public DocumentAdapter(Context context, List<DocumentModel> documentModelList,int flag) {
-        this.context = context;
-        this.documentModelList = documentModelList;
-        fromActivity = true;
-        flagValue = flag;
-    }
 
     @NonNull
     @Override
     public viewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ActivityDocumentListBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.activity_document_list, parent, false);
+        ActivityPendingDocumentListBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.activity_pending_document_list, parent, false);
         return new viewHolder(binding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
-        DocumentModel model = documentModelList.get(position);
+        PendingDocumentModel model = documentModelList.get(position);
 
         holder.binding.txtTitle.setText(model.getTitle());
-        holder.binding.txtDocument.setText(context.getResources().getString(R.string.upload)+" "+model.getTitle());
+//        holder.binding.txtDocument.setText(context.getResources().getString(R.string.upload)+" "+model.getTitle());
 
         holder.binding.lnrCheck.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,15 +84,7 @@ public class DocumentAdapter extends RecyclerView.Adapter<DocumentAdapter.viewHo
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-                if (fromActivity){
-                    if (flagValue==1){
-                        ((CarBookingDetailsActivity)context).downloadDocument(model.getTitle(),holder.binding.txtDocument,holder.binding.txtImagePath);
-                    }else if (flagValue==2){
-                        ((DocumentEditActivity)context).downloadDocument(model.getTitle(),holder.binding.txtDocument,holder.binding.txtImagePath);
-                    }
-                }else {
-                    ((DocumentFragment)fragment).downloadDocument(model.getTitle(),holder.binding.txtDocument,holder.binding.txtImagePath);
-                }
+                ((AdditionalDriverDocumentFragment)fragment).downloadDocument(model.getTitle(),holder.binding.txtDocument,holder.binding.txtImagePath);
             }
         });
 
@@ -121,17 +99,11 @@ public class DocumentAdapter extends RecyclerView.Adapter<DocumentAdapter.viewHo
         }catch (Exception e){
         }
         model.setFieldList(fieldList);
-        DocumentFieldAdapter documentFieldAdapter = new DocumentFieldAdapter(context,model.getFieldList(),new Json(),model.getSave_data(),1);
+        DocumentFieldAdapter documentFieldAdapter = new DocumentFieldAdapter(context,model.getFieldList(),new Json(),model.getSave_data(),2);
         holder.binding.recyclerExtraFields.setLayoutManager(new LinearLayoutManager(context));
         holder.binding.recyclerExtraFields.setHasFixedSize(true);
         holder.binding.recyclerExtraFields.setNestedScrollingEnabled(true);
         holder.binding.recyclerExtraFields.setAdapter(documentFieldAdapter);
-
-        if (position==documentModelList.size()-1){
-            holder.binding.lnrView.setVisibility(View.GONE);
-        }else {
-            holder.binding.lnrView.setVisibility(View.VISIBLE);
-        }
 
     }
 
@@ -141,8 +113,8 @@ public class DocumentAdapter extends RecyclerView.Adapter<DocumentAdapter.viewHo
     }
 
     public class viewHolder extends RecyclerView.ViewHolder {
-        ActivityDocumentListBinding binding;
-        public viewHolder(@NonNull ActivityDocumentListBinding binding) {
+        ActivityPendingDocumentListBinding binding;
+        public viewHolder(@NonNull ActivityPendingDocumentListBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }

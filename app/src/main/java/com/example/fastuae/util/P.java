@@ -29,6 +29,8 @@ public class P {
     public static String document_list = "document_list";
     public static String uploaded_document = "uploaded_document";
     public static String pending_document = "pending_document";
+    public static String all_document = "all_document";
+    public static String filter_document_document = "filter_document_document";
     public static String id = "id";
     public static String title_name = "title_name";
     public static String offer_validity = "offer_validity";
