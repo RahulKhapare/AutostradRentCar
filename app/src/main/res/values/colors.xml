@@ -21,5 +21,6 @@
     <color name="redText">#FF0007</color>
     <color name="redWhite">#FFF2F2</color>
     <color name="grayLightNew">#F3F3F3</color>
+    <color name="semiTrans">#30000000</color>
 
 </resources>

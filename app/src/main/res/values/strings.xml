@@ -512,6 +512,17 @@
     <string name="docMessage">Would someone be assisting you with the driving? Enter their document here.</string>
     <string name="uploadNow">Upload Now</string>
     <string name="uploadNew">Upload New Document</string>
+    <string name="numberColun">Number:</string>
+    <string name="expDateColun">Expiry Date:</string>
+    <string name="idNumber">ID Number</string>
+    <string name="docFile">Document File</string>
+    <string name="uploadDoc">Upload Document</string>
+    <string name="update">Update</string>
+    <string name="enterIDNo">Enter Id Number</string>
+    <string name="selectExpDate">Select Expiry Date</string>
+    <string name="uplaodDoc">Please upload document</string>
+    <string name="autostradCar">Autostrad Rent a Car</string>
+
 
     <string name="txt1">Leading Car Rental Company with the largest network of Branches &amp; Pickup points</string>
     <string name="txt2">Leading Car Rental Company with the largest network of Branches &amp; Pickup points</string>

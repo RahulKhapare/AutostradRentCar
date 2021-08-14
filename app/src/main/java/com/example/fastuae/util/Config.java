@@ -132,5 +132,7 @@ public class Config {
     public static boolean HOME_COLLECT_CHECK = false;
     public static boolean FOR_EDIT_LOCATION = false;
 
+    public static String UAE = "United Arab Emirates";
+
 
 }

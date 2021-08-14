@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Build;
 import android.os.Bundle;
@@ -29,13 +30,16 @@ import com.adoisstudio.helper.JsonList;
 import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
 import com.example.fastuae.R;
+import com.example.fastuae.activity.ProfileViewActivity;
 import com.example.fastuae.adapter.AdditionalDriverListAdapter;
 import com.example.fastuae.adapter.AddressSelectionAdapter;
 import com.example.fastuae.adapter.CodeSelectionAdapter;
+import com.example.fastuae.adapter.EmirateSelectionAdapter;
 import com.example.fastuae.databinding.FragmentAdditionalDriveBinding;
 import com.example.fastuae.model.AdditionalDriverModel;
 import com.example.fastuae.model.AddressModel;
 import com.example.fastuae.model.CountryCodeModel;
+import com.example.fastuae.model.EmirateModel;
 import com.example.fastuae.util.CheckString;
 import com.example.fastuae.util.Click;
 import com.example.fastuae.util.Config;
@@ -64,6 +68,9 @@ public class AdditionalDriverFragment extends Fragment implements AdditionalDriv
     private String codeSecondary = "";
     private String countryId = "";
     private String emirateID = "";
+    private String countryName = "";
+
+    private List<EmirateModel> listLocation;
 
     public static boolean forEditData = false;
     public static boolean forAddData = false;
@@ -175,6 +182,28 @@ public class AdditionalDriverFragment extends Fragment implements AdditionalDriv
         AddressSelectionAdapter adapterAddress = new AddressSelectionAdapter(context, lisAddressEmirate);
         binding.spinnerNationality.setAdapter(adapterAddress);
 
+        listLocation = new ArrayList<>();
+        EmirateModel emirateModel = new EmirateModel();
+        emirateModel.setEmirate_name(getResources().getString(R.string.selectEmirate));
+        listLocation.add(emirateModel);
+        JsonList emirate_list = HomeFragment.emirate_list;
+        if (emirate_list != null && emirate_list.size() != 0) {
+            for (Json json : emirate_list) {
+                String id = json.getString(P.id);
+                String emirate_name = json.getString(P.emirate_name);
+                String status = json.getString(P.status);
+                EmirateModel model = new EmirateModel();
+                model.setId(id);
+                model.setEmirate_name(emirate_name);
+                model.setStatus(status);
+                listLocation.add(model);
+            }
+        }
+
+
+        EmirateSelectionAdapter adapterLocation = new EmirateSelectionAdapter(context, listLocation);
+        binding.spinnerEmirate.setAdapter(adapterLocation);
+
         setDateTimeField(binding.etxBirtDate);
         binding.etxBirtDate.setFocusable(false);
         binding.etxBirtDate.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.calender_bg, 0);
@@ -212,10 +241,10 @@ public class AdditionalDriverFragment extends Fragment implements AdditionalDriv
 
     @Override
     public void uploadClick(AdditionalDriverModel model) {
-//        Config.currentProfileFlag = Config.Additional_Driver_Document;
-//        Config.driverIDFORDOC = model.getId();
-//        Intent intent = new Intent(context, ProfileViewActivity.class);
-//        startActivity(intent);
+        Config.currentProfileFlag = Config.Additional_Driver_Document;
+        Config.driverIDFORDOC = model.getId();
+        Intent intent = new Intent(context, ProfileViewActivity.class);
+        startActivity(intent);
     }
 
     private void onDeleteClick(AdditionalDriverModel model, String message) {
@@ -295,11 +324,37 @@ public class AdditionalDriverFragment extends Fragment implements AdditionalDriv
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 AddressModel model = lisAddressEmirate.get(position);
                 if (!model.getCountry_name().equals(getResources().getString(R.string.nationality))) {
-                    emirateID = model.getId();
+                    countryName = model.getCountry_name();
                     countryId = model.getPhone_code();
+
+                    if (countryName.equals(Config.UAE)){
+                        binding.lnrEmirate.setVisibility(View.VISIBLE);
+                    }else {
+                        emirateID = "";
+                        binding.lnrEmirate.setVisibility(View.GONE);
+                    }
+
                 } else {
                     emirateID = "";
+                    countryName = "";
                     countryId = "";
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        binding.spinnerEmirate.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                EmirateModel model = listLocation.get(position);
+                if (!TextUtils.isEmpty(model.getId()) && !model.getId().equals("")){
+                    emirateID = model.getId();
+                }else {
+                    emirateID = "";
                 }
             }
 
@@ -408,9 +463,14 @@ public class AdditionalDriverFragment extends Fragment implements AdditionalDriv
         } else if (!Validation.validEmail(binding.etxEmail.getText().toString().trim())) {
             value = false;
             H.showMessage(context, getResources().getString(R.string.enterEmailValid));
-        } else if (TextUtils.isEmpty(countryId) && TextUtils.isEmpty(emirateID)) {
+        } else if (TextUtils.isEmpty(countryId)) {
             value = false;
             H.showMessage(context, getResources().getString(R.string.selectNationality));
+        }else if (binding.lnrEmirate.getVisibility()==View.VISIBLE){
+            if (TextUtils.isEmpty(emirateID)) {
+                value = false;
+                H.showMessage(context, getResources().getString(R.string.selectEmirate));
+            }
         }
 
         return value;
@@ -427,6 +487,9 @@ public class AdditionalDriverFragment extends Fragment implements AdditionalDriv
             binding.imgNationalityRight.setVisibility(View.GONE);
             binding.imgNationalityLeft.setVisibility(View.VISIBLE);
 
+            binding.imgEmirateRight.setVisibility(View.GONE);
+            binding.imgEmirateLeft.setVisibility(View.VISIBLE);
+
         } else if (flag.equals(Config.ENGLISH)) {
 
             binding.imgDriveRight.setVisibility(View.VISIBLE);
@@ -434,6 +497,9 @@ public class AdditionalDriverFragment extends Fragment implements AdditionalDriv
 
             binding.imgNationalityRight.setVisibility(View.VISIBLE);
             binding.imgNationalityLeft.setVisibility(View.GONE);
+
+            binding.imgEmirateRight.setVisibility(View.VISIBLE);
+            binding.imgEmirateLeft.setVisibility(View.GONE);
 
         }
 
@@ -547,10 +613,12 @@ public class AdditionalDriverFragment extends Fragment implements AdditionalDriv
                             binding.lnrDriverList.setVisibility(View.VISIBLE);
                         }
 
+                        binding.nestedScroll.fullScroll(View.FOCUS_UP);
                     } else {
+                        binding.nestedScroll.fullScroll(View.FOCUS_UP);
                         H.showMessage(context, json.getString(P.error));
                     }
-                    binding.nestedScroll.fullScroll(View.FOCUS_UP);
+
                     ProgressView.dismiss(loadingDialog);
 
                 })
@@ -625,6 +693,14 @@ public class AdditionalDriverFragment extends Fragment implements AdditionalDriv
                                 if (i < jsonList.size()) {
                                     binding.spinnerNationality.setSelection(i + 1);
                                 }
+                            }
+                        }
+
+                        JsonList emirate_list = HomeFragment.emirate_list;
+                        for (int i = 0; i < emirate_list.size(); i++) {
+                            Json jsonData = emirate_list.get(i);
+                            if (jsonData.getString(P.id).equalsIgnoreCase(emirateID)) {
+                                binding.spinnerEmirate.setSelection(i + 1);
                             }
                         }
 

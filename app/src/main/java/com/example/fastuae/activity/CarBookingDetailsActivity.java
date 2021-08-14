@@ -77,6 +77,7 @@ import com.example.fastuae.util.P;
 import com.example.fastuae.util.ProgressView;
 import com.example.fastuae.util.Validation;
 import com.example.fastuae.util.WindowView;
+import com.github.chrisbanes.photoview.PhotoView;
 
 import org.json.JSONArray;
 
@@ -1294,7 +1295,7 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Emir
 
     @Override
     public void documentView(String imagePath) {
-        documentDialog(imagePath);
+        viewDialog(imagePath);
     }
 
     private void documentDialog(String imagePath) {
@@ -1312,6 +1313,33 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Emir
         dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
 
     }
+
+    private void viewDialog(String imagePath) {
+
+        final Dialog dialog = new Dialog(activity);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.activity_image_view);
+
+        PhotoView imageView = dialog.findViewById(R.id.imageView);
+        ImageView imgClose = dialog.findViewById(R.id.imgClose);
+
+        LoadImage.glideString(activity,imageView,imagePath);
+
+        imgClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                dialog.dismiss();
+            }
+        });
+
+        dialog.setCancelable(true);
+        dialog.show();
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.white);
+        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
+
+    }
+
 
     @Override
     public void onEditPayment(PaymentCardModel model) {
@@ -1983,7 +2011,7 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Emir
                         txtImagePath.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                documentDialog(image_url);
+                                viewDialog(image_url);
                             }
                         });
                         H.showMessage(activity, getResources().getString(R.string.imageUploaded));

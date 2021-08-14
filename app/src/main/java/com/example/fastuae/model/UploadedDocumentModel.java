@@ -1,6 +1,10 @@
 package com.example.fastuae.model;
 
+import com.adoisstudio.helper.Json;
+
 import org.json.JSONArray;
+
+import java.util.List;
 
 public class UploadedDocumentModel {
 
@@ -28,6 +32,25 @@ public class UploadedDocumentModel {
     String title;
     JSONArray field;
     JSONArray field_for;
+
+    List<FieldModel> fieldList;
+    Json save_data;
+
+    public List<FieldModel> getFieldList() {
+        return fieldList;
+    }
+
+    public void setFieldList(List<FieldModel> fieldList) {
+        this.fieldList = fieldList;
+    }
+
+    public Json getSave_data() {
+        return save_data;
+    }
+
+    public void setSave_data(Json save_data) {
+        this.save_data = save_data;
+    }
 
     public String getId() {
         return id;

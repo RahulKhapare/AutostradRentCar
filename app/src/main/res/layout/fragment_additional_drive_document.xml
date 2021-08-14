@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true">
@@ -129,7 +130,7 @@
                     </androidx.cardview.widget.CardView>
 
                     <androidx.recyclerview.widget.RecyclerView
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="8dp"
                         android:id="@+id/recyclerUploadedDocument"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">

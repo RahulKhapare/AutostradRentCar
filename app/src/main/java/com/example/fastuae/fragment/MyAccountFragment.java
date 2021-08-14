@@ -30,9 +30,11 @@ import com.adoisstudio.helper.Session;
 import com.example.fastuae.R;
 import com.example.fastuae.adapter.AddressSelectionAdapter;
 import com.example.fastuae.adapter.CodeSelectionAdapter;
+import com.example.fastuae.adapter.EmirateSelectionAdapter;
 import com.example.fastuae.databinding.FragmentMyAccountBinding;
 import com.example.fastuae.model.AddressModel;
 import com.example.fastuae.model.CountryCodeModel;
+import com.example.fastuae.model.EmirateModel;
 import com.example.fastuae.util.CheckString;
 import com.example.fastuae.util.Click;
 import com.example.fastuae.util.Config;
@@ -60,7 +62,15 @@ public class MyAccountFragment extends Fragment {
     private String codePrimary = "";
     private String codeSecondary = "";
     private String addressCountryId = "";
+    private String addressCountryName = "";
     private String personalCountryId = "";
+    private String personalCountryName = "";
+
+    private String personalEmirateId = "";
+    private String addressEmirateId = "";
+
+    private List<EmirateModel> listEmirateLocationPerosnal;
+    private List<EmirateModel> listEmirateLocationAddress;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -106,7 +116,6 @@ public class MyAccountFragment extends Fragment {
         lisAddressEmirate.add(modelAddress1);
 
 
-
         JsonList jsonList = Config.countryJsonList;
         for (int i = 0; i < jsonList.size(); i++) {
             Json json = jsonList.get(i);
@@ -142,7 +151,34 @@ public class MyAccountFragment extends Fragment {
         AddressSelectionAdapter adapterPersonalEmirate = new AddressSelectionAdapter(context, lisAddressEmirate);
         binding.spinnerPersonalCountry.setAdapter(adapterPersonalEmirate);
 
-        onClick();
+
+
+        listEmirateLocationPerosnal = new ArrayList<>();
+        listEmirateLocationAddress = new ArrayList<>();
+        EmirateModel emirateModel = new EmirateModel();
+        emirateModel.setEmirate_name(getResources().getString(R.string.selectEmirate));
+        listEmirateLocationPerosnal.add(emirateModel);
+        listEmirateLocationAddress.add(emirateModel);
+        JsonList emirate_list = HomeFragment.emirate_list;
+        if (emirate_list != null && emirate_list.size() != 0) {
+            for (Json json : emirate_list) {
+                String id = json.getString(P.id);
+                String emirate_name = json.getString(P.emirate_name);
+                String status = json.getString(P.status);
+                EmirateModel model = new EmirateModel();
+                model.setId(id);
+                model.setEmirate_name(emirate_name);
+                model.setStatus(status);
+                listEmirateLocationPerosnal.add(model);
+                listEmirateLocationAddress.add(model);
+            }
+        }
+
+        EmirateSelectionAdapter adapterLocation = new EmirateSelectionAdapter(context, listEmirateLocationPerosnal);
+        binding.spinnerEmirateNewPersonal.setAdapter(adapterLocation);
+
+        EmirateSelectionAdapter adapterLocationAddress = new EmirateSelectionAdapter(context, listEmirateLocationAddress);
+        binding.spinnerAddressEmirate.setAdapter(adapterLocationAddress);
 
         setDateTimeField(binding.etxBirtDate);
         binding.etxBirtDate.setFocusable(false);
@@ -156,6 +192,7 @@ public class MyAccountFragment extends Fragment {
             }
         });
 
+        onClick();
         hitPersonalDetails();
         hitAddressDetails();
 
@@ -194,8 +231,17 @@ public class MyAccountFragment extends Fragment {
                 AddressModel model = lisAddressEmirate.get(position);
                 if (!model.getCountry_name().equals(getResources().getString(R.string.country))){
                     personalCountryId = model.getId();
+                    personalCountryName = model.getCountry_name();
                 }else {
                     personalCountryId = "";
+                    personalCountryName = "";
+                }
+
+                if (personalCountryName.equals(Config.UAE)){
+                    binding.lnrEmirateNewPersonal.setVisibility(View.VISIBLE);
+                }else {
+                    personalEmirateId = "";
+                    binding.lnrEmirateNewPersonal.setVisibility(View.GONE);
                 }
             }
 
@@ -205,14 +251,58 @@ public class MyAccountFragment extends Fragment {
             }
         });
 
+        binding.spinnerEmirateNewPersonal.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                EmirateModel model = listEmirateLocationPerosnal.get(position);
+                if (!TextUtils.isEmpty(model.getId()) && !model.getId().equals("")){
+                    personalEmirateId = model.getId();
+                }else {
+                    personalEmirateId = "";
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
         binding.spinnerAddressCountry.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 AddressModel model = lisAddressEmirate.get(position);
                 if (!model.getCountry_name().equals(getResources().getString(R.string.country))){
                     addressCountryId = model.getId();
+                    addressCountryName = model.getCountry_name();
                 }else {
                     addressCountryId = "";
+                    addressCountryName = "";
+                }
+
+                if (addressCountryName.equals(Config.UAE)){
+                    binding.lnrAddressEmirate.setVisibility(View.VISIBLE);
+                }else {
+                    addressCountryName = "";
+                    binding.lnrAddressEmirate.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        binding.spinnerAddressEmirate.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                EmirateModel model = listEmirateLocationAddress.get(position);
+                if (!TextUtils.isEmpty(model.getId()) && !model.getId().equals("")){
+                    addressEmirateId = model.getId();
+                }else {
+                    addressEmirateId = "";
                 }
             }
 
@@ -316,6 +406,11 @@ public class MyAccountFragment extends Fragment {
         }else if (TextUtils.isEmpty(addressCountryId)) {
             value = false;
             H.showMessage(context, getResources().getString(R.string.country));
+        }else if (binding.lnrAddressEmirate.getVisibility()==View.VISIBLE){
+            if (TextUtils.isEmpty(addressEmirateId)) {
+                value = false;
+                H.showMessage(context, getResources().getString(R.string.selectEmirate));
+            }
         }
         return value;
     }
@@ -346,6 +441,11 @@ public class MyAccountFragment extends Fragment {
         }else if (TextUtils.isEmpty(personalCountryId)){
             value = false;
             H.showMessage(context, getResources().getString(R.string.country));
+        }else if (binding.lnrEmirateNewPersonal.getVisibility()==View.VISIBLE){
+            if (TextUtils.isEmpty(personalEmirateId)) {
+                value = false;
+                H.showMessage(context, getResources().getString(R.string.selectEmirate));
+            }
         }
 
         return value;
@@ -391,8 +491,14 @@ public class MyAccountFragment extends Fragment {
             binding.imgEmirateRight.setVisibility(View.GONE);
             binding.imgEmirateLeft.setVisibility(View.VISIBLE);
 
+            binding.imgEmirateNewPersonalRight.setVisibility(View.GONE);
+            binding.imgEmirateNewPersonalLeft.setVisibility(View.VISIBLE);
+
             binding.imgPersonalEmirateRight.setVisibility(View.GONE);
             binding.imgPersonalEmirateLeft.setVisibility(View.VISIBLE);
+
+            binding.imgEmirateAddressRight.setVisibility(View.GONE);
+            binding.imgEmirateAddressLeft.setVisibility(View.VISIBLE);
 
         } else if (flag.equals(Config.ENGLISH)) {
 
@@ -408,8 +514,14 @@ public class MyAccountFragment extends Fragment {
             binding.imgEmirateRight.setVisibility(View.VISIBLE);
             binding.imgEmirateLeft.setVisibility(View.GONE);
 
+            binding.imgEmirateNewPersonalRight.setVisibility(View.VISIBLE);
+            binding.imgEmirateNewPersonalLeft.setVisibility(View.GONE);
+
             binding.imgPersonalEmirateRight.setVisibility(View.VISIBLE);
             binding.imgPersonalEmirateLeft.setVisibility(View.GONE);
+
+            binding.imgEmirateAddressRight.setVisibility(View.VISIBLE);
+            binding.imgEmirateAddressLeft.setVisibility(View.GONE);
         }
 
     }
@@ -583,6 +695,15 @@ public class MyAccountFragment extends Fragment {
                             }
                         }
 
+                        JsonList emirate_list = HomeFragment.emirate_list;
+                        for (int i = 0; i < emirate_list.size(); i++) {
+                            Json jsonData = emirate_list.get(i);
+                            if (jsonData.getString(P.id).equalsIgnoreCase(emirate_id)) {
+                                binding.spinnerEmirateNewPersonal.setSelection(i+1);
+                            }
+                        }
+
+
                     }else {
                         H.showMessage(context,json.getString(P.error));
                     }
@@ -611,7 +732,7 @@ public class MyAccountFragment extends Fragment {
         j.addString(P.user_alt_country_code,codeSecondary);
         j.addString(P.user_alt_mobile,binding.etxAlternameNumber.getText().toString().trim());
         j.addString(P.country_id,personalCountryId);
-        j.addString(P.emirate_id,"");
+        j.addString(P.emirate_id,personalEmirateId);
 
         Api.newApi(context, P.BaseUrl + "update_user_data").addJson(j)
                 .setMethod(Api.POST)

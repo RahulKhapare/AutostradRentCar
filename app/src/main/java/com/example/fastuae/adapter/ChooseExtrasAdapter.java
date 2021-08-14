@@ -77,11 +77,17 @@ public class ChooseExtrasAdapter extends RecyclerView.Adapter<ChooseExtrasAdapte
         }
 
         if (model.getTitle().contains("Baby Seater")){
-            LoadImage.glide(context,holder.binding.imgExtra,context.getResources().getDrawable(R.drawable.ic_baby_seat));
-        }else if (model.getTitle().contains("GPS")){
-            LoadImage.glide(context,holder.binding.imgExtra,context.getResources().getDrawable(R.drawable.ic_gps));
+            LoadImage.glide(context,holder.binding.imgExtra,context.getResources().getDrawable(R.drawable.ic_baby_seat_new));
+        }else if (model.getTitle().contains("Navigation System") || model.getTitle().contains("GPS")){
+            LoadImage.glide(context,holder.binding.imgExtra,context.getResources().getDrawable(R.drawable.ic_gps_new));
         }else if (model.getTitle().contains("Additional Driver")){
-            LoadImage.glide(context,holder.binding.imgExtra,context.getResources().getDrawable(R.drawable.ic_driver));
+            LoadImage.glide(context,holder.binding.imgExtra,context.getResources().getDrawable(R.drawable.ic_drive_new));
+        }else if (model.getTitle().contains("CDW")){
+            LoadImage.glide(context,holder.binding.imgExtra,context.getResources().getDrawable(R.drawable.ic_cdw_new));
+        }else if (model.getTitle().contains("Super Collision Damage Waiver")){
+            LoadImage.glide(context,holder.binding.imgExtra,context.getResources().getDrawable(R.drawable.ic_scdw_new));
+        }else if (model.getTitle().contains("PAI")){
+            LoadImage.glide(context,holder.binding.imgExtra,context.getResources().getDrawable(R.drawable.ic_pai_new));
         }else {
             holder.binding.imgExtra.setVisibility(View.GONE);
         }

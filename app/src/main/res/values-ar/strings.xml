@@ -510,6 +510,16 @@
     <string name="docMessage">هل سيساعدك شخص ما في القيادة؟ أدخل وثيقتهم هنا.</string>
     <string name="uploadNow">تحميل الآن</string>
     <string name="uploadNew">تحميل مستند جديد</string>
+    <string name="numberColun">عدد:</string>
+    <string name="expDateColun">تاريخ انتهاء الصلاحية:</string>
+    <string name="idNumber">رقم الهوية</string>
+    <string name="docFile">ملف المستند</string>
+    <string name="uploadDoc">تحميل المستند</string>
+    <string name="update">تحديث</string>
+    <string name="enterIDNo">أدخل رقم الهوية</string>
+    <string name="selectExpDate">حدد تاريخ انتهاء الصلاحية</string>
+    <string name="uplaodDoc">الرجاء تحميل الوثيقة</string>
+    <string name="autostradCar">أوتوستراد لتأجير السيارات</string>
 
     <string name="txt1">شركة رائدة في مجال تأجير السيارات ولديها أكبر شبكة من الفروع ونقاط الالتقاء</string>
     <string name="txt2">شركة رائدة في مجال تأجير السيارات ولديها أكبر شبكة من الفروع ونقاط الالتقاء</string>

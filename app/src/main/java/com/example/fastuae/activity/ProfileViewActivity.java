@@ -50,12 +50,14 @@ import com.example.fastuae.fragment.RefundFragment;
 import com.example.fastuae.fragment.SalikChargesFragment;
 import com.example.fastuae.fragment.TrafficLinesFragment;
 import com.example.fastuae.model.ImagePathModel;
+import com.example.fastuae.util.Click;
 import com.example.fastuae.util.Config;
 import com.example.fastuae.util.LoadImage;
 import com.example.fastuae.util.P;
 import com.example.fastuae.util.PdfDownloader;
 import com.example.fastuae.util.ProgressView;
 import com.example.fastuae.util.WindowView;
+import com.github.chrisbanes.photoview.PhotoView;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -390,11 +392,12 @@ public class ProfileViewActivity extends AppCompatActivity{
                         imagePathModelList.add(model);
                         textViewDocumnt.setText(getResources().getString(R.string.uploaded) + " " +documentName);
                         txtImagePath.setText(getResources().getString(R.string.imagePath) + " " +image);
+                        txtImagePath.setTag(image);
                         txtImagePath.setVisibility(View.VISIBLE);
                         txtImagePath.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                documentDialog(image_url);
+                                viewDialog(image_url);
                             }
                         });
                         H.showMessage(activity,getResources().getString(R.string.imageUploaded));
@@ -419,6 +422,32 @@ public class ProfileViewActivity extends AppCompatActivity{
         dialog.show();
         dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+
+    }
+
+    private void viewDialog(String imagePath) {
+
+        final Dialog dialog = new Dialog(activity);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.activity_image_view);
+
+        PhotoView imageView = dialog.findViewById(R.id.imageView);
+        ImageView imgClose = dialog.findViewById(R.id.imgClose);
+
+        LoadImage.glideString(activity,imageView,imagePath);
+
+        imgClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                dialog.dismiss();
+            }
+        });
+
+        dialog.setCancelable(true);
+        dialog.show();
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.white);
+        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
 
     }
 
