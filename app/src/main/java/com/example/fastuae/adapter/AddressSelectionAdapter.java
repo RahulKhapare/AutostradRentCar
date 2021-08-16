@@ -48,7 +48,7 @@ public class AddressSelectionAdapter extends BaseAdapter {
         if (i==0){
             txtName.setTextColor(context.getResources().getColor(R.color.iconicGray));
         }else {
-            txtName.setTextColor(context.getResources().getColor(R.color.colorPrimaryDark));
+            txtName.setTextColor(context.getResources().getColor(R.color.textDark));
         }
         return view;
     }

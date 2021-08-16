@@ -157,6 +157,9 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Emir
     Json jsonChild;
     boolean updateFlag = true;
 
+    String personalCountryId;
+    String personalEmirateId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -941,6 +944,9 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Emir
                         json = json.getJson(P.data);
                         json = json.getJson(P.user);
 
+                        personalCountryId = json.getString(P.country_id);
+                        personalEmirateId = json.getString(P.emirate_id);
+
                         binding.etxFirstName.setText(CheckString.check(json.getString(P.user_name)));
                         binding.etxLastName.setText(CheckString.check(json.getString(P.user_lastname)));
                         binding.etxEmail.setText(CheckString.check(json.getString(P.user_email)));
@@ -1588,7 +1594,8 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Emir
         j.addString(P.user_mobile, binding.etxNumber.getText().toString().trim());
         j.addString(P.user_alt_country_code, codeSecondary);
         j.addString(P.user_alt_mobile, binding.etxAlternameNumber.getText().toString().trim());
-
+        j.addString(P.country_id,personalCountryId);
+        j.addString(P.emirate_id,personalEmirateId);
 
         Api.newApi(activity, P.BaseUrl + "update_user_data").addJson(j)
                 .setMethod(Api.POST)
@@ -2132,6 +2139,9 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Emir
         }
         j.addString(P.dropoff_date, SelectCarActivity.dropUpDate);
         j.addString(P.dropoff_time, SelectCarActivity.dropUpTime);
+
+        j.addString(P.pickup_delivery_check, "1");
+        j.addString(P.dropoff_delivery_check, "1");
 
         JSONArray array = new JSONArray();
         for (Json jsonData : AddOnsActivity.jsonAddOnsList) {

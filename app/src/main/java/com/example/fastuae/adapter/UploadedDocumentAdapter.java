@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -43,7 +44,7 @@ public class UploadedDocumentAdapter extends RecyclerView.Adapter<UploadedDocume
     }
 
     public interface onClick {
-        void documentUploadedEdit(UploadedDocumentModel model,int position);
+        void documentUploadedEdit(UploadedDocumentModel model);
         void documentUploadedDelete(UploadedDocumentModel model);
         void documentUploadedView(UploadedDocumentModel model);
     }
@@ -61,8 +62,26 @@ public class UploadedDocumentAdapter extends RecyclerView.Adapter<UploadedDocume
 
         LoadImage.glideString(context,holder.binding.imgDocument,model.getImage_url());
         holder.binding.txtTitle.setText(checkString(model.getTitle()));
-        holder.binding.txtNumber.setText(checkString(model.getId_number()));
-        holder.binding.txtExpDate.setText(checkString(getFormatDate(model.getExpiry())));
+
+        try {
+            String value = model.getField().getString(0);
+            String hint = value.replace("_"," ");
+            String upperString = hint.substring(0, 1).toUpperCase() + hint.substring(1).toLowerCase();
+            holder.binding.txtNumTitle.setText(wordCapitalize(upperString) +":");
+            if (model.getJsonAllData().has(value)){
+                if (upperString.contains("date") || upperString.contains("Date") || upperString.contains("DATE")){
+                    holder.binding.txtNumber.setText(checkString(getFormatDate(model.getJsonAllData().getString(value)),holder.binding.lnrNumber));
+                }else {
+                    holder.binding.txtNumber.setText(checkString(model.getJsonAllData().getString(value),holder.binding.lnrNumber));
+                }
+            }else {
+                holder.binding.txtNumber.setText(checkString("",holder.binding.lnrNumber));
+            }
+        }catch (Exception e){
+            holder.binding.txtNumber.setText(checkString("",holder.binding.lnrNumber));
+        }
+
+        holder.binding.txtExpDate.setText(checkString(getFormatDate(model.getExpiry()),holder.binding.lnrExpire));
 
         holder.binding.imgDocument.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,7 +95,7 @@ public class UploadedDocumentAdapter extends RecyclerView.Adapter<UploadedDocume
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-                ((AdditionalDriverDocumentFragment)fragment).documentUploadedEdit(model,position);
+                ((AdditionalDriverDocumentFragment)fragment).documentUploadedEdit(model);
             }
         });
 
@@ -113,6 +132,16 @@ public class UploadedDocumentAdapter extends RecyclerView.Adapter<UploadedDocume
         return capMatcher.appendTail(capBuffer).toString();
     }
 
+    private String checkString(String string, LinearLayout lnr){
+        String value = "";
+        if (string!=null && !string.equals("null") && !string.equals("")){
+            value = string;
+        }else {
+            lnr.setVisibility(View.GONE);
+        }
+        return value;
+    }
+
     private String checkString(String string){
         String value = "";
         if (string!=null && !string.equals("null") && !string.equals("")){
@@ -137,4 +166,30 @@ public class UploadedDocumentAdapter extends RecyclerView.Adapter<UploadedDocume
         return app_date;
     }
 
+    public String wordCapitalize(String words)
+    {
+
+        String str = "";
+        boolean isCap = false;
+
+        for(int i = 0; i < words.length(); i++){
+
+            if(isCap){
+                str +=  words.toUpperCase().charAt(i);
+            }else{
+                if(i==0){
+                    str +=  words.toUpperCase().charAt(i);
+                }else {
+                    str += words.toLowerCase().charAt(i);
+                }
+            }
+
+            if(words.charAt(i)==' '){
+                isCap = true;
+            }else{
+                isCap = false;
+            }
+        }
+        return str;
+    }
 }

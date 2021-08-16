@@ -231,7 +231,7 @@ public class ContactUsActivity extends AppCompatActivity implements LocationList
     private void hitLocationData(String emirateID) {
         contactModelList.clear();
         ProgressView.show(activity,loadingDialog);
-        Api.newApi(activity, P.BaseUrl + "location"+"emirate_id=" + emirateID)
+        Api.newApi(activity, P.BaseUrl + "location?"+"emirate_id=" + emirateID)
                 .setMethod(Api.GET)
 //                .onHeaderRequest(App::getHeaders)
                 .onError(() -> {

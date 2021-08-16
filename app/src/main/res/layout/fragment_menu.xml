@@ -403,6 +403,136 @@
                 android:layout_marginBottom="5dp"
                 android:background="@color/customeGray"></LinearLayout>
 
+            <RelativeLayout
+                android:id="@+id/lnrBlog"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:src="@drawable/ic_about">
+
+                    </ImageView>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/textDark"
+                        android:gravity="center_vertical"
+                        android:layout_gravity="center_vertical"
+                        android:fontFamily="@font/nunito_sans_regular"
+                        android:text="@string/blog"
+                        android:textSize="18sp">
+                    </TextView>
+
+                </LinearLayout>
+
+
+                <ImageView
+                    android:id="@+id/imgBlogRight"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginRight="15dp"
+                    android:src="@drawable/ic_right_arrow"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true">
+                </ImageView>
+
+                <ImageView
+                    android:id="@+id/imgBlogLeft"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="15dp"
+                    android:src="@drawable/ic_left_arrow"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:visibility="gone">
+                </ImageView>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@color/customeGray"></LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/lnrAboutUAE"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:src="@drawable/ic_about">
+
+                    </ImageView>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/textDark"
+                        android:gravity="center_vertical"
+                        android:layout_gravity="center_vertical"
+                        android:fontFamily="@font/nunito_sans_regular"
+                        android:text="@string/aboutUAE"
+                        android:textSize="18sp">
+                    </TextView>
+
+                </LinearLayout>
+
+
+                <ImageView
+                    android:id="@+id/imgUAERight"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginRight="15dp"
+                    android:src="@drawable/ic_right_arrow"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true">
+                </ImageView>
+
+                <ImageView
+                    android:id="@+id/imgUAELeft"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="15dp"
+                    android:src="@drawable/ic_left_arrow"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:visibility="gone">
+                </ImageView>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@color/customeGray"></LinearLayout>
+
 
             <RelativeLayout
                 android:id="@+id/lnrContactUs"
@@ -726,6 +856,200 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
                 android:background="@color/customeGray"></LinearLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/lnrCustFeedback"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:src="@drawable/ic_feedback">
+
+                    </ImageView>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/textDark"
+                        android:gravity="center_vertical"
+                        android:layout_gravity="center_vertical"
+                        android:fontFamily="@font/nunito_sans_regular"
+                        android:text="@string/customerFeedback"
+                        android:textSize="18sp">
+                    </TextView>
+
+                </LinearLayout>
+
+
+                <ImageView
+                    android:id="@+id/imgCustFeedbackRight"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginRight="15dp"
+                    android:src="@drawable/ic_right_arrow"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true">
+                </ImageView>
+
+                <ImageView
+                    android:id="@+id/imgCustFeedbackLeft"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="15dp"
+                    android:src="@drawable/ic_left_arrow"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:visibility="gone">
+                </ImageView>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@color/customeGray"></LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/lnrTermCondition"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:src="@drawable/ic_term">
+
+                    </ImageView>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/textDark"
+                        android:gravity="center_vertical"
+                        android:layout_gravity="center_vertical"
+                        android:fontFamily="@font/nunito_sans_regular"
+                        android:text="@string/termConditions"
+                        android:textSize="18sp">
+                    </TextView>
+
+                </LinearLayout>
+
+
+                <ImageView
+                    android:id="@+id/imgTermRight"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginRight="15dp"
+                    android:src="@drawable/ic_right_arrow"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true">
+                </ImageView>
+
+                <ImageView
+                    android:id="@+id/imgTermLeft"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="15dp"
+                    android:src="@drawable/ic_left_arrow"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:visibility="gone">
+                </ImageView>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@color/customeGray"></LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/lnrPrivacy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:src="@drawable/ic_privacy">
+
+                    </ImageView>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/textDark"
+                        android:gravity="center_vertical"
+                        android:layout_gravity="center_vertical"
+                        android:fontFamily="@font/nunito_sans_regular"
+                        android:text="@string/privacyPolicy"
+                        android:textSize="18sp">
+                    </TextView>
+
+                </LinearLayout>
+
+
+                <ImageView
+                    android:id="@+id/imgPrivacyRight"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginRight="15dp"
+                    android:src="@drawable/ic_right_arrow"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true">
+                </ImageView>
+
+                <ImageView
+                    android:id="@+id/imgPrivacyLeft"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="15dp"
+                    android:src="@drawable/ic_left_arrow"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:visibility="gone">
+                </ImageView>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@color/customeGray"></LinearLayout>
+
 
 
         </LinearLayout>

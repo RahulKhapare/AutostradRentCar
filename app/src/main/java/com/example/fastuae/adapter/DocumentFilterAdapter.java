@@ -1,6 +1,8 @@
 package com.example.fastuae.adapter;
 
 import android.content.Context;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.adoisstudio.helper.H;
 import com.example.fastuae.R;
 import com.example.fastuae.databinding.ActivityCarFilterListBinding;
 import com.example.fastuae.fragment.AdditionalDriverDocumentFragment;
@@ -23,16 +26,18 @@ public class DocumentFilterAdapter extends RecyclerView.Adapter<DocumentFilterAd
     private List<DocumentFilterModel> documentFilterModelList;
     private AdditionalDriverDocumentFragment fragment;
     private boolean firstValue;
+    private String filterTitle;
 
     public interface onClick {
         void onFilterClick(DocumentFilterModel model);
     }
 
-    public DocumentFilterAdapter(Context context, List<DocumentFilterModel> documentFilterModelList, AdditionalDriverDocumentFragment fragment, boolean firstValue) {
+    public DocumentFilterAdapter(Context context, List<DocumentFilterModel> documentFilterModelList, AdditionalDriverDocumentFragment fragment, boolean firstValue,String filterTitle) {
         this.context = context;
         this.documentFilterModelList = documentFilterModelList;
         this.fragment = fragment;
         this.firstValue = firstValue;
+        this.filterTitle = filterTitle;
     }
 
     @NonNull
@@ -55,10 +60,18 @@ public class DocumentFilterAdapter extends RecyclerView.Adapter<DocumentFilterAd
             }
         });
 
-        if (firstValue){
+        if (!filterTitle.equals("")){
             firstValue = false;
-            ((AdditionalDriverDocumentFragment)fragment).onFilterClick(model);
+            if (model.getTitle().equals(filterTitle)){
+                ((AdditionalDriverDocumentFragment)fragment).onFilterClick(model);
+            }
+        }else {
+            if (firstValue){
+                firstValue = false;
+                ((AdditionalDriverDocumentFragment)fragment).onFilterClick(model);
+            }
         }
+
     }
 
     @Override

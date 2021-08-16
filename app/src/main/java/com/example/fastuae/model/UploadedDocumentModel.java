@@ -32,9 +32,18 @@ public class UploadedDocumentModel {
     String title;
     JSONArray field;
     JSONArray field_for;
+    Json jsonAllData;
 
     List<FieldModel> fieldList;
     Json save_data;
+
+    public Json getJsonAllData() {
+        return jsonAllData;
+    }
+
+    public void setJsonAllData(Json jsonAllData) {
+        this.jsonAllData = jsonAllData;
+    }
 
     public List<FieldModel> getFieldList() {
         return fieldList;

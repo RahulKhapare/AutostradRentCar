@@ -174,7 +174,7 @@
     <string name="estimatedTotal">Estimated Total</string>
     <string name="ade100">ADE 100</string>
     <string name="baseFree">(Base Free + Taxes Free)</string>
-    <string name="termConditions">Term And Conditions</string>
+    <string name="termConditions">Term &amp; Conditions</string>
     <string name="upgradeAvailable">Upgrade Availability</string>
     <string name="enterYourDetails">Enter your details</string>
     <string name="driversInformation">Drivers Information</string>
@@ -522,7 +522,10 @@
     <string name="selectExpDate">Select Expiry Date</string>
     <string name="uplaodDoc">Please upload document</string>
     <string name="autostradCar">Autostrad Rent a Car</string>
-
+    <string name="blog">Blog</string>
+    <string name="customerFeedback">Customer Feedback</string>
+    <string name="privacyPolicy">Privacy Policy</string>
+    <string name="aboutUAE">About UAE</string>
 
     <string name="txt1">Leading Car Rental Company with the largest network of Branches &amp; Pickup points</string>
     <string name="txt2">Leading Car Rental Company with the largest network of Branches &amp; Pickup points</string>

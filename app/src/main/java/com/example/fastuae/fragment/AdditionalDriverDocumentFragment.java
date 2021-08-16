@@ -1,12 +1,10 @@
 package com.example.fastuae.fragment;
 
 import android.app.AlertDialog;
-import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,8 +12,6 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -33,12 +29,10 @@ import com.adoisstudio.helper.Session;
 import com.example.fastuae.R;
 import com.example.fastuae.activity.ProfileViewActivity;
 import com.example.fastuae.adapter.DocumentEditAdapter;
-import com.example.fastuae.adapter.DocumentFieldAdapter;
 import com.example.fastuae.adapter.DocumentFilterAdapter;
 import com.example.fastuae.adapter.PendingDocumentAdapter;
 import com.example.fastuae.adapter.UploadedDocumentAdapter;
 import com.example.fastuae.databinding.FragmentAdditionalDriveDocumentBinding;
-import com.example.fastuae.model.AdditionalDriverModel;
 import com.example.fastuae.model.DocumentFilterModel;
 import com.example.fastuae.model.FieldModel;
 import com.example.fastuae.model.ImagePathModel;
@@ -51,12 +45,7 @@ import com.example.fastuae.util.P;
 import com.example.fastuae.util.ProgressView;
 import com.github.chrisbanes.photoview.PhotoView;
 
-import org.json.JSONException;
-
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -82,6 +71,11 @@ public class AdditionalDriverDocumentFragment extends Fragment implements Docume
     Json jsonMain;
     Json jsonChild;
     boolean updateFlag = true;
+
+    public static boolean forAddData = false;
+    private boolean upadateData = false;
+
+    private String filterTitle = "";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -110,6 +104,9 @@ public class AdditionalDriverDocumentFragment extends Fragment implements Docume
 
     private void initView() {
 
+        upadateData = false;
+        forAddData = false;
+
         driver_id = Config.driverIDFORDOC;
 
         loadingDialog = new LoadingDialog(context);
@@ -118,7 +115,7 @@ public class AdditionalDriverDocumentFragment extends Fragment implements Docume
         flag = session.getString(P.languageFlag);
 
         documentFilterModelList = new ArrayList<>();
-        documentFilterAdapter = new DocumentFilterAdapter(context, documentFilterModelList, AdditionalDriverDocumentFragment.this, true);
+        documentFilterAdapter = new DocumentFilterAdapter(context, documentFilterModelList, AdditionalDriverDocumentFragment.this, true, filterTitle);
         binding.recyclerDocFilter.setLayoutManager(new LinearLayoutManager(context));
         binding.recyclerDocFilter.setNestedScrollingEnabled(false);
         binding.recyclerDocFilter.setAdapter(documentFilterAdapter);
@@ -137,11 +134,21 @@ public class AdditionalDriverDocumentFragment extends Fragment implements Docume
         binding.recyclerPendingDocument.setNestedScrollingEnabled(false);
         binding.recyclerPendingDocument.setAdapter(pendingDocumentAdapter);
 
-        checkView();
         onClick();
+        checkView();
         hitDocumentData(driver_id);
 
     }
+
+    public void callBackAdd() {
+        if (forAddData) {
+            forAddData = false;
+            binding.lnrUploadedDetailsView.setVisibility(View.VISIBLE);
+            binding.lnrUploadingListView.setVisibility(View.GONE);
+            return;
+        }
+    }
+
 
     private void onClick() {
         binding.cardLocation.setOnClickListener(new View.OnClickListener() {
@@ -156,8 +163,11 @@ public class AdditionalDriverDocumentFragment extends Fragment implements Docume
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
+                forAddData = true;
+                upadateData = true;
                 binding.lnrUploadedDetailsView.setVisibility(View.GONE);
                 binding.lnrUploadingListView.setVisibility(View.VISIBLE);
+                binding.nestedScroll.fullScroll(View.FOCUS_UP);
             }
         });
 
@@ -202,12 +212,12 @@ public class AdditionalDriverDocumentFragment extends Fragment implements Docume
     @Override
     public void onFilterClick(DocumentFilterModel model) {
         checkView();
+        filterTitle = model.getTitle();
         binding.txtArea.setText(model.getTitle());
-//        applyFilter(model);
-
+        applyFilter(model);
     }
 
-    private void applyFilter(DocumentFilterModel model){
+    private void applyFilter(DocumentFilterModel model) {
         try {
             List<UploadedDocumentModel> docList = new ArrayList<>();
             for (int i = 0; i < model.getDocument_key().length(); i++) {
@@ -219,8 +229,11 @@ public class AdditionalDriverDocumentFragment extends Fragment implements Docume
                 }
                 updateDocumentList(docList);
             }
-            if (docList.isEmpty()){
-                H.showMessage(context,getResources().getString(R.string.noDataFound));
+            if (docList.isEmpty()) {
+//                H.showMessage(context, getResources().getString(R.string.noDataFound));
+                binding.txtErrorData.setVisibility(View.VISIBLE);
+            }else {
+                binding.txtErrorData.setVisibility(View.GONE);
             }
         } catch (Exception e) {
             H.showMessage(context, getResources().getString(R.string.somethingWrong));
@@ -237,15 +250,19 @@ public class AdditionalDriverDocumentFragment extends Fragment implements Docume
     }
 
     @Override
-    public void documentUploadedEdit(UploadedDocumentModel model, int position) {
+    public void documentUploadedEdit(UploadedDocumentModel model) {
+        forAddData = false;
+        upadateData = true;
         goneView();
-//        documentEditDialog(model,position);
+        documentEditDialog(model);
     }
 
     @Override
     public void documentUploadedDelete(UploadedDocumentModel model) {
+        forAddData = false;
+        upadateData = true;
         goneView();
-//        documentDeleteDialog(model, getResources().getString(R.string.deleteDocMessage));
+        documentDeleteDialog(model, getResources().getString(R.string.deleteDocMessage));
     }
 
     @Override
@@ -286,7 +303,7 @@ public class AdditionalDriverDocumentFragment extends Fragment implements Docume
 
     }
 
-    private void documentEditDialog(UploadedDocumentModel model, int position) {
+    private void documentEditDialog(UploadedDocumentModel model) {
 
         final Dialog dialog = new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -299,6 +316,7 @@ public class AdditionalDriverDocumentFragment extends Fragment implements Docume
         RecyclerView recyclerExtraFields = dialog.findViewById(R.id.recyclerExtraFields);
         txtTitle.setText(getResources().getString(R.string.update) + " " + checkString(model.getTitle()));
 
+        txtUploadedPath.setText(model.getImage());
         List<FieldModel> fieldList = new ArrayList<>();
         try {
             for (int i = 0; i < model.getField().length(); i++) {
@@ -311,7 +329,7 @@ public class AdditionalDriverDocumentFragment extends Fragment implements Docume
         }
 
         model.setFieldList(fieldList);
-        DocumentEditAdapter documentEditAdapter = new DocumentEditAdapter(context, model.getFieldList(), new Json(), model.getSave_data(), 2);
+        DocumentEditAdapter documentEditAdapter = new DocumentEditAdapter(context, model.getFieldList(), new Json(), model.getSave_data(), 2, model.getJsonAllData(),model.getImage());
         recyclerExtraFields.setLayoutManager(new LinearLayoutManager(context));
         recyclerExtraFields.setHasFixedSize(true);
         recyclerExtraFields.setNestedScrollingEnabled(true);
@@ -337,7 +355,7 @@ public class AdditionalDriverDocumentFragment extends Fragment implements Docume
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-                checkEditDocument(dialog, position);
+                checkEditDocument(dialog, model);
             }
         });
 
@@ -396,8 +414,9 @@ public class AdditionalDriverDocumentFragment extends Fragment implements Docume
 
                         uploadedDocumentModelList.clear();
                         pendingDocumentModelList.clear();
+                        documentFilterModelList.clear();
 
-                        uploadedDocumentAdapter.notifyDataSetChanged();
+                        updateDocumentList(uploadedDocumentModelList);
                         pendingDocumentAdapter.notifyDataSetChanged();
 
                         Json data = json.getJson(P.data);
@@ -407,23 +426,6 @@ public class AdditionalDriverDocumentFragment extends Fragment implements Docume
                         JsonList pending_document = document.getJsonList(P.pending_document);
                         JsonList all_document = document.getJsonList(P.all_document);
                         JsonList filter_document_document = document.getJsonList(P.filter_document_document);
-
-                        if (filter_document_document != null && filter_document_document.size() != 0) {
-                            for (Json jsonValue : filter_document_document) {
-                                DocumentFilterModel model = new DocumentFilterModel();
-                                model.setTitle(jsonValue.getString("title"));
-                                model.setDocument_key(jsonValue.getJsonArray("document_key"));
-                                model.setField_for(jsonValue.getJsonArray("field_for"));
-                                documentFilterModelList.add(model);
-                            }
-                            documentFilterAdapter.notifyDataSetChanged();
-                        }
-
-                        if (documentFilterModelList.isEmpty()) {
-                            binding.lnrFilterView.setVisibility(View.GONE);
-                        } else {
-                            binding.lnrFilterView.setVisibility(View.VISIBLE);
-                        }
 
                         if (uploaded_document != null && uploaded_document.size() != 0) {
 //                            Log.e("TAG", "hitDocumentDataASASAS: "+uploaded_document.toString()  );
@@ -454,6 +456,7 @@ public class AdditionalDriverDocumentFragment extends Fragment implements Docume
                                 model.setTitle(jsonValue.getString("title"));
                                 model.setField(jsonValue.getJsonArray("field"));
                                 model.setField_for(jsonValue.getJsonArray("field_for"));
+                                model.setJsonAllData(jsonValue);
                                 try {
                                     model.setSave_data(jsonValue.getJson(P.save_data));
                                 } catch (Exception e) {
@@ -484,6 +487,12 @@ public class AdditionalDriverDocumentFragment extends Fragment implements Docume
                             pendingDocumentAdapter.notifyDataSetChanged();
                         }
 
+                        if (pendingDocumentModelList.isEmpty()){
+                            binding.txtUploadDocument.setVisibility(View.GONE);
+                        }else {
+                            binding.txtUploadDocument.setVisibility(View.VISIBLE);
+                        }
+
                         if (uploadedDocumentModelList.isEmpty()) {
                             binding.lnrUploadedDetailsView.setVisibility(View.GONE);
                             binding.lnrUploadingListView.setVisibility(View.VISIBLE);
@@ -491,6 +500,31 @@ public class AdditionalDriverDocumentFragment extends Fragment implements Docume
                             binding.lnrUploadedDetailsView.setVisibility(View.VISIBLE);
                             binding.lnrUploadingListView.setVisibility(View.GONE);
                         }
+
+                        if (filter_document_document != null && filter_document_document.size() != 0) {
+                            for (Json jsonValue : filter_document_document) {
+                                DocumentFilterModel model = new DocumentFilterModel();
+                                model.setTitle(jsonValue.getString("title"));
+                                model.setDocument_key(jsonValue.getJsonArray("document_key"));
+                                model.setField_for(jsonValue.getJsonArray("field_for"));
+                                documentFilterModelList.add(model);
+                            }
+                            DocumentFilterAdapter documentFilterAdapter = new DocumentFilterAdapter(context, documentFilterModelList, AdditionalDriverDocumentFragment.this, true, filterTitle);
+                            binding.recyclerDocFilter.setLayoutManager(new LinearLayoutManager(context));
+                            binding.recyclerDocFilter.setNestedScrollingEnabled(false);
+                            binding.recyclerDocFilter.setAdapter(documentFilterAdapter);
+                            if (upadateData){
+                                upadateData = false;
+                                binding.cardLocation.performClick();
+                            }
+                        }
+
+                        if (documentFilterModelList.isEmpty()) {
+                            binding.lnrFilterView.setVisibility(View.GONE);
+                        } else {
+                            binding.lnrFilterView.setVisibility(View.VISIBLE);
+                        }
+
 
                         checkData();
 
@@ -585,24 +619,26 @@ public class AdditionalDriverDocumentFragment extends Fragment implements Docume
         }
     }
 
-    private void checkEditDocument(Dialog dialog, int position) {
+    private void checkEditDocument(Dialog dialog, UploadedDocumentModel dataModel) {
 
         updateFlag = true;
         jsonMain = new Json();
         jsonChild = new Json();
 
         try {
-            UploadedDocumentModel model = uploadedDocumentModelList.get(position);
+            UploadedDocumentModel model = dataModel;
             jsonMain.addString("driver_id", driver_id);
             for (FieldModel fieldModel : model.getFieldList()) {
 
-                for (ImagePathModel imageModel : ProfileViewActivity.imagePathModelList) {
-                    if (imageModel.getTitle().equals(model.getTitle())) {
-                        if (fieldModel.getJson().has(P.image)) {
-                            fieldModel.getJson().remove(P.image);
-                            fieldModel.getJson().addString(P.image, imageModel.getPath());
-                        } else {
-                            fieldModel.getJson().addString(P.image, imageModel.getPath());
+                if (ProfileViewActivity.imagePathModelList!=null && !ProfileViewActivity.imagePathModelList.isEmpty() && ProfileViewActivity.imagePathModelList.size()!=0) {
+                    for (ImagePathModel imageModel : ProfileViewActivity.imagePathModelList) {
+                        if (imageModel.getTitle().equals(model.getTitle())) {
+                            if (fieldModel.getJson().has(P.image)) {
+                                fieldModel.getJson().remove(P.image);
+                                fieldModel.getJson().addString(P.image, imageModel.getPath());
+                            } else {
+                                fieldModel.getJson().addString(P.image, imageModel.getPath());
+                            }
                         }
                     }
                 }
@@ -666,10 +702,11 @@ public class AdditionalDriverDocumentFragment extends Fragment implements Docume
                         if (ProfileViewActivity.imagePathModelList != null) {
                             ProfileViewActivity.imagePathModelList.clear();
                         }
+                        forAddData = false;
                         hitDocumentData(driver_id);
                         H.showMessage(context, getResources().getString(R.string.dataUpdated));
                     } else {
-                        H.showMessage(context, json.getString(P.error));
+                        H.showMessage(context, json.getString(P.error_array));
                     }
                     ProgressView.dismiss(loadingDialog);
 
@@ -731,7 +768,7 @@ public class AdditionalDriverDocumentFragment extends Fragment implements Docume
         PhotoView imageView = dialog.findViewById(R.id.imageView);
         ImageView imgClose = dialog.findViewById(R.id.imgClose);
 
-        LoadImage.glideString(context,imageView,imagePath);
+        LoadImage.glideString(context, imageView, imagePath);
 
         imgClose.setOnClickListener(new View.OnClickListener() {
             @Override

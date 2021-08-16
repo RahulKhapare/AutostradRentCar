@@ -20,6 +20,7 @@ import com.example.fastuae.R;
 import com.example.fastuae.databinding.ActivityEditListBinding;
 import com.example.fastuae.databinding.ActivityFiledListBinding;
 import com.example.fastuae.model.FieldModel;
+import com.example.fastuae.model.UploadedDocumentModel;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -48,12 +49,18 @@ public class DocumentEditAdapter extends RecyclerView.Adapter<DocumentEditAdapte
 
     int value;
 
-    public DocumentEditAdapter(Context context, List<FieldModel> filedList, Json json, Json saveJson, int value) {
+    Json modelJSON;
+
+    String imageURL;
+
+    public DocumentEditAdapter(Context context, List<FieldModel> filedList, Json json, Json saveJson, int value, Json modelJSON,String imageURL) {
         this.context = context;
         this.filedList = filedList;
         this.jsonItem = json;
         this.saveJsonData = saveJson;
         this.value = value;
+        this.modelJSON = modelJSON;
+        this.imageURL = imageURL;
     }
 
     @NonNull
@@ -67,10 +74,22 @@ public class DocumentEditAdapter extends RecyclerView.Adapter<DocumentEditAdapte
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
         FieldModel model = filedList.get(position);
 
+        if (jsonItem.has("image")){
+            jsonItem.remove("image");
+            jsonItem.addString("image",imageURL);
+        }else {
+            jsonItem.addString("image",imageURL);
+        }
+
         String hint = model.getFiled().replace("_"," ");
-//        String upperString = hint.substring(0, 1).toUpperCase() + hint.substring(1).toLowerCase();
+//      String upperString = hint.substring(0, 1).toUpperCase() + hint.substring(1).toLowerCase();
+
 
         holder.binding.txtTitle.setText(capitalize(hint));
+        if (modelJSON.has(model.getFiled())){
+            holder.binding.editText.setText(modelJSON.getString(model.getFiled()));
+            checkJson(model,holder.binding.editText.getText().toString(),jsonItem);
+        }
 
         if (model.getFiled().equals(issue_date) || model.getFiled().equals(expiry) || model.getFiled().equals(visa_issue_date)){
 

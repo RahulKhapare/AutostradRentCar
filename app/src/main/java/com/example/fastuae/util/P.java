@@ -59,6 +59,8 @@ public class P {
     public static String booking_document = "booking_document";
     public static String dropoff_details = "dropoff_details";
     public static String pickup_details = "pickup_details";
+    public static String pickup_delivery_check = "pickup_delivery_check";
+    public static String dropoff_delivery_check = "dropoff_delivery_check";
 
     public static String faq_list = "faq_list";
     public static String question = "question";
@@ -255,6 +257,7 @@ public class P {
     public static String offers = "offers";
 
     public static String driver_id = "driver_id";
+    public static String error_array = "error_array";
 
 
 }

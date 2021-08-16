@@ -164,7 +164,7 @@ public class LocationActivity extends AppCompatActivity implements LocationFilte
     private void hitLocationData(String emirateID) {
         locationModelList.clear();
         ProgressView.show(activity,loadingDialog);
-        Api.newApi(activity, P.BaseUrl + "location"+"emirate_id=" + emirateID)
+        Api.newApi(activity, P.BaseUrl + "location?"+"emirate_id=" + emirateID)
                 .setMethod(Api.GET)
 //                .onHeaderRequest(App::getHeaders)
                 .onError(() -> {

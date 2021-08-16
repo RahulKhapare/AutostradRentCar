@@ -1106,6 +1106,12 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick, D
         j.addString(P.pickup_date, pickUpDate);
         j.addString(P.pickup_time, pickUpTime);
 
+        j.addString(P.pickup_lat, "1");
+        j.addString(P.pickup_long, "1");
+        j.addString(P.pickup_details, "");
+        j.addString(P.pickup_delivery_check, "0");
+
+
         Api.newApi(context, P.BaseUrl + "verify_pickup_location_date_time").addJson(j)
                 .setMethod(Api.POST)
                 //.onHeaderRequest(App::getHeaders)
@@ -1161,6 +1167,11 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick, D
 
         j.addString(P.dropoff_date, date);
         j.addString(P.dropoff_time, time);
+
+        j.addString(P.dropoff_lat, "1");
+        j.addString(P.dropoff_long, "1");
+        j.addString(P.dropoff_details, "");
+        j.addString(P.dropoff_delivery_check, "0");
 
         Api.newApi(context, P.BaseUrl + "verify_dropoff_location_date_time").addJson(j)
                 .setMethod(Api.POST)

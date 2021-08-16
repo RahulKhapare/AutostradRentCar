@@ -64,13 +64,6 @@ public class MenuFragment extends Fragment {
             }
         });
 
-        binding.lnrFastRewards.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Click.preventTwoClick(v);
-            }
-        });
-
         binding.lnrSpecialOffers.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,13 +109,6 @@ public class MenuFragment extends Fragment {
             }
         });
 
-        binding.lnrGetReceipt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Click.preventTwoClick(v);
-            }
-        });
-
         binding.lnrCareers.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -150,6 +136,54 @@ public class MenuFragment extends Fragment {
             }
         });
 
+        binding.lnrFastRewards.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+            }
+        });
+
+        binding.lnrGetReceipt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+            }
+        });
+
+        binding.lnrBlog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+            }
+        });
+
+        binding.lnrAboutUAE.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+            }
+        });
+
+        binding.lnrCustFeedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+            }
+        });
+
+        binding.lnrTermCondition.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+            }
+        });
+
+        binding.lnrPrivacy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+            }
+        });
     }
 
     private void updateIcons() {
@@ -189,6 +223,20 @@ public class MenuFragment extends Fragment {
             binding.imgLoastFoundRight.setVisibility(View.GONE);
             binding.imgLoastFoundLeft.setVisibility(View.VISIBLE);
 
+            binding.imgBlogRight.setVisibility(View.GONE);
+            binding.imgBlogLeft.setVisibility(View.VISIBLE);
+
+            binding.imgCustFeedbackRight.setVisibility(View.GONE);
+            binding.imgCustFeedbackLeft.setVisibility(View.VISIBLE);
+
+            binding.imgTermRight.setVisibility(View.GONE);
+            binding.imgTermLeft.setVisibility(View.VISIBLE);
+
+            binding.imgPrivacyRight.setVisibility(View.GONE);
+            binding.imgPrivacyLeft.setVisibility(View.VISIBLE);
+
+            binding.imgUAERight.setVisibility(View.GONE);
+            binding.imgUAELeft.setVisibility(View.VISIBLE);
 
         } else if (flag.equals(Config.ENGLISH)) {
 
@@ -225,6 +273,20 @@ public class MenuFragment extends Fragment {
             binding.imgLoastFoundRight.setVisibility(View.VISIBLE);
             binding.imgLoastFoundLeft.setVisibility(View.GONE);
 
+            binding.imgBlogRight.setVisibility(View.VISIBLE);
+            binding.imgBlogLeft.setVisibility(View.GONE);
+
+            binding.imgCustFeedbackRight.setVisibility(View.VISIBLE);
+            binding.imgCustFeedbackLeft.setVisibility(View.GONE);
+
+            binding.imgTermRight.setVisibility(View.VISIBLE);
+            binding.imgTermLeft.setVisibility(View.GONE);
+
+            binding.imgPrivacyRight.setVisibility(View.VISIBLE);
+            binding.imgPrivacyLeft.setVisibility(View.GONE);
+
+            binding.imgUAERight.setVisibility(View.VISIBLE);
+            binding.imgUAELeft.setVisibility(View.GONE);
         }
     }
 

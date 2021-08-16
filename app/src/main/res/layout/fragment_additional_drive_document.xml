@@ -138,6 +138,22 @@
                     </androidx.recyclerview.widget.RecyclerView>
 
                     <TextView
+                        android:id="@+id/txtErrorData"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/textDark"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:paddingTop="100dp"
+                        android:paddingBottom="100dp"
+                        android:fontFamily="@font/nunito_sans_semibold"
+                        android:text="@string/noDataFound"
+                        android:visibility="gone"
+                        android:textSize="22sp">
+
+                    </TextView>
+
+                    <TextView
                         android:id="@+id/txtUploadDocument"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
