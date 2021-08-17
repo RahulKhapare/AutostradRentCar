@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "1086767951140",
-    "project_id": "fastuae-600a9",
-    "storage_bucket": "fastuae-600a9.appspot.com"
+    "project_number": "750991320333",
+    "project_id": "autostrad-rent-car",
+    "storage_bucket": "autostrad-rent-car.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1086767951140:android:5eb817e9515e883a8cd7b1",
+        "mobilesdk_app_id": "1:750991320333:android:93cd3166603494cc64bc44",
         "android_client_info": {
-          "package_name": "com.example.fastuae"
+          "package_name": "com.autostrad.rentcar"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1086767951140-laclk7kqagnp075drqim342770ojnpvu.apps.googleusercontent.com",
+          "client_id": "750991320333-udmauk8mm0rb391k4rr3od8ro8f5hcu7.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyArMaUHrUep4fWqECKUqa2BAOKqWGjua28"
+          "current_key": "AIzaSyA8H6bIjM6bF23fsXcicFCtQ6XDmSRk9rc"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1086767951140-laclk7kqagnp075drqim342770ojnpvu.apps.googleusercontent.com",
+              "client_id": "750991320333-udmauk8mm0rb391k4rr3od8ro8f5hcu7.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

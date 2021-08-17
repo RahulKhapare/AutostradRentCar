@@ -69,7 +69,7 @@
 
                             </TextView>
 
-                            <com.example.fastuae.util.OtpEditTextDark
+                            <com.autostrad.rentcar.util.OtpEditTextDark
                                 android:id="@+id/etxOtp"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"

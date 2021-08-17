@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">الإمارات السريعة</string>
+    <string name="app_name">أوتوستراد لتأجير السيارات</string>
     <string name="select_language">اختار اللغة</string>
     <string name="english">الإنجليزية</string>
     <string name="urdu">عربى</string>
@@ -191,7 +191,7 @@
     <string name="backToHome">العودة إلى المنزل</string>
     <string name="viewMyBooking">عرض حجزي</string>
     <string name="confirmBooking">تأكيد الحجز</string>
-    <string name="fastReward">مكافآت سريعة</string>
+    <string name="fastReward">مكافآت أوتوستراد لتأجير السيارات</string>
     <string name="specialOffers">عروض خاصة</string>
     <string name="faqs">أسئلة وأجوبة</string>
     <string name="locations">المواقع</string>
@@ -200,7 +200,7 @@
     <string name="getReceipt">احصل على إيصال إلكتروني</string>
     <string name="careers">وظائف</string>
     <string name="rentalInfo">معلومات الإيجار</string>
-    <string name="yourFasrCar">Fastcar الخاص بك في الإمارات العربية المتحدة</string>
+    <string name="yourFasrCar">سيارتك الأوتوستراد في الإمارات العربية المتحدة</string>
     <string name="branchCode">رمز الفرع</string>
     <string name="branchName">اسم الفرع</string>
     <string name="details">تفاصيل</string>
@@ -214,7 +214,7 @@
     <string name="insuranceRelated">المتعلقة بالتأمين</string>
     <string name="viewLess">عرض تفاصيل أقل</string>
 
-    <string name="rentFastCar">فاست لتأجير السيارات</string>
+    <string name="rentFastCar">أوتوستراد لتأجير السيارات</string>
     <string name="nationalGroup">مجموعة إماراتية وطنية</string>
     <string name="ourLocation">مواقعنا</string>
     <string name="noInternet">لا يوجد اتصال بالإنترنت متاح</string>
@@ -230,7 +230,7 @@
 
     <string name="otpEnter">أدخل OTP</string>
     <string name="createAccount">إنشاء حساب</string>
-    <string name="newToFats">جديد على FastUAE؟</string>
+    <string name="newToFats">هل أنت جديد على أوتوستراد لتأجير السيارات؟</string>
     <string name="alreyCustomer">عميل بالفعل؟</string>
     <string name="dataUpdated">تم تحديث البيانات بنجاح</string>
     <string name="selectNationality">الرجاء تحديد الجنسية</string>
@@ -377,7 +377,7 @@
     <string name="shareToFriend">شارك مع صديق</string>
     <string name="about">حول</string>
     <string name="mileGo">مايلز تو جو ....</string>
-    <string name="mileGoMsg">Fast Rent A Car هي جزء من مجموعة الإمارات الوطنية المرموقة ، التي تمتلك و؛ تدير العلامات التجارية التي تقدم وسائل النقل الخاصة والعامة ، إلى جانب الخدمات الإضافية </string>
+    <string name="mileGoMsg">أوتوستراد لتأجير السيارات هي جزء من مجموعة الإمارات الوطنية المرموقة ، التي تمتلك وتدير العلامات التجارية التي تقدم وسائل النقل الخاصة والعامة ، إلى جانب الخدمات الإضافية.</string>
     <string name="ourFleet">أسطولنا</string>
     <string name="ourFleetMessage">على مر السنين ، نما عدد سكان دولة الإمارات العربية المتحدة بشكل كبير وأصبحت الإمارات العربية المتحدة مركزًا عالميًا للأعمال و ؛ السياحة. مع متطلبات العملاء المتغيرة باستمرار ، هناك حاجة متزايدة لتوسيع خدماتنا وتلبية الاحتياجات الجديدة المتميزة</string>
     <string name="valueAdded">حلول القيمة المضافة</string>
@@ -397,9 +397,9 @@
     <string name="ourMissionMsg">لكسب قلب كل عميل. من خلال توفير حلول نقل مخصصة عالية الجودة باستمرار. ندعم التزامنا باستثمارنا في التكنولوجيا المتطورة وخدمة العملاء على مستوى عالمي بحيث تكون تجربة كل عميل تجربة لا تُنسى!</string>
     <string name="moreView1">عرض المزيد</string>
     <string name="ourHeritage">ميراثنا</string>
-    <string name="ourHeritageMsg">Fast Rent A Car هي جزء من مجموعة الإمارات الوطنية المرموقة ، التي تمتلك و ؛ تدير العلامات التجارية التي تقدم وسائل النقل الخاصة والعامة ، إلى جانب الخدمات الإضافية.</string>
+    <string name="ourHeritageMsg">أوتوستراد لتأجير السيارات هي جزء من مجموعة الإمارات الوطنية المرموقة ، التي تمتلك وتدير العلامات التجارية التي تقدم وسائل النقل الخاصة والعامة ، إلى جانب الخدمات الإضافية.</string>
     <string name="corporateLEasing">تأجير الشركات</string>
-    <string name="fastRentCar">فاست لتأجير السيارات</string>
+    <string name="fastRentCar">أوتوستراد لتأجير السيارات</string>
     <string name="aboutMessage1">ابتكار تجارب تأجير سيارات لا تُنسى ، قيادة واحدة في كل مرة!</string>
     <string name="aboutMessage2">انها مجرد قيادة…. مجرد رحلة من مكان إلى آخر ، طريق ربما تكون قد سافرت عليه عدة مرات! ومع ذلك ، فإن كل رحلة هي تجربة فريدة من نوعها!</string>
     <string name="addressMessage">أدخل رقم الشقة / اسم المبنى واسم الشارع والمنطقة ...</string>
@@ -411,20 +411,20 @@
     <string name="cancelled">ألغيت</string>
     <string name="yourPayment">الدفع الخاص بك</string>
     <string name="chargesFine">الرسوم / الغرامات</string>
-    <string name="fastLoyalty">ولاء سريع</string>
+    <string name="fastLoyalty">برنامج ولاء أوتوستراد لتأجير السيارات</string>
     <string name="refund">استرداد</string>
-    <string name="yourAutoStard">أوتوستراد الخاص بك في الإمارات العربية المتحدة</string>
+    <string name="yourAutoStard">أوتوستراد الخاص بك لتأجير السيارات في الإمارات العربية المتحدة</string>
     <string name="editAddressMessage">هل تريد تعديل المكان والوقت؟</string>
     <string name="editLocationTime">تحرير الموقع والوقت</string>
-    <string name="lostFoundDesc">أثناء الاستئجار من Fast Rent A Car ، من المهم أن تعرف أنك مسؤول عن متعلقاتك. ومع ذلك ، فإننا ندرك أنه ستظل هناك أوقات قد تفقد فيها أنت أو عائلتك متعلقاتك عن طريق الخطأ في أحد إيجاراتنا. في مثل هذه الحالات ، يمكنك أن تطمئن إلى أن فريقنا سيبذل قصارى جهده لمساعدتك في التعافي!</string>
+    <string name="lostFoundDesc">أثناء الاستئجار من Autostrad Rent a Car ، من المهم أن تعرف أنك مسؤول عن ممتلكاتك. ومع ذلك ، فإننا ندرك أنه ستظل هناك أوقات قد تفقد فيها أنت أو عائلتك متعلقاتك عن طريق الخطأ في أحد إيجاراتنا. في مثل هذه الحالات ، يمكنك أن تطمئن إلى أن فريقنا سيبذل قصارى جهده لمساعدتك في التعافي!</string>
     <string name="whoIsRight">لمن هذا الحق؟</string>
     <string name="whoIsRightMsg">هل أنت شركة أو شركة تبحث عن مركبات لنقل البضائع أو المواد أو لمجرد توفير خيار للتنقل لموظفيك؟</string>
     <string name="doesYour">هل تتطلب مؤسستك أكثر من 80 مركبة؟</string>
     <string name="doYouWant">هل تريد تجنب دفع مبالغ مقطوعة لشراء سياراتك الخاصة؟</string>
     <string name="areYouLooking">هل تبحث عن خدمة إدارة أسطول احترافية بتكلفة ثابتة ، لتحرير وقتك ومواردك حتى تتمكن من التركيز على إدارة عملك؟</string>
     <string name="ifAnswer">إذا كانت الإجابة على أي من هذه الأسئلة أو جميعها بنعم ، فستستفيد أنت وشركتك بالتأكيد من تأجير أسطول شركتك من Fast Rent a Car.</string>
-    <string name="whoChoose">لماذا تختار استئجار سيارة سريع؟</string>
-    <string name="withOver">مع أكثر من 30 عامًا من الخبرة ، أصبحت Fast Rent A Car واحدة من مزودي حلول النقل الرائدين في سوق الإمارات العربية المتحدة لحلول تأجير الشركات وإدارة الأسطول.</string>
+    <string name="whoChoose">لماذا تختار أوتوستراد لتأجير السيارات؟</string>
+    <string name="withOver">مع أكثر من 30 عامًا من الخبرة ، أصبحت أوتوستراد لتأجير السيارات واحدة من مزودي حلول النقل الرائدين في سوق الإمارات العربية المتحدة لحلول تأجير الشركات وإدارة الأسطول.</string>
     <string name="weProvided">نحن نقدم خدماتنا بخبرة وتجربة مثبتتين في إدارة عمليات التأجير لأكثر من 300 عميل مع أكثر من 5000 مركبة.</string>
     <string name="sectorsWe">القطاعات التي نقدم خدماتنا لها</string>
     <string name="vehicleFor">مركبات للمديرين التنفيذيين في الشركة بما في ذلك الإدارة العليا</string>
@@ -454,21 +454,21 @@
     <string name="bestVehicle">أفضل سعر لشراء السيارة</string>
     <string name="companyOwned">أسطول الشركة المملوك</string>
     <string name="youNeedTo">أنت بحاجة للتفاوض على كل مركبة</string>
-    <string name="leasingFrom">التأجير من فاست لتأجير السيارات</string>
+    <string name="leasingFrom">التأجير من أوتوستراد لتأجير السيارات</string>
     <string name="managedForYou">مُدار من أجلك جنبًا إلى جنب مع أفضل الأسعار كمشتري أسطول</string>
     <string name="insurance">تأمين</string>
     <string name="salikTrafficFines">إدارة سالك والمخالفات المرورية</string>
     <string name="vehicleRouting">تتبع الخدمة الروتينية للمركبة</string>
     <string name="vehicleBreakDown">تعطل السيارة</string>
     <string name="repairsTyres">الإصلاحات والإطارات واستبدال البطارية</string>
-    <string name="theFastRent">عملية تأجير السيارات السريعة</string>
-    <string name="atFastRent">في Fast Rent A Car ، نجعل التأجير سهلاً قدر الإمكان بأقل قدر من الأعمال الورقية. بعد تلقي استفسار مبدئي عن المبيعات ، قمنا بإعداد اجتماع لتقييم متطلباتك وفهم أي احتياجات أخرى قد تكون لديك حيث نؤمن بتوفير حلول مصممة خصيصًا لتناسب احتياجات عملائنا. بناءً على ذلك ، نقدم لك اقتراح حل. بعد الموافقة على هذا الاقتراح ، نطلب فقط بعض الوثائق</string>
+    <string name="theFastRent">الأوتوستراد عملية تأجير السيارات</string>
+    <string name="atFastRent">في أوتوستراد لتأجير السيارات ، نجعل التأجير سهلاً قدر الإمكان بأقل قدر من الأعمال الورقية. بعد تلقي استفسار مبدئي عن المبيعات ، قمنا بإعداد اجتماع لتقييم متطلباتك وفهم أي احتياجات أخرى قد تكون لديك حيث نؤمن بتوفير حلول مصممة خصيصًا لتناسب احتياجات عملائنا. بناءً على ذلك ، نقدم لك اقتراح حل. بعد الموافقة على هذا الاقتراح ، نطلب فقط بعض الوثائق</string>
     <string name="aValidTrade">نسخة من الرخصة التجارية سارية المفعول</string>
     <string name="aValidTax">نسخة من الشهادة الضريبية سارية المفعول</string>
     <string name="aValidCopy">نسخة سارية المفعول من جواز السفر ، التأشيرة ، EID للمخول بالتوقيع وتوكيله</string>
     <string name="theAboveIs">ثم يتم تقديم ما ورد أعلاه للتحقق من المستند والموافقة عليه. بمجرد الموافقة ، كل ما نطلبه هو توقيع من المستأجر على VLC (عقد تأجير السيارة) وأنت على ما يرام!</string>
     <string name="schoolBusService">خدمات الحافلات المدرسية</string>
-    <string name="fastRentA">تقدم شركة Fast Rent A Car خدمة تأجير الحافلات المدرسية على المدى القصير والطويل للمدارس المرموقة في أبو ظبي ودبي ، لأكثر من عقد من الزمان. جميع السائقين لدينا معتمدين بشكل كامل لضمان سلامة ورعاية أطفال المدارس وراحة البال للمدرسة وأولياء الأمور.</string>
+    <string name="fastRentA">توفر أوتوستراد لتأجير السيارات خدمة تأجير الحافلات المدرسية على المدى القصير والطويل للمدارس المرموقة في أبو ظبي ودبي ، لأكثر من عقد من الزمان. جميع السائقين لدينا معتمدين بشكل كامل لضمان سلامة ورعاية أطفال المدارس وراحة البال للمدرسة وأولياء الأمور.</string>
     <string name="weHave">لدينا مجموعة متنوعة من الحافلات من أفضل العلامات التجارية لتناسب جميع متطلبات النقل الخاصة بك. من حافلات أشوك ليلاند الكبيرة ذات الـ 58 مقعدًا إلى الحافلات الأصغر ذات الـ 33 و 26 مقعدًا من ميتسوبيشي</string>
     <string name="allOur">جميع حافلاتنا مجهزة بهذه الميزات الخاصة لضمان سلامة طفلك</string>
     <string name="yellowColour">حافلات مدرسية صفراء اللون عليها اسم المدرسة من الجانبين.</string>
@@ -524,6 +524,7 @@
     <string name="customerFeedback">ملاحظات العملاء</string>
     <string name="privacyPolicy">سياسة الخصوصية</string>
     <string name="aboutUAE">حول الإمارات</string>
+    <string name="myBlog">مدوناتي</string>
 
     <string name="txt1">شركة رائدة في مجال تأجير السيارات ولديها أكبر شبكة من الفروع ونقاط الالتقاء</string>
     <string name="txt2">شركة رائدة في مجال تأجير السيارات ولديها أكبر شبكة من الفروع ونقاط الالتقاء</string>

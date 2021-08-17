@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FastUAE</string>
+    <string name="app_name">Autostrad Rent a Car</string>
     <string name="select_language">Select Language</string>
     <string name="english">English</string>
     <string name="urdu">Arabic</string>
@@ -198,7 +198,7 @@
     <string name="backToHome">Back to Home</string>
     <string name="viewMyBooking">View My Booking</string>
     <string name="confirmBooking">Confirm Booking</string>
-    <string name="fastReward">Fast Rewards</string>
+    <string name="fastReward">Autostrad Rent Car Rewards</string>
     <string name="specialOffers">Special Offers</string>
     <string name="faqs">FAQs</string>
     <string name="locations">Location</string>
@@ -207,7 +207,7 @@
     <string name="getReceipt">Get E-Receipt</string>
     <string name="careers">Careers</string>
     <string name="rentalInfo">Rental Information</string>
-    <string name="yourFasrCar">Your Fastcar in UAE</string>
+    <string name="yourFasrCar">Your Autostrad Rent Car in UAE</string>
     <string name="branchCode">Branch Code</string>
     <string name="branchName">Branch Name</string>
     <string name="details">Details</string>
@@ -230,7 +230,7 @@
     <string name="insuranceRelated">Insurance Related</string>
     <string name="viewLess">View less details</string>
 
-    <string name="rentFastCar">Fast Rent a Car</string>
+    <string name="rentFastCar">Autostrad Rent a Car</string>
     <string name="nationalGroup">An Emirates National Group</string>
     <string name="ourLocation">Our Locations</string>
     <string name="noInternet">No internet connection available</string>
@@ -238,7 +238,7 @@
 
     <string name="otpEnter">Enter OTP</string>
     <string name="createAccount">Create Account</string>
-    <string name="newToFats">New to FastUAE ?</string>
+    <string name="newToFats">New to Autostrad Rent a Car ?</string>
     <string name="alreyCustomer">Already a customer ?</string>
     <string name="dataUpdated">Data updated successfully</string>
     <string name="selectNationality">Please select nationality</string>
@@ -379,7 +379,7 @@
     <string name="shareToFriend">Share to friend</string>
     <string name="about">About</string>
     <string name="mileGo">Miles To Go ....</string>
-    <string name="mileGoMsg">Fast Rent A Car is part of the prestigious Emirates National Group, which owns &amp; operates brands that offer private and public transportation, along with ancillary services.</string>
+    <string name="mileGoMsg">Autostrad Rent a Car is part of the prestigious Emirates National Group, which owns &amp; operates brands that offer private and public transportation, along with ancillary services.</string>
     <string name="ourFleet">Our Fleet</string>
     <string name="ourFleetMessage">Over the years, UAE’s population has grown exponentially and UAE has becom a global hub for business &amp; tourism. With ever-changing customer demands, there is an increasing need to expand our serv -ices and cater to the new discerning</string>
     <string name="valueAdded">Value Added Solutions</string>
@@ -399,9 +399,9 @@
     <string name="ourMissionMsg">To win the heart of each customer. by consistently providing high quality customized transport solutions. We back our commitment with our investment in cutting-edge technology and world class customer service so that each customer experience is a memorable one!</string>
     <string name="moreView1">View More</string>
     <string name="ourHeritage">Our Heritage</string>
-    <string name="ourHeritageMsg">Fast Rent A Car is part of the prestigious Emirates National Group, which owns &amp; operates brands that offer private and public transportation, along with ancillary services.</string>
+    <string name="ourHeritageMsg">Autostrad Rent a Car is part of the prestigious Emirates National Group, which owns &amp; operates brands that offer private and public transportation, along with ancillary services.</string>
     <string name="corporateLEasing">Corporate Leasing</string>
-    <string name="fastRentCar">Fast Rent A Car</string>
+    <string name="fastRentCar">Autostrad Rent a Car</string>
     <string name="aboutMessage1">“Creating memorable car rental experiences, one drive at a time!”</string>
     <string name="aboutMessage2">It’s just a drive …. just a journey from one place to the other, a road that you may have travelled many times over! Yet, each drive is a unique experience!</string>
     <string name="addressMessage">Enter flat No./ Building name, street name, area...</string>
@@ -413,20 +413,20 @@
     <string name="cancelled">Cancelled</string>
     <string name="yourPayment">Your Payment</string>
     <string name="chargesFine">Charges/ Fines</string>
-    <string name="fastLoyalty">Fast Loyalty</string>
+    <string name="fastLoyalty">Autostrad Rent Car Loyalty</string>
     <string name="refund">Refund</string>
-    <string name="yourAutoStard">Your AutoStrad in UAE</string>
+    <string name="yourAutoStard">Your AutoStrad Rent a Car in UAE</string>
     <string name="editAddressMessage">Do you want to edit location and time ?</string>
     <string name="editLocationTime">Edit Location &amp; Time</string>
-    <string name="lostFoundDesc">While renting from Fast Rent A Car, it is important to know that you are responsible for your belongings. However, we recognize that there would still be times that you or your family may accidentally lose your belongings in one of our rentals. In such cases, you can be rest assured, that our team will do their best in assisting you with their recovery!</string>
+    <string name="lostFoundDesc">While renting from Autostrad Rent a Car, it is important to know that you are responsible for your belongings. However, we recognize that there would still be times that you or your family may accidentally lose your belongings in one of our rentals. In such cases, you can be rest assured, that our team will do their best in assisting you with their recovery!</string>
     <string name="whoIsRight">Who is it right for?</string>
     <string name="whoIsRightMsg">Are you a business or a company looking for vehicles to transport your goods, materials or to simply provide an option to commute for your employees?</string>
     <string name="doesYour">Does your enterprise require more than 80 vehicles?</string>
     <string name="doYouWant">Do you want to avoid paying lump sum amounts to purchase your own vehicles?</string>
     <string name="areYouLooking">Are you looking for a professional fleet management service at a fixed cost, to free up your time and resources so you can focus on running your business?</string>
-    <string name="ifAnswer">If the answer to any or all of these questions is yes then you and your company will definitely benefit from leasing your corporate fleet from Fast Rent a Car.</string>
-    <string name="whoChoose">Why choose a fast rent a car?</string>
-    <string name="withOver">With over 30 years of experience, Fast Rent A Car has become one of the leading transport solution providers in the UAE market for corporate leasing and fleet management solutions.</string>
+    <string name="ifAnswer">If the answer to any or all of these questions is yes then you and your company will definitely benefit from leasing your corporate fleet from Autostrad Rent a Car.</string>
+    <string name="whoChoose">Why choose a Autostrad Rent a Car?</string>
+    <string name="withOver">With over 30 years of experience, Autostrad Rent a Car has become one of the leading transport solution providers in the UAE market for corporate leasing and fleet management solutions.</string>
     <string name="weProvided">We provide our services with proven expertise and experience in managing lease operations for over 300 clients with more than 5,000 vehicles.</string>
     <string name="sectorsWe">Sectors we cater to</string>
     <string name="vehicleFor">Vehicles for company executives including for senior management</string>
@@ -456,21 +456,21 @@
     <string name="bestVehicle">Best Vehicle purchase pricing</string>
     <string name="companyOwned">Company Owned Fleet</string>
     <string name="youNeedTo">You need to negotiate for each vehicle</string>
-    <string name="leasingFrom">Leasing From Fast Rent a Car</string>
+    <string name="leasingFrom">Leasing From Autostrad Rent a Car</string>
     <string name="managedForYou">Managed for you along with best prices as a fleet buyer</string>
     <string name="insurance">Insurance</string>
     <string name="salikTrafficFines">Salik &amp; Traffic fines management</string>
     <string name="vehicleRouting">Vehicle routine service tracking</string>
     <string name="vehicleBreakDown">Vehicle break down</string>
     <string name="repairsTyres">Repairs, tyres and battery replacement</string>
-    <string name="theFastRent">The fast rent a car leasing process</string>
-    <string name="atFastRent">At Fast Rent A Car we make leasing as easy as we can with minimal paperwork. After receiving an initial sales inquiry, we set up a meeting to assess your requirements and understand any further needs that you may have as we believe in providing tailor made solutions to suit our client’s needs. Based on this we then present to you a solution proposal. Upon agreement to this proposal, we only require a few documents</string>
+    <string name="theFastRent">The autostrad rent a car leasing process</string>
+    <string name="atFastRent">At Autostrad Rent a Car we make leasing as easy as we can with minimal paperwork. After receiving an initial sales inquiry, we set up a meeting to assess your requirements and understand any further needs that you may have as we believe in providing tailor made solutions to suit our client’s needs. Based on this we then present to you a solution proposal. Upon agreement to this proposal, we only require a few documents</string>
     <string name="aValidTrade">A valid trade license copy</string>
     <string name="aValidTax">A valid tax certificate copy</string>
     <string name="aValidCopy">A valid copy of passport, VISA, EID of the authorized signatory and his power of attorney</string>
     <string name="theAboveIs">The above is then submitted for document verification and approval. Once cleared, all we require is a signature from the Hirer on the VLC (Vehicle Leasing Contract) and you’re good to go!</string>
     <string name="schoolBusService">School Buses Services</string>
-    <string name="fastRentA">Fast Rent A Car has been providing short &amp; long term school bus rental leasing for prestigious schools in Abu Dhabi and Dubai, for more than a decade. All our drivers are fully certified ensuring safety and care for school children and peace of mind for school and parents.</string>
+    <string name="fastRentA">Autostrad Rent a Car has been providing short &amp; long term school bus rental leasing for prestigious schools in Abu Dhabi and Dubai, for more than a decade. All our drivers are fully certified ensuring safety and care for school children and peace of mind for school and parents.</string>
     <string name="weHave">We have a variety of Buses from top of the line brands to suit all your transport requirements. From the large 58 seater Ashok Leyland busses to the smaller 33 and 26 seater Rosa from Mitsubishi</string>
     <string name="allOur">All our buses are equipped with these special features to ensure the safety of your child</string>
     <string name="yellowColour">Yellow colour school buses with the name of the school on both sides.</string>
@@ -526,6 +526,7 @@
     <string name="customerFeedback">Customer Feedback</string>
     <string name="privacyPolicy">Privacy Policy</string>
     <string name="aboutUAE">About UAE</string>
+    <string name="myBlog">My Blogs</string>
 
     <string name="txt1">Leading Car Rental Company with the largest network of Branches &amp; Pickup points</string>
     <string name="txt2">Leading Car Rental Company with the largest network of Branches &amp; Pickup points</string>
