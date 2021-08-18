@@ -44,6 +44,7 @@ import com.autostrad.rentcar.util.P;
 import com.autostrad.rentcar.util.ProgressView;
 import com.autostrad.rentcar.util.Validation;
 import com.autostrad.rentcar.util.WindowView;
+import com.github.chrisbanes.photoview.PhotoView;
 
 import org.json.JSONException;
 
@@ -132,7 +133,16 @@ public class CareerActivity extends AppCompatActivity implements CareerAdapter.o
                         String page_banner = career.getString("page_banner");
 
                         LoadImage.glideString(activity,binding.imgBanner,page_banner);
+                        binding.txtPageTitle.setText(career_text_1);
                         binding.txtPageDesc.setText(career_text_2);
+
+                        binding.imgBanner.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Click.preventTwoClick(v);
+                                viewDialog(page_banner);
+                            }
+                        });
 
                         if (career_text_2.equals("") || career_text_2.equals("null")){
                             binding.txtPageDesc.setVisibility(View.GONE);
@@ -422,6 +432,32 @@ public class CareerActivity extends AppCompatActivity implements CareerAdapter.o
                     }
                 })
                 .run("hitUploadImage",session.getString(P.token));
+
+    }
+
+    private void viewDialog(String imagePath) {
+
+        final Dialog dialog = new Dialog(activity);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.activity_image_view);
+
+        PhotoView imageView = dialog.findViewById(R.id.imageView);
+        ImageView imgClose = dialog.findViewById(R.id.imgClose);
+
+        LoadImage.glideString(activity,imageView,imagePath);
+
+        imgClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                dialog.dismiss();
+            }
+        });
+
+        dialog.setCancelable(true);
+        dialog.show();
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.white);
+        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
 
     }
 

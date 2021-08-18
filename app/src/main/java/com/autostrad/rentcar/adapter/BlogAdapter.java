@@ -53,7 +53,7 @@ public class BlogAdapter extends RecyclerView.Adapter<BlogAdapter.viewHolder> {
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-                Intent intent = new Intent(context, AboutUAEDetailsActivity.class);
+                Intent intent = new Intent(context, BlogDetailsActivity.class);
                 intent.putExtra("blogSlug",model.getSlug());
                 intent.putExtra("blogId",model.getId());
                 context.startActivity(intent);

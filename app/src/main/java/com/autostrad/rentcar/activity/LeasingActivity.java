@@ -1,8 +1,13 @@
 package com.autostrad.rentcar.activity;
 
+import android.app.Dialog;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -11,7 +16,10 @@ import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
 import com.autostrad.rentcar.R;
 import com.autostrad.rentcar.databinding.ActivityLeasingBinding;
+import com.autostrad.rentcar.util.Click;
+import com.autostrad.rentcar.util.LoadImage;
 import com.autostrad.rentcar.util.WindowView;
+import com.github.chrisbanes.photoview.PhotoView;
 
 public class LeasingActivity extends AppCompatActivity {
 
@@ -42,6 +50,15 @@ public class LeasingActivity extends AppCompatActivity {
     }
 
     private void  onClick(){
+
+
+        binding.imgBanner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                viewDialog(getResources().getDrawable(R.drawable.ic_carrer));
+            }
+        });
 
         binding.lnrClickOne.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -194,6 +211,33 @@ public class LeasingActivity extends AppCompatActivity {
             }
         });
 
+
+    }
+
+
+    private void viewDialog(Drawable imagePath) {
+
+        final Dialog dialog = new Dialog(activity);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.activity_image_view);
+
+        PhotoView imageView = dialog.findViewById(R.id.imageView);
+        ImageView imgClose = dialog.findViewById(R.id.imgClose);
+
+        LoadImage.glide(activity,imageView,imagePath);
+
+        imgClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                dialog.dismiss();
+            }
+        });
+
+        dialog.setCancelable(true);
+        dialog.show();
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.white);
+        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
 
     }
 
