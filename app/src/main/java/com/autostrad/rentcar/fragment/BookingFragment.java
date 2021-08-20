@@ -20,13 +20,14 @@ import com.google.android.material.tabs.TabLayout;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookingFragment extends Fragment implements ViewPager.OnPageChangeListener{
+public class BookingFragment extends Fragment implements ViewPager.OnPageChangeListener {
 
     private Context context;
     private FragmentBookingBinding binding;
     private UpcomingReservationFragment upcomingReservationFragment = UpcomingReservationFragment.newInstance();
     private PastRentalFragment pastRentalFragment = PastRentalFragment.newInstance();
     private CancelBookingFragment cancelBookingFragment = CancelBookingFragment.newInstance();
+    private CurrentBookingFragment currentBookingFragment = CurrentBookingFragment.newInstance();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -41,14 +42,11 @@ public class BookingFragment extends Fragment implements ViewPager.OnPageChangeL
     }
 
     @Override
-    public void onDestroyView()
-    {
-        if (binding.getRoot() != null)
-        {
+    public void onDestroyView() {
+        if (binding.getRoot() != null) {
             ViewGroup parentViewGroup = (ViewGroup) binding.getRoot().getParent();
 
-            if (parentViewGroup != null)
-            {
+            if (parentViewGroup != null) {
                 parentViewGroup.removeAllViews();
             }
         }
@@ -56,7 +54,7 @@ public class BookingFragment extends Fragment implements ViewPager.OnPageChangeL
         super.onDestroyView();
     }
 
-    private void initView(){
+    private void initView() {
         setUpViewPager();
         setupTabIcons();
     }
@@ -68,14 +66,18 @@ public class BookingFragment extends Fragment implements ViewPager.OnPageChangeL
         ((TextView) view1.findViewById(R.id.text)).setTextColor(getResources().getColor(R.color.lightBlue));
 
         View view2 = LayoutInflater.from(context).inflate(R.layout.activity_customt_child_tab, null);
-        ((TextView) view2.findViewById(R.id.text)).setText(getResources().getString(R.string.pastRental));
+        ((TextView) view2.findViewById(R.id.text)).setText(getResources().getString(R.string.pastReservations));
 
         View view3 = LayoutInflater.from(context).inflate(R.layout.activity_customt_child_tab, null);
-        ((TextView) view3.findViewById(R.id.text)).setText(getResources().getString(R.string.cancelled));
+        ((TextView) view3.findViewById(R.id.text)).setText(getResources().getString(R.string.cancelReservations));
+
+        View view4 = LayoutInflater.from(context).inflate(R.layout.activity_customt_child_tab, null);
+        ((TextView) view4.findViewById(R.id.text)).setText(getResources().getString(R.string.currentReservations));
 
         binding.tabLayout.getTabAt(0).setCustomView(view1);
-        binding.tabLayout.getTabAt(1).setCustomView(view2);
-        binding.tabLayout.getTabAt(2).setCustomView(view3);
+        binding.tabLayout.getTabAt(1).setCustomView(view4);
+        binding.tabLayout.getTabAt(2).setCustomView(view2);
+        binding.tabLayout.getTabAt(3).setCustomView(view3);
 
         binding.tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -106,7 +108,8 @@ public class BookingFragment extends Fragment implements ViewPager.OnPageChangeL
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
-        adapter.addFragment(upcomingReservationFragment,"");
+        adapter.addFragment(upcomingReservationFragment, "");
+        adapter.addFragment(currentBookingFragment, "");
         adapter.addFragment(pastRentalFragment, "");
         adapter.addFragment(cancelBookingFragment, "");
         viewPager.setAdapter(adapter);

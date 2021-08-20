@@ -150,7 +150,7 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Emir
     private static final int PDF_DATA = 22;
     private List<ImagePathModel> imagePathModelList;
 
-    Json jsonMain;
+//    Json jsonMain;
     Json jsonChild;
     boolean updateFlag = true;
 
@@ -685,7 +685,7 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Emir
 
         updateFlag = true;
 
-        jsonMain = new Json();
+//        jsonMain = new Json();
         jsonChild = new Json();
 
         try {
@@ -708,11 +708,7 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Emir
 
                         jsonChild.addJSON(model.getKey(), fieldModel.getJson());
 
-                        if (fieldModel.getJson().has("key")){
-                            fieldModel.getJson().remove("key");
-                        }else {
-                            fieldModel.getJson().addString("key","1");
-                        }
+                        fieldModel.getJson().addString("key","1");
 
                         if (!fieldModel.getJson().has(fieldModel.getFiled())) {
                             String valueKey = fieldModel.getFiled().replace("_", " ");
@@ -738,7 +734,7 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Emir
                     return;
                 }
 
-                jsonMain.addJSON(P.document, jsonChild);
+//                jsonMain.addJSON(P.document, jsonChild);
 
             }
 
@@ -750,7 +746,7 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Emir
             H.showMessage(activity, getResources().getString(R.string.somethingWrong));
         }
 
-        Log.e("TAG", "onClickJSJJS: " + jsonMain.toString());
+//        Log.e("TAG", "onClickJSJJS: " + jsonChild.toString());
     }
 
     private void blackTin(RadioButton radioButton) {
@@ -2164,7 +2160,7 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Emir
         j.addString(P.failed_url, "");
         j.addString(P.booking_from, "mobile");
         j.addString(P.success_url, "");
-        j.addJSON(P.booking_document, jsonMain);
+        j.addJSON(P.document, jsonChild);
 
         Log.e("TAG", "hitBookCarDataJSON: " + j.toString());
 

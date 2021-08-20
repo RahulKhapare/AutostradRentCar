@@ -528,6 +528,36 @@
     <string name="aboutUAE">About UAE</string>
     <string name="myBlog">My Blogs</string>
     <string name="lessView1">View Less</string>
+    <string name="howDidYpuKnow">How did you know about autostrad rent a car ?</string>
+    <string name="pleaseChooseService">Please choose the category of the service</string>
+    <string name="pleaseTellUsLocation">Please tell us the location of your rental</string>
+    <string name="whtaURThought">What are your thoughts about the representative who attended you? He/She has:</string>
+    <string name="productKnowledge">Product Knowledge</string>
+    <string name="professionalism">Professionalism</string>
+    <string name="friednliness">Friednliness</string>
+    <string name="timelyResponse">Timely Response</string>
+    <string name="howWouldYouRate">How would you rate the vehicle provided by us?</string>
+    <string name="reliability">Reliability</string>
+    <string name="cleanliness">Cleanliness</string>
+    <string name="howWouldYouLike">How would you rate Autostrad Rent A Car compared to other car rental companies?</string>
+    <string name="howWouldYouLikeRent">How likely you would rent again from Autostrad Rent A Car?</string>
+    <string name="anySuggetionCustomer">Any suggestion on how could we improve your experience next time?</string>
+    <string name="selectFeedbackSoursce">Please select feedback source</string>
+    <string name="selectFeedbackService">Please select feedback service</string>
+    <string name="selectFeedbackCompare">Please select compared to other car</string>
+    <string name="selectFeedbackRentAgain">Please select rent again</string>
+    <string name="enterSuggetion">Please enter suggestion</string>
+    <string name="enterValidSuggetion">Please enter valid suggestion</string>
+    <string name="enterName">Please enter Name</string>
+    <string name="currentReservations">Current Reservations</string>
+    <string name="pastReservations">Past Reservations</string>
+    <string name="cancelReservations">Cancel Reservations</string>
+    <string name="editReservations">Edit Reservations</string>
+    <string name="extendReservations">Extend Reservations</string>
+    <string name="extendBooking">Extend Booking</string>
+    <string name="selectNewDropOffDate">Select New Drop off Date</string>
+    <string name="selectNewDropOffTime">Select New Drop off Time</string>
+
 
     <string name="txt1">Leading Car Rental Company with the largest network of Branches &amp; Pickup points</string>
     <string name="txt2">Leading Car Rental Company with the largest network of Branches &amp; Pickup points</string>

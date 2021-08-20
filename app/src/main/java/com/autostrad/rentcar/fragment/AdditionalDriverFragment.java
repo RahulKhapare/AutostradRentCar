@@ -55,6 +55,7 @@ import java.util.List;
 
 public class AdditionalDriverFragment extends Fragment implements AdditionalDriverListAdapter.onClick {
 
+    //9594022128
     private Context context;
     private FragmentAdditionalDriveBinding binding;
     private int positionNumber = 0;
@@ -325,7 +326,7 @@ public class AdditionalDriverFragment extends Fragment implements AdditionalDriv
                 AddressModel model = lisAddressEmirate.get(position);
                 if (!model.getCountry_name().equals(getResources().getString(R.string.nationality))) {
                     countryName = model.getCountry_name();
-                    countryId = model.getPhone_code();
+                    countryId = model.getId();
 
                     if (countryName.equals(Config.UAE)){
                         binding.lnrEmirate.setVisibility(View.VISIBLE);
@@ -685,11 +686,11 @@ public class AdditionalDriverFragment extends Fragment implements AdditionalDriv
                                 binding.spinnerCodeMobile.setSelection(i);
                             }
 
-                            if (jsonData.getString(P.phone_code).equalsIgnoreCase(codeSecondary)) {
+                            if (jsonData.getString(P.id).equalsIgnoreCase(codeSecondary)) {
                                 binding.spinnerCodeAlternate.setSelection(i);
                             }
 
-                            if (jsonData.getString(P.phone_code).equalsIgnoreCase(countryID)) {
+                            if (jsonData.getString(P.id).equalsIgnoreCase(countryID)) {
                                 if (i < jsonList.size()) {
                                     binding.spinnerNationality.setSelection(i + 1);
                                 }
@@ -723,6 +724,7 @@ public class AdditionalDriverFragment extends Fragment implements AdditionalDriv
         binding.etxNumber.setText("");
         binding.etxAlternameNumber.setText("");
         binding.spinnerNationality.setSelection(0);
+        binding.spinnerEmirate.setSelection(0);
     }
 
     private void hitSaveDriverDetails() {

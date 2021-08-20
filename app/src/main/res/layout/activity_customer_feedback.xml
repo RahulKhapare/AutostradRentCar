@@ -36,23 +36,752 @@
                     android:layout_above="@+id/cardBottom"
                     android:fillViewport="true">
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
 
+                        <LinearLayout
+                            android:id="@+id/lnrFeedbackView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/textDark"
+                                android:textSize="18sp"
+                                android:fontFamily="@font/nunito_sans_regular"
+                                android:text="@string/howDidYpuKnow">
+
+                            </TextView>
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_marginTop="15dp"
+                                android:id="@+id/cardFeedback"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="2dp"
+                                android:layout_marginRight="2dp"
+                                android:layout_marginBottom="5dp"
+                                app:cardElevation="3dp"
+                                app:cardCornerRadius="5dp">
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="?actionBarSize">
+
+                                        <TextView
+                                            android:id="@+id/txtFeedback"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:textColor="@color/textDark"
+                                            android:gravity="center_vertical"
+                                            android:layout_marginLeft="20dp"
+                                            android:layout_marginRight="20dp"
+                                            android:layout_gravity="center_vertical"
+                                            android:fontFamily="@font/nunito_sans_regular"
+                                            android:text="@string/app_name"
+                                            android:textSize="18sp">
+                                        </TextView>
+
+
+                                        <ImageView
+                                            android:id="@+id/imgFeedbackRight"
+                                            android:layout_width="25dp"
+                                            android:layout_height="25dp"
+                                            android:layout_marginRight="15dp"
+                                            android:src="@drawable/ic_down_arrow"
+                                            android:layout_alignParentRight="true"
+                                            android:layout_centerVertical="true">
+                                        </ImageView>
+
+                                        <ImageView
+                                            android:id="@+id/imgFeedbackLeft"
+                                            android:layout_width="25dp"
+                                            android:layout_height="25dp"
+                                            android:layout_marginLeft="15dp"
+                                            android:src="@drawable/ic_down_arrow"
+                                            android:layout_alignParentLeft="true"
+                                            android:layout_centerVertical="true"
+                                            android:visibility="gone">
+                                        </ImageView>
+
+                                    </RelativeLayout>
+
+
+                                    <LinearLayout
+                                        android:id="@+id/lnrFeedbackListView"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:visibility="gone"
+                                        android:orientation="vertical">
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="0.5dp"
+                                            android:layout_marginTop="5dp"
+                                            android:background="@color/customeGray"
+                                            tools:ignore="Suspicious0dp">
+
+                                        </LinearLayout>
+
+                                        <androidx.recyclerview.widget.RecyclerView
+                                            android:id="@+id/recyclerFeedback"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content">
+
+                                        </androidx.recyclerview.widget.RecyclerView>
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+
+                            </androidx.cardview.widget.CardView>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/lnrServiceView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="30dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/textDark"
+                                android:textSize="18sp"
+                                android:fontFamily="@font/nunito_sans_regular"
+                                android:text="@string/pleaseChooseService">
+
+                            </TextView>
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_marginTop="15dp"
+                                android:id="@+id/cardService"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="2dp"
+                                android:layout_marginRight="2dp"
+                                android:layout_marginBottom="5dp"
+                                app:cardElevation="3dp"
+                                app:cardCornerRadius="5dp">
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="?actionBarSize">
+
+                                        <TextView
+                                            android:id="@+id/txtService"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:textColor="@color/textDark"
+                                            android:gravity="center_vertical"
+                                            android:layout_marginLeft="20dp"
+                                            android:layout_marginRight="20dp"
+                                            android:layout_gravity="center_vertical"
+                                            android:fontFamily="@font/nunito_sans_regular"
+                                            android:text="@string/app_name"
+                                            android:textSize="18sp">
+                                        </TextView>
+
+
+                                        <ImageView
+                                            android:id="@+id/imgServiceRight"
+                                            android:layout_width="25dp"
+                                            android:layout_height="25dp"
+                                            android:layout_marginRight="15dp"
+                                            android:src="@drawable/ic_down_arrow"
+                                            android:layout_alignParentRight="true"
+                                            android:layout_centerVertical="true">
+                                        </ImageView>
+
+                                        <ImageView
+                                            android:id="@+id/imgServiceLeft"
+                                            android:layout_width="25dp"
+                                            android:layout_height="25dp"
+                                            android:layout_marginLeft="15dp"
+                                            android:src="@drawable/ic_down_arrow"
+                                            android:layout_alignParentLeft="true"
+                                            android:layout_centerVertical="true"
+                                            android:visibility="gone">
+                                        </ImageView>
+
+                                    </RelativeLayout>
+
+
+                                    <LinearLayout
+                                        android:id="@+id/lnrServiceListView"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:visibility="gone"
+                                        android:orientation="vertical">
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="0.5dp"
+                                            android:layout_marginTop="5dp"
+                                            android:background="@color/customeGray"
+                                            tools:ignore="Suspicious0dp">
+
+                                        </LinearLayout>
+
+                                        <androidx.recyclerview.widget.RecyclerView
+                                            android:id="@+id/recyclerService"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content">
+
+                                        </androidx.recyclerview.widget.RecyclerView>
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+
+                            </androidx.cardview.widget.CardView>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/lnrEmirateView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="30dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/textDark"
+                                android:textSize="18sp"
+                                android:fontFamily="@font/nunito_sans_regular"
+                                android:text="@string/pleaseTellUsLocation">
+
+                            </TextView>
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/recyclerEmirate"
+                                android:layout_marginTop="10dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                            </androidx.recyclerview.widget.RecyclerView>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/lnrThoughtView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="30dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/textDark"
+                                android:textSize="18sp"
+                                android:fontFamily="@font/nunito_sans_regular"
+                                android:text="@string/whtaURThought">
+
+                            </TextView>
+
+                            <TextView
+                                android:layout_marginTop="10dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/textDark"
+                                android:textSize="14sp"
+                                android:fontFamily="@font/nunito_sans_regular"
+                                android:text="@string/productKnowledge">
+
+                            </TextView>
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/recyclerProductKnowledge"
+                                android:layout_marginTop="10dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                            </androidx.recyclerview.widget.RecyclerView>
+
+                            <TextView
+                                android:layout_marginTop="10dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/textDark"
+                                android:textSize="14sp"
+                                android:fontFamily="@font/nunito_sans_regular"
+                                android:text="@string/professionalism">
+
+                            </TextView>
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/recyclerProfessionalism"
+                                android:layout_marginTop="10dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                            </androidx.recyclerview.widget.RecyclerView>
+
+                            <TextView
+                                android:layout_marginTop="10dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/textDark"
+                                android:textSize="14sp"
+                                android:fontFamily="@font/nunito_sans_regular"
+                                android:text="@string/friednliness">
+
+                            </TextView>
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/recyclerFriednliness"
+                                android:layout_marginTop="10dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                            </androidx.recyclerview.widget.RecyclerView>
+
+                            <TextView
+                                android:layout_marginTop="10dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/textDark"
+                                android:textSize="14sp"
+                                android:fontFamily="@font/nunito_sans_regular"
+                                android:text="@string/timelyResponse">
+
+                            </TextView>
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/recyclerTimelyResponse"
+                                android:layout_marginTop="10dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                            </androidx.recyclerview.widget.RecyclerView>
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/lnrRateView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="30dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/textDark"
+                                android:textSize="18sp"
+                                android:fontFamily="@font/nunito_sans_regular"
+                                android:text="@string/howWouldYouRate">
+
+                            </TextView>
+
+                            <TextView
+                                android:layout_marginTop="10dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/textDark"
+                                android:textSize="14sp"
+                                android:fontFamily="@font/nunito_sans_regular"
+                                android:text="@string/reliability">
+
+                            </TextView>
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/recyclerReliability"
+                                android:layout_marginTop="10dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                            </androidx.recyclerview.widget.RecyclerView>
+
+                            <TextView
+                                android:layout_marginTop="10dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/textDark"
+                                android:textSize="14sp"
+                                android:fontFamily="@font/nunito_sans_regular"
+                                android:text="@string/cleanliness">
+
+                            </TextView>
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/recyclerCleanliness"
+                                android:layout_marginTop="10dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                            </androidx.recyclerview.widget.RecyclerView>
+
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/lnrCompareView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="30dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/textDark"
+                                android:textSize="18sp"
+                                android:fontFamily="@font/nunito_sans_regular"
+                                android:text="@string/howWouldYouLike">
+
+                            </TextView>
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_marginTop="15dp"
+                                android:id="@+id/cardCompare"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="2dp"
+                                android:layout_marginRight="2dp"
+                                android:layout_marginBottom="5dp"
+                                app:cardElevation="3dp"
+                                app:cardCornerRadius="5dp">
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="?actionBarSize">
+
+                                        <TextView
+                                            android:id="@+id/txtCompare"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:textColor="@color/textDark"
+                                            android:gravity="center_vertical"
+                                            android:layout_marginLeft="20dp"
+                                            android:layout_marginRight="20dp"
+                                            android:layout_gravity="center_vertical"
+                                            android:fontFamily="@font/nunito_sans_regular"
+                                            android:text="@string/app_name"
+                                            android:textSize="18sp">
+                                        </TextView>
+
+
+                                        <ImageView
+                                            android:id="@+id/imgCompareRight"
+                                            android:layout_width="25dp"
+                                            android:layout_height="25dp"
+                                            android:layout_marginRight="15dp"
+                                            android:src="@drawable/ic_down_arrow"
+                                            android:layout_alignParentRight="true"
+                                            android:layout_centerVertical="true">
+                                        </ImageView>
+
+                                        <ImageView
+                                            android:id="@+id/imgCompareLeft"
+                                            android:layout_width="25dp"
+                                            android:layout_height="25dp"
+                                            android:layout_marginLeft="15dp"
+                                            android:src="@drawable/ic_down_arrow"
+                                            android:layout_alignParentLeft="true"
+                                            android:layout_centerVertical="true"
+                                            android:visibility="gone">
+                                        </ImageView>
+
+                                    </RelativeLayout>
+
+
+                                    <LinearLayout
+                                        android:id="@+id/lnrCompareListView"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:visibility="gone"
+                                        android:orientation="vertical">
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="0.5dp"
+                                            android:layout_marginTop="5dp"
+                                            android:background="@color/customeGray"
+                                            tools:ignore="Suspicious0dp">
+
+                                        </LinearLayout>
+
+                                        <androidx.recyclerview.widget.RecyclerView
+                                            android:id="@+id/recyclerCompare"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content">
+
+                                        </androidx.recyclerview.widget.RecyclerView>
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+
+                            </androidx.cardview.widget.CardView>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/lnrRentView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="30dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/textDark"
+                                android:textSize="18sp"
+                                android:fontFamily="@font/nunito_sans_regular"
+                                android:text="@string/howWouldYouLikeRent">
+
+                            </TextView>
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_marginTop="15dp"
+                                android:id="@+id/cardRent"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="2dp"
+                                android:layout_marginRight="2dp"
+                                android:layout_marginBottom="5dp"
+                                app:cardElevation="3dp"
+                                app:cardCornerRadius="5dp">
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="?actionBarSize">
+
+                                        <TextView
+                                            android:id="@+id/txtRent"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:textColor="@color/textDark"
+                                            android:gravity="center_vertical"
+                                            android:layout_marginLeft="20dp"
+                                            android:layout_marginRight="20dp"
+                                            android:layout_gravity="center_vertical"
+                                            android:fontFamily="@font/nunito_sans_regular"
+                                            android:text="@string/app_name"
+                                            android:textSize="18sp">
+                                        </TextView>
+
+
+                                        <ImageView
+                                            android:id="@+id/imgRentRight"
+                                            android:layout_width="25dp"
+                                            android:layout_height="25dp"
+                                            android:layout_marginRight="15dp"
+                                            android:src="@drawable/ic_down_arrow"
+                                            android:layout_alignParentRight="true"
+                                            android:layout_centerVertical="true">
+                                        </ImageView>
+
+                                        <ImageView
+                                            android:id="@+id/imgRentLeft"
+                                            android:layout_width="25dp"
+                                            android:layout_height="25dp"
+                                            android:layout_marginLeft="15dp"
+                                            android:src="@drawable/ic_down_arrow"
+                                            android:layout_alignParentLeft="true"
+                                            android:layout_centerVertical="true"
+                                            android:visibility="gone">
+                                        </ImageView>
+
+                                    </RelativeLayout>
+
+
+                                    <LinearLayout
+                                        android:id="@+id/lnrRentListView"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:visibility="gone"
+                                        android:orientation="vertical">
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="0.5dp"
+                                            android:layout_marginTop="5dp"
+                                            android:background="@color/customeGray"
+                                            tools:ignore="Suspicious0dp">
+
+                                        </LinearLayout>
+
+                                        <androidx.recyclerview.widget.RecyclerView
+                                            android:id="@+id/recyclerRent"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content">
+
+                                        </androidx.recyclerview.widget.RecyclerView>
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+
+                            </androidx.cardview.widget.CardView>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="30dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/textDark"
+                                android:textSize="18sp"
+                                android:fontFamily="@font/nunito_sans_regular"
+                                android:text="@string/anySuggetionCustomer">
+
+                            </TextView>
+
+                            <EditText
+                                android:id="@+id/etxSuggetion"
+                                android:layout_width="match_parent"
+                                android:layout_height="220dp"
+                                android:padding="10dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_gravity="start"
+                                android:gravity="start"
+                                android:imeOptions="actionNext"
+                                android:background="@drawable/corner_gray_bg">
+
+                            </EditText>
+
+                            <TextView
+                                android:layout_marginTop="30dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/textDark"
+                                android:textSize="18sp"
+                                android:fontFamily="@font/nunito_sans_regular"
+                                android:text="@string/name">
+
+                            </TextView>
+
+                            <EditText
+                                android:id="@+id/etxName"
+                                android:layout_width="match_parent"
+                                android:layout_height="?actionBarSize"
+                                android:padding="10dp"
+                                android:imeOptions="actionNext"
+                                android:layout_marginTop="10dp"
+                                android:background="@drawable/corner_gray_bg">
+
+                            </EditText>
+
+                            <TextView
+                                android:layout_marginTop="30dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/textDark"
+                                android:textSize="18sp"
+                                android:fontFamily="@font/nunito_sans_regular"
+                                android:text="@string/mobile">
+
+                            </TextView>
+
+                            <EditText
+                                android:id="@+id/etxMobile"
+                                android:layout_width="match_parent"
+                                android:layout_height="?actionBarSize"
+                                android:padding="10dp"
+                                android:layout_marginTop="10dp"
+                                android:inputType="number"
+                                android:imeOptions="actionNext"
+                                android:background="@drawable/corner_gray_bg">
+
+                            </EditText>
+
+                            <TextView
+                                android:layout_marginTop="30dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/textDark"
+                                android:textSize="18sp"
+                                android:fontFamily="@font/nunito_sans_regular"
+                                android:text="@string/email">
+
+                            </TextView>
+
+                            <EditText
+                                android:id="@+id/etxEmail"
+                                android:layout_width="match_parent"
+                                android:layout_height="?actionBarSize"
+                                android:padding="10dp"
+                                android:imeOptions="actionDone"
+                                android:layout_marginTop="10dp"
+                                android:inputType="textEmailAddress"
+                                android:background="@drawable/corner_gray_bg">
+
+                            </EditText>
+
+                            <TextView
+                                android:id="@+id/txtSubmit"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="50dp"
+                                android:layout_marginBottom="70dp"
+                                android:layout_marginLeft="20dp"
+                                android:layout_marginRight="20dp"
+                                android:background="@drawable/button_blue_bg"
+                                android:fontFamily="@font/nunit_sans_bold"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:paddingRight="60dp"
+                                android:paddingLeft="60dp"
+                                android:paddingBottom="16dp"
+                                android:paddingTop="16dp"
+                                android:text="@string/submit"
+                                android:textColor="@color/colorWhite"
+                                android:textSize="18dp" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
 
                 </androidx.core.widget.NestedScrollView>
-
-                <TextView
-                    android:id="@+id/txtError"
-                    android:layout_weight="1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/noDataFound"
-                    android:textSize="22sp"
-                    android:visibility="gone"
-                    android:layout_centerInParent="true"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:fontFamily="@font/nunito_sans_semibold">
-
-                </TextView>
 
             </RelativeLayout>
 

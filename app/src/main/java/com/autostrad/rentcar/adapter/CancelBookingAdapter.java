@@ -4,6 +4,7 @@ import android.app.ActionBar;
 import android.content.Context;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -30,10 +31,6 @@ public class CancelBookingAdapter extends RecyclerView.Adapter<CancelBookingAdap
     private Fragment fragment;
     private int flag;
 
-    public interface onClick {
-        void downloadInvoice(BookingModel model);
-    }
-
     public CancelBookingAdapter(Context context, List<BookingModel> bookingModelList, Fragment fragment, int flag) {
         this.context = context;
         this.bookingModelList = bookingModelList;
@@ -58,7 +55,14 @@ public class CancelBookingAdapter extends RecyclerView.Adapter<CancelBookingAdap
         holder.binding.txtReservationNo.setText(model.getBooking_id());
         holder.binding.txtPickup.setText(getFormatDate(checkString(model.getPickup_datetime())));
         holder.binding.txtDropoff.setText(getFormatDate(checkString(model.getDropoff_datetime())));
-        holder.binding.txtMessage.setText(model.getRefund_status_msg());
+        if (!TextUtils.isEmpty(checkString(model.getRefund_status_msg()))){
+            holder.binding.txtMessage.setText(checkString(model.getRefund_status_msg()));
+            holder.binding.lnrMessage.setVisibility(View.VISIBLE);
+        }else {
+            holder.binding.lnrMessage.setVisibility(View.GONE);
+        }
+
+
 
         try {
             if (position == bookingModelList.size() - 1) {

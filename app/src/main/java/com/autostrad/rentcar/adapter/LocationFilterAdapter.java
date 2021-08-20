@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.autostrad.rentcar.R;
 import com.autostrad.rentcar.activity.ContactUsActivity;
+import com.autostrad.rentcar.activity.CustomerFeedbackActivity;
 import com.autostrad.rentcar.activity.LocationActivity;
 import com.autostrad.rentcar.databinding.ActivityCarFilterListBinding;
 import com.autostrad.rentcar.model.LocationModel;
@@ -26,6 +27,13 @@ public class LocationFilterAdapter extends RecyclerView.Adapter<LocationFilterAd
 
     public interface onClick{
         void onFilterClick(LocationModel model);
+    }
+
+    public interface onFeedback{
+        void onFeedbackClick(LocationModel model);
+        void onServiceClick(LocationModel model);
+        void onCompareClick(LocationModel model);
+        void onRentClick(LocationModel model);
     }
 
     public LocationFilterAdapter(Context context, List<LocationModel> locationModelList,int from) {
@@ -45,6 +53,12 @@ public class LocationFilterAdapter extends RecyclerView.Adapter<LocationFilterAd
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
         LocationModel model = locationModelList.get(position);
 
+        if (from==3 || from==4 || from==5 || from==6){
+            if (position==0){
+                holder.binding.txtFilter.setTextColor(context.getResources().getColor(R.color.iconicGray));
+            }
+        }
+
         holder.binding.txtFilter.setText(model.getEmirate_name());
         holder.binding.txtFilter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,6 +68,14 @@ public class LocationFilterAdapter extends RecyclerView.Adapter<LocationFilterAd
                     ((ContactUsActivity)context).onFilterClick(model);
                 }else if (from==2){
                     ((LocationActivity)context).onFilterClick(model);
+                }else if (from==3){
+                    ((CustomerFeedbackActivity)context).onFeedbackClick(model);
+                }else if (from==4){
+                    ((CustomerFeedbackActivity)context).onServiceClick(model);
+                }else if (from==5){
+                    ((CustomerFeedbackActivity)context).onCompareClick(model);
+                }else if (from==6){
+                    ((CustomerFeedbackActivity)context).onRentClick(model);
                 }
             }
         });

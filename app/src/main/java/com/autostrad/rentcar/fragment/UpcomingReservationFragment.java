@@ -90,10 +90,8 @@ public class UpcomingReservationFragment extends Fragment implements UpcomingRes
                     if (json.getInt(P.status) == 1) {
 
                         json = json.getJson(P.data);
+
                         JsonList upcoming_list = json.getJsonList(P.upcoming_list);
-                        JsonList current_list = json.getJsonList(P.current_list);
-                        JsonList past_list = json.getJsonList(P.past_list);
-                        JsonList cancel_list = json.getJsonList(P.cancel_list);
 
                         if (upcoming_list!=null && upcoming_list.size()!=0){
                             for (Json jsonData : upcoming_list){
@@ -106,12 +104,14 @@ public class UpcomingReservationFragment extends Fragment implements UpcomingRes
                                 String pickup_type = jsonData.getString(P.pickup_type);
                                 String pickup_datetime = jsonData.getString(P.pickup_datetime);
                                 String pickup_location_name = jsonData.getString(P.pickup_location_name);
-                                String pickup_address = jsonData.getString(P.pickup_address);
+//                                String pickup_address = jsonData.getString(P.pickup_address);
+                                String pickup_address = jsonData.getString(P.pickup_details);
                                 String pickup_landmark = jsonData.getString(P.pickup_landmark);
                                 String dropoff_type = jsonData.getString(P.dropoff_type);
                                 String dropoff_datetime = jsonData.getString(P.dropoff_datetime);
                                 String dropoff_location_name = jsonData.getString(P.dropoff_location_name);
-                                String dropoff_address = jsonData.getString(P.dropoff_address);
+//                                String dropoff_address = jsonData.getString(P.dropoff_address);
+                                String dropoff_address = jsonData.getString(P.dropoff_details);
                                 String dropoff_landmark = jsonData.getString(P.dropoff_landmark);
 
                                 BookingModel model = new BookingModel();

@@ -48,6 +48,7 @@ public class Config {
     public static String Traffic_Lines = "Traffic Lines";
     public static String Fast_Loyalty = "Fast Loyalty";
     public static String Refund = "Refund";
+    public static String Extend_Booking = "EXTEND BOOKING";
 
     public static String General = "General";
     public static String Payment_Related = "Payment Related";

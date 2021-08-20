@@ -526,6 +526,36 @@
     <string name="aboutUAE">حول الإمارات</string>
     <string name="myBlog">مدوناتي</string>
     <string name="lessView1">عرض أقل</string>
+    <string name="howDidYpuKnow">كيف عرفت عن أوتوستراد لتأجير السيارات؟</string>
+    <string name="pleaseChooseService">الرجاء اختيار فئة الخدمة</string>
+    <string name="pleaseTellUsLocation">يرجى إخبارنا بموقع إيجارك</string>
+    <string name="whtaURThought">ما هي أفكارك حول الممثل الذي حضرك؟ لديه / لديها:</string>
+    <string name="productKnowledge">معرفة المنتج</string>
+    <string name="professionalism">احترافية</string>
+    <string name="friednliness">فرايدنلينس</string>
+    <string name="timelyResponse">الاستجابة في الوقت المناسب</string>
+    <string name="howWouldYouRate">كيف تقيم السيارة التي نقدمها؟</string>
+    <string name="reliability">مصداقية</string>
+    <string name="cleanliness">النظافة</string>
+    <string name="howWouldYouLike">كيف تقيم Autostrad Rent A Car مقارنة بشركات تأجير السيارات الأخرى؟</string>
+    <string name="howWouldYouLikeRent">ما مدى احتمالية أن تستأجر مرة أخرى من Autostrad Rent A Car؟</string>
+    <string name="anySuggetionCustomer">أي اقتراح حول كيف يمكننا تحسين تجربتك في المرة القادمة؟</string>
+    <string name="selectFeedbackSoursce">الرجاء تحديد مصدر التعليقات</string>
+    <string name="selectFeedbackService">الرجاء تحديد خدمة التعليقات</string>
+    <string name="selectFeedbackCompare">الرجاء تحديد مقارنة مع سيارة أخرى</string>
+    <string name="selectFeedbackRentAgain">الرجاء تحديد الإيجار مرة أخرى</string>
+    <string name="enterSuggetion">الرجاء إدخال الاقتراح</string>
+    <string name="enterValidSuggetion">الرجاء إدخال اقتراح صالح</string>
+    <string name="enterName">أدخل الاسم</string>
+    <string name="currentReservations">الحجوزات الحالية</string>
+    <string name="pastReservations">الحجوزات السابقة</string>
+    <string name="cancelReservations">إلغاء الحجوزات</string>
+    <string name="editReservations">تحرير الحجوزات</string>
+    <string name="extendReservations">تمديد الحجوزات</string>
+    <string name="extendBooking">تمديد الحجز</string>
+    <string name="selectNewDropOffDate">حدد تاريخ تسليم جديد</string>
+    <string name="selectNewDropOffTime">حدد وقت التسليم الجديد</string>
+
 
     <string name="txt1">شركة رائدة في مجال تأجير السيارات ولديها أكبر شبكة من الفروع ونقاط الالتقاء</string>
     <string name="txt2">شركة رائدة في مجال تأجير السيارات ولديها أكبر شبكة من الفروع ونقاط الالتقاء</string>

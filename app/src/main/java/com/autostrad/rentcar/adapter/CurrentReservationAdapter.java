@@ -16,7 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.adoisstudio.helper.Session;
 import com.autostrad.rentcar.R;
 import com.autostrad.rentcar.databinding.ActivityCarBookingListBinding;
-import com.autostrad.rentcar.fragment.UpcomingReservationFragment;
+import com.autostrad.rentcar.databinding.ActivityCurrentBookingListBinding;
+import com.autostrad.rentcar.fragment.CurrentBookingFragment;
 import com.autostrad.rentcar.model.BookingModel;
 import com.autostrad.rentcar.util.Click;
 import com.autostrad.rentcar.util.Config;
@@ -28,7 +29,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class UpcomingReservationAdapter extends RecyclerView.Adapter<UpcomingReservationAdapter.viewHolder> {
+public class CurrentReservationAdapter extends RecyclerView.Adapter<CurrentReservationAdapter.viewHolder> {
 
     private Context context;
     private List<BookingModel> bookingModelList;
@@ -37,10 +38,10 @@ public class UpcomingReservationAdapter extends RecyclerView.Adapter<UpcomingRes
     private int flag;
 
     public interface onClick{
-        void cancelBooking(BookingModel model);
+        void extendBooking(BookingModel model);
     }
 
-    public UpcomingReservationAdapter(Context context, List<BookingModel> bookingModelList, Fragment fragment, int flag) {
+    public CurrentReservationAdapter(Context context, List<BookingModel> bookingModelList, Fragment fragment, int flag) {
         this.context = context;
         this.bookingModelList = bookingModelList;
         this.fragment = fragment;
@@ -51,7 +52,7 @@ public class UpcomingReservationAdapter extends RecyclerView.Adapter<UpcomingRes
     @NonNull
     @Override
     public viewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ActivityCarBookingListBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.activity_car_booking_list, parent, false);
+        ActivityCurrentBookingListBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.activity_current_booking_list, parent, false);
         return new viewHolder(binding);
     }
 
@@ -62,6 +63,7 @@ public class UpcomingReservationAdapter extends RecyclerView.Adapter<UpcomingRes
         LoadImage.glideString(context,holder.binding.imgCar,model.getCar_image());
         holder.binding.txtCarName.setText(model.getCar_name());
         holder.binding.txtRegisterNo.setText(context.getResources().getString(R.string.reservationNo)+"\n"+model.getBooking_id());
+
 
         if (model.getPickup_type().equals("self_pickup")){
             holder.binding.txtFrom.setText(checkString(model.getPickup_location_name() + "\n" + getFormatDate(model.getPickup_datetime())));
@@ -75,27 +77,20 @@ public class UpcomingReservationAdapter extends RecyclerView.Adapter<UpcomingRes
             holder.binding.txtTo.setText(checkString(model.getDropoff_address() + "\n" + getFormatDate(model.getDropoff_datetime())));
         }
 
-
         if (session.getString(P.languageFlag).equals(Config.ARABIC)) {
             holder.binding.txtRegisterNo.setGravity(Gravity.RIGHT);
         }else if (session.getString(P.languageFlag).equals(Config.ENGLISH)) {
             holder.binding.txtRegisterNo.setGravity(Gravity.LEFT);
         }
 
-        holder.binding.txtCancel.setOnClickListener(new View.OnClickListener() {
+        holder.binding.txtExtend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-//                ((UpcomingReservationFragment)fragment).cancelBooking(model);
+                ((CurrentBookingFragment)fragment).extendBooking(model);
             }
         });
 
-        holder.binding.txtEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Click.preventTwoClick(v);
-            }
-        });
 
         try{
             if (position==bookingModelList.size()-1){
@@ -118,8 +113,8 @@ public class UpcomingReservationAdapter extends RecyclerView.Adapter<UpcomingRes
     }
 
     public class viewHolder extends RecyclerView.ViewHolder {
-        ActivityCarBookingListBinding binding;
-        public viewHolder(@NonNull ActivityCarBookingListBinding binding) {
+        ActivityCurrentBookingListBinding binding;
+        public viewHolder(@NonNull ActivityCurrentBookingListBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }

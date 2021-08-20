@@ -23,7 +23,7 @@
             android:visibility="gone"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:text="@string/noUpcomingReservation"
+            android:text="@string/bookingError"
             android:layout_centerInParent="true"
             android:fontFamily="@font/nunito_sans_semibold"
             android:textColor="@color/darkOrange">

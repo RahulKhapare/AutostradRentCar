@@ -17,7 +17,7 @@
             android:elevation="3dp"
             app:tabIndicatorColor="@color/lightBlue"
             app:tabIndicatorHeight="2dp"
-            app:tabMode="fixed"
+            app:tabMode="scrollable"
             app:tabGravity="fill"
             app:tabInlineLabel="true"
             app:tabIconTint="@color/your_color_selector"

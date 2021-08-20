@@ -1,7 +1,9 @@
 package com.autostrad.rentcar.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,22 +20,25 @@ import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
 import com.autostrad.rentcar.R;
 import com.autostrad.rentcar.activity.MainActivity;
+import com.autostrad.rentcar.activity.ProfileViewActivity;
 import com.autostrad.rentcar.adapter.CancelBookingAdapter;
+import com.autostrad.rentcar.adapter.CurrentReservationAdapter;
 import com.autostrad.rentcar.adapter.PastRentalAdapter;
 import com.autostrad.rentcar.databinding.FragmentPastRentalBinding;
 import com.autostrad.rentcar.model.BookingModel;
+import com.autostrad.rentcar.util.Config;
 import com.autostrad.rentcar.util.P;
 import com.autostrad.rentcar.util.ProgressView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CancelBookingFragment extends Fragment {
+public class CurrentBookingFragment extends Fragment implements CurrentReservationAdapter.onClick {
 
     private Context context;
     private FragmentPastRentalBinding binding;
     private List<BookingModel> bookingModelList;
-    private CancelBookingAdapter cancelBookingAdapter;
+    private CurrentReservationAdapter currentReservationAdapter;
     private LoadingDialog loadingDialog;
     private Session session;
 
@@ -53,16 +58,23 @@ public class CancelBookingFragment extends Fragment {
         session = new Session(context);
         loadingDialog = new LoadingDialog(context);
         bookingModelList = new ArrayList<>();
-        cancelBookingAdapter = new CancelBookingAdapter(context, bookingModelList, CancelBookingFragment.this, 2);
+        currentReservationAdapter = new CurrentReservationAdapter(context, bookingModelList, CurrentBookingFragment.this, 2);
         binding.recyclerPastRental.setLayoutManager(new LinearLayoutManager(context));
-        binding.recyclerPastRental.setAdapter(cancelBookingAdapter);
-        hitCancelBookingDetails();
-
+        binding.recyclerPastRental.setAdapter(currentReservationAdapter);
+        hitCurrentBookingDetails();
     }
 
-    private void hitCancelBookingDetails() {
+    @Override
+    public void extendBooking(BookingModel model) {
+        Config.currentProfileFlag = Config.Extend_Booking;
+        Config.driverIDFORDOC = model.getBooking_id();
+        Intent intent = new Intent(context, ProfileViewActivity.class);
+        startActivity(intent);
+    }
+
+    private void hitCurrentBookingDetails() {
         bookingModelList.clear();
-        cancelBookingAdapter.notifyDataSetChanged();
+        currentReservationAdapter.notifyDataSetChanged();
         ProgressView.show(context, loadingDialog);
         Json j = new Json();
         j.addString(P.booking_number, "");
@@ -81,11 +93,10 @@ public class CancelBookingFragment extends Fragment {
 
                         json = json.getJson(P.data);
 
-                        JsonList cancel_list = json.getJsonList(P.cancel_list);
-
-                        if (cancel_list != null && cancel_list.size() != 0) {
-                            for (Json jsonData : cancel_list) {
-
+                        JsonList current_list = json.getJsonList(P.current_list);
+                        if (current_list != null && current_list.size() != 0) {
+                            for (Json jsonData : current_list) {
+                                Log.e("TAG", "aasasasas: "+ jsonData.toString() );
                                 String id = jsonData.getString(P.id);
                                 String booking_id = jsonData.getString(P.booking_id);
                                 String refund_status_msg = jsonData.getString(P.refund_status_msg);
@@ -124,7 +135,7 @@ public class CancelBookingFragment extends Fragment {
                                 bookingModelList.add(model);
                             }
 
-                            cancelBookingAdapter.notifyDataSetChanged();
+                            currentReservationAdapter.notifyDataSetChanged();
                         }
 
                     } else {
@@ -134,7 +145,7 @@ public class CancelBookingFragment extends Fragment {
                     ProgressView.dismiss(loadingDialog);
 
                 })
-                .run("hitCancelBookingDetails", session.getString(P.token));
+                .run("hitCurrentBookingDetails", session.getString(P.token));
 
     }
 
@@ -148,9 +159,8 @@ public class CancelBookingFragment extends Fragment {
         }
     }
 
-    public static CancelBookingFragment newInstance() {
-        CancelBookingFragment fragment = new CancelBookingFragment();
+    public static CurrentBookingFragment newInstance() {
+        CurrentBookingFragment fragment = new CurrentBookingFragment();
         return fragment;
     }
-
 }

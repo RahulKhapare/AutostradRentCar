@@ -42,6 +42,7 @@ import com.autostrad.rentcar.fragment.AdditionalDriverDocumentFragment;
 import com.autostrad.rentcar.fragment.AdditionalDriverFragment;
 import com.autostrad.rentcar.fragment.BookingFragment;
 import com.autostrad.rentcar.fragment.DocumentFragment;
+import com.autostrad.rentcar.fragment.ExtendBookingFragment;
 import com.autostrad.rentcar.fragment.FastLoyaltyFragment;
 import com.autostrad.rentcar.fragment.InvoiceFragment;
 import com.autostrad.rentcar.fragment.ManagePaymentFragment;
@@ -83,6 +84,7 @@ public class ProfileViewActivity extends AppCompatActivity{
     private TrafficLinesFragment trafficLinesFragment;
     private FastLoyaltyFragment fastLoyaltyFragment;
     private RefundFragment refundFragment;
+    private ExtendBookingFragment extendBookingFragment;
 
     private LoadingDialog loadingDialog;
     private Session session;
@@ -174,6 +176,10 @@ public class ProfileViewActivity extends AppCompatActivity{
             binding.txtTitle.setText(getResources().getString(R.string.refund));
             refundFragment = RefundFragment.newInstance();
             fragmentLoader(refundFragment, Config.Refund);
+        }else if (categoryFlag.equals(Config.Extend_Booking)) {
+            binding.txtTitle.setText(getResources().getString(R.string.extendBooking));
+            extendBookingFragment = ExtendBookingFragment.newInstance();
+            fragmentLoader(extendBookingFragment, Config.Extend_Booking);
         }
     }
 
@@ -201,6 +207,10 @@ public class ProfileViewActivity extends AppCompatActivity{
         click = upload;
         getPermission();
 
+    }
+
+    public void finishView(){
+        finish();
     }
 
     private void getAccess() {

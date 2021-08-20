@@ -67,8 +67,10 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/textDark"
+                                android:layout_gravity="center"
                                 android:fontFamily="@font/nunito_sans_regular"
                                 android:textSize="12sp"
+                                android:maxLines="2"
                                 android:paddingRight="10dp"
                                 android:paddingLeft="10dp"
                                 android:text="@string/newToFats">
@@ -112,6 +114,7 @@
                                 android:textColor="@color/textDark"
                                 android:fontFamily="@font/nunito_sans_regular"
                                 android:textSize="12sp"
+                                android:layout_gravity="center"
                                 android:paddingRight="10dp"
                                 android:paddingLeft="10dp"
                                 android:text="@string/alreyCustomer">
