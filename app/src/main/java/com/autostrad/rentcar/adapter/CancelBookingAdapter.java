@@ -55,6 +55,7 @@ public class CancelBookingAdapter extends RecyclerView.Adapter<CancelBookingAdap
         holder.binding.txtReservationNo.setText(model.getBooking_id());
         holder.binding.txtPickup.setText(getFormatDate(checkString(model.getPickup_datetime())));
         holder.binding.txtDropoff.setText(getFormatDate(checkString(model.getDropoff_datetime())));
+
         if (!TextUtils.isEmpty(checkString(model.getRefund_status_msg()))){
             holder.binding.txtMessage.setText(checkString(model.getRefund_status_msg()));
             holder.binding.lnrMessage.setVisibility(View.VISIBLE);

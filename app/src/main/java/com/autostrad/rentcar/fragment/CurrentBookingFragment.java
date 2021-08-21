@@ -96,7 +96,7 @@ public class CurrentBookingFragment extends Fragment implements CurrentReservati
                         JsonList current_list = json.getJsonList(P.current_list);
                         if (current_list != null && current_list.size() != 0) {
                             for (Json jsonData : current_list) {
-                                Log.e("TAG", "aasasasas: "+ jsonData.toString() );
+
                                 String id = jsonData.getString(P.id);
                                 String booking_id = jsonData.getString(P.booking_id);
                                 String refund_status_msg = jsonData.getString(P.refund_status_msg);

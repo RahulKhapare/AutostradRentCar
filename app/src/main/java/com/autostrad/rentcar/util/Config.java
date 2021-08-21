@@ -127,7 +127,7 @@ public class Config {
     public static String collect = "collect";
     public static String deliver = "deliver";
     public static String self_pickup = "self_pickup";
-    public static String self_dropoff = "self_dropoff";
+    public static String self_dropoff = "self_return";
     public static boolean HOME_DELIVERY_CHECK = false;
     public static boolean HOME_COLLECT_CHECK = false;
     public static boolean FOR_EDIT_LOCATION = false;

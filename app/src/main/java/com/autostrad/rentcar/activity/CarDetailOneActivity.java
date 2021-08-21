@@ -217,13 +217,13 @@ public class CarDetailOneActivity extends AppCompatActivity implements AddOnsAda
             binding.txtCarName.setGravity(Gravity.RIGHT);
         }
 
-        if(SelectCarActivity.pickUpType.equals("self_pickup")){
+        if(SelectCarActivity.pickUpType.equals(Config.self_pickup)){
             binding.txtPickupDetails.setVisibility(View.VISIBLE);
         }else {
             binding.txtPickupDetails.setVisibility(View.GONE);
         }
 
-        if(SelectCarActivity.dropUpType.equals("self_dropoff")){
+        if(SelectCarActivity.dropUpType.equals(Config.self_dropoff)){
             binding.txtDropupDetails.setVisibility(View.VISIBLE);
         }else {
             binding.txtDropupDetails.setVisibility(View.GONE);

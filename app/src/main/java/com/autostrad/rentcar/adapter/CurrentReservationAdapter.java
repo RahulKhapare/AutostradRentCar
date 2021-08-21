@@ -3,6 +3,7 @@ package com.autostrad.rentcar.adapter;
 import android.app.ActionBar;
 import android.content.Context;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -65,15 +66,15 @@ public class CurrentReservationAdapter extends RecyclerView.Adapter<CurrentReser
         holder.binding.txtRegisterNo.setText(context.getResources().getString(R.string.reservationNo)+"\n"+model.getBooking_id());
 
 
-        if (model.getPickup_type().equals("self_pickup")){
+        if (model.getPickup_type().equals(Config.self_pickup)){
             holder.binding.txtFrom.setText(checkString(model.getPickup_location_name() + "\n" + getFormatDate(model.getPickup_datetime())));
-        }else if (model.getPickup_type().equals("deliver")){
+        }else if (model.getPickup_type().equals(Config.deliver)){
             holder.binding.txtFrom.setText(checkString(model.getPickup_address() + "\n" + getFormatDate(model.getPickup_datetime())));
         }
 
-        if (model.getDropoff_type().equals("self_dropoff")){
+        if (model.getDropoff_type().equals(Config.self_dropoff)){
             holder.binding.txtTo.setText(checkString(model.getDropoff_location_name() + "\n" + getFormatDate(model.getDropoff_datetime())));
-        }else if (model.getDropoff_type().equals("collect")){
+        }else if (model.getDropoff_type().equals(Config.collect)){
             holder.binding.txtTo.setText(checkString(model.getDropoff_address() + "\n" + getFormatDate(model.getDropoff_datetime())));
         }
 
