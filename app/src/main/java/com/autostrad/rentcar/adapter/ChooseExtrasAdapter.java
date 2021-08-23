@@ -1,27 +1,45 @@
 package com.autostrad.rentcar.adapter;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.adoisstudio.helper.Api;
 import com.adoisstudio.helper.H;
+import com.adoisstudio.helper.Json;
+import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
 import com.autostrad.rentcar.R;
 import com.autostrad.rentcar.activity.AddOnsActivity;
+import com.autostrad.rentcar.activity.SelectCarActivity;
 import com.autostrad.rentcar.databinding.ActivityChooseExtraListBinding;
+import com.autostrad.rentcar.model.AEDModel;
 import com.autostrad.rentcar.model.BookingModel;
+import com.autostrad.rentcar.model.CarModel;
 import com.autostrad.rentcar.model.ChooseExtrasModel;
 import com.autostrad.rentcar.util.Click;
+import com.autostrad.rentcar.util.Config;
 import com.autostrad.rentcar.util.LoadImage;
+import com.autostrad.rentcar.util.P;
+import com.autostrad.rentcar.util.ProgressView;
 import com.autostrad.rentcar.util.RemoveHtml;
 
+import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ChooseExtrasAdapter extends RecyclerView.Adapter<ChooseExtrasAdapter.viewHolder> {
@@ -29,6 +47,8 @@ public class ChooseExtrasAdapter extends RecyclerView.Adapter<ChooseExtrasAdapte
     private Context context;
     private List<ChooseExtrasModel> chooseExtrasModelList;
     private Session session;
+    private LoadingDialog loadingDialog;
+    private CarModel carModel;
 
     public interface onClick {
         void cancelBooking(String quantity,BookingModel model);
@@ -38,6 +58,8 @@ public class ChooseExtrasAdapter extends RecyclerView.Adapter<ChooseExtrasAdapte
         this.context = context;
         this.chooseExtrasModelList = chooseExtrasModelList;
         session = new Session(context);
+        loadingDialog = new LoadingDialog(context);
+        carModel = Config.carModel;
     }
 
     @NonNull
@@ -163,6 +185,14 @@ public class ChooseExtrasAdapter extends RecyclerView.Adapter<ChooseExtrasAdapte
             }
         });
 
+        holder.binding.txtViewCalculation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                hitAEDDetailsData(model.getKey_value());
+            }
+        });
+
     }
 
     @Override
@@ -178,4 +208,113 @@ public class ChooseExtrasAdapter extends RecyclerView.Adapter<ChooseExtrasAdapte
             this.binding = binding;
         }
     }
+
+    private void hitAEDDetailsData(String detail_type) {
+
+        ProgressView.show(context, loadingDialog);
+        Json j = new Json();
+
+        String extraParams =
+                "emirate_id=" + SelectCarActivity.pickUpEmirateID+
+                        "&pickup_emirate_id=" + SelectCarActivity.pickUpEmirateID+
+                        "&car_id=" + carModel.getId()+
+                        "&pickup_date=" + SelectCarActivity.pickUpDate +
+                        "&dropoff_date=" + SelectCarActivity.dropUpDate +
+                        "&booking_type=" + SelectCarActivity.bookingTYpe +
+                        "&month_time=" + SelectCarActivity.monthDuration +
+                        "&detail_type=" + detail_type +
+                        "&coupon_code=" + "" ;
+
+        Api.newApi(context, P.BaseUrl + "car_rate_details?" + extraParams).addJson(j)
+                .setMethod(Api.GET)
+                //.onHeaderRequest(App::getHeaders)
+                .onError(() -> {
+                    ProgressView.dismiss(loadingDialog);
+                    H.showMessage(context, "On error is called");
+                })
+                .onSuccess(json ->
+                {
+                    if (json.getInt(P.status) == 1) {
+
+                        json = json.getJson(P.data);
+                        AEDDetailsDialog(json,detail_type);
+
+                    }
+                    ProgressView.dismiss(loadingDialog);
+
+                })
+                .run("hitAEDDetailsData");
+    }
+
+    private void AEDDetailsDialog(Json json,String detail_type) {
+
+        final Dialog dialog = new Dialog(context);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.activity_aed_details);
+
+        ImageView imgClose = dialog.findViewById(R.id.imgClose);
+        LinearLayout lnrTotal = dialog.findViewById(R.id.lnrTotal);
+        LinearLayout lnrPayLater = dialog.findViewById(R.id.lnrPayLater);
+        LinearLayout lnrDiscount = dialog.findViewById(R.id.lnrDiscount);
+        LinearLayout lnrPayNow = dialog.findViewById(R.id.lnrPayNow);
+
+        TextView txtTotalAmount = dialog.findViewById(R.id.txtTotalAmount);
+        TextView txtPayLaterAmount = dialog.findViewById(R.id.txtPayLaterAmount);
+        TextView txtPayDiscountAmount = dialog.findViewById(R.id.txtPayDiscountAmount);
+        TextView txtPayNowAmount = dialog.findViewById(R.id.txtPayNowAmount);
+
+        List<AEDModel> aedModelList = new ArrayList<>();
+
+        for (Json jsonData : json.getJsonList("breakup")){
+            AEDModel model = new AEDModel();
+            model.setDate(jsonData.getString("date"));
+            model.setPrice(jsonData.getString("price"));
+            model.setSurge(jsonData.getString("surge"));
+            model.setDiscount(jsonData.getString("discount"));
+//            model.setType(jsonData.getString(detail_type));
+            aedModelList.add(model);
+        }
+
+        RecyclerView recyclerAED = dialog.findViewById(R.id.recyclerAED);
+        recyclerAED.setLayoutManager(new LinearLayoutManager(context));
+        recyclerAED.setNestedScrollingEnabled(false);
+        AEDAdapter aedAdapter = new AEDAdapter(context,aedModelList);
+        recyclerAED.setAdapter(aedAdapter);
+
+        String aed  = context.getResources().getString(R.string.aed);
+        txtTotalAmount.setText(aed + " " + checkView(json.getString("breakup_total"),lnrTotal));
+        txtPayLaterAmount.setText(aed + " " + checkView(json.getString("pay_later_price"),lnrPayLater));
+        txtPayDiscountAmount.setText(aed + " " + checkView(json.getString("pay_now_discount"),lnrDiscount));
+        txtPayNowAmount.setText(aed + " " + checkView(json.getString("pay_now_price"),lnrPayNow));
+
+        imgClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                dialog.dismiss();
+            }
+        });
+
+        dialog.setCancelable(true);
+        dialog.show();
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+
+    }
+
+    private String checkView(String string, LinearLayout linearLayout){
+        String value = "";
+        if (TextUtils.isEmpty(string) || string.equals("null") || string.equals("0")){
+            linearLayout.setVisibility(View.GONE);
+        }else {
+            try {
+                double doubleValue = Double.parseDouble(string);
+                value = new DecimalFormat("##.##").format(doubleValue);
+            }catch (Exception e){
+                value = string;
+            }
+        }
+        return value;
+    }
+
 }
