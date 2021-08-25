@@ -31,10 +31,12 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
@@ -42,6 +44,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.adoisstudio.helper.Api;
 import com.adoisstudio.helper.H;
@@ -50,6 +53,7 @@ import com.adoisstudio.helper.JsonList;
 import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
 import com.autostrad.rentcar.R;
+import com.autostrad.rentcar.adapter.AEDAdapter;
 import com.autostrad.rentcar.adapter.AddressSelectionAdapter;
 import com.autostrad.rentcar.adapter.CodeSelectionAdapter;
 import com.autostrad.rentcar.adapter.DocumentAdapter;
@@ -57,6 +61,7 @@ import com.autostrad.rentcar.adapter.DocumentListAdapter;
 import com.autostrad.rentcar.adapter.EmirateAdapter;
 import com.autostrad.rentcar.adapter.PaymentCardAdapter;
 import com.autostrad.rentcar.databinding.ActivityCarBookingDetailBinding;
+import com.autostrad.rentcar.model.AEDModel;
 import com.autostrad.rentcar.model.AddressModel;
 import com.autostrad.rentcar.model.CarModel;
 import com.autostrad.rentcar.model.CountryCodeModel;
@@ -1636,10 +1641,12 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Emir
 
                         json = json.getJson(P.data);
 
-                        if (binding.checkBoxAccept.isChecked()) {
-                            hitBookCarData(model);
-                        } else {
+                        if (!binding.checkBoxAccept.isChecked()) {
                             H.showMessage(activity, getResources().getString(R.string.allowTemCondition));
+                        }else if (!binding.checkBoxAge.isChecked()) {
+                            H.showMessage(activity, getResources().getString(R.string.ageMessage));
+                        } else {
+                            getVerificationDialog();
                         }
 
                     } else {
@@ -2158,7 +2165,7 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Emir
 
         j.addString(P.booking_remark, binding.etxRemark.getText().toString().trim());
         j.addString(P.failed_url, "");
-        j.addString(P.booking_from, "mobile");
+        j.addString(P.booking_from, Config.MOBILE);
         j.addString(P.success_url, "");
         j.addJSON(P.document, jsonChild);
 
@@ -2191,6 +2198,48 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Emir
 
                 })
                 .run("hitBookCarData",session.getString(P.token));
+
+    }
+
+    private void getVerificationDialog() {
+        final Dialog dialog = new Dialog(activity);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.activity_age_check);
+
+        CheckBox checkBoxAge = dialog.findViewById(R.id.checkBoxAge);
+        TextView txtCancel = dialog.findViewById(R.id.txtCancel);
+        TextView txtConfirm = dialog.findViewById(R.id.txtConfirm);
+
+        checkBoxAge.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            }
+        });
+        txtCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                dialog.dismiss();
+            }
+        });
+
+        txtConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                if (!checkBoxAge.isChecked()) {
+                    H.showMessage(activity, getResources().getString(R.string.ageMessage));
+                }else {
+                    dialog.dismiss();
+                    hitBookCarData(model);
+                }
+            }
+        });
+
+        dialog.setCancelable(true);
+        dialog.show();
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
 
     }
 

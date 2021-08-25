@@ -337,8 +337,8 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick, D
 
 
     private String getCurrentTime() {
-//        String delegate = "kk:mm aaa"; //24 HOUR
-        String delegate = "hh:mm aaa"; //12 HOUR
+        String delegate = "kk:mm aaa"; //24 HOUR
+//        String delegate = "hh:mm aaa"; //12 HOUR
         String oldstr = (String) DateFormat.format(delegate, Calendar.getInstance().getTime());
 
         pickUpTime = oldstr;

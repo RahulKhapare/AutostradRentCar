@@ -68,6 +68,7 @@ public class CurrentBookingFragment extends Fragment implements CurrentReservati
     public void extendBooking(BookingModel model) {
         Config.currentProfileFlag = Config.Extend_Booking;
         Config.driverIDFORDOC = model.getBooking_id();
+        Config.driverDROP_DATE = model.getDropoff_datetime();
         Intent intent = new Intent(context, ProfileViewActivity.class);
         startActivity(intent);
     }
@@ -96,7 +97,6 @@ public class CurrentBookingFragment extends Fragment implements CurrentReservati
                         JsonList current_list = json.getJsonList(P.current_list);
                         if (current_list != null && current_list.size() != 0) {
                             for (Json jsonData : current_list) {
-
                                 String id = jsonData.getString(P.id);
                                 String booking_id = jsonData.getString(P.booking_id);
                                 String refund_status_msg = jsonData.getString(P.refund_status_msg);

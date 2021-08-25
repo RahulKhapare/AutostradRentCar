@@ -21,6 +21,7 @@ public class Config {
     public static String currentProfileFlag = "";
     public static String currentFAQFlag = "";
     public static String driverIDFORDOC = "";
+    public static String driverDROP_DATE = "";
 
     public static String SelectedPickUpID = "";
     public static String SelectedPickUpEmirateID = "";
@@ -133,6 +134,7 @@ public class Config {
     public static boolean FOR_EDIT_LOCATION = false;
 
     public static String UAE = "United Arab Emirates";
+    public static String MOBILE = "mobile-android";
 
 
 }

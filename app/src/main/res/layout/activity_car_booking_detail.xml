@@ -1640,6 +1640,41 @@
 
                        </LinearLayout>
 
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginRight="16dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:orientation="horizontal">
+
+                            <CheckBox
+                                android:id="@+id/checkBoxAge"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:background="@drawable/check_bg"
+                                android:textColor="@color/textDark"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginRight="5dp"
+                                android:checked="true"
+                                android:fontFamily="@font/nunito_sans_regular"
+                                android:button="@null" />
+
+                            <TextView
+                                android:id="@+id/txtMessage4"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="5dp"
+                                android:fontFamily="@font/nunito_sans_regular"
+                                android:textColor="@color/textDark"
+                                android:textSize="16sp"
+                                android:text="@string/ageMessage">
+
+                            </TextView>
+
+                        </LinearLayout>
+
                         <TextView
                             android:id="@+id/txtMessage2"
                             android:layout_width="match_parent"

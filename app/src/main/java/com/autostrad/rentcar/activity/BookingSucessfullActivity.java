@@ -68,8 +68,12 @@ public class BookingSucessfullActivity extends AppCompatActivity {
         @Override
         public void onPageFinished(WebView view, String url) {
             Log.e("TAG", "onPageFinished: " + url);
-            if (url.contains("payment_success")) {
+            if (url.contains("payment_success") ||
+                    url.contains("extend_booking_payment_success") ||
+                    url.contains("edit_booking_payment_success")) {
                 continueShoppingIntent();
+            }else if (url.contains("payment_failed")){
+
             }
         }
     }

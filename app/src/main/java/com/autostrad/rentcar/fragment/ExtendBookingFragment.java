@@ -4,9 +4,11 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +25,7 @@ import com.adoisstudio.helper.Json;
 import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
 import com.autostrad.rentcar.R;
+import com.autostrad.rentcar.activity.BookingSucessfullActivity;
 import com.autostrad.rentcar.activity.ProfileViewActivity;
 import com.autostrad.rentcar.databinding.FragmentExtendBookingBinding;
 import com.autostrad.rentcar.databinding.FragmentRefundBinding;
@@ -31,9 +34,14 @@ import com.autostrad.rentcar.util.Config;
 import com.autostrad.rentcar.util.P;
 import com.autostrad.rentcar.util.ProgressView;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class ExtendBookingFragment extends Fragment {
 
@@ -76,8 +84,10 @@ public class ExtendBookingFragment extends Fragment {
         loadingDialog = new LoadingDialog(context);
 
         String booking_id =  Config.driverIDFORDOC;
+        String dropoff_datetime =  Config.driverDROP_DATE;
 
         binding.txtResevationNo.setText(booking_id);
+        binding.etxTime.setText(getCurrentTime());
 
         //DATE
         Calendar newCalendar = Calendar.getInstance();
@@ -91,10 +101,26 @@ public class ExtendBookingFragment extends Fragment {
                 String fdate = sd.format(startDate);
 
                 binding.etxDate.setText(fdate);
+                emptyData();
 
             }
         }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
 //        mDatePicker.getDatePicker().setMinDate(System.currentTimeMillis());
+
+        try {
+            SimpleDateFormat curFormater = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+            Date dateObj = curFormater.parse(dropoff_datetime);
+            Calendar calendar = Calendar.getInstance();
+            calendar .setTime(dateObj);
+
+            Calendar c = Calendar.getInstance();
+            c.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MARCH), calendar.get(Calendar.DATE)+1);
+
+            mDatePicker.getDatePicker().setMinDate(c.getTimeInMillis());
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         binding.etxDate.setFocusable(false);
         binding.etxDate.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_date_range_24, 0);
@@ -126,6 +152,7 @@ public class ExtendBookingFragment extends Fragment {
                     AM_PM = "PM";
 
                 binding.etxTime.setText(selectedHour + ":" + selectedMinute + " " + AM_PM);
+                emptyData();
 
 
             }
@@ -147,22 +174,55 @@ public class ExtendBookingFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-                if (TextUtils.isEmpty(binding.etxDate.getText().toString().trim())){
-                    H.showMessage(context,getResources().getString(R.string.selectNewDropOffDate));
-                }else if (TextUtils.isEmpty(binding.etxTime.getText().toString().trim())){
-                    H.showMessage(context,getResources().getString(R.string.selectNewDropOffTime));
+
+                if (binding.txtAEDMessage.getVisibility()==View.GONE){
+                    if (TextUtils.isEmpty(binding.etxDate.getText().toString().trim())){
+                        H.showMessage(context,getResources().getString(R.string.selectNewDropOffDate));
+                    }else if (TextUtils.isEmpty(binding.etxTime.getText().toString().trim())){
+                        H.showMessage(context,getResources().getString(R.string.selectNewDropOffTime));
+                    }else {
+                        Json json = new Json();
+                        json.addString("dropoff_date",binding.etxDate.getText().toString().trim());
+                        json.addString("dropoff_time",binding.etxTime.getText().toString().trim());
+                        json.addString("booking_id",booking_id);
+                        json.addString("booking_from",Config.MOBILE);
+                        hitExtendData(json);
+                    }
+                }else if (binding.txtAEDMessage.getVisibility()==View.VISIBLE){
+                    if (TextUtils.isEmpty(binding.etxDate.getText().toString().trim())){
+                        H.showMessage(context,getResources().getString(R.string.selectNewDropOffDate));
+                    }else if (TextUtils.isEmpty(binding.etxTime.getText().toString().trim())){
+                        H.showMessage(context,getResources().getString(R.string.selectNewDropOffTime));
+                    }else {
+                        Json json = new Json();
+                        json.addString("dropoff_date",binding.etxDate.getText().toString().trim());
+                        json.addString("dropoff_time",binding.etxTime.getText().toString().trim());
+                        json.addString("booking_id",booking_id);
+                        json.addString("booking_from",Config.MOBILE);
+                        json.addString("success_url","");
+                        json.addString("failed_url","");
+                        hitConformExtendData(json);
+                    }
                 }else {
-                    Json json = new Json();
-                    json.addString("dropoff_date",binding.etxDate.getText().toString().trim());
-                    json.addString("dropoff_time",binding.etxTime.getText().toString().trim());
-                    json.addString("booking_id",booking_id);
-                    json.addString("booking_from","website");
-
-                    hitExtendData(json);
-
+                    H.showMessage(context,getResources().getString(R.string.somethingWrong));
                 }
+
             }
         });
+    }
+
+    private String getCurrentTime() {
+        String delegate = "kk:mm aaa"; //24 HOUR
+//        String delegate = "hh:mm aaa"; //12 HOUR
+        String oldstr = (String) DateFormat.format(delegate, Calendar.getInstance().getTime());
+        String str = oldstr.replace("am", "AM").replace("pm", "PM");
+        return str;
+    }
+
+    private void emptyData(){
+        binding.txtAEDMessage.setText("");
+        binding.txtAEDMessage.setVisibility(View.GONE);
+        binding.txtSubmit.setText(getResources().getString(R.string.submit));
     }
 
     public void hitExtendData(Json j) {
@@ -179,16 +239,45 @@ public class ExtendBookingFragment extends Fragment {
                 .onSuccess(json ->
                 {
                     if (json.getInt(P.status) == 1) {
-                        H.showMessage(context, json.getString(P.msg));
-                        new Handler().postDelayed(() -> {
-                            ((ProfileViewActivity)getActivity()).finishView();
-                        }, 1000);
+                        Json data = json.getJson(P.data);
+                        String booking_update_msg = data.getString("booking_update_msg");
+                        binding.txtAEDMessage.setVisibility(View.VISIBLE);
+                        binding.txtAEDMessage.setText(booking_update_msg);
+                        binding.txtSubmit.setText(getResources().getString(R.string.confirm));
                     } else {
                         H.showMessage(context, json.getString(P.error));
                     }
                     ProgressView.dismiss(loadingDialog);
                 })
-                .run("hitExtendData");
+                .run("hitExtendData",session.getString(P.token));
+    }
+
+    public void hitConformExtendData(Json j) {
+
+        ProgressView.show(context, loadingDialog);
+
+        Api.newApi(context, P.BaseUrl + "confirm_extend_booking").addJson(j)
+                .setMethod(Api.POST)
+                //.onHeaderRequest(App::getHeaders)
+                .onError(() -> {
+                    ProgressView.dismiss(loadingDialog);
+                    H.showMessage(context, "On error is called");
+                })
+                .onSuccess(json ->
+                {
+                    if (json.getInt(P.status) == 1) {
+                        Json data = json.getJson(P.data);
+                        String payment_link = data.getString(P.payment_link);
+                        Intent intent = new Intent(context, BookingSucessfullActivity.class);
+                        intent.putExtra(Config.WEB_URL,payment_link);
+                        intent.putExtra(Config.PAY_TYPE,Config.pay_now);
+                        startActivity(intent);
+                    } else {
+                        H.showMessage(context, json.getString(P.error));
+                    }
+                    ProgressView.dismiss(loadingDialog);
+                })
+                .run("hitConformExtendData",session.getString(P.token));
     }
 
     public static ExtendBookingFragment newInstance() {

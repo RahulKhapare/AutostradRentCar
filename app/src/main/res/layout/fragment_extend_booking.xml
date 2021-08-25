@@ -68,6 +68,20 @@
                 </EditText>
 
                 <TextView
+                    android:id="@+id/txtAEDMessage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/youNeedToPay"
+                    android:visibility="gone"
+                    android:textColor="@color/textDark"
+                    android:layout_marginTop="30dp"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/nunito_sans_semibold"
+                    android:textSize="18sp">
+
+                </TextView>
+
+                <TextView
                     android:id="@+id/txtSubmit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

@@ -555,7 +555,8 @@
     <string name="selectNewDropOffDate">Select New Drop off Date</string>
     <string name="selectNewDropOffTime">Select New Drop off Time</string>
     <string name="viewCalulation">View Calculation</string>
-
+    <string name="youNeedToPay">You need to pay AED</string>
+    <string name="ageMessage">You must be 21 or over to rent a car with us.</string>
 
     <string name="txt1">Leading Car Rental Company with the largest network of Branches &amp; Pickup points</string>
     <string name="txt2">Leading Car Rental Company with the largest network of Branches &amp; Pickup points</string>
