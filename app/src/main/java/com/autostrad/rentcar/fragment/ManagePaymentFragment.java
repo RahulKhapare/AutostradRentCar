@@ -183,13 +183,13 @@ public class ManagePaymentFragment extends Fragment implements PaymentCardAdapte
             value = false;
             H.showMessage(context, getResources().getString(R.string.checkCardFormat));
         }
-//        else if (TextUtils.isEmpty(binding.etxCvv.getText().toString().trim())) {
-//            value = false;
-//            H.showMessage(context, getResources().getString(R.string.enterCvv));
-//        } else if (binding.etxCvv.getText().toString().trim().length() < 3 || binding.etxCvv.getText().toString().trim().length() > 3) {
-//            value = false;
-//            H.showMessage(context, getResources().getString(R.string.enterValidCvv));
-//        }
+        else if (TextUtils.isEmpty(binding.etxCvv.getText().toString().trim())) {
+            value = false;
+            H.showMessage(context, getResources().getString(R.string.enterCvv));
+        } else if (binding.etxCvv.getText().toString().trim().length() < 3 || binding.etxCvv.getText().toString().trim().length() > 3) {
+            value = false;
+            H.showMessage(context, getResources().getString(R.string.enterValidCvv));
+        }
 
         return value;
     }
@@ -447,13 +447,13 @@ public class ManagePaymentFragment extends Fragment implements PaymentCardAdapte
                     H.showMessage(context, getResources().getString(R.string.checkCardFormat));
                     return;
                 }
-//                else if (TextUtils.isEmpty(etxCvv.getText().toString().trim())) {
-//                    H.showMessage(context, getResources().getString(R.string.enterCvv));
-//                    return;
-//                } else if (etxCvv.getText().toString().trim().length() < 3 || etxCvv.getText().toString().trim().length() > 3) {
-//                    H.showMessage(context, getResources().getString(R.string.enterValidCvv));
-//                    return;
-//                }
+                else if (TextUtils.isEmpty(etxCvv.getText().toString().trim())) {
+                    H.showMessage(context, getResources().getString(R.string.enterCvv));
+                    return;
+                } else if (etxCvv.getText().toString().trim().length() < 3 || etxCvv.getText().toString().trim().length() > 3) {
+                    H.showMessage(context, getResources().getString(R.string.enterValidCvv));
+                    return;
+                }
 
                 hideKeyboard(context);
                 hitEditUserPaymentDetails(dialog, model, etxCardNumber, etxCardName, etxValidMonth, etxCvv);

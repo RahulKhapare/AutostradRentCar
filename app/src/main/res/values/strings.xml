@@ -560,6 +560,10 @@
     <string name="viewCalulation">View Calculation</string>
     <string name="youNeedToPay">You need to pay AED</string>
     <string name="ageMessage">You must be 21 or over to rent a car with us.</string>
+    <string name="selectTime">Select Time</string>
+    <string name="noTimeSlot">No time slot available</string>
+    <string name="selectPickupTime">Please select pickup time</string>
+    <string name="selectDropoffTime">Please select drop off time</string>
 
 
     <string name="txt1">Leading Car Rental Company with the largest network of Branches &amp; Pickup points</string>

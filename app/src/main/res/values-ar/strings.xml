@@ -558,6 +558,10 @@
     <string name="viewCalulation">مشاهدة الحساب</string>
     <string name="youNeedToPay">عليك أن تدفع درهمًا إماراتيًا</string>
     <string name="ageMessage">يجب أن يكون عمرك 21 عامًا أو أكثر لاستئجار سيارة معنا</string>
+    <string name="selectTime">حدد الوقت</string>
+    <string name="noTimeSlot">لا توجد فترة زمنية متاحة</string>
+    <string name="selectPickupTime">الرجاء تحديد وقت الاستلام</string>
+    <string name="selectDropoffTime">الرجاء تحديد وقت التسليم</string>
 
     <string name="txt1">شركة رائدة في مجال تأجير السيارات ولديها أكبر شبكة من الفروع ونقاط الالتقاء</string>
     <string name="txt2">شركة رائدة في مجال تأجير السيارات ولديها أكبر شبكة من الفروع ونقاط الالتقاء</string>

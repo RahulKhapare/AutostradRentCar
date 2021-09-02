@@ -2,6 +2,7 @@ package com.autostrad.rentcar.activity;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.res.ColorStateList;
 import android.os.Build;
@@ -10,7 +11,11 @@ import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.DatePicker;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -18,6 +23,7 @@ import android.widget.TimePicker;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.adoisstudio.helper.Api;
 import com.adoisstudio.helper.H;
@@ -29,10 +35,13 @@ import com.autostrad.rentcar.R;
 import com.autostrad.rentcar.adapter.DurationAdapter;
 import com.autostrad.rentcar.adapter.EmirateAdapter;
 import com.autostrad.rentcar.adapter.LocationAdapter;
+import com.autostrad.rentcar.adapter.TimeSlotAdapter;
 import com.autostrad.rentcar.databinding.ActivityEditPickupDropoffBinding;
+import com.autostrad.rentcar.fragment.HomeFragment;
 import com.autostrad.rentcar.model.DurationModel;
 import com.autostrad.rentcar.model.EmirateModel;
 import com.autostrad.rentcar.model.HomeLocationModel;
+import com.autostrad.rentcar.model.TimeSlotModel;
 import com.autostrad.rentcar.util.Click;
 import com.autostrad.rentcar.util.Config;
 import com.autostrad.rentcar.util.P;
@@ -45,7 +54,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class EditPickupDropofftActivity extends AppCompatActivity implements LocationAdapter.onClick, DurationAdapter.onClick, EmirateAdapter.onClick{
+public class EditPickupDropofftActivity extends AppCompatActivity implements LocationAdapter.onClick, DurationAdapter.onClick, EmirateAdapter.onClick, TimeSlotAdapter.onClick {
 
     private EditPickupDropofftActivity activity = this;
     private ActivityEditPickupDropoffBinding binding;
@@ -96,6 +105,24 @@ public class EditPickupDropofftActivity extends AppCompatActivity implements Loc
     private int pickupMONTH = 0;
     private int pickupDAY = 0;
 
+    private List<TimeSlotModel> puckupTimeSlotList;
+    private List<TimeSlotModel> dropoffTimeSlotList;
+
+    private int callTimeFor = 0;
+    private int callTimeForPickup = 1;
+    private int callTimeForDropoff = 2;
+    private int pickup_time_position;
+    private int dropoff_time_position;
+
+    private boolean callPickupFirst = false;
+    private boolean callDropoffFirst = false;
+
+    private String lastConfigPickupTime = "";
+    private String lastActivityPickupTime = "";
+
+    private String lastConfigDropoffTime = "";
+    private String lastActivityDropoffTime = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -112,6 +139,12 @@ public class EditPickupDropofftActivity extends AppCompatActivity implements Loc
 
         session = new Session(activity);
         loadingDialog = new LoadingDialog(activity);
+
+        callPickupFirst = false;
+        callDropoffFirst = false;
+
+        puckupTimeSlotList = new ArrayList<>();
+        dropoffTimeSlotList = new ArrayList<>();
 
         bookingTYpe = Config.daily;
         pickupType = Config.self_pickup;
@@ -191,10 +224,12 @@ public class EditPickupDropofftActivity extends AppCompatActivity implements Loc
         binding.txtPickDate.setText(Config.pickupDay);
         binding.txtPickMonth.setText(Config.pickupMonth);
         binding.txtPickTime.setText(Config.pickupTime);
+        lastConfigPickupTime = Config.pickupTime;
 
         binding.txtDropDate.setText(Config.dropOffDay);
         binding.txtDropMonth.setText(Config.dropOffMonth);
         binding.txtDropTime.setText(Config.dropOffTime);
+        lastConfigDropoffTime = Config.dropOffTime;
 
         monthDuration = SelectCarActivity.monthDuration;
         bookingTYpe = SelectCarActivity.bookingTYpe;
@@ -210,6 +245,7 @@ public class EditPickupDropofftActivity extends AppCompatActivity implements Loc
         pickUpAddress = SelectCarActivity.pickUpAddress;
         pickUpLandmark = Config.SelectedPickUpLandmark;
         pickUpLocation = SelectCarActivity.pickupLocation;
+        lastActivityPickupTime = SelectCarActivity.pickUpTime;
 
         dropupType = SelectCarActivity.dropUpType;
         dropUpId = SelectCarActivity.dropUpLocationID;
@@ -219,6 +255,10 @@ public class EditPickupDropofftActivity extends AppCompatActivity implements Loc
         dropUpAddress = SelectCarActivity.dropUpAddress;
         dropUpLandmark = Config.SelectedDropUpLandmark;
         dropUpLocation = SelectCarActivity.dropUpLocation;
+        lastActivityDropoffTime = SelectCarActivity.dropUpTime;
+
+        hitPickUpTimeData(pickupType,pickUpId,pickUpDate);
+        hitDropOffTimeData(dropupType,dropUpId,dropUpDate);
     }
 
     @Override
@@ -263,6 +303,7 @@ public class EditPickupDropofftActivity extends AppCompatActivity implements Loc
             pickUpAddress = model.getAddress();
             pickUpLandmark = model.getLocation_name();
             cardPickupClick();
+            hitPickUpTimeData(pickupType,pickUpId,pickUpDate);
         } else if (flag == dropUpFlag) {
             dropUpId = model.getId();
             dropUpLocation = model.getLocation_name();
@@ -271,8 +312,24 @@ public class EditPickupDropofftActivity extends AppCompatActivity implements Loc
             dropUpAddress = model.getAddress();
             dropUpLandmark = model.getLocation_name();
             cardDropUpClick();
+            hitDropOffTimeData(dropupType,dropUpId,dropUpDate);
         }
 
+    }
+
+    @Override
+    public void onTimeClick(TimeSlotModel model,int position) {
+        if (callTimeFor==callTimeForPickup){
+            Config.pickupTime = model.getValue();
+            pickUpTime = model.getValue();
+            binding.txtPickTime.setText(model.getValue());
+            pickup_time_position = position;
+        }else if (callTimeFor==callTimeForDropoff){
+            Config.dropOffTime = model.getValue();
+            dropUpTime = model.getValue();
+            binding.txtDropTime.setText(model.getValue());
+            dropoff_time_position = position;
+        }
     }
 
     private void getCurrentDate() {
@@ -296,7 +353,7 @@ public class EditPickupDropofftActivity extends AppCompatActivity implements Loc
 
         binding.txtPickDate.setText(dayString);
         binding.txtPickMonth.setText(monthString.toUpperCase());
-        binding.txtPickTime.setText(getCurrentTime() + "");
+//        binding.txtPickTime.setText(getCurrentTime() + "");
 
 
         String currentDate = yeare + "-" + monthNumber + "-" + dayString;
@@ -329,7 +386,7 @@ public class EditPickupDropofftActivity extends AppCompatActivity implements Loc
 
         binding.txtDropDate.setText(dayString);
         binding.txtDropMonth.setText(monthString.toUpperCase());
-        binding.txtDropTime.setText(getCurrentTime());
+//        binding.txtDropTime.setText(getCurrentTime());
 
         String nextDate = yeare + "-" + monthNumber + "-" + dayString;
         dropUpDate = nextDate;
@@ -348,7 +405,7 @@ public class EditPickupDropofftActivity extends AppCompatActivity implements Loc
 
         binding.txtDropDate.setText(dayString);
         binding.txtDropMonth.setText(monthString.toUpperCase());
-        binding.txtDropTime.setText(getCurrentTime());
+//        binding.txtDropTime.setText(getCurrentTime());
 
         String nextDate = yeare + "-" + monthNumber + "-" + dayString;
         dropUpDate = nextDate;
@@ -391,7 +448,13 @@ public class EditPickupDropofftActivity extends AppCompatActivity implements Loc
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-                setTime(binding.txtPickTime, pickUpFlag);
+                if (TextUtils.isEmpty(pickUpId)) {
+                    H.showMessage(activity, getResources().getString(R.string.selectSelftPickUpLocation));
+                }else {
+                    callTimeFor = callTimeForPickup;
+                    setTimeDialog(puckupTimeSlotList,pickup_time_position);
+//                setTime(binding.txtPickTime, pickUpFlag);
+                }
             }
         });
 
@@ -399,7 +462,13 @@ public class EditPickupDropofftActivity extends AppCompatActivity implements Loc
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-                setTime(binding.txtDropTime, dropUpFlag);
+                if (TextUtils.isEmpty(dropUpId)) {
+                    H.showMessage(activity, getResources().getString(R.string.selectDropOffLocation));
+                }else {
+                    callTimeFor = callTimeForDropoff;
+                    setTimeDialog(dropoffTimeSlotList,dropoff_time_position);
+//                setTime(binding.txtDropTime, dropUpFlag);
+                }
             }
         });
 
@@ -436,6 +505,16 @@ public class EditPickupDropofftActivity extends AppCompatActivity implements Loc
                         H.showMessage(activity, getResources().getString(R.string.selectDropOffLocation));
                         return;
                     }
+                }
+
+                if (TextUtils.isEmpty(pickUpTime)){
+                    H.showMessage(activity, getResources().getString(R.string.selectPickupTime));
+                    return;
+                }
+
+                if (TextUtils.isEmpty(dropUpTime)){
+                    H.showMessage(activity, getResources().getString(R.string.selectDropoffTime));
+                    return;
                 }
 
                 hitVerifyPickUpData(pickUpId, pickUpDate, pickUpTime, dropUpId, dropUpDate, dropUpTime);
@@ -783,7 +862,9 @@ public class EditPickupDropofftActivity extends AppCompatActivity implements Loc
                 pickupDAY = Integer.parseInt(dayString) + 1;
 
                 setNextSelectionDate();
-
+                if (!TextUtils.isEmpty(pickUpId)){
+                    hitPickUpTimeData(pickupType,pickUpId,pickUpDate);
+                }
             }
         }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
         mDatePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
@@ -823,6 +904,10 @@ public class EditPickupDropofftActivity extends AppCompatActivity implements Loc
 
                 txtDay.setText(dayString);
                 txtMonth.setText(monthString.toUpperCase());
+
+                if (!TextUtils.isEmpty(dropUpId)){
+                    hitDropOffTimeData(dropupType,dropUpId,dropUpDate);
+                }
 
             }
         }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
@@ -899,6 +984,47 @@ public class EditPickupDropofftActivity extends AppCompatActivity implements Loc
         }, hour, minute, true);//Yes 24 hour time
 //        mTimePicker.setTitle("Select Time");
         mTimePicker.show();
+
+    }
+
+    private void setTimeDialog(List<TimeSlotModel> timeSlotModelList,int position){
+
+        final Dialog dialog = new Dialog(activity);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.activity_time_slot);
+
+        LinearLayout lnrError = dialog.findViewById(R.id.lnrError);
+        LinearLayout lnrView = dialog.findViewById(R.id.lnrView);
+        ImageView imgClose = dialog.findViewById(R.id.imgClose);
+
+        TimeSlotAdapter adapter = new TimeSlotAdapter(activity,timeSlotModelList, 2,position,dialog);
+        RecyclerView recyclerTimeSlot = dialog.findViewById(R.id.recyclerTimeSlot);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(activity);
+        recyclerTimeSlot.setLayoutManager(linearLayoutManager);
+        recyclerTimeSlot.setHasFixedSize(true);
+        recyclerTimeSlot.setAdapter(adapter);
+        recyclerTimeSlot.setItemViewCacheSize(timeSlotModelList.size());
+        recyclerTimeSlot.smoothScrollToPosition(position);
+
+        if (timeSlotModelList.isEmpty()){
+            lnrView.setVisibility(View.GONE);
+            lnrError.setVisibility(View.VISIBLE);
+        }else {
+            lnrView.setVisibility(View.VISIBLE);
+            lnrError.setVisibility(View.GONE);
+        }
+
+        imgClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.setCancelable(true);
+        dialog.show();
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
 
     }
 
@@ -1203,6 +1329,114 @@ public class EditPickupDropofftActivity extends AppCompatActivity implements Loc
         durationList.add(new DurationModel("37 month"));
         durationList.add(new DurationModel("38 month"));
         durationList.add(new DurationModel("39 month"));
+    }
+
+    private void hitPickUpTimeData(String pickup_type, String pickup_location_id, String pickup_date) {
+
+        ProgressView.show(activity, loadingDialog);
+        Json j = new Json();
+
+        j.addString(P.pickup_type, pickup_type);
+        j.addString(P.pickup_location_id, pickup_location_id);
+        j.addString(P.pickup_date, pickup_date);
+
+        Api.newApi(activity, P.BaseUrl + "pickup_location_time").addJson(j)
+                .setMethod(Api.POST)
+                //.onHeaderRequest(App::getHeaders)
+                .onError(() -> {
+                    ProgressView.dismiss(loadingDialog);
+                    H.showMessage(activity, "On error is called");
+                })
+                .onSuccess(json ->
+                {
+                    if (json.getInt(P.status) == 1) {
+                        puckupTimeSlotList.clear();
+                        if (!callPickupFirst){
+                            callPickupFirst = true;
+                        }else {
+                            binding.txtPickTime.setText(getResources().getString(R.string.selectTime));
+                            Config.pickupTime = "";
+                            pickUpTime = "";
+                            pickup_time_position = 0;
+                        }
+
+                        Json data = json.getJson(P.data);
+                        JsonList time_list = data.getJsonList(P.time_list);
+                        if (time_list!=null && time_list.size()!=0){
+                            for (Json datValue : time_list){
+                                String key = datValue.getString("key");
+                                String value = datValue.getString("value");
+                                TimeSlotModel model = new TimeSlotModel();
+                                model.setKey(key);
+                                model.setValue(value);
+                                puckupTimeSlotList.add(model);
+                            }
+                        }
+                    } else {
+                        H.showMessage(activity, json.getString(P.error));
+                    }
+                    ProgressView.dismiss(loadingDialog);
+
+                })
+                .run("hitPickUpTimeData");
+    }
+
+    private void hitDropOffTimeData(String dropoff_type, String dropoff_location_id, String dropoff_date) {
+
+        ProgressView.show(activity, loadingDialog);
+        Json j = new Json();
+
+        j.addString(P.dropoff_type, dropoff_type);
+        j.addString(P.dropoff_location_id, dropoff_location_id);
+        j.addString(P.dropoff_date, dropoff_date);
+
+        Api.newApi(activity, P.BaseUrl + "dropoff_location_time").addJson(j)
+                .setMethod(Api.POST)
+                //.onHeaderRequest(App::getHeaders)
+                .onError(() -> {
+                    ProgressView.dismiss(loadingDialog);
+                    H.showMessage(activity, "On error is called");
+                })
+                .onSuccess(json ->
+                {
+                    if (json.getInt(P.status) == 1) {
+                        dropoffTimeSlotList.clear();
+                        if (!callDropoffFirst){
+                            callDropoffFirst = true;
+                        }else {
+                            binding.txtDropTime.setText(getResources().getString(R.string.selectTime));
+                            Config.dropOffTime = "";
+                            dropUpTime = "";
+                            dropoff_time_position = 0;
+                        }
+                        Json data = json.getJson(P.data);
+                        JsonList time_list = data.getJsonList(P.time_list);
+                        if (time_list!=null && time_list.size()!=0){
+                            for (Json datValue : time_list){
+                                String key = datValue.getString("key");
+                                String value = datValue.getString("value");
+                                TimeSlotModel model = new TimeSlotModel();
+                                model.setKey(key);
+                                model.setValue(value);
+                                dropoffTimeSlotList.add(model);
+                            }
+                        }
+                    } else {
+                        H.showMessage(activity, json.getString(P.error));
+                    }
+                    ProgressView.dismiss(loadingDialog);
+
+                })
+                .run("hitDropOffTimeData");
+    }
+
+    @Override
+    public void onBackPressed() {
+        Config.pickupTime = lastConfigPickupTime;
+        Config.dropOffTime = lastConfigDropoffTime;
+        SelectCarActivity.pickUpTime = lastActivityPickupTime;
+        SelectCarActivity.dropUpTime = lastActivityDropoffTime;
+        super.onBackPressed();
     }
 
     @Override

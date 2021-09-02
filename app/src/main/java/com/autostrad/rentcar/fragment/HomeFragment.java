@@ -2,6 +2,7 @@ package com.autostrad.rentcar.fragment;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -14,7 +15,11 @@ import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.DatePicker;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -31,20 +36,25 @@ import com.adoisstudio.helper.JsonList;
 import com.adoisstudio.helper.LoadingDialog;
 import com.autostrad.rentcar.R;
 import com.autostrad.rentcar.activity.SelectCarActivity;
+import com.autostrad.rentcar.adapter.AEDAdapter;
 import com.autostrad.rentcar.adapter.DurationAdapter;
 import com.autostrad.rentcar.adapter.EmirateAdapter;
 import com.autostrad.rentcar.adapter.LocationAdapter;
 import com.autostrad.rentcar.adapter.SliderImageAdapter;
+import com.autostrad.rentcar.adapter.TimeSlotAdapter;
 import com.autostrad.rentcar.databinding.FragmentHomeBinding;
+import com.autostrad.rentcar.model.AEDModel;
 import com.autostrad.rentcar.model.DurationModel;
 import com.autostrad.rentcar.model.EmirateModel;
 import com.autostrad.rentcar.model.HomeLocationModel;
 import com.autostrad.rentcar.model.SliderModel;
+import com.autostrad.rentcar.model.TimeSlotModel;
 import com.autostrad.rentcar.util.Click;
 import com.autostrad.rentcar.util.Config;
 import com.autostrad.rentcar.util.P;
 import com.autostrad.rentcar.util.ProgressView;
 
+import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -52,7 +62,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
-public class HomeFragment extends Fragment implements LocationAdapter.onClick, DurationAdapter.onClick, EmirateAdapter.onClick {
+public class HomeFragment extends Fragment implements LocationAdapter.onClick, DurationAdapter.onClick, EmirateAdapter.onClick,TimeSlotAdapter.onClick{
 
     private Context context;
     private FragmentHomeBinding binding;
@@ -107,6 +117,15 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick, D
     private int pickupMONTH = 0;
     private int pickupDAY = 0;
 
+    private List<TimeSlotModel> puckupTimeSlotList;
+    private List<TimeSlotModel> dropoffTimeSlotList;
+
+    private int callTimeFor = 0;
+    private int callTimeForPickup = 1;
+    private int callTimeForDropoff = 2;
+    private int pickup_time_position;
+    private int dropoff_time_position;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -136,6 +155,9 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick, D
     }
 
     private void initView() {
+
+        puckupTimeSlotList = new ArrayList<>();
+        dropoffTimeSlotList = new ArrayList<>();
 
         bookingTYpe = Config.daily;
         pickupType = Config.self_pickup;
@@ -242,6 +264,7 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick, D
             pickUpAddress = model.getAddress();
             pickUpLandmark = model.getLocation_name();
             cardPickupClick();
+            hitPickUpTimeData(pickupType,pickUpId,pickUpDate);
         } else if (flag == dropUpFlag) {
             dropUpId = model.getId();
             dropUpLocation = model.getLocation_name();
@@ -250,8 +273,24 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick, D
             dropUpAddress = model.getAddress();
             dropUpLandmark = model.getLocation_name();
             cardDropUpClick();
+            hitDropOffTimeData(dropupType,dropUpId,dropUpDate);
         }
 
+    }
+
+    @Override
+    public void onTimeClick(TimeSlotModel model,int position) {
+        if (callTimeFor==callTimeForPickup){
+            Config.pickupTime = model.getValue();
+            pickUpTime = model.getValue();
+            binding.txtPickTime.setText(model.getValue());
+            pickup_time_position = position;
+        }else if (callTimeFor==callTimeForDropoff){
+            Config.dropOffTime = model.getValue();
+            dropUpTime = model.getValue();
+            binding.txtDropTime.setText(model.getValue());
+            dropoff_time_position = position;
+        }
     }
 
     private void getCurrentDate() {
@@ -272,11 +311,11 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick, D
         Config.pickupDay = dayString;
         Config.pickupMonth = monthString;
         Config.pickupYear = yeare;
-        Config.pickupTime = getCurrentTime() + "";
+//        Config.pickupTime = getCurrentTime() + "";
 
         binding.txtPickDate.setText(dayString);
         binding.txtPickMonth.setText(monthString.toUpperCase());
-        binding.txtPickTime.setText(getCurrentTime() + "");
+//        binding.txtPickTime.setText(getCurrentTime() + "");
 
         String currentDate = yeare + "-" + monthNumber + "-" + dayString;
         pickUpDate = currentDate;
@@ -305,11 +344,11 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick, D
         Config.dropOffDay = dayString;
         Config.dropOffMonth = monthString;
         Config.dropOffYear = yeare;
-        Config.dropOffTime = getCurrentTime() + "";
+//        Config.dropOffTime = getCurrentTime() + "";
 
         binding.txtDropDate.setText(dayString);
         binding.txtDropMonth.setText(monthString.toUpperCase());
-        binding.txtDropTime.setText(getCurrentTime());
+//        binding.txtDropTime.setText(getCurrentTime());
 
         String nextDate = yeare + "-" + monthNumber + "-" + dayString;
         dropUpDate = nextDate;
@@ -329,7 +368,7 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick, D
 
         binding.txtDropDate.setText(dayString);
         binding.txtDropMonth.setText(monthString.toUpperCase());
-        binding.txtDropTime.setText(getCurrentTime());
+//        binding.txtDropTime.setText(getCurrentTime());
 
         String nextDate = yeare + "-" + monthNumber + "-" + dayString;
         dropUpDate = nextDate;
@@ -414,7 +453,14 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick, D
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-                setTime(binding.txtPickTime, pickUpFlag);
+                if (TextUtils.isEmpty(pickUpId)) {
+                    H.showMessage(context, getResources().getString(R.string.selectSelftPickUpLocation));
+                }else {
+                    callTimeFor = callTimeForPickup;
+                    setTimeDialog(puckupTimeSlotList,pickup_time_position);
+//                setTime(binding.txtPickTime, pickUpFlag);
+                }
+
             }
         });
 
@@ -422,7 +468,13 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick, D
             @Override
             public void onClick(View v) {
                 Click.preventTwoClick(v);
-                setTime(binding.txtDropTime, dropUpFlag);
+                if (TextUtils.isEmpty(dropUpId)) {
+                    H.showMessage(context, getResources().getString(R.string.selectDropOffLocation));
+                }else {
+                    callTimeFor = callTimeForDropoff;
+                    setTimeDialog(dropoffTimeSlotList,dropoff_time_position);
+//                setTime(binding.txtDropTime, dropUpFlag);
+                }
             }
         });
 
@@ -459,6 +511,16 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick, D
                         H.showMessage(context, getResources().getString(R.string.selectDropOffLocation));
                         return;
                     }
+                }
+
+                if (TextUtils.isEmpty(pickUpTime)){
+                    H.showMessage(context, getResources().getString(R.string.selectPickupTime));
+                    return;
+                }
+
+                if (TextUtils.isEmpty(dropUpTime)){
+                    H.showMessage(context, getResources().getString(R.string.selectDropoffTime));
+                    return;
                 }
 
                 hitVerifyPickUpData(pickUpId, pickUpDate, pickUpTime, dropUpId, dropUpDate, dropUpTime);
@@ -807,6 +869,9 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick, D
                 pickupDAY = Integer.parseInt(dayString) + 1;
 
                 setNextSelectionDate();
+                if (!TextUtils.isEmpty(pickUpId)){
+                    hitPickUpTimeData(pickupType,pickUpId,pickUpDate);
+                }
 
             }
         }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
@@ -846,6 +911,10 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick, D
 
                 txtDay.setText(dayString);
                 txtMonth.setText(monthString.toUpperCase());
+
+                if (!TextUtils.isEmpty(dropUpId)){
+                    hitDropOffTimeData(dropupType,dropUpId,dropUpDate);
+                }
 
             }
         }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
@@ -922,6 +991,47 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick, D
         }, hour, minute, true);//Yes 24 hour time
 //        mTimePicker.setTitle("Select Time");
         mTimePicker.show();
+
+    }
+
+    private void setTimeDialog(List<TimeSlotModel> timeSlotModelList,int position){
+
+        final Dialog dialog = new Dialog(context);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.activity_time_slot);
+
+        LinearLayout lnrError = dialog.findViewById(R.id.lnrError);
+        LinearLayout lnrView = dialog.findViewById(R.id.lnrView);
+        ImageView imgClose = dialog.findViewById(R.id.imgClose);
+
+        TimeSlotAdapter adapter = new TimeSlotAdapter(context,timeSlotModelList,HomeFragment.this,1,position,dialog);
+        RecyclerView recyclerTimeSlot = dialog.findViewById(R.id.recyclerTimeSlot);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
+        recyclerTimeSlot.setLayoutManager(linearLayoutManager);
+        recyclerTimeSlot.setHasFixedSize(true);
+        recyclerTimeSlot.setAdapter(adapter);
+        recyclerTimeSlot.setItemViewCacheSize(timeSlotModelList.size());
+        recyclerTimeSlot.smoothScrollToPosition(position);
+
+        if (timeSlotModelList.isEmpty()){
+            lnrView.setVisibility(View.GONE);
+            lnrError.setVisibility(View.VISIBLE);
+        }else {
+            lnrView.setVisibility(View.VISIBLE);
+            lnrError.setVisibility(View.GONE);
+        }
+
+        imgClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.setCancelable(true);
+        dialog.show();
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
 
     }
 
@@ -1278,6 +1388,95 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick, D
         durationList.add(new DurationModel("39 month"));
     }
 
+    private void hitPickUpTimeData(String pickup_type, String pickup_location_id, String pickup_date) {
+
+        ProgressView.show(context, loadingDialog);
+        Json j = new Json();
+
+        j.addString(P.pickup_type, pickup_type);
+        j.addString(P.pickup_location_id, pickup_location_id);
+        j.addString(P.pickup_date, pickup_date);
+
+        Api.newApi(context, P.BaseUrl + "pickup_location_time").addJson(j)
+                .setMethod(Api.POST)
+                //.onHeaderRequest(App::getHeaders)
+                .onError(() -> {
+                    ProgressView.dismiss(loadingDialog);
+                    H.showMessage(context, "On error is called");
+                })
+                .onSuccess(json ->
+                {
+                    if (json.getInt(P.status) == 1) {
+                        puckupTimeSlotList.clear();
+                        binding.txtPickTime.setText(getResources().getString(R.string.selectTime));
+                        Config.pickupTime = "";
+                        pickUpTime = "";
+                        pickup_time_position = 0;
+                        Json data = json.getJson(P.data);
+                        JsonList time_list = data.getJsonList(P.time_list);
+                        if (time_list!=null && time_list.size()!=0){
+                            for (Json datValue : time_list){
+                                String key = datValue.getString("key");
+                                String value = datValue.getString("value");
+                                TimeSlotModel model = new TimeSlotModel();
+                                model.setKey(key);
+                                model.setValue(value);
+                                puckupTimeSlotList.add(model);
+                            }
+                        }
+                    } else {
+                        H.showMessage(context, json.getString(P.error));
+                    }
+                    ProgressView.dismiss(loadingDialog);
+
+                })
+                .run("hitPickUpTimeData");
+    }
+
+    private void hitDropOffTimeData(String dropoff_type, String dropoff_location_id, String dropoff_date) {
+
+        ProgressView.show(context, loadingDialog);
+        Json j = new Json();
+
+        j.addString(P.dropoff_type, dropoff_type);
+        j.addString(P.dropoff_location_id, dropoff_location_id);
+        j.addString(P.dropoff_date, dropoff_date);
+
+        Api.newApi(context, P.BaseUrl + "dropoff_location_time").addJson(j)
+                .setMethod(Api.POST)
+                //.onHeaderRequest(App::getHeaders)
+                .onError(() -> {
+                    ProgressView.dismiss(loadingDialog);
+                    H.showMessage(context, "On error is called");
+                })
+                .onSuccess(json ->
+                {
+                    if (json.getInt(P.status) == 1) {
+                        dropoffTimeSlotList.clear();
+                        binding.txtDropTime.setText(getResources().getString(R.string.selectTime));
+                        Config.dropOffTime = "";
+                        dropUpTime = "";
+                        dropoff_time_position = 0;
+                        Json data = json.getJson(P.data);
+                        JsonList time_list = data.getJsonList(P.time_list);
+                        if (time_list!=null && time_list.size()!=0){
+                            for (Json datValue : time_list){
+                                String key = datValue.getString("key");
+                                String value = datValue.getString("value");
+                                TimeSlotModel model = new TimeSlotModel();
+                                model.setKey(key);
+                                model.setValue(value);
+                                dropoffTimeSlotList.add(model);
+                            }
+                        }
+                    } else {
+                        H.showMessage(context, json.getString(P.error));
+                    }
+                    ProgressView.dismiss(loadingDialog);
+
+                })
+                .run("hitDropOffTimeData");
+    }
 
     @Override
     public void onDestroyView() {
@@ -1291,4 +1490,6 @@ public class HomeFragment extends Fragment implements LocationAdapter.onClick, D
 
         super.onDestroyView();
     }
+
+
 }

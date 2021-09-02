@@ -1092,7 +1092,6 @@
                                                 android:textSize="18sp"
                                                 android:digits="0123456789"
                                                 android:maxLength="3"
-                                                android:visibility="gone"
                                                 android:imeOptions="actionNext"
                                                 android:textColor="@color/textDark"
                                                 android:textColorHint="@color/iconicGray"

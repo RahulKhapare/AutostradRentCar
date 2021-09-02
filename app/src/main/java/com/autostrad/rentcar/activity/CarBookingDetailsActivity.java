@@ -803,13 +803,13 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Emir
             value = false;
             H.showMessage(activity, getResources().getString(R.string.checkCardFormat));
         }
-//        else if (TextUtils.isEmpty(binding.etxCvv.getText().toString().trim())) {
-//            value = false;
-//            H.showMessage(activity, getResources().getString(R.string.enterCvv));
-//        } else if (binding.etxCvv.getText().toString().trim().length() < 3 || binding.etxCvv.getText().toString().trim().length() > 3) {
-//            value = false;
-//            H.showMessage(activity, getResources().getString(R.string.enterValidCvv));
-//        }
+        else if (TextUtils.isEmpty(binding.etxCvv.getText().toString().trim())) {
+            value = false;
+            H.showMessage(activity, getResources().getString(R.string.enterCvv));
+        } else if (binding.etxCvv.getText().toString().trim().length() < 3 || binding.etxCvv.getText().toString().trim().length() > 3) {
+            value = false;
+            H.showMessage(activity, getResources().getString(R.string.enterValidCvv));
+        }
 
         return value;
     }
@@ -1483,13 +1483,13 @@ public class CarBookingDetailsActivity extends AppCompatActivity implements Emir
                     H.showMessage(activity, getResources().getString(R.string.checkCardFormat));
                     return;
                 }
-//                else if (TextUtils.isEmpty(etxCvv.getText().toString().trim())) {
-//                    H.showMessage(activity, getResources().getString(R.string.enterCvv));
-//                    return;
-//                } else if (etxCvv.getText().toString().trim().length() < 3 || etxCvv.getText().toString().trim().length() > 3) {
-//                    H.showMessage(activity, getResources().getString(R.string.enterValidCvv));
-//                    return;
-//                }
+                else if (TextUtils.isEmpty(etxCvv.getText().toString().trim())) {
+                    H.showMessage(activity, getResources().getString(R.string.enterCvv));
+                    return;
+                } else if (etxCvv.getText().toString().trim().length() < 3 || etxCvv.getText().toString().trim().length() > 3) {
+                    H.showMessage(activity, getResources().getString(R.string.enterValidCvv));
+                    return;
+                }
 
                 hideKeyboard(activity);
                 hitEditUserPaymentDetails(dialog, model, etxCardNumber, etxCardName, etxValidMonth, etxCvv);

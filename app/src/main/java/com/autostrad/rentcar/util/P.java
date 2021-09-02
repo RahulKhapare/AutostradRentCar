@@ -71,6 +71,7 @@ public class P {
     public static String banner_image = "banner_image";
     public static String image_alt_text = "image_alt_text";
     public static String url = "url";
+    public static String time_list = "time_list";
 
     public static String category_list = "category_list";
     public static String car_list = "car_list";

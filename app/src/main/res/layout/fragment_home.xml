@@ -678,7 +678,8 @@
                                     android:layout_marginLeft="5dp"
                                     android:fontFamily="@font/nunito_sans_semibold"
                                     android:gravity="center_horizontal"
-                                    android:text="10:10 AM"
+                                    android:text="@string/selectTime"
+                                    android:singleLine="true"
                                     android:textColor="@color/colorPrimaryDark"
                                     android:textSize="16sp"></TextView>
 
@@ -781,8 +782,9 @@
                                     android:textColor="@color/colorPrimaryDark"
                                     android:layout_gravity="center_vertical"
                                     android:fontFamily="@font/nunito_sans_semibold"
-                                    android:text="10:10 AM"
+                                    android:text="@string/selectTime"
                                     android:gravity="center_horizontal"
+                                    android:singleLine="true"
                                     android:layout_marginLeft="5dp"
                                     android:textSize="16sp">
                                 </TextView>
