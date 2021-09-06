@@ -31,6 +31,7 @@ public class OTPVerificationActivity extends AppCompatActivity {
     private LoadingDialog loadingDialog;
     private Session session;
     private String number = "";
+    private String email = "";
     private String countryCode = "";
     private String loginOTP = "123456";
     private CountDownTimer timer;
@@ -48,6 +49,7 @@ public class OTPVerificationActivity extends AppCompatActivity {
     private void initView(){
         session = new Session(activity);
         number = getIntent().getStringExtra(Config.MOBILE_NUMBER);
+        email = getIntent().getStringExtra(Config.USER_EMAIL);
         countryCode = getIntent().getStringExtra(Config.COUNTRY_CODE);
         verificationFor = getIntent().getStringExtra(Config.VERIFICATION_FOR);
 
@@ -141,12 +143,14 @@ public class OTPVerificationActivity extends AppCompatActivity {
         Json j = new Json();
         j.addString(P.user_mobile,number);
         j.addString(P.otp,binding.etxOtp.getText().toString().trim());
+        j.addString(P.user_country_code,countryCode);
 
         String apiCall = "";
         if (verificationFor.equals(Config.LOGIN)){
             apiCall = "verify_login_otp";
         }else if (verificationFor.equals(Config.SIGN_UP)){
             apiCall = "verify_register_otp";
+            j.addString(P.user_email,email);
         }
 
         Api.newApi(activity, P.BaseUrl + apiCall).addJson(j)
@@ -185,12 +189,14 @@ public class OTPVerificationActivity extends AppCompatActivity {
         ProgressView.show(activity,loadingDialog);
         Json j = new Json();
         j.addString(P.user_mobile,number);
+        j.addString(P.user_country_code,countryCode);
 
         String apiCall = "";
         if (verificationFor.equals(Config.LOGIN)){
             apiCall = "resend_login_otp";
         }else if (verificationFor.equals(Config.SIGN_UP)){
             apiCall = "resend_register_otp";
+            j.addString(P.user_email,email);
         }
 
         Api.newApi(activity, P.BaseUrl + apiCall).addJson(j)

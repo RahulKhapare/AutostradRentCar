@@ -168,7 +168,7 @@ public class SignUpActivity extends AppCompatActivity {
                         Intent intent = new Intent(activity, OTPVerificationActivity.class);
                         intent.putExtra(Config.VERIFICATION_FOR,Config.SIGN_UP);
                         intent.putExtra(Config.MOBILE_NUMBER,binding.etxMobileNumber.getText().toString().trim());
-                        intent.putExtra(Config.COUNTRY_CODE,countryCode);
+                        intent.putExtra(Config.USER_EMAIL,binding.etxEmail.getText().toString().trim());
                         startActivity(intent);
                     }else {
                         H.showMessage(activity,json.getString(P.error));

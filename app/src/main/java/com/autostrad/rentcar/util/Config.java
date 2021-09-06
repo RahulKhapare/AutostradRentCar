@@ -7,6 +7,7 @@ public class Config {
 
     public static String VERIFICATION_FOR = "VERIFICATION_FOR";
     public static String MOBILE_NUMBER = "MOBILE_NUMBER";
+    public static String USER_EMAIL = "USER_EMAIL";
     public static String COUNTRY_CODE = "COUNTRY_CODE";
     public static String ENGLISH = "en";
     public static String ARABIC = "ar";

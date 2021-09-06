@@ -166,6 +166,7 @@ public class LoginActivity extends AppCompatActivity {
                         intent.putExtra(Config.VERIFICATION_FOR,Config.LOGIN);
                         intent.putExtra(Config.MOBILE_NUMBER,binding.etxMobileNumber.getText().toString().trim());
                         intent.putExtra(Config.COUNTRY_CODE,countryCode);
+                        intent.putExtra(Config.USER_EMAIL,"");
                         startActivity(intent);
                     }else {
                         H.showMessage(activity,json.getString(P.error));
