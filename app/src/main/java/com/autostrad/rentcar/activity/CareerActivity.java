@@ -161,8 +161,8 @@ public class CareerActivity extends AppCompatActivity implements CareerAdapter.o
                                 model.setDescription(jsonData.getString("description"));
                                 careerModelList.add(model);
                             }
-                            careerAdapter.notifyDataSetChanged();
                         }
+                        careerAdapter.notifyDataSetChanged();
                         checkData();
                     }else {
                         checkData();

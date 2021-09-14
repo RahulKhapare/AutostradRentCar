@@ -44,20 +44,11 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/nunit_sans_bold"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="18sp"
+                        android:textSize="20sp"
                         android:text="@string/rentFastCar">
 
                     </TextView>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/nunito_sans_regular"
-                        android:textColor="@color/textDark"
-                        android:textSize="14sp"
-                        android:text="@string/nationalGroup">
-
-                    </TextView>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -65,20 +56,104 @@
                         android:layout_marginTop="20dp"
                         android:orientation="vertical">
 
+                        <TextView
+                            android:id="@+id/txtArea1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/nunito_sans_semibold"
+                            android:textColor="@color/textDark"
+                            android:textSize="18sp"
+                            android:text="@string/nationalGroup">
+
+                        </TextView>
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
                             android:orientation="horizontal">
 
                             <ImageView
-                                android:layout_width="25dp"
-                                android:layout_height="25dp"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
                                 android:src="@drawable/ic_location_gray">
 
                             </ImageView>
 
                             <TextView
-                                android:id="@+id/txtLocation"
+                                android:id="@+id/txtLocation1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/nunito_sans_regular"
+                                android:textColor="@color/textDark"
+                                android:textSize="18sp"
+                                android:paddingLeft="10dp"
+                                android:paddingRight="10dp"
+                                android:layout_gravity="center_vertical"
+                                android:text="@string/app_name">
+
+                            </TextView>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:src="@drawable/ic_call_gray">
+
+                            </ImageView>
+
+                            <TextView
+                                android:id="@+id/txtMobileNo1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/nunito_sans_regular"
+                                android:textColor="@color/textDark"
+                                android:textSize="17sp"
+                                android:paddingLeft="10dp"
+                                android:paddingRight="10dp"
+                                android:autoLink="phone"
+                                android:textColorLink="@color/textDark"
+                                android:layout_gravity="center_vertical"
+                                android:text="@string/app_name">
+
+                            </TextView>
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/txtArea2"
+                            android:layout_marginTop="30dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/nunito_sans_semibold"
+                            android:textColor="@color/textDark"
+                            android:textSize="18sp"
+                            android:text="@string/nationalGroup">
+
+                        </TextView>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:src="@drawable/ic_location_gray">
+
+                            </ImageView>
+
+                            <TextView
+                                android:id="@+id/txtLocation2"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/nunito_sans_regular"
@@ -96,18 +171,18 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="20dp"
+                            android:layout_marginTop="5dp"
                             android:orientation="horizontal">
 
                             <ImageView
-                                android:layout_width="25dp"
-                                android:layout_height="25dp"
-                                android:src="@drawable/ic_email_gray">
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:src="@drawable/ic_call_gray">
 
                             </ImageView>
 
                             <TextView
-                                android:id="@+id/txtEmail"
+                                android:id="@+id/txtMobileNo2"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/nunito_sans_regular"
@@ -115,7 +190,7 @@
                                 android:textSize="16sp"
                                 android:paddingLeft="10dp"
                                 android:paddingRight="10dp"
-                                android:autoLink="email"
+                                android:autoLink="phone"
                                 android:textColorLink="@color/textDark"
                                 android:layout_gravity="center_vertical"
                                 android:text="@string/app_name">
@@ -155,6 +230,7 @@
 
                         </LinearLayout>
 
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -164,12 +240,12 @@
                             <ImageView
                                 android:layout_width="25dp"
                                 android:layout_height="25dp"
-                                android:src="@drawable/ic_call_gray">
+                                android:src="@drawable/ic_email_gray">
 
                             </ImageView>
 
                             <TextView
-                                android:id="@+id/txtMobileNo"
+                                android:id="@+id/txtEmail"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/nunito_sans_regular"
@@ -177,7 +253,7 @@
                                 android:textSize="16sp"
                                 android:paddingLeft="10dp"
                                 android:paddingRight="10dp"
-                                android:autoLink="phone"
+                                android:autoLink="email"
                                 android:textColorLink="@color/textDark"
                                 android:layout_gravity="center_vertical"
                                 android:text="@string/app_name">
@@ -185,6 +261,200 @@
                             </TextView>
 
                         </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:tint="@color/grayDark"
+                                android:src="@drawable/ic_web">
+
+                            </ImageView>
+
+                            <TextView
+                                android:id="@+id/txtWebsite"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/nunito_sans_regular"
+                                android:textColor="@color/textDark"
+                                android:textSize="16sp"
+                                android:paddingLeft="10dp"
+                                android:paddingRight="10dp"
+                                android:autoLink="web"
+                                android:textColorLink="@color/textDark"
+                                android:layout_gravity="center_vertical"
+                                android:text="@string/app_name">
+
+                            </TextView>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:tint="@color/grayDark"
+                                android:src="@drawable/ic_fb">
+
+                            </ImageView>
+
+                            <TextView
+                                android:id="@+id/txtFacebook"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/nunito_sans_regular"
+                                android:textColor="@color/textDark"
+                                android:textSize="16sp"
+                                android:paddingLeft="10dp"
+                                android:paddingRight="10dp"
+                                android:autoLink="web"
+                                android:textColorLink="@color/textDark"
+                                android:layout_gravity="center_vertical"
+                                android:text="@string/app_name">
+
+                            </TextView>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:tint="@color/grayDark"
+                                android:src="@drawable/ic_insta">
+
+                            </ImageView>
+
+                            <TextView
+                                android:id="@+id/txtInsta"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/nunito_sans_regular"
+                                android:textColor="@color/textDark"
+                                android:textSize="16sp"
+                                android:paddingLeft="10dp"
+                                android:paddingRight="10dp"
+                                android:autoLink="web"
+                                android:textColorLink="@color/textDark"
+                                android:layout_gravity="center_vertical"
+                                android:text="@string/app_name">
+
+                            </TextView>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:tint="@color/grayDark"
+                                android:src="@drawable/ic_twitter">
+
+                            </ImageView>
+
+
+                            <TextView
+                                android:id="@+id/txtTwitter"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/nunito_sans_regular"
+                                android:textColor="@color/textDark"
+                                android:textSize="16sp"
+                                android:paddingLeft="10dp"
+                                android:paddingRight="10dp"
+                                android:autoLink="web"
+                                android:textColorLink="@color/textDark"
+                                android:layout_gravity="center_vertical"
+                                android:text="@string/app_name">
+
+                            </TextView>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:tint="@color/grayDark"
+                                android:src="@drawable/ic_inn">
+
+                            </ImageView>
+
+                            <TextView
+                                android:id="@+id/txtIn"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/nunito_sans_regular"
+                                android:textColor="@color/textDark"
+                                android:textSize="16sp"
+                                android:paddingLeft="10dp"
+                                android:paddingRight="10dp"
+                                android:autoLink="web"
+                                android:textColorLink="@color/textDark"
+                                android:layout_gravity="center_vertical"
+                                android:text="@string/app_name">
+
+                            </TextView>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:tint="@color/grayDark"
+                                android:src="@drawable/ic_youtube">
+
+                            </ImageView>
+
+                            <TextView
+                                android:id="@+id/txtYoutube"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/nunito_sans_regular"
+                                android:textColor="@color/textDark"
+                                android:textSize="16sp"
+                                android:paddingLeft="10dp"
+                                android:paddingRight="10dp"
+                                android:autoLink="web"
+                                android:textColorLink="@color/textDark"
+                                android:layout_gravity="center_vertical"
+                                android:text="@string/app_name">
+
+                            </TextView>
+
+                        </LinearLayout>
+
 
                     </LinearLayout>
                     

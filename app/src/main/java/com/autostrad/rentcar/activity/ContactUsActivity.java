@@ -1,10 +1,12 @@
 package com.autostrad.rentcar.activity;
 
 import android.Manifest;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.location.Address;
 import android.location.Criteria;
 import android.location.Geocoder;
@@ -130,10 +132,101 @@ public class ContactUsActivity extends AppCompatActivity implements LocationList
 
     private void setData(){
 
-        binding.txtLocation.setText("Corner Building Musafah Industrial 2(M2) Abu Dhabi, UAE");
-        binding.txtEmail.setText("assist@fastuae.com");
-        binding.txtTelephoneNo.setText("600-500-101");
-        binding.txtMobileNo.setText("971 2815 2700");
+        binding.txtArea1.setText("Autostrad International Vehicle Leasing Sole Proprietorship LLC.");
+        binding.txtLocation1.setText("PO BOX 8279 Abu Dhabi, United Arab Emirates");
+        binding.txtMobileNo1.setText("Tel: +971 2815 2700");
+
+        binding.txtArea2.setText("Autostrad International Vehicle Leasing LLC.");
+        binding.txtLocation2.setText("PO BOX 449788 Dubai, United Arab Emirates");
+        binding.txtMobileNo2.setText("Tel: +971 4 3387171");
+
+        binding.txtTelephoneNo.setText("Toll Free : 800 2772");
+
+        binding.txtEmail.setText("info@autostrad.com");
+        binding.txtWebsite.setText("www.autostrad.com");
+        binding.txtFacebook.setText("@autostradrentacar");
+        binding.txtInsta.setText("@autostradrentacar");
+        binding.txtTwitter.setText("@autostradrentacar");
+        binding.txtIn.setText("@autostradrentacar");
+        binding.txtYoutube.setText("@autostradrentacar");
+
+        binding.txtFacebook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                try {
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("fb://profile/autostradrentacar"));
+                    startActivity(intent);
+                } catch(Exception e) {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.facebook.com/autostradrentacar")));
+                }
+            }
+        });
+
+        binding.txtInsta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                Uri uri = Uri.parse("http://instagram.com/_u/autostradrentacar");
+                Intent likeIng = new Intent(Intent.ACTION_VIEW, uri);
+
+                likeIng.setPackage("com.instagram.android");
+
+                try {
+                    startActivity(likeIng);
+                } catch (ActivityNotFoundException e) {
+                    startActivity(new Intent(Intent.ACTION_VIEW,
+                            Uri.parse("http://instagram.com/autostradrentacar")));
+                }
+            }
+        });
+
+        binding.txtTwitter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                Intent intent = null;
+                try {
+                    // get the Twitter app if possible
+                    getPackageManager().getPackageInfo("com.twitter.android", 0);
+                    intent = new Intent(Intent.ACTION_VIEW, Uri.parse("twitter://user?screen_name=autostradrentacar"));
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                } catch (Exception e) {
+                    // no Twitter app, revert to browser
+                    intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/autostradrentacar"));
+                }
+                startActivity(intent);
+            }
+        });
+
+        binding.txtIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("linkedin://add/%@" + "autostradrentacar"));
+                final PackageManager packageManager = getPackageManager();
+                final List<ResolveInfo> list = packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
+                if (list.isEmpty()) {
+                    intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.linkedin.com/profile/view?id=" + "autostradrentacar"));
+                }
+                startActivity(intent);
+            }
+        });
+
+        binding.txtYoutube.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click.preventTwoClick(v);
+                Intent appIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube:" + "autostradrentacar"));
+                Intent webIntent = new Intent(Intent.ACTION_VIEW,
+                        Uri.parse("http://www.youtube.com/watch?v=" + "autostradrentacar"));
+                try {
+                    startActivity(appIntent);
+                } catch (ActivityNotFoundException ex) {
+                    startActivity(webIntent);
+                }
+            }
+        });
 
     }
 
@@ -304,7 +397,8 @@ public class ContactUsActivity extends AppCompatActivity implements LocationList
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        updateLocation(currentLat, currentLong);
+//        updateLocation(currentLat, currentLong);
+        getLatLognfromAddress(binding.txtLocation1.getText().toString());
     }
 
     private void checkGPS() {
@@ -420,7 +514,8 @@ public class ContactUsActivity extends AppCompatActivity implements LocationList
             isUpdateSearch = true;
             currentLat = location.getLatitude();
             currentLong = location.getLongitude();
-            updateLocation(currentLat, currentLong);
+//            updateLocation(currentLat, currentLong);
+            getLatLognfromAddress(binding.txtLocation1.getText().toString());
         }
     }
 
@@ -442,7 +537,7 @@ public class ContactUsActivity extends AppCompatActivity implements LocationList
 
             if (!TextUtils.isEmpty(address)) {
                 addressData = address + "";
-                binding.txtLocation.setText(addressData);
+//                binding.txtLocation.setText(addressData);
             }
 
         } catch (IOException e) {
@@ -463,6 +558,7 @@ public class ContactUsActivity extends AppCompatActivity implements LocationList
             getAddress(currentLat,currentLong);
         }
     }
+
 
     @Override
     public void onProviderDisabled(String provider) {
@@ -559,4 +655,19 @@ public class ContactUsActivity extends AppCompatActivity implements LocationList
                 new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
                 REQUEST_LOCATION);
     }
+
+    private void getLatLognfromAddress(String address){
+        Geocoder coder = new Geocoder(this);
+        try {
+            ArrayList<Address> adresses = (ArrayList<Address>) coder.getFromLocationName(address, 50);
+            for(Address add : adresses){
+                double longitude = add.getLongitude();
+                double latitude = add.getLatitude();
+                updateLocation(latitude, longitude);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
