@@ -17,192 +17,201 @@
             app:subtitleTextColor="@color/colorWhite"
             app:titleTextColor="@color/colorWhite"></androidx.appcompat.widget.Toolbar>
 
-        <LinearLayout
+        <androidx.cardview.widget.CardView
+            android:layout_below="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/toolbar"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="0dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/curve_main_bg">
+            android:layout_marginBottom="-20dp">
 
-
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginBottom="20dp">
 
-                <androidx.core.widget.NestedScrollView
-                    android:layout_marginTop="10dp"
+
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_above="@+id/cardBottom"
-                    android:fillViewport="true">
+                    android:layout_height="match_parent">
 
-
-                    <RelativeLayout
+                    <androidx.core.widget.NestedScrollView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:background="@color/colorWhite">
-
-                        <TextView
-                            android:id="@+id/txtError"
-                            android:layout_weight="1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/noDataFound"
-                            android:textSize="22sp"
-                            android:visibility="gone"
-                            android:layout_centerInParent="true"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:fontFamily="@font/nunito_sans_semibold">
-
-                        </TextView>
-
-                      <LinearLayout
-                          android:id="@+id/lnrView"
-                          android:layout_width="match_parent"
-                          android:layout_height="wrap_content"
-                          android:layout_marginTop="10dp"
-                          android:layout_marginLeft="16dp"
-                          android:layout_marginRight="16dp"
-                          android:orientation="vertical">
-
-                          <TextView
-                              android:id="@+id/txtTitle"
-                              android:layout_width="match_parent"
-                              android:layout_height="wrap_content"
-                              android:textColor="@color/colorPrimaryDark"
-                              android:textSize="18sp"
-                              android:fontFamily="@font/nunit_sans_bold"
-                              android:text="@string/ourLocation">
-
-                          </TextView>
-
-                          <androidx.cardview.widget.CardView
-                              android:layout_marginTop="15dp"
-                              android:id="@+id/cardLocation"
-                              android:layout_width="match_parent"
-                              android:layout_height="wrap_content"
-                              android:layout_marginLeft="2dp"
-                              android:layout_marginRight="2dp"
-                              android:layout_marginBottom="5dp"
-                              app:cardElevation="3dp"
-                              app:cardCornerRadius="5dp">
+                        android:layout_above="@+id/cardBottom"
+                        android:fillViewport="true">
 
 
-                              <LinearLayout
-                                  android:layout_width="match_parent"
-                                  android:layout_height="wrap_content"
-                                  android:orientation="vertical">
-
-                                  <RelativeLayout
-                                      android:layout_width="match_parent"
-                                      android:layout_height="?actionBarSize">
-
-                                      <TextView
-                                          android:id="@+id/txtArea"
-                                          android:layout_width="match_parent"
-                                          android:layout_height="match_parent"
-                                          android:textColor="@color/textDark"
-                                          android:gravity="center_vertical"
-                                          android:layout_marginLeft="20dp"
-                                          android:layout_marginRight="20dp"
-                                          android:layout_gravity="center_vertical"
-                                          android:fontFamily="@font/nunito_sans_semibold"
-                                          android:text="@string/app_name"
-                                          android:textSize="18sp">
-                                      </TextView>
-
-
-                                      <ImageView
-                                          android:id="@+id/imgLocationRight"
-                                          android:layout_width="25dp"
-                                          android:layout_height="25dp"
-                                          android:layout_marginRight="15dp"
-                                          android:src="@drawable/ic_down_arrow"
-                                          android:layout_alignParentRight="true"
-                                          android:layout_centerVertical="true">
-                                      </ImageView>
-
-                                      <ImageView
-                                          android:id="@+id/imgLocationLeft"
-                                          android:layout_width="25dp"
-                                          android:layout_height="25dp"
-                                          android:layout_marginLeft="15dp"
-                                          android:src="@drawable/ic_down_arrow"
-                                          android:layout_alignParentLeft="true"
-                                          android:layout_centerVertical="true"
-                                          android:visibility="gone">
-                                      </ImageView>
-
-                                  </RelativeLayout>
-
-
-                                  <LinearLayout
-                                      android:id="@+id/lnrLocationListView"
-                                      android:layout_width="match_parent"
-                                      android:layout_height="wrap_content"
-                                      android:visibility="gone"
-                                      android:orientation="vertical">
-
-                                      <LinearLayout
-                                          android:layout_width="match_parent"
-                                          android:layout_height="0.5dp"
-                                          android:layout_marginTop="5dp"
-                                          android:background="@color/customeGray"
-                                          tools:ignore="Suspicious0dp">
-
-                                      </LinearLayout>
-
-                                      <androidx.recyclerview.widget.RecyclerView
-                                          android:id="@+id/recyclerEmirateLocation"
-                                          android:layout_width="match_parent"
-                                          android:layout_height="wrap_content">
-
-                                      </androidx.recyclerview.widget.RecyclerView>
-
-                                  </LinearLayout>
-
-                              </LinearLayout>
-
-
-                          </androidx.cardview.widget.CardView>
-
-                      </LinearLayout>
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:layout_below="@+id/lnrView"
-                            android:layout_marginTop="20dp"
-                            android:id="@+id/recyclerLocation"
+                        <RelativeLayout
+                            android:layout_marginTop="10dp"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:background="@color/colorWhite">
 
-                        </androidx.recyclerview.widget.RecyclerView>
+                            <TextView
+                                android:id="@+id/txtError"
+                                android:layout_weight="1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/noDataFound"
+                                android:textSize="22sp"
+                                android:visibility="gone"
+                                android:layout_centerInParent="true"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:fontFamily="@font/nunito_sans_semibold">
+
+                            </TextView>
+
+                            <LinearLayout
+                                android:id="@+id/lnrView"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginRight="16dp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/txtTitle"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="@color/colorPrimaryDark"
+                                    android:textSize="18sp"
+                                    android:fontFamily="@font/nunit_sans_bold"
+                                    android:text="@string/ourLocation">
+
+                                </TextView>
+
+                                <androidx.cardview.widget.CardView
+                                    android:layout_marginTop="15dp"
+                                    android:id="@+id/cardLocation"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="2dp"
+                                    android:layout_marginRight="2dp"
+                                    android:layout_marginBottom="5dp"
+                                    app:cardElevation="3dp"
+                                    app:cardCornerRadius="5dp">
 
 
-                        <TextView
-                            android:id="@+id/txtViewMore"
-                            android:layout_below="@+id/recyclerLocation"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/lightBlue"
-                            android:gravity="center"
-                            android:layout_marginTop="20dp"
-                            android:layout_marginBottom="50dp"
-                            android:textSize="14sp"
-                            android:padding="10dp"
-                            android:text="@string/moreView"
-                            android:fontFamily="@font/nunit_sans_bold"/>
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                        <RelativeLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="?actionBarSize">
+
+                                            <TextView
+                                                android:id="@+id/txtArea"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:textColor="@color/textDark"
+                                                android:gravity="center_vertical"
+                                                android:layout_marginLeft="20dp"
+                                                android:layout_marginRight="20dp"
+                                                android:layout_gravity="center_vertical"
+                                                android:fontFamily="@font/nunito_sans_semibold"
+                                                android:text="@string/app_name"
+                                                android:textSize="18sp">
+                                            </TextView>
+
+
+                                            <ImageView
+                                                android:id="@+id/imgLocationRight"
+                                                android:layout_width="25dp"
+                                                android:layout_height="25dp"
+                                                android:layout_marginRight="15dp"
+                                                android:src="@drawable/ic_down_arrow"
+                                                android:layout_alignParentRight="true"
+                                                android:layout_centerVertical="true">
+                                            </ImageView>
+
+                                            <ImageView
+                                                android:id="@+id/imgLocationLeft"
+                                                android:layout_width="25dp"
+                                                android:layout_height="25dp"
+                                                android:layout_marginLeft="15dp"
+                                                android:src="@drawable/ic_down_arrow"
+                                                android:layout_alignParentLeft="true"
+                                                android:layout_centerVertical="true"
+                                                android:visibility="gone">
+                                            </ImageView>
+
+                                        </RelativeLayout>
+
+
+                                        <LinearLayout
+                                            android:id="@+id/lnrLocationListView"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:visibility="gone"
+                                            android:orientation="vertical">
+
+                                            <LinearLayout
+                                                android:layout_width="match_parent"
+                                                android:layout_height="0.5dp"
+                                                android:layout_marginTop="5dp"
+                                                android:background="@color/customeGray"
+                                                tools:ignore="Suspicious0dp">
+
+                                            </LinearLayout>
+
+                                            <androidx.recyclerview.widget.RecyclerView
+                                                android:id="@+id/recyclerEmirateLocation"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content">
+
+                                            </androidx.recyclerview.widget.RecyclerView>
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+
+
+                                </androidx.cardview.widget.CardView>
+
+                            </LinearLayout>
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:layout_below="@+id/lnrView"
+                                android:layout_marginTop="20dp"
+                                android:id="@+id/recyclerLocation"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                            </androidx.recyclerview.widget.RecyclerView>
+
+
+                            <TextView
+                                android:id="@+id/txtViewMore"
+                                android:layout_below="@+id/recyclerLocation"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/lightBlue"
+                                android:gravity="center"
+                                android:layout_marginTop="20dp"
+                                android:layout_marginBottom="50dp"
+                                android:textSize="14sp"
+                                android:padding="10dp"
+                                android:text="@string/moreView"
+                                android:fontFamily="@font/nunit_sans_bold"/>
 
 
 
-                    </RelativeLayout>
+                        </RelativeLayout>
 
-                </androidx.core.widget.NestedScrollView>
+                    </androidx.core.widget.NestedScrollView>
 
-            </RelativeLayout>
+                </RelativeLayout>
 
 
-        </LinearLayout>
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
 
     </RelativeLayout>
 </layout>

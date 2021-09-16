@@ -17,50 +17,60 @@
             app:subtitleTextColor="@color/colorWhite"
             app:titleTextColor="@color/colorWhite"></androidx.appcompat.widget.Toolbar>
 
-        <LinearLayout
+        <androidx.cardview.widget.CardView
+            android:layout_below="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/toolbar"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="0dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/curve_main_bg">
+            android:layout_marginBottom="-20dp">
 
-
-            <androidx.core.widget.NestedScrollView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
-                android:fillViewport="true">
+                android:layout_marginBottom="20dp">
 
-                <LinearLayout
+
+                <androidx.core.widget.NestedScrollView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:background="@color/colorWhite">
+                    android:fillViewport="true">
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recyclerFAQCategory"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="6dp"
-                        android:layout_marginRight="6dp">
-
-                    </androidx.recyclerview.widget.RecyclerView>
-
-                    <FrameLayout
-                        android:layout_below="@+id/recyclerProfileCategory"
-                        android:id="@+id/fragmentFrame"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
                         android:layout_marginTop="10dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:background="@color/colorWhite">
 
-                    </FrameLayout>
-                </LinearLayout>
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recyclerFAQCategory"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="6dp"
+                            android:layout_marginRight="6dp">
 
-            </androidx.core.widget.NestedScrollView>
+                        </androidx.recyclerview.widget.RecyclerView>
+
+                        <FrameLayout
+                            android:layout_below="@+id/recyclerProfileCategory"
+                            android:id="@+id/fragmentFrame"
+                            android:layout_marginTop="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                        </FrameLayout>
+                    </LinearLayout>
+
+                </androidx.core.widget.NestedScrollView>
 
 
 
-        </LinearLayout>
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
 
     </RelativeLayout>
 </layout>

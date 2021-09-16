@@ -17,52 +17,64 @@
             app:subtitleTextColor="@color/colorWhite"
             app:titleTextColor="@color/colorWhite"></androidx.appcompat.widget.Toolbar>
 
-        <LinearLayout
+        <androidx.cardview.widget.CardView
+            android:layout_below="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/toolbar"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="0dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/curve_main_bg">
+            android:layout_marginBottom="-20dp">
 
-
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginBottom="20dp">
 
-                <androidx.core.widget.NestedScrollView
-                    android:layout_marginTop="0dp"
+
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_above="@+id/cardBottom"
-                    android:fillViewport="true">
+                    android:layout_height="match_parent">
 
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recyclerOffers"
+                    <androidx.core.widget.NestedScrollView
+                        android:layout_marginTop="0dp"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                    </androidx.recyclerview.widget.RecyclerView>
-                </androidx.core.widget.NestedScrollView>
-
-                <TextView
-                    android:id="@+id/txtError"
-                    android:layout_weight="1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/noDataFound"
-                    android:textSize="22sp"
-                    android:visibility="gone"
-                    android:layout_centerInParent="true"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:fontFamily="@font/nunito_sans_semibold">
-
-                </TextView>
-
-            </RelativeLayout>
+                        android:layout_height="match_parent"
+                        android:layout_above="@+id/cardBottom"
+                        android:fillViewport="true">
 
 
-        </LinearLayout>
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recyclerOffers"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                        </androidx.recyclerview.widget.RecyclerView>
+                    </androidx.core.widget.NestedScrollView>
+
+                    <TextView
+                        android:id="@+id/txtError"
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/noDataFound"
+                        android:textSize="22sp"
+                        android:visibility="gone"
+                        android:layout_centerInParent="true"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:fontFamily="@font/nunito_sans_semibold">
+
+                    </TextView>
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+
 
     </RelativeLayout>
 </layout>

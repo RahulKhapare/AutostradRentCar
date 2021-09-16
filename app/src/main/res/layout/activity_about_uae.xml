@@ -17,34 +17,26 @@
             app:subtitleTextColor="@color/colorWhite"
             app:titleTextColor="@color/colorWhite"></androidx.appcompat.widget.Toolbar>
 
-        <LinearLayout
+        <androidx.cardview.widget.CardView
+            android:layout_below="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/toolbar"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="0dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/curve_main_bg">
-
+            android:layout_marginBottom="-20dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginBottom="20dp">
 
-                <androidx.core.widget.NestedScrollView
-                    android:layout_marginTop="30dp"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerUAE"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_above="@+id/cardBottom"
-                    android:fillViewport="true">
+                    android:layout_height="wrap_content">
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recyclerUAE"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                    </androidx.recyclerview.widget.RecyclerView>
-
-
-                </androidx.core.widget.NestedScrollView>
+                </androidx.recyclerview.widget.RecyclerView>
 
                 <TextView
                     android:id="@+id/txtError"
@@ -63,7 +55,8 @@
             </RelativeLayout>
 
 
-        </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
 
     </RelativeLayout>
 </layout>

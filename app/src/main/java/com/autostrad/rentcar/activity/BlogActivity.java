@@ -66,7 +66,6 @@ public class BlogActivity extends AppCompatActivity {
         linearLayoutManager = new LinearLayoutManager(activity);
         binding.recyclerBlog.setLayoutManager(linearLayoutManager);
         binding.recyclerBlog.setHasFixedSize(true);
-        binding.recyclerBlog.setNestedScrollingEnabled(false);
         binding.recyclerBlog.setAdapter(blogAdapter);
 
         hitBlogData(pageCount);

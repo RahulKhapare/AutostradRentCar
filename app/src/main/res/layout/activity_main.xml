@@ -18,202 +18,211 @@
             android:background="@color/colorPrimaryDark">
         </androidx.appcompat.widget.Toolbar>
 
-        <LinearLayout
+        <androidx.cardview.widget.CardView
+            android:layout_below="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="0dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/curve_main_bg"
-            android:layout_below="@+id/toolbar">
+            android:layout_marginBottom="-20dp">
 
-
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginBottom="20dp">
 
-                <FrameLayout
-                    android:id="@+id/fragmentFrame"
+
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="5dp"
-                    android:layout_above="@+id/lnrBottom">
+                    android:layout_height="match_parent">
 
-                </FrameLayout>
+                    <FrameLayout
+                        android:id="@+id/fragmentFrame"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_above="@+id/lnrBottom">
 
-                <LinearLayout
-                    android:id="@+id/lnrBottom"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_alignParentBottom="true">
-
+                    </FrameLayout>
 
                     <LinearLayout
-                        android:id="@+id/lnrHome"
-                        android:layout_weight="1"
+                        android:id="@+id/lnrBottom"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:clickable="true"
-                        android:onClick="onBottomBarClick"
-                        android:orientation="vertical">
+                        android:orientation="horizontal"
+                        android:layout_alignParentBottom="true">
+
 
                         <LinearLayout
-                            android:tag="lnrTag"
-                            android:layout_width="match_parent"
-                            android:layout_height="2dp"
-                            android:background="@color/lightBlue">
-                        </LinearLayout>
-
-                        <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:src="@drawable/ic_home"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginBottom="5dp"
-                            android:layout_gravity="center_horizontal"
-                            android:tag="imageView">
-
-                        </ImageView>
-
-                        <TextView
+                            android:id="@+id/lnrHome"
+                            android:layout_weight="1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="12sp"
-                            android:gravity="center_horizontal"
-                            android:textColor="@color/lightBlue"
-                            android:paddingBottom="5dp"
-                            android:tag="textView"
-                            android:fontFamily="@font/nunit_sans_bold"
-                            android:text="@string/home"></TextView>
+                            android:clickable="true"
+                            android:onClick="onBottomBarClick"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:tag="lnrTag"
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp"
+                                android:background="@color/lightBlue">
+                            </LinearLayout>
+
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:src="@drawable/ic_home"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:layout_gravity="center_horizontal"
+                                android:tag="imageView">
+
+                            </ImageView>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="12sp"
+                                android:gravity="center_horizontal"
+                                android:textColor="@color/lightBlue"
+                                android:paddingBottom="5dp"
+                                android:tag="textView"
+                                android:fontFamily="@font/nunit_sans_bold"
+                                android:text="@string/home"></TextView>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/lnrProfile"
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:onClick="onBottomBarClick"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:tag="lnrTag"
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp"
+                                android:background="@color/colorWhite">
+                            </LinearLayout>
+
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:src="@drawable/ic_profile"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:tag="imageView"
+                                android:layout_gravity="center_horizontal">
+
+                            </ImageView>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="12sp"
+                                android:gravity="center_horizontal"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:paddingBottom="5dp"
+                                android:tag="textView"
+                                android:fontFamily="@font/nunit_sans_bold"
+                                android:text="@string/profile"></TextView>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/lnrFleet"
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:onClick="onBottomBarClick"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:tag="lnrTag"
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp"
+                                android:background="@color/colorWhite">
+                            </LinearLayout>
+
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:src="@drawable/ic_fleat"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:tag="imageView"
+                                android:layout_gravity="center_horizontal">
+
+                            </ImageView>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="12sp"
+                                android:gravity="center_horizontal"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:paddingBottom="5dp"
+                                android:tag="textView"
+                                android:fontFamily="@font/nunit_sans_bold"
+                                android:text="@string/fleet"></TextView>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/lnrMenu"
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:onClick="onBottomBarClick"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:tag="lnrTag"
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp"
+                                android:background="@color/colorWhite">
+                            </LinearLayout>
+
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:src="@drawable/ic_menu"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:tag="imageView"
+                                android:layout_gravity="center_horizontal">
+
+                            </ImageView>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="12sp"
+                                android:gravity="center_horizontal"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:paddingBottom="5dp"
+                                android:tag="textView"
+                                android:fontFamily="@font/nunit_sans_bold"
+                                android:text="@string/menu"></TextView>
+
+                        </LinearLayout>
 
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:id="@+id/lnrProfile"
-                        android:layout_weight="1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:clickable="true"
-                        android:onClick="onBottomBarClick"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:tag="lnrTag"
-                            android:layout_width="match_parent"
-                            android:layout_height="2dp"
-                            android:background="@color/colorWhite">
-                        </LinearLayout>
-
-                        <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:src="@drawable/ic_profile"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginBottom="5dp"
-                            android:tag="imageView"
-                            android:layout_gravity="center_horizontal">
-
-                        </ImageView>
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textSize="12sp"
-                            android:gravity="center_horizontal"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:paddingBottom="5dp"
-                            android:tag="textView"
-                            android:fontFamily="@font/nunit_sans_bold"
-                            android:text="@string/profile"></TextView>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/lnrFleet"
-                        android:layout_weight="1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:clickable="true"
-                        android:onClick="onBottomBarClick"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:tag="lnrTag"
-                            android:layout_width="match_parent"
-                            android:layout_height="2dp"
-                            android:background="@color/colorWhite">
-                        </LinearLayout>
-
-                        <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:src="@drawable/ic_fleat"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginBottom="5dp"
-                            android:tag="imageView"
-                            android:layout_gravity="center_horizontal">
-
-                        </ImageView>
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textSize="12sp"
-                            android:gravity="center_horizontal"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:paddingBottom="5dp"
-                            android:tag="textView"
-                            android:fontFamily="@font/nunit_sans_bold"
-                            android:text="@string/fleet"></TextView>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/lnrMenu"
-                        android:layout_weight="1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:clickable="true"
-                        android:onClick="onBottomBarClick"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:tag="lnrTag"
-                            android:layout_width="match_parent"
-                            android:layout_height="2dp"
-                            android:background="@color/colorWhite">
-                        </LinearLayout>
-
-                        <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:src="@drawable/ic_menu"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginBottom="5dp"
-                            android:tag="imageView"
-                            android:layout_gravity="center_horizontal">
-
-                        </ImageView>
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textSize="12sp"
-                            android:gravity="center_horizontal"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:paddingBottom="5dp"
-                            android:tag="textView"
-                            android:fontFamily="@font/nunit_sans_bold"
-                            android:text="@string/menu"></TextView>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </RelativeLayout>
+                </RelativeLayout>
 
 
 
-        </LinearLayout>
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
 
     </RelativeLayout>
 </layout>

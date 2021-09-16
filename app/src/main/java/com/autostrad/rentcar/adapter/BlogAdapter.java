@@ -59,6 +59,18 @@ public class BlogAdapter extends RecyclerView.Adapter<BlogAdapter.viewHolder> {
                 context.startActivity(intent);
             }
         });
+
+        if (position==0){
+            setMargins(holder.binding.lnrBlog,54,100,54,20);
+        }
+    }
+
+    private void setMargins (View view, int left, int top, int right, int bottom) {
+        if (view.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
+            ViewGroup.MarginLayoutParams p = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
+            p.setMargins(left, top, right, bottom);
+            view.requestLayout();
+        }
     }
 
     @Override

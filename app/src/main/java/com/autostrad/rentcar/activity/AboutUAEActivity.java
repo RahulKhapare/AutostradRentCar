@@ -66,7 +66,6 @@ public class AboutUAEActivity extends AppCompatActivity {
         linearLayoutManager = new LinearLayoutManager(activity);
         binding.recyclerUAE.setLayoutManager(linearLayoutManager);
         binding.recyclerUAE.setHasFixedSize(true);
-        binding.recyclerUAE.setNestedScrollingEnabled(false);
         binding.recyclerUAE.setAdapter(uaeAdapter);
 
         hitUAEData(pageCount);
