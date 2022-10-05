@@ -328,9 +328,9 @@ public class AdditionalDriverFragment extends Fragment implements AdditionalDriv
                     countryName = model.getCountry_name();
                     countryId = model.getId();
 
-                    if (countryName.equals(Config.UAE)){
+                    if (countryName.equals(Config.UAE)) {
                         binding.lnrEmirate.setVisibility(View.VISIBLE);
-                    }else {
+                    } else {
                         emirateID = "";
                         binding.lnrEmirate.setVisibility(View.GONE);
                     }
@@ -352,9 +352,9 @@ public class AdditionalDriverFragment extends Fragment implements AdditionalDriv
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 EmirateModel model = listLocation.get(position);
-                if (!TextUtils.isEmpty(model.getId()) && !model.getId().equals("")){
+                if (!TextUtils.isEmpty(model.getId()) && !model.getId().equals("")) {
                     emirateID = model.getId();
-                }else {
+                } else {
                     emirateID = "";
                 }
             }
@@ -467,7 +467,7 @@ public class AdditionalDriverFragment extends Fragment implements AdditionalDriv
         } else if (TextUtils.isEmpty(countryId)) {
             value = false;
             H.showMessage(context, getResources().getString(R.string.selectNationality));
-        }else if (binding.lnrEmirate.getVisibility()==View.VISIBLE){
+        } else if (binding.lnrEmirate.getVisibility() == View.VISIBLE) {
             if (TextUtils.isEmpty(emirateID)) {
                 value = false;
                 H.showMessage(context, getResources().getString(R.string.selectEmirate));

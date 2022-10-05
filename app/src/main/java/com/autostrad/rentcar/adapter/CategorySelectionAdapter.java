@@ -77,7 +77,6 @@ public class CategorySelectionAdapter extends RecyclerView.Adapter<CategorySelec
                 }else if (tag.equals(Config.FLEET_TAG)){
                     ((FleetFragment)fleetFragment).onCategoryClick(model.getCategoryName());
                 }
-
             }
         });
 

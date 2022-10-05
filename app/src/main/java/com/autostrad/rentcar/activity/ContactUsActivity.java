@@ -358,7 +358,6 @@ public class ContactUsActivity extends AppCompatActivity implements LocationList
                                 }else {
                                     contactModelList.add(model);
                                 }
-
                             }
 
                             callTime = true;

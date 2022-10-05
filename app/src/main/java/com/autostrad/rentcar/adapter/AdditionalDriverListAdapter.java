@@ -31,7 +31,6 @@ public class AdditionalDriverListAdapter extends RecyclerView.Adapter<Additional
         void uploadClick(AdditionalDriverModel model);
     }
 
-
     public AdditionalDriverListAdapter(Context context, List<AdditionalDriverModel> additionalDriverModelList, AdditionalDriverFragment fragment) {
         this.context = context;
         this.additionalDriverModelList = additionalDriverModelList;
